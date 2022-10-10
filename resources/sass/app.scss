@@ -11,6 +11,7 @@
 @import 'styles/main';
 @import "layouts/main/style";
 
+
 //Сетка
 .container,
 .container-fluid{
@@ -189,10 +190,275 @@
 }
 
 
+//Стили для базового контейнера форм
+.base-form{
+    max-width: 340px;
+    @include m(full){
+        max-width: 100%;
+    }
+    @include m(auth){
+        .form{
+            &__input{
+                &[type='password']{
+                    padding-right: 126px;
+                }
+            }
+        }
+    }
+    @include m(restorepass){
+        max-width: 100%;
+        @media (min-width: $media-lg){
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .container{
+            @media (max-width: $media-lg-max){
+                padding: 0;
+            }
+        }
+        .form{
+            &__inner{
+                display: flex;
+                flex-wrap: wrap;
+                margin: 0 -$global-padding;
+            }
+            &__left,
+            &__right{
+                min-width: 100%;
+                padding: 0 $global-padding;
+            }
+            &__left{
+                @media (min-width: $media-lg){
+                    min-width: col-width(6);
+                    max-width: col-width(6);
+                    margin-top: -$global-margin * .75;
+                }
+            }
+            &__right{
+                @media (min-width: $media-lg){
+                    width: 496px + $global-gutter;
+                    min-width: 0;
+                    max-width: col-width(6);
+                    margin-top: -$global-margin * 1.5;
+                }
+            }
+            &__form-group{
+                @include m(submit){
+                    @media (min-width: $media-lg){
+                        justify-content: flex-start;
+                    }
+                }
+            }
+        }
+    }
+    @include m(profile){
+        max-width: 633px;
+        .row{
+            @media (min-width: $media-lg){
+                margin-left: -22px;
+                margin-right: -22px;
+            }
+        }
+        .form-group{
+            min-width: 100%;
+            max-width: 100%;
+            padding-left: $global-padding;
+            padding-right: $global-padding;
+            @media (min-width: $media-sm){
+                min-width: col-width(6);
+                max-width: col-width(6);
+            }
+            @media (min-width: $media-lg){
+                padding-left: 22px;
+                padding-right: 22px;
+            }
+            .btn{
+                width: 471px;
+                max-width: 100%;
+                margin-top: 25px;
+            }
+        }
+    }
+    @include m(invitation){
+        max-width: 100%;
+        .form-group{
+            display: block;
+            min-width: 100%;
+            max-width: 100%;
+            margin-top: 20px;
+            padding-left: $global-padding;
+            padding-right: $global-padding;
+            @media (min-width: $media-sm){
+                min-width: col-width(7);
+                max-width: col-width(7);
+            }
+            @include m(submit){
+                @media (min-width: $media-sm){
+                    min-width: col-width(5);
+                    max-width: col-width(5);
+                }
+            }
+            .btn{
+                width: 100%;
+                margin-top: 27px;
+            }
+        }
+    }
+
+    .form{
+        position: relative;
+    }
+}
+
+//Стили для повторяющихся элементов форм
+.form{
+    &__title{
+        font-size: px-rem(22);
+        font-weight: $header-weight;
+        line-height: $line-height-md;
+    }
+    &__form-group{
+        @include m(submit){
+            display: flex;
+            justify-content: center;
+            margin-top: $global-margin * 2;
+        }
+        @include m(bottom){
+            display: flex;
+            justify-content: center;
+            margin-top: $global-margin * 2.5;
+        }
+        @include m(left){
+            justify-content: flex-start;
+        }
+    }
+    &__button{
+        min-width: 160px;
+    }
+    &__link{
+            background: none;
+            border: none;
+            color: #175ed9;
+            font-size: 14px;
+            padding: 0;
+        @include m(right){
+            position: absolute;
+            top: 10px;
+            right: $input-padding;
+        }
+    }
+    &__agreement{
+        color: $text-secondary;
+        font-size: $size-md-px;
+        text-align: center;
+        a{
+            color: $text-secondary;
+            text-decoration: underline;
+            &:hover,
+            &:focus{
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+html[data-slideout-type='auth']{
+    .slideout{
+        .base-form.-auth{
+            display: block;
+        }
+    }
+}
+html[data-slideout-type='register']{
+    .slideout{
+        .base-form.-register{
+            display: block;
+        }
+    }
+}
+html[data-slideout-type='restorepass']{
+    .slideout{
+        .base-form.-restorepass{
+            display: block;
+        }
+    }
+}
+html[data-slideout-type='catalog-item']{
+    .slideout{
+        .base-form.-catalog-item{
+            display: block;
+        }
+    }
+}
+
+.slideout{
+    .base-form{
+        margin: 0 auto;
+        padding: 18px 15px $global-margin * 4;
+        @media (min-width: $media-lg){
+            padding-top: 64px;
+            padding-bottom: 80px;
+        }
+        @include m(catalog-item){
+            max-width: none;
+            padding-top: 0;
+            @media (min-width: $media-xs){
+                padding-left: 28px;
+                padding-right: 28px;
+            }
+            .form{
+                &__title{
+                    padding-top: $global-margin * 1.5;
+                    font-size: $size-h1;
+                }
+                &__input-container{
+                    @include m(checks){
+                        margin-top: -12px;
+                        padding-top: 6px;
+                    }
+                }
+                &__file{
+                    .file-item,
+                    .file-label{
+                        width: 226px;
+                        height: 226px;
+                        color: $color-primary;
+                        font-size: $size-primary-px;
+                        background-color: $grey-lightest;
+                    }
+                    .file-name{
+                        visibility: hidden;
+                    }
+                }
+                &__form-check{
+                    margin-top: 12px;
+                    margin-right: 28px;
+                }
+                &__button{
+                    width: 200px;
+                }
+            }
+        }
+    }
+    .form{
+        &__title{
+            padding-right: 50px + 15;
+            font-size: rem-px(36px);
+            @media (min-width: $media-xs){
+                padding-right: 0;
+            }
+            @media (min-width: $media-lg){
+                font-size: rem-px(52px);
+            }
+        }
+    }
+}
+
 
 
 
 // ------------ <Header> ------------
+
 
 .header{
     position: fixed;
@@ -211,6 +477,7 @@
         padding-top: 56px;
         @media (min-width: $media-lg){
             padding-top: 96px;
+            background: none;
         }
     }
 
@@ -519,7 +786,7 @@ html[data-slideout-type='places']{
         &__inner{
             display: flex;
             flex-wrap: wrap;
-            margin: 0 -$global-padding;
+            margin: 0 - $global-padding;
         }
         &__left,
         &__right{
@@ -705,6 +972,15 @@ html[data-slideout-type='places']{
             }
         }
     }
+}
+
+.form__input-container {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-width: 100%;
+    position: relative;
 }
 
 // ------------- </Page index> --------------

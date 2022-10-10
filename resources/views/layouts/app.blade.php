@@ -14,9 +14,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+{{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])    --}}
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 <body>
 <script data-skip-moving="true">
