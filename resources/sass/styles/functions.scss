@@ -1,0 +1,101 @@
+@use 'sass:math';
+
+//Делит одно число на другое
+@function divide($dividend, $divisor){
+    @return math.div($dividend, $divisor);
+}
+
+//Заменяет часть строки другой строкой
+@function str-replace($string, $search, $replace: ''){
+    $index: str-index($string, $search);
+
+    @if $index{
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+}
+
+//Конвертирует строку в кодировку Unicode
+@function unicode($string){
+    @return unquote('\"') + unquote(str-insert($string, '\\', 1)) + unquote('\"');
+}
+
+//Заменяет значение в списке другим значением
+@function replace($list, $old-value, $new-value, $recursive: false){
+    $result: ();
+
+    @for $i from 1 through length($list){
+        @if type-of(nth($list, $i)) == list and $recursive{
+            $result: append($result, replace(nth($list, $i), $old-value, $new-value, $recursive));
+        } @else{
+            @if nth($list, $i) == $old-value{
+                $result: append($result, $new-value);
+            } @else{
+                $result: append($result, nth($list, $i));
+            }
+        }
+    }
+
+    @return $result;
+}
+
+//Заменяет значение в коллекции другим значением
+@function replace-nth($list, $index, $value){
+    $result: null;
+
+    @if type-of($index) != number{
+        @warn '$index: #{quote($index)} is not a number for `replace-nth`.';
+    } @else if $index == 0{
+        @warn 'List index 0 must be a non-zero integer for `replace-nth`.';
+    } @else if abs($index) > length($list){
+        @warn 'List index is #{$index} but list is only #{length($list)} item long for `replace-nth`.';
+    } @else{
+        $result: ();
+        $index: if($index < 0, length($list) + $index + 1, $index);
+
+        @for $i from 1 through length($list){
+            @if $i == $index{
+                $result: append($result, $value);
+            } @else{
+                $result: append($result, nth($list, $i));
+            }
+        }
+    }
+
+    @return $result;
+}
+
+//----------------------------
+//Функции для единиц измерения
+
+//Убирает единицы измерения из значения
+@function strip-unit($number){
+    @if type-of($number) == 'number' and not unitless($number){
+        @return divide($number, ($number * 0 + 1));
+    }
+
+    @return $number;
+}
+
+//Конвертирует пиксели в rem
+@function px-rem($value, $base: 16px){
+    @if type-of($value) == 'number'{
+        @if unit($value) != 'rem'{
+            $value: divide(strip-unit($value), strip-unit($base)) * 1rem;
+        }
+    }
+
+    @return $value;
+}
+
+//Конвертирует rem в пиксели
+@function rem-px($value, $base: 16px){
+    @if type-of($value) == 'number'{
+        @if unit($value) != 'px'{
+            $value: strip-unit($value) * strip-unit($base) * 1px;
+        }
+    }
+
+    @return $value;
+}
