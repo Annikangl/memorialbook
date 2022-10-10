@@ -1,0 +1,308 @@
+@import '../../../../../../../Users/Ivan/Downloads/memo verstka/frontend/src/base/config/global-settings';
+
+@import 'functions';
+@import 'colors';
+
+$builder: false !default;
+$dist: false !default;
+
+$m: '.-'; //разделитель модификатора
+
+//Сетка
+$global-padding: 12px;
+$global-gutter: $global-padding * 2; //отступ сетки
+$section-margin: 12px;
+$global-margin: 1rem;
+$container-padding: 20px; //отступы у контейнеров по горизонтали
+$content-width: 1440px; //максимальная ширина контентного блока, включая крайние отступы
+$columns-number: 12;
+$use-grid: false;
+
+//Шрифты
+//Основной
+$font-name-primary: 'Lato';
+$font-fallback-primary: Arial, Helvetica; //stylelint-disable-line value-keyword-case
+$font-serif-primary: sans-serif;
+//Дополнительный
+$font-name-secondary: $font-name-primary;
+$font-fallback-secondary: $font-fallback-primary;
+$font-serif-secondary: sans-serif;
+//С засечками
+$font-name-serif: 'Times New Roman';
+$font-fallback-serif: Times; //stylelint-disable-line value-keyword-case
+$font-serif-serif: serif;
+//Шрифт для валюты
+$font-name-currency: $font-name-primary;
+$font-fallback-currency: $font-fallback-primary;
+$font-serif-currency: $font-serif-primary;
+//Моноширинный
+$font-name-monospace: 'Courier New';
+//Объединённые
+$font-primary: $font-name-primary, $font-fallback-primary, $font-serif-primary;
+$font-secondary: $font-name-secondary, $font-fallback-secondary, $font-serif-secondary;
+$font-serif: $font-name-serif, $font-fallback-serif, $font-serif-serif;
+$font-currency: $font-name-currency, $font-fallback-currency, $font-serif-currency;
+$font-monospace: $font-name-monospace, monospace;
+//Жирность шрифтов
+$weight-black: 900;
+$weight-extrabold: 800;
+$weight-bold: 700;
+$weight-semibold: 600;
+$weight-medium: 500;
+$weight-normal: 400;
+$weight-light: 300;
+$weight-extralight: 200;
+$weight-thin: 100;
+
+//Границы
+$border-width-primary: 1px;
+$border-width-secondary: 2px;
+$border-width-blockquote: $border-width-primary * 2;
+
+//Радиус
+$radius-primary: 7px;
+$radius-secondary: 4px;
+$radius-big: 32px;
+$radius-huge: $radius-big *2;
+
+//Тексты
+$line-height-primary: 1.5; //24px
+$weight-primary: $weight-normal;
+$text-margin: $global-margin * 1.5;
+//Размеры шрифтов
+$size-xxl: px-rem(27);
+$size-xxl-px: rem-px($size-xxl);
+$size-xl: px-rem(21);
+$size-xl-px: rem-px($size-xl);
+$size-lg: px-rem(18);
+$size-lg-px: rem-px($size-lg);
+$size-primary: px-rem(16);
+$size-primary-px: rem-px($size-primary);
+$size-primary-sm: 14px;
+$size-ml: px-rem(15);
+$size-ml-px: rem-px($size-ml);
+$size-md: px-rem(14);
+$size-md-px: rem-px($size-md);
+$size-sl: px-rem(13);
+$size-sl-px: rem-px($size-sl);
+$size-sm: px-rem(12);
+$size-sm-px: rem-px($size-sm);
+$size-xs: px-rem(11);
+$size-xs-px: rem-px($size-xs);
+$size-xxs: px-rem(10);
+$size-xxs-px: rem-px($size-xxs);
+//Высота строк
+$line-height-lg: 1.7;
+$line-height-md: 1.3;
+$line-height-sm: 1.1;
+//Отступы между буквами
+$letter-spacing-primary: .05em;
+$letter-spacing-xl: .25em;
+$letter-spacing-lg: .1em;
+$letter-spacing-md: .04em;
+$letter-spacing-sm: .025em;
+$letter-spacing-xs: .015em;
+//Увеличенный шрифт
+$lead-size: px-rem(21);
+$lead-size-px: rem-px($lead-size);
+$lead-line-height: 1.5;
+$lead-margin: 1.7em;
+//Другие
+$figcaption-margin-top: .5em;
+
+//Ссылки
+$link-decoration: none;
+$link-decoration-hover: underline;
+
+//Заголовки
+//Шрифт
+$header-font: $font-secondary;
+$header-weight: $weight-black;
+$header-line-height: 1.1;
+//Размеры шрифтов
+$size-h1: px-rem(30);
+$size-h1-px: rem-px($size-h1);
+$size-h2: px-rem(24);
+$size-h2-px: rem-px($size-h2);
+$size-h3: px-rem(22);
+$size-h3-px: rem-px($size-h3);
+$size-h4: px-rem(18);
+$size-h4-px: rem-px($size-h4);
+$size-h5: px-rem(16);
+$size-h5-px: rem-px($size-h5);
+$size-h6: px-rem(14);
+$size-h6-px: rem-px($size-h6);
+//Вертикальные отступы
+$header-margin-top: 1.4em;
+$header-margin-bottom-h1: 1.5em;
+$header-margin-bottom-h2: 1.5em;
+$header-margin-bottom-h3: 1.25em;
+$header-margin-bottom-h4: 1em;
+$header-margin-bottom-h5: 1em;
+$header-margin-bottom-h6: .8em;
+
+//Формы
+//Поля ввода
+$input-height: 44px;
+$input-padding: 1.1em;
+$input-padding-vertical: .4em;
+$input-font-size: $size-sl-px;
+$input-line-height: $line-height-primary;
+$input-weight: $weight-semibold;
+$input-border-width: $border-width-primary;
+$input-check-size: 24px;
+$input-radius: $radius-primary;
+//$input-radius: 50rem; //округлённый радиус
+//Размеры полей ввода
+$input-height-lg: 54px;
+$input-font-size-lg: $size-lg-px;
+$input-height-sm: 35px;
+$input-font-size-sm: $size-xs-px;
+//Кнопки
+$btn-height: $input-height;
+$btn-padding: 1.1em;
+$btn-padding-vertical: .65em;
+$btn-font-size: $size-md-px;
+$btn-line-height: $line-height-primary;
+$btn-weight: $weight-semibold;
+$btn-border-width: $border-width-primary;
+$btn-radius: $radius-primary; //округлённый радиус
+$btn-shadow-size: 0 4px 6px 0;
+//Размеры кнопок
+$btn-height-lg: $input-height-lg;
+$btn-font-size-lg: $btn-font-size;
+$btn-height-sm: $input-height-sm;
+$btn-font-size-sm: $btn-font-size;
+//Текстовое поле ввода
+$textarea-min-height: $input-height * 2.5;
+//Заголовок блока формы (legend)
+$legend-font-size: $size-h2;
+$legend-margin-bottom: $header-margin-bottom-h2;
+//Заголовок поля ввода (label)
+$label-font-size: $size-sm-px;
+$label-margin-bottom: .2em;
+//Другие
+$form-group-margin: 18px;
+
+//Списки
+$list-padding-left: 2em;
+$li-margin-top: .5em;
+$li-bullet-size: 4px; //размер элемента маркера тега li
+
+//Таблицы
+$table-border-width: 1px;
+$table-td-padding-h: 1.5em;
+$table-td-padding-v: 1.45em;
+$table-td-padding-h-sm: 1.2em;
+$table-td-padding-v-sm: .75em;
+$table-th-padding-v: 1.45em;
+
+//Тени
+//Цвета
+$shadow-color-primary: $grey-darkest;
+//Размеры
+$shadow-size-primary: 0 4px 6px 0;
+$shadow-size-lg: 0 6px 30px 0;
+$shadow-size-md: 0 3px 10px 0;
+$shadow-size-sm: 0 2px 5px 0;
+//Объединённые
+$shadow-primary: $shadow-size-primary rgba($shadow-color-primary, .2);
+$shadow-lg: $shadow-size-lg rgba($shadow-color-primary, .2);
+$shadow-md: $shadow-size-md rgba($shadow-color-primary, .2);
+$shadow-sm: $shadow-size-sm rgba($shadow-color-primary, .2);
+
+//Плавность
+$trans-duration-primary: .25s;
+$trans-easing-primary: ease-in-out;
+$trans-primary: $trans-duration-primary $trans-easing-primary;
+
+$trans-duration-secondary: .5s;
+$trans-easing-secondary: $trans-easing-primary;
+$trans-secondary: $trans-duration-secondary $trans-easing-secondary;
+
+$trans-scroll: .3s ease-in-out;
+
+//Трансформация
+$translate-size-primary: 10px;
+$translate-size-secondary: 20px;
+
+//Курсоры
+$cursor-pointer: pointer;
+
+//Медиа
+$media-desktop23: 1920px;
+$media-desktop23-max: $media-desktop23 - .02;
+$media-desktop20: 1600px;
+$media-desktop20-max: $media-desktop20 - .02;
+$media-xxl: 1366px;
+$media-xxl-max: $media-xxl - .02;
+$media-xl: 1200px;
+$media-xl-max: $media-xl - .02;
+$media-mxl: 1080px;
+$media-mxl-max: $media-mxl - .02;
+$media-lg: 992px;
+$media-lg-max: $media-lg - .02;
+$media-md: 768px;
+$media-md-max: $media-md - .02;
+$media-mlg: 840px;
+$media-mlg-max: $media-mlg - .02;
+$media-sm: 576px;
+$media-sm-max: $media-sm - .02;
+$media-xs: 414px;
+$media-xs-max: $media-xs - .02;
+
+//Устройства
+$media-iphone4-width: 320px;
+$media-iphone4-width-max: $media-iphone4-width - .02;
+$media-iphone4-height: 480px;
+$media-iphone4-height-max: $media-iphone4-height - .02;
+
+$media-galaxy-width: 360px;
+$media-galaxy-width-max: $media-galaxy-width - .02;
+$media-galaxy-height: 640px;
+$media-galaxy-height-max: $media-galaxy-height - .02;
+
+$media-iphone6-width: 375px;
+$media-iphone6-width-max: $media-iphone6-width - .02;
+$media-iphone6-height: 667px;
+$media-iphone6-height-max: $media-iphone6-height - .02;
+
+$media-iphone-xr-height: 896px;
+$media-iphone-xr-height-max: $media-iphone-xr-height - .02;
+
+$media-ipad-height: 1024px;
+$media-ipad-height-max: $media-ipad-height - .02;
+$media-ipad-width: 768px;
+$media-ipad-width-max: $media-ipad-width - .02;
+
+//Ширины
+$width-slideout: 536px;
+$width-text-content-inner: divide($content-width, divide($columns-number, 12)) - (($global-padding * 3.5) * 2 + ($container-padding * 1.75) * 2);
+$width-text-content: $width-text-content-inner + $global-gutter;
+
+//Медиа-запросы:
+//iPhone
+//320 - iPhone 4, 5, 5s, SE width
+//375 - iPhone 6, 6s, 7, 8, X, Xs width
+//414 - iPhone 6+, 7+, 8+, Xr, Xs Max width
+//480 - iPhone 4 height
+//568 - iPhone 5, 5s, SE height
+//667 - iPhone 6, 6s, 7, 8 height
+//736 - iPhone 6+, 7+, 8+ height
+//812 - iPhone X, Xs height
+//896 - iPhone Xr, Xs Max height
+
+//LG
+//360 - Nexus 5, G3, G4 width
+//384 - Nexus 4 width
+//411 - Nexus 5X, 6, 6P width
+//640 - Nexus 4, 5, G3, G4 height
+//731 - Nexus 5X, 6, 6P height
+
+//Samsung
+//360 - Galaxy width
+//640 - Galaxy height
+
+//iPad
+//768 - iPad width
+//1024 - iPad height

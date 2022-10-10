@@ -1,0 +1,89 @@
+//Текст
+.text-monospace{
+    font-family: $font-monospace !important;
+}
+
+.text-justify{
+    text-align: justify !important;
+}
+.text-wrap{
+    white-space: normal !important;
+}
+.text-nowrap{
+    white-space: nowrap !important;
+}
+.text-truncate{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+@each $breakpoint in map-keys($grid-breakpoints){
+    @include media-breakpoint-up($breakpoint){
+        $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+        .text#{$infix}-left{
+            text-align: left !important;
+        }
+        .text#{$infix}-right{
+            text-align: right !important;
+        }
+        .text#{$infix}-center{
+            text-align: center !important;
+        }
+    }
+}
+
+.text-lowercase{
+    text-transform: lowercase !important;
+}
+.text-uppercase{
+    text-transform: uppercase !important;
+}
+.text-capitalize{
+    text-transform: capitalize !important;
+}
+
+.font-weight-light{
+    font-weight: $weight-light !important;
+}
+.font-weight-normal{
+    font-weight: $weight-normal !important;
+}
+.font-weight-bold{
+    font-weight: $weight-bold !important;
+}
+.font-italic{
+    font-style: italic !important;
+}
+
+.text-white{
+    color: $white !important;
+}
+
+@mixin text-emphasis-variant($parent, $color){
+    #{$parent}{
+        color: $color !important;
+    }
+    a#{$parent}{
+        &:hover,
+        &:focus{
+            color: darken($color, 15%) !important;
+        }
+    }
+}
+
+@each $color, $value in $theme-colors{
+    @include text-emphasis-variant('.text-#{$color}', $value);
+}
+
+.text-body{
+    color: $text-primary !important;
+}
+.text-muted{
+    color: $color-comment !important;
+}
+
+.text-decoration-none{
+    text-decoration: none !important;
+}
