@@ -16,10 +16,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- Scripts -->
-{{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])    --}}
-    @vite(['resources/css/app.scss', 'resources/js/app.js'])
+    {{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])    --}}
+{{--    @vite(['resources/css/app.scss', 'resources/js/app.js'])--}}
 </head>
 <body>
+<style>
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    .slideout-menu {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 0;
+        width: 256px;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        display: none;
+    }
+
+    .slideout-panel {
+        position: relative;
+        z-index: 1;
+        will-change: transform;
+    }
+
+    .slideout-open,
+    .slideout-open body,
+    .slideout-open .slideout-panel {
+        overflow: hidden;
+    }
+
+    .slideout-open .slideout-menu {
+        display: block;
+    }
+</style>
 <script data-skip-moving="true">
     document.documentElement.classList.remove('no-js');
 </script>
@@ -73,20 +108,20 @@
                                     </div>
                                     <div class="header__personal -small col">
                                         @guest
-                                        <div class="row -small">
-{{--                                            <div class="header-personal__item -small -auth col">--}}
-{{--                                                <a class="header-personal__button btn btn-primary" href="#slideout-auth"--}}
-{{--                                                   role="button" data-slideout=""--}}
-{{--                                                   data-slideout-options="{&quot;type&quot;:&quot;auth&quot;}">Вход</a>--}}
-{{--                                            </div>--}}
+                                            <div class="row -small">
+                                                {{--                                            <div class="header-personal__item -small -auth col">--}}
+                                                {{--                                                <a class="header-personal__button btn btn-primary" href="#slideout-auth"--}}
+                                                {{--                                                   role="button" data-slideout=""--}}
+                                                {{--                                                   data-slideout-options="{&quot;type&quot;:&quot;auth&quot;}">Вход</a>--}}
+                                                {{--                                            </div>--}}
 
-                                            <div class="header-personal__item -small -register col">
-                                                <a class="header-personal__button btn btn-outline-primary"
-                                                   href="#slideout-register" role="button" data-slideout=""
-                                                   data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Регистрация</a>
+                                                <div class="header-personal__item -small -register col">
+                                                    <a class="header-personal__button btn btn-outline-primary"
+                                                       href="#slideout-register" id="register-btn" role="button" data-slideout=""
+                                                       data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Регистрация</a>
+                                                </div>
+                                                @endif
                                             </div>
-                                            @endif
-                                        </div>
                                     </div>
                                     <div class="header__slideout-menu -small col">
                                         <button class="header-slideout-menu__button" type="button">
@@ -410,116 +445,136 @@
             </div>
 
 
-        {{--        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">--}}
-        {{--            <div class="container">--}}
-        {{--                <a class="navbar-brand" href="{{ url('/') }}">--}}
-        {{--                    {{ config('app.name', 'Laravel') }}--}}
-        {{--                </a>--}}
-        {{--                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"--}}
-        {{--                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"--}}
-        {{--                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">--}}
-        {{--                    <span class="navbar-toggler-icon"></span>--}}
-        {{--                </button>--}}
+            {{--        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">--}}
+            {{--            <div class="container">--}}
+            {{--                <a class="navbar-brand" href="{{ url('/') }}">--}}
+            {{--                    {{ config('app.name', 'Laravel') }}--}}
+            {{--                </a>--}}
+            {{--                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"--}}
+            {{--                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"--}}
+            {{--                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">--}}
+            {{--                    <span class="navbar-toggler-icon"></span>--}}
+            {{--                </button>--}}
 
-        {{--                <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
-        {{--                    <!-- Left Side Of Navbar -->--}}
-        {{--                    <ul class="navbar-nav me-auto">--}}
+            {{--                <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
+            {{--                    <!-- Left Side Of Navbar -->--}}
+            {{--                    <ul class="navbar-nav me-auto">--}}
 
-        {{--                    </ul>--}}
+            {{--                    </ul>--}}
 
-        {{--                    <!-- Right Side Of Navbar -->--}}
-        {{--                    <ul class="navbar-nav ms-auto">--}}
-        {{--                        <!-- Authentication Links -->--}}
-        {{--                        @guest--}}
-        {{--                            @if (Route::has('login'))--}}
-        {{--                                <li class="nav-item">--}}
-        {{--                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
-        {{--                                </li>--}}
-        {{--                            @endif--}}
+            {{--                    <!-- Right Side Of Navbar -->--}}
+            {{--                    <ul class="navbar-nav ms-auto">--}}
+            {{--                        <!-- Authentication Links -->--}}
+            {{--                        @guest--}}
+            {{--                            @if (Route::has('login'))--}}
+            {{--                                <li class="nav-item">--}}
+            {{--                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
+            {{--                                </li>--}}
+            {{--                            @endif--}}
 
-        {{--                            @if (Route::has('register'))--}}
-        {{--                                <li class="nav-item">--}}
-        {{--                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
-        {{--                                </li>--}}
-        {{--                            @endif--}}
-        {{--                        @else--}}
-        {{--                            <li class="nav-item dropdown">--}}
-        {{--                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"--}}
-        {{--                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
-        {{--                                    {{ Auth::user()->name }}--}}
-        {{--                                </a>--}}
+            {{--                            @if (Route::has('register'))--}}
+            {{--                                <li class="nav-item">--}}
+            {{--                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
+            {{--                                </li>--}}
+            {{--                            @endif--}}
+            {{--                        @else--}}
+            {{--                            <li class="nav-item dropdown">--}}
+            {{--                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"--}}
+            {{--                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
+            {{--                                    {{ Auth::user()->name }}--}}
+            {{--                                </a>--}}
 
-        {{--                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">--}}
-        {{--                                    <a class="dropdown-item" href="{{ route('logout') }}"--}}
-        {{--                                       onclick="event.preventDefault();--}}
-        {{--                                                     document.getElementById('logout-form').submit();">--}}
-        {{--                                        {{ __('Logout') }}--}}
-        {{--                                    </a>--}}
+            {{--                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">--}}
+            {{--                                    <a class="dropdown-item" href="{{ route('logout') }}"--}}
+            {{--                                       onclick="event.preventDefault();--}}
+            {{--                                                     document.getElementById('logout-form').submit();">--}}
+            {{--                                        {{ __('Logout') }}--}}
+            {{--                                    </a>--}}
 
-        {{--                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
-        {{--                                        @csrf--}}
-        {{--                                    </form>--}}
-        {{--                                </div>--}}
-        {{--                            </li>--}}
-        {{--                        @endguest--}}
-        {{--                    </ul>--}}
-        {{--                </div>--}}
-        {{--            </div>--}}
-        {{--        </nav>--}}
+            {{--                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
+            {{--                                        @csrf--}}
+            {{--                                    </form>--}}
+            {{--                                </div>--}}
+            {{--                            </li>--}}
+            {{--                        @endguest--}}
+            {{--                    </ul>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
+            {{--        </nav>--}}
 
-        <main class="main-content" role="main">
-                        @yield('content')
-        </main>
-        <div class="footer">
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="footer__logo col-auto">
+            <main class="main-content" role="main">
+                @yield('content')
+            </main>
+            <div class="footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="footer__logo col-auto">
                                 <span class="footer-logo__inner">
                                     <img class="footer-logo__image" src="{{ asset('img/logo/logo-light.svg') }}"
                                          alt="Логотип Memorial book">
                                 </span>
-                        </div>
-                        <div class="footer__menu col-auto">
-                            <nav class="footer-menu__container">
-                                <ul class="footer-menu__list">
-                                    <li class="footer-menu__item -slideout">
-                                        <a class="footer-menu__link" href="./text">О проекте</a>
-                                    </li>
-                                    <li class="footer-menu__item">
-                                        <a class="footer-menu__link" href="./tree">Семейное древо</a>
-                                    </li>
-                                    <li class="footer-menu__item">
-                                        <a class="footer-menu__link" href="./text">Магазин</a>
-                                    </li>
-                                    <li class="footer-menu__item">
-                                        <a class="footer-menu__link" href="#slideout-people" data-slideout=""
-                                           data-slideout-options="{&quot;type&quot;:&quot;people&quot;,&quot;position&quot;:&quot;top&quot;}">Поиск
-                                            людей
-                                        </a>
-                                    </li>
-                                    <li class="footer-menu__item">
-                                        <a class="footer-menu__link" href="#slideout-places" data-slideout=""
-                                           data-slideout-options="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}">Кладбища</a>
-                                    </li>
-                                    <li class="footer-menu__item -slideout">
-                                        <a class="footer-menu__link" href="./text">Контакты</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div class="footer__policy col-auto">
-                            <a class="footer-policy__link" href="javascript:void(0)">Политика обработки персональных
-                                данных</a>
+                            </div>
+                            <div class="footer__menu col-auto">
+                                <nav class="footer-menu__container">
+                                    <ul class="footer-menu__list">
+                                        <li class="footer-menu__item -slideout">
+                                            <a class="footer-menu__link" href="./text">О проекте</a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a class="footer-menu__link" href="./tree">Семейное древо</a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a class="footer-menu__link" href="./text">Магазин</a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a class="footer-menu__link" href="#slideout-people" data-slideout=""
+                                               data-slideout-options="{&quot;type&quot;:&quot;people&quot;,&quot;position&quot;:&quot;top&quot;}">Поиск
+                                                людей
+                                            </a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a class="footer-menu__link" href="#slideout-places" data-slideout=""
+                                               data-slideout-options="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}">Кладбища</a>
+                                        </li>
+                                        <li class="footer-menu__item -slideout">
+                                            <a class="footer-menu__link" href="./text">Контакты</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="footer__policy col-auto">
+                                <a class="footer-policy__link" href="javascript:void(0)">Политика обработки персональных
+                                    данных</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div hidden=""></div>
         </div>
-        <div hidden=""></div>
-    </div>  </div>
+    </div>
 </div>
 
+
+<script src="{{ asset('js/vendor.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+
+<script>
+    let slideout = new Slideout({
+        'panel': document.getElementById('panel'),
+        'menu': document.getElementById('menu'),
+        'padding': 256,
+        'tolerance': 70
+    });
+
+    // Toggle button
+    document.querySelector('.register-btn').addEventListener('click', function() {
+        slideout.toggle();
+    });
+
+</script>
 
 </body>
 </html>

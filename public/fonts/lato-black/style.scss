@@ -1,0 +1,4 @@
+@import 'resources/sass/styles/main';
+
+//Font-face parameters: fontname, filepath, font-style, font-weight, extensions, font-display
+@include font-face($font-name-primary, 'lato-black/lato-black', normal, $weight-black);

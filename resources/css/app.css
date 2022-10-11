@@ -11823,7 +11823,7 @@ fieldset.disabled .choices, fieldset:disabled .choices {
 }
 
 [data-slideout-shown=true] .slideout {
-    opacity: 1;
+    opacity: 0;
     pointer-events: auto;
     -webkit-user-select: text;
     -moz-user-select: text;

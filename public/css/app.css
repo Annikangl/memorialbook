@@ -4,7 +4,7 @@
     font-family: Lato;
     font-style: normal;
     font-weight: 900;
-    src: url(../../resources/fonts/lato-black/lato-black.woff2) format("woff2"), url(../../resources/fonts/lato-black/lato-black.woff) format("woff")
+    src: url(../fonts/lato-black/lato-black.woff2) format("woff2"), url(../fonts/lato-black/lato-black.woff) format("woff")
 }
 
 @font-face {
@@ -12,7 +12,7 @@
     font-family: Lato;
     font-style: normal;
     font-weight: 700;
-    src: url(../../resources/fonts/lato-bold/lato-bold.woff2) format("woff2"), url(../../resources/fonts/lato-bold/lato-bold.woff) format("woff")
+    src: url(../fonts/lato-bold/lato-bold.woff2) format("woff2"), url(../fonts/lato-bold/lato-bold.woff) format("woff")
 }
 
 @font-face {
@@ -20,7 +20,7 @@
     font-family: Lato;
     font-style: normal;
     font-weight: 400;
-    src: url(../../resources/fonts/lato-regular/lato-regular.woff2) format("woff2"), url(../../resources/fonts/lato-regular/lato-regular.woff) format("woff")
+    src: url(../fonts/lato-regular/lato-regular.woff2) format("woff2"), url(../fonts/lato-regular/lato-regular.woff) format("woff")
 }
 
 @font-face {
@@ -28,7 +28,7 @@
     font-family: Lato;
     font-style: normal;
     font-weight: 600;
-    src: url(../../resources/fonts/lato-semibold/lato-semibold.woff2) format("woff2"), url(../../resources/fonts/lato-semibold/lato-semibold.woff) format("woff")
+    src: url(../fonts/lato-semibold/lato-semibold.woff2) format("woff2"), url(../fonts/lato-semibold/lato-semibold.woff) format("woff")
 }
 
 .container, .container-fluid {
@@ -269,7 +269,7 @@ body {
     background-color: #f5f7f9;
     color: #201e1f;
     font-family: Lato, Arial, Helvetica, sans-serif;
-    font-size: 1rem;
+    font-size: .875rem;
     font-weight: 400;
     margin: 0;
     min-width: 303px;
