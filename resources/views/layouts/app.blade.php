@@ -17,6 +17,13 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- Scripts -->
     {{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])    --}}
+    <script src="{{asset('js/template.js')}}"></script>
+    <script src="{{asset('js/familytree.js')}}"></script>
+    {{--    <script src="{{asset('js/onion.js')}}"></script>--}}
+
+    <link href= "{{asset('css\template.css')}}" rel="stylesheet" />
+    <link href="{{asset('css\main.styles.css')}}" rel="stylesheet" />
+    <link href="{{asset('css\profile.main.css')}}" rel="stylesheet" />
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 <body>
