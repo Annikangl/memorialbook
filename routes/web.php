@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/tree', function () {
+    return view('tree.index');
+});
+Route::group(['prefix'=>'profile','as'=>'profile.'],function(){
+    Route::get('/create',[App\Http\Controllers\ProfileController::class,'create'])->name('create');
+});
