@@ -41,7 +41,6 @@
     <script src="{{asset('js/template.js')}}"></script>
     <script src="{{asset('js/familytree.js')}}"></script>
 
-    <link href="{{asset('css\template.css')}}" rel="stylesheet"/>
 
 </head>
 <body>
