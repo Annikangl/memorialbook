@@ -23,3 +23,7 @@ Route::get('/tree', function () {
 Route::group(['prefix'=>'profile','as'=>'profile.'],function(){
     Route::get('/create',[App\Http\Controllers\ProfileController::class,'create'])->name('create');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -1,0 +1,444 @@
+@import 'config';
+
+//stylelint-disable value-list-max-empty-lines
+
+//Кнопки
+@mixin btn{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: $btn-height;
+    padding: $btn-padding-vertical + .05 $btn-padding $btn-padding-vertical - .05;
+    border: $btn-border-width solid transparent;
+    border-radius: $btn-radius;
+    font-family: $font-primary;
+    font-size: $btn-font-size;
+    font-weight: $btn-weight;
+    line-height: $btn-line-height;
+    letter-spacing: $letter-spacing-primary;
+    white-space: nowrap;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: $cursor-pointer;
+    transition-property: color, background, border-color, box-shadow;
+    transition-duration: $trans-duration-primary;
+    transition-timing-function: $trans-easing-primary;
+    user-select: none;
+    &:hover{
+        text-decoration: none;
+        //box-shadow: $btn-shadow-size rgba($shadow-color-primary, .1);
+    }
+    &:focus{
+        text-decoration: none !important;
+        outline: none !important;
+        //box-shadow: $btn-shadow-size rgba($shadow-color-primary, .2);
+    }
+    &.active{
+        box-shadow: none;
+        &:focus{
+            box-shadow: none;
+        }
+    }
+}
+
+//Состояния кнопок
+@mixin button-active{
+    &:not([disabled]):not(.disabled){
+        &:hover{
+            @content;
+        }
+        &:active,
+        &.active,
+        .show > &.dropdown-toggle{
+            @content;
+            &:hover{
+                @content;
+            }
+            &:focus{
+                @content;
+            }
+        }
+    }
+}
+@mixin button-states($content){
+    &,
+    &.disabled,
+    &:disabled{
+        border-color: map-get($content, border);
+        color: map-get($content, color);
+        background: map-get($content, bg);
+    }
+    @include button-active{
+        border-color: map-get($content, active-border);
+        color: map-get($content, active-color);
+        background: map-get($content, active-bg);
+    }
+    &:focus{
+        @if map-get($content, focus-color){
+            color: map-get($content, focus-color);
+        } @else{
+            color: map-get($content, color);
+        }
+        background: map-get($content, bg);
+        @if map-get($content, focus-border){
+            border-color: map-get($content, focus-border);
+        } @else{
+            border-color: map-get($content, border);
+        }
+        &:hover{
+            border-color: map-get($content, active-border);
+            color: map-get($content, active-color);
+            background: map-get($content, active-bg);
+        }
+    }
+}
+
+//Btn primary
+@mixin btn-primary{
+    $content: (
+        color: $btn-color,
+        bg: $btn-bg,
+        border: $btn-border,
+
+        active-color: $btn-color,
+        active-bg: palette(primary, light),
+        active-border: palette(primary, light)
+    );
+    @include button-states($content);
+}
+@mixin btn-outline-primary{
+    $content: (
+        color: $btn-bg,
+        bg: transparent,
+        border: $btn-bg,
+
+        active-color: $btn-color,
+        active-bg: $btn-bg,
+        active-border: $btn-bg,
+
+        focus-color: palette(primary, light),
+        focus-border: palette(primary, light)
+    );
+    @include button-states($content);
+}
+
+//Btn secondary
+@mixin btn-secondary{
+    $content: (
+        color: $btn-secondary-color,
+        bg: $btn-secondary-bg,
+        border: $btn-secondary-border,
+
+        active-color: $btn-secondary-color-hover,
+        active-bg: $btn-secondary-bg-hover,
+        active-border: $btn-secondary-border-hover
+    );
+    @include button-states($content);
+}
+@mixin btn-outline-secondary{
+    $content: (
+        color: $btn-secondary-color,
+        bg: transparent,
+        border: $btn-secondary-border,
+
+        active-color: $btn-secondary-color-hover,
+        active-bg: $btn-secondary-border,
+        active-border: $btn-secondary-border,
+
+        focus-color: $btn-secondary-color-hover,
+        focus-border: $btn-secondary-bg-hover
+    );
+    @include button-states($content);
+}
+
+//Btn success
+@mixin btn-success{
+    $content: (
+        color: $btn-success-color,
+        bg: $btn-success-bg,
+        border: $btn-success-border,
+
+        active-color: $btn-success-color,
+        active-bg: palette(success, light),
+        active-border: palette(success, light)
+    );
+    @include button-states($content);
+}
+@mixin btn-outline-success{
+    $content: (
+        color: $btn-success-bg,
+        bg: transparent,
+        border: $btn-success-bg,
+
+        active-color: $btn-success-color,
+        active-bg: $btn-success-bg,
+        active-border: $btn-success-bg,
+
+        focus-color: palette(success, base),
+        focus-border: palette(success, light)
+    );
+    @include button-states($content);
+}
+
+//Btn info
+@mixin btn-info{
+    $content: (
+        color: $btn-info-color,
+        bg: $btn-info-bg,
+        border: $btn-info-border,
+
+        active-color: $btn-info-color,
+        active-bg: palette(info, light),
+        active-border: palette(info, light)
+    );
+    @include button-states($content);
+}
+@mixin btn-outline-info{
+    $content: (
+        color: $btn-info-bg,
+        bg: transparent,
+        border: $btn-info-bg,
+
+        active-color: $btn-info-color,
+        active-bg: $btn-info-bg,
+        active-border: $btn-info-bg,
+
+        focus-color: palette(info, base),
+        focus-border: palette(info, light)
+    );
+    @include button-states($content);
+}
+
+//Btn warning
+@mixin btn-warning{
+    $content: (
+        color: $btn-warning-color,
+        bg: $btn-warning-bg,
+        border: $btn-warning-border,
+
+        active-color: $btn-warning-color,
+        active-bg: palette(warning, light),
+        active-border: palette(warning, light)
+    );
+    @include button-states($content);
+}
+@mixin btn-outline-warning{
+    $content: (
+        color: $btn-warning-bg,
+        bg: transparent,
+        border: $btn-warning-bg,
+
+        active-color: $btn-warning-color,
+        active-bg: $btn-warning-bg,
+        active-border: $btn-warning-bg,
+
+        focus-color: palette(warning, base),
+        focus-border: palette(warning, light)
+    );
+    @include button-states($content);
+}
+
+//Btn danger
+@mixin btn-danger{
+    $content: (
+        color: $btn-danger-color,
+        bg: $btn-danger-bg,
+        border: $btn-danger-border,
+
+        active-color: $btn-danger-color,
+        active-bg: palette(danger, light),
+        active-border: palette(danger, light)
+    );
+    @include button-states($content);
+}
+@mixin btn-outline-danger{
+    $content: (
+        color: $btn-danger-bg,
+        bg: transparent,
+        border: $btn-danger-bg,
+
+        active-color: $btn-danger-color,
+        active-bg: $btn-danger-bg,
+        active-border: $btn-danger-bg,
+
+        focus-color: palette(danger, base),
+        focus-border: palette(danger, light)
+    );
+    @include button-states($content);
+}
+
+//Btn link
+@mixin btn-link{
+    border-color: transparent;
+    color: $text-primary;
+    text-decoration: underline;
+    &:hover,
+    &:focus{
+        text-decoration: none;
+        box-shadow: none;
+    }
+}
+
+//Btn light
+@mixin btn-light{
+    $content: (
+        color: $btn-light-color,
+        bg: $btn-light-bg,
+        border: $btn-light-border,
+
+        active-color: $btn-light-color,
+        active-bg: lighten($btn-light-bg, 10%),
+        active-border: lighten($btn-light-border, 10%)
+    );
+    @include button-states($content);
+}
+@mixin btn-outline-light{
+    $content: (
+        color: $btn-light-color,
+        bg: transparent,
+        border: $btn-light-border,
+
+        active-color: $btn-light-color,
+        active-bg: $btn-light-bg,
+        active-border: $btn-light-border,
+
+        focus-color: $btn-light-color,
+        focus-border: lighten($btn-light-border, 10%)
+    );
+    @include button-states($content);
+}
+
+//Btn dark
+@mixin btn-dark{
+    $content: (
+        color: $btn-dark-color,
+        bg: $btn-dark-bg,
+        border: $btn-dark-border,
+
+        active-color: $btn-dark-color,
+        active-bg: $grey-dark,
+        active-border: $grey-dark
+    );
+    @include button-states($content);
+}
+@mixin btn-outline-dark{
+    $content: (
+        color: $btn-dark-bg,
+        bg: transparent,
+        border: $btn-dark-border,
+
+        active-color: $btn-dark-color,
+        active-bg: $btn-dark-bg,
+        active-border: $btn-dark-border,
+
+        focus-color: $btn-dark-bg,
+        focus-border: $grey-dark
+    );
+    @include button-states($content);
+}
+
+//Btn white
+@mixin btn-white{
+    $content: (
+        color: $text-primary,
+        bg: $white,
+        border: $white,
+
+        active-color: $text-primary,
+        active-bg: $grey-lightest,
+        active-border: $grey-lightest
+    );
+    @include button-states($content);
+    &:hover,
+    &:focus{
+        box-shadow: $btn-shadow-size rgba($shadow-color-primary, .65);
+    }
+}
+@mixin btn-outline-white{
+    $content: (
+        color: $white,
+        bg: transparent,
+        border: $white,
+
+        active-color: $text-primary,
+        active-bg: $white,
+        active-border: $white,
+
+        focus-color: $grey-lightest,
+        focus-border: $grey-lightest
+    );
+    @include button-states($content);
+    &:hover,
+    &:focus{
+        box-shadow: $btn-shadow-size rgba($shadow-color-primary, .85);
+    }
+}
+
+//Btn grey
+@mixin btn-grey{
+    $content: (
+        color: $btn-color,
+        bg: $grey,
+        border: $grey,
+
+        active-color: $btn-color,
+        active-bg: $grey-midlight,
+        active-border: $grey-midlight
+    );
+    @include button-states($content);
+}
+@mixin btn-outline-grey{
+    $content: (
+        color: $text-primary,
+        bg: transparent,
+        border: $grey,
+
+        active-color: $btn-color,
+        active-bg: $grey,
+        active-border: $grey,
+
+        focus-color: $grey-midlight,
+        focus-border: $grey-midlight
+    );
+    @include button-states($content);
+}
+//Размеры кнопок
+@mixin btn-lg(
+    $font-size: $btn-font-size-lg,
+    $line-height: $line-height-md,
+    $min-height: $btn-height-lg,
+    $padding: $btn-padding-vertical + .35 $btn-padding $btn-padding-vertical + .25){
+    @if $font-size != false{
+        font-size: $font-size;
+    }
+    @if $line-height != false{
+        line-height: $line-height;
+    }
+    @if $min-height != false{
+        min-height: $min-height;
+    }
+    @if $padding != false{
+        padding: $padding;
+    }
+}
+@mixin btn-sm(
+    $font-size: $btn-font-size-sm,
+    $line-height: $line-height-md,
+    $min-height: $btn-height-sm,
+    $padding: $btn-padding-vertical - .05 $btn-padding $btn-padding-vertical - .1){
+    @if $font-size != false{
+        font-size: $font-size;
+    }
+    @if $line-height != false{
+        line-height: $line-height;
+    }
+    @if $min-height != false{
+        min-height: $min-height;
+    }
+    @if $padding != false{
+        padding: $padding;
+    }
+}

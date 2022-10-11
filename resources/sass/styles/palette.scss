@@ -1,0 +1,94 @@
+//stylelint-disable function-max-empty-lines, indentation, value-list-max-empty-lines
+
+$color-primary: #175ed9;
+$color-secondary: $color-primary;
+$color-success: #12AF52;
+$color-info: #2f76d6;
+$color-warning: #ffce2c;
+$color-danger: #fa122e;
+
+$palettes: (
+    primary: (
+        base: $color-primary,
+        //dark:
+        light: lighten($color-primary, 20%)
+        //color:
+        //bg:
+        //border:
+        //link:
+    ),
+
+    secondary: (
+        base: $color-secondary,
+        dark: darken($color-secondary, 10%),
+        light: lighten($color-secondary, 10%),
+        color: darken($color-secondary, 20%),
+        bg: lighten($color-secondary, 30%),
+        border: lighten($color-secondary, 40%),
+        link: darken($color-secondary, 20%)
+    ),
+
+    success: (
+        base: $color-success,
+        dark: darken($color-success, 10%),
+        light: lighten($color-success, 10%),
+        color: darken($color-success, 20%),
+        bg: lighten($color-success, 50%),
+        border: lighten($color-success, 35%),
+        link: darken($color-success, 20%)
+    ),
+
+    info: (
+        base: $color-info,
+        dark: darken($color-info, 10%),
+        light: lighten($color-info, 10%),
+        color: darken($color-info, 20%),
+        bg: lighten($color-info, 30%),
+        border: lighten($color-info, 40%),
+        link: darken($color-info, 30%)
+    ),
+
+    warning: (
+        base: $color-warning,
+        dark: darken($color-warning, 10%),
+        light: lighten($color-warning, 10%),
+        color: darken($color-warning, 30%),
+        bg: lighten($color-warning, 30%),
+        border: lighten($color-warning, 10%),
+        link: darken($color-warning, 40%)
+    ),
+
+    danger: (
+        base: $color-danger,
+        dark: darken($color-danger, 10%),
+        light: lighten($color-danger, 10%),
+        color: darken($color-danger, 20%),
+        bg: lighten($color-danger, 30%),
+        border: lighten($color-danger, 25%),
+        link: darken($color-danger, 40%)
+    )
+);
+
+@if map-has-key(map-get($palettes, primary), dark) == false{
+    $palettes: map-merge($palettes, (primary: map-merge(map-get($palettes, primary), (dark: darken($color-primary, 40%)))));
+}
+@if map-has-key(map-get($palettes, primary), light) == false{
+    $palettes: map-merge($palettes, (primary: map-merge(map-get($palettes, primary), (light: lighten($color-primary, 10%)))));
+}
+@if map-has-key(map-get($palettes, primary), color) == false{
+    $palettes: map-merge($palettes, (primary: map-merge(map-get($palettes, primary), (color: darken($color-primary, 20%)))));
+}
+@if map-has-key(map-get($palettes, primary), bg) == false{
+    $palettes: map-merge($palettes, (primary: map-merge(map-get($palettes, primary), (bg: lighten($color-primary, 30%)))));
+}
+@if map-has-key(map-get($palettes, primary), border) == false{
+    $palettes: map-merge($palettes, (primary: map-merge(map-get($palettes, primary), (border: lighten($color-primary, 40%)))));
+}
+@if map-has-key(map-get($palettes, primary), link) == false{
+    $palettes: map-merge($palettes, (primary: map-merge(map-get($palettes, primary), (link: darken($color-primary, 30%)))));
+}
+
+//Возвращает цвет из палитры по оттенку и варианту цвета
+@function palette($variant: primary, $tone: base){
+    @return map-get(map-get($palettes, $variant), $tone);
+}

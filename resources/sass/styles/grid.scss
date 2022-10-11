@@ -1,0 +1,184 @@
+@import 'config';
+
+$grid-mixins-defaults: (
+    global-gutter: $global-gutter,
+    columns-number: $columns-number,
+    content-width: $content-width - ($container-padding * 2 + $global-gutter)
+);
+
+$grid-row-columns: 6;
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+);
+
+//Функции для работы с сеткой
+
+//Возвращает процентное значение ширины колонки
+@function col-width($columns, $columns-number: map-get($grid-mixins-defaults, columns-number)){
+    @return percentage(divide($columns, $columns-number));
+}
+@function col-width-px(
+    $columns,
+    $columns-number: map-get($grid-mixins-defaults, columns-number),
+    $content-width: map-get($grid-mixins-defaults, content-width)
+){
+    @return floor(divide($content-width, divide($columns-number, $columns)));
+}
+
+//----------------------------
+//Миксины для работы с сеткой
+
+//Добавление правил бутстраповских .row
+@mixin row($gutter: map-get($grid-mixins-defaults, global-gutter), $flex: true){
+    @if $flex{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    @if $gutter{
+        margin-left: ceil($gutter * -.5);
+        margin-right: floor($gutter * -.5);
+    }
+}
+
+//Добавление не-flexbox-правил бутстраповских .col
+@mixin col-attrs($gutter: map-get($grid-mixins-defaults, global-gutter), $width: true){
+    position: relative;
+    @if $width{
+        width: 100%;
+    }
+    @if $gutter{
+        padding-left: $gutter * .5;
+        padding-right: $gutter * .5;
+    }
+}
+
+//Добавление flexbox-правил бутстраповских .col
+@mixin col(){
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+//Добавление flexbox-правил бутстраповского .col-auto
+@mixin col-auto(){
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+}
+
+//Добавление ширины колонки
+@mixin col-n($columns, $columns-number: map-get($grid-mixins-defaults, columns-number)){
+    width: col-width($columns, $columns-number);
+}
+
+//Создание классов сетки
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints){
+    $min: map-get($breakpoints, $name);
+    @return if($min != 0, $min, null);
+}
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints){
+    @return if(breakpoint-min($name, $breakpoints) == null, '', '-#{$name}');
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints){
+    $min: breakpoint-min($name, $breakpoints);
+    @if $min{
+        @media (min-width: $min){
+            @content;
+        }
+    } @else{
+        @content;
+    }
+}
+@mixin row-cols($count){
+    > *{
+        flex: 0 0 divide(100%, $count);
+        max-width: divide(100%, $count);
+    }
+}
+@mixin make-col-auto(){
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+}
+@mixin make-col($size, $columns: $columns-number){
+    flex: 0 0 percentage(divide($size, $columns));
+    max-width: percentage(divide($size, $columns));
+}
+@mixin make-col-offset($size, $columns: $columns-number){
+    $num: divide($size, $columns);
+    margin-left: if($num == 0, 0, percentage($num));
+}
+
+@mixin make-grid-columns($columns: $columns-number, $gutter: $global-gutter, $breakpoints: $grid-breakpoints){
+    %grid-column{
+        position: relative;
+        width: 100%;
+        padding-right: $gutter * .5;
+        padding-left: $gutter * .5;
+    }
+
+    @each $breakpoint in map-keys($breakpoints){
+        $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+        @if $columns > 0{
+            @for $i from 1 through $columns{
+                .col#{$infix}-#{$i}{
+                    @extend %grid-column;
+                }
+            }
+        }
+        .col#{$infix},
+        .col#{$infix}-auto{
+            @extend %grid-column;
+        }
+        @include media-breakpoint-up($breakpoint, $breakpoints){
+            .col#{$infix}{
+                flex-basis: 0;
+                flex-grow: 1;
+                max-width: 100%;
+            }
+            @if $grid-row-columns > 0{
+                @for $i from 1 through $grid-row-columns{
+                    .row-cols#{$infix}-#{$i}{
+                        @include row-cols($i);
+                    }
+                }
+            }
+            .col#{$infix}-auto{
+                @include make-col-auto;
+            }
+            @if $columns > 0{
+                @for $i from 1 through $columns{
+                    .col#{$infix}-#{$i}{
+                        @include make-col($i, $columns);
+                    }
+                }
+            }
+            .order#{$infix}-first{
+                order: -1;
+            }
+            .order#{$infix}-last{
+                order: $columns + 1;
+            }
+            @for $i from 0 through $columns{
+                .order#{$infix}-#{$i}{
+                    order: $i;
+                }
+            }
+            @if $columns > 0{
+                @for $i from 0 through ($columns - 1){
+                    @if not ($infix == '' and $i == 0){
+                        .offset#{$infix}-#{$i}{
+                            @include make-col-offset($i, $columns);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

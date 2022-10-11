@@ -1,0 +1,8 @@
+//Выделение текста
+$user-selects: all, auto, none !default;
+
+@each $value in $user-selects{
+    .user-select-#{$value}{
+        user-select: $value !important;
+    }
+}

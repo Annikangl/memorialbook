@@ -1,0 +1,98 @@
+@import '../../../../../../../Users/Ivan/Downloads/memo verstka/frontend/src/base/config/sprite-png-config';
+@import 'styles/config';
+
+$sprites-mixins-defaults: (
+    sprite-file: 'sprite', //название файла спрайтов без формата файла
+    sprite-type: 'svg', //какой тип спрайта использовать по умолчанию - svg или png
+    retina-divider: 1 //какой коэффициент масштабирования спрайта использовать
+);
+
+//Функции для работы со спрайтами
+
+//Возвращает ширину спрайта
+@function sprite-width($sprite, $sprite-type: map-get($sprites-mixins-defaults, sprite-type)){
+    @if $sprite-type == 'svg'{
+        @return #{nth($sprite, 3)}px;
+    } @else{
+        @return floor(divide(nth($sprite, 5), map-get($sprites-mixins-defaults, retina-divider)));
+    }
+}
+
+//Возвращает высоту спрайта
+@function sprite-height($sprite, $sprite-type: map-get($sprites-mixins-defaults, sprite-type)){
+    @if $sprite-type == 'svg'{
+        @return #{nth($sprite, 4)}px;
+    } @else{
+        @return floor(divide(nth($sprite, 6), map-get($sprites-mixins-defaults, retina-divider)));
+    }
+}
+
+//Возвращает адрес спрайта в виде url
+@function sprite-image($sprite-type: map-get($sprites-mixins-defaults, sprite-type)){
+    @return url(map-get($sprites-mixins-defaults, sprite-file) + '.' + $sprite-type); //stylelint-disable-line function-url-quotes
+}
+
+//Возвращает позицию фона спрайта
+@function sprite-position($sprite, $sprite-type: map-get($sprites-mixins-defaults, sprite-type)){
+    $x-position: 0;
+    $y-position: 0;
+    @if $sprite-type == 'svg'{
+        $x-position: nth($sprite, 1);
+        $y-position: nth($sprite, 2);
+    } @else{
+        $x-position: divide(nth($sprite, 3), map-get($sprites-mixins-defaults, retina-divider));
+        $y-position: divide(nth($sprite, 4), map-get($sprites-mixins-defaults, retina-divider));
+        @if $x-position == 0{
+            $x-position: 0;
+        }
+        @if $y-position == 0{
+            $y-position: 0;
+        }
+    }
+
+    @return $x-position $y-position;
+}
+
+//-----------------------------
+//Миксины для работы со спрайтами
+
+//Устанавливает background-image
+@mixin sprite-bg-image($sprite-type: map-get($sprites-mixins-defaults, sprite-type), $imp: null){
+    background-image: sprite-image($sprite-type) $imp;
+}
+
+//Устанавливает background-position
+@mixin sprite-bg-position($sprite, $sprite-type: map-get($sprites-mixins-defaults, sprite-type), $imp: null){
+    background-position: sprite-position($sprite, $sprite-type) $imp;
+}
+
+//Устанавливает background-size, если используется спрайт для retina
+@mixin sprite-bg-size($sprite-type: map-get($sprites-mixins-defaults, sprite-type), $imp: null){
+    @if $sprite-type == 'png' and map-get($sprites-mixins-defaults, retina-divider) > 1{
+        $x-size: floor(divide(nth($spritesheet, 1), map-get($sprites-mixins-defaults, retina-divider)));
+        $y-size: floor(divide(nth($spritesheet, 2), map-get($sprites-mixins-defaults, retina-divider)));
+        background-size: $x-size $y-size $imp;
+    }
+}
+
+//Устанавливает ширину и высоту спрайта
+@mixin sprite-size($sprite, $sprite-type: map-get($sprites-mixins-defaults, sprite-type), $imp: null){
+    @if $imp == true{
+        $imp: !important; //stylelint-disable-line scss/dollar-variable-colon-space-after
+    }
+
+    width: sprite-width($sprite, $sprite-type) $imp;
+    height: sprite-height($sprite, $sprite-type) $imp;
+}
+
+//Устанавливает свойства для фона спрайта background-image, background-position и background-size, если используется спрайт для retina
+@mixin sprite-bg($sprite, $sprite-type: map-get($sprites-mixins-defaults, sprite-type)){
+    background: sprite-image($sprite-type) sprite-position($sprite, $sprite-type);
+    @include sprite-bg-size($sprite-type);
+}
+
+//Устанавливает свойства размера и фона спрайта
+@mixin sprite($sprite, $sprite-type: map-get($sprites-mixins-defaults, sprite-type)){
+    @include sprite-size($sprite, $sprite-type);
+    @include sprite-bg($sprite, $sprite-type);
+}

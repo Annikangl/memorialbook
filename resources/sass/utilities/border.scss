@@ -1,0 +1,68 @@
+//Границы
+.border{
+    border: $border-width-primary solid $border-primary !important;
+}
+.border-top{
+    border-top: $border-width-primary solid $border-primary !important;
+}
+.border-right{
+    border-right: $border-width-primary solid $border-primary !important;
+}
+.border-bottom{
+    border-bottom: $border-width-primary solid $border-primary !important;
+}
+.border-left{
+    border-left: $border-width-primary solid $border-primary !important;
+}
+
+.border-0{
+    border: none !important;
+}
+.border-top-0{
+    border-top: none !important;
+}
+.border-right-0{
+    border-right: none !important;
+}
+.border-bottom-0{
+    border-bottom: none !important;
+}
+.border-left-0{
+    border-left: none !important;
+}
+
+@each $color, $value in $theme-colors{
+    .border-#{$color}{
+        border-color: $value !important;
+    }
+}
+.border-white{
+    border-color: $white !important;
+}
+
+//Скругленные границы
+.rounded{
+    border-radius: $radius-primary !important;
+}
+.rounded-top{
+    border-top-left-radius: $radius-primary !important;
+    border-top-right-radius: $radius-primary !important;
+}
+.rounded-right{
+    border-top-right-radius: $radius-primary !important;
+    border-bottom-right-radius: $radius-primary !important;
+}
+.rounded-bottom{
+    border-bottom-left-radius: $radius-primary !important;
+    border-bottom-right-radius: $radius-primary !important;
+}
+.rounded-left{
+    border-top-left-radius: $radius-primary !important;
+    border-bottom-left-radius: $radius-primary !important;
+}
+.rounded-circle{
+    border-radius: 50% !important;
+}
+.rounded-0{
+    border-radius: 0 !important;
+}
