@@ -1,11 +1,4 @@
-html, body {
-  margin: 0px;
-  padding: 0px;
-  width: 100%;
-  height: 100%;
-  font-family: Helvetica;
-  overflow: hidden;
-}
+
 
 .bft-light {
     background-color:#f5f7f9 !important;

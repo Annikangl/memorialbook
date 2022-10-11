@@ -1,9 +1,0 @@
-//Видимость для скринридеров
-.sr-only{
-    @include sr-only;
-    margin: 0;
-    clip-path: inset(50%);
-}
-.sr-only-focusable{
-    @include sr-only-focusable;
-}

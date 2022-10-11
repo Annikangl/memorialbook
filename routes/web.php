@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,10 +23,11 @@ Route::get('/', function () {
 Route::get('/tree', function () {
     return view('tree.index');
 });
-Route::group(['prefix'=>'profile','as'=>'profile.'],function(){
-    Route::get('/create',[App\Http\Controllers\ProfileController::class,'create'])->name('create');
+
+Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+    Route::get('/create', [App\Http\Controllers\ProfileController::class, 'create'])->name('create');
 });
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

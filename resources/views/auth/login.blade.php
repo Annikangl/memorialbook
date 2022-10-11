@@ -1,56 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="index">
-        <div class="index__left">
-            <div class="index-left__content">
-                <div class="index__image">
-                    <img class="index-image__image -desktop" src="{{ asset('img/index-page/login-image.png') }}" alt="">
-                    <img class="index-image__image -mobile" src="{{ asset('img/index-page/image-mobile.png') }}" alt="">
-                </div>
+    <main class="content">
+        <section class="preview">
+            <div class="preview-img">
+                <img src="{{ asset('img/index/image.png') }}" alt="" title=""/>
+                <img src="{{ asset('img/index/image-mobile.png') }}" alt="" title=""/>
             </div>
-        </div>
-        <div class="index__right">
-            <div class="index-right__content">
-                <div class="base-form -auth">
-                    <form class="form form-initialized base-form-initialized preloader-initialized" action="#"
-                          method="post" data-base-form="" aria-disabled="false" novalidate="">
-                        <div class="form__title">Вход в&nbsp;систему</div>
-                        <div class="form__form-group form-group">
-                            <label class="form__label" for="auth-email-6">Email:</label>
-                            <div class="form__input-container">
-                                <input class="form__input form-control" type="email" id="auth-email-6" name="EMAIL"
-                                       autocomplete="email" data-validate="required, email">
-                            </div>
-                        </div>
-                        <div class="form__form-group form-group">
-                            <label class="form__label" for="auth-password-6">Пароль:</label>
-                            <div class="form__input-container">
-                                <input class="form__input form-control" type="password" id="auth-password-6"
-                                       name="PASSWORD" autocomplete="current-password" data-validate="required">
-                                <a class="form__link -right" href="#slideout-restorepass" data-slideout=""
-                                   data-slideout-options="{&quot;type&quot;:&quot;restorepass&quot;,&quot;position&quot;:&quot;top&quot;}">Забыли
-                                    пароль?</a>
-                            </div>
-                        </div>
-                        <div class="form__form-group -submit form-group">
-                            <button class="form__button -submit btn btn-primary btn-lg" type="submit">Войти</button>
-                        </div>
-                        <div class="form__form-group -bottom form-group">
-                            <a class="form__link" href="#slideout-register" data-slideout=""
-                               data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Нет аккаунта?
-                                Зарегистироваться</a>
-                        </div>
-                        <div class="preloader" role="status" style="transition-duration: 250ms;">
-                            <div class="preloader-spinner">
 
-                            </div>
+            <div class="preview-form">
+                <form class="login-form" id="login-form">
+
+                    <h3 class="login-form__title">Вход в систему</h3>
+
+                    <div class="input-wrap">
+                        <span class="input-wrap__title">Email:</span>
+                        <div class="input-form">
+                            <input type="email" class="login-input" name="login-form__mail" title=""/>
                         </div>
-                    </form>
-                </div>
+                    </div>
+
+                    <div class="input-wrap">
+                        <span class="input-wrap__title">Пароль:</span>
+                        <div class="input-form">
+                            <a class="input-link" id="input-link">Забыли пароль?</a>
+                            <input type="password" class="login-input" name="login-form__password" title=""/>
+                        </div>
+                    </div>
+
+                    <input type="submit" class="form__submit" value="Войти" title="Войти"/>
+
+                    <a href="#" class="login-form__registration-link open-registration">Нет аккаунта? Зарегистироваться</a>
+                </form>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
     {{--<div class="container">--}}
     {{--    <div class="row justify-content-center">--}}
     {{--        <div class="col-md-8">--}}
