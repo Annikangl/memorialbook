@@ -17,44 +17,11 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- Scripts -->
     {{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])    --}}
-{{--    @vite(['resources/css/app.scss', 'resources/js/app.js'])--}}
+    @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-<style>
-    body {
-        width: 100%;
-        height: 100%;
-    }
 
-    .slideout-menu {
-        position: fixed;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        z-index: 0;
-        width: 256px;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-        display: none;
-    }
 
-    .slideout-panel {
-        position: relative;
-        z-index: 1;
-        will-change: transform;
-    }
-
-    .slideout-open,
-    .slideout-open body,
-    .slideout-open .slideout-panel {
-        overflow: hidden;
-    }
-
-    .slideout-open .slideout-menu {
-        display: block;
-    }
-</style>
 <script data-skip-moving="true">
     document.documentElement.classList.remove('no-js');
 </script>
@@ -116,7 +83,7 @@
                                                 {{--                                            </div>--}}
 
                                                 <div class="header-personal__item -small -register col">
-                                                    <a class="header-personal__button btn btn-outline-primary"
+                                                    <a class="header-personal__button btn btn-outline-primary toggle-button"
                                                        href="#slideout-register" id="register-btn" role="button" data-slideout=""
                                                        data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Регистрация</a>
                                                 </div>
@@ -557,24 +524,6 @@
 </div>
 
 
-<script src="{{ asset('js/vendor.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
-
-<script>
-    let slideout = new Slideout({
-        'panel': document.getElementById('panel'),
-        'menu': document.getElementById('menu'),
-        'padding': 256,
-        'tolerance': 70
-    });
-
-    // Toggle button
-    document.querySelector('.register-btn').addEventListener('click', function() {
-        slideout.toggle();
-    });
-
-</script>
-
 </body>
 </html>
