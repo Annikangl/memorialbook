@@ -2,13 +2,19 @@
     <div class="aside-form" id="form-aside">
         <button type="button" class="close-registration" id="close-aside"></button>
 
-        <form class="form-registration" id="form-registration">
+        <form class="form-registration" id="form-registration" method="POST" action="{{ route('register') }}">
+            @csrf
             <h3 class="form-registration__title">Регистрация</h3>
             <div class="input-wrap">
                 <span class="input-wrap__title">ФИО:</span>
                 <div class="input-form">
                     <input type="text" class="login-input" name="login-registration__name" title=""/>
                 </div>
+                @error('login-registration__name')
+                <span class="is-invalid" role="alert" style="display: block">
+                    {{ $message }}
+                </span>
+                @enderror
             </div>
 
             <div class="input-wrap">
@@ -16,6 +22,11 @@
                 <div class="input-form">
                     <input type="email" class="login-input" name="login-registration__mail" title=""/>
                 </div>
+                @error('login-registration__mail')
+                <span class="is-invalid" role="alert" style="display: block">
+                    {{ $message }}
+                </span>
+                @enderror
             </div>
 
             <div class="input-wrap">
@@ -23,6 +34,11 @@
                 <div class="input-form">
                     <input type="tel" class="login-input" name="login-registration__phone" title=""/>
                 </div>
+                @error('login-registration__phone')
+                <span class="is-invalid" role="alert" style="display: block">
+                    {{ $message }}
+                </span>
+                @enderror
             </div>
 
             <div class="input-wrap">
@@ -30,13 +46,24 @@
                 <div class="input-form">
                     <input type="password" class="login-input" name="login-registration__password" title=""/>
                 </div>
+                @error('login-registration__password')
+                <span class="is-invalid" role="alert" style="display: block">
+                    {{ $message }}
+                </span>
+                @enderror
             </div>
 
             <div class="input-wrap">
                 <span class="input-wrap__title">Повторите пароль:</span>
                 <div class="input-form">
-                    <input type="password" class="login-input" name="login-registration__confirm" title=""/>
+                    <input type="password" class="login-input" name="login-registration__password_confirmation"
+                           title=""/>
                 </div>
+                @error('login-registration__password_confirmation')
+                <span class="is-invalid" role="alert" style="display: block">
+                    {{ $message }}
+                </span>
+                @enderror
             </div>
 
             <input type="submit" class="form__submit" value="Зарегистрироваться" title="Зарегистрироваться"/>

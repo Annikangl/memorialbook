@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,7 @@ Route::get('/', function () {
 
 Route::get('/tree', function () {
     return view('tree.index');
-});
+})->name('family-tree');
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
     Route::get('/create', [App\Http\Controllers\ProfileController::class, 'create'])->name('create');

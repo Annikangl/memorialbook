@@ -9,7 +9,13 @@
             </div>
 
             <div class="preview-form">
-                <form class="login-form" id="login-form">
+                @if($errors->any())
+                    @foreach($errors as $error)
+                        <span>{{ $error }}</span>
+                    @endforeach
+                @endif
+                <form action="{{ route('login') }}" class="login-form" id="login-form" method="POST">
+                    @csrf
 
                     <h3 class="login-form__title">Вход в систему</h3>
 

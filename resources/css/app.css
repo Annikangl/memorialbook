@@ -742,3 +742,82 @@ input[type="radio"], input[type="checkbox"], input[type="file"] {
         width: 100%;
     }
 }
+
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.col, .col-auto {
+    max-width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    position: relative;
+}
+
+
+.col.-small, [class*=col-].-small {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.header .header-personal__item {
+    height: 100%;
+}
+
+.header .header-personal__button.-notifications {
+    align-items: center;
+    background: none;
+    border: none;
+    color: #201e1f;
+    display: flex;
+    height: 44px;
+    justify-content: center;
+    max-width: 40px;
+    min-width: 40px;
+    padding: 0;
+    position: relative;
+}
+
+.badge {
+    border-radius: 7px;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.7;
+    min-width: 1.7em;
+    padding: 0 0.34375rem;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+.badge-danger {
+    background-color: #fa122e;
+    color: #fff;
+}
+
+.header .header-personal__badge {
+    font-size: 8px;
+    left: 20px;
+    line-height: 12px;
+    min-width: 12px;
+    padding: 0 3px;
+    position: absolute;
+    top: 7px;
+}
+
+.header .header-personal__item.-user {
+    max-width: calc(100% - 52px);
+    width: 100%;
+}
+
+.header .header-personal__link {
+    align-items: center;
+    color: #201e1f;
+    display: flex;
+    height: 44px;
+    white-space: nowrap;
+}
