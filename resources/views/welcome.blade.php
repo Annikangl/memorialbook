@@ -1,5 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3>Feed</h3>
+    <div style="height: 85vh; position: relative">
+        <div class="content" style="    position: absolute;
+     margin: auto;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     width: 200px;
+     height: 100px;">
+            <h2>Main</h2>
+        </div>
+    </div>
 @endsection

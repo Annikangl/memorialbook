@@ -41,6 +41,6 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        dd($request);   
+        dd($request);
     }
 }

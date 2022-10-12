@@ -85,14 +85,22 @@
         <!--buttons-->
         <div class="header-buttons" id="header-button">
             <button type="button" class="header-buttons__lang">Ru</button>
+            @auth
+                <span>{{ \Illuminate\Support\Facades\Auth::user()->name }}</span>
+            <form action="{{ route('logout') }}" method="POST" style="margin-left: 10px;">
+                @csrf
+                <button type="submit" class="header-buttons">Выйти</button>
+            </form>
+            @endif
             @guest
                 <button type="button" class="header-buttons__registration open-registration">Регистрация</button>
+            @endif
                 <button type="button" class="header-buttons__menu" id="mobile-menu">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
-        @endif
+
 
     </header>
     @yield('content')
