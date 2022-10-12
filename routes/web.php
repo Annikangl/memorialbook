@@ -17,9 +17,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
+
 
 Route::get('/tree', function () {
     return view('tree.index');

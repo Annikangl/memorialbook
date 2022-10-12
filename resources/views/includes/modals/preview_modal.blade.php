@@ -1,4 +1,4 @@
-<section class="preview">
+
 <div class="preview-modal" id="modal-from">
     <div class="aside-form" id="form-aside">
         <button type="button" class="close-registration" id="close-aside"></button>
@@ -83,6 +83,11 @@
                     <div class="input-form">
                         <input type="email" class="login-input" name="form-recover__email" title=""/>
                     </div>
+                    @error('form-recover__email')
+                        <span class="is-invalid" role="alert" style="display: block">
+                            {{ $errors->first() }}
+                    </span>
+                    @enderror
                 </div>
                 <input type="submit" class="form__submit" value="Выслать" title="Выслать"/>
             </div>
@@ -90,4 +95,4 @@
 
     </div>
 </div>
-</section>
+

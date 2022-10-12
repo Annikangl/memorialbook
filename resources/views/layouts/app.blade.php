@@ -46,62 +46,62 @@
 <body>
 
 <div id="page">
-    <header class="header">
-        <!--logo header-->
-        <a href="{{ route('home') }}" class="logo-header">
-            <img src="{{ asset('img/logo/logo.svg') }}" class="logo-header__img" alt="Memorialbook" title=""/>
-        </a>
+{{--    <header class="header">--}}
+{{--        <!--logo header-->--}}
+{{--        <a href="{{ route('home') }}" class="logo-header">--}}
+{{--            <img src="{{ asset('img/logo/logo.svg') }}" class="logo-header__img" alt="Memorialbook" title=""/>--}}
+{{--        </a>--}}
 
-        <!--menu-->
-        <nav class="header-menu" id="header-menu">
-            <ul class="menu">
-                @guest
-                    <li class="menu__item">
-                        <a href="#" class="menu__link">Люди</a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="#" class="menu__link">Места</a>
-                    </li>
-                @else
-                    <li class="menu__item">
-                        <a href="#" class="menu__link">Люди</a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="#" class="menu__link">Места</a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="{{ route('family-tree') }}" class="menu__link">Семейное древо</a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="#" class="menu__link">Магазин</a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="#" class="menu__link">Заказы</a>
-                    </li>
-                @endif
-            </ul>
-        </nav>
+{{--        <!--menu-->--}}
+{{--        <nav class="header-menu" id="header-menu">--}}
+{{--            <ul class="menu">--}}
+{{--                @guest--}}
+{{--                    <li class="menu__item">--}}
+{{--                        <a href="#" class="menu__link">Люди</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="menu__item">--}}
+{{--                        <a href="#" class="menu__link">Места</a>--}}
+{{--                    </li>--}}
+{{--                @else--}}
+{{--                    <li class="menu__item">--}}
+{{--                        <a href="#" class="menu__link">Люди</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="menu__item">--}}
+{{--                        <a href="#" class="menu__link">Места</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="menu__item">--}}
+{{--                        <a href="{{ route('family-tree') }}" class="menu__link">Семейное древо</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="menu__item">--}}
+{{--                        <a href="#" class="menu__link">Магазин</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="menu__item">--}}
+{{--                        <a href="#" class="menu__link">Заказы</a>--}}
+{{--                    </li>--}}
+{{--                @endif--}}
+{{--            </ul>--}}
+{{--        </nav>--}}
 
-        <!--buttons-->
-        <div class="header-buttons" id="header-button">
-            <button type="button" class="header-buttons__lang">Ru</button>
-            @auth
-                <span>{{ \Illuminate\Support\Facades\Auth::user()->name }}</span>
-            <form action="{{ route('logout') }}" method="POST" style="margin-left: 10px;">
-                @csrf
-                <button type="submit" class="header-buttons">Выйти</button>
-            </form>
-            @else
-                <button type="button" class="header-buttons__registration open-registration">Регистрация</button>
-            @endif
-                <button type="button" class="header-buttons__menu" id="mobile-menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+{{--        <!--buttons-->--}}
+{{--        <div class="header-buttons" id="header-button">--}}
+{{--            <button type="button" class="header-buttons__lang">Ru</button>--}}
+{{--            @auth--}}
+{{--                <span>{{ \Illuminate\Support\Facades\Auth::user()->name }}</span>--}}
+{{--            <form action="{{ route('logout') }}" method="POST" style="margin-left: 10px;">--}}
+{{--                @csrf--}}
+{{--                <button type="submit" class="header-buttons">Выйти</button>--}}
+{{--            </form>--}}
+{{--            @else--}}
+{{--                <button type="button" class="header-buttons__registration open-registration">Регистрация</button>--}}
+{{--            @endif--}}
+{{--                <button type="button" class="header-buttons__menu" id="mobile-menu">--}}
+{{--                    <span></span>--}}
+{{--                    <span></span>--}}
+{{--                    <span></span>--}}
+{{--                </button>--}}
 
 
-    </header>
+{{--    </header>--}}
     <main class="content">
         @yield('content')
     </main>

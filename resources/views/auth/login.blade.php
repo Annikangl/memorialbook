@@ -14,6 +14,14 @@
                     <span>{{ session('status') }}</span>
                 </div>
             @endif
+            @if ($errors->any())
+                @foreach($errors->all() as $error)
+
+                <span class="is-invalid" role="alert" style="display: block">
+                    {{ $error }}
+                </span>
+                    @endforeach
+                @endif
             <form action="{{ route('login') }}" class="login-form" id="login-form" method="POST">
                 @csrf
 
@@ -22,9 +30,9 @@
                 <div class="input-wrap">
                     <span class="input-wrap__title">Email:</span>
                     <div class="input-form">
-                        <input type="email" class="login-input" name="login-form__mail" title=""/>
+                        <input type="email" class="login-input" name="login-form__mail" title="" value="{{ old('login-form__mail') }}"/>
                     </div>
-                    @error('login-form__mail')
+                    @error('email')
                     <span class="is-invalid" role="alert" style="display: block">
                             {{ $message }}
                         </span>
@@ -41,18 +49,7 @@
                         @endif
                         <input type="password" class="login-input" name="login-form__password" title=""/>
                     </div>
-                    @error('login-form__password')
-                    <span class="is-invalid" role="alert" style="display: block">
-                            {{ $message }}
-                        </span>
-                    @enderror
                 </div>
-
-                @if ($errors->any())
-                    <span class="is-invalid" role="alert" style="display: block">
-                            {{ $errors->first() }}
-                    </span>
-                @endif
 
                 <input type="submit" class="form__submit" value="Войти" title="Войти"/>
 
@@ -61,6 +58,7 @@
 
         </div>
     </section>
+
 
     {{--<div class="container">--}}
     {{--    <div class="row justify-content-center">--}}
