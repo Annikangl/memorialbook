@@ -10,7 +10,7 @@
      left: 0;
      width: 200px;
      height: 100px;">
-            <h2>Home page</h2>
+            <h2>Вы авторизованы!</h2>
         </div>
     </div>
 {{--<div class="container">--}}

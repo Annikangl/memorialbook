@@ -1,3 +1,4 @@
+<section class="preview">
 <div class="preview-modal" id="modal-from">
     <div class="aside-form" id="form-aside">
         <button type="button" class="close-registration" id="close-aside"></button>
@@ -71,7 +72,8 @@
                 <a href="#">политики обработки персональных данных</a></p>
         </form>
 
-        <form class="form-recover">
+        <form method="POST" action="{{ route('password.email') }}" class="form-recover">
+            @csrf
             <h3 class="form-recover__title">Восстановить пароль</h3>
             <div class="form-recover-wrap">
                 <p>Если вы забыли пароль, введите email. <br/>Контрольная строка для смены пароля, а также ваши
@@ -82,9 +84,10 @@
                         <input type="email" class="login-input" name="form-recover__email" title=""/>
                     </div>
                 </div>
-                <input type="submit" class="form__submit" value="Высдать" title="Зарегистрироваться"/>
+                <input type="submit" class="form__submit" value="Выслать" title="Выслать"/>
             </div>
         </form>
 
     </div>
 </div>
+</section>

@@ -91,8 +91,7 @@
                 @csrf
                 <button type="submit" class="header-buttons">Выйти</button>
             </form>
-            @endif
-            @guest
+            @else
                 <button type="button" class="header-buttons__registration open-registration">Регистрация</button>
             @endif
                 <button type="button" class="header-buttons__menu" id="mobile-menu">
@@ -103,7 +102,10 @@
 
 
     </header>
-    @yield('content')
+    <main class="content">
+        @yield('content')
+    </main>
+
     <footer class="footer">
         <!--logo footer-->
         <a href="#" class="logo-footer">
@@ -120,7 +122,7 @@
                     <li class="menu-list__item">
                         <a href="#" class="menu-list__link">Контакты</a>
                     </li>
-                @elseguest
+                @else
                     <li class="menu-list__item">
                         <a href="{{ route('family-tree') }}" class="menu-list__link">Семейное древо</a>
                     </li>
