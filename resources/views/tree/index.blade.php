@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
-        <div class="container">
-            <div class="tree__inner">
+
+        <div class="container" >
+            <div class="tree__inner" style="margin-top: 100px !important;">
                 <div class="tree__nav">
                     <div class="tree-nav__items">
                         <div class="tree-nav__item">
@@ -16,11 +17,13 @@
                     <a class="tree-controls__button -new btn btn-primary btn-sm" href="{{route('profile.create')}}">+ Добавить профиль</a>
                 </div>
             </div>
-            <div id="tree">   </div>
+            <div class="container-tree">
+                <div id="tree"></div>
+            </div>
+
         </div>
 
 
 
-    <script type="text/javascript" src="{{asset('js/familytree.js')}}"></script>
 
-
+<script type="text/javascript" src="{{asset('js/familytree.js')}}"></script>

@@ -10,14 +10,12 @@ return new class extends Migration
      * Run the migrations.
      *
      * @return void
-     *
      */
     public function up()
     {
-        Schema::create('user_cemetery', function (Blueprint $table) {
+        Schema::create('cemetery', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_user');
-            $table->integer('id_cemetery');
+
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_cemetry');
+        Schema::dropIfExists('cemetry');
     }
 };
