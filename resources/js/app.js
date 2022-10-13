@@ -1,5 +1,8 @@
 import 'bootstrap'
 import './vendor'
+import './familytree'
+import './template'
+
 
 
 /*! For license information please see main.scripts.js.LICENSE.txt */
