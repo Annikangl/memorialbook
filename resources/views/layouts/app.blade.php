@@ -61,7 +61,7 @@
                     <div class="row -small">
                         <div class="header__logo -small col-auto">
                                 <span class="header-logo__inner">
-                                    <a href="{{ route('home') }}">
+                                    <a href="{{ route('index') }}">
                                     <img class="header-logo__image"
                                          src="{{ asset('assets/media/media/logo/logo.svg') }}"
                                          alt="Логотип Memorial book">
@@ -152,7 +152,9 @@
                                     </button>
                                 </div>
                                 <div class="base-form -auth" id="slideout-auth">
-                                    <form class="form" action="#" method="post" data-base-form="">
+                                    <form class="form" action="{{ route('login') }}" method="post" data-base-form="">
+                                        @csrf
+
                                         <div class="form__title">Вход в&nbsp;систему</div>
                                         <div class="form__form-group form-group">
                                             <label class="form__label" for="auth-email-2">Email:</label>
@@ -187,7 +189,8 @@
                                     </form>
                                 </div>
                                 <div class="base-form -restorepass" id="slideout-restorepass">
-                                    <form class="form" action="#" method="post" data-base-form="">
+                                    <form class="form" action="{{ route('password.email') }}" method="post" data-base-form="">
+                                        @csrf
                                         <div class="container">
                                             <div class="form__inner">
                                                 <div class="form__left">

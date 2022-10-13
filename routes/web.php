@@ -21,17 +21,18 @@ Auth::routes();
 Route::get('login/{driver}', [NetworkController::class, 'redirect'])->name('social.login');
 Route::get('login/{driver}/callback', [NetworkController::class, 'callback']);
 
-Route::get('/', [LoginController::class, 'showLoginForm']);
+Route::get('/', [LoginController::class, 'showLoginForm'])->name('index');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/tree', function () {
+        return view('tree.index');
+    })->name('family-tree');
 
-Route::get('/tree', function () {
-    return view('tree.index');
-})->name('family-tree');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-    Route::get('/create', [App\Http\Controllers\ProfileController::class, 'create'])->name('create');
+    Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+        Route::get('/create', [App\Http\Controllers\ProfileController::class, 'create'])->name('create');
+    });
 });
 
 
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
