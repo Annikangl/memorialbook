@@ -15,26 +15,29 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('full_name');
+            $table->string('name');
+            $table->string('patronymic');
+            $table->string('surname');
             $table->string('avatar');
             $table->date('date_birth');
             $table->string('place_birth');
             $table->date('date_death');
-            $table->string('burial_place');
-            $table->string('death_certificate');
-            $table->string('religious_views');
-            $table->string('hobby');
-            $table->string('image_video_gallery');
-            $table->integer('id_father');
-            $table->integer('id_mother');
-            $table->integer('id_spouse');
-            $table->boolean('moderation_status');
-            $table->string('moderators_comment');
-            $table->string('setting_access');
-            $table->string('gender');
-            $table->integer('p_id');
-            $table->integer('m_id');
-            $table->integer('f_id');
+            $table->string('burial_place')->nullable();
+            $table->string('reason_death')->nullable();
+            $table->string('death_certificate')->nullable();
+            $table->string('religious_views')->nullable();
+            $table->string('hobby')->nullable();
+            $table->string('image_video_gallery')->nullable();
+            $table->integer('id_father')->nullable();
+            $table->integer('id_mother')->nullable();
+            $table->integer('id_spouse')->nullable();
+            $table->boolean('moderation_status')->nullable();
+            $table->string('moderators_comment')->nullable();
+            $table->string('setting_access')->nullable();
+            $table->string('gender')->nullable();
+            $table->integer('p_id')->nullable();
+            $table->integer('m_id')->nullable();
+            $table->integer('f_id')->nullable();
 
             $table->timestamps();
         });

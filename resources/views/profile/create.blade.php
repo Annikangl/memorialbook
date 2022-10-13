@@ -319,7 +319,7 @@
                 </div>
             </div>
         </div>
-        <main class="main-content" role="main">
+        <main class="main-content" role="main" style="padding-top: 0px">
             <div class="container">
                 <div class="breadcrumbs">
                     <nav class="breadcrumbs__inner" aria-labelledby="breadcrumbs-title">
@@ -343,6 +343,9 @@
                             <div class="profile__text-info">Давайте создавать и хранить историю вместе? Для начала необходимо заполнить основную информацию
                                 профиля.</div>
                         </div>
+
+
+
                         <div class="profile__side -step-menu col">
                             <div class="profile__sidebar">
                                 <h1>Новый профиль</h1>
@@ -379,16 +382,17 @@
                         </div>
                         <div class="profile__side -step-content col">
                             <div class="base-form -full">
-                                <form class="form" action="#" method="post" data-base-form="">
+
+                                <form method="POST" enctype="multipart/form-data" action="{{route('profile.store')}}">
+                                    @csrf
                                     <div class="profile__section">
                                         <div class="profile-section__row row">
                                             <div class="profile-section__side">
                                                 <div class="profile-avatar -middle">
                                                     <div class="profile-avatar__inner">
                                                         <div class="profile-avatar__file -preview file" data-file="">
-                                                            <label class="profile-avatar-file__list file-list" for="profile-image-6">
-                                                                    <span class="file-item" title="Управление аватаром"
-                                                                          style="background-image: url('../assets/uploads/profile/avatar-5.jpg')">
+                                                            <label class="profile-avatar-file__list file-list" for="avatar">
+                                                                    <span class="file-item" title="Управление аватаром">
                                                                         <span class="file-name">Управление аватаром</span>
                                                                         <button class="file-cancel" type="button" title="Отменить загрузку файла">
                                                                             <svg style="width: 12px; height: 12px;" aria-hidden="true">
@@ -397,14 +401,13 @@
                                                                         </button>
                                                                     </span>
                                                             </label>
-                                                            <label class="profile-avatar-file__label file-label" for="profile-image-6">
+                                                            <label class="profile-avatar-file__label file-label" for="avatar">
                                                                 <div class="file-label-inner">
                                                                     <span>Выберите фото</span>
                                                                 </div>
                                                             </label>
-                                                            <input class="profile-avatar-file__input file-input sr-only" type="file" id="profile-image-6"
-                                                                   value="Управление аватаром" accept=".jpg,.jpeg,.png">
-                                                            <label class="profile-avatar-file__button btn btn-primary" for="profile-image-6">
+                                                            <input class="profile-avatar-file__input file-input sr-only" type="file" name="avatar" id="avatar" accept=".jpg,.jpeg,.png">
+                                                            <label class="profile-avatar-file__button btn btn-primary" for="avatar">
                                                                 <svg style="width: 22px; height: 20px;" aria-hidden="true">
                                                                     <use xlink:href="../assets/media/sprite.svg?1642772414527#sprite-photo"></use>
                                                                 </svg>
@@ -420,22 +423,22 @@
                                                     <div class="profile-section__form-group -mt-0 form-group">
                                                         <label class="profile-section__label" for="new-member-name">Имя:</label>
                                                         <div class="profile-section__input-container">
-                                                            <input class="profile-section__input form-control" type="text" id="new-member-name" name="name"
-                                                                   value="Михаил" autofocus="" data-autofocus="" data-validate="required, name">
+                                                            <input class="profile-section__input form-control" type="text" id="name" name="name"
+                                                                  autofocus="" data-autofocus="" data-validate="required, name">
                                                         </div>
                                                     </div>
                                                     <div class="profile-section__form-group form-group">
-                                                        <label class="profile-section__label" for="new-member-patronymic">Отчество:</label>
+                                                        <label class="profile-section__label" for="patronymic">Отчество:</label>
                                                         <div class="profile-section__input-container">
-                                                            <input class="profile-section__input form-control" type="text" id="new-member-patronymic"
-                                                                   name="patronymic" placeholder="Сергеевич" data-validate="required, patronymic">
+                                                            <input class="profile-section__input form-control" type="text" id="patronymic"
+                                                                   name="patronymic" data-validate="required, patronymic">
                                                         </div>
                                                     </div>
                                                     <div class="profile-section__form-group form-group">
                                                         <label class="profile-section__label" for="new-member-surname">Фамилия:</label>
                                                         <div class="profile-section__input-container">
-                                                            <input class="profile-section__input form-control" type="text" id="new-member-surname"
-                                                                   name="surname" placeholder="Иванов" data-validate="required, surname">
+                                                            <input class="profile-section__input form-control" type="text" id="surname"
+                                                                   name="surname" data-validate="required, surname">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -445,31 +448,30 @@
                                     <div class="profile__section">
                                         <div class="profile-section__row -m-up row">
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="new-member-birth">Дата рождения:</label>
+                                                <label class="profile-section__label" for="date_birth">Дата рождения:</label>
                                                 <div class="profile-section__input-container">
-                                                    <input class="profile-section__input form-control" type="text" id="new-member-birth" name="birth-day"
-                                                           value="24.12.1968" data-validate="required" data-mask="99.99.9999">
+                                                    <input class="profile-section__input form-control" type="date" id="date_birth" name="date_birth"
+                                                           data-validate="required">
                                                 </div>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="new-member-birth-place">Место рождения:</label>
+                                                <label class="profile-section__label" for="place_birth">Место рождения:</label>
                                                 <div class="profile-section__input-container">
-                                                    <input class="profile-section__input form-control" type="text" id="new-member-birth-place"
-                                                           name="birth-place" value="пос. Белгородский">
+                                                    <input class="profile-section__input form-control" type="text" id="place_birth"
+                                                           name="place_birth" value="">
                                                 </div>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="new-member-death">Дата смерти:</label>
+                                                <label class="profile-section__label" for="date_death">Дата смерти:</label>
                                                 <div class="profile-section__input-container">
-                                                    <input class="profile-section__input form-control" type="text" id="new-member-death" name="death-day"
-                                                           value="24.12.2001" data-mask="99.99.9999">
+                                                    <input class="profile-section__input form-control" type="date" id="date_death" name="date_death">
                                                 </div>
                                             </div>
                                             <div class="profile-section__form-group -half -address form-group">
-                                                <label class="profile-section__label" for="new-member-death-place">Место захоронения:</label>
+                                                <label class="profile-section__label" for="burial_place">Место захоронения:</label>
                                                 <div class="profile-section__input-container">
-                                                    <input class="profile-section__input form-control" type="text" id="new-member-death-place"
-                                                           name="death-place" placeholder="Укажите место захоронения" readonly="" data-popup="#popup-map">
+                                                    <input class="profile-section__input form-control" type="text" id="burial_place"
+                                                           name="burial_place" placeholder="Укажите место захоронения" readonly="" data-popup="#popup-map">
                                                     <div class="popup -map mfp-hide" role="dialog" id="popup-map" aria-hidden="true"
                                                          aria-labelledby="popup-map-title">
                                                         <div class="popup__inner">
@@ -486,17 +488,17 @@
                                                 </div>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="new-member-death-reason">Причина смерти:</label>
+                                                <label class="profile-section__label" for="reason_death">Причина смерти:</label>
                                                 <div class="profile-section__input-container">
-                                                    <input class="profile-section__input form-control" type="text" id="new-member-death-reason"
-                                                           name="death-reason">
+                                                    <input class="profile-section__input form-control" type="text" id="reason_death"
+                                                           name="reason_death">
                                                 </div>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="new-member-death-certificate">Свидетельство о смерти:</label>
+                                                <label class="profile-section__label" for="death_certificate">Свидетельство о смерти:</label>
                                                 <div class="profile-section__input-container">
-                                                    <input class="profile-section__input form-control" type="text" id="new-member-death-certificate"
-                                                           name="death-certificate">
+                                                    <input class="profile-section__input form-control" type="file" id="death_certificate"
+                                                           name="death_certificate">
                                                 </div>
                                             </div>
                                         </div>
@@ -504,24 +506,24 @@
                                     <div class="profile__section">
                                         <div class="profile-section__row -m-up row">
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="new-member-father">Отец</label>
-                                                <select class="profile-section__select select" id="new-member-father" hidden="" data-select="">
+                                                <label class="profile-section__label" for="id_father">Отец</label>
+                                                <select class="profile-section__select select" id="id_father" hidden="" data-select="">
                                                     <option value="0">Выберите из списка</option>
                                                     <option value="1">Алексеев Алексей Алексеевич</option>
                                                     <option value="1">Алексеев Алексей Матвеевич</option>
                                                 </select>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="new-member-mother">Мать</label>
-                                                <select class="profile-section__select select" id="new-member-mother" hidden="" data-select="">
+                                                <label class="profile-section__label" for="id_mother">Мать</label>
+                                                <select class="profile-section__select select" id="id_mother" hidden="" data-select="">
                                                     <option value="0">Выберите из списка</option>
                                                     <option value="1">Каренина Анна Аркадьевна</option>
                                                     <option value="1">Облонская Анна Аркадьевна</option>
                                                 </select>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="new-member-partner">Супруг / Супруга</label>
-                                                <select class="profile-section__select select" id="new-member-partner" hidden="" data-select="">
+                                                <label class="profile-section__label" for="id_spouse">Супруг / Супруга</label>
+                                                <select class="profile-section__select select" id="id_spouse" hidden="" data-select="">
                                                     <option value="0">Выберите из списка</option>
                                                     <option value="1">Дитриев Дмитрий Дмитриевич</option>
                                                     <option value="1">Андрей Дмитрий Дмитриевич</option>
@@ -531,17 +533,12 @@
                                     </div>
                                     <div class="profile__bottom">
                                         <div class="profile-bottom__item">
-                                            <a class="profile-bottom__button btn btn-primary" href="../profile-add-member-2">Сохранить и продолжить</a>
+                                            <button class="profile-bottom__button btn btn-primary">Сохранить и продолжить</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-        <div hidden></div>
-    </div>
-</div>
+
+
 @endsection

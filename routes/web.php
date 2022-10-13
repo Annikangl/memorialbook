@@ -17,11 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tree', function () {
-    return view('tree.index');
-});
+
+
+Route::get('/tree',[App\Http\Controllers\ProfileController::class,'index'])->name('tree');
+
+Route::get('/tree-list',[App\Http\Controllers\ProfileController::class,'list'])->name('tree.list');
+
 Route::group(['prefix'=>'profile','as'=>'profile.'],function(){
     Route::get('/create',[App\Http\Controllers\ProfileController::class,'create'])->name('create');
+    Route::post('/store',[App\Http\Controllers\ProfileController::class,'store'])->name('store');
 });
 
 Auth::routes();
