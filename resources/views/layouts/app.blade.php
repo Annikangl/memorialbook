@@ -278,11 +278,8 @@
                                                     персональных данных</a>
                                             </div>
                                         </div>
-                                        <div class="form__form-group -submit form-group">
-                                            <a href="#" style="margin-right: 10px">Facebook</a>
-                                            <a href="#">Apple</a>
-                                        </div>
                                     </form>
+                                    @include('auth.partials.socials')
                                 </div>
                                 <div class="filter -people" id="slideout-people">
                                     <form class="form" action="#" method="post">

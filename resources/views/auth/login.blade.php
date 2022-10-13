@@ -36,15 +36,13 @@
                         <div class="form__form-group -submit form-group">
                             <button class="form__button -submit btn btn-primary btn-lg" type="submit">Войти</button>
                         </div>
-                        <div class="form__form-group -submit form-group">
-                            <a href="#" style="margin-right: 10px">Facebook</a>
-                            <a href="#">Apple</a>
-                        </div>
+
                         <div class="form__form-group -bottom form-group">
                             <a class="form__link" href="#slideout-register" data-slideout=""
                                data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Нет аккаунта? Зарегистироваться</a>
                         </div>
                     </form>
+                    @include('auth.partials.socials')
                 </div>
             </div>
         </div>

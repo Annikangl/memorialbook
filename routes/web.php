@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\NetworkController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('login/{driver}', [NetworkController::class, 'redirect'])->name('social.login');
+Route::get('login/{driver}/callback', [NetworkController::class, 'callback']);
 
-Route::get('/', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
+Route::get('/', [LoginController::class, 'showLoginForm']);
 
 
 Route::get('/tree', function () {
