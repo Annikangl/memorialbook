@@ -130,6 +130,10 @@
     margin-bottom: 15px
 }
 
+.social__icon-facebook {
+    margin: 0;
+}
+
 .top__title {
     margin: 0
 }
