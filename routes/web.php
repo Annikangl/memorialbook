@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\NetworkController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('login/{driver}', [NetworkController::class, 'redirect'])->name('social.login');
+Route::get('login/{driver}/callback', [NetworkController::class, 'callback'])->name('social.callback');
 
-Route::get('/', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
+Route::get('/', [LoginController::class, 'showLoginForm'])->name('index');
 
+Route::middleware('auth')->group(function () {
 
 Route::get('/tree',[App\Http\Controllers\ProfileController::class,'index'])->name('tree');
 
@@ -33,5 +38,10 @@ Route::group(['prefix'=>'profile','as'=>'profile.'],function(){
 
 
 
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+        Route::get('/create', [App\Http\Controllers\ProfileController::class, 'create'])->name('create');
+    });
+});
+

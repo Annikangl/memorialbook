@@ -43,13 +43,13 @@ class ForgotPasswordController extends Controller
 
     protected function validateEmail(Request $request)
     {
-        $request->validate(['form-recover__email' => 'required|email']);
+        $request->validate(['EMAIL' => 'required|email']);
     }
 
     protected function credentials(Request $request)
     {
         return [
-            'email' => $request->get('form-recover__email'),
+            'email' => $request->get('EMAIL'),
         ];
     }
 
@@ -57,12 +57,15 @@ class ForgotPasswordController extends Controller
     {
         if ($request->wantsJson()) {
             throw ValidationException::withMessages([
-                'form-recover__email' => [trans($response)],
+                'EMAIL' => [trans($response)],
             ]);
         }
 
-        return back()
-            ->withInput($request->only('email'))
-            ->withErrors(['email' => trans($response)]);
+        return response()->json(['status' =>false, 'errors' => trans($response)])
+            ->setStatusCode(500);
+
+//        return back()
+//            ->withInput($request->only('email'))
+//            ->withErrors(['email' => trans($response)]);
     }
 }

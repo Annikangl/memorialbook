@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\Models\User;
+use App\Models\User\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,10 +50,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'login-registration__name' => ['required', 'string', 'max:255'],
-            'login-registration__mail' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'login-registration__phone' => ['required', 'string', 'max:15', 'unique:users,phone'],
-            'login-registration__password' => ['required', 'string', 'min:8', 'confirmed'],
+            'FIO' => ['required', 'string', 'max:255'],
+            'EMAIL' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'PHONE' => ['required', 'string', 'max:15', 'unique:users,phone'],
+            'PASSWORD' => ['required', 'string', 'min:8'],
+            'PASSWORD_CONFIRM' => ['required',' string', 'min:8']
         ]);
     }
 
@@ -66,10 +67,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['login-registration__name'],
-            'email' => $data['login-registration__mail'],
-            'phone' => $data['login-registration__phone'],
-            'password' => Hash::make($data['login-registration__password']),
+            'name' => $data['FIO'],
+            'email' => $data['EMAIL'],
+            'phone' => $data['PHONE'],
+            'password' => Hash::make($data['PASSWORD']),
         ]);
     }
 }
