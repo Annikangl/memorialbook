@@ -41,14 +41,21 @@ class ProfileController extends Controller
         $params['avatar']=$avatar_path;
         $params['death_certificate']=$certificate_path;
 
-        $profile = Profile::create($params);
+        $request->session()->put('profile',$params);
+//        $profile = Profile::create($params);
 
-        return redirect()->route('tree');
+        return redirect()->route('profile.create.step2');
 // Перебрасывать на шаг 2 с id который только создал и его там сохранять чтобы при записи дополнялись данные уже в текущую запись
+        //загрузка данных в сессию с дальнейшей переброской по маршрутам
     }
-    public function create_step2(){
-
+    public function create_step2(Request $request){
         return view('profile.create_step2');
+    }
+    public function store_step2(Request $request){
+        dd($request);
+        $params = $request->all();
+        $value = $request->session()->get('profile');
+        dd($value);
     }
 
     public function create_step3(){
