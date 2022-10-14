@@ -500,13 +500,8 @@
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-</div>
 
 @yield('scripts')
-=======
->>>>>>> master
-
 
 </body>
 </html>
