@@ -79,7 +79,8 @@ class User extends Authenticatable
             'password' => null
         ]);
 
-        $user->networks->create([
+
+        $user->networks()->create([
             'network' => $network,
             'identity' => $identity
         ]);

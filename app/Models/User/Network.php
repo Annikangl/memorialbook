@@ -18,6 +18,7 @@ class Network extends Model
 {
     use HasFactory;
 
+    protected $table = 'user_networks';
     public $timestamps = false;
     protected $fillable = ['network', 'identity'];
 

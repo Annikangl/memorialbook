@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('login/{driver}', [NetworkController::class, 'redirect'])->name('social.login');
-Route::get('login/{driver}/callback', [NetworkController::class, 'callback']);
+Route::get('login/{driver}/callback', [NetworkController::class, 'callback'])->name('social.callback');
 
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('index');
 
