@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 
@@ -69,6 +70,16 @@ class User extends Authenticatable
     public function networks(): HasMany
     {
         return $this->hasMany(Network::class);
+    }
+
+    public static function register(string $name, string $email, string $phone, string $password): self
+    {
+        return static::create([
+            'name' => $name,
+            'email' => $name,
+            'phone' => $phone,
+            'password' => Hash::make($password),
+        ]);
     }
 
     public static function registerByNetwork(string $name, string $email, string $network, string $identity): self
