@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('death_certificate')->nullable();
             $table->string('religious_views')->nullable();
             $table->string('hobby')->nullable();
-            $table->string('image_video_gallery')->nullable();
             $table->integer('id_father')->nullable();
             $table->integer('id_mother')->nullable();
             $table->integer('id_spouse')->nullable();

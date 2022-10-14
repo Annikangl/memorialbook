@@ -1,35 +1,11 @@
-@charset "UTF-8";
-@font-face {
-    font-display: swap;
-    font-family: Lato;
-    font-style: normal;
-    font-weight: 900;
-    src: url(../../resources/fonts/lato-black/lato-black.woff2) format("woff2"), url(../../resources/fonts/lato-black/lato-black.woff) format("woff")
-}
+/* style general
 
-@font-face {
-    font-display: swap;
-    font-family: Lato;
-    font-style: normal;
-    font-weight: 700;
-    src: url(../../resources/fonts/lato-bold/lato-bold.woff2) format("woff2"), url(../../resources/fonts/lato-bold/lato-bold.woff) format("woff")
-}
 
-@font-face {
-    font-display: swap;
-    font-family: Lato;
-    font-style: normal;
-    font-weight: 400;
-    src: url(../../resources/fonts/lato-regular/lato-regular.woff2) format("woff2"), url(../../resources/fonts/lato-regular/lato-regular.woff) format("woff")
-}
+-----------------*/
+@import "./fonts.css";
+@import "./template.css";
 
-@font-face {
-    font-display: swap;
-    font-family: Lato;
-    font-style: normal;
-    font-weight: 600;
-    src: url(../../resources/fonts/lato-semibold/lato-semibold.woff2) format("woff2"), url(../../resources/fonts/lato-semibold/lato-semibold.woff) format("woff")
-}
+
 
 .container, .container-fluid {
     margin-left: auto;
@@ -3975,8 +3951,6 @@ a.text-dark:focus, a.text-dark:hover {
 
 .file.-preview .file-item {
     align-items: center;
-    background-position: 50%;
-    background-size: cover;
     border-radius: 7px;
     display: flex;
     height: 100px;
@@ -4051,6 +4025,13 @@ a.text-dark:focus, a.text-dark:hover {
 .file.-preview .file-label span:not(:first-child) {
     display: block;
     margin-top: 10px
+}
+
+.file.-preview .file-image {
+    background-position: 50%;
+    background-size: cover;
+    height: 100%;
+    width: 100%
 }
 
 .file.-banner .file-label, .file.-banner .file-list {
@@ -8533,6 +8514,11 @@ html[data-slideout-type=people] .slideout .filter.-people, html[data-slideout-ty
     position: static
 }
 
+.profile-cemeteries-item__side.-content:first-child {
+    min-width: 100% !important;
+    max-width: 100% !important
+}
+
 .profile-cemeteries-item__content {
     display: flex;
     flex-direction: column;
@@ -8894,6 +8880,10 @@ html[data-slideout-type=people] .slideout .filter.-people, html[data-slideout-ty
     max-height: calc(100vh - 56px);
     min-height: calc(100vh - 56px);
     position: relative
+}
+
+.tree.-list {
+    max-height: none !important
 }
 
 .tree__nav {
@@ -11823,7 +11813,7 @@ fieldset.disabled .choices, fieldset:disabled .choices {
 }
 
 [data-slideout-shown=true] .slideout {
-    opacity: 0;
+    opacity: 1;
     pointer-events: auto;
     -webkit-user-select: text;
     -moz-user-select: text;
@@ -12011,7 +12001,6 @@ fieldset.disabled .choices, fieldset:disabled .choices {
     flex-grow: 0;
     padding: 0
 }
-
 
 .slideout .header-language__button {
     color: #201e1f;

@@ -1,0 +1,24 @@
+{
+  "name": "Memorial book",
+  "short_name": "Memorial book",
+  "description": "Memorial book",
+  "dir": "auto",
+  "lang": "ru-RU",
+  "display": "browser",
+  "orientation": "portrait",
+  "start_url": ".",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/local/templates/main/static/assets/media/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/local/templates/main/static/assets/media/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
