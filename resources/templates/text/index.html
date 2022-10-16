@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ru-RU">
+
+<head>
+    <title>Текстовая страница — Memorial book</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff">
+    <link href="../assets/media/icons/favicon.ico" type="image/x-icon" rel="icon">
+    <link href="../assets/media/icons/favicon.svg" type="image/svg+xml" rel="icon">
+    <link href="../assets/media/icons/apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180">
+    <link href="../assets/media/icons/manifest.json" rel="manifest">
+    <link href="../assets/fonts/lato-black/lato-black.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous">
+    <link href="../assets/fonts/lato-bold/lato-bold.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous">
+    <link href="../assets/fonts/lato-regular/lato-regular.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous">
+    <link href="../assets/fonts/lato-semibold/lato-semibold.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous">
+    <link href="../assets/styles/main.styles.css?1644862965730" rel="stylesheet">
+    <script src="../assets/scripts/polyfills.scripts.js?1644862965730" nomodule="" data-skip-moving="true"></script>
+    <script data-skip-moving="true">
+        window.app = window.app || {};
+        window.app.globalConfig = {
+            relPath: '../',
+            assetsPath: '../assets/',
+            gmapsApikey: 'AIzaSyDCgArix6diJwCToFgNcbDATib9ZrgYcBo'
+        };
+        window.app.ready = function(callback) {
+            if (typeof callback === 'function') document.addEventListener('DOMContentLoaded', function() {
+                callback();
+            });
+        };
+    </script>
+</head>
+
+<body>
+    <script data-skip-moving="true">
+        document.documentElement.classList.remove('no-js');
+    </script>
+    <div class="toaster -right -top" data-toaster=""></div>
+    <div class="toaster -right -bottom" data-toaster="">
+        <div class="alert -toast fade alert-dismissible alert-white" id="cookies-alert" role="alertdialog" aria-modal="true" data-alert="">
+            <button class="alert__close close" type="button" title="Скрыть уведомление" data-alert-close=""></button>
+            <div>Наш интернет-магазин работает только с юридическими лицами и индивидуальными предпринимателями. Продолжая использовать наш сайт, вы даете
+                согласие на обработку файлов cookie.</div>
+            <div>
+                <a class="alert__link alert-link" href="../text" target="_blank">Подробнее</a>
+            </div>
+            <div>
+                <br>
+                <button class="alert__button btn btn-primary" type="button">Хорошо</button>
+            </div>
+        </div>
+    </div>
+    <div class="page-wrapper">
+        <div class="page-wrapper-inner">
+            <div class="header">
+                <div class="header-top">
+                    <div class="container">
+                        <div class="row -small">
+                            <div class="header__logo -small col-auto">
+                                <a class="header-logo__link" href="../" title="Перейти на главную страницу">
+                                    <span class="header-logo__inner">
+                                        <img class="header-logo__image" src="../assets/media/logo/logo.svg" alt="Логотип Memorial book">
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="header__menu -small col-auto">
+                                <nav class="header-menu__container">
+                                    <ul class="header-menu__list">
+                                        <li class="header-menu__item">
+                                            <a class="header-menu__link" href="#slideout-people" data-slideout=""
+                                                data-slideout-options="{&quot;type&quot;:&quot;people&quot;,&quot;position&quot;:&quot;top&quot;}">Люди</a>
+                                        </li>
+                                        <li class="header-menu__item">
+                                            <a class="header-menu__link" href="#slideout-places" data-slideout=""
+                                                data-slideout-options="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}">Места</a>
+                                        </li>
+                                        <li class="header-menu__item -secondary">
+                                            <a class="header-menu__link" href="../tree">Семейное древо</a>
+                                        </li>
+                                        <li class="header-menu__item -secondary">
+                                            <a class="header-menu__link" href="../shop">Магазин</a>
+                                        </li>
+                                        <li class="header-menu__item -secondary">
+                                            <a class="header-menu__link" href="../text">Заказы</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="header__right -small col-auto">
+                                <div class="row -small">
+                                    <div class="header__language -small col">
+                                        <a class="header-language__button btn btn-outline-secondary" href="javascript:void(0)" role="button">RU</a>
+                                    </div>
+                                    <div class="header__personal -small col">
+                                        <div class="row -small">
+                                            <div class="header-personal__item -small -auth col">
+                                                <a class="header-personal__button btn btn-primary" href="#slideout-auth" role="button" data-slideout=""
+                                                    data-slideout-options="{&quot;type&quot;:&quot;auth&quot;}">Вход</a>
+                                            </div>
+                                            <div class="header-personal__item -small -register col">
+                                                <a class="header-personal__button btn btn-outline-primary" href="#slideout-register" role="button"
+                                                    data-slideout="" data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Регистрация</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="header__slideout-menu -small col">
+                                        <button class="header-slideout-menu__button" type="button">
+                                            <div class="header-slideout-menu__bars"></div>
+                                        </button>
+                                    </div>
+                                    <div class="base-form -auth" id="slideout-auth">
+                                        <form class="form" action="#" method="post" data-base-form="">
+                                            <div class="form__title">Вход в&nbsp;систему</div>
+                                            <div class="form__form-group form-group">
+                                                <label class="form__label" for="auth-email-2">Email:</label>
+                                                <div class="form__input-container">
+                                                    <input class="form__input form-control" type="email" id="auth-email-2" name="EMAIL" autocomplete="email"
+                                                        data-validate="required, email">
+                                                </div>
+                                            </div>
+                                            <div class="form__form-group form-group">
+                                                <label class="form__label" for="auth-password-2">Пароль:</label>
+                                                <div class="form__input-container">
+                                                    <input class="form__input form-control" type="password" id="auth-password-2" name="PASSWORD"
+                                                        autocomplete="current-password" data-validate="required">
+                                                    <a class="form__link -right" href="#slideout-restorepass" data-slideout=""
+                                                        data-slideout-options="{&quot;type&quot;:&quot;restorepass&quot;,&quot;position&quot;:&quot;top&quot;}">
+                                                        Забыли пароль?</a>
+                                                </div>
+                                            </div>
+                                            <div class="form__form-group -submit form-group">
+                                                <button class="form__button -submit btn btn-primary btn-lg" type="submit">Войти</button>
+                                            </div>
+                                            <div class="form__form-group -bottom form-group">
+                                                <a class="form__link" href="#slideout-register" data-slideout=""
+                                                    data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Нет аккаунта? Зарегистироваться</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="base-form -restorepass" id="slideout-restorepass">
+                                        <form class="form" action="#" method="post" data-base-form="">
+                                            <div class="container">
+                                                <div class="form__inner">
+                                                    <div class="form__left">
+                                                        <div class="form__title">Восстановить пароль</div>
+                                                    </div>
+                                                    <div class="form__right">
+                                                        <div class="form__form-group form-group">
+                                                            <div class="form__message">Если вы забыли пароль, введите email.
+                                                                <br>Контрольная строка для смены пароля, а также ваши регистрационные данные, будут высланы вам
+                                                                по электронной почте.
+                                                            </div>
+                                                        </div>
+                                                        <div class="form__form-group form-group">
+                                                            <label class="form__label" for="restorepass-email-3">Email:</label>
+                                                            <div class="form__input-container">
+                                                                <input class="form__input form-control" type="email" id="restorepass-email-3" name="EMAIL"
+                                                                    autocomplete="email" data-validate="required, email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form__form-group -submit form-group">
+                                                            <button class="form__button -submit btn btn-primary" type="submit">Выслать</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="base-form -register" id="slideout-register">
+                                        <form class="form" action="#" method="post" data-base-form="">
+                                            <div class="form__title">Регистрация</div>
+                                            <div class="form__form-group form-group">
+                                                <label class="form__label" for="register-fio-4">ФИО:</label>
+                                                <div class="form__input-container">
+                                                    <input class="form__input form-control" type="text" id="register-fio-4" name="FIO" autocomplete="name"
+                                                        data-validate="required, name">
+                                                </div>
+                                            </div>
+                                            <div class="form__form-group form-group">
+                                                <label class="form__label" for="register-email-4">Email:</label>
+                                                <div class="form__input-container">
+                                                    <input class="form__input form-control" type="email" id="register-email-4" name="EMAIL" autocomplete="email"
+                                                        data-validate="required, email">
+                                                </div>
+                                            </div>
+                                            <div class="form__form-group form-group">
+                                                <label class="form__label" for="register-phone-4">Телефон:</label>
+                                                <div class="form__input-container">
+                                                    <input class="form__input form-control" type="tel" id="register-phone-4" name="PHONE" autocomplete="tel"
+                                                        data-validate="required, tel">
+                                                </div>
+                                            </div>
+                                            <div class="form__form-group form-group">
+                                                <label class="form__label" for="register-password-4">Пароль:</label>
+                                                <div class="form__input-container">
+                                                    <input class="form__input form-control" type="password" id="register-password-4" name="PASSWORD"
+                                                        autocomplete="new-password" data-validate="required, minlength: 6, equalto: PASSWORD_CONFIRM">
+                                                </div>
+                                            </div>
+                                            <div class="form__form-group form-group">
+                                                <label class="form__label" for="register-password-confirm-4">Повторите пароль:</label>
+                                                <div class="form__input-container">
+                                                    <input class="form__input form-control" type="password" id="register-password-confirm-4"
+                                                        name="PASSWORD_CONFIRM" autocomplete="new-password"
+                                                        data-validate="required, minlength: 6, equalto: PASSWORD">
+                                                </div>
+                                            </div>
+                                            <div class="form__form-group -submit form-group">
+                                                <button class="form__button -submit btn btn-primary btn-lg" type="submit">Зарегистрироваться</button>
+                                            </div>
+                                            <div class="form__form-group -agreement form-group">
+                                                <div class="form__agreement">Нажимая кнопку, вы соглашаетесь с условиями <a href="#">политики обработки
+                                                        персональных данных</a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="filter -people" id="slideout-people">
+                                        <form class="form" action="#" method="post">
+                                            <div class="container">
+                                                <div class="form__top">
+                                                    <div class="form__inner">
+                                                        <div class="form__left">
+                                                            <div class="form__title">Поиск людей</div>
+                                                        </div>
+                                                        <div class="form__right">
+                                                            <div class="form__form-group form-group">
+                                                                <div class="form__message">Введите фамилию, имя, отчество профиля, который вы хотите найти. Если
+                                                                    вы не уверенны в датах, укажите примерные.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form__items">
+                                                    <div class="form__inner">
+                                                        <div class="form__left">
+                                                            <div class="form__row row">
+                                                                <div class="form__col -fio col">
+                                                                    <div class="form__form-group form-group">
+                                                                        <label class="form__label" for="filter-people-fio">ФИО:</label>
+                                                                        <div class="form__input-container">
+                                                                            <input class="form__input form-control" type="text" id="filter-people-fio"
+                                                                                name="FIO" placeholder=" ">
+                                                                            <button class="form__button -close close" type="button"></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form__right">
+                                                            <div class="form__row row">
+                                                                <div class="form__col -birth col">
+                                                                    <div class="form__form-group form-group">
+                                                                        <label class="form__label" for="filter-people-birth">Год рождения:</label>
+                                                                        <div class="form__input-container">
+                                                                            <input class="form__input form-control" type="text" id="filter-people-birth"
+                                                                                name="BIRTH" placeholder="XXXX-XXXX г." data-mask="9999-9999">
+                                                                            <button class="form__button -close close" type="button"></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form__col -death col">
+                                                                    <div class="form__form-group form-group">
+                                                                        <label class="form__label" for="filter-people-death">Год смерти:</label>
+                                                                        <div class="form__input-container">
+                                                                            <input class="form__input form-control" type="text" id="filter-people-death"
+                                                                                name="DEATH" placeholder="XXXX-XXXX г." data-mask="9999-9999">
+                                                                            <button class="form__button -close close" type="button"></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form__col -submit col">
+                                                                    <div class="form__form-group -submit form-group">
+                                                                        <button class="form__button -submit btn btn-primary btn-lg" type="submit">
+                                                                            <span>Показать</span>
+                                                                            <span>2 799</span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="filter -places" id="slideout-places">
+                                        <form class="form" action="#" method="post">
+                                            <div class="container">
+                                                <div class="form__top">
+                                                    <div class="form__inner">
+                                                        <div class="form__left">
+                                                            <div class="form__title">Поиск мест</div>
+                                                        </div>
+                                                        <div class="form__right">
+                                                            <div class="form__form-group form-group">
+                                                                <div class="form__message">Введите фамилию, имя, отчество профиля, который вы хотите найти. Если
+                                                                    вы не уверенны в датах, укажите примерные.</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form__items">
+                                                    <div class="form__inner">
+                                                        <div class="form__left">
+                                                            <div class="form__row row">
+                                                                <div class="form__col -name col">
+                                                                    <div class="form__form-group form-group">
+                                                                        <label class="form__label" for="filter-places-name">Название:</label>
+                                                                        <div class="form__input-container">
+                                                                            <input class="form__input form-control" type="text" id="filter-places-name"
+                                                                                name="NAME" placeholder=" ">
+                                                                            <button class="form__button -close close" type="button"></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form__right">
+                                                            <div class="form__row row">
+                                                                <div class="form__col -address col">
+                                                                    <div class="form__form-group form-group">
+                                                                        <label class="form__label" for="filter-places-address">Местоположение:</label>
+                                                                        <div class="form__input-container">
+                                                                            <input class="form__input form-control" type="text" id="filter-places-address"
+                                                                                name="ADDRESS" placeholder=" ">
+                                                                            <button class="form__button -close close" type="button"></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form__col -submit col">
+                                                                    <div class="form__form-group -submit form-group">
+                                                                        <button class="form__button -submit btn btn-primary btn-lg" type="submit">
+                                                                            <span>Показать</span>
+                                                                            <span>2 799</span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <main class="main-content" role="main">
+                <div class="main-content__container container">
+                    <div class="main-content__row row">
+                        <div class="main-content__col col">
+                            <div class="main-content__inner container preloader-container">
+                                <div class="main-content-inner__row row">
+                                    <div class="breadcrumbs">
+                                        <nav class="breadcrumbs__inner" aria-labelledby="breadcrumbs-title">
+                                            <div class="breadcrumbs__title sr-only" id="breadcrumbs-title">Навигационная цепочка</div>
+                                            <ul class="breadcrumbs__list">
+                                                <li class="breadcrumbs__item">
+                                                    <a class="breadcrumbs__link" href="../">Memorial book</a>
+                                                </li>
+                                                <li class="breadcrumbs__item">
+                                                    <a class="breadcrumbs__link" href="javascript:void(0)">Раздел второго уровня</a>
+                                                </li>
+                                                <li class="breadcrumbs__item">
+                                                    <span class="breadcrumbs__link">Текстовая страница</span>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="top">
+                                        <div class="top__row row">
+                                            <div class="top__side -content col">
+                                                <h1 class="top__title">Заголовок первого уровня H1</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="main-content-inner__col col text-content">
+                                        <h2>Заголовок второго уровня H2</h2>
+                                        <h3>Заголовок третьего уровня H3</h3>
+                                        <p class="lead">
+                                            <strong>Ведущий абзац (увеличенный шрифт):</strong>
+                                            <br>Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в
+                                            страшное насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову, свой коричневый,
+                                            выпуклый, разделенный дугообразными чешуйками живот, на верхушке которого еле держалось готовое вот-вот окончательно
+                                            сползти одеяло. Его многочисленные, убого тонкие по сравнению с остальным телом ножки беспомощно копошились у него
+                                            перед глазами.
+                                        </p>
+                                        <p>«Что со мной случилось?» — подумал он. Это не было сном. Его комната, настоящая, разве что слишком маленькая, но
+                                            обычная комната, мирно покоилась в своих четырех хорошо знакомых стенах. Над столом, где были разложены
+                                            распакованные образцы сукон — Замза был коммивояжером, — висел портрет, который он недавно вырезал из
+                                            иллюстрированного журнала и вставил а красивую золоченую рамку. На портрете была изображена дама в меховой шляпе и
+                                            боа, она сидела очень прямо и протягивала зрителю тяжелую меховую муфту, в которой целиком исчезала ее рука.</p>
+                                        <p>Затем взгляд Грегора устремился в окно, и пасмурная погода — слышно было, как по жести подоконника стучат капли дождя
+                                            — привела его и вовсе в грустное настроение. «Хорошо бы еще немного поспать и забыть всю эту чепуху», — подумал он,
+                                            но это было совершенно неосуществимо, он привык спать на правом боку, а в теперешнем своем состоянии он никак не мог
+                                            принять этого положения. С какой бы силой ни поворачивался он на правый бок, он неизменно сваливался опять на спину.
+                                            Закрыв глаза, чтобы не видеть своих барахтающихся ног, он проделал это добрую сотню раз и отказался от этих попыток
+                                            только тогда, когда почувствовал какую-то неведомую дотоле, тупую и слабую боль в боку.</p>
+                                        <br>
+                                        <p>HTML-теги:
+                                            <br>
+                                            <a href="javascript:void(0);">&lt;a&gt;</a>
+                                            <strong>&lt;strong&gt;</strong>
+                                            <em>&lt;em&gt;</em>
+                                            <b>&lt;b&gt;</b>
+                                            <i>&lt;i&gt;</i>
+                                            <u>&lt;u&gt;</u>
+                                            <s>&lt;s&gt;</s>
+                                            <mark>&lt;mark&gt;</mark>
+                                            <abbr title="описание">&lt;abbr&gt;</abbr>
+                                            <small>&lt;small&gt;</small>
+                                            <sup>&lt;sup&gt;</sup>
+                                            <sub>&lt;sub&gt;</sub>
+                                        </p>
+                                        <br>
+                                        <h2>Заголовок второго уровня H2
+                                            <br>вторая строка
+                                        </h2>
+                                        <div class="clearfix">
+                                            <img class="left"
+                                                src="https://via.placeholder.com/370.png?text=%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5"
+                                                alt="изображение">
+                                            <p>«Ах ты, господи, — подумал он, — какую я выбрал хлопотную профессию! Изо дня в день в разъездах. Деловых волнений
+                                                куда больше, чем на месте, в торговом доме, а кроме того, изволь терпеть тяготы дороги, думай о расписании
+                                                поездов, мирись с плохим, нерегулярным питанием, завязывай со все новыми и новыми людьми недолгие, никогда не
+                                                бывающие сердечными отношения. Черт бы побрал все это!» Он почувствовал вверху живота легкий зуд; медленно
+                                                подвинулся на спине к прутьям кровати, чтобы удобнее было поднять голову; нашел зудевшее место, сплошь покрытое,
+                                                как оказалось, белыми непонятными точечками; хотел было ощупать это место одной из ножек, но сразу отдернул ее,
+                                                ибо даже простое прикосновение вызвало у него, Грегора, озноб.</p>
+                                            <p>Он соскользнул в прежнее свое положение. «От этого раннего вставания, — подумал он, — можно совсем обезуметь.
+                                                Человек должен высыпаться. Другие коммивояжеры живут, как одалиски. Когда я, например, среди дня возвращаюсь в
+                                                гостиницу, чтобы переписать полученные заказы, эти господа только завтракают. А осмелься я вести себя так, мои
+                                                хозяин выгнал бы меня сразу. Кто знает, впрочем, может быть, это было бы даже очень хорошо для меня. Если бы я
+                                                не сдерживался ради родителей, я бы давно заявил об уходе, я бы подошел к своему хозяину и выложил ему все, что
+                                                о нем думаю. Он бы так и свалился с конторки! Странная у него манера — садиться на конторку и с ее высоты
+                                                разговаривать со служащим, который вдобавок вынужден подойти вплотную к конторке из-за того, что хозяин туг на
+                                                ухо. Однако надежда еще не совсем потеряна: как только я накоплю денег, чтобы выплатить долг моих родителей — на
+                                                это уйдет еще лет пять-шесть, — я так и поступлю. Тут-то мы и распрощаемся раз и навсегда. А пока что надо
+                                                подниматься, мой поезд отходит в пять».</p>
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <p>Пункт списка в параграфе</p>
+                                            </li>
+                                            <li>Пункт списка
+                                                <br>вторая строка
+                                            </li>
+                                            <li>
+                                                <p>Пункт списка</p>
+                                                <ul>
+                                                    <li>Пункт списка второго порядка</li>
+                                                    <li>
+                                                        <p>Пункт списка второго порядка
+                                                            <br>вторая строка
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p>Пункт списка второго порядка</p>
+                                                        <ul>
+                                                            <li>Пункт списка третьего порядка</li>
+                                                            <li>Пункт списка третьего порядка
+                                                                <br>вторая строка
+                                                            </li>
+                                                            <li>
+                                                                <p>Параграф 1</p>
+                                                                <p>Параграф 2</p>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <p>И он взглянул на будильник, который тикал на сундуке. «Боже правый!» — подумал он. Было половина седьмого, и стрелки
+                                            спокойно двигались дальше, было даже больше половины, без малого уже три четверти. Неужели будильник не звонил? С
+                                            кровати было видно, что он поставлен правильно, на четыре часа; и он, несомненно, звонил. Но как можно было спокойно
+                                            спать под этот сотрясающий мебель трезвон? Ну, спал-то он неспокойно, но, видимо, крепко. Однако что делать теперь?
+                                            Следующий поезд уходит в семь часов; чтобы поспеть на него, он должен отчаянно торопиться, а набор образцов еще не
+                                            упакован, да и сам он отнюдь не чувствует себя свежим и легким на подъем.</p>
+                                        <hr>
+                                        <br>
+                                        <h4>Заголовок четвертого уровня H4</h4>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Заголовок ячейки 1</th>
+                                                    <th>Заголовок ячейки 2
+                                                        <br>вторая строка
+                                                    </th>
+                                                    <th>Заголовок ячейки 3</th>
+                                                    <th>Заголовок ячейки 4</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Текст ячейки 1
+                                                        <br>вторая строка
+                                                    </th>
+                                                    <td>
+                                                        <p>Текст ячейки 2</p>
+                                                    </td>
+                                                    <td>Текст ячейки 3</td>
+                                                    <td>Текст ячейки 4</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Текст ячейки 1</th>
+                                                    <td>Текст ячейки 2</td>
+                                                    <td>Текст ячейки 3</td>
+                                                    <td>Текст ячейки 4</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <br>
+                                        <h5>Заголовок пятого уровня H5</h5>
+                                        <p>И даже поспей он на поезд, хозяйского разноса ему все равно не избежать — ведь рассыльный торгового дома дежурил у
+                                            пятичасового поезда и давно доложил о его, Грегора, опоздании. Рассыльный, человек бесхарактерный и неумный, был
+                                            ставленником хозяина. А что, если сказаться больным? Но это было бы крайне неприятно и показалось бы подозрительным,
+                                            ибо за пятилетнюю свою службу Грегор ни разу еще не болел. Хозяин, конечно, привел бы врача больничной кассы и стал
+                                            попрекать родителей сыном лентяем, отводя любые возражения ссылкой на этого врача, по мнению которого все люди на
+                                            свете совершенно здоровы и только не любят работать. И разве в данном случае он был бы так уж неправ? Если не
+                                            считать сонливости, действительно странной после такого долгого сна, Грегор и в самом деле чувствовал себя
+                                            превосходно и был даже чертовски голоден.</p>
+                                        <blockquote>
+                                            <p>Покуда он все это торопливо обдумывал, никак не решаясь покинуть постель, — будильник как раз пробил без четверти
+                                                семь, — в дверь у его изголовья осторожно постучали.</p>
+                                        </blockquote>
+                                        <h6>Заголовок шестого уровня H6</h6>
+                                        <p>— Грегор, — услыхал он (это была его мать), — уже без четверти семь. Разве ты не собирался уехать?</p>
+                                        <div>
+                                            <figure class="right">
+                                                <img src="https://via.placeholder.com/370.png?text=%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5"
+                                                    alt="изображение">
+                                                <figcaption>Подпись к картинке</figcaption>
+                                            </figure>
+                                            <p>Покуда он все это торопливо обдумывал, никак не решаясь покинуть постель, — будильник как раз пробил без четверти
+                                                семь, — в дверь у его изголовья осторожно постучали.</p>
+                                            <p>Этот ласковый голос! Грегор испугался, услыхав ответные звуки собственного голоса, к которому, хоть это и был,
+                                                несомненно, прежний его голос, примешивался какой-то подспудный, но упрямый болезненный писк, отчего слова
+                                                только в первое мгновение звучали отчетливо, а потом искажались отголоском настолько, что нельзя было с
+                                                уверенностью сказать, не ослышался ли ты. Грегор хотел подробно ответить и все объяснить, но ввиду этих
+                                                обстоятельств сказал только:</p>
+                                            <p>— Да, да, спасибо, мама, я уже встаю.</p>
+                                            <br>
+                                            <h4>Нумерованный список</h4>
+                                            <ol>
+                                                <li>Пункт нумерованного списка</li>
+                                                <li>
+                                                    <p>Пункт нумерованного списка в параграфе</p>
+                                                </li>
+                                                <li>Пункт нумерованного списка
+                                                    <br>вторая строка
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <div class="footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="footer__logo col-auto">
+                                <a class="footer-logo__link" href="../" title="Перейти на главную страницу">
+                                    <span class="footer-logo__inner">
+                                        <img class="footer-logo__image" src="../assets/media/logo/logo-light.svg" alt="Логотип Memorial book">
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="footer__menu col-auto">
+                                <nav class="footer-menu__container">
+                                    <ul class="footer-menu__list">
+                                        <li class="footer-menu__item -slideout">
+                                            <a class="footer-menu__link" href="../text">О проекте</a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a class="footer-menu__link" href="../tree">Семейное древо</a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a class="footer-menu__link" href="../text">Магазин</a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a class="footer-menu__link" href="#slideout-people" data-slideout=""
+                                                data-slideout-options="{&quot;type&quot;:&quot;people&quot;,&quot;position&quot;:&quot;top&quot;}">Поиск людей
+                                            </a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a class="footer-menu__link" href="#slideout-places" data-slideout=""
+                                                data-slideout-options="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}">Кладбища</a>
+                                        </li>
+                                        <li class="footer-menu__item -slideout">
+                                            <a class="footer-menu__link" href="../text">Контакты</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="footer__policy col-auto">
+                                <a class="footer-policy__link" href="javascript:void(0)">Политика обработки персональных данных</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div hidden></div>
+        </div>
+    </div>
+    <script src="../assets/scripts/vendor.scripts.js?1644862965730"></script>
+    <script src="../assets/scripts/main.scripts.js?1644862965730"></script>
+</body>
+
+</html>
