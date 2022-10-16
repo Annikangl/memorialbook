@@ -1,5 +1,5 @@
 <div class="filter -people" id="slideout-people">
-    <form class="form" action="#" method="post">
+    <form class="form" action="{{ route('profile.search.map') }}" method="get">
         <div class="container">
             <div class="form__top">
                 <div class="form__inner">
@@ -26,7 +26,7 @@
                                     <div class="form__input-container">
                                         <input class="form__input form-control"
                                                type="text" id="filter-people-fio"
-                                               name="FIO" placeholder=" ">
+                                               name="FIO" placeholder=" " value="{{ request('FIO') }}">
                                         <button class="form__button -close close"
                                                 type="button"></button>
                                     </div>
@@ -45,6 +45,7 @@
                                         <input class="form__input form-control"
                                                type="text" id="filter-people-birth"
                                                name="BIRTH" placeholder="XXXX-XXXX г."
+                                               value="{{ request('BIRTH') }}"
                                                data-mask="9999-9999">
                                         <button class="form__button -close close"
                                                 type="button"></button>
@@ -59,6 +60,7 @@
                                         <input class="form__input form-control"
                                                type="text" id="filter-people-death"
                                                name="DEATH" placeholder="XXXX-XXXX г."
+                                               value="{{ request('DEATH') }}"
                                                data-mask="9999-9999">
                                         <button class="form__button -close close"
                                                 type="button"></button>

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\NetworkController;
+use App\Http\Controllers\Cemetery\CemeteryController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,13 +31,17 @@ Route::get('/tree',[App\Http\Controllers\ProfileController::class,'index'])->nam
 
 Route::get('/tree-list',[App\Http\Controllers\ProfileController::class,'list'])->name('tree.list');
 
-Route::group(['prefix'=>'profile','as'=>'profile.'],function(){
-    Route::get('/create',[App\Http\Controllers\ProfileController::class,'create'])->name('create');
-    Route::get('/create_step2',[App\Http\Controllers\ProfileController::class,'create_step2'])->name('create.step2');
-    Route::get('/create_step3',[App\Http\Controllers\ProfileController::class,'create_step3'])->name('create.step3');
-    Route::post('/store',[App\Http\Controllers\ProfileController::class,'store'])->name('store');
+Route::group(['prefix'=> 'profile', 'as'=> 'profile.'],function(){
+    Route::get('/create',[ProfileController::class,'create'])->name('create');
+    Route::post('/store',[ProfileController::class,'store'])->name('store');
+    Route::get('/create_step2',[ProfileController::class,'create_step2'])->name('create.step2');
+    Route::get('/create_step3',[ProfileController::class,'create_step3'])->name('create.step3');
+    Route::get('/map', [ProfileController::class, 'map'])->name('search.map');
 });
 
+Route::group(['prefix' => 'cemetery', 'as' => 'cemetery.'], function () {
+    Route::get('map', [CemeteryController::class, 'map'])->name('search.map');
+});
 
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

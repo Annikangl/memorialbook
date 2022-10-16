@@ -1,5 +1,5 @@
 <div class="filter -places" id="slideout-places">
-    <form class="form" action="#" method="post">
+    <form class="form" action="{{ route('cemetery.search.map') }}" method="get">
         <div class="container">
             <div class="form__top">
                 <div class="form__inner">
