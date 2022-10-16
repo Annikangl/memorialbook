@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div style="height: 85vh; position: relative">
+    <div style="height: 76vh; position: relative">
         <div class="content" style="    position: absolute;
      margin: auto;
      top: 0;
