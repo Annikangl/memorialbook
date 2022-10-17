@@ -15,7 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
  * App\Models\User\User
  *
  * @property int $id
- * @property string $name
+ * @property string $username
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $phone
@@ -45,6 +45,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static Builder|User whereUsername($value)
  */
 class User extends Authenticatable
 {
