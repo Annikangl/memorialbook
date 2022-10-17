@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Profile\SearchRequest;
 use App\Models\Profile;
+use App\Services\ProfileService;
 use Illuminate\Http\Request;
 
 /**
@@ -12,6 +13,13 @@ use Illuminate\Http\Request;
  */
 class ProfileController extends Controller
 {
+    private ProfileService $service;
+
+    public function __construct(ProfileService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
         $profiles = Profile::query()->orderBy('id')->get();
@@ -53,7 +61,7 @@ class ProfileController extends Controller
         $profile = Profile::query()->create($params);
 
         return redirect()->route('tree');
-// TODO Перебрасывать на шаг 2 с id который только создал и его там сохранять чтобы при записи дополнялись данные уже в текущую запись
+        // TODO Перебрасывать на шаг 2 с id который только создал и его там сохранять чтобы при записи дополнялись данные уже в текущую запись
     }
 
     public function create_step2()
@@ -68,7 +76,25 @@ class ProfileController extends Controller
 
     public function map(SearchRequest $request)
     {
-        return view('profile.map');
+        $count_filters = 1;
+        $value = $request->input('FIO');
+
+        $query = Profile::query()
+            ->where(\DB::raw('CONCAT(profiles.name, " ", profiles.surname, " ", profiles.patronymic)'), 'LIKE', "%$value%");
+
+        if ($value = $request->get('BIRTH')) {
+            $query->whereBetween(\DB::raw('YEAR(date_birth)'), explode('-', $value));
+            $count_filters++;
+        }
+
+        if ($value = $request->get('DEATH')) {
+            $query->whereBetween(\DB::raw('YEAR(date_death)'), explode('-', $value));
+            $count_filters++;
+        }
+
+        $profiles = $query->paginate(15);
+
+        return view('profile.map', compact('profiles', 'count_filters'));
     }
 
 }
