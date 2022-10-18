@@ -6,7 +6,7 @@
         <div class="tree__nav">
             <div class="tree-nav__items">
                 <div class="tree-nav__item">
-                    <a class="tree-nav__link active" href="../tree">Семейное древо</a>
+                    <a class="tree-nav__link active" href="{{route('tree')}}">Семейное древо</a>
                 </div>
                 <div class="tree-nav__item">
                     <a class="tree-nav__link" href="{{route('tree.list')}}">Список профилей</a>
