@@ -183,7 +183,9 @@
                     </div>
                 @endif
             </div>
+
             @yield('content')
+
         </main>
 
         <div class="footer">

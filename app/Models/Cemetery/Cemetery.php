@@ -2,6 +2,7 @@
 
 namespace App\Models\Cemetery;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,6 +33,17 @@ class Cemetery extends Model
         'moderators_comment',
         'access'
     ];
+
+    public function scopeByName(Builder $query, string $name): Builder
+    {
+        return $query->where('title', 'LIKE', "%$name%")
+            ->orWhere('title_en', 'LIKE', "%$name%");
+    }
+
+    public function scopeByAddress(Builder $query, string $address): Builder
+    {
+        return $query->where('address', 'LIKE', "%$address%");
+    }
 
 
 }

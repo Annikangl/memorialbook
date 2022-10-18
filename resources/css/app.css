@@ -4050,6 +4050,8 @@ a.text-dark:focus, a.text-dark:hover {
     width: 100%
 }
 
+
+
 .file.-multimedia {
     background: #f5f7f9;
     border: 1px solid #cdd1d6;
@@ -12062,4 +12064,21 @@ fieldset.disabled .choices, fieldset:disabled .choices {
         padding-left: 40px;
         padding-right: 40px
     }
+}
+
+.search-filter__icon {
+    border-radius: 50%;
+    border: 1px solid #e5e8eb;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.search-filter__icon svg {
+    fill: var(--blue);
+    width: 18px;
+    height: 18px;
 }
