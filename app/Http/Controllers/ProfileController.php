@@ -42,6 +42,8 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
+
+
         if ($request->hasFile('avatar')) {
             $avatar_path = $request->file('avatar')->store('avatar_profile', 'public');
         } else {
@@ -55,12 +57,13 @@ class ProfileController extends Controller
         }
 
         $params = $request->all();
+        $params = $request->except(['_token']);
         $params['avatar'] = $avatar_path;
         $params['death_certificate'] = $certificate_path;
 
 //        dd()
-        $request->session()->put('profile', $params);
-//        $profile = Profile::create($params);
+//        $request->session()->put('profile', $params);
+        $profile = Profile::create($params);
 
         return redirect()->route('profile.create.step2');
 // Перебрасывать на шаг 2 с id который только создал и его там сохранять чтобы при записи дополнялись данные уже в текущую запись

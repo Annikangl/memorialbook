@@ -77,6 +77,10 @@ class Profile extends Model
     public const STATUS_ACTIVE = 'Опубликован';
     public const STATUS_CLOSED = 'Закрыт';
 
+    protected $guarded = [
+        '_token'
+    ];
+
     protected $fillable = [
         'first_name',
         'last_name',

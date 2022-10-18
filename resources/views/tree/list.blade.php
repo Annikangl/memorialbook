@@ -27,8 +27,8 @@
                                 <div class="tree-list-item__info">
                                     <div class="tree-list-item-info__row row">
                                         <div class="tree-list-item-info__side -content">
-                                            <div class="tree-list-item__title">{{$profile->name.' '.$profile->patronymic.' '.$profile->surname}}</div>
-                                            <div class="tree-list-item__text">{{Carbon\Carbon::createFromFormat('Y-m-d', $profile->date_birth)->year .' - '.Carbon\Carbon::createFromFormat('Y-m-d', $profile->date_death)->year}}</div>
+                                            <div class="tree-list-item__title">{{$profile->first_name.' '.$profile->patronymic.' '.$profile->last_name}}</div>
+                                            <div class="tree-list-item__text">{{$profile->date_birth.' - '.$profile->date_death}}</div>
                                         </div>
                                         <div class="tree-list-item-info__side -status">
                                             <div class="tree-list-item__title -error">Публикация отклонена</div>

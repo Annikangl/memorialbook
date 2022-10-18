@@ -68,10 +68,10 @@
                                             <div class="profile-section__side">
                                                 <div class="profile-section__row row">
                                                     <div class="profile-section__form-group -mt-0 form-group">
-                                                        <label class="profile-section__label" for="new-member-name">Имя:</label>
+                                                        <label class="profile-section__label" for="first_name">Имя:</label>
                                                         <div class="profile-section__input-container">
-                                                            <input class="profile-section__input form-control" type="text" id="name" name="name"
-                                                                  autofocus="" data-autofocus="" data-validate="required, name">
+                                                            <input class="profile-section__input form-control" type="text" id="first_name" name="first_name"
+                                                                  autofocus="" data-autofocus="" data-validate="required, first_name">
                                                         </div>
                                                     </div>
                                                     <div class="profile-section__form-group form-group">
@@ -82,10 +82,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="profile-section__form-group form-group">
-                                                        <label class="profile-section__label" for="new-member-surname">Фамилия:</label>
+                                                        <label class="profile-section__label" for="last_name">Фамилия:</label>
                                                         <div class="profile-section__input-container">
-                                                            <input class="profile-section__input form-control" type="text" id="surname"
-                                                                   name="surname" data-validate="required, surname">
+                                                            <input class="profile-section__input form-control" type="text" id="last_name"
+                                                                   name="last_name" data-validate="required, last_name">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -102,10 +102,10 @@
                                                 </div>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="place_birth">Место рождения:</label>
+                                                <label class="profile-section__label" for="birth_place">Место рождения:</label>
                                                 <div class="profile-section__input-container">
-                                                    <input class="profile-section__input form-control" type="text" id="place_birth"
-                                                           name="place_birth" value="">
+                                                    <input class="profile-section__input form-control" type="text" id="birth_place"
+                                                           name="birth_place" value="">
                                                 </div>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
@@ -155,21 +155,21 @@
                                             <div class="profile-section__form-group -half form-group">
                                                 <label class="profile-section__label" for="f_id">Отец</label>
                                                 <select class="profile-section__select select" id="f_id" name="f_id" hidden="" data-select="">
-                                                    <option>Выберите из списка</option>
+                                                    <option value="">Выберите из списка</option>
                                                     <option value="1" id="f_id" name="f_id">Алексеев Алексей Алексеевич</option>
                                                 </select>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
                                                 <label class="profile-section__label" for="m_id">Мать</label>
                                                 <select class="profile-section__select select" id="m_id" name="m_id" hidden="" data-select="">
-                                                    <option>Выберите из списка</option>
+                                                    <option value="">Выберите из списка</option>
                                                     <option value="2" id="m_id" name="m_id">Каренина Анна Аркадьевна</option>
                                                 </select>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
                                                 <label class="profile-section__label" for="p_id">Супруг / Супруга</label>
                                                 <select class="profile-section__select select" id="p_id" name="p_id" hidden="" data-select="">
-                                                    <option>Выберите из списка</option>
+                                                    <option value="">Выберите из списка</option>
                                                     <option value="3" id="p_id" name="p_id">Дитриев Дмитрий Дмитриевич</option>
                                                 </select>
                                             </div>

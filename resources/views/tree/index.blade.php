@@ -9,7 +9,7 @@
                     <a class="tree-nav__link active" href="../tree">Семейное древо</a>
                 </div>
                 <div class="tree-nav__item">
-                    <a class="tree-nav__link" href="./tree-list">Список профилей</a>
+                    <a class="tree-nav__link" href="{{route('tree.list')}}">Список профилей</a>
                 </div>
             </div>
         </div>
@@ -39,63 +39,60 @@
             field_1: "date",
             img_0: "img",
         },
-        editForm: {
-            titleBinding: false,
-            photoBinding: "img",
-            generateElementsFromFields: false,
-            addMore: false,
-            cancelBtn: 'Закрыть',
-            saveAndCloseBtn: 'Сохранить',
-            elements: [
-                {type: 'textbox', label: 'Полное имя', id: 'name', binding: 'fullname'},
-                [
-                    {type: 'date', label: 'Дата рождения', binding: 'birthDate'},
-                    {type: 'date', label: 'Дата смерти', binding: 'deathDate'}
-                ],
-                [
-                    {type: 'textbox', label: 'Место рождения', binding: 'placebirth'},
-                    {type: 'textbox', label: 'Место смерти', binding: 'burialplace'},
-                ],
-                {type: 'textbox', label: 'Причина смерти', binding: 'reasondeath'},
-                {type: 'btn', label: 'Причина смерти', binding: 'link'},
-
-            ],
-            buttons: {
-                edit: {
-                    icon: FamilyTree.icon.edit(24, 24, '#fff'),
-                    text: 'Edit',
-                    hideIfEditMode: true,
-                    hideIfDetailsMode: false
-                },
-                remove: null,
-                share: null,
-                pdf: null
-            }
-        }
+        // editForm: {
+        //     titleBinding: false,
+        //     photoBinding: "img",
+        //     generateElementsFromFields: false,
+        //     addMore: false,
+        //     cancelBtn: 'Закрыть',
+        //     saveAndCloseBtn: 'Сохранить',
+        //     elements: [
+        //         {type: 'textbox', label: 'Полное имя', id: 'name', binding: 'fullname'},
+        //         [
+        //             // {type: 'date', label: 'Дата рождения', binding: 'birthDate'},
+        //             // {type: 'date', label: 'Дата смерти', binding: 'deathDate'}
+        //         ],
+        //         [
+        //             {type: 'textbox', label: 'Место рождения', binding: 'placebirth'},
+        //             {type: 'textbox', label: 'Место смерти', binding: 'burialplace'},
+        //         ],
+        //         {type: 'textbox', label: 'Причина смерти', binding: 'reasondeath'},
+        //         {type: 'btn', label: 'Причина смерти', binding: 'link'},
+        //
+        //     ],
+        //     buttons: {
+        //         edit: {
+        //             icon: FamilyTree.icon.edit(24, 24, '#fff'),
+        //             text: 'Edit',
+        //             hideIfEditMode: true,
+        //             hideIfDetailsMode: false
+        //         },
+        //         remove: null,
+        //         share: null,
+        //         pdf: null
+        //     }
+        // }
     });
 
     let profiles = @json($profiles);
 
     profiles.forEach(function (profile) {
 
-        console.log(profile)
-
         family.addNode({
             id: profile.id,
             pids: [profile.p_id],
             mid: profile.m_id,
             fid: profile.f_id,
-            name: [profile.name + ' ' + profile.surname],
-            fullname: [profile.name + ' ' + profile.patronymic + ' ' + profile.surname],
+            name: [profile.first_name + ' ' + profile.last_name],
+            fullname: [profile.first_name + ' ' + profile.patronymic + ' ' + profile.last_name],
             img: 'storage/' + profile.avatar,
             gender: 'male',
             birthDate: profile.date_birth,
             deathDate: profile.date_death,
-            placebirth: profile.place_birth,
+            placebirth: profile.birth_place,
             burialplace: profile.burial_place,
             reasondeath: profile.reason_death,
-            date: new Date(profile.date_birth).getFullYear() + ' - ' + new Date(profile.date_death).getFullYear() + ' ' + 'г.',
-            link: 'http://127.0.0.1',
+            date: profile.date_birth + ' - ' + profile.date_death + ' ' + 'г.',
         },)
 
     });

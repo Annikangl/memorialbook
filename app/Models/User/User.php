@@ -52,7 +52,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'phone',
         'password',
@@ -76,7 +76,7 @@ class User extends Authenticatable
     public static function register(string $name, string $email, string $phone, string $password): self
     {
         return static::create([
-            'name' => $name,
+            'username' => $name,
             'email' => $name,
             'phone' => $phone,
             'password' => Hash::make($password),
@@ -86,7 +86,7 @@ class User extends Authenticatable
     public static function registerByNetwork(string $name, string $email, string $network, string $identity): self
     {
         $user = static::create([
-            'name' => $name,
+            'username' => $name,
             'email' => $email,
             'password' => null
         ]);

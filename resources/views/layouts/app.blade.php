@@ -140,7 +140,7 @@
                                             </div>
                                             <div class="header-personal__item -small -user col">
                                                 <a class="header-personal__link"
-                                                   href="../profile-edit">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
+                                                   href="../profile-edit">{{ \Illuminate\Support\Facades\Auth::user()->username }}</a>
                                             </div>
                                             <div class="header-personal__item -small -exit col">
                                                 <form action="{{ route('logout') }}" method="post">
