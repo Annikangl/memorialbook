@@ -119,9 +119,11 @@ class Profile extends Model
         });
     }
 
-    public function getFullNameAttribute(): string
+    public function fullName(): Attribute
     {
-        return "{$this->first_name} {$this->last_name} {$this->patronymic}";
+        return new Attribute(
+            get: fn () => "{$this->first_name} {$this->last_name} {$this->patronymic}"
+        );
     }
 
     public function dateBirth(): Attribute

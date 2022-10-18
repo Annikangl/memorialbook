@@ -36,7 +36,7 @@
         window.app = window.app || {};
         window.app.globalConfig = {
             relPath: './',
-            assetsPath: './assets/media/',
+            assetsPath: '/assets/media/',
             gmapsApikey: 'AIzaSyDCgArix6diJwCToFgNcbDATib9ZrgYcBo'
         };
         window.app.ready = function (callback) {
@@ -140,7 +140,7 @@
                                             </div>
                                             <div class="header-personal__item -small -user col">
                                                 <a class="header-personal__link"
-                                                   href="../profile-edit">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
+                                                   href="../profile-edit">{{ \Illuminate\Support\Facades\Auth::user()->username }}</a>
                                             </div>
                                             <div class="header-personal__item -small -exit col">
                                                 <form action="{{ route('logout') }}" method="post">
@@ -246,6 +246,9 @@
 </div>
 
 @yield('scripts')
+<script>
+    console.log(document.querySelector('#search-peoples'));
+</script>
 
 </body>
 </html>

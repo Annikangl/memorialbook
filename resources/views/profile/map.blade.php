@@ -17,7 +17,7 @@
         </div>
         <div class="map__view">
             <div class="map-view__item">
-                <a class="map-view__link active" href="../map">На карте</a>
+                <a class="map-view__link active" href="#">На карте</a>
             </div>
 {{--            <div class="map-view__item">--}}
 {{--                <a class="map-view__link" href="../list">Списком</a>--}}
@@ -31,7 +31,7 @@
                     <div class="map-results-title-comment__text -active">Скрыть</div>
                     <div class="map-results-title-comment__icon">
                         <svg style="width: 14px; height: 8px;" aria-hidden="true">
-                            <use xlink:href="../assets/media/sprite.svg?1644862971818#sprite-arrow"></use>
+                            <use xlink:href="{{ asset('assets/media/media/sprite.svg?#sprite-arrow') }}"></use>
                         </svg>
                     </div>
                 </div>

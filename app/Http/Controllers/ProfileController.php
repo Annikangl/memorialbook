@@ -80,7 +80,7 @@ class ProfileController extends Controller
         $value = $request->input('FIO');
 
         $query = Profile::query()
-            ->where(\DB::raw('CONCAT(profiles.name, " ", profiles.surname, " ", profiles.patronymic)'), 'LIKE', "%$value%");
+            ->where(\DB::raw('CONCAT(profiles.first_name, " ", profiles.last_name, " ", profiles.patronymic)'), 'LIKE', "%$value%");
 
         if ($value = $request->get('BIRTH')) {
             $query->whereBetween(\DB::raw('YEAR(date_birth)'), explode('-', $value));

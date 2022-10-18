@@ -71,6 +71,7 @@
                                 <div class="form__form-group -submit form-group">
                                     <button
                                         class="form__button -submit btn btn-primary btn-lg"
+                                        id="search-peoples"
                                         type="submit">
                                         <span>Показать</span>
                                         <span>2 799</span>
