@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigInteger('profile_id')->unsigned();
             $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('CASCADE');
             $table->string('item')->nullable();
+
             $table->timestamps();
         });
     }
@@ -29,6 +30,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('profile_gallery');
+        if (app()->isLocal()) {
+            Schema::dropIfExists('profile_gallery');
+        }
     }
 };

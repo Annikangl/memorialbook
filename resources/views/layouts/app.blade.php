@@ -114,31 +114,33 @@
                                 <div class="header__personal -small col">
                                     <div class="row -small">
                                         @guest
-                                        <div class="header-personal__item -small -auth col">
-                                            <a class="header-personal__button btn btn-primary" href="#slideout-auth"
-                                               role="button" data-slideout=""
-                                               data-slideout-options="{&quot;type&quot;:&quot;auth&quot;}">Вход</a>
-                                        </div>
-                                        <div class="header-personal__item -small -register col">
-                                            <a class="header-personal__button btn btn-outline-primary"
-                                               href="#slideout-register" role="button"
-                                               data-slideout=""
-                                               data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Регистрация</a>
-                                        </div>
+                                            <div class="header-personal__item -small -auth col">
+                                                <a class="header-personal__button btn btn-primary" href="#slideout-auth"
+                                                   role="button" data-slideout=""
+                                                   data-slideout-options="{&quot;type&quot;:&quot;auth&quot;}">Вход</a>
+                                            </div>
+                                            <div class="header-personal__item -small -register col">
+                                                <a class="header-personal__button btn btn-outline-primary"
+                                                   href="#slideout-register" role="button"
+                                                   data-slideout=""
+                                                   data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Регистрация</a>
+                                            </div>
                                         @else
                                             <div class="header-personal__item -small -notifications col">
                                                 <button class="header-personal__button -notifications" type="button">
                                                     <div class="header-personal__icon">
-                                                        <img src="{{ asset('assets/media/media/sprite-bell.svg') }}" alt="notification" width="18px" height="21px">
-{{--                                                        <svg style="width: 18px; height: 21px;" aria-hidden="true">--}}
-{{--                                                            <use xlink:href="{{ asset('assets/media/media/sprite-bell.svg') }}"></use>--}}
-{{--                                                        </svg>--}}
+                                                        <img src="{{ asset('assets/media/media/sprite-bell.svg') }}"
+                                                             alt="notification" width="18px" height="21px">
+                                                        {{--                                                        <svg style="width: 18px; height: 21px;" aria-hidden="true">--}}
+                                                        {{--                                                            <use xlink:href="{{ asset('assets/media/media/sprite-bell.svg') }}"></use>--}}
+                                                        {{--                                                        </svg>--}}
                                                     </div>
                                                     <span class="header-personal__badge badge badge-danger">1</span>
                                                 </button>
                                             </div>
                                             <div class="header-personal__item -small -user col">
-                                                <a class="header-personal__link" href="../profile-edit">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
+                                                <a class="header-personal__link"
+                                                   href="../profile-edit">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
                                             </div>
                                             <div class="header-personal__item -small -exit col">
                                                 <form action="{{ route('logout') }}" method="post">
@@ -146,7 +148,7 @@
                                                     <input class="btn" type="submit" value="Выйти">
                                                 </form>
                                             </div>
-                                            @endif
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="header__slideout-menu -small col">
@@ -154,291 +156,14 @@
                                         <div class="header-slideout-menu__bars"></div>
                                     </button>
                                 </div>
-                                <div class="base-form -auth" id="slideout-auth">
-                                    <form class="form" action="{{ route('login') }}" method="post" data-base-form="">
-                                        @csrf
 
-                                        <div class="form__title">Вход в&nbsp;систему</div>
-                                        <div class="form__form-group form-group">
-                                            <label class="form__label" for="auth-email-2">Email:</label>
-                                            <div class="form__input-container">
-                                                <input class="form__input form-control" type="email" id="auth-email-2"
-                                                       name="EMAIL" autocomplete="email"
-                                                       data-validate="required, email">
-                                            </div>
-                                        </div>
-                                        <div class="form__form-group form-group">
-                                            <label class="form__label" for="auth-password-2">Пароль:</label>
-                                            <div class="form__input-container">
-                                                <input class="form__input form-control" type="password"
-                                                       id="auth-password-2" name="PASSWORD"
-                                                       autocomplete="current-password" data-validate="required">
-                                                <a class="form__link -right" href="#slideout-restorepass"
-                                                   data-slideout=""
-                                                   data-slideout-options="{&quot;type&quot;:&quot;restorepass&quot;,&quot;position&quot;:&quot;top&quot;}">
-                                                    Забыли пароль?</a>
-                                            </div>
-                                        </div>
-                                        <div class="form__form-group -submit form-group">
-                                            <button class="form__button -submit btn btn-primary btn-lg" type="submit">
-                                                Войти
-                                            </button>
-                                        </div>
-                                        <div class="form__form-group -bottom form-group">
-                                            <a class="form__link" href="#slideout-register" data-slideout=""
-                                               data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Нет
-                                                аккаунта? Зарегистироваться</a>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="base-form -restorepass" id="slideout-restorepass">
-                                    <form class="form" action="{{ route('password.email') }}" method="post" data-base-form="">
-                                        @csrf
-                                        <div class="container">
-                                            <div class="form__inner">
-                                                <div class="form__left">
-                                                    <div class="form__title">Восстановить пароль</div>
-                                                </div>
-                                                <div class="form__right">
-                                                    <div class="form__form-group form-group">
-                                                        <div class="form__message">Если вы забыли пароль, введите email.
-                                                            <br>Контрольная строка для смены пароля, а также ваши
-                                                            регистрационные данные, будут высланы вам
-                                                            по электронной почте.
-                                                        </div>
-                                                    </div>
-                                                    <div class="form__form-group form-group">
-                                                        <label class="form__label"
-                                                               for="restorepass-email-3">Email:</label>
-                                                        <div class="form__input-container">
-                                                            <input class="form__input form-control" type="email"
-                                                                   id="restorepass-email-3" name="EMAIL"
-                                                                   autocomplete="email" data-validate="required, email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="form__form-group -submit form-group">
-                                                        <button class="form__button -submit btn btn-primary"
-                                                                type="submit">Выслать
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="base-form -register" id="slideout-register">
-                                    <form class="form" action="{{ route('register') }}" method="post" data-base-form="">
-                                        @csrf
-                                        <div class="form__title">Регистрация</div>
-                                        <div class="form__form-group form-group">
-                                            <label class="form__label" for="register-fio-4">ФИО:</label>
-                                            <div class="form__input-container">
-                                                <input class="form__input form-control" type="text" id="register-fio-4"
-                                                       name="FIO" autocomplete="name"
-                                                       data-validate="required, name">
-                                            </div>
-                                        </div>
-                                        <div class="form__form-group form-group">
-                                            <label class="form__label" for="register-email-4">Email:</label>
-                                            <div class="form__input-container">
-                                                <input class="form__input form-control" type="email"
-                                                       id="register-email-4" name="EMAIL" autocomplete="email"
-                                                       data-validate="required, email">
-                                            </div>
-                                        </div>
-                                        <div class="form__form-group form-group">
-                                            <label class="form__label" for="register-phone-4">Телефон:</label>
-                                            <div class="form__input-container">
-                                                <input class="form__input form-control" type="tel" id="register-phone-4"
-                                                       name="PHONE" autocomplete="tel"
-                                                       data-validate="required, tel">
-                                            </div>
-                                        </div>
-                                        <div class="form__form-group form-group">
-                                            <label class="form__label" for="register-password-4">Пароль:</label>
-                                            <div class="form__input-container">
-                                                <input class="form__input form-control" type="password"
-                                                       id="register-password-4" name="PASSWORD"
-                                                       autocomplete="new-password"
-                                                       data-validate="required, minlength: 6, equalto: PASSWORD_CONFIRM">
-                                            </div>
-                                        </div>
-                                        <div class="form__form-group form-group">
-                                            <label class="form__label" for="register-password-confirm-4">Повторите
-                                                пароль:</label>
-                                            <div class="form__input-container">
-                                                <input class="form__input form-control" type="password"
-                                                       id="register-password-confirm-4"
-                                                       name="PASSWORD_CONFIRM" autocomplete="new-password"
-                                                       data-validate="required, minlength: 6, equalto: PASSWORD">
-                                            </div>
-                                        </div>
-                                        <div class="form__form-group -submit form-group">
-                                            <button class="form__button -submit btn btn-primary btn-lg" type="submit">
-                                                Зарегистрироваться
-                                            </button>
-                                        </div>
-                                        <div class="form__form-group -agreement form-group">
-                                            <div class="form__agreement">Нажимая кнопку, вы соглашаетесь с условиями <a
-                                                    href="#">политики обработки
-                                                    персональных данных</a>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    @include('auth.partials.socials')
-                                </div>
-                                <div class="filter -people" id="slideout-people">
-                                    <form class="form" action="#" method="post">
-                                        <div class="container">
-                                            <div class="form__top">
-                                                <div class="form__inner">
-                                                    <div class="form__left">
-                                                        <div class="form__title">Поиск людей</div>
-                                                    </div>
-                                                    <div class="form__right">
-                                                        <div class="form__form-group form-group">
-                                                            <div class="form__message">Введите фамилию, имя, отчество
-                                                                профиля, который вы хотите найти. Если
-                                                                вы не уверенны в датах, укажите примерные.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form__items">
-                                                <div class="form__inner">
-                                                    <div class="form__left">
-                                                        <div class="form__row row">
-                                                            <div class="form__col -fio col">
-                                                                <div class="form__form-group form-group">
-                                                                    <label class="form__label" for="filter-people-fio">ФИО:</label>
-                                                                    <div class="form__input-container">
-                                                                        <input class="form__input form-control"
-                                                                               type="text" id="filter-people-fio"
-                                                                               name="FIO" placeholder=" ">
-                                                                        <button class="form__button -close close"
-                                                                                type="button"></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form__right">
-                                                        <div class="form__row row">
-                                                            <div class="form__col -birth col">
-                                                                <div class="form__form-group form-group">
-                                                                    <label class="form__label"
-                                                                           for="filter-people-birth">Год
-                                                                        рождения:</label>
-                                                                    <div class="form__input-container">
-                                                                        <input class="form__input form-control"
-                                                                               type="text" id="filter-people-birth"
-                                                                               name="BIRTH" placeholder="XXXX-XXXX г."
-                                                                               data-mask="9999-9999">
-                                                                        <button class="form__button -close close"
-                                                                                type="button"></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form__col -death col">
-                                                                <div class="form__form-group form-group">
-                                                                    <label class="form__label"
-                                                                           for="filter-people-death">Год смерти:</label>
-                                                                    <div class="form__input-container">
-                                                                        <input class="form__input form-control"
-                                                                               type="text" id="filter-people-death"
-                                                                               name="DEATH" placeholder="XXXX-XXXX г."
-                                                                               data-mask="9999-9999">
-                                                                        <button class="form__button -close close"
-                                                                                type="button"></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form__col -submit col">
-                                                                <div class="form__form-group -submit form-group">
-                                                                    <button
-                                                                        class="form__button -submit btn btn-primary btn-lg"
-                                                                        type="submit">
-                                                                        <span>Показать</span>
-                                                                        <span>2 799</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="filter -places" id="slideout-places">
-                                    <form class="form" action="#" method="post">
-                                        <div class="container">
-                                            <div class="form__top">
-                                                <div class="form__inner">
-                                                    <div class="form__left">
-                                                        <div class="form__title">Поиск мест</div>
-                                                    </div>
-                                                    <div class="form__right">
-                                                        <div class="form__form-group form-group">
-                                                            <div class="form__message">Введите фамилию, имя, отчество
-                                                                профиля, который вы хотите найти. Если
-                                                                вы не уверенны в датах, укажите примерные.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form__items">
-                                                <div class="form__inner">
-                                                    <div class="form__left">
-                                                        <div class="form__row row">
-                                                            <div class="form__col -name col">
-                                                                <div class="form__form-group form-group">
-                                                                    <label class="form__label" for="filter-places-name">Название:</label>
-                                                                    <div class="form__input-container">
-                                                                        <input class="form__input form-control"
-                                                                               type="text" id="filter-places-name"
-                                                                               name="NAME" placeholder=" ">
-                                                                        <button class="form__button -close close"
-                                                                                type="button"></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form__right">
-                                                        <div class="form__row row">
-                                                            <div class="form__col -address col">
-                                                                <div class="form__form-group form-group">
-                                                                    <label class="form__label"
-                                                                           for="filter-places-address">Местоположение:</label>
-                                                                    <div class="form__input-container">
-                                                                        <input class="form__input form-control"
-                                                                               type="text" id="filter-places-address"
-                                                                               name="ADDRESS" placeholder=" ">
-                                                                        <button class="form__button -close close"
-                                                                                type="button"></button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form__col -submit col">
-                                                                <div class="form__form-group -submit form-group">
-                                                                    <button
-                                                                        class="form__button -submit btn btn-primary btn-lg"
-                                                                        type="submit">
-                                                                        <span>Показать</span>
-                                                                        <span>2 799</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                                @include('includes.forms.auth.login')
+                                @include('includes.forms.auth.restore_password')
+                                @include('includes.forms.auth.register')
+
+                                @include('includes.forms.filter_people')
+                                @include('includes.forms.filter_places')
+
                             </div>
                         </div>
                     </div>
@@ -447,6 +172,17 @@
         </div>
 
         <main class="main-content" role="main">
+            <div class="message">
+                @if ($errors->any())
+                    <div class="message alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
             @yield('content')
         </main>
 
@@ -464,29 +200,37 @@
                         <div class="footer__menu col-auto">
                             <nav class="footer-menu__container">
                                 <ul class="footer-menu__list">
-                                    <li class="footer-menu__item -slideout">
-                                        <a class="footer-menu__link" href="./text">О проекте</a>
-                                    </li>
-                                    <li class="footer-menu__item">
-                                        <a class="footer-menu__link" href="./tree">Семейное древо</a>
-                                    </li>
-                                    <li class="footer-menu__item">
-                                        <a class="footer-menu__link" href="./text">Магазин</a>
-                                    </li>
-                                    <li class="footer-menu__item">
-                                        <a class="footer-menu__link" href="#slideout-people" data-slideout=""
-                                           data-slideout-options="{&quot;type&quot;:&quot;people&quot;,&quot;position&quot;:&quot;top&quot;}">Поиск
-                                            людей
-                                        </a>
-                                    </li>
-                                    <li class="footer-menu__item">
-                                        <a class="footer-menu__link" href="#slideout-places" data-slideout=""
-                                           data-slideout-options="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}">Кладбища</a>
-                                    </li>
-                                    <li class="footer-menu__item -slideout">
-                                        <a class="footer-menu__link" href="./text">Контакты</a>
-                                    </li>
-
+                                    @guest
+                                        <li class="footer-menu__item -slideout">
+                                            <a class="footer-menu__link" href="./text">О проекте</a>
+                                        </li>
+                                        <li class="footer-menu__item -slideout">
+                                            <a class="footer-menu__link" href="./text">Контакты</a>
+                                        </li>
+                                    @else
+                                        <li class="footer-menu__item -slideout">
+                                            <a class="footer-menu__link" href="./text">О проекте</a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a class="footer-menu__link" href="./tree">Семейное древо</a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a class="footer-menu__link" href="./text">Магазин</a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a class="footer-menu__link" href="#slideout-people" data-slideout=""
+                                               data-slideout-options="{&quot;type&quot;:&quot;people&quot;,&quot;position&quot;:&quot;top&quot;}">Поиск
+                                                людей
+                                            </a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a class="footer-menu__link" href="#slideout-places" data-slideout=""
+                                               data-slideout-options="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}">Кладбища</a>
+                                        </li>
+                                        <li class="footer-menu__item -slideout">
+                                            <a class="footer-menu__link" href="./text">Контакты</a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </nav>
                         </div>

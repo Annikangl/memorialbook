@@ -2,22 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Profile\SearchRequest;
 use App\Models\Profile;
+use App\Services\ProfileService;
 use Illuminate\Http\Request;
 
+/**
+ * Class ProfileController
+ * @package App\Http\Controllers
+ */
 class ProfileController extends Controller
 {
+    private ProfileService $service;
+
+    public function __construct(ProfileService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
-        $profiles = Profile::orderBy('id')->get();
+        $profiles = Profile::query()->orderBy('id')->get();
         return view('tree.index', compact('profiles'));
     }
 
     public function list()
     {
-        $profiles = Profile::orderBy('date_birth')
+        $profiles = Profile::query()->orderBy('date_birth')
             ->whereNotNull('date_death')
             ->get();
+
         return view('tree.list', compact('profiles'));
     }
 
@@ -53,10 +67,19 @@ class ProfileController extends Controller
         //загрузка данных в сессию с дальнейшей переброской по маршрутам
     }
 
-    public function create_step2(Request $request)
+//    public function create_step2(Request $request){
+//
+//        $profile = Profile::query()->create($params);
+//
+//        return redirect()->route('tree');
+//        // TODO Перебрасывать на шаг 2 с id который только создал и его там сохранять чтобы при записи дополнялись данные уже в текущую запись
+//    }
+
+    public function create_step2()
     {
         return view('profile.create_step2');
     }
+
 
     public function store_step2(Request $request)
     {
@@ -66,11 +89,33 @@ class ProfileController extends Controller
         dd($value);
     }
 
+
     public function create_step3()
     {
-
         return view('profile.create_step3');
     }
 
+    public function map(SearchRequest $request)
+    {
+        $count_filters = 1;
+        $value = $request->input('FIO');
+
+        $query = Profile::query()
+            ->where(\DB::raw('CONCAT(profiles.name, " ", profiles.surname, " ", profiles.patronymic)'), 'LIKE', "%$value%");
+
+        if ($value = $request->get('BIRTH')) {
+            $query->whereBetween(\DB::raw('YEAR(date_birth)'), explode('-', $value));
+            $count_filters++;
+        }
+
+        if ($value = $request->get('DEATH')) {
+            $query->whereBetween(\DB::raw('YEAR(date_death)'), explode('-', $value));
+            $count_filters++;
+        }
+
+        $profiles = $query->paginate(15);
+
+        return view('profile.map', compact('profiles', 'count_filters'));
+    }
 
 }
