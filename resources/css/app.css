@@ -7,7 +7,6 @@
 @import "cemetery_pagination.css";
 
 
-
 .container, .container-fluid {
     margin-left: auto;
     margin-right: auto;
@@ -772,11 +771,10 @@ fieldset.disabled button, fieldset.disabled input, fieldset.disabled select, fie
 
 @media print {
     size:a3
-
-;*, :after, :before {
-     box-shadow: none !important;
-     text-shadow: none !important
- }
+    *, :after, :before {
+        box-shadow: none !important;
+        text-shadow: none !important
+    }
 
     body {
         min-width: 992px !important
@@ -4050,7 +4048,6 @@ a.text-dark:focus, a.text-dark:hover {
     margin: 0;
     width: 100%
 }
-
 
 
 .file.-multimedia {

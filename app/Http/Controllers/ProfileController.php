@@ -99,23 +99,8 @@ class ProfileController extends Controller
 
     public function map(SearchRequest $request)
     {
-        $count_filters = 1;
-        $value = $request->input('FIO');
-
-        $query = Profile::query()
-            ->where(\DB::raw('CONCAT(profiles.first_name, " ", profiles.last_name, " ", profiles.patronymic)'), 'LIKE', "%$value%");
-
-        if ($value = $request->get('BIRTH')) {
-            $query->whereBetween(\DB::raw('YEAR(date_birth)'), explode('-', $value));
-            $count_filters++;
-        }
-
-        if ($value = $request->get('DEATH')) {
-            $query->whereBetween(\DB::raw('YEAR(date_death)'), explode('-', $value));
-            $count_filters++;
-        }
-
-        $profiles = $query->paginate(20);
+        $profiles = Profile::filtered()->paginate(30);
+        $count_filters = count($request->input());
 
         return view('profile.map', compact('profiles', 'count_filters'));
     }

@@ -67,6 +67,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Profile whereStatus($value)
  * @method static Builder|Profile whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property float|null $latitude
+ * @property float|null $longitude
+ * @method static Builder|Profile whereLatitude($value)
+ * @method static Builder|Profile whereLongitude($value)
  */
 class Profile extends Model
 {
@@ -91,6 +95,8 @@ class Profile extends Model
         'date_death',
         'birth_place',
         'burial_place',
+        'latitude',
+        'longitude',
         'reason_death',
         'death_certificate',
         'religious_views',
@@ -114,12 +120,14 @@ class Profile extends Model
         ];
     }
 
-    public function scopeFiltered(Builder $query)
+    public function scopeFiltered(Builder $query): Builder
     {
         return $query->when($value = request('FIO'), function (Builder $q) use ($value) {
-            return $q->where('name', 'LIKE', "%$value%");
-        })->when(request('BIRTH'), function (Builder $q) {
-            return $q->whereBetween('YEAR(date_birth)', explode('-', request('BIRTH')));
+            $q->where(\DB::raw('CONCAT(profiles.first_name, " ", profiles.last_name, " ", profiles.patronymic)'), 'LIKE', "%$value%");
+        })->when($value = request('BIRTH'), function (Builder $q) use ($value) {
+            $q->whereBetween(\DB::raw('YEAR(date_birth)'), explode('-', $value));
+        })->when($value = request('DEATH'), function (Builder $query) use ($value) {
+            $query->whereBetween(\DB::raw('YEAR(date_death)'), explode('-', $value));
         });
     }
 
