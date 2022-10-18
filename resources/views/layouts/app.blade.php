@@ -247,7 +247,7 @@
 
 @yield('scripts')
 <script>
-    console.log(document.querySelector('#search-peoples'));
+
 </script>
 
 

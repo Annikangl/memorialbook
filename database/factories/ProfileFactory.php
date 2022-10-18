@@ -23,9 +23,14 @@ class ProfileFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'patronymic' => $this->faker->domainName(),
-            'avatar' => Storage::path('profiles'),
+            'avatar' => $this->faker->randomElement(
+                [
+                    'avatar_profile/YecDyQ7H4e7HydHbRqQr89AAQwG7DJ0aQ1wunwYq.jpg',
+                    'avatar_profile/rXmKCVJDTn2IW00VmpgejetE5BOAEY4srx5AcimZ.jpg'
+                ]
+            ),
             'gender' => $this->faker->titleMale(),
-            'date_birth' => $birth = $this->faker->date("Y-m-d",'2000'),
+            'date_birth' => $birth = $this->faker->date("Y-m-d", '2000'),
             'date_death' => Carbon::createFromFormat('Y-m-d', $birth)->addYears(25),
             'birth_place' => $this->faker->address(),
             'burial_place' => $this->faker->address(),
@@ -34,7 +39,7 @@ class ProfileFactory extends Factory
             'religious_views' => $this->faker->randomElement(['christianity', 'Islam', 'buddhism']),
             'hobby' => $this->faker->text(30),
             'status' => Profile::STATUS_ACTIVE,
-            'moderators_comment' =>  null,
+            'moderators_comment' => null,
             'access' => null,
             'p_id' => null,
             'm_id' => null,

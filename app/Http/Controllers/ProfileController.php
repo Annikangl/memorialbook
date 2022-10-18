@@ -6,6 +6,7 @@ use App\Http\Requests\Profile\SearchRequest;
 use App\Models\Profile;
 use App\Services\ProfileService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 /**
  * Class ProfileController

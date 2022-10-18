@@ -10,6 +10,7 @@ class CemeteryController extends Controller
 {
     public function map(SearchRequest $request)
     {
+        dd($request);
         return view('cemetery.map');
     }
 }
