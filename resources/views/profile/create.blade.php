@@ -153,27 +153,24 @@
                                     <div class="profile__section">
                                         <div class="profile-section__row -m-up row">
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="id_father">Отец</label>
-                                                <select class="profile-section__select select" id="id_father" hidden="" data-select="">
-                                                    <option value="0">Выберите из списка</option>
-                                                    <option value="1">Алексеев Алексей Алексеевич</option>
-                                                    <option value="1">Алексеев Алексей Матвеевич</option>
+                                                <label class="profile-section__label" for="f_id">Отец</label>
+                                                <select class="profile-section__select select" id="f_id" name="f_id" hidden="" data-select="">
+                                                    <option>Выберите из списка</option>
+                                                    <option value="1" id="f_id" name="f_id">Алексеев Алексей Алексеевич</option>
                                                 </select>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="id_mother">Мать</label>
-                                                <select class="profile-section__select select" id="id_mother" hidden="" data-select="">
-                                                    <option value="0">Выберите из списка</option>
-                                                    <option value="1">Каренина Анна Аркадьевна</option>
-                                                    <option value="1">Облонская Анна Аркадьевна</option>
+                                                <label class="profile-section__label" for="m_id">Мать</label>
+                                                <select class="profile-section__select select" id="m_id" name="m_id" hidden="" data-select="">
+                                                    <option>Выберите из списка</option>
+                                                    <option value="2" id="m_id" name="m_id">Каренина Анна Аркадьевна</option>
                                                 </select>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="id_spouse">Супруг / Супруга</label>
-                                                <select class="profile-section__select select" id="id_spouse" hidden="" data-select="">
-                                                    <option value="0">Выберите из списка</option>
-                                                    <option value="1">Дитриев Дмитрий Дмитриевич</option>
-                                                    <option value="1">Андрей Дмитрий Дмитриевич</option>
+                                                <label class="profile-section__label" for="p_id">Супруг / Супруга</label>
+                                                <select class="profile-section__select select" id="p_id" name="p_id" hidden="" data-select="">
+                                                    <option>Выберите из списка</option>
+                                                    <option value="3" id="p_id" name="p_id">Дитриев Дмитрий Дмитриевич</option>
                                                 </select>
                                             </div>
                                         </div>
