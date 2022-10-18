@@ -22,7 +22,7 @@ class ProfileFactory extends Factory
         return [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-            'patronymic' => $this->faker->domainName(),
+            'patronymic' => $this->faker->name(),
             'avatar' => $this->faker->randomElement(
                 [
                     'avatar_profile/YecDyQ7H4e7HydHbRqQr89AAQwG7DJ0aQ1wunwYq.jpg',
