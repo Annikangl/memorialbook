@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="map">
         <div class="map__nav">
             <a class="map-nav__button" href="#slideout-people" role="button" data-slideout=""
@@ -23,7 +22,7 @@
         </div>
         <div class="map__results">
             <button class="map-results__title" type="button">
-                <div class="map-results-title__text">Найдено {{ $profiles->count() }} человек</div>
+                <div class="map-results-title__text">Найдено {{ $profiles->total() }} человек</div>
                 <div class="map-results-title__comment">
                     <div class="map-results-title-comment__text -default">Показать</div>
                     <div class="map-results-title-comment__text -active">Скрыть</div>
@@ -55,31 +54,17 @@
         </div>
         <div class="map__container"></div>
         <script>
-            window.markersContent = [{
-                "title": "Айдахо",
-                "coords": "44.3509, -114.613"
-            }, {
-                "title": "Айова",
-                "coords": "42.0751, -93.496"
-            }, {
-                "title": "Алабама",
-                "coords": "32.7794, -86.8287"
-            }, {
-                "title": "Аляска",
-                "coords": "64.0685, -152.2782"
-            }, {
-                "title": "Аризона",
-                "coords": "34.2744, -111.6602"
-            }, {
-                "title": "Арканзас",
-                "coords": "34.8938, -92.4426"
-            }, {
-                "title": "Вайоминг",
-                "coords": "42.9957, -107.5512"
-            }, {
-                "title": "Вашингтон",
-                "coords": "47, -120"
-            }]
+            const coordinates = {!! json_encode($profiles->toArray()) !!};
+            window.markersContent = [];
+
+            coordinates.data.forEach((item) => {
+                window.markersContent.push({
+                    "title": item.burial_place,
+                    "coords": item.latitude + ', ' + item.longitude
+                })
+            })
+
+            console.log(window.markersContent)
         </script>
     </div>
 

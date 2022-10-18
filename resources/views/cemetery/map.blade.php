@@ -4,7 +4,7 @@
     <div class="map">
         <div class="map__nav">
             <a class="map-nav__button" href="#slideout-places" role="button" data-slideout=""
-               data-slideout-options="{&quot;type&quot;:&quot;people&quot;,&quot;position&quot;:&quot;top&quot;}">
+               data-slideout-options="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}">
                 <span class="map-nav-button__text">Поиск</span>
                 <span class="search-filter__icon">
                     <svg xmlns="http://www.w3.org/2000/svg">
@@ -26,31 +26,40 @@
 
         <div class="map__container"></div>
         <script>
-            window.markersContent = [{
-                "title": "Айдахо",
-                "coords": "44.3509, -114.613"
-            }, {
-                "title": "Айова",
-                "coords": "42.0751, -93.496"
-            }, {
-                "title": "Алабама",
-                "coords": "32.7794, -86.8287"
-            }, {
-                "title": "Аляска",
-                "coords": "64.0685, -152.2782"
-            }, {
-                "title": "Аризона",
-                "coords": "34.2744, -111.6602"
-            }, {
-                "title": "Арканзас",
-                "coords": "34.8938, -92.4426"
-            }, {
-                "title": "Вайоминг",
-                "coords": "42.9957, -107.5512"
-            }, {
-                "title": "Вашингтон",
-                "coords": "47, -120"
-            }]
+            const coordinates = {!! json_encode($cemeteries->toArray()) !!};
+            window.markersContent = [];
+
+            coordinates.data.forEach((item) => {
+                window.markersContent.push({
+                    "title": item.burial_place,
+                    "coords": item.latitude + ', ' + item.longitude
+                })
+            })
+            // window.markersContent = [{
+            //     "title": "Айдахо",
+            //     "coords": "44.3509, -114.613"
+            // }, {
+            //     "title": "Айова",
+            //     "coords": "42.0751, -93.496"
+            // }, {
+            //     "title": "Алабама",
+            //     "coords": "32.7794, -86.8287"
+            // }, {
+            //     "title": "Аляска",
+            //     "coords": "64.0685, -152.2782"
+            // }, {
+            //     "title": "Аризона",
+            //     "coords": "34.2744, -111.6602"
+            // }, {
+            //     "title": "Арканзас",
+            //     "coords": "34.8938, -92.4426"
+            // }, {
+            //     "title": "Вайоминг",
+            //     "coords": "42.9957, -107.5512"
+            // }, {
+            //     "title": "Вашингтон",
+            //     "coords": "47, -120"
+            // }]
         </script>
     </div>
 

@@ -36,7 +36,7 @@ class CemeteryController extends Controller
             $count_filters++;
         }
 
-        $cemeteries = $query->paginate(10);
+        $cemeteries = $query->paginate(3);
 
         return view('cemetery.list', compact('cemeteries', 'count_filters'));
 

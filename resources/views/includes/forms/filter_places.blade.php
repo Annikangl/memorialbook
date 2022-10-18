@@ -26,7 +26,7 @@
                                     <div class="form__input-container">
                                         <input class="form__input form-control"
                                                type="text" id="filter-places-name"
-                                               name="NAME" placeholder=" ">
+                                               name="NAME" value="{{ request('NAME') }}" placeholder=" ">
                                         <button class="form__button -close close"
                                                 type="button"></button>
                                     </div>
@@ -43,7 +43,7 @@
                                     <div class="form__input-container">
                                         <input class="form__input form-control"
                                                type="text" id="filter-places-address"
-                                               name="ADDRESS" placeholder=" ">
+                                               name="ADDRESS"  value="{{ request('ADDRESS') }}" placeholder=" ">
                                         <button class="form__button -close close"
                                                 type="button"></button>
                                     </div>

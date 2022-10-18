@@ -20,6 +20,8 @@ class CemeteryFactory extends Factory
             'phone' => $this->faker->phoneNumber(),
             'schedule' => 'Пн-Сб: 09:00 - 20:00 / Вс: 09:00 - 22:00',
             'address' => $this->faker->address(),
+            'latitude' => $this->faker->latitude(),
+            'longitude' => $this->faker->longitude(),
             'avatar' => $this->faker->randomElement(
                 [
                     'cemetery/avatar/avatar-1.jpg',

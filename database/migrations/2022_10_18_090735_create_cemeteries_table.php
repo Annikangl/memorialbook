@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('phone',20)->nullable();
             $table->string('schedule');
             $table->string('address');
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->string('avatar')->nullable();
             $table->string('banner')->nullable();
             $table->text('description')->nullable();

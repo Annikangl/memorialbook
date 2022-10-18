@@ -43,8 +43,6 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
-
-
         if ($request->hasFile('avatar')) {
             $avatar_path = $request->file('avatar')->store('avatar_profile', 'public');
         } else {
@@ -117,7 +115,7 @@ class ProfileController extends Controller
             $count_filters++;
         }
 
-        $profiles = $query->paginate(15);
+        $profiles = $query->paginate(20);
 
         return view('profile.map', compact('profiles', 'count_filters'));
     }

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->date('date_death');
             $table->string('birth_place')->nullable();
             $table->string('burial_place')->nullable();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->string('reason_death')->nullable();
             $table->string('death_certificate')->nullable();
             $table->string('religious_views')->nullable();

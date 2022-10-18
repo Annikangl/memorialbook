@@ -8,129 +8,51 @@
                     <a class="map-nav__button" href="#slideout-places" role="button" data-slideout=""
                        data-slideout-options="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}">
                         <span class="map-nav-button__text">Поиск</span>
-                        <span class="map-nav-button__icon">
-                                        <svg style="width: 18px; height: 18px;" aria-hidden="true">
-                                            <use xlink:href="../assets/media/sprite.svg?1644862970869#sprite-filter"></use>
-                                        </svg>
-                                    </span>
-                        <span class="map-nav-button__badge badge badge-primary">5</span>
+                        <span class="search-filter__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+              <path
+                  d="M15 18c-.6 0-1-.4-1-1v-1.2c-.4-.1-.8-.4-1.1-.7-.6-.5-.9-1.3-.9-2.1s.3-1.6.9-2.1c.3-.3.7-.6 1.1-.7V1c0-.6.4-1 1-1s1 .4 1 1v9.2c.4.1.8.4 1.1.7.6.6.9 1.3.9 2.1s-.3 1.6-.9 2.1c-.3.3-.7.6-1.1.7V17c0 .6-.4 1-1 1zm0-4c.3 0 .5-.1.7-.3s.3-.4.3-.7-.1-.5-.3-.7c-.4-.4-1-.4-1.4 0-.2.2-.3.4-.3.7s.1.5.3.7.4.3.7.3zm-6 4c-.6 0-1-.4-1-1V7.8c-.4-.1-.8-.4-1.1-.7C6.3 6.6 6 5.8 6 5s.3-1.6.9-2.1c.3-.3.7-.6 1.1-.7V1c0-.6.4-1 1-1s1 .4 1 1v1.2c.4.1.8.4 1.1.7.6.5.9 1.3.9 2.1s-.3 1.6-.9 2.1c-.3.3-.7.6-1.1.7V17c0 .6-.4 1-1 1zM9 4c-.3 0-.5.1-.7.3-.2.2-.3.4-.3.7s.1.5.3.7c.4.4 1 .4 1.4 0 .2-.2.3-.4.3-.7s-.1-.5-.3-.7C9.5 4.1 9.3 4 9 4zM3 18c-.6 0-1-.4-1-1v-1.2c-.4-.1-.8-.4-1.1-.7-.6-.5-.9-1.3-.9-2.1s.3-1.6.9-2.1c.3-.3.7-.6 1.1-.7V1c0-.6.4-1 1-1s1 .4 1 1v9.2c.4.1.8.4 1.1.7.6.5.9 1.3.9 2.1s-.3 1.6-.9 2.1c-.3.3-.7.6-1.1.7V17c0 .6-.4 1-1 1zm0-4c.3 0 .5-.1.7-.3.2-.2.3-.4.3-.7s-.1-.5-.3-.7c-.4-.4-1-.4-1.4 0-.2.2-.3.4-.3.7s.1.5.3.7c.2.2.4.3.7.3z"/>
+            </svg>
+                </span>
+                        <span class="map-nav-button__badge badge badge-primary">{{ $count_filters }}</span>
                     </a>
                 </div>
                 <div class="map__view">
                     <div class="map-view__item">
-                        <a class="map-view__link" href="../map">На карте</a>
+                        <a class="map-view__link" href="{{ route('cemetery.search.map') . '?NAME=' . request('NAME') . '&ADDRESS=' . request('ADDRESS') }}">На карте</a>
                     </div>
                     <div class="map-view__item">
-                        <a class="map-view__link active" href="../list">Списком</a>
+                        <a class="map-view__link active" href="#">Списком</a>
                     </div>
                 </div>
             </div>
             <div class="cemeteries-list__content">
                 <div class="cemeteries-list__items row">
+                    @foreach($cemeteries as $cemetery)
                     <div class="cemeteries-list__item col">
                         <a class="cemeteries-list-item__inner" href="javascript:void(0)">
                             <div class="cemeteries-list-item__row row">
                                 <div class="cemeteries-list-item__side -avatar col">
                                     <div class="cemeteries-list-item__avatar">
-                                        <img class="cemeteries-list-item__image" src="../assets/uploads/cemetery/avatar-1.jpg"
+                                        <img class="cemeteries-list-item__image" src="{{ asset('storage/' . $cemetery->avatar) }}"
                                              alt="Национальное кладбище Арлингт">
                                     </div>
                                 </div>
                                 <div class="cemeteries-list-item__side -content col">
                                     <div class="cemeteries-list-item__content">
-                                        <div class="cemeteries-list-item__title">Arlington National Cemetery</div>
+                                        <div class="cemeteries-list-item__title">{{ $cemetery->title }}</div>
                                         <div class="cemeteries-list-item__bottom">
-                                            <div class="cemeteries-list-item-bottom__address">Арлингтон, Virginia</div>
+                                            <div class="cemeteries-list-item-bottom__address">{{ $cemetery->address }}</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="cemeteries-list__item col">
-                        <a class="cemeteries-list-item__inner" href="javascript:void(0)">
-                            <div class="cemeteries-list-item__row row">
-                                <div class="cemeteries-list-item__side -avatar col">
-                                    <div class="cemeteries-list-item__avatar">
-                                        <img class="cemeteries-list-item__image" src="../assets/uploads/cemetery/avatar-2.jpg"
-                                             alt="Вашингтонское кладбище">
-                                    </div>
-                                </div>
-                                <div class="cemeteries-list-item__side -content col">
-                                    <div class="cemeteries-list-item__content">
-                                        <div class="cemeteries-list-item__title">MT. Washington Cemetery</div>
-                                        <div class="cemeteries-list-item__bottom">
-                                            <div class="cemeteries-list-item-bottom__address">Арлингтон, Virginia</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="cemeteries-list__item col">
-                        <a class="cemeteries-list-item__inner" href="javascript:void(0)">
-                            <div class="cemeteries-list-item__row row">
-                                <div class="cemeteries-list-item__side -avatar col">
-                                    <div class="cemeteries-list-item__avatar">
-                                        <img class="cemeteries-list-item__image" src="../assets/uploads/cemetery/avatar-3.jpg"
-                                             alt="Национальное кладбище Арлингт">
-                                    </div>
-                                </div>
-                                <div class="cemeteries-list-item__side -content col">
-                                    <div class="cemeteries-list-item__content">
-                                        <div class="cemeteries-list-item__title">Arlington National Cemetery</div>
-                                        <div class="cemeteries-list-item__bottom">
-                                            <div class="cemeteries-list-item-bottom__address">Арлингтон, Virginia</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="cemeteries-list__item col">
-                        <a class="cemeteries-list-item__inner" href="javascript:void(0)">
-                            <div class="cemeteries-list-item__row row">
-                                <div class="cemeteries-list-item__side -avatar col">
-                                    <div class="cemeteries-list-item__avatar">
-                                        <img class="cemeteries-list-item__image" src="../assets/uploads/cemetery/avatar-4.jpg"
-                                             alt="MT. Washington Cemetery">
-                                    </div>
-                                </div>
-                                <div class="cemeteries-list-item__side -content col">
-                                    <div class="cemeteries-list-item__content">
-                                        <div class="cemeteries-list-item__title">MT. Washington Cemetery</div>
-                                        <div class="cemeteries-list-item__bottom">
-                                            <div class="cemeteries-list-item-bottom__address">Арлингтон, Virginia</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="pagination">
-                        <button class="pagination__more btn btn-outline-primary" type="button">Показать ещё</button>
-                        <div class="pagination__pages">
-                            <a class="pagination-pages__link -prev arrow" href="../list">
-                                            <span class="pagination-pages__icon">
-                                                <svg style="width: 14px; height: 8px;" aria-hidden="true">
-                                                    <use xlink:href="../assets/media/sprite.svg?1644862970869#sprite-arrow"></use>
-                                                </svg>
-                                            </span>
-                            </a>
-                            <div class="pagination-pages__numbers">
-                                <div class="pagination-pages__current">1</div>
-                                <div class="pagination-pages__delimiter">/</div>
-                                <div class="pagination-pages__all">5</div>
-                            </div>
-                            <a class="pagination-pages__link -next arrow" href="../list">
-                                            <span class="pagination-pages__icon">
-                                                <svg style="width: 14px; height: 8px;" aria-hidden="true">
-                                                    <use xlink:href="../assets/media/sprite.svg?1644862970869#sprite-arrow"></use>
-                                                </svg>
-                                            </span>
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
+
+                        {{ $cemeteries->links('cemetery.partials.pagination', ['paginator' => $cemeteries]) }}
+
                 </div>
             </div>
         </div>

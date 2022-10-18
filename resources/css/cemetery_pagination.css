@@ -1,0 +1,91 @@
+.cemeteries-buttons {
+    width: 100%;
+    margin: 32px 0 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-more {
+    padding: 10px 15px;
+    border: 1px solid var(--blue);
+    min-width: 194px;
+    height: 44px;
+    color: var(--blue);
+    text-transform: uppercase;
+    transition: var(--normal);
+    border-radius: 7px;
+    font-size: 14px;
+    letter-spacing: .05em;
+    line-height: 1.5;
+    min-height: 44px;
+    background-color: transparent;
+    position: relative;
+    left: 50px;
+}
+
+.button-more:hover {
+    background-color: var(--blue);
+    color: #fff;
+}
+
+.cemeteries-buttons:before {
+    content: "";
+}
+
+.pagination-left, .pagination-right {
+    border: 1px solid #e5e8eb;
+    border-radius: 7px;
+    color: rgba(32,30,31,.3);
+    height: 44px;
+    width: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--normal);
+    cursor: pointer;
+}
+
+.pagination-left:hover, .pagination-right:hover {
+    background: #fff;
+    color: #201e1f;
+}
+
+.cemeteries-pagination {
+    display: flex;
+    align-items: center;
+}
+
+.pagination-number {
+    display: flex;
+    font-size: 18px;
+    margin: 0 20px;
+    color: rgba(32,30,31,.6);
+}
+
+.pagination-number__delimiter {
+    margin: 0 8px;
+}
+
+.pagination-number__current {
+    color: #201e1f;
+}
+
+.left-arrow, .right-arrow {
+    width: 14px;
+    height: 8px;
+    fill: rgba(32,30,31,.6);
+    transition: var(--normal);
+}
+
+.left-arrow {
+    transform: rotate(90deg);
+}
+
+.right-arrow {
+    transform: rotate(-90deg);
+}
+
+.pagination-left:hover .left-arrow, .pagination-right:hover .right-arrow {
+    fill: var(--black);
+}

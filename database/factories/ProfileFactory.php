@@ -34,6 +34,8 @@ class ProfileFactory extends Factory
             'date_death' => Carbon::createFromFormat('Y-m-d', $birth)->addYears(25),
             'birth_place' => $this->faker->address(),
             'burial_place' => $this->faker->address(),
+            'latitude' => $this->faker->latitude(),
+            'longitude' => $this->faker->longitude(),
             'reason_death' => $this->faker->text(10),
             'death_certificate' => null,
             'religious_views' => $this->faker->randomElement(['christianity', 'Islam', 'buddhism']),
