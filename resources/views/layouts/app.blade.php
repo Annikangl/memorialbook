@@ -36,7 +36,7 @@
         window.app = window.app || {};
         window.app.globalConfig = {
             relPath: './',
-            assetsPath: './assets/media/',
+            assetsPath: '/assets/media/',
             gmapsApikey: 'AIzaSyDCgArix6diJwCToFgNcbDATib9ZrgYcBo'
         };
         window.app.ready = function (callback) {
@@ -246,6 +246,9 @@
 </div>
 
 @yield('scripts')
+<script>
+    console.log(document.querySelector('#search-peoples'));
+</script>
 
 
 </body>
