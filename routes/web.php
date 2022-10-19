@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [ProfileController::class, 'store'])->name('store');
         Route::get('/create_step2', [ProfileController::class, 'create_step2'])->name('create.step2');
         Route::get('/create_step3', [ProfileController::class, 'create_step3'])->name('create.step3');
+        Route::get('/card/{profile}', [ProfileController::class, 'show'])->name('show');
         Route::get('/map', [ProfileController::class, 'map'])->name('search.map');
     });
 

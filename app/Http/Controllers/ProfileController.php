@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Profile\SearchRequest;
 use App\Models\Profile;
-use App\Services\ProfileService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
+
 
 /**
  * Class ProfileController
@@ -14,13 +13,6 @@ use Illuminate\Support\Facades\Http;
  */
 class ProfileController extends Controller
 {
-    private ProfileService $service;
-
-    public function __construct(ProfileService $service)
-    {
-        $this->service = $service;
-    }
-
     public function index()
     {
         $profiles = Profile::query()->orderBy('id')->get();
@@ -37,6 +29,11 @@ class ProfileController extends Controller
             ->get();
 
         return view('tree.list', compact('profiles'));
+    }
+
+    public function show(Profile $profile)
+    {
+        return view('profile.show', compact('profile'));
     }
 
     public function create()
