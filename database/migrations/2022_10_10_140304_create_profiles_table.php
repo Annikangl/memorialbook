@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('patronymic')->nullable();
-            $table->string('slug');
+            $table->string('slug')->nullable()->index();
             $table->string('gender', 10)->nullable();
             $table->string('avatar')->nullable();
             $table->date('date_birth');

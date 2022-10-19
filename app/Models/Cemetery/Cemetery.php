@@ -2,6 +2,7 @@
 
 namespace App\Models\Cemetery;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -56,7 +57,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Cemetery extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     public const STATUS_DRAFT = 'Черновик';
     public const STATUS_MODERATION = 'На модерации';
@@ -95,4 +96,12 @@ class Cemetery extends Model
     }
 
 
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 }

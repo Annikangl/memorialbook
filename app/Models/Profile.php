@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 
 /**
@@ -74,7 +75,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Profile extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     public const STATUS_DRAFT = 'Черновик';
     public const STATUS_MODERATION = 'На модерации';
@@ -140,6 +141,7 @@ class Profile extends Model
 
     public function dateBirth(): Attribute
     {
+
         return new Attribute(
             get: fn($value) => Carbon::createFromFormat("Y-m-d", $value)->year
         );
@@ -152,12 +154,12 @@ class Profile extends Model
         );
     }
 
-    protected static function boot()
+    public function sluggable(): array
     {
-        parent::boot();
-
-        static::creating(function (Profile $profile) {
-            $profile->slug = $profile->slug ?? str($profile->first_name . $profile->last_name)->slug();
-        });
+        return [
+            'slug' => [
+                'source' => ['first_name', 'last_name'],
+            ]
+        ];
     }
 }

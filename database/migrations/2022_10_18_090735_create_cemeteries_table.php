@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('title_en');
+            $table->string('slug')->nullable()->index();
             $table->string('subtitle');
             $table->string('email')->nullable();
             $table->string('phone',20)->nullable();
