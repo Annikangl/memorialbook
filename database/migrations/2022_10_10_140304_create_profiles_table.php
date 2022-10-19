@@ -30,9 +30,9 @@ return new class extends Migration
             $table->string('status',16);
             $table->string('moderators_comment')->nullable();
             $table->string('access')->nullable();
-            $table->integer('p_id')->nullable();
-            $table->integer('m_id')->nullable();
-            $table->integer('f_id')->nullable();
+            $table->integer('parent_id')->nullable();
+            $table->integer('mother_id')->nullable();
+            $table->integer('father_id')->nullable();
 
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

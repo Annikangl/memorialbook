@@ -104,9 +104,9 @@ class Profile extends Model
         'status',
         'moderators_comment',
         'access',
-        'p_id',
-        'm_id',
-        'f_id',
+        'parent_id',
+        'mother_id',
+        'father_id',
         'published_at'
     ];
 

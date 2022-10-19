@@ -43,9 +43,9 @@ class ProfileFactory extends Factory
             'status' => Profile::STATUS_ACTIVE,
             'moderators_comment' => null,
             'access' => null,
-            'p_id' => null,
-            'm_id' => null,
-            'f_id' => null,
+            'parent_id' => null,
+            'mother_id' => null,
+            'father_id' => null,
             'published_at' => Carbon::now()
         ];
     }

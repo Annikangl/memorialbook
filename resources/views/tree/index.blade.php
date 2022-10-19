@@ -30,12 +30,10 @@
 
 <script>
     window.onload = function () {
-        {{--let profiles = {!! json_encode($profiles->toArray())!!};--}}
-
         var family = new FamilyTree(document.getElementById("tree"), {
             template: 'john',
 
-            nodeMouseClick: FamilyTree.action.details,
+            nodeMouseClick: FamilyTree.action.none,
             siblingSeparation: 150,
             enableSearch: false,
             nodeBinding: {
@@ -43,13 +41,6 @@
                 field_0: 'name',
                 field_1: "date",
             },
-            {{--nodeMenu: {--}}
-                {{--    addMore: {--}}
-                {{--        text: "Редактировать",--}}
-                {{--        onClick:function(){window.location.href = "{{URL::to('profile/create')}}"}--}}
-                {{--    },--}}
-                {{--},--}}
-
             editForm: {
                 titleBinding: false,
                 photoBinding: "img",
@@ -88,43 +79,35 @@
             }
 
         });
-        // family.on('field', function (sender, args) {
-        //     var name = args.data["name"];
-        //     var date = args.data["date"];
-        //     var link = args.data["link"];
-        //     args.value = '<a target="_blank" href="' + link + '">' + name + ' ' + date+'</a>';
-        // });
+
+        family.on('click', function (sender, args,) {
+            var link = args.node.gender;
+            console.log(args)
+            window.location.href = 'profile/update/'+ link
+        });
 
         let profiles = @json($profiles);
 
         profiles.forEach(function (profile) {
             family.addNode({
                 id: profile.id,
-                pids: [profile.p_id],
-                mid: profile.m_id,
-                fid: profile.f_id,
+                // slug:profile.slug,
+                pids: [profile.parent_id],
+                mid: profile.mother_id,
+                fid: profile.father_id,
                 name: [profile.first_name + ' ' + profile.last_name],
                 fullname: [profile.first_name + ' ' + profile.patronymic + ' ' + profile.last_name],
                 img: 'storage/' + profile.avatar,
-                gender: 'male',
+                gender: profile.slug,
                 birthDate: new Date(profile.date_birth).toLocaleDateString(),
                 deathDate: new Date(profile.date_death).toLocaleDateString(),
                 placebirth: profile.birth_place,
                 burialplace: profile.burial_place,
                 reasondeath: profile.reason_death,
                 date: profile.date_birth + ' - ' + profile.date_death + ' ' + 'г.',
-                link: 'https://ya.ru/',
+                link: 'profile/update/'+profile.id,
             },)
         });
-
-        function callHandler(nodeId) {
-            // var nodeData = family.get(nodeId);
-            // var employeeName = nodeData["name"];
-            window.location.href = "{{URL::to('profile/create')}}";
-        }
     }
-    {{--document.querySelector(".link-button").addEventListener("click", function() {--}}
-    {{--    window.location.href = "{{URL::to('profile/create')}}"--}}
-    {{--});--}}
 
 </script>
