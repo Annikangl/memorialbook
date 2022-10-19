@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Profile;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 /**
@@ -41,38 +42,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read string $full_name
  * @method static \Database\Factories\ProfileFactory factory(...$parameters)
  * @method static Builder|Profile filtered()
- * @method static Builder|Profile newModelQuery()
- * @method static Builder|Profile newQuery()
  * @method static Builder|Profile query()
- * @method static Builder|Profile whereAccess($value)
- * @method static Builder|Profile whereAvatar($value)
- * @method static Builder|Profile whereBirthPlace($value)
- * @method static Builder|Profile whereBurialPlace($value)
- * @method static Builder|Profile whereCreatedAt($value)
- * @method static Builder|Profile whereDateBirth($value)
- * @method static Builder|Profile whereDateDeath($value)
- * @method static Builder|Profile whereDeathCertificate($value)
- * @method static Builder|Profile whereFId($value)
- * @method static Builder|Profile whereFirstName($value)
- * @method static Builder|Profile whereGender($value)
- * @method static Builder|Profile whereHobby($value)
- * @method static Builder|Profile whereId($value)
- * @method static Builder|Profile whereLastName($value)
- * @method static Builder|Profile whereMId($value)
- * @method static Builder|Profile whereModeratorsComment($value)
- * @method static Builder|Profile wherePId($value)
- * @method static Builder|Profile wherePatronymic($value)
- * @method static Builder|Profile wherePublishedAt($value)
- * @method static Builder|Profile whereReasonDeath($value)
- * @method static Builder|Profile whereReligiousViews($value)
- * @method static Builder|Profile whereSlug($value)
- * @method static Builder|Profile whereStatus($value)
- * @method static Builder|Profile whereUpdatedAt($value)
- * @mixin \Eloquent
- * @property float|null $latitude
- * @property float|null $longitude
- * @method static Builder|Profile whereLatitude($value)
- * @method static Builder|Profile whereLongitude($value)
+
  */
 class Profile extends Model
 {
@@ -168,6 +139,11 @@ class Profile extends Model
                 'source' => ['first_name', 'last_name'],
             ]
         ];
+    }
+
+    public function galleries(): HasMany
+    {
+        return $this->hasMany(Gallery::class);
     }
 
     public function spouse(): BelongsTo

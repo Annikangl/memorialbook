@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Profile\SearchRequest;
-use App\Models\Profile;
+use App\Models\Profile\Profile;
 use Illuminate\Http\Request;
 
 
@@ -16,9 +16,9 @@ class ProfileController extends Controller
     public function index()
     {
         $profiles = Profile::query()->orderBy('id')->get();
-            if ($profiles->isEmpty()){
-                return view('tree.error');
-            }
+        if ($profiles->isEmpty()) {
+            return view('tree.error');
+        }
         return view('tree.index', compact('profiles'));
     }
 
@@ -33,7 +33,9 @@ class ProfileController extends Controller
 
     public function show(string $slug)
     {
-        $profile = Profile::with(['spouse:id,first_name','father:id', 'mother:id'])->whereSlug($slug)->first();
+        $profile = Profile::query()->with(['spouse:id,first_name', 'father:id', 'mother:id'])
+            ->whereSlug($slug)
+            ->firstOrFail();
 
         $relatives = [
             $profile->spouse()->get()->toArray(),
