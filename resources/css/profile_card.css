@@ -1,0 +1,37 @@
+.video-play {
+    width: 31px;
+    height: 36px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    fill: #175ed9;
+}
+
+
+.relatives__name, .view-relatives__text {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 2px 16px 2px 8px;
+}
+
+.view-relatives__text {
+    color: #175ed9;
+}
+
+.view-relatives__icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e5e8eb;
+}
+
+.view-relatives__icon svg {
+    fill: #175ed9;
+    width: 20px;
+    height: 25px;
+}

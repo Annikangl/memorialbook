@@ -30,9 +30,17 @@ return new class extends Migration
             $table->string('status',16);
             $table->string('moderators_comment')->nullable();
             $table->string('access')->nullable();
-            $table->integer('parent_id')->nullable();
-            $table->integer('mother_id')->nullable();
-            $table->integer('father_id')->nullable();
+
+            $table->unsignedBigInteger('mother_id')->nullable();
+            $table->unsignedBigInteger('father_id')->nullable();
+            $table->unsignedBigInteger('spouse_id')->nullable();
+
+            $table->foreign('mother_id')->references('id')->on('profiles')
+                ->onDelete('CASCADE');
+            $table->foreign('father_id')->references('id')->on('profiles')
+                ->onDelete('CASCADE');
+            $table->foreign('spouse_id')->references('id')->on('profiles')
+                ->onDelete('CASCADE');
 
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

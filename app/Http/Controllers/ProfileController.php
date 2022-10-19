@@ -31,9 +31,18 @@ class ProfileController extends Controller
         return view('tree.list', compact('profiles'));
     }
 
-    public function show(Profile $profile)
+    public function show(string $slug)
     {
-        return view('profile.show', compact('profile'));
+        $profile = Profile::with(['spouse:id,first_name','father:id', 'mother:id'])->whereSlug($slug)->first();
+
+        $relatives = [
+            $profile->spouse()->get()->toArray(),
+            $profile->father()->get()->toArray(),
+            $profile->mother()->get()->toArray(),
+        ];
+
+
+        return view('profile.show', compact('profile', 'relatives'));
     }
 
     public function create()

@@ -5,7 +5,7 @@
 @import "./fonts.css";
 @import "./template.css";
 @import "cemetery_pagination.css";
-
+@import "profile_card.css";
 
 .container, .container-fluid {
     margin-left: auto;

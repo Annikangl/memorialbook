@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 /**
@@ -139,9 +140,15 @@ class Profile extends Model
         );
     }
 
+    public function hobbies(): Attribute
+    {
+        return new Attribute(
+            get: fn() => $this->hobby ? explode(' ', $this->hobby) : ''
+        );
+    }
+
     public function dateBirth(): Attribute
     {
-
         return new Attribute(
             get: fn($value) => Carbon::createFromFormat("Y-m-d", $value)->year
         );
@@ -161,5 +168,20 @@ class Profile extends Model
                 'source' => ['first_name', 'last_name'],
             ]
         ];
+    }
+
+    public function spouse(): BelongsTo
+    {
+        return self::belongsTo(static::class);
+    }
+
+    public function father(): BelongsTo
+    {
+        return self::belongsTo(static::class);
+    }
+
+    public function mother(): BelongsTo
+    {
+        return self::belongsTo(static::class);
     }
 }
