@@ -4,7 +4,7 @@
 -----------------*/
 @import "./fonts.css";
 @import "./template.css";
-
+@import "cemetery_pagination.css";
 
 
 .container, .container-fluid {
@@ -771,11 +771,10 @@ fieldset.disabled button, fieldset.disabled input, fieldset.disabled select, fie
 
 @media print {
     size:a3
-
-;*, :after, :before {
-     box-shadow: none !important;
-     text-shadow: none !important
- }
+    *, :after, :before {
+        box-shadow: none !important;
+        text-shadow: none !important
+    }
 
     body {
         min-width: 992px !important
@@ -4049,6 +4048,7 @@ a.text-dark:focus, a.text-dark:hover {
     margin: 0;
     width: 100%
 }
+
 
 .file.-multimedia {
     background: #f5f7f9;
@@ -12062,4 +12062,21 @@ fieldset.disabled .choices, fieldset:disabled .choices {
         padding-left: 40px;
         padding-right: 40px
     }
+}
+
+.search-filter__icon {
+    border-radius: 50%;
+    border: 1px solid #e5e8eb;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.search-filter__icon svg {
+    fill: var(--blue);
+    width: 18px;
+    height: 18px;
 }

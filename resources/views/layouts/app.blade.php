@@ -183,7 +183,9 @@
                     </div>
                 @endif
             </div>
+
             @yield('content')
+
         </main>
 
         <div class="footer">
@@ -212,7 +214,7 @@
                                             <a class="footer-menu__link" href="./text">О проекте</a>
                                         </li>
                                         <li class="footer-menu__item">
-                                            <a class="footer-menu__link" href="./tree">Семейное древо</a>
+                                            <a class="footer-menu__link" href="{{ route('tree') }}">Семейное древо</a>
                                         </li>
                                         <li class="footer-menu__item">
                                             <a class="footer-menu__link" href="./text">Магазин</a>
@@ -247,7 +249,7 @@
 
 @yield('scripts')
 <script>
-    console.log(document.querySelector('#search-peoples'));
+
 </script>
 
 

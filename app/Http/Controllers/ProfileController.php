@@ -6,6 +6,7 @@ use App\Http\Requests\Profile\SearchRequest;
 use App\Models\Profile;
 use App\Services\ProfileService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 /**
  * Class ProfileController
@@ -45,8 +46,6 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
-
-
         if ($request->hasFile('avatar')) {
             $avatar_path = $request->file('avatar')->store('avatar_profile', 'public');
         } else {
@@ -103,23 +102,8 @@ class ProfileController extends Controller
 
     public function map(SearchRequest $request)
     {
-        $count_filters = 1;
-        $value = $request->input('FIO');
-
-        $query = Profile::query()
-            ->where(\DB::raw('CONCAT(profiles.first_name, " ", profiles.last_name, " ", profiles.patronymic)'), 'LIKE', "%$value%");
-
-        if ($value = $request->get('BIRTH')) {
-            $query->whereBetween(\DB::raw('YEAR(date_birth)'), explode('-', $value));
-            $count_filters++;
-        }
-
-        if ($value = $request->get('DEATH')) {
-            $query->whereBetween(\DB::raw('YEAR(date_death)'), explode('-', $value));
-            $count_filters++;
-        }
-
-        $profiles = $query->paginate(15);
+        $profiles = Profile::filtered()->paginate(30);
+        $count_filters = count($request->input());
 
         return view('profile.map', compact('profiles', 'count_filters'));
     }
