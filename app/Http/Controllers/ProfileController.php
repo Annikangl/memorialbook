@@ -23,6 +23,9 @@ class ProfileController extends Controller
     public function index()
     {
         $profiles = Profile::query()->orderBy('id')->get();
+            if ($profiles->isEmpty()){
+                return view('tree.error');
+            }
         return view('tree.index', compact('profiles'));
     }
 

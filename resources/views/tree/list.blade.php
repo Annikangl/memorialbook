@@ -31,7 +31,7 @@
                                             <div class="tree-list-item__text">{{$profile->date_birth.' - '.$profile->date_death}}</div>
                                         </div>
                                         <div class="tree-list-item-info__side -status">
-                                            <div class="tree-list-item__title -error">Публикация отклонена</div>
+                                            <div class="tree-list-item__title -error">{{$profile->status}}</div>
                                             <div class="tree-list-item__text -grey">{{$profile->updated_at}}</div>
                                         </div>
                                     </div>
@@ -43,7 +43,6 @@
                                 </a>
                             </div>
                             @endforeach
-
                             </div>
                         </div>
                     </div>
