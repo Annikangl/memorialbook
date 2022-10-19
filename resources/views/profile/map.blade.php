@@ -37,7 +37,7 @@
                 <div class="map-results__items">
                     @foreach($profiles as $profile)
                     <div class="map-results__item">
-                        <a class="map-results__link" href="javascript:void(0)">
+                        <a class="map-results__link" href="{{ route('profile.show', ['profile' => $profile]) }}">
                             <div class="map-results__image">
                                 <img class="map-results-image__image" src="{{ asset('assets/uploads/tree/f1.png') }}" alt="Георг VI">
                             </div>
