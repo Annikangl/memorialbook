@@ -104,7 +104,7 @@
                 placebirth: profile.birth_place,
                 burialplace: profile.burial_place,
                 reasondeath: profile.reason_death,
-                date: profile.date_birth + ' - ' + profile.date_death + ' ' + 'г.',
+                date: new Date(profile.date_birth).getFullYear() + ' - ' +  new Date(profile.date_death).getFullYear() + ' ' + 'г.',
                 link: 'profile/update/'+profile.id,
             },)
         });
