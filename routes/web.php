@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
         Route::get('/create', [ProfileController::class, 'create'])->name('create');
         Route::post('/store', [ProfileController::class, 'store'])->name('store');
+        Route::post('/store_step2', [ProfileController::class, 'store_step2'])->name('store.step2');
         Route::get('/create_step2', [ProfileController::class, 'create_step2'])->name('create.step2');
         Route::get('/create_step3', [ProfileController::class, 'create_step3'])->name('create.step3');
         Route::get('/card/{slug}', [ProfileController::class, 'show'])->name('show');

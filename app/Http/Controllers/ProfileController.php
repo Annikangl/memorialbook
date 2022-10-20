@@ -49,7 +49,11 @@ class ProfileController extends Controller
 
     public function create()
     {
-        return view('profile.create');
+        $fathers = Profile::query()->where('gender','male')->get();
+        $mothers = Profile::query()->where('gender','female')->get();
+        $profiles = Profile::query()->get();
+
+        return view('profile.create', compact('fathers','mothers','profiles'));
     }
 
     public function store(Request $request)
@@ -72,21 +76,13 @@ class ProfileController extends Controller
         $params['death_certificate'] = $certificate_path;
 
 //        dd()
-//        $request->session()->put('profile', $params);
-        $profile = Profile::create($params);
+        $request->session()->put('profile', $params);
+//        $profile = Profile::create($params);
 
         return redirect()->route('profile.create.step2');
 // Перебрасывать на шаг 2 с id который только создал и его там сохранять чтобы при записи дополнялись данные уже в текущую запись
         //загрузка данных в сессию с дальнейшей переброской по маршрутам
     }
-
-//    public function create_step2(Request $request){
-//
-//        $profile = Profile::query()->create($params);
-//
-//        return redirect()->route('tree');
-//        // TODO Перебрасывать на шаг 2 с id который только создал и его там сохранять чтобы при записи дополнялись данные уже в текущую запись
-//    }
 
     public function create_step2()
     {
@@ -96,7 +92,6 @@ class ProfileController extends Controller
 
     public function store_step2(Request $request)
     {
-        dd($request);
         $params = $request->all();
         $value = $request->session()->get('profile');
         dd($value);

@@ -28,7 +28,8 @@
 
             <div class="profile__side -step-content col">
                 <div class="base-form -full">
-                    <form class="form" action="#" method="post" data-base-form="">
+                    <form class="form" method="POST" enctype="multipart/form-data" action="{{route('profile.store.step2')}}">
+                        @csrf
                         <div class="profile__section">
                             <div class="profile-section__row row">
                                 <div class="profile-section__form-group -mt-0 form-group">
@@ -80,15 +81,15 @@
                                     </div>
                                 </div>
                                 <div class="profile-section__form-group form-group">
-                                    <label class="profile-section__label" for="new-member-description">Описание: </label>
+                                    <label class="profile-section__label" for="description">Описание: </label>
                                     <div class="profile-section__input-container">
-                                                        <textarea class="profile-section__input form-control" rows="7" id="new-member-description"
+                                                        <textarea class="profile-section__input form-control" rows="7" id="description"
                                                                   name="description" placeholder="Текст описания…" autofocus="" data-autofocus=""></textarea>
                                     </div>
                                 </div>
                                 <div class="profile-section__form-group form-group">
-                                    <label class="profile-section__label" for="new-member-hobby">Увлечения:</label>
-                                    <select class="profile-section__select select form-control" id="new-member-hobby" multiple="" hidden=""
+                                    <label class="profile-section__label" for="hobby_id">Увлечения:</label>
+                                    <select class="profile-section__select select form-control" id="hobby_id" name="hobby_id" multiple="" hidden=""
                                             data-select="">
                                         <option value="1" selected="">Спортивная ходьба</option>
                                         <option value="2" selected="">Рыбалка</option>
@@ -98,8 +99,8 @@
                                     </select>
                                 </div>
                                 <div class="profile-section__form-group form-group">
-                                    <label class="profile-section__label" for="new-member-religious">Религиозные взгляды:</label>
-                                    <select class="profile-section__select select" id="new-member-religious" hidden="" data-select="">
+                                    <label class="profile-section__label" for="religious_view_id">Религиозные взгляды:</label>
+                                    <select class="profile-section__select select" id="religious_view_id" name="religious_view_id" hidden="" data-select="">
                                         <option value="0">Выберите из списка</option>
                                         <option value="1">Ислам</option>
                                         <option value="2">Буддизм</option>
@@ -110,7 +111,7 @@
                         </div>
                         <div class="profile__bottom">
                             <div class="profile-bottom__item">
-                                <a class="profile-bottom__button btn btn-primary" href="../profile-add-member-3">Сохранить и продолжить</a>
+                                <button class="profile-bottom__button btn btn-primary">Сохранить и продолжить</button>
                             </div>
                         </div>
                     </form>

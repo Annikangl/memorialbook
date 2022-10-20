@@ -153,24 +153,30 @@
                                     <div class="profile__section">
                                         <div class="profile-section__row -m-up row">
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="f_id">Отец</label>
-                                                <select class="profile-section__select select" id="f_id" name="f_id" hidden="" data-select="">
+                                                <label class="profile-section__label" for="father_id">Отец</label>
+                                                <select class="profile-section__select select" id="father_id" name="father_id" hidden="" data-select="">
                                                     <option value="">Выберите из списка</option>
-                                                    <option value="1" id="f_id" name="f_id">Алексеев Алексей Алексеевич</option>
+                                                    @foreach($fathers as $father)
+                                                    <option value="{{$father->id}}" id="father_id" name="father_id">{{$father->first_name.' '.$father->last_name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="m_id">Мать</label>
-                                                <select class="profile-section__select select" id="m_id" name="m_id" hidden="" data-select="">
+                                                <label class="profile-section__label" for="mother_id">Мать</label>
+                                                <select class="profile-section__select select" id="mother_id" name="mother_id" hidden="" data-select="">
                                                     <option value="">Выберите из списка</option>
-                                                    <option value="2" id="m_id" name="m_id">Каренина Анна Аркадьевна</option>
+                                                    @foreach($mothers as $mother)
+                                                    <option value="{{$mother->id}}" id="mother_id" name="mother_id">{{$mother->first_name.' '.$mother->last_name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="p_id">Супруг / Супруга</label>
-                                                <select class="profile-section__select select" id="p_id" name="p_id" hidden="" data-select="">
+                                                <label class="profile-section__label" for="spouse_id">Супруг / Супруга</label>
+                                                <select class="profile-section__select select" id="spouse_id" name="spouse_id" hidden="" data-select="">
                                                     <option value="">Выберите из списка</option>
-                                                    <option value="3" id="p_id" name="p_id">Дитриев Дмитрий Дмитриевич</option>
+                                                    @foreach($profiles as $profile)
+                                                    <option value="{{$profile->id}}" id="spouse_id" name="spouse_id">{{$profile->first_name.' '.$profile->last_name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -183,6 +189,4 @@
                                 </form>
                             </div>
                         </div>
-
-
 @endsection
