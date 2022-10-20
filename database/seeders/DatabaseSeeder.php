@@ -6,14 +6,14 @@ namespace Database\Seeders;
 use App\Models\Cemetery\Cemetery;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
-use App\Models\Profile\ReligiousView;
+use App\Models\Profile\Religion;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        ReligiousView::factory(10)->create();
+        Religion::factory(10)->create();
         Hobby::factory(10)->create();
         Profile::factory(30)->create();
         Cemetery::factory(30)->create();

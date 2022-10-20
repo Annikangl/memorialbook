@@ -41,8 +41,8 @@ class ProfileFactory extends Factory
             'longitude' => $this->faker->longitude(),
             'reason_death' => $this->faker->text(10),
             'death_certificate' => null,
-            'religious_view_id' => ReligiousView::query()->inRandomOrder()->first('id'),
-            'hobby_id' => Hobby::query()->inRandomOrder()->first('id'),
+
+
 //            'religious_views' => $this->faker->randomElement(['christianity', 'Islam', 'buddhism']),
 //            'hobby' => $this->faker->randomElement(['Спортивная ходьба Рыбалка Бокс', 'Каратэ Йога', 'Плавание Бокс Футбол']),
             'status' => Profile::STATUS_ACTIVE,

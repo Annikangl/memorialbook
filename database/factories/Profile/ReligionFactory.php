@@ -5,9 +5,9 @@ namespace Database\Factories\Profile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Profile\ReligiousView>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Profile\Religion>
  */
-class ReligiousViewFactory extends Factory
+class ReligionFactory extends Factory
 {
     /**
      * Define the model's default state.

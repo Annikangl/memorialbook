@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
@@ -148,14 +149,14 @@ class Profile extends Model
         return $this->hasMany(Gallery::class);
     }
 
-    public function hobbies(): HasMany
+    public function hobbies(): BelongsToMany
     {
-        return $this->hasMany(Hobby::class);
+        return $this->belongsToMany(Hobby::class);
     }
 
-    public function religiousViews(): HasMany
+    public function religions(): BelongsToMany
     {
-        return $this->hasMany(ReligiousView::class);
+        return $this->belongsToMany(Religion::class);
     }
 
     public function spouse(): BelongsTo

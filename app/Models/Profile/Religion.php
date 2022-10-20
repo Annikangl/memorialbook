@@ -6,11 +6,11 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ReligiousView extends Model
+class Religion extends Model
 {
     use HasFactory;
 
-    protected $table = 'profile_religious_views';
+    protected $table = 'religions';
 
     public $timestamps = false;
 

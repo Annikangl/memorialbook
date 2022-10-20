@@ -10,7 +10,7 @@ class Hobby extends Model
 {
     use HasFactory;
 
-    protected $table = 'profile_hobbies';
+    protected $table = 'hobbies';
 
     public $timestamps = false;
 
