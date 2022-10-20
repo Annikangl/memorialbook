@@ -92,7 +92,7 @@
             family.addNode({
                 id: profile.id,
                 // slug:profile.slug,
-                pids: [profile.parent_id],
+                pids: [profile.spouse_id],
                 mid: profile.mother_id,
                 fid: profile.father_id,
                 name: [profile.first_name + ' ' + profile.last_name],

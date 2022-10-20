@@ -77,7 +77,8 @@ class Profile extends Model
         'status',
         'moderators_comment',
         'access',
-        'parent_id',
+        'spouse_id',
+        'child_id',
         'mother_id',
         'father_id',
         'published_at'

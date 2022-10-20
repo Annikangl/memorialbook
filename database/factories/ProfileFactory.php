@@ -44,6 +44,7 @@ class ProfileFactory extends Factory
             'moderators_comment' => null,
             'access' => null,
             'spouse_id' =>  null,
+            'child_id' =>  null,
             'mother_id' =>  null,
             'father_id' =>  null,
             'published_at' => Carbon::now()
