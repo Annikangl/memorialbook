@@ -43,12 +43,11 @@
                             </div>
                             <div class="map-results__info">
                                 <div class="map-results__name">{{ $profile->fullName }}</div>
-                                <div class="map-results__dates">{{ $profile->date_birth }} - {{ $profile->date_death }} г.</div>
+                                <div class="map-results__dates">{{ $profile->lifeExpectancy }} г.</div>
                             </div>
                         </a>
                     </div>
                     @endforeach
-
                 </div>
             </div>
         </div>

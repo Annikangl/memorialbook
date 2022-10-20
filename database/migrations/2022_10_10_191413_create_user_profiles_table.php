@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Profile;
+use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
