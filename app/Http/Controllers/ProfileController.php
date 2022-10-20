@@ -33,18 +33,17 @@ class ProfileController extends Controller
 
     public function show(string $slug)
     {
-        $profile = Profile::query()->with(['hobbies','religions'])
-            ->whereSlug($slug)
+        /** @var Profile $profile */
+        $profile = Profile::query()->with(['hobbies', 'religions', 'galleries'])
+            ->where('slug', $slug)
             ->firstOrFail();
 
-//        $relatives = [
-//            $profile->spouse()->get()->toArray(),
-//            $profile->father()->get()->toArray(),
-//            $profile->mother()->get()->toArray(),
-//        ];
+        $relatives = Profile::query()
+            ->select('first_name', 'last_name', 'patronymic', 'slug', 'avatar')
+            ->whereIn('id', [$profile->mother_id, $profile->father_id, $profile->spouse_id, $profile->child_id])
+            ->get();
 
-
-        return view('profile.show', compact('profile'));
+        return view('profile.show', compact('profile', 'relatives'));
     }
 
     public function create()

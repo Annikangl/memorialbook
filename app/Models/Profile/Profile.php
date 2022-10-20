@@ -29,14 +29,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $burial_place
  * @property string|null $reason_death
  * @property string|null $death_certificate
- * @property string|null $religious_views
- * @property string|null $hobby
  * @property string $status
  * @property string|null $moderators_comment
  * @property string|null $access
- * @property int|null $p_id
- * @property int|null $m_id
- * @property int|null $f_id
+ * @property int|null $father_id
+ * @property int|null $mother_id
+ * @property int|null $child_id
+ * @property int|null $spouse_id
  * @property string|null $published_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at

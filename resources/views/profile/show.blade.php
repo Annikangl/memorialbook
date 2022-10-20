@@ -9,7 +9,7 @@
                         <div class="member-card-header__avatar">
                             <div class="member-card-header-avatar__image">
                                 <img class="member-card-header-avatar__img"
-                                     src="{{ asset('storage/' . $profile->avatar)  }}" alt="">
+                                     src="{{ asset('storage/' . $profile->avatar)  }}" alt="Profile avatar">
                             </div>
                             <a class="member-card-header-avatar__edit-link" href="../profile-add-member">
                                 <svg xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +22,6 @@
                                 <span>{{ $profile->full_name }}</span>
                                 <span class="member-card__religion"></span>
                             </h1>
-                            {{--                            TODO change to fuul date --}}
                             <div class="member-card__dates">{{ $profile->lifeExpectancy }}</div>
                         </div>
                     </div>
@@ -49,22 +48,20 @@
                             <div class="member-card-relatives__list">
 
                                 @if (!empty($relatives))
-                                    @foreach ($relatives as $key => $relative)
-                                            @foreach($relative as $item)
+                                    @foreach ($relatives as $relative)
                                         <div class="member-card-relatives__item">
-                                            <a class="member-card-relatives-item__link" href="{{ route('profile.show', ['slug' => $item['slug']]) }}">
+                                            <a class="member-card-relatives-item__link" href="{{ route('profile.show', ['slug' => $relative->slug]) }}">
                                                 <div class="member-card-relatives-item__content">
                                                     <div class="member-card-relatives-item__avatar">
                                                         <img class="member-card-relatives-item__image"
-                                                             src="{{ asset('storage/' . $item['avatar'] ) }}" alt="avatar">
+                                                             src="{{ asset('storage/' . $relative->avatar ) }}" alt="avatar">
                                                     </div>
                                                     <div class="member-card-relatives-item__name">
-                                                        {{ $item['first_name'] .' ' . $item['last_name'] }}
+                                                        {{ $relative->full_name }}
                                                     </div>
                                                 </div>
                                             </a>
                                         </div>
-                                            @endforeach
                                     @endforeach
                                 @endif
 
