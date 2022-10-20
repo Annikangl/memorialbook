@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Profile\Hobby;
-use App\Models\Profile\ReligiousView;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
