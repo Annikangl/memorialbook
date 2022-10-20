@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('burial_place')->nullable();
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
-            $table->string('reason_death')->nullable();
+            $table->string('death_reason')->nullable();
             $table->string('death_certificate')->nullable();
 
             $table->string('status',16);

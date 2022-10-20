@@ -4,9 +4,12 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Cemetery\Cemetery;
+use App\Models\Profile\DeathReason;
+use App\Models\Profile\Gallery;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
 use App\Models\Profile\Religion;
+use Database\Seeders\Profile\DeathReasonSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +18,15 @@ class DatabaseSeeder extends Seeder
     {
         Religion::factory(10)->create();
         Hobby::factory(10)->create();
-        Profile::factory(30)->create();
+
+        $this->call(DeathReasonSeeder::class);
+
+        Profile::factory(30)
+            ->has(Hobby::factory()->count(3))
+            ->has(Religion::factory()->count(3))
+            ->has(Gallery::factory()->count(5))
+            ->create();
+
         Cemetery::factory(30)->create();
 
         \DB::table('users')->insert([

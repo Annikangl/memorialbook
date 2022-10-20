@@ -24,10 +24,10 @@ class CemeteryFactory extends Factory
             'longitude' => $this->faker->longitude(),
             'avatar' => $this->faker->randomElement(
                 [
-                    'cemetery/avatar/avatar-1.jpg',
-                    'cemetery/avatar/avatar-2.jpg',
-                    'cemetery/avatar/avatar-3.jpg',
-                    'cemetery/avatar/avatar-4.jpg',
+                    'uploads/cemeteries/avatar/avatar-1.jpg',
+                    'uploads/cemeteries/avatar/avatar-2.jpg',
+                    'uploads/cemeteries/avatar/avatar-3.jpg',
+                    'uploads/cemeteries/avatar/avatar-4.jpg',
                 ]
             ),
             'banner' => 'cemetery/banner/img.png',

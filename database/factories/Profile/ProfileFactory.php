@@ -2,8 +2,10 @@
 
 namespace Database\Factories\Profile;
 
+use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
 use Carbon\Carbon;
+use Closure;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,8 +21,11 @@ class ProfileFactory extends Factory
             'patronymic' => $this->faker->name(),
             'avatar' => $this->faker->randomElement(
                 [
-                    'avatar_profile/YecDyQ7H4e7HydHbRqQr89AAQwG7DJ0aQ1wunwYq.jpg',
-                    'avatar_profile/rXmKCVJDTn2IW00VmpgejetE5BOAEY4srx5AcimZ.jpg'
+                    'uploads/profiles/avatar/avatar-1.jpg',
+                    'uploads/profiles/avatar/avatar-2.png',
+                    'uploads/profiles/avatar/avatar-3.png',
+                    'uploads/profiles/avatar/avatar-4.jpg',
+                    'uploads/profiles/avatar/avatar-5.jpg',
                 ]
             ),
             'description' => $this->faker->text(),
@@ -31,7 +36,7 @@ class ProfileFactory extends Factory
             'burial_place' => $this->faker->address(),
             'latitude' => $this->faker->latitude(),
             'longitude' => $this->faker->longitude(),
-            'reason_death' => $this->faker->text(10),
+            'death_reason' => null,
             'death_certificate' => null,
             'status' => Profile::STATUS_ACTIVE,
             'moderators_comment' => null,

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hobby extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     protected $table = 'hobbies';
 
