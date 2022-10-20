@@ -110,7 +110,11 @@ class ProfileController extends Controller
     public function map(SearchRequest $request)
     {
         $profiles = Profile::filtered()->paginate(30);
-        $count_filters = count($request->input());
+
+        $count_filters = collect($request->input())->filter(function ($value) {
+            return !is_null($value);
+        })->count();
+
 
         return view('profile.map', compact('profiles', 'count_filters'));
     }

@@ -39,11 +39,11 @@
                     <div class="map-results__item">
                         <a class="map-results__link" href="{{ route('profile.show', ['slug' => $profile->slug]) }}">
                             <div class="map-results__image">
-                                <img class="map-results-image__image" src="{{ asset('assets/uploads/tree/f1.png') }}" alt="Георг VI">
+                                <img class="map-results-image__image" src="{{ asset('storage/' . $profile->avatar) }}" alt="Георг VI">
                             </div>
                             <div class="map-results__info">
                                 <div class="map-results__name">{{ $profile->fullName }}</div>
-                                <div class="map-results__dates">{{ $profile->lifeExpectancy }} г.</div>
+                                <div class="map-results__dates">{{ $profile->yearBirth }} - {{ $profile->yearDeath }} г.</div>
                             </div>
                         </a>
                     </div>

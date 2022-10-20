@@ -120,19 +120,19 @@ class Profile extends Model
         );
     }
 
-//    protected function dateBirth(): Attribute
-//    {
-//        return new Attribute(
-//            get: fn($value) => Carbon::createFromFormat("Y-m-d", $value)->year
-//        );
-//    }
-//
-//    protected function dateDeath(): Attribute
-//    {
-//        return new Attribute(
-//            get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->year
-//        );
-//    }
+    protected function yearBirth(): Attribute
+    {
+        return new Attribute(
+            get: fn() => Carbon::createFromFormat('Y-m-d', $this->date_birth)->year
+        );
+    }
+
+    protected function yearDeath(): Attribute
+    {
+        return new Attribute(
+            get: fn() => Carbon::createFromFormat('Y-m-d', $this->date_death)->year
+        );
+    }
 
     public function sluggable(): array
     {
