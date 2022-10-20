@@ -2,7 +2,6 @@
 @php /** @var \App\Models\Profile\Profile $profile */@endphp
 
 @section('content')
-
     <div class="member-card">
         <div class="container">
             <div class="member-card__row row">
@@ -30,8 +29,7 @@
                     </div>
                     <div class="member-card__info">
                         <div class="member-card-info__text">Причина смерти: {{ $profile->reason_death }}</div>
-                        <div class="member-card-info__text">{{ $profile->description }}
-                        </div>
+                        <div class="member-card-info__text">{{ $profile->description }}</div>
                     </div>
 
                     @if (!empty($profile->hobbies))
@@ -44,6 +42,23 @@
                         </div>
                     @endif
 
+                    <ul class="social">
+                        <li class="social__item">
+                            <a href="#" class="social__link">
+                                <img src="{{ asset('assets/media/media/icons/social/facebook.svg') }}" alt="facebook" title="facebook"/>
+                            </a>
+                        </li>
+                        <li class="social__item">
+                            <a href="#" class="social__link">
+                                <img src="{{ asset('assets/media/media/icons/social/instagram.svg') }}" alt="instagram" title="instagram"/>
+                            </a>
+                        </li>
+                        <li class="social__item">
+                            <a href="#" class="social__link">
+                                <img src="{{ asset('assets/media/media/icons/social/twitter.svg') }}" alt="instagram" title="instagram"/>
+                            </a>
+                        </li>
+                    </ul>
                     <div class="member-card__relatives">
                         <div class="member-card-relatives__header">
                             <h4 class="member-card-relatives__title">Родственники</h4>
