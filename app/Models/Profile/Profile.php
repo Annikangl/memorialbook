@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
@@ -40,7 +41,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read string $full_name
- * @method static \Database\Factories\ProfileFactory factory(...$parameters)
+ * @method static \Database\Factories\Profile\ProfileFactory factory(...$parameters)
  * @method static Builder|Profile filtered()
  * @method static Builder|Profile query()
 
@@ -106,33 +107,34 @@ class Profile extends Model
         });
     }
 
-    public function fullName(): Attribute
+    protected function lifeExpectancy(): Attribute
+    {
+        return new Attribute(
+            get: fn () => Carbon::make($this->date_birth)->format('d.m.Y') . ' - ' .
+                Carbon::make($this->date_death)->format('d.m.Y')
+        );
+    }
+
+    protected function fullName(): Attribute
     {
         return new Attribute(
             get: fn () => "{$this->first_name} {$this->last_name} {$this->patronymic}"
         );
     }
 
-    public function hobbies(): Attribute
-    {
-        return new Attribute(
-            get: fn() => $this->hobby ? explode(' ', $this->hobby) : ''
-        );
-    }
-
-    public function dateBirth(): Attribute
-    {
-        return new Attribute(
-            get: fn($value) => Carbon::createFromFormat("Y-m-d", $value)->year
-        );
-    }
-
-    public function dateDeath(): Attribute
-    {
-        return new Attribute(
-            get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->year
-        );
-    }
+//    protected function dateBirth(): Attribute
+//    {
+//        return new Attribute(
+//            get: fn($value) => Carbon::createFromFormat("Y-m-d", $value)->year
+//        );
+//    }
+//
+//    protected function dateDeath(): Attribute
+//    {
+//        return new Attribute(
+//            get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->year
+//        );
+//    }
 
     public function sluggable(): array
     {
@@ -148,6 +150,16 @@ class Profile extends Model
         return $this->hasMany(Gallery::class);
     }
 
+    public function hobbies(): BelongsToMany
+    {
+        return $this->belongsToMany(Hobby::class);
+    }
+
+    public function religions(): BelongsToMany
+    {
+        return $this->belongsToMany(Religion::class);
+    }
+
     public function spouse(): BelongsTo
     {
         return self::belongsTo(static::class);
@@ -159,6 +171,11 @@ class Profile extends Model
     }
 
     public function mother(): BelongsTo
+    {
+        return self::belongsTo(static::class);
+    }
+
+    public function child(): BelongsTo
     {
         return self::belongsTo(static::class);
     }

@@ -23,7 +23,7 @@
                                 <span class="member-card__religion"></span>
                             </h1>
                             {{--                            TODO change to fuul date --}}
-                            <div class="member-card__dates">{{ $profile->date_birth }} -{{ $profile->date_death }}</div>
+                            <div class="member-card__dates">{{ $profile->lifeExpectancy }}</div>
                         </div>
                     </div>
                     <div class="member-card__info">

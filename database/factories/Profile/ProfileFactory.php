@@ -1,8 +1,10 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Profile;
 
-use App\Models\Profile;
+use App\Models\Profile\Hobby;
+use App\Models\Profile\Profile;
+use App\Models\Profile\ReligiousView;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;
@@ -29,6 +31,7 @@ class ProfileFactory extends Factory
                     'avatar_profile/rXmKCVJDTn2IW00VmpgejetE5BOAEY4srx5AcimZ.jpg'
                 ]
             ),
+            'description' => $this->faker->text(),
             'gender' => $this->faker->titleMale(),
             'date_birth' => $birth = $this->faker->date("Y-m-d", '2000'),
             'date_death' => Carbon::createFromFormat('Y-m-d', $birth)->addYears(25),
@@ -38,8 +41,10 @@ class ProfileFactory extends Factory
             'longitude' => $this->faker->longitude(),
             'reason_death' => $this->faker->text(10),
             'death_certificate' => null,
-            'religious_views' => $this->faker->randomElement(['christianity', 'Islam', 'buddhism']),
-            'hobby' => $this->faker->randomElement(['Спортивная ходьба Рыбалка Бокс', 'Каратэ Йога', 'Плавание Бокс Футбол']),
+
+
+//            'religious_views' => $this->faker->randomElement(['christianity', 'Islam', 'buddhism']),
+//            'hobby' => $this->faker->randomElement(['Спортивная ходьба Рыбалка Бокс', 'Каратэ Йога', 'Плавание Бокс Футбол']),
             'status' => Profile::STATUS_ACTIVE,
             'moderators_comment' => null,
             'access' => null,
