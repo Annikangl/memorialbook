@@ -156,7 +156,7 @@ class Profile extends Model
 
     public function religions(): BelongsToMany
     {
-        return $this->belongsToMany(Religion::class);
+        return $this->belongsToMany(Religion::class,'religion_profile');
     }
 
     public function spouse(): BelongsTo

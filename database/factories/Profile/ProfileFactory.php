@@ -2,23 +2,15 @@
 
 namespace Database\Factories\Profile;
 
-use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
-use App\Models\Profile\ReligiousView;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Profile>
  */
 class ProfileFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -41,10 +33,6 @@ class ProfileFactory extends Factory
             'longitude' => $this->faker->longitude(),
             'reason_death' => $this->faker->text(10),
             'death_certificate' => null,
-
-
-//            'religious_views' => $this->faker->randomElement(['christianity', 'Islam', 'buddhism']),
-//            'hobby' => $this->faker->randomElement(['Спортивная ходьба Рыбалка Бокс', 'Каратэ Йога', 'Плавание Бокс Футбол']),
             'status' => Profile::STATUS_ACTIVE,
             'moderators_comment' => null,
             'access' => null,

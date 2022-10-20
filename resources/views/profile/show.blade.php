@@ -28,14 +28,14 @@
                     </div>
                     <div class="member-card__info">
                         <div class="member-card-info__text">Причина смерти: {{ $profile->reason_death }}</div>
-                        <div class="member-card-info__text">Руководитель государственного музея современного искусства
+                        <div class="member-card-info__text">{{ $profile->description }}
                         </div>
                     </div>
                     @if (!empty($profile->hobbies))
                         <div class="member-card__hobbies">
                             @foreach($profile->hobbies as $hobby)
                                 <div class="member-card-hobbies__item">
-                                    <div class="member-card-hobbies__label">{{ $hobby }}</div>
+                                    <div class="member-card-hobbies__label">{{ $hobby->title }}</div>
                                 </div>
                             @endforeach
                         </div>

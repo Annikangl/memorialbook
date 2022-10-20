@@ -45,8 +45,6 @@ return new class extends Migration
             $table->string('moderators_comment')->nullable();
             $table->string('access')->nullable();
 
-//            $table->unsignedBigInteger('religious_view_id')->nullable();
-//            $table->unsignedBigInteger('hobby_id')->nullable();
             $table->unsignedBigInteger('mother_id')->nullable();
             $table->unsignedBigInteger('father_id')->nullable();
             $table->unsignedBigInteger('spouse_id')->nullable();
@@ -73,10 +71,9 @@ return new class extends Migration
             $table->bigInteger('religion_id')->unsigned();
             $table->foreign('religion_id')->references('id')->on('religions')
                 ->onDelete('CASCADE');
-
         });
 
-        Schema::create('hobbies_profile', function (Blueprint $table) {
+        Schema::create('hobby_profile', function (Blueprint $table) {
             $table->id();
 
             $table->bigInteger('profile_id')->unsigned();
@@ -92,11 +89,11 @@ return new class extends Migration
     public function down()
     {
         if (app()->isLocal()) {
-            Schema::dropIfExists('profile_religious_views');
-            Schema::dropIfExists('profile_hobbies');
+            Schema::dropIfExists('religions');
+            Schema::dropIfExists('hobbies');
             Schema::dropIfExists('profiles');
             Schema::dropIfExists('religion_profile');
-            Schema::dropIfExists('religious_profile');
+            Schema::dropIfExists('hobby_profile');
         }
     }
 };
