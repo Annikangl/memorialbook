@@ -36,7 +36,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('cemetery_galleries', function (Blueprint $table) {
+        Schema::create('cemetery_gallery', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Cemetery::class)
                 ->constrained()

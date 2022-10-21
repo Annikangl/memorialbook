@@ -35,3 +35,23 @@
     width: 20px;
     height: 25px;
 }
+
+.social {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px 0 0;
+}
+
+.social__item {
+    margin-right: 10px;
+}
+
+.social__item img {
+    width: 25px;
+    transition: var(--normal);
+}
+
+.social__item:hover img {
+    transform: scale(1.05);
+}

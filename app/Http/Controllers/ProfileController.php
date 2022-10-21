@@ -35,16 +35,15 @@ class ProfileController extends Controller
 
     public function show(string $slug)
     {
-        $profile = Profile::query()->with(['spouse:id,first_name', 'father:id', 'mother:id'])
-            ->whereSlug($slug)
+        /** @var Profile $profile */
+        $profile = Profile::query()->with(['hobbies', 'religions', 'galleries'])
+            ->where('slug', $slug)
             ->firstOrFail();
 
-        $relatives = [
-            $profile->spouse()->get()->toArray(),
-            $profile->father()->get()->toArray(),
-            $profile->mother()->get()->toArray(),
-        ];
-
+        $relatives = Profile::query()
+            ->select('first_name', 'last_name', 'patronymic', 'slug', 'avatar')
+            ->whereIn('id', [$profile->mother_id, $profile->father_id, $profile->spouse_id, $profile->child_id])
+            ->get();
 
         return view('profile.show', compact('profile', 'relatives'));
     }
@@ -111,7 +110,11 @@ class ProfileController extends Controller
     public function map(SearchRequest $request)
     {
         $profiles = Profile::filtered()->paginate(30);
-        $count_filters = count($request->input());
+
+        $count_filters = collect($request->input())->filter(function ($value) {
+            return !is_null($value);
+        })->count();
+
 
         return view('profile.map', compact('profiles', 'count_filters'));
     }

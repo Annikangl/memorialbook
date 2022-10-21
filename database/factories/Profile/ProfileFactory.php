@@ -4,21 +4,15 @@ namespace Database\Factories\Profile;
 
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
-use App\Models\Profile\ReligiousView;
 use Carbon\Carbon;
+use Closure;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Profile>
  */
 class ProfileFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -27,8 +21,11 @@ class ProfileFactory extends Factory
             'patronymic' => $this->faker->name(),
             'avatar' => $this->faker->randomElement(
                 [
-                    'avatar_profile/YecDyQ7H4e7HydHbRqQr89AAQwG7DJ0aQ1wunwYq.jpg',
-                    'avatar_profile/rXmKCVJDTn2IW00VmpgejetE5BOAEY4srx5AcimZ.jpg'
+                    'uploads/profiles/avatar/avatar-1.jpg',
+                    'uploads/profiles/avatar/avatar-2.png',
+                    'uploads/profiles/avatar/avatar-3.png',
+                    'uploads/profiles/avatar/avatar-4.jpg',
+                    'uploads/profiles/avatar/avatar-5.jpg',
                 ]
             ),
             'description' => $this->faker->text(),
@@ -39,12 +36,8 @@ class ProfileFactory extends Factory
             'burial_place' => $this->faker->address(),
             'latitude' => $this->faker->latitude(),
             'longitude' => $this->faker->longitude(),
-            'reason_death' => $this->faker->text(10),
+            'death_reason' => null,
             'death_certificate' => null,
-
-
-//            'religious_views' => $this->faker->randomElement(['christianity', 'Islam', 'buddhism']),
-//            'hobby' => $this->faker->randomElement(['Спортивная ходьба Рыбалка Бокс', 'Каратэ Йога', 'Плавание Бокс Футбол']),
             'status' => Profile::STATUS_ACTIVE,
             'moderators_comment' => null,
             'access' => null,
