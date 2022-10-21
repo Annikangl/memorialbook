@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@php /** @var \App\Models\Cemetery\Cemetery $cemetery */ @endphp
+
 @section('content')
     <div class="container">
         <div class="cemeteries-list">
@@ -35,7 +37,7 @@
                                 <div class="cemeteries-list-item__side -avatar col">
                                     <div class="cemeteries-list-item__avatar">
                                         <img class="cemeteries-list-item__image" src="{{ asset('storage/' . $cemetery->avatar) }}"
-                                             alt="Национальное кладбище Арлингт">
+                                             alt="{{ $cemetery->title }}">
                                     </div>
                                 </div>
                                 <div class="cemeteries-list-item__side -content col">

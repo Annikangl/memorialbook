@@ -11,17 +11,24 @@ class CemeteryController extends Controller
 {
     public function map(SearchRequest $request): View
     {
-        $cemeteries = Cemetery::filtered()->paginate(30);
-        $count_filters = count($request->input());
+        $cemeteries = Cemetery::active()->filtered()->paginate(30);
+        $count_filters = $this->countApplyFilters($request->input());
 
         return view('cemetery.map', compact('cemeteries', 'count_filters'));
     }
 
     public function list(SearchRequest $request): View
     {
-        $cemeteries = Cemetery::filtered()->paginate(5);
-        $count_filters = count($request->input());
+        $cemeteries = Cemetery::active()->filtered()->paginate(5);
+        $count_filters = $this->countApplyFilters($request->input());
 
         return view('cemetery.list', compact('cemeteries', 'count_filters'));
+    }
+
+    private function countApplyFilters(array $filters) : int
+    {
+        return collect($filters)->filter(function ($value) {
+            return !is_null($value);
+        })->count();
     }
 }

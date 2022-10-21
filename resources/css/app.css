@@ -130,10 +130,6 @@
     margin-bottom: 15px
 }
 
-.social__icon-facebook {
-    margin: 0;
-}
-
 .top__title {
     margin: 0
 }
@@ -564,15 +560,15 @@ ul {
     list-style: none
 }
 
-ul > li:before {
-    background: #201e1f;
-    border-radius: 50%;
-    content: "";
-    height: 4px;
-    left: -1em;
-    top: calc(.75em - 2px);
-    width: 4px
-}
+/*ul > li:before {*/
+/*    background: #201e1f;*/
+/*    border-radius: 50%;*/
+/*    content: "";*/
+/*    height: 4px;*/
+/*    left: -1em;*/
+/*    top: calc(.75em - 2px);*/
+/*    width: 4px*/
+/*}*/
 
 ul > br {
     display: none

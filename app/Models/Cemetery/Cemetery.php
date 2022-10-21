@@ -32,6 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Cemetery byName(string $name)
  * @method static \Database\Factories\Cemetery\CemeteryFactory factory(...$parameters)
  * @method static Builder|Cemetery filtered()
+ * @method static Builder|Cemetery active()
  * @method static Builder|Cemetery newModelQuery()
  * @method static Builder|Cemetery newQuery()
  * @method static Builder|Cemetery query()
@@ -93,6 +94,11 @@ class Cemetery extends Model
         })->when($address = request('ADDRESS'), function (Builder $query) use ($address) {
             $query->where('address', 'LIKE', "%$address%");
         });
+    }
+
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('status', self::STATUS_ACTIVE);
     }
 
 
