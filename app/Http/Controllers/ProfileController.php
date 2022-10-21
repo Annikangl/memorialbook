@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Profile\SearchRequest;
+use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
+use App\Models\Profile\Religion;
 use Illuminate\Http\Request;
 
 
@@ -86,7 +88,10 @@ class ProfileController extends Controller
 
     public function create_step2()
     {
-        return view('profile.create_step2');
+        $hobbys = Hobby::query()->orderBy('id')->get();
+        $religions = Religion::query()->orderBy('id')->get();
+
+        return view('profile.create_step2',compact('hobbys','religions'));
     }
 
 

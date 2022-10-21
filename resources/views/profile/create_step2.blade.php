@@ -91,20 +91,18 @@
                                     <label class="profile-section__label" for="hobby_id">Увлечения:</label>
                                     <select class="profile-section__select select form-control" id="hobby_id" name="hobby_id" multiple="" hidden=""
                                             data-select="">
-                                        <option value="1" selected="">Спортивная ходьба</option>
-                                        <option value="2" selected="">Рыбалка</option>
-                                        <option value="3">Танцы</option>
-                                        <option value="4">Футбол</option>
-                                        <option value="5">Чтение</option>
+                                        @foreach($hobbys as $hobby)
+                                        <option value="{{$hobby->id}}">{{$hobby->title}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="profile-section__form-group form-group">
-                                    <label class="profile-section__label" for="religious_view_id">Религиозные взгляды:</label>
-                                    <select class="profile-section__select select" id="religious_view_id" name="religious_view_id" hidden="" data-select="">
-                                        <option value="0">Выберите из списка</option>
-                                        <option value="1">Ислам</option>
-                                        <option value="2">Буддизм</option>
-                                        <option value="2">Христианство</option>
+                                    <label class="profile-section__label" for="religious_id">Религиозные взгляды:</label>
+                                    <select class="profile-section__select select" id="religious_id" name="religious_id" hidden="" data-select="">
+                                        <option value="">Выберите из списка</option>
+                                        @foreach($religions as $religion)
+                                        <option value="{{$religion->id}}">{{$religion->title}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
