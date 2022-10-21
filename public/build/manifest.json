@@ -16,12 +16,12 @@
     "src": "resources/fonts/lato-semibold.woff2"
   },
   "resources/js/app.js": {
-    "file": "assets/app.e3f940ea.js",
+    "file": "assets/app.81bc2479.js",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app.1aeee714.css",
+    "file": "assets/app.1942c7e3.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }

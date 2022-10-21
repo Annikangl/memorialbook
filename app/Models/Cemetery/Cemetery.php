@@ -55,6 +55,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Cemetery whereTitleEn($value)
  * @method static Builder|Cemetery whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $slug
+ * @method static Builder|Cemetery findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static Builder|Cemetery whereSlug($value)
+ * @method static Builder|Cemetery withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 class Cemetery extends Model
 {
