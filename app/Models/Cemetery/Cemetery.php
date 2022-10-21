@@ -93,7 +93,7 @@ class Cemetery extends Model
     public function scopeFiltered(Builder $query): Builder
     {
         return $query->when($name = request('NAME'), function (Builder $q) use ($name) {
-            $q->where('title', 'LIKE', "%req%")
+            $q->where('title', 'LIKE', "%$name%")
                 ->orWhere('title_en', 'LIKE', "%$name%");
         })->when($address = request('ADDRESS'), function (Builder $query) use ($address) {
             $query->where('address', 'LIKE', "%$address%");
