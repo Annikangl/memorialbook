@@ -32,7 +32,7 @@
                 <div class="cemeteries-list__items row">
                     @foreach($cemeteries as $cemetery)
                     <div class="cemeteries-list__item col">
-                        <a class="cemeteries-list-item__inner" href="javascript:void(0)">
+                        <a class="cemeteries-list-item__inner" href="{{ route('cemetery.show', ['slug' => $cemetery->slug ]) }}">
                             <div class="cemeteries-list-item__row row">
                                 <div class="cemeteries-list-item__side -avatar col">
                                     <div class="cemeteries-list-item__avatar">

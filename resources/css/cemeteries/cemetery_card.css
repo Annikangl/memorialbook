@@ -1,0 +1,659 @@
+
+.cemeteries__link {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.cemetery-title-wrap {
+    width: 100%;
+    padding: 26px var(--content-size) 0;
+    background-color: #fff;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.cemetery-title {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.cemetery-title-img {
+    width: 122px;
+    height: 122px;
+    position: relative;
+    overflow-y: hidden;
+    border-radius: 50%;
+}
+
+.cemetery-named-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.cemetery-named {
+    width: calc(100% - 122px);
+    padding-left: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.cemetery-photo {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
+    position: relative;
+    top: 20px;
+}
+
+.cemetery-photo__item, .cemetery-photo__link {
+    width: 100%;
+    display: block;
+}
+
+.cemetery-photo__item.hide {
+    display: none;
+}
+
+.cemetery-photo__link {
+    padding-top: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.cemetery-photo__number-hide {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: rgba(0, 0, 0, .6);
+    color: #fff;
+    font-size: 12px;
+    left: 0;
+    padding: 0 8px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+}
+
+.cemetery-named__title {
+    font-size: 30px;
+    color: var(--black);
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.cemetery-named__info {
+    color: rgba(32, 30, 31, .7);
+    font-size: 16px;
+}
+
+.cemetery {
+    width: 100%;
+    padding: 0;
+}
+
+.cemetery-menu {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    top: 1px;
+    margin-top: 40px;
+}
+
+.cemetery-menu__item {
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 14px 24px;
+    border-radius: 7px 7px 0 0;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--normal);
+    border-bottom: none;
+    color: rgba(32, 30, 31, .7);
+    cursor: pointer;
+}
+
+.cemetery-menu__item.current {
+    border-color: var(--light-gray);
+    background-color: var(--gray);
+    color: var(--black);
+}
+
+.cemetery-menu__item:hover {
+    color: var(--black);
+}
+
+.cemetery-content {
+    width: 100%;
+    padding: 24px var(--content-size) 64px;
+    background: var(--gray);
+    border: 1px solid var(--gray);
+    overflow: hidden;
+}
+
+.cemetery-content__item {
+    opacity: 0;
+    position: absolute;
+    transition: var(--normal);
+    height: 0;
+    overflow: hidden;
+}
+
+.cemetery-content__item.current {
+    opacity: 1;
+    position: relative;
+    z-index: 10;
+    height: auto;
+    overflow: visible;
+}
+
+.cemetery-text-wrap {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 24px;
+}
+
+.cemetery-text p {
+    color: rgba(32, 30, 31, .7);
+    font-size: 16px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.cemetery-text p:last-child {
+    margin-bottom: 0;
+}
+
+.famous-persons__title {
+    color: rgba(32, 30, 31, .8);
+    font: 700 20px sans-serif;
+}
+
+.famous-persons__map {
+    margin-top: 32px;
+}
+
+.famous-persons__map, .cemetery-contacts-map {
+    padding-top: 50%;
+    overflow: hidden;
+
+    /*удалить следующие (ниже) стили при вставке карты*/
+    background-color: rgba(32, 30, 31, .7);
+    color: #fff;
+}
+
+.famous-persons-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.famous-persons__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid var(--light-gray);
+    border-radius: 64px;
+    margin: 8px 10px 0 0;
+    padding: 3px;
+}
+
+.famous-persons-img {
+    width: 34px;
+    height: 34px;
+}
+
+.famous-persons__name {
+    font: 600 14px sans-serif;
+    padding: 2px 16px 2px 8px;
+    color: var(--black);
+}
+
+.memorials__item {
+    width: 100%;
+    background: #fff;
+    border-radius: 7px;
+    padding: 9px 18px;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.memorials__item:last-child {
+    margin-bottom: 0;
+}
+
+.memorials-img {
+    width: 68px;
+    height: 68px;
+}
+
+.famous-persons-img, .memorials-img {
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.memorials-info {
+    width: calc(100% - 68px);
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.memorials-info__name {
+    line-height: 1.4;
+    font-size: 16px;
+    color: var(--black);
+}
+
+.memorials-info__ages {
+    color: rgba(32, 30, 31, .8);
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.cemetery-contacts {
+    width: 100%;
+    background-color: #fff;
+    padding: 24px 27px;
+    border-radius: 0 0 7px 7px;
+}
+
+.button-add-message, .button-route {
+    width: 100%;
+    height: 54px;
+    line-height: 1.3;
+    font: 600 14px sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: .05em;
+    transition: var(--normal);
+    border-radius: 7px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.button-add-message {
+    background-color: var(--blue);
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.button-add-message:hover {
+    background-color: #6799ef;
+}
+
+.button-route {
+    border: 1px solid var(--blue);
+    color: var(--blue);
+}
+
+.button-route:hover {
+    color: #fff;
+    background-color: var(--blue);
+}
+
+.cemetery-contacts-list {
+    margin-bottom: 44px;
+}
+
+.cemetery-contacts-list__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 15px;
+}
+
+.cemetery-contacts-list__title {
+    font-size: 14px;
+    color: var(--black);
+}
+
+.cemetery-contacts-list__text {
+    font-size: 18px;
+    color: var(--black);
+    transition: var(--normal);
+}
+
+a.cemetery-contacts-list__text:hover {
+    color: var(--blue);
+}
+
+.cemeteries {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    margin-top: 26px;
+}
+
+.cemeteries__item {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 7px;
+    color: var(--black);
+    padding: 15px;
+}
+
+.cemeteries-img {
+    width: 118px;
+    height: 118px;
+    position: relative;
+    overflow: hidden;
+    margin-right: 24px;
+}
+
+.cemeteries-info {
+    width: calc(100% - 142px);
+    height: 118px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cemeteries-info__title {
+    color: var(--black);
+    font: 600 18px sans-serif;
+    line-height: 1.1;
+    transition: var(--normal);
+}
+
+.cemeteries-info__city {
+    color: #797879;
+    font-size: 16px;
+}
+
+.cemeteries__item:hover .cemeteries-info__title {
+    color: var(--blue);
+}
+
+.cemeteries-buttons {
+    width: 100%;
+    margin: 32px 0 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-more:hover {
+    background-color: var(--blue);
+    color: #fff;
+}
+
+.cemeteries-buttons:before {
+    content: "";
+}
+
+.pagination-left, .pagination-right {
+    border: 1px solid var(--light-gray);
+    border-radius: 7px;
+    color: rgba(32, 30, 31, .3);
+    height: 44px;
+    width: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--normal);
+    cursor: pointer;
+}
+
+.pagination-left:hover, .pagination-right:hover {
+    background: #fff;
+    color: var(--black);
+}
+
+.cemeteries-pagination {
+    display: flex;
+    align-items: center;
+}
+
+.pagination-number {
+    display: flex;
+    font-size: 18px;
+    margin: 0 20px;
+    color: rgba(32, 30, 31, .6);
+}
+
+.pagination-number__delimiter {
+    margin: 0 8px;
+}
+
+.pagination-number__current {
+    color: var(--black);
+}
+
+.left-arrow, .right-arrow {
+    width: 14px;
+    height: 8px;
+    fill: rgba(32, 30, 31, .6);
+    transition: var(--normal);
+}
+
+.left-arrow {
+    transform: rotate(90deg);
+}
+
+.right-arrow {
+    transform: rotate(-90deg);
+}
+
+.pagination-left:hover .left-arrow, .pagination-right:hover .right-arrow {
+    fill: var(--black);
+}
+
+
+@media screen and (max-width: 1430px) {
+    .cemetery-content {
+        padding: 24px 20px;
+    }
+
+    .cemetery-title-wrap {
+        padding: 26px 0 0;
+        margin: 0 20px;
+        width: calc(100% - 40px);
+    }
+}
+
+@media screen and (max-width: 1120px) {
+    .cemeteries {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .cemetery-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .cemetery-photo {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .cemeteries-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .cemeteries-info {
+        width: calc(100% - 102px);
+        height: 80px;
+    }
+
+    .cemeteries-info__title {
+        font-size: 16px;
+    }
+
+    .cemetery-text-wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .cemetery-menu__item {
+        font-size: 14px;
+        padding: 7px 12px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .cemeteries__link {
+        flex-direction: column;
+    }
+
+    .cemeteries-info {
+        width: 100%;
+        margin-top: 20px;
+        height: auto;
+        align-items: center;
+    }
+
+    .cemeteries-img {
+        margin: 0;
+    }
+
+    .cemeteries-info__title {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .cemetery-named-wrap {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .cemetery-named {
+        padding: 0;
+        width: 100%;
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    .cemetery-photo {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .cemeteries-buttons {
+        flex-direction: column;
+    }
+
+    .cemeteries-buttons:before {
+        content: none;
+    }
+
+    .button-more {
+        margin-bottom: 15px;
+        left: 0;
+    }
+
+    .logo-header__img {
+        width: 140px;
+    }
+
+    .famous-persons__name, .memorials-info__ages {
+        font-size: 12px;
+    }
+
+    .memorials-info__name {
+        font-size: 14px;
+    }
+
+    .cemetery-contacts {
+        padding: 24px 10px;
+    }
+
+    .cemetery-menu__item {
+        padding: 5px 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .cemeteries {
+        grid-template-columns: 1fr;
+    }
+
+    .cemetery-title-wrap {
+        margin: 0 10px;
+        width: calc(100% - 20px);
+    }
+
+    .cemetery-menu {
+        flex-direction: column;
+        justify-content: flex-start;
+        position: relative;
+        border: 1px solid var(--light-gray);
+        background-color: var(--gray);
+        border-bottom: none;
+        border-radius: 7px 7px 0 0;
+        cursor: pointer;
+    }
+
+    .cemetery-menu:before {
+        content: "";
+        background: url("../img/arrow.svg") no-repeat center center;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 14px;
+        height: 8px;
+        z-index: 10;
+        transition: var(--normal);
+        transform: rotate(0);
+    }
+
+    .cemetery-menu.open:before {
+        transform: rotate(180deg);
+    }
+
+    .cemetery-menu__item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        justify-content: flex-start;
+        opacity: 0;
+        visibility: hidden;
+        background: transparent;
+        border: none;
+    }
+
+    .cemetery-menu.open .cemetery-menu__item, .cemetery-menu__item.current {
+        opacity: 1;
+        visibility: visible;
+        position: static;
+        z-index: 1;
+    }
+
+    .cemetery-menu__item.current {
+        order: 1;
+    }
+}

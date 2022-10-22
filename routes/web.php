@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'cemetery', 'as' => 'cemetery.'], function () {
         Route::get('map', [CemeteryController::class, 'map'])->name('search.map');
         Route::get('list', [CemeteryController::class, 'list'])->name('search.list');
+        Route::get('show/{slug}', [CemeteryController::class, 'show'])->name('show');
     });
 
 

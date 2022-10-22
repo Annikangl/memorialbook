@@ -1,0 +1,7 @@
+:root {
+    --content-size: calc(50% - 700px);
+    --normal: .4s ease;
+    --blue: #175ed9;
+    --black: #201e1f;
+    --red: #fa122e;
+}
