@@ -1,4 +1,3 @@
-
 .cemeteries__link {
     display: flex;
     justify-content: flex-start;
@@ -61,7 +60,7 @@
 }
 
 .cemetery-photo__link {
-    padding-top: 100%;
+    /*padding-top: 100%;*/
     position: relative;
     overflow: hidden;
 }
@@ -189,8 +188,8 @@
     overflow: hidden;
 
     /*удалить следующие (ниже) стили при вставке карты*/
-    background-color: rgba(32, 30, 31, .7);
-    color: #fff;
+    /*background-color: rgba(32, 30, 31, .7);*/
+    /*color: #fff;*/
 }
 
 .famous-persons-list {
@@ -275,6 +274,100 @@
     background-color: #fff;
     padding: 24px 27px;
     border-radius: 0 0 7px 7px;
+}
+.price {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 272px 1fr;
+    grid-gap: 18px;
+}
+
+.price .cemeteries-buttons {
+    grid-column: 2/3;
+}
+
+.price-filter {
+    width: 100%;
+    height: max-content;
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 12px 32px;
+}
+
+.price-filter__item {
+    padding: 7px 0;
+}
+
+.price-filter__link {
+    color: rgba(32, 30, 31, .6);
+    font: 600 18px sans-serif;
+    transition: var(--normal);
+}
+
+.price-filter__item.active .price-filter__link, .price-filter__link:hover {
+    color: var(--blue);
+}
+
+.price-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 18px 16px;
+    width: 100%;
+}
+
+.price-list__item {
+    background-color: #fff;
+    padding: 16px 12px;
+    border: 1px solid var(--gray);
+    border-radius: 7px;
+}
+
+.price-list__link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.price-img {
+    max-height: 200px;
+}
+
+.price-title {
+    color: var(--black);
+    transition: var(--normal);
+    font: 100 14px sans-serif;
+    margin-top: 16px;
+}
+
+.price-title:hover {
+    color: var(--blue);
+}
+
+.price-list-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.price-title-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.cost {
+    font: 700 18px sans-serif;
+    color: var(--black);
+}
+
+.buy {
+    font: 700 18px sans-serif;
+    color: var(--blue);
 }
 
 .button-add-message, .button-route {

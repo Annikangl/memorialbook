@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Profile;
 
+use App\Models\Cemetery\Cemetery;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
 use Carbon\Carbon;
@@ -16,6 +17,7 @@ class ProfileFactory extends Factory
     public function definition(): array
     {
         return [
+            'cemetery_id' => Cemetery::query()->inRandomOrder()->value('id'),
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'patronymic' => $this->faker->name(),

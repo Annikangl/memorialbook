@@ -11,7 +11,7 @@
             height: auto;
         }
     </style>
-    <section class="cemetery">
+    <section class="cemetery" onload="init()">
         <div class="cemetery-bg"></div>
         <div class="cemetery-title-wrap">
             <div class="cemetery-title">
@@ -26,38 +26,52 @@
                 </div>
                 <ul class="cemetery-photo">
                     <li class="cemetery-photo__item">
-                        <a href="img/gallery/2-small.jpg" class="cemetery-photo__link gallery">
-                            <img src="{{ asset('storage/uploads/profiles/gallery/gallery-1.jpg') }}" class="bg-img" alt="" title=""/>
+                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
+                           class="cemetery-photo__link gallery">
+                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
+                                 alt="" title=""/>
                         </a>
                     </li>
                     <li class="cemetery-photo__item">
-                        <a href="img/gallery/2-small.jpg" class="cemetery-photo__link gallery">
-                            <img src="img/gallery/2-small.jpg" class="bg-img" alt="" title=""/>
+                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
+                           class="cemetery-photo__link gallery">
+                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
+                                 alt="" title=""/>
                         </a>
                     </li>
                     <li class="cemetery-photo__item">
-                        <a href="img/gallery/2-small.jpg" class="cemetery-photo__link gallery">
-                            <img src="img/gallery/2-small.jpg" class="bg-img" alt="" title=""/>
+                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
+                           class="cemetery-photo__link gallery">
+                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
+                                 alt="" title=""/>
                         </a>
                     </li>
                     <li class="cemetery-photo__item">
-                        <a href="img/gallery/2-small.jpg" class="cemetery-photo__link gallery">
-                            <img src="img/gallery/2-small.jpg" class="bg-img" alt="" title=""/>
+                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
+                           class="cemetery-photo__link gallery">
+                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
+                                 alt="" title=""/>
                         </a>
                     </li>
                     <li class="cemetery-photo__item">
-                        <a href="img/gallery/2-small.jpg" class="cemetery-photo__link gallery">
-                            <img src="img/gallery/2-small.jpg" class="bg-img" alt="" title=""/>
+                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
+                           class="cemetery-photo__link gallery">
+                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
+                                 alt="" title=""/>
                         </a>
                     </li>
                     <li class="cemetery-photo__item">
-                        <a href="img/gallery/2-small.jpg" class="cemetery-photo__link gallery">
-                            <img src="img/gallery/2-small.jpg" class="bg-img" alt="" title=""/>
+                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
+                           class="cemetery-photo__link gallery">
+                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
+                                 alt="" title=""/>
                         </a>
                     </li>
                     <li class="cemetery-photo__item">
-                        <a href="img/gallery/2-small.jpg" class="cemetery-photo__link gallery">
-                            <img src="img/gallery/2-small.jpg" class="bg-img" alt="" title=""/>
+                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
+                           class="cemetery-photo__link gallery">
+                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
+                                 alt="" title=""/>
                         </a>
                     </li>
                 </ul>
@@ -76,44 +90,48 @@
                 <div class="cemetery-text-wrap">
 
                     <div class="cemetery-text">
-                        <p>Американское военное кладбище в Арлингтоне, пригороде Вашингтона. На территории кладбища захоронены
-                            участники войн, президенты, председатели Верховного суда и астронавты. В настоящее время на кладбище
-                            погребено более 400 000 человек; площадь его составляет 2,53 км.</p>
-                        <p>Кладбище основано в 1865 году и предназначалось для захоронения солдат, погибших в Гражданской войне.
-                            Участок земли, на котором находится кладбище, был конфискован у генерала Роберта Ли — главнокомандующего
-                            армией Юга в Гражданской войне.</p>
-                        <p>Американское военное кладбище в Арлингтоне, пригороде Вашингтона. На территории кладбища захоронены
-                            участники войн, президенты, председатели Верховного суда и астронавты. В настоящее время на кладбище
-                            погребено более 400 000 человек; площадь его составляет 2,53 км.</p>
-                        <p>Кладбище основано в 1865 году и предназначалось для захоронения солдат, погибших в Гражданской войне.
-                            Участок земли, на котором находится кладбище, был конфискован у генерала Роберта Ли — главнокомандующего
-                            армией Юга в Гражданской войне.</p>
-                        <p>Американское военное кладбище в Арлингтоне, пригороде Вашингтона. На территории кладбища захоронены
-                            участники войн, президенты, председатели Верховного суда и астронавты. В настоящее время на кладбище
-                            погребено более 400 000 человек; площадь его составляет 2,53 км.</p>
-                        <p>Кладбище основано в 1865 году и предназначалось для захоронения солдат, погибших в Гражданской войне.
-                            Участок земли, на котором находится кладбище, был конфискован у генерала Роберта Ли — главнокомандующего
-                            армией Юга в Гражданской войне.</p>
+                        {{ $cemetery->description }}
+                        {{--                        <p>Американское военное кладбище в Арлингтоне, пригороде Вашингтона. На территории кладбища захоронены--}}
+                        {{--                            участники войн, президенты, председатели Верховного суда и астронавты. В настоящее время на кладбище--}}
+                        {{--                            погребено более 400 000 человек; площадь его составляет 2,53 км.</p>--}}
+                        {{--                        <p>Кладбище основано в 1865 году и предназначалось для захоронения солдат, погибших в Гражданской войне.--}}
+                        {{--                            Участок земли, на котором находится кладбище, был конфискован у генерала Роберта Ли — главнокомандующего--}}
+                        {{--                            армией Юга в Гражданской войне.</p>--}}
+                        {{--                        <p>Американское военное кладбище в Арлингтоне, пригороде Вашингтона. На территории кладбища захоронены--}}
+                        {{--                            участники войн, президенты, председатели Верховного суда и астронавты. В настоящее время на кладбище--}}
+                        {{--                            погребено более 400 000 человек; площадь его составляет 2,53 км.</p>--}}
+                        {{--                        <p>Кладбище основано в 1865 году и предназначалось для захоронения солдат, погибших в Гражданской войне.--}}
+                        {{--                            Участок земли, на котором находится кладбище, был конфискован у генерала Роберта Ли — главнокомандующего--}}
+                        {{--                            армией Юга в Гражданской войне.</p>--}}
+                        {{--                        <p>Американское военное кладбище в Арлингтоне, пригороде Вашингтона. На территории кладбища захоронены--}}
+                        {{--                            участники войн, президенты, председатели Верховного суда и астронавты. В настоящее время на кладбище--}}
+                        {{--                            погребено более 400 000 человек; площадь его составляет 2,53 км.</p>--}}
+                        {{--                        <p>Кладбище основано в 1865 году и предназначалось для захоронения солдат, погибших в Гражданской войне.--}}
+                        {{--                            Участок земли, на котором находится кладбище, был конфискован у генерала Роберта Ли — главнокомандующего--}}
+                        {{--                            армией Юга в Гражданской войне.</p>--}}
 
                         <ul class="social">
                             <li class="social__item">
                                 <a href="#" class="social__link">
-                                    <img src="img/social/facebook.svg" alt="" title="facebook"/>
+                                    <img src="{{ asset('assets/media/media/icons/social/facebook.svg')}}" alt=""
+                                         title="facebook"/>
                                 </a>
                             </li>
                             <li class="social__item">
                                 <a href="#" class="social__link">
-                                    <img src="img/social/instagram.svg" alt="" title=""/>
+                                    <img src="{{ asset('assets/media/media/icons/social/instagram.svg') }}" alt=""
+                                         title=""/>
                                 </a>
                             </li>
                             <li class="social__item">
                                 <a href="#" class="social__link">
-                                    <img src="img/social/twitter.svg" alt="" title=""/>
+                                    <img src="{{ asset('assets/media/media/icons/social/twitter.svg') }}" alt=""
+                                         title=""/>
                                 </a>
                             </li>
                             <li class="social__item">
                                 <a href="#" class="social__link">
-                                    <img src="img/social/wikipedia.svg" alt="" title=""/>
+                                    {{--                                    <img src="img/social/wikipedia.svg" alt="" title=""/>--}}
                                 </a>
                             </li>
                         </ul>
@@ -123,59 +141,37 @@
                         <h4 class="famous-persons__title">Известные личности</h4>
 
                         <ul class="famous-persons-list">
-                            <li class="famous-persons__item">
-                                <div class="famous-persons-img">
-                                    <img src="img/relatives/avatar-2.jpg" class="bg-img" alt="" title=""/>
-                                </div>
-                                <span class="famous-persons__name">Андросова Марина Викторовна</span>
-                            </li>
-                            <li class="famous-persons__item">
-                                <div class="famous-persons-img">
-                                    <img src="img/relatives/avatar-2.jpg" class="bg-img" alt="" title=""/>
-                                </div>
-                                <span class="famous-persons__name">Андросова Нина Ивановна</span>
-                            </li>
-                            <li class="famous-persons__item">
-                                <div class="famous-persons-img">
-                                    <img src="img/relatives/avatar-1.jpg" class="bg-img" alt="" title=""/>
-                                </div>
-                                <span class="famous-persons__name">Андросов Олег Иванович</span>
-                            </li>
+                            @foreach($famous as $profile)
+                                <li class="famous-persons__item">
+                                    <div class="famous-persons-img">
+                                        <img src="{{ asset('storage/' . $profile->avatar) }}" class="bg-img"
+                                             alt="{{ $profile->full_name }}"
+                                             title="{{ $profile->full_name }}"/>
+                                    </div>
+                                    <span class="famous-persons__name">{{ $profile->full_name }}</span>
+                                </li>
+                            @endforeach
                         </ul>
 
-                        <div class="famous-persons__map">Заглушка под карту. Удалить заливку после импорта карты</div>
+                        <div class="famous-persons__map"></div>
                     </div>
                 </div>
             </div>
             <div class="cemetery-content__item">
                 <ul class="memorials">
-                    <li class="memorials__item">
-                        <div class="memorials-img">
-                            <img src="img/relatives/avatar-2.jpg" class="bg-img" alt="" title=""/>
-                        </div>
-                        <div class="memorials-info">
-                            <span class="memorials-info__name">Андросова Марина Викторовна</span>
-                            <span class="memorials-info__ages">28.12.1964 - 14.04.2008</span>
-                        </div>
-                    </li>
-                    <li class="memorials__item">
-                        <div class="memorials-img">
-                            <img src="img/relatives/avatar-2.jpg" class="bg-img" alt="" title=""/>
-                        </div>
-                        <div class="memorials-info">
-                            <span class="memorials-info__name">Андросова Марина Викторовна</span>
-                            <span class="memorials-info__ages">28.12.1964 - 14.04.2008</span>
-                        </div>
-                    </li>
-                    <li class="memorials__item">
-                        <div class="memorials-img">
-                            <img src="img/relatives/avatar-2.jpg" class="bg-img" alt="" title=""/>
-                        </div>
-                        <div class="memorials-info">
-                            <span class="memorials-info__name">Андросова Марина Викторовна</span>
-                            <span class="memorials-info__ages">28.12.1964 - 14.04.2008</span>
-                        </div>
-                    </li>
+                    @foreach($cemetery->profiles as $profile)
+                        <li class="memorials__item">
+                            <div class="memorials-img">
+                                <img src="{{ asset('storage/' . $profile->avatar) }}" class="bg-img"
+                                     alt="{{ $profile->full_name }}"
+                                     title="{{ $profile->full_name }}"/>
+                            </div>
+                            <div class="memorials-info">
+                                <span class="memorials-info__name">{{ $profile->full_name }}</span>
+                                <span class="memorials-info__ages">{{ $profile->lifeExpectancy }}</span>
+                            </div>
+                        </li>
+                    @endforeach
                 </ul>
 
                 <!--cemeteries pagination start-->
@@ -349,7 +345,8 @@
                         <div class="cemeteries-pagination">
                             <a class="pagination-left">
                                 <svg class="left-arrow" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
+                                    <path
+                                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
                                 </svg>
                             </a>
                             <div class="pagination-number">
@@ -359,7 +356,8 @@
                             </div>
                             <a class="pagination-right">
                                 <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
+                                    <path
+                                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
                                 </svg>
                             </a>
                         </div>
@@ -394,3 +392,17 @@
 
     </section>
 @endsection
+
+@section('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y&callback=initMap&v=weekly"
+        defer
+    ></script>
+
+    <script>
+        let coords = {!! json_encode($famous->toArray()) !!};
+
+    </script>
+
+@endsection
+

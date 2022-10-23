@@ -2,10 +2,12 @@
 
 namespace App\Models\Cemetery;
 
+use App\Models\Profile\Profile;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Cemetery\Cemetery
@@ -103,6 +105,11 @@ class Cemetery extends Model
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('status', self::STATUS_ACTIVE);
+    }
+
+    public function profiles(): HasMany
+    {
+        return $this->hasMany(Profile::class);
     }
 
 

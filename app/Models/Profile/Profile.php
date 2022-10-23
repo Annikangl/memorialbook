@@ -2,6 +2,7 @@
 
 namespace App\Models\Profile;
 
+use App\Models\Cemetery\Cemetery;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -104,6 +105,7 @@ class Profile extends Model
     ];
 
     protected $fillable = [
+        'cemetery_id',
         'first_name',
         'last_name',
         'patronymic',
@@ -206,6 +208,11 @@ class Profile extends Model
     public function religions(): BelongsToMany
     {
         return $this->belongsToMany(Religion::class,'religion_profile');
+    }
+
+    public function cemeteries(): BelongsTo
+    {
+        return $this->belongsTo(Cemetery::class);
     }
 
     public function spouse(): BelongsTo

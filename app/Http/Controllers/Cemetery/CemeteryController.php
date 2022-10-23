@@ -26,8 +26,11 @@ class CemeteryController extends Controller
 
     public function show(string $slug)
     {
-        $cemetery = Cemetery::query()->where('slug', $slug)->firstOrFail();
-        return view('cemetery.show', compact('cemetery'));
+        $cemetery = Cemetery::query()->where('slug', $slug)->with('profiles')->firstOrFail();
+        $famous = $cemetery->profiles()->limit(4)->get();
+
+
+        return view('cemetery.show', compact('cemetery','famous'));
     }
 
     private function countApplyFilters(array $filters) : int

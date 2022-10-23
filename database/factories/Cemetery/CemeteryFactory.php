@@ -31,7 +31,7 @@ class CemeteryFactory extends Factory
                 ]
             ),
             'banner' => 'uploads/cemetery/banner/img.png',
-            'description' => $this->faker->sentence(10),
+            'description' => $this->faker->realText(1000),
             'status' => Cemetery::STATUS_ACTIVE,
             'moderators_comment' => null,
             'access' => Cemetery::ACCESS_OPEN

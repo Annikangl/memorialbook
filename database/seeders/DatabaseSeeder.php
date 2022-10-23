@@ -21,13 +21,16 @@ class DatabaseSeeder extends Seeder
 
         $this->call(DeathReasonSeeder::class);
 
+        Cemetery::factory(30)->create();
+
         Profile::factory(30)
+            ->has(Cemetery::factory()->count(3))
             ->has(Hobby::factory()->count(3))
             ->has(Religion::factory()->count(3))
             ->has(Gallery::factory()->count(5))
+
             ->create();
 
-        Cemetery::factory(30)->create();
 
         \DB::table('users')->insert([
             'username' => 'Shahed_136',
