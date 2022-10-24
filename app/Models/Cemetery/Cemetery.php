@@ -112,6 +112,11 @@ class Cemetery extends Model
         return $this->hasMany(Profile::class);
     }
 
+    public function galleries(): HasMany
+    {
+        return $this->hasMany(Gallery::class);
+    }
+
 
     public function sluggable(): array
     {

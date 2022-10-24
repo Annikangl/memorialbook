@@ -11,7 +11,7 @@
             height: auto;
         }
     </style>
-    <section class="cemetery" onload="init()">
+    <section class="cemetery">
         <div class="cemetery-bg"></div>
         <div class="cemetery-title-wrap">
             <div class="cemetery-title">
@@ -25,55 +25,15 @@
                     </div>
                 </div>
                 <ul class="cemetery-photo">
+                    @foreach($cemetery->galleries as $gallery)
                     <li class="cemetery-photo__item">
-                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
+                        <a href="{{ asset('storage/' . $gallery->item ) }}"
                            class="cemetery-photo__link gallery">
-                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
-                                 alt="" title=""/>
+                            <img src="{{ asset('storage/' . $gallery->item) }}" class="bg-img"
+                                 alt="{{ $gallery->item }}" title="{{ $gallery->item }}"/>
                         </a>
                     </li>
-                    <li class="cemetery-photo__item">
-                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
-                           class="cemetery-photo__link gallery">
-                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
-                                 alt="" title=""/>
-                        </a>
-                    </li>
-                    <li class="cemetery-photo__item">
-                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
-                           class="cemetery-photo__link gallery">
-                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
-                                 alt="" title=""/>
-                        </a>
-                    </li>
-                    <li class="cemetery-photo__item">
-                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
-                           class="cemetery-photo__link gallery">
-                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
-                                 alt="" title=""/>
-                        </a>
-                    </li>
-                    <li class="cemetery-photo__item">
-                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
-                           class="cemetery-photo__link gallery">
-                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
-                                 alt="" title=""/>
-                        </a>
-                    </li>
-                    <li class="cemetery-photo__item">
-                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
-                           class="cemetery-photo__link gallery">
-                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
-                                 alt="" title=""/>
-                        </a>
-                    </li>
-                    <li class="cemetery-photo__item">
-                        <a href="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}"
-                           class="cemetery-photo__link gallery">
-                            <img src="{{ asset('storage/uploads/cemeteries/gallery/2-small.jpg') }}" class="bg-img"
-                                 alt="" title=""/>
-                        </a>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
 
@@ -89,7 +49,7 @@
             <div class="cemetery-content__item current">
                 <div class="cemetery-text-wrap">
                     <div class="cemetery-text">
-                        {{ $cemetery->description }}
+                        <p>{{ $cemetery->description }} </p>
                         <ul class="social">
                             <li class="social__item">
                                 <a href="#" class="social__link">
@@ -111,7 +71,8 @@
                             </li>
                             <li class="social__item">
                                 <a href="#" class="social__link">
-                                    {{--                                    <img src="img/social/wikipedia.svg" alt="" title=""/>--}}
+                                    <img src="{{ asset('assets/media/media/icons/social/wikipedia.svg') }}" alt=""
+                                         title=""/>
                                 </a>
                             </li>
                         </ul>
@@ -122,7 +83,8 @@
 
                         <ul class="famous-persons-list">
                             @foreach($famous as $profile)
-                                <li class="famous-persons__item">
+                                <li class="famous-persons__item" data-lat="{{ $profile->latitude }}"
+                                    data-lng="{{ $profile->longitude }}">
                                     <div class="famous-persons-img">
                                         <img src="{{ asset('storage/' . $profile->avatar) }}" class="bg-img"
                                              alt="{{ $profile->full_name }}"
@@ -139,7 +101,7 @@
             </div>
             <div class="cemetery-content__item">
                 <ul class="memorials">
-                    @foreach($cemetery->profiles as $profile)
+                    @foreach($memorials as $profile)
                         <li class="memorials__item">
                             <div class="memorials-img">
                                 <img src="{{ asset('storage/' . $profile->avatar) }}" class="bg-img"
@@ -158,23 +120,7 @@
                 <div class="cemeteries-buttons">
                     <button type="button" class="button-more">Показать еще</button>
 
-                    <div class="cemeteries-pagination">
-                        <a class="pagination-left">
-                            <svg class="left-arrow" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                            </svg>
-                        </a>
-                        <div class="pagination-number">
-                            <span class="pagination-number__current">1</span>
-                            <span class="pagination-number__delimiter">/</span>
-                            <span class="pagination-number__all">5</span>
-                        </div>
-                        <a class="pagination-right">
-                            <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                            </svg>
-                        </a>
-                    </div>
+                    {{ $memorials->links('cemetery.partials.pagination', ['paginator' => $memorials ]) }}
                 </div>
                 <!--cemeteries pagination end-->
 
@@ -378,10 +324,68 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y&callback=initMap&v=weekly"
         defer
     ></script>
+    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
 
     <script>
-        let coords = {!! json_encode($famous->toArray()) !!};
+        const locations = [];
 
+        const cemeteryCoords = {
+            lat: {{ $cemetery->latitude }},
+            lng: {{ $cemetery->longitude }}
+        };
+
+        document.querySelectorAll('.famous-persons__item').forEach(function (element) {
+            locations.push({
+                lat: parseFloat(element.getAttribute('data-lat')),
+                lng: parseFloat(element.getAttribute('data-lng'))
+            })
+        })
+
+
+        function initMap() {
+            const uluru = cemeteryCoords;
+            const image = window.app.globalConfig.assetsPath + 'media/cock.png';
+
+            const contactMap = new google.maps.Map(document.querySelector(".cemetery-contacts-map"), {
+                zoom: 4,
+                center: uluru,
+            });
+
+            const contactMarker = new google.maps.Marker({
+                position: uluru,
+                map: contactMap,
+            });
+
+            const map = new google.maps.Map(document.querySelector(".famous-persons__map"), {
+                zoom: 1,
+                center: locations[0],
+            });
+
+            const infoWindow = new google.maps.InfoWindow({
+                content: "",
+                disableAutoPan: true,
+            });
+
+            const labels = document.querySelectorAll('.famous-persons__name');
+
+            const markers = locations.map((position, i) => {
+                const label = labels[i % labels.length];
+                const marker = new google.maps.Marker({
+                    position,
+                    label,
+                });
+
+                marker.addListener("click", () => {
+                    infoWindow.setContent(label.textContent);
+                    infoWindow.open(map, marker);
+                });
+                return marker;
+            });
+
+            const markerCluster = new markerClusterer.MarkerClusterer({markers, map});
+        }
+
+        window.initMap = initMap;
     </script>
 
 @endsection

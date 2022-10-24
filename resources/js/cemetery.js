@@ -1,5 +1,22 @@
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
 
+import { Fancybox } from "@fancyapps/ui/src/Fancybox/Fancybox.js";
+
+Fancybox.bind(".gallery", {
+    groupAll : true, // Group all items
+    Toolbar: {
+        display: [
+            { id: "prev", position: "center" },
+            { id: "counter", position: "center" },
+            { id: "next", position: "center" },
+            "zoom",
+            "slideshow",
+            "fullscreen",
+            "close",
+        ],
+    },
+});
+
 let checkCemeteryContent = function () {
     let cemeteryMenuItems = document.querySelectorAll('.cemetery-menu__item');
     let cemeteryContentItems = document.querySelectorAll('.cemetery-content__item');
@@ -90,58 +107,3 @@ if (document.querySelector('.cemetery-menu')) {
     openMenuCemetery();
     cemeteryPhotoLength();
 }
-
-// ------------------ Maps ------------------------------
-const locations = [];
-
-coords.forEach((item) => {
-    console.log(item)
-    locations.push({
-        "lat": item.latitude,
-        'lng': item.longitude
-    })
-});
-
-
-function initMap() {
-
-    console.log(locations);
-
-    const map = new google.maps.Map(document.querySelector(".famous-persons__map"), {
-        zoom: 3,
-        center: { lat: -28.024, lng: 140.887 },
-    });
-    const infoWindow = new google.maps.InfoWindow({
-        content: "",
-        disableAutoPan: true,
-    });
-    // Create an array of alphabetical characters used to label the markers.
-    const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    // Add some markers to the map.
-    const markers = locations.map((position, i) => {
-        const label = labels[i % labels.length];
-        const marker = new google.maps.Marker({
-            position,
-            label,
-        });
-
-        // markers can only be keyboard focusable when they have click listeners
-        // open info window when marker is clicked
-        marker.addListener("click", () => {
-            infoWindow.setContent(label);
-            infoWindow.open(map, marker);
-        });
-        return marker;
-    });
-
-    new MarkerClusterer({ markers, map });
-
-}
-
-
-
-
-
-
-
-window.initMap = initMap;
