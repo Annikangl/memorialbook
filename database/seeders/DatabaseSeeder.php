@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(DeathReasonSeeder::class);
 
-        Cemetery::factory(30)->create();
+        Cemetery::factory(30)
+            ->has(\App\Models\Cemetery\Gallery::factory()->count(5))
+            ->create();
 
         Profile::factory(30)
             ->has(Cemetery::factory()->count(3))

@@ -1,8 +1,7 @@
 import 'bootstrap'
 import './vendor'
 import  './cemetery'
-// import './familytree'
-// import './template'
+
 
 
 

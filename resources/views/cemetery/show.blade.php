@@ -37,16 +37,18 @@
                 </ul>
             </div>
 
+{{--            // TODO change paginate --}}
+
             <ul class="cemetery-menu">
-                <li class="cemetery-menu__item current">О кладбище</li>
-                <li class="cemetery-menu__item">Мемориалы</li>
+                <li class="cemetery-menu__item @if (!Request::has('page')) current @endif">О кладбище</li>
+                <li class="cemetery-menu__item @if (Request::has('page')) current @endif" >Мемориалы</li>
                 <li class="cemetery-menu__item">Товары и услуги</li>
                 <li class="cemetery-menu__item">Контакты</li>
             </ul>
 
         </div>
         <div class="cemetery-content">
-            <div class="cemetery-content__item current">
+            <div class="cemetery-content__item @if (!Request::has('page')) current @endif ">
                 <div class="cemetery-text-wrap">
                     <div class="cemetery-text">
                         <p>{{ $cemetery->description }} </p>
@@ -99,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cemetery-content__item">
+            <div class="cemetery-content__item @if (Request::has('page')) current @endif"">
                 <ul class="memorials">
                     @foreach($memorials as $profile)
                         <li class="memorials__item">
@@ -118,8 +120,7 @@
 
                 <!--cemeteries pagination start-->
                 <div class="cemeteries-buttons">
-                    <button type="button" class="button-more">Показать еще</button>
-
+                    <button type="button" class="button-more" data-link="{{ $memorials->nextPageUrl()  }}">Показать еще</button>
                     {{ $memorials->links('cemetery.partials.pagination', ['paginator' => $memorials ]) }}
                 </div>
                 <!--cemeteries pagination end-->
@@ -386,7 +387,9 @@
         }
 
         window.initMap = initMap;
+
     </script>
+
 
 @endsection
 

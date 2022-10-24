@@ -12,6 +12,8 @@ class Gallery extends Model
 
     protected $table = 'cemetery_gallery';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'cemetery_id',
         'item'

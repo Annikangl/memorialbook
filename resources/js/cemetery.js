@@ -1,6 +1,8 @@
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
 
+
 import { Fancybox } from "@fancyapps/ui/src/Fancybox/Fancybox.js";
+import axios from "axios";
 
 Fancybox.bind(".gallery", {
     groupAll : true, // Group all items
@@ -16,6 +18,35 @@ Fancybox.bind(".gallery", {
         ],
     },
 });
+
+// TODO pagination more btn none
+
+const moreBtn = document.querySelector('.button-more');
+
+moreBtn.addEventListener('click', function (event) {
+    let memorialsList = document.querySelector('.memorials');
+
+    let nextPageLink = this.getAttribute('data-link');
+
+    if (nextPageLink !== '') {
+       axios.get(nextPageLink).then(response => {
+           let htmlObject = document.createElement('div');
+           htmlObject.innerHTML = response.data
+
+           htmlObject.querySelectorAll('.memorials__item').forEach(function (item) {
+               memorialsList.append(item)
+           })
+
+           this.setAttribute('data-link', htmlObject.querySelector('.button-more').getAttribute('data-link'));
+       }).catch(err => {
+           this.style.display = 'none';
+           console.log(err);
+       })
+    } else {
+        this.style.display = 'none';
+    }
+
+})
 
 let checkCemeteryContent = function () {
     let cemeteryMenuItems = document.querySelectorAll('.cemetery-menu__item');
