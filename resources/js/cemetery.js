@@ -22,11 +22,11 @@ Fancybox.bind(".gallery", {
 
 const moreBtn = document.querySelector('.button-more');
 
-if (moreBtn.getAttribute('data-link') === '') {
-    moreBtn.style.display = 'none';
-}
-
 let loadFamous = function () {
+    if (moreBtn.getAttribute('data-link') === '') {
+        moreBtn.style.display = 'none';
+    }
+
     moreBtn.addEventListener('click', function (event) {
         let memorialsList = document.querySelector('.memorials');
 
