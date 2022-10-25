@@ -1,6 +1,5 @@
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
 
-
 import { Fancybox } from "@fancyapps/ui/src/Fancybox/Fancybox.js";
 import axios from "axios";
 
@@ -23,11 +22,16 @@ Fancybox.bind(".gallery", {
 
 const moreBtn = document.querySelector('.button-more');
 
+if (moreBtn.getAttribute('data-link') === '') {
+    moreBtn.style.display = 'none';
+}
+
 let loadFamous = function () {
     moreBtn.addEventListener('click', function (event) {
         let memorialsList = document.querySelector('.memorials');
 
         let nextPageLink = this.getAttribute('data-link');
+        document.querySelector('.pagination-right').setAttribute('href', nextPageLink);
 
         if (nextPageLink !== '') {
             axios.get(nextPageLink).then(response => {

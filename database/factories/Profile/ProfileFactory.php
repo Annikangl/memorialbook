@@ -24,7 +24,7 @@ class ProfileFactory extends Factory
             'avatar' => $this->faker->randomElement(
                 [
                     'uploads/profiles/avatar/avatar-1.jpg',
-                    'uploads/profiles/avatar/avatar-2.png',
+                    'uploads/profiles/avatar/avatar-2.jpg',
                     'uploads/profiles/avatar/avatar-3.jpg',
                     'uploads/profiles/avatar/avatar-4.jpg',
                     'uploads/profiles/avatar/avatar-5.jpg',

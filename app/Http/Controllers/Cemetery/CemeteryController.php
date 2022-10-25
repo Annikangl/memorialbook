@@ -26,7 +26,7 @@ class CemeteryController extends Controller
 
     public function show(string $slug)
     {
-        $cemetery = Cemetery::query()->where('slug', $slug)->with(['profiles','galleries'])->firstOrFail();
+        $cemetery = Cemetery::query()->where('slug', $slug)->with(['profiles','galleries','socials'])->firstOrFail();
         $memorials = $cemetery->profiles()->paginate(3);
         $famous = $cemetery->profiles()->limit(4)->get();
 

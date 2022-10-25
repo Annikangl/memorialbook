@@ -10,8 +10,7 @@ class Gallery extends Model
 {
     use HasFactory;
 
-    protected $table = 'cemetery_gallery';
-
+    protected $table = 'cemetery_galleries';
     public $timestamps = false;
 
     protected $fillable = [
