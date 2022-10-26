@@ -48,6 +48,8 @@ return new class extends Migration
             $table->unsignedBigInteger('spouse_id')->nullable();
             $table->unsignedBigInteger('child_id')->nullable();
 
+            $table->unsignedBigInteger('user_id')->nullable();
+
             $table->foreign('mother_id')->references('id')->on('profiles')
                 ->onDelete('CASCADE');
             $table->foreign('father_id')->references('id')->on('profiles')

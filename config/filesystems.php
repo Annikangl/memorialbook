@@ -56,6 +56,21 @@ return [
             'throw' => false,
         ],
 
+        'media' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/media'),
+            'url' => env('APP_URL').'/media',
+            'visibility' => 'public',
+        ],
+
+        'avatar' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/profiles/avatar'),
+            'url' => env('APP_URL').'/memorialbook/public/storage/uploads/profiles/avatar',
+            'visibility' => 'public',
+        ],
+
+
     ],
 
     /*

@@ -11,6 +11,10 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
 /**
@@ -45,9 +49,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|Profile query()
 
  */
-class Profile extends Model
+
+class Profile extends Model implements HasMedia
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, InteractsWithMedia;
 
     public const STATUS_DRAFT = 'Черновик';
     public const STATUS_MODERATION = 'На модерации';
@@ -71,7 +76,7 @@ class Profile extends Model
         'burial_place',
         'latitude',
         'longitude',
-        'reason_death',
+        'death_reason',
         'death_certificate',
         'religious_view_id',
         'hobby_id',
@@ -84,6 +89,13 @@ class Profile extends Model
         'father_id',
         'published_at'
     ];
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->fit(Manipulations::FIT_CROP, 150, 150)
+            ->nonQueued();
+    }
 
     public static function statusList(): array
     {

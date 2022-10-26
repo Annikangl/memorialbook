@@ -28,7 +28,7 @@
 
             <div class="profile__side -step-content col">
                 <div class="base-form -full">
-                    <form class="form" action="#" method="post" data-base-form="">
+                    <form class="form" action="{{route('profile.store_step3')}}" method="post" data-base-form="">
                         <div class="profile__section">
                             <div class="profile-section__row row">
                                 <div class="profile-section__side -avatar">

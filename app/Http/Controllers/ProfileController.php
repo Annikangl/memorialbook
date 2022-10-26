@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Profile\ProfileCreateRequest;
 use App\Http\Requests\Profile\SearchRequest;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
@@ -18,6 +19,7 @@ class ProfileController extends Controller
     public function index()
     {
         $profiles = Profile::query()->orderBy('id')->get();
+
         if ($profiles->isEmpty()) {
             return view('tree.error');
         }
@@ -26,11 +28,11 @@ class ProfileController extends Controller
 
     public function list()
     {
-        $profiles = Profile::query()->orderBy('date_birth')
-            ->whereNotNull('date_death')
-            ->get();
+        $profiles = Profile::query()->orderBy('date_birth')->paginate(8);
 
-        return view('tree.list', compact('profiles'));
+        $medias=Profile::find(45)->getMedia('avatar')->all();
+
+        return view('tree.list', compact('profiles','medias'));
     }
 
     public function show(string $slug)
@@ -57,16 +59,16 @@ class ProfileController extends Controller
         return view('profile.create', compact('fathers','mothers','profiles'));
     }
 
-    public function store(Request $request)
+    public function store(ProfileCreateRequest $request)
     {
         if ($request->hasFile('avatar')) {
-            $avatar_path = $request->file('avatar')->store('avatar_profile', 'public');
+            $avatar_path = $request->file('avatar')->store('uploads/profiles/avatar', 'public');
         } else {
             $avatar_path = null;
         }
 
         if ($request->hasFile('death_certificate')) {
-            $certificate_path = $request->file('death_certificate')->store('death_certificate');
+            $certificate_path = $request->file('death_certificate')->store('uploads/profiles/document','public');
         } else {
             $certificate_path = null;
         }
@@ -76,9 +78,11 @@ class ProfileController extends Controller
         $params['avatar'] = $avatar_path;
         $params['death_certificate'] = $certificate_path;
 
-//        dd()
-        $request->session()->put('profile', $params);
-//        $profile = Profile::create($params);
+        $request->session()->put('profile_step1', $params);
+
+//        $profile = Profile::create($params)
+//            ->addMedia($request->file('avatar'))
+//            ->toMediaCollection('avatar','avatar');
 
         return redirect()->route('profile.create.step2');
 // Перебрасывать на шаг 2 с id который только создал и его там сохранять чтобы при записи дополнялись данные уже в текущую запись
@@ -96,15 +100,25 @@ class ProfileController extends Controller
 
     public function store_step2(Request $request)
     {
+
         $params = $request->all();
-        $value = $request->session()->get('profile');
-        dd($value);
+        $params = $request->except(['_token']);
+
+        $request->session()->put('profile_step2', $params);
+        $value = $request->session()->all();
+//        dd($value);
+        return redirect()->route('profile.create.step3');
     }
 
 
     public function create_step3()
     {
+//        $value = $request->;
+        dd(session()->all());
         return view('profile.create_step3');
+    }
+    public function store_step3(Request $request){
+
     }
 
     public function map(SearchRequest $request)

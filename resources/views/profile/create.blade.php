@@ -22,14 +22,23 @@
                     <div class="profile__row row">
                         <div class="profile__side -step-info col">
                             <div class="profile__text-info">Давайте создавать и хранить историю вместе? Для начала необходимо заполнить основную информацию
-                                профиля.</div>
+                                профиля.
+{{--                                @if ($errors->any())--}}
+{{--                                    <div class="profile__text-info">--}}
+{{--                                        <ul>--}}
+{{--                                            @foreach ($errors->all() as $error)--}}
+{{--                                                <li>{{ $error }}</li>--}}
+{{--                                            @endforeach--}}
+{{--                                        </ul>--}}
+{{--                                    </div>--}}
+{{--                                @endif--}}
+                            </div>
                         </div>
 
                         <x-profile.steps_menu></x-profile.steps_menu>
 
                         <div class="profile__side -step-content col">
                             <div class="base-form -full">
-
                                 <form method="POST" enctype="multipart/form-data" action="{{route('profile.store')}}">
                                     @csrf
                                     <div class="profile__section">
@@ -135,10 +144,10 @@
                                                 </div>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
-                                                <label class="profile-section__label" for="reason_death">Причина смерти:</label>
+                                                <label class="profile-section__label" for="death_reason">Причина смерти:</label>
                                                 <div class="profile-section__input-container">
-                                                    <input class="profile-section__input form-control" type="text" id="reason_death"
-                                                           name="reason_death">
+                                                    <input class="profile-section__input form-control" type="text" id="death_reason"
+                                                           name="death_reason">
                                                 </div>
                                             </div>
                                             <div class="profile-section__form-group -half form-group">

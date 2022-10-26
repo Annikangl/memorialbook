@@ -37,36 +37,36 @@
                                     <div class="profile-section__file -multiple -preview -filename -multimedia file" data-file=""
                                          data-file-options="{&quot;max&quot;:100}">
                                         <label class="profile-section-file__list file-list" for="profile-images-1">
-                                                            <span class="file-item" title="Фото профайла">
-                                                                <span class="file-name">Фото профайла</span>
-                                                                <button class="file-cancel" type="button" title="Отменить загрузку файла">
-                                                                    <svg style="width: 12px; height: 12px;" aria-hidden="true">
-                                                                        <use xlink:href="../assets/media/sprite.svg?1644862956843#sprite-close"></use>
-                                                                    </svg>
-                                                                </button>
-                                                                <span class="file-image" style="background-image: url('../assets/uploads/profile/img-1.jpg')">
-                                                                </span>
-                                                            </span>
-                                            <span class="file-item" title="Фото профайла">
-                                                                <span class="file-name">Фото профайла</span>
-                                                                <button class="file-cancel" type="button" title="Отменить загрузку файла">
-                                                                    <svg style="width: 12px; height: 12px;" aria-hidden="true">
-                                                                        <use xlink:href="../assets/media/sprite.svg?1644862956843#sprite-close"></use>
-                                                                    </svg>
-                                                                </button>
-                                                                <span class="file-image" style="background-image: url('../assets/uploads/profile/img-2.png')">
-                                                                </span>
-                                                            </span>
-                                            <span class="file-item" title="Фото профайла">
-                                                                <span class="file-name">Фото профайла</span>
-                                                                <button class="file-cancel" type="button" title="Отменить загрузку файла">
-                                                                    <svg style="width: 12px; height: 12px;" aria-hidden="true">
-                                                                        <use xlink:href="../assets/media/sprite.svg?1644862956843#sprite-close"></use>
-                                                                    </svg>
-                                                                </button>
-                                                                <span class="file-image" style="background-image: url('../assets/uploads/profile/img-3.jpg')">
-                                                                </span>
-                                                            </span>
+{{--                                                            <span class="file-item" title="Фото профайла">--}}
+{{--                                                                <span class="file-name">Фото профайла</span>--}}
+{{--                                                                <button class="file-cancel" type="button" title="Отменить загрузку файла">--}}
+{{--                                                                    <svg style="width: 12px; height: 12px;" aria-hidden="true">--}}
+{{--                                                                        <use xlink:href="../assets/media/sprite.svg?1644862956843#sprite-close"></use>--}}
+{{--                                                                    </svg>--}}
+{{--                                                                </button>--}}
+{{--                                                                <span class="file-image" style="background-image: url('../assets/uploads/profile/img-1.jpg')">--}}
+{{--                                                                </span>--}}
+{{--                                                            </span>--}}
+{{--                                            <span class="file-item" title="Фото профайла">--}}
+{{--                                                                <span class="file-name">Фото профайла</span>--}}
+{{--                                                                <button class="file-cancel" type="button" title="Отменить загрузку файла">--}}
+{{--                                                                    <svg style="width: 12px; height: 12px;" aria-hidden="true">--}}
+{{--                                                                        <use xlink:href="../assets/media/sprite.svg?1644862956843#sprite-close"></use>--}}
+{{--                                                                    </svg>--}}
+{{--                                                                </button>--}}
+{{--                                                                <span class="file-image" style="background-image: url('../assets/uploads/profile/img-2.png')">--}}
+{{--                                                                </span>--}}
+{{--                                                            </span>--}}
+{{--                                            <span class="file-item" title="Фото профайла">--}}
+{{--                                                                <span class="file-name">Фото профайла</span>--}}
+{{--                                                                <button class="file-cancel" type="button" title="Отменить загрузку файла">--}}
+{{--                                                                    <svg style="width: 12px; height: 12px;" aria-hidden="true">--}}
+{{--                                                                        <use xlink:href="../assets/media/sprite.svg?1644862956843#sprite-close"></use>--}}
+{{--                                                                    </svg>--}}
+{{--                                                                </button>--}}
+{{--                                                                <span class="file-image" style="background-image: url('../assets/uploads/profile/img-3.jpg')">--}}
+{{--                                                                </span>--}}
+{{--                                                            </span>--}}
                                             <label class="profile-section-file__label file-label" for="profile-images-1">
                                                 <div class="file-label-inner">
                                                     <svg style="width: 20px; height: 20px;" aria-hidden="true">
@@ -77,7 +77,7 @@
                                             </label>
                                         </label>
                                         <input class="profile-section-file__input file-input sr-only" type="file" id="profile-images-1"
-                                               name="PHOTO" value="Фото профайла" accept=".jpg,.jpeg,.png,.mp4" multiple="">
+                                               name="PHOTO" value="Фото профайла" accept="" multiple="">
                                     </div>
                                 </div>
                                 <div class="profile-section__form-group form-group">
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="profile-section__form-group form-group">
                                     <label class="profile-section__label" for="hobby_id">Увлечения:</label>
-                                    <select class="profile-section__select select form-control" id="hobby_id" name="hobby_id" multiple="" hidden=""
+                                    <select class="profile-section__select select form-control" id="hobby_id" name="hobby_id[]" multiple="" hidden=""
                                             data-select="">
                                         @foreach($hobbys as $hobby)
                                         <option value="{{$hobby->id}}">{{$hobby->title}}</option>

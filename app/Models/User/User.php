@@ -77,7 +77,7 @@ class User extends Authenticatable
     {
         return static::create([
             'username' => $name,
-            'email' => $name,
+            'email' => $email,
             'phone' => $phone,
             'password' => Hash::make($password),
         ]);

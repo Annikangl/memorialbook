@@ -37,7 +37,7 @@
         window.app.globalConfig = {
             relPath: './',
             assetsPath: '/assets/media/',
-            gmapsApikey: 'AIzaSyDCgArix6diJwCToFgNcbDATib9ZrgYcBo'
+            gmapsApikey: 'AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y'
         };
         window.app.ready = function (callback) {
             if (typeof callback === 'function') document.addEventListener('DOMContentLoaded', function () {
