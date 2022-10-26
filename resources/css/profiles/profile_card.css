@@ -41,6 +41,7 @@
     justify-content: flex-start;
     align-items: center;
     margin: 20px 0 0;
+    padding-left: 0;
 }
 
 .social__item {

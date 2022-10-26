@@ -7,21 +7,21 @@
     "file": "assets/lato-bold.0cc3d792.woff2",
     "src": "resources/fonts/lato-bold.woff2"
   },
-  "resources/fonts/lato-regular.woff2": {
-    "file": "assets/lato-regular.de81d909.woff2",
-    "src": "resources/fonts/lato-regular.woff2"
-  },
   "resources/fonts/lato-semibold.woff2": {
     "file": "assets/lato-semibold.e42a071f.woff2",
     "src": "resources/fonts/lato-semibold.woff2"
   },
+  "resources/fonts/lato-regular.woff2": {
+    "file": "assets/lato-regular.de81d909.woff2",
+    "src": "resources/fonts/lato-regular.woff2"
+  },
   "resources/js/app.js": {
-    "file": "assets/app.e3f940ea.js",
+    "file": "assets/app.c14f2f0b.js",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app.1aeee714.css",
+    "file": "assets/app.d4716c30.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }

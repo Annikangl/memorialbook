@@ -29,6 +29,9 @@ class ProfileController extends Controller
     public function list()
     {
         $profiles = Profile::query()->orderBy('date_birth')->paginate(8);
+        if ($profiles->isEmpty()) {
+            return view('tree.error');
+        }
 
         $medias=Profile::find(45)->getMedia('avatar')->all();
 
@@ -37,13 +40,12 @@ class ProfileController extends Controller
 
     public function show(string $slug)
     {
-        /** @var Profile $profile */
         $profile = Profile::query()->with(['hobbies', 'religions', 'galleries'])
             ->where('slug', $slug)
             ->firstOrFail();
 
         $relatives = Profile::query()
-            ->select('first_name', 'last_name', 'patronymic', 'slug', 'avatar')
+            ->select(['first_name', 'last_name', 'patronymic', 'slug', 'avatar'])
             ->whereIn('id', [$profile->mother_id, $profile->father_id, $profile->spouse_id, $profile->child_id])
             ->get();
 
@@ -123,7 +125,7 @@ class ProfileController extends Controller
 
     public function map(SearchRequest $request)
     {
-        $profiles = Profile::filtered()->paginate(30);
+        $profiles = Profile::active()->filtered()->paginate(30);
 
         $count_filters = collect($request->input())->filter(function ($value) {
             return !is_null($value);

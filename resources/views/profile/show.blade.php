@@ -10,7 +10,7 @@
                         <div class="member-card-header__avatar">
                             <div class="member-card-header-avatar__image">
                                 <img class="member-card-header-avatar__img"
-                                     src="{{ asset('storage/' . $profile->avatar)  }}" alt="Profile avatar">
+                                     src="{{ asset('storage/' . $profile->avatar)  }}" alt="{{ $profile->full_name }}">
                             </div>
                             <a class="member-card-header-avatar__edit-link" href="../profile-add-member">
                                 <svg xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="member-card__info">
-                        <div class="member-card-info__text">Причина смерти: {{ $profile->reason_death }}</div>
+                        <div class="member-card-info__text">Причина смерти: {{ $profile->death_reason }}</div>
                         <div class="member-card-info__text">{{ $profile->description }}</div>
                     </div>
 

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('phone',20)->nullable();
             $table->string('schedule');
             $table->string('address');
+
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
             $table->string('avatar')->nullable();
@@ -36,7 +37,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('cemetery_gallery', function (Blueprint $table) {
+        Schema::create('cemetery_galleries', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Cemetery::class)
                 ->constrained()
@@ -54,6 +55,15 @@ return new class extends Migration
                 ->cascadeOnUpdate();
 
             $table->string('file')->nullable();
+        });
+
+        Schema::create('cemetery_socials', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Cemetery::class)
+                ->constrained();
+
+            $table->string('link')->nullable();
+            $table->string('icon')->nullable();
         });
     }
 

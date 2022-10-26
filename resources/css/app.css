@@ -2,10 +2,12 @@
 
 
 -----------------*/
+@import "_vars.css";
 @import "./fonts.css";
 @import "./template.css";
-@import "cemetery_pagination.css";
-@import "profile_card.css";
+@import "cemeteries/cemetery_pagination.css";
+@import "profiles/profile_card.css";
+@import "cemeteries/cemetery_card.css";
 
 .container, .container-fluid {
     margin-left: auto;
@@ -128,10 +130,6 @@
 
 .top__side {
     margin-bottom: 15px
-}
-
-.social__icon-facebook {
-    margin: 0;
 }
 
 .top__title {
@@ -562,16 +560,6 @@ dl, ol, ul {
 
 ul {
     list-style: none
-}
-
-ul > li:before {
-    background: #201e1f;
-    border-radius: 50%;
-    content: "";
-    height: 4px;
-    left: -1em;
-    top: calc(.75em - 2px);
-    width: 4px
 }
 
 ul > br {
@@ -5838,600 +5826,600 @@ html[data-slideout-type=auth] .slideout .base-form.-auth, html[data-slideout-typ
     }
 }
 
-.cemetery__top {
-    background-position: 50%;
-    background-size: cover;
-    height: 130px;
-    min-width: 100%;
-    overflow: hidden
-}
-
-.cemetery-top__image {
-    height: 100%;
-    margin: 0;
-    opacity: 0;
-    width: 100%
-}
-
-.cemetery__header {
-    background: #fff;
-    border-bottom: 1px solid #e5e8eb;
-    min-width: 100%;
-    padding-top: 1rem
-}
-
-.cemetery-header__left {
-    align-items: center;
-    display: flex;
-    min-width: 100%
-}
-
-.cemetery-header__logo {
-    align-self: flex-start;
-    max-width: 90px;
-    min-width: 90px
-}
-
-.cemetery-header-logo__image {
-    margin: 0
-}
-
-.cemetery-header__info {
-    max-width: calc(100% - 90px);
-    min-width: calc(100% - 90px);
-    padding-left: 20px
-}
-
-.cemetery-header__title {
-    align-items: center;
-    display: flex;
-    margin: 0;
-    min-height: 90px
-}
-
-.cemetery-header__subtitle {
-    color: rgba(32, 30, 31, .7);
-    margin-left: -110px;
-    padding-top: 1rem
-}
-
-.cemetery-header__gallery {
-    margin-top: 2rem;
-    width: 100%
-}
-
-.cemetery-header-gallery__items {
-    display: flex;
-    margin: 0 -2px
-}
-
-.cemetery-header-gallery__item {
-    display: flex;
-    max-width: 33.3333333333%;
-    min-width: 33.3333333333%;
-    padding: 0 2px
-}
-
-.cemetery-header-gallery__item.-more.-desktop, .cemetery-header-gallery__item:nth-child(3), .cemetery-header-gallery__item:nth-child(4) {
-    display: none
-}
-
-.cemetery-header-gallery__link {
-    color: #fff !important;
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    width: 100%
-}
-
-.cemetery-header-gallery__inner {
-    position: relative
-}
-
-.cemetery-header-gallery__video {
-    height: 100%;
-    margin: 0;
-    max-width: none
-}
-
-.cemetery-header-gallery__play, .cemetery-header-gallery__video {
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%)
-}
-
-.cemetery-header-gallery__image {
-    margin: 0
-}
-
-.cemetery-header-gallery__more {
-    align-items: center;
-    background: rgba(0, 0, 0, .6);
-    border: none;
-    color: #fff;
-    display: flex;
-    font-size: 12px;
-    height: 100%;
-    justify-content: center;
-    left: 0;
-    padding: 0 8px;
-    position: absolute;
-    text-align: center;
-    top: 0;
-    width: 100%
-}
-
-.cemetery-header__tabs {
-    margin-bottom: -1px;
-    margin-top: 1.5rem;
-    min-width: 100%
-}
-
-.cemetery-header-tabs-menu__list {
-    flex-wrap: nowrap;
-    margin: 0 -20px;
-    overflow-x: auto;
-    padding: 0 20px
-}
-
-.cemetery-header-tabs-menu__list:after {
-    display: none
-}
-
-.cemetery-header-tabs-menu__list .nav-link {
-    border: 1px solid transparent;
-    border-bottom: none;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    color: rgba(32, 30, 31, .7);
-    font-size: 14px;
-    font-weight: 600;
-    padding: 12px 18px
-}
-
-.cemetery-header-tabs-menu__list .nav-link.active, .cemetery-header-tabs-menu__list .nav-link:focus, .cemetery-header-tabs-menu__list .nav-link:hover {
-    color: #201e1f
-}
-
-.cemetery-header-tabs-menu__list .nav-link.active {
-    background: #f5f7f9;
-    border-color: #e5e8eb
-}
-
-.cemetery-header-tabs-menu__link {
-    white-space: nowrap
-}
-
-.cemetery-header-tabs-menu__link:after {
-    display: none
-}
-
-.cemetery-tabs__content {
-    padding-bottom: 3.5rem
-}
-
-.cemetery-tabs__content .pagination {
-    margin-bottom: 0
-}
-
-.cemetery-tabs-content__inner {
-    margin-top: 0
-}
-
-.cemetery-content__left, .cemetery-content__right {
-    min-width: 100%
-}
-
-.cemetery-content__text {
-    color: rgba(32, 30, 31, .7);
-    margin-top: 1.5rem
-}
-
-.cemetery-content__right {
-    margin-top: 1.5rem
-}
-
-.cemetery-content-people__title {
-    color: rgba(32, 30, 31, .8);
-    font-size: 20px;
-    font-weight: 700
-}
-
-.cemetery-content-people__items {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: -10px;
-    margin-right: -10px;
-    margin-top: 4px
-}
-
-.cemetery-content-people__item {
-    flex: 0 0 auto;
-    margin-top: 8px;
-    max-width: 100%;
-    padding-left: 10px;
-    padding-right: 10px
-}
-
-.cemetery-content-people-item__inner {
-    background-color: #f5f7f9;
-    border: 1px solid #e5e8eb;
-    border-radius: 64px;
-    display: flex
-}
-
-.cemetery-content-people-item__content {
-    align-items: center;
-    background-color: #fff;
-    border: 1px solid #e5e8eb;
-    border-radius: 64px;
-    display: flex;
-    margin: -1px;
-    padding: 3px
-}
-
-.cemetery-content-people-item__image {
-    border-radius: 50%;
-    height: 34px;
-    margin: 0;
-    width: 34px
-}
-
-.cemetery-content-people-item__name {
-    font-size: 14px;
-    font-weight: 600;
-    padding: 2px 16px 2px 8px
-}
-
-.cemetery-content-people-item__status {
-    color: #797879;
-    padding: 8px 40px 8px 25px
-}
-
-.cemetery-content__map {
-    margin-top: 1.5rem
-}
-
-.cemetery-content-map__image {
-    margin: 0
-}
-
-.cemetery-memorials__items {
-    margin-top: 1rem
-}
-
-.cemetery-memorials__item {
-    margin-top: 4px
-}
-
-.cemetery-memorials__inner {
-    align-items: center;
-    background: #fff;
-    border-radius: 7px;
-    display: flex;
-    padding: 9px 18px
-}
-
-.cemetery-memorials-image__image {
-    margin: 0
-}
-
-.cemetery-memorials__info {
-    padding-left: 16px
-}
-
-.cemetery-memorials__name {
-    line-height: 1.3
-}
-
-.cemetery-memorials__dates {
-    color: rgba(32, 30, 31, .8);
-    font-size: 14px;
-    margin-top: 6px
-}
-
-.cemetery-catalog__row {
-    margin-left: -9px;
-    margin-right: -9px
-}
-
-.cemetery-catalog__left, .cemetery-catalog__right {
-    padding-left: 9px;
-    padding-right: 9px
-}
-
-.cemetery-catalog__left {
-    max-width: 100%;
-    min-width: 100%
-}
-
-.cemetery-catalog__dropdown {
-    display: flex;
-    margin-top: 1rem
-}
-
-.cemetery-catalog__dropdown.show .cemetery-catalog-dropdown__icon {
-    transform: scaleY(-1)
-}
-
-.cemetery-catalog-dropdown__toggle {
-    align-items: center;
-    background: #fff;
-    border: none;
-    border-radius: 7px;
-    display: flex;
-    font-size: 18px;
-    font-weight: 600;
-    height: 44px;
-    justify-content: space-between;
-    padding: 0 18px 0 24px
-}
-
-.cemetery-catalog-dropdown__toggle:after {
-    display: none
-}
-
-.cemetery-catalog-dropdown__icon {
-    color: #201e1f;
-    display: block
-}
-
-.cemetery-catalog-dropdown__menu.dropdown-menu .dropdown-inner {
-    padding: 12px 0 18px !important
-}
-
-.cemetery-catalog-dropdown__menu.dropdown-menu .dropdown-item {
-    border-bottom: none !important
-}
-
-.cemetery-catalog-dropdown__menu.dropdown-menu .dropdown-link {
-    background: none;
-    color: rgba(32, 30, 31, .6);
-    font-size: 18px;
-    font-weight: 600;
-    padding-left: 32px;
-    padding-right: 32px
-}
-
-.cemetery-catalog-dropdown__menu.dropdown-menu .dropdown-link.active {
-    color: #175ed9
-}
-
-.cemetery-catalog__items {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -8px -9px 0;
-    padding-top: 1rem
-}
-
-.cemetery-catalog__items .catalog-item {
-    min-width: 100%;
-    padding: 8px 9px 0
-}
-
-.cemetery-catalog__items .catalog-item .card {
-    height: 100%;
-    margin-top: 0;
-    min-width: 100%
-}
-
-.cemetery__contacts {
-    margin-top: 1rem
-}
-
-.cemetery-contacts-map__image {
-    margin: 0
-}
-
-.cemetery-contacts__info {
-    background: #fff;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    padding: 1.5rem 27px
-}
-
-.cemetery-contacts__items {
-    margin-top: -1.5rem
-}
-
-.cemetery-contacts__item {
-    margin-top: 1.5rem
-}
-
-.cemetery-contacts__title {
-    font-size: 14px
-}
-
-.cemetery-contacts__value {
-    font-size: 18px
-}
-
-.cemetery-contacts__link {
-    color: #201e1f;
-    text-decoration: none !important
-}
-
-.cemetery-contacts__bottom {
-    margin-top: 2.75rem
-}
-
-.cemetery-contacts-bottom__items {
-    margin-top: -8px
-}
-
-.cemetery-contacts-bottom__item {
-    margin-top: 8px
-}
-
-.cemetery-contacts-bottom__button {
-    min-width: 100%
-}
-
-@media (min-width: 414px) {
-    .cemetery-header-tabs-menu__list .nav-link {
-        font-size: 16px
-    }
-}
-
-@media (min-width: 576px) {
-    .cemetery__top {
-        height: 24.7222222222vw
-    }
-
-    .cemetery-top__image {
-        left: 0;
-        position: absolute;
-        top: 0
-    }
-
-    .cemetery__header {
-        padding-top: 1.5rem
-    }
-
-    .cemetery-header__logo {
-        max-width: 122px;
-        min-width: 122px
-    }
-
-    .cemetery-header__title {
-        height: auto
-    }
-
-    .cemetery-header__subtitle {
-        margin-left: 0;
-        padding-top: .5rem
-    }
-
-    .cemetery-header-gallery__item {
-        max-width: 20%;
-        min-width: 20%
-    }
-
-    .cemetery-header-gallery__item.-more.-desktop, .cemetery-header-gallery__item:nth-child(3), .cemetery-header-gallery__item:nth-child(4) {
-        display: flex
-    }
-
-    .cemetery-header-gallery__item.-more.-mobile {
-        display: none
-    }
-
-    .cemetery-header__tabs {
-        margin-top: 2rem
-    }
-
-    .cemetery-header-tabs-menu__list .nav-link {
-        font-size: 18px
-    }
-}
-
-@media (min-width: 768px) {
-    .cemetery-header-gallery__items {
-        margin: 0 -3px
-    }
-
-    .cemetery-header-gallery__item {
-        max-width: 128px;
-        min-width: 128px;
-        padding: 0 3px
-    }
-
-    .cemetery-catalog__items {
-        margin-top: -1rem
-    }
-
-    .cemetery-catalog__items .catalog-item {
-        max-width: 50%;
-        min-width: 50%;
-        padding-top: 1rem
-    }
-}
-
-@media (min-width: 992px) {
-    .cemetery__header {
-        padding-top: 2rem
-    }
-
-    .cemetery-header__tabs {
-        margin-top: 2.5rem
-    }
-
-    .cemetery-header-tabs-menu__list .nav-link {
-        padding: 14px 24px
-    }
-
-    .cemetery-tabs__content {
-        padding-bottom: 4rem
-    }
-
-    .cemetery-content__left {
-        max-width: 58.3333333333%;
-        min-width: 58.3333333333%
-    }
-
-    .cemetery-content__right {
-        max-width: 41.6666666667%;
-        min-width: 41.6666666667%
-    }
-
-    .cemetery-content__map, .cemetery-content__right, .cemetery-content__text {
-        margin-top: 2rem
-    }
-
-    .cemetery-catalog__left {
-        max-width: 290px;
-        min-width: 290px
-    }
-
-    .cemetery-catalog-dropdown__toggle {
-        display: none
-    }
-
-    .cemetery-catalog-dropdown__menu.dropdown-menu {
-        box-shadow: none;
-        margin-top: 0 !important;
-        max-height: none;
-        min-width: 100% !important;
-        opacity: 1;
-        position: static;
-        transform: none !important;
-        transition: none
-    }
-
-    .cemetery-catalog-dropdown__menu.dropdown-menu:before {
-        display: none
-    }
-}
-
-@media (min-width: 1200px) {
-    .cemetery-header__left, .cemetery-header__right {
-        max-width: 50%;
-        min-width: 50%
-    }
-
-    .cemetery-header-gallery__item {
-        max-width: 20%;
-        min-width: 20%
-    }
-
-    .cemetery-content__left, .cemetery-content__right {
-        max-width: 50%;
-        min-width: 50%
-    }
-
-    .cemetery-catalog__items .catalog-item {
-        max-width: 33.3333333333%;
-        min-width: 33.3333333333%
-    }
-}
-
-@media (min-width: 1366px) {
-    .cemetery-catalog__items .catalog-item {
-        max-width: 25%;
-        min-width: 25%
-    }
-}
+/*.cemetery__top {*/
+/*    background-position: 50%;*/
+/*    background-size: cover;*/
+/*    height: 130px;*/
+/*    min-width: 100%;*/
+/*    overflow: hidden*/
+/*}*/
+
+/*.cemetery-top__image {*/
+/*    height: 100%;*/
+/*    margin: 0;*/
+/*    opacity: 0;*/
+/*    width: 100%*/
+/*}*/
+
+/*.cemetery__header {*/
+/*    background: #fff;*/
+/*    border-bottom: 1px solid #e5e8eb;*/
+/*    min-width: 100%;*/
+/*    padding-top: 1rem*/
+/*}*/
+
+/*.cemetery-header__left {*/
+/*    align-items: center;*/
+/*    display: flex;*/
+/*    min-width: 100%*/
+/*}*/
+
+/*.cemetery-header__logo {*/
+/*    align-self: flex-start;*/
+/*    max-width: 90px;*/
+/*    min-width: 90px*/
+/*}*/
+
+/*.cemetery-header-logo__image {*/
+/*    margin: 0*/
+/*}*/
+
+/*.cemetery-header__info {*/
+/*    max-width: calc(100% - 90px);*/
+/*    min-width: calc(100% - 90px);*/
+/*    padding-left: 20px*/
+/*}*/
+
+/*.cemetery-header__title {*/
+/*    align-items: center;*/
+/*    display: flex;*/
+/*    margin: 0;*/
+/*    min-height: 90px*/
+/*}*/
+
+/*.cemetery-header__subtitle {*/
+/*    color: rgba(32, 30, 31, .7);*/
+/*    margin-left: -110px;*/
+/*    padding-top: 1rem*/
+/*}*/
+
+/*.cemetery-header__gallery {*/
+/*    margin-top: 2rem;*/
+/*    width: 100%*/
+/*}*/
+
+/*.cemetery-header-gallery__items {*/
+/*    display: flex;*/
+/*    margin: 0 -2px*/
+/*}*/
+
+/*.cemetery-header-gallery__item {*/
+/*    display: flex;*/
+/*    max-width: 33.3333333333%;*/
+/*    min-width: 33.3333333333%;*/
+/*    padding: 0 2px*/
+/*}*/
+
+/*.cemetery-header-gallery__item.-more.-desktop, .cemetery-header-gallery__item:nth-child(3), .cemetery-header-gallery__item:nth-child(4) {*/
+/*    display: none*/
+/*}*/
+
+/*.cemetery-header-gallery__link {*/
+/*    color: #fff !important;*/
+/*    display: flex;*/
+/*    overflow: hidden;*/
+/*    position: relative;*/
+/*    width: 100%*/
+/*}*/
+
+/*.cemetery-header-gallery__inner {*/
+/*    position: relative*/
+/*}*/
+
+/*.cemetery-header-gallery__video {*/
+/*    height: 100%;*/
+/*    margin: 0;*/
+/*    max-width: none*/
+/*}*/
+
+/*.cemetery-header-gallery__play, .cemetery-header-gallery__video {*/
+/*    left: 50%;*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    transform: translate(-50%, -50%)*/
+/*}*/
+
+/*.cemetery-header-gallery__image {*/
+/*    margin: 0*/
+/*}*/
+
+/*.cemetery-header-gallery__more {*/
+/*    align-items: center;*/
+/*    background: rgba(0, 0, 0, .6);*/
+/*    border: none;*/
+/*    color: #fff;*/
+/*    display: flex;*/
+/*    font-size: 12px;*/
+/*    height: 100%;*/
+/*    justify-content: center;*/
+/*    left: 0;*/
+/*    padding: 0 8px;*/
+/*    position: absolute;*/
+/*    text-align: center;*/
+/*    top: 0;*/
+/*    width: 100%*/
+/*}*/
+
+/*.cemetery-header__tabs {*/
+/*    margin-bottom: -1px;*/
+/*    margin-top: 1.5rem;*/
+/*    min-width: 100%*/
+/*}*/
+
+/*.cemetery-header-tabs-menu__list {*/
+/*    flex-wrap: nowrap;*/
+/*    margin: 0 -20px;*/
+/*    overflow-x: auto;*/
+/*    padding: 0 20px*/
+/*}*/
+
+/*.cemetery-header-tabs-menu__list:after {*/
+/*    display: none*/
+/*}*/
+
+/*.cemetery-header-tabs-menu__list .nav-link {*/
+/*    border: 1px solid transparent;*/
+/*    border-bottom: none;*/
+/*    border-top-left-radius: 7px;*/
+/*    border-top-right-radius: 7px;*/
+/*    color: rgba(32, 30, 31, .7);*/
+/*    font-size: 14px;*/
+/*    font-weight: 600;*/
+/*    padding: 12px 18px*/
+/*}*/
+
+/*.cemetery-header-tabs-menu__list .nav-link.active, .cemetery-header-tabs-menu__list .nav-link:focus, .cemetery-header-tabs-menu__list .nav-link:hover {*/
+/*    color: #201e1f*/
+/*}*/
+
+/*.cemetery-header-tabs-menu__list .nav-link.active {*/
+/*    background: #f5f7f9;*/
+/*    border-color: #e5e8eb*/
+/*}*/
+
+/*.cemetery-header-tabs-menu__link {*/
+/*    white-space: nowrap*/
+/*}*/
+
+/*.cemetery-header-tabs-menu__link:after {*/
+/*    display: none*/
+/*}*/
+
+/*.cemetery-tabs__content {*/
+/*    padding-bottom: 3.5rem*/
+/*}*/
+
+/*.cemetery-tabs__content .pagination {*/
+/*    margin-bottom: 0*/
+/*}*/
+
+/*.cemetery-tabs-content__inner {*/
+/*    margin-top: 0*/
+/*}*/
+
+/*.cemetery-content__left, .cemetery-content__right {*/
+/*    min-width: 100%*/
+/*}*/
+
+/*.cemetery-content__text {*/
+/*    color: rgba(32, 30, 31, .7);*/
+/*    margin-top: 1.5rem*/
+/*}*/
+
+/*.cemetery-content__right {*/
+/*    margin-top: 1.5rem*/
+/*}*/
+
+/*.cemetery-content-people__title {*/
+/*    color: rgba(32, 30, 31, .8);*/
+/*    font-size: 20px;*/
+/*    font-weight: 700*/
+/*}*/
+
+/*.cemetery-content-people__items {*/
+/*    align-items: center;*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    margin-left: -10px;*/
+/*    margin-right: -10px;*/
+/*    margin-top: 4px*/
+/*}*/
+
+/*.cemetery-content-people__item {*/
+/*    flex: 0 0 auto;*/
+/*    margin-top: 8px;*/
+/*    max-width: 100%;*/
+/*    padding-left: 10px;*/
+/*    padding-right: 10px*/
+/*}*/
+
+/*.cemetery-content-people-item__inner {*/
+/*    background-color: #f5f7f9;*/
+/*    border: 1px solid #e5e8eb;*/
+/*    border-radius: 64px;*/
+/*    display: flex*/
+/*}*/
+
+/*.cemetery-content-people-item__content {*/
+/*    align-items: center;*/
+/*    background-color: #fff;*/
+/*    border: 1px solid #e5e8eb;*/
+/*    border-radius: 64px;*/
+/*    display: flex;*/
+/*    margin: -1px;*/
+/*    padding: 3px*/
+/*}*/
+
+/*.cemetery-content-people-item__image {*/
+/*    border-radius: 50%;*/
+/*    height: 34px;*/
+/*    margin: 0;*/
+/*    width: 34px*/
+/*}*/
+
+/*.cemetery-content-people-item__name {*/
+/*    font-size: 14px;*/
+/*    font-weight: 600;*/
+/*    padding: 2px 16px 2px 8px*/
+/*}*/
+
+/*.cemetery-content-people-item__status {*/
+/*    color: #797879;*/
+/*    padding: 8px 40px 8px 25px*/
+/*}*/
+
+/*.cemetery-content__map {*/
+/*    margin-top: 1.5rem*/
+/*}*/
+
+/*.cemetery-content-map__image {*/
+/*    margin: 0*/
+/*}*/
+
+/*.cemetery-memorials__items {*/
+/*    margin-top: 1rem*/
+/*}*/
+
+/*.cemetery-memorials__item {*/
+/*    margin-top: 4px*/
+/*}*/
+
+/*.cemetery-memorials__inner {*/
+/*    align-items: center;*/
+/*    background: #fff;*/
+/*    border-radius: 7px;*/
+/*    display: flex;*/
+/*    padding: 9px 18px*/
+/*}*/
+
+/*.cemetery-memorials-image__image {*/
+/*    margin: 0*/
+/*}*/
+
+/*.cemetery-memorials__info {*/
+/*    padding-left: 16px*/
+/*}*/
+
+/*.cemetery-memorials__name {*/
+/*    line-height: 1.3*/
+/*}*/
+
+/*.cemetery-memorials__dates {*/
+/*    color: rgba(32, 30, 31, .8);*/
+/*    font-size: 14px;*/
+/*    margin-top: 6px*/
+/*}*/
+
+/*.cemetery-catalog__row {*/
+/*    margin-left: -9px;*/
+/*    margin-right: -9px*/
+/*}*/
+
+/*.cemetery-catalog__left, .cemetery-catalog__right {*/
+/*    padding-left: 9px;*/
+/*    padding-right: 9px*/
+/*}*/
+
+/*.cemetery-catalog__left {*/
+/*    max-width: 100%;*/
+/*    min-width: 100%*/
+/*}*/
+
+/*.cemetery-catalog__dropdown {*/
+/*    display: flex;*/
+/*    margin-top: 1rem*/
+/*}*/
+
+/*.cemetery-catalog__dropdown.show .cemetery-catalog-dropdown__icon {*/
+/*    transform: scaleY(-1)*/
+/*}*/
+
+/*.cemetery-catalog-dropdown__toggle {*/
+/*    align-items: center;*/
+/*    background: #fff;*/
+/*    border: none;*/
+/*    border-radius: 7px;*/
+/*    display: flex;*/
+/*    font-size: 18px;*/
+/*    font-weight: 600;*/
+/*    height: 44px;*/
+/*    justify-content: space-between;*/
+/*    padding: 0 18px 0 24px*/
+/*}*/
+
+/*.cemetery-catalog-dropdown__toggle:after {*/
+/*    display: none*/
+/*}*/
+
+/*.cemetery-catalog-dropdown__icon {*/
+/*    color: #201e1f;*/
+/*    display: block*/
+/*}*/
+
+/*.cemetery-catalog-dropdown__menu.dropdown-menu .dropdown-inner {*/
+/*    padding: 12px 0 18px !important*/
+/*}*/
+
+/*.cemetery-catalog-dropdown__menu.dropdown-menu .dropdown-item {*/
+/*    border-bottom: none !important*/
+/*}*/
+
+/*.cemetery-catalog-dropdown__menu.dropdown-menu .dropdown-link {*/
+/*    background: none;*/
+/*    color: rgba(32, 30, 31, .6);*/
+/*    font-size: 18px;*/
+/*    font-weight: 600;*/
+/*    padding-left: 32px;*/
+/*    padding-right: 32px*/
+/*}*/
+
+/*.cemetery-catalog-dropdown__menu.dropdown-menu .dropdown-link.active {*/
+/*    color: #175ed9*/
+/*}*/
+
+/*.cemetery-catalog__items {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    margin: -8px -9px 0;*/
+/*    padding-top: 1rem*/
+/*}*/
+
+/*.cemetery-catalog__items .catalog-item {*/
+/*    min-width: 100%;*/
+/*    padding: 8px 9px 0*/
+/*}*/
+
+/*.cemetery-catalog__items .catalog-item .card {*/
+/*    height: 100%;*/
+/*    margin-top: 0;*/
+/*    min-width: 100%*/
+/*}*/
+
+/*.cemetery__contacts {*/
+/*    margin-top: 1rem*/
+/*}*/
+
+/*.cemetery-contacts-map__image {*/
+/*    margin: 0*/
+/*}*/
+
+/*.cemetery-contacts__info {*/
+/*    background: #fff;*/
+/*    border-bottom-left-radius: 7px;*/
+/*    border-bottom-right-radius: 7px;*/
+/*    padding: 1.5rem 27px*/
+/*}*/
+
+/*.cemetery-contacts__items {*/
+/*    margin-top: -1.5rem*/
+/*}*/
+
+/*.cemetery-contacts__item {*/
+/*    margin-top: 1.5rem*/
+/*}*/
+
+/*.cemetery-contacts__title {*/
+/*    font-size: 14px*/
+/*}*/
+
+/*.cemetery-contacts__value {*/
+/*    font-size: 18px*/
+/*}*/
+
+/*.cemetery-contacts__link {*/
+/*    color: #201e1f;*/
+/*    text-decoration: none !important*/
+/*}*/
+
+/*.cemetery-contacts__bottom {*/
+/*    margin-top: 2.75rem*/
+/*}*/
+
+/*.cemetery-contacts-bottom__items {*/
+/*    margin-top: -8px*/
+/*}*/
+
+/*.cemetery-contacts-bottom__item {*/
+/*    margin-top: 8px*/
+/*}*/
+
+/*.cemetery-contacts-bottom__button {*/
+/*    min-width: 100%*/
+/*}*/
+
+/*@media (min-width: 414px) {*/
+/*    .cemetery-header-tabs-menu__list .nav-link {*/
+/*        font-size: 16px*/
+/*    }*/
+/*}*/
+
+/*@media (min-width: 576px) {*/
+/*    .cemetery__top {*/
+/*        height: 24.7222222222vw*/
+/*    }*/
+
+/*    .cemetery-top__image {*/
+/*        left: 0;*/
+/*        position: absolute;*/
+/*        top: 0*/
+/*    }*/
+
+/*    .cemetery__header {*/
+/*        padding-top: 1.5rem*/
+/*    }*/
+
+/*    .cemetery-header__logo {*/
+/*        max-width: 122px;*/
+/*        min-width: 122px*/
+/*    }*/
+
+/*    .cemetery-header__title {*/
+/*        height: auto*/
+/*    }*/
+
+/*    .cemetery-header__subtitle {*/
+/*        margin-left: 0;*/
+/*        padding-top: .5rem*/
+/*    }*/
+
+/*    .cemetery-header-gallery__item {*/
+/*        max-width: 20%;*/
+/*        min-width: 20%*/
+/*    }*/
+
+/*    .cemetery-header-gallery__item.-more.-desktop, .cemetery-header-gallery__item:nth-child(3), .cemetery-header-gallery__item:nth-child(4) {*/
+/*        display: flex*/
+/*    }*/
+
+/*    .cemetery-header-gallery__item.-more.-mobile {*/
+/*        display: none*/
+/*    }*/
+
+/*    .cemetery-header__tabs {*/
+/*        margin-top: 2rem*/
+/*    }*/
+
+/*    .cemetery-header-tabs-menu__list .nav-link {*/
+/*        font-size: 18px*/
+/*    }*/
+/*}*/
+
+/*@media (min-width: 768px) {*/
+/*    .cemetery-header-gallery__items {*/
+/*        margin: 0 -3px*/
+/*    }*/
+
+/*    .cemetery-header-gallery__item {*/
+/*        max-width: 128px;*/
+/*        min-width: 128px;*/
+/*        padding: 0 3px*/
+/*    }*/
+
+/*    .cemetery-catalog__items {*/
+/*        margin-top: -1rem*/
+/*    }*/
+
+/*    .cemetery-catalog__items .catalog-item {*/
+/*        max-width: 50%;*/
+/*        min-width: 50%;*/
+/*        padding-top: 1rem*/
+/*    }*/
+/*}*/
+
+/*@media (min-width: 992px) {*/
+/*    .cemetery__header {*/
+/*        padding-top: 2rem*/
+/*    }*/
+
+/*    .cemetery-header__tabs {*/
+/*        margin-top: 2.5rem*/
+/*    }*/
+
+/*    .cemetery-header-tabs-menu__list .nav-link {*/
+/*        padding: 14px 24px*/
+/*    }*/
+
+/*    .cemetery-tabs__content {*/
+/*        padding-bottom: 4rem*/
+/*    }*/
+
+/*    .cemetery-content__left {*/
+/*        max-width: 58.3333333333%;*/
+/*        min-width: 58.3333333333%*/
+/*    }*/
+
+/*    .cemetery-content__right {*/
+/*        max-width: 41.6666666667%;*/
+/*        min-width: 41.6666666667%*/
+/*    }*/
+
+/*    .cemetery-content__map, .cemetery-content__right, .cemetery-content__text {*/
+/*        margin-top: 2rem*/
+/*    }*/
+
+/*    .cemetery-catalog__left {*/
+/*        max-width: 290px;*/
+/*        min-width: 290px*/
+/*    }*/
+
+/*    .cemetery-catalog-dropdown__toggle {*/
+/*        display: none*/
+/*    }*/
+
+/*    .cemetery-catalog-dropdown__menu.dropdown-menu {*/
+/*        box-shadow: none;*/
+/*        margin-top: 0 !important;*/
+/*        max-height: none;*/
+/*        min-width: 100% !important;*/
+/*        opacity: 1;*/
+/*        position: static;*/
+/*        transform: none !important;*/
+/*        transition: none*/
+/*    }*/
+
+/*    .cemetery-catalog-dropdown__menu.dropdown-menu:before {*/
+/*        display: none*/
+/*    }*/
+/*}*/
+
+/*@media (min-width: 1200px) {*/
+/*    .cemetery-header__left, .cemetery-header__right {*/
+/*        max-width: 50%;*/
+/*        min-width: 50%*/
+/*    }*/
+
+/*    .cemetery-header-gallery__item {*/
+/*        max-width: 20%;*/
+/*        min-width: 20%*/
+/*    }*/
+
+/*    .cemetery-content__left, .cemetery-content__right {*/
+/*        max-width: 50%;*/
+/*        min-width: 50%*/
+/*    }*/
+
+/*    .cemetery-catalog__items .catalog-item {*/
+/*        max-width: 33.3333333333%;*/
+/*        min-width: 33.3333333333%*/
+/*    }*/
+/*}*/
+
+/*@media (min-width: 1366px) {*/
+/*    .cemetery-catalog__items .catalog-item {*/
+/*        max-width: 25%;*/
+/*        min-width: 25%*/
+/*    }*/
+/*}*/
 
 .catalog-header__left {
     min-width: 100%

@@ -20,6 +20,8 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
+        "@fancyapps/ui": "^4.0.31",
+        "@googlemaps/markerclusterer": "^2.0.13",
         "jquery": "^3.6.1",
         "slideout": "^1.0.1"
     }

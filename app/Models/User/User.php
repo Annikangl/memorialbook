@@ -46,6 +46,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @method static Builder|User whereUsername($value)
+ * @method static \Database\Factories\User\UserFactory factory(...$parameters)
  */
 class User extends Authenticatable
 {

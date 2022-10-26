@@ -4,11 +4,11 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class InstallCommand extends Command
+class RefreshCommand extends Command
 {
-    protected $signature = 'memorialbook:install';
+    protected $signature = 'memorialbook:refresh';
 
-    protected $description = 'Installing test data';
+    protected $description = 'Refreshing data';
 
     public function handle(): int
     {
@@ -16,8 +16,9 @@ class InstallCommand extends Command
             return self::FAILURE;
         }
 
-        $this->call('migrate');
-        $this->call('storage:link');
+        $this->call('migrate:fresh', [
+            '--seed' => true
+        ]);
 
         return Command::SUCCESS;
     }
