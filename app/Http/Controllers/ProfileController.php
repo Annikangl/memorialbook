@@ -29,6 +29,9 @@ class ProfileController extends Controller
     public function list()
     {
         $profiles = Profile::query()->orderBy('date_birth')->paginate(8);
+        if ($profiles->isEmpty()) {
+            return view('tree.error');
+        }
 
         $medias=Profile::find(45)->getMedia('avatar')->all();
 
