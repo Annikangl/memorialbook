@@ -2,10 +2,12 @@
 
 namespace App\Models\Cemetery;
 
+use App\Models\Profile\Profile;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Cemetery\Cemetery
@@ -32,6 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Cemetery byName(string $name)
  * @method static \Database\Factories\Cemetery\CemeteryFactory factory(...$parameters)
  * @method static Builder|Cemetery filtered()
+ * @method static Builder|Cemetery active()
  * @method static Builder|Cemetery newModelQuery()
  * @method static Builder|Cemetery newQuery()
  * @method static Builder|Cemetery query()
@@ -54,6 +57,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static Builder|Cemetery whereTitleEn($value)
  * @method static Builder|Cemetery whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $slug
+ * @method static Builder|Cemetery findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static Builder|Cemetery whereSlug($value)
+ * @method static Builder|Cemetery withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 class Cemetery extends Model
 {
@@ -88,13 +95,32 @@ class Cemetery extends Model
     public function scopeFiltered(Builder $query): Builder
     {
         return $query->when($name = request('NAME'), function (Builder $q) use ($name) {
-            $q->where('title', 'LIKE', "%req%")
+            $q->where('title', 'LIKE', "%$name%")
                 ->orWhere('title_en', 'LIKE', "%$name%");
         })->when($address = request('ADDRESS'), function (Builder $query) use ($address) {
             $query->where('address', 'LIKE', "%$address%");
         });
     }
 
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('status', self::STATUS_ACTIVE);
+    }
+
+    public function profiles(): HasMany
+    {
+        return $this->hasMany(Profile::class);
+    }
+
+    public function galleries(): HasMany
+    {
+        return $this->hasMany(Gallery::class);
+    }
+
+    public function socials(): HasMany
+    {
+        return $this->hasMany(CemeterySocial::class);
+    }
 
     public function sluggable(): array
     {

@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Profile;
 
+use App\Models\Cemetery\Cemetery;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
 use Carbon\Carbon;
@@ -16,14 +17,15 @@ class ProfileFactory extends Factory
     public function definition(): array
     {
         return [
+            'cemetery_id' => Cemetery::query()->inRandomOrder()->value('id'),
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'patronymic' => $this->faker->name(),
             'avatar' => $this->faker->randomElement(
                 [
                     'uploads/profiles/avatar/avatar-1.jpg',
-                    'uploads/profiles/avatar/avatar-2.png',
-                    'uploads/profiles/avatar/avatar-3.png',
+                    'uploads/profiles/avatar/avatar-2.jpg',
+                    'uploads/profiles/avatar/avatar-3.jpg',
                     'uploads/profiles/avatar/avatar-4.jpg',
                     'uploads/profiles/avatar/avatar-5.jpg',
                 ]

@@ -5,23 +5,38 @@ namespace App\Http\Controllers\Cemetery;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cemetery\SearchRequest;
 use App\Models\Cemetery\Cemetery;
-use Illuminate\Contracts\View\View;
 
 class CemeteryController extends Controller
 {
-    public function map(SearchRequest $request): View
+    public function map(SearchRequest $request)
     {
-        $cemeteries = Cemetery::filtered()->paginate(30);
-        $count_filters = count($request->input());
+        $cemeteries = Cemetery::active()->filtered()->paginate(30);
+        $count_filters = $this->countApplyFilters($request->input());
 
         return view('cemetery.map', compact('cemeteries', 'count_filters'));
     }
 
-    public function list(SearchRequest $request): View
+    public function list(SearchRequest $request)
     {
-        $cemeteries = Cemetery::filtered()->paginate(5);
-        $count_filters = count($request->input());
+        $cemeteries = Cemetery::active()->filtered()->paginate(5);
+        $count_filters = $this->countApplyFilters($request->input());
 
         return view('cemetery.list', compact('cemeteries', 'count_filters'));
+    }
+
+    public function show(string $slug)
+    {
+        $cemetery = Cemetery::query()->where('slug', $slug)->with(['profiles','galleries','socials'])->firstOrFail();
+        $memorials = $cemetery->profiles()->paginate(3);
+        $famous = $cemetery->profiles()->limit(4)->get();
+
+        return view('cemetery.show', compact('cemetery','memorials', 'famous'));
+    }
+
+    private function countApplyFilters(array $filters) : int
+    {
+        return collect($filters)->filter(function ($value) {
+            return !is_null($value);
+        })->count();
     }
 }

@@ -55,7 +55,7 @@
                                         class="form__button -submit btn btn-primary btn-lg"
                                         type="submit">
                                         <span>Показать</span>
-                                        <span>2 799</span>
+{{--                                        <span>2 799</span>--}}
                                     </button>
                                 </div>
                             </div>

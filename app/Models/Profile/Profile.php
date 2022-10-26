@@ -2,6 +2,7 @@
 
 namespace App\Models\Profile;
 
+use App\Models\Cemetery\Cemetery;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -47,7 +48,52 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static \Database\Factories\Profile\ProfileFactory factory(...$parameters)
  * @method static Builder|Profile filtered()
  * @method static Builder|Profile query()
-
+ * @property string|null $description
+ * @property float|null $latitude
+ * @property float|null $longitude
+ * @property string|null $death_reason
+ * @property-read Profile|null $child
+ * @property-read Profile|null $father
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Profile\Gallery[] $galleries
+ * @property-read int|null $galleries_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Profile\Hobby[] $hobbies
+ * @property-read int|null $hobbies_count
+ * @property-read Profile|null $mother
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Profile\Religion[] $religions
+ * @property-read int|null $religions_count
+ * @property-read Profile|null $spouse
+ * @method static Builder|Profile active()
+ * @method static Builder|Profile findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static Builder|Profile newModelQuery()
+ * @method static Builder|Profile newQuery()
+ * @method static Builder|Profile whereAccess($value)
+ * @method static Builder|Profile whereAvatar($value)
+ * @method static Builder|Profile whereBirthPlace($value)
+ * @method static Builder|Profile whereBurialPlace($value)
+ * @method static Builder|Profile whereChildId($value)
+ * @method static Builder|Profile whereCreatedAt($value)
+ * @method static Builder|Profile whereDateBirth($value)
+ * @method static Builder|Profile whereDateDeath($value)
+ * @method static Builder|Profile whereDeathCertificate($value)
+ * @method static Builder|Profile whereDeathReason($value)
+ * @method static Builder|Profile whereDescription($value)
+ * @method static Builder|Profile whereFatherId($value)
+ * @method static Builder|Profile whereFirstName($value)
+ * @method static Builder|Profile whereGender($value)
+ * @method static Builder|Profile whereId($value)
+ * @method static Builder|Profile whereLastName($value)
+ * @method static Builder|Profile whereLatitude($value)
+ * @method static Builder|Profile whereLongitude($value)
+ * @method static Builder|Profile whereModeratorsComment($value)
+ * @method static Builder|Profile whereMotherId($value)
+ * @method static Builder|Profile wherePatronymic($value)
+ * @method static Builder|Profile wherePublishedAt($value)
+ * @method static Builder|Profile whereSlug($value)
+ * @method static Builder|Profile whereSpouseId($value)
+ * @method static Builder|Profile whereStatus($value)
+ * @method static Builder|Profile whereUpdatedAt($value)
+ * @method static Builder|Profile withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ * @mixin \Eloquent
  */
 
 class Profile extends Model implements HasMedia
@@ -64,6 +110,7 @@ class Profile extends Model implements HasMedia
     ];
 
     protected $fillable = [
+        'cemetery_id',
         'first_name',
         'last_name',
         'patronymic',
@@ -105,6 +152,11 @@ class Profile extends Model implements HasMedia
             'Закрыт' => self::STATUS_CLOSED,
             'На модерации' => self::STATUS_MODERATION
         ];
+    }
+
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('status', self::STATUS_ACTIVE);
     }
 
     public function scopeFiltered(Builder $query): Builder
@@ -169,6 +221,11 @@ class Profile extends Model implements HasMedia
     public function religions(): BelongsToMany
     {
         return $this->belongsToMany(Religion::class,'religion_profile');
+    }
+
+    public function cemeteries(): BelongsTo
+    {
+        return $this->belongsTo(Cemetery::class);
     }
 
     public function spouse(): BelongsTo
