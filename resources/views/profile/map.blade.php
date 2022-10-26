@@ -262,7 +262,27 @@
 @endsection
 
 @section('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y&callback=initMap&v=weekly"
+        defer
+    ></script>
+    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
     <script>
+        function initMap() {
+            // The location of Uluru
+            const uluru = { lat: -25.344, lng: 131.031 };
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.querySelector(".map-wrap"), {
+                zoom: 4,
+                center: uluru,
+            });
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+            });
+        }
+
         // function unwrap result search
         if (document.querySelector('.map-results')) {
             let buttonUnwrap = document.querySelector('.map-results__unwrap');
@@ -275,6 +295,6 @@
 
             buttonUnwrap.addEventListener('click', mapResultsUnwrap);
         }
-
+        window.initMap = initMap;
     </script>
 @endsection
