@@ -53,7 +53,7 @@
                     </div>
                     @endforeach
 
-                        {{ $cemeteries->links('cemetery.partials.pagination', ['paginator' => $cemeteries]) }}
+                        <x-paginator :paginator="$cemeteries"></x-paginator>
 
                 </div>
             </div>

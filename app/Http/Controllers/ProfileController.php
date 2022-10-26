@@ -10,6 +10,7 @@ use App\Models\Profile\Religion;
 use Illuminate\Http\Request;
 
 
+
 /**
  * Class ProfileController
  * @package App\Http\Controllers
@@ -18,7 +19,10 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $profiles = Profile::query()->orderBy('id')->get();
+        $profiles = Profile::query()->orderBy('id')
+            ->with('users')
+            ->where('user_id',\Auth::id())
+            ->get();
 
         if ($profiles->isEmpty()) {
             return view('tree.error');
@@ -28,14 +32,19 @@ class ProfileController extends Controller
 
     public function list()
     {
-        $profiles = Profile::query()->orderBy('date_birth')->paginate(8);
+        $profiles = Profile::query()
+            ->orderBy('date_birth')
+            ->with('users')
+            ->where('user_id',\Auth::id())
+            ->paginate(8);
+
         if ($profiles->isEmpty()) {
             return view('tree.error');
         }
 
-        $medias=Profile::find(45)->getMedia('avatar')->all();
+//        $medias=Profile::find(45)->getMedia('avatar')->all();
 
-        return view('tree.list', compact('profiles','medias'));
+        return view('tree.list', compact('profiles',));
     }
 
     public function show(string $slug)
@@ -54,9 +63,22 @@ class ProfileController extends Controller
 
     public function create()
     {
-        $fathers = Profile::query()->where('gender','male')->get();
-        $mothers = Profile::query()->where('gender','female')->get();
-        $profiles = Profile::query()->get();
+        $fathers = Profile::query()
+            ->where('gender','male')
+            ->with('users')
+            ->where('user_id',\Auth::id())
+            ->get();
+
+        $mothers = Profile::query()
+            ->where('gender','female')
+            ->with('users')
+            ->where('user_id',\Auth::id())
+            ->get();
+
+        $profiles = Profile::query()
+            ->with('users')
+            ->where('user_id',\Auth::id())
+            ->get();
 
         return view('profile.create', compact('fathers','mothers','profiles'));
     }

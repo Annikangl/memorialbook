@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Profile\Profile;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -72,6 +73,11 @@ class User extends Authenticatable
     public function networks(): HasMany
     {
         return $this->hasMany(Network::class);
+    }
+
+    public function profiles(): HasMany
+    {
+        return $this->hasMany(Profile::class);
     }
 
     public static function register(string $name, string $email, string $phone, string $password): self

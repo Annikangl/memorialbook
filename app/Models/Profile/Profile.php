@@ -3,6 +3,7 @@
 namespace App\Models\Profile;
 
 use App\Models\Cemetery\Cemetery;
+use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -134,7 +135,8 @@ class Profile extends Model implements HasMedia
         'child_id',
         'mother_id',
         'father_id',
-        'published_at'
+        'published_at',
+        'user_id',
     ];
 
     public function registerMediaConversions(Media $media = null): void
@@ -211,6 +213,11 @@ class Profile extends Model implements HasMedia
     public function galleries(): HasMany
     {
         return $this->hasMany(Gallery::class);
+    }
+
+    public function users(): BelongsTo
+    {
+        return $this->BelongsTo(User::class);
     }
 
     public function hobbies(): BelongsToMany

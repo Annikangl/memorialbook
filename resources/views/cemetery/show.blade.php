@@ -107,7 +107,7 @@
             <div class="cemeteries-buttons">
                 <button type="button" class="button-more" data-link="{{ $memorials->nextPageUrl()  }}">Показать еще
                 </button>
-                {{ $memorials->links('cemetery.partials.pagination', ['paginator' => $memorials ]) }}
+                <x-paginator :paginator="$memorials"></x-paginator>
             </div>
             <!--cemeteries pagination end-->
 

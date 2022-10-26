@@ -83,7 +83,7 @@
         family.on('click', function (sender, args,) {
             var link = args.node.gender;
             console.log(args)
-            window.location.href = 'profile/update/'+ link
+            window.location.href = 'profile/card/'+ link
         });
 
         let profiles = @json($profiles);
