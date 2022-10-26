@@ -50,12 +50,16 @@ return new class extends Migration
 
             $table->unsignedBigInteger('user_id')->nullable();
 
+            //TODO не забыть убрать nullable
+
             $table->foreign('mother_id')->references('id')->on('profiles')
                 ->onDelete('CASCADE');
             $table->foreign('father_id')->references('id')->on('profiles')
                 ->onDelete('CASCADE');
             $table->foreign('spouse_id')->references('id')->on('profiles')
                 ->onDelete('CASCADE');
+
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
