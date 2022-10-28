@@ -31,7 +31,7 @@ class Hobby extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['title','slug'];
+    protected $fillable = ['title','slug',];
 
     public function sluggable(): array
     {
