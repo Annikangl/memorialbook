@@ -138,7 +138,6 @@ let cemeteryPhotoLength = function () {
     window.addEventListener('load', changeNamber);
 }
 
-
 const cemeteryPageMap = function initMap() {
     const locations = [];
 
@@ -193,8 +192,6 @@ const cemeteryPageMap = function initMap() {
 
     new MarkerClusterer({map, markers});
 }
-
-
 
 window.initMap = cemeteryPageMap;
 

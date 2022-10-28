@@ -16,12 +16,12 @@
     "src": "resources/fonts/lato-regular.woff2"
   },
   "resources/js/app.js": {
-    "file": "assets/app.c14f2f0b.js",
+    "file": "assets/app.2a4294b7.js",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app.d4716c30.css",
+    "file": "assets/app.9d2095e0.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }
