@@ -4,7 +4,7 @@
     <style>
         .cemetery-bg {
             width: 100%;
-            background: url("{{ asset('storage/uploads/cemeteries/banner/img.png') }}") no-repeat;
+            background: url("{{ asset('storage/uploads/cemeteries/banner/bg.jpg') }}") no-repeat;
             background-size: cover;
             overflow: hidden;
             padding: 25% 0 0;
@@ -310,79 +310,4 @@
         </div>
 
     </section>
-@endsection
-
-@section('scripts')
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y&callback=initMap&v=weekly"
-        defer
-    ></script>
-    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
-
-
-{{--    <script>--}}
-{{--        const locations = [];--}}
-
-{{--        const cemeteryCoords = {--}}
-{{--            lat: {{ $cemetery->latitude }},--}}
-{{--            lng: {{ $cemetery->longitude }}--}}
-{{--        };--}}
-
-{{--        document.querySelectorAll('.famous-persons__item').forEach(function (element) {--}}
-{{--            locations.push({--}}
-{{--                lat: parseFloat(element.getAttribute('data-lat')),--}}
-{{--                lng: parseFloat(element.getAttribute('data-lng'))--}}
-{{--            })--}}
-{{--        })--}}
-
-
-{{--        function initMap() {--}}
-{{--            console.log('Map')--}}
-{{--            const uluru = cemeteryCoords;--}}
-{{--            const image = window.app.globalConfig.assetsPath + 'media/cock.png';--}}
-
-{{--            const contactMap = new google.maps.Map(document.querySelector(".cemetery-contacts-map"), {--}}
-{{--                zoom: 4,--}}
-{{--                center: uluru,--}}
-{{--            });--}}
-
-{{--            const contactMarker = new google.maps.Marker({--}}
-{{--                position: uluru,--}}
-{{--                map: contactMap,--}}
-{{--            });--}}
-
-{{--            document.querySelector('.famous-persons__map');--}}
-
-{{--            const map = new google.maps.Map(document.querySelector(".famous-persons__map"), {--}}
-{{--                zoom: 4,--}}
-{{--                center: locations[0],--}}
-{{--            });--}}
-
-{{--            const infoWindow = new google.maps.InfoWindow({--}}
-{{--                content: "",--}}
-{{--                disableAutoPan: true,--}}
-{{--            });--}}
-
-{{--            const labels = document.querySelectorAll('.famous-persons__name');--}}
-
-{{--            const markers = locations.map((position, i) => {--}}
-{{--                const label = labels[i % labels.length];--}}
-{{--                const marker = new google.maps.Marker({--}}
-{{--                    position,--}}
-{{--                    label,--}}
-{{--                });--}}
-
-{{--                marker.addListener("click", () => {--}}
-{{--                    infoWindow.setContent(label.textContent);--}}
-{{--                    infoWindow.open(map, marker);--}}
-{{--                });--}}
-{{--                return marker;--}}
-{{--            });--}}
-
-{{--            const markerCluster = new markerClusterer.MarkerClusterer({markers, map});--}}
-{{--        }--}}
-
-{{--        window.initMap = initMap;--}}
-
-{{--    </script>--}}
 @endsection

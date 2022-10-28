@@ -1,5 +1,5 @@
+import {Loader} from 'google-maps';
 import {MarkerClusterer} from "@googlemaps/markerclusterer";
-
 import {Fancybox} from "@fancyapps/ui/src/Fancybox/Fancybox.js";
 import axios from "axios";
 
@@ -138,7 +138,12 @@ let cemeteryPhotoLength = function () {
     window.addEventListener('load', changeNamber);
 }
 
-const cemeteryPageMap = function initMap() {
+
+
+const cemeteryPageMap = async function initMap() {
+    const loader = new Loader('AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y');
+    const google = await loader.load();
+
     const locations = [];
 
     document.querySelectorAll('.famous-persons__item').forEach(function (element) {
@@ -193,7 +198,7 @@ const cemeteryPageMap = function initMap() {
     new MarkerClusterer({map, markers});
 }
 
-window.initMap = cemeteryPageMap;
+// window.initMap = cemeteryPageMap;
 
 
 if (document.querySelector('.cemetery-menu')) {
