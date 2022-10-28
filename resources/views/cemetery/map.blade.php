@@ -50,9 +50,3 @@
 
 @endsection
 
-@section('scripts')
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y&callback=initMap&v=weekly"
-        defer
-    ></script>
-@endsection
