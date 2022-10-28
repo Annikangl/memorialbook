@@ -1,15 +1,19 @@
+import { Loader } from 'google-maps';
 import { MarkerClusterer} from "@googlemaps/markerclusterer";
 
 const locations = [];
 
 document.querySelectorAll('.map-results__item').forEach(function (element) {
     locations.push({
-        lat: parseFloat(element.getAttribute('data-lat')),
+        lat: parseFloat(element.getAttribute('data-lat')) ,
         lng: parseFloat(element.getAttribute('data-lng'))
     })
 })
 
-function initMap() {
+async function initMap() {
+    const loader = new Loader(app.globalConfig.gmapsApikey);
+    const google = await loader.load();
+
     const map = new google.maps.Map(document.querySelector(".map-wrap"), {
         zoom: 3,
         center: locations[0],
@@ -30,6 +34,7 @@ function initMap() {
     const labels = document.querySelectorAll('.map-results__name');
 
     const markers = locations.map((position, i) => {
+
         const label = labels[i % labels.length];
         const marker = new google.maps.Marker({
             position,
@@ -43,7 +48,9 @@ function initMap() {
         return marker;
     });
 
-    const markerCluster = new MarkerClusterer({map, markers});
+     new MarkerClusterer({map, markers});
 }
 
-window.initMap = initMap;
+if (document.querySelector('.map-results')) {
+    initMap()
+}

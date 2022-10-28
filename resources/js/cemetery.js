@@ -141,7 +141,7 @@ let cemeteryPhotoLength = function () {
 
 
 const cemeteryPageMap = async function initMap() {
-    const loader = new Loader('AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y');
+    const loader = new Loader(app.globalConfig.gmapsApikey);
     const google = await loader.load();
 
     const locations = [];
