@@ -20,10 +20,10 @@
             </div>
 
             <div class="select-search">
-                <a href="#" class="select-search__map active">На карте</a>
+                <a href="{{ route('cemetery.search.map') . '?NAME=' . request('NAME') . '&ADDRESS=' . request('ADDRESS') }}" class="select-search__map active">На карте</a>
                 <a
                     href="{{ route('cemetery.search.list') . '?NAME=' . request('NAME') . '&ADDRESS=' . request('ADDRESS') }}"
-                    class="select-search__list">Списком</a>
+                    class="select-search__list active">Списком</a>
             </div>
         </div>
         <!--button filter end-->
