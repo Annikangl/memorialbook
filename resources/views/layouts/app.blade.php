@@ -97,9 +97,9 @@
                                         <li class="header-menu__item -secondary">
                                             <a class="header-menu__link" href="#">Магазин</a>
                                         </li>
-                                        <li class="header-menu__item -secondary">
-                                            <a class="header-menu__link" href="#">Заказы</a>
-                                        </li>
+{{--                                        <li class="header-menu__item -secondary">--}}
+{{--                                            <a class="header-menu__link" href="#">Заказы</a>--}}
+{{--                                        </li>--}}
                                     @endif
 
                                 </ul>

@@ -21,7 +21,10 @@
                     </div>
                     <div class="cemetery-named">
                         <h4 class="cemetery-named__title">{{ $cemetery->title }}</h4>
-                        <span class="cemetery-named__info">{{ $cemetery->subtitle }}</span>
+                        <span class="cemetery-named__info"
+                              data-lat="{{ $cemetery->latitude }}"
+                              data-lng="{{ $cemetery->longitude }}">
+                            {{ $cemetery->subtitle }}</span>
                     </div>
                 </div>
                 <ul class="cemetery-photo">
@@ -86,7 +89,7 @@
                 </div>
             </div>
             <div class="cemetery-content__item @if (Request::has('page')) current @endif"
-            ">
+            >
             <ul class="memorials">
                 @foreach($memorials as $profile)
                     <li class="memorials__item">
@@ -281,7 +284,9 @@
 
         </div>
         <div class="cemetery-content__item">
+
             <div class="cemetery-contacts-map"></div>
+
             <div class="cemetery-contacts">
                 <ul class="cemetery-contacts-list">
                     <li class="cemetery-contacts-list__item">
@@ -314,68 +319,70 @@
     ></script>
     <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
 
-    <script>
-        const locations = [];
 
-        const cemeteryCoords = {
-            lat: {{ $cemetery->latitude }},
-            lng: {{ $cemetery->longitude }}
-        };
+{{--    <script>--}}
+{{--        const locations = [];--}}
 
-        document.querySelectorAll('.famous-persons__item').forEach(function (element) {
-            locations.push({
-                lat: parseFloat(element.getAttribute('data-lat')),
-                lng: parseFloat(element.getAttribute('data-lng'))
-            })
-        })
+{{--        const cemeteryCoords = {--}}
+{{--            lat: {{ $cemetery->latitude }},--}}
+{{--            lng: {{ $cemetery->longitude }}--}}
+{{--        };--}}
 
-
-        function initMap() {
-            const uluru = cemeteryCoords;
-            const image = window.app.globalConfig.assetsPath + 'media/cock.png';
-
-            const contactMap = new google.maps.Map(document.querySelector(".cemetery-contacts-map"), {
-                zoom: 4,
-                center: uluru,
-            });
-
-            const contactMarker = new google.maps.Marker({
-                position: uluru,
-                map: contactMap,
-            });
-
-            const map = new google.maps.Map(document.querySelector(".famous-persons__map"), {
-                zoom: 4,
-                center: locations[0],
-            });
-
-            const infoWindow = new google.maps.InfoWindow({
-                content: "",
-                disableAutoPan: true,
-            });
-
-            const labels = document.querySelectorAll('.famous-persons__name');
-
-            const markers = locations.map((position, i) => {
-                const label = labels[i % labels.length];
-                const marker = new google.maps.Marker({
-                    position,
-                    label,
-                });
-
-                marker.addListener("click", () => {
-                    infoWindow.setContent(label.textContent);
-                    infoWindow.open(map, marker);
-                });
-                return marker;
-            });
-
-            const markerCluster = new markerClusterer.MarkerClusterer({markers, map});
-        }
-
-        window.initMap = initMap;
-
-    </script>
+{{--        document.querySelectorAll('.famous-persons__item').forEach(function (element) {--}}
+{{--            locations.push({--}}
+{{--                lat: parseFloat(element.getAttribute('data-lat')),--}}
+{{--                lng: parseFloat(element.getAttribute('data-lng'))--}}
+{{--            })--}}
+{{--        })--}}
 
 
+{{--        function initMap() {--}}
+{{--            console.log('Map')--}}
+{{--            const uluru = cemeteryCoords;--}}
+{{--            const image = window.app.globalConfig.assetsPath + 'media/cock.png';--}}
+
+{{--            const contactMap = new google.maps.Map(document.querySelector(".cemetery-contacts-map"), {--}}
+{{--                zoom: 4,--}}
+{{--                center: uluru,--}}
+{{--            });--}}
+
+{{--            const contactMarker = new google.maps.Marker({--}}
+{{--                position: uluru,--}}
+{{--                map: contactMap,--}}
+{{--            });--}}
+
+{{--            document.querySelector('.famous-persons__map');--}}
+
+{{--            const map = new google.maps.Map(document.querySelector(".famous-persons__map"), {--}}
+{{--                zoom: 4,--}}
+{{--                center: locations[0],--}}
+{{--            });--}}
+
+{{--            const infoWindow = new google.maps.InfoWindow({--}}
+{{--                content: "",--}}
+{{--                disableAutoPan: true,--}}
+{{--            });--}}
+
+{{--            const labels = document.querySelectorAll('.famous-persons__name');--}}
+
+{{--            const markers = locations.map((position, i) => {--}}
+{{--                const label = labels[i % labels.length];--}}
+{{--                const marker = new google.maps.Marker({--}}
+{{--                    position,--}}
+{{--                    label,--}}
+{{--                });--}}
+
+{{--                marker.addListener("click", () => {--}}
+{{--                    infoWindow.setContent(label.textContent);--}}
+{{--                    infoWindow.open(map, marker);--}}
+{{--                });--}}
+{{--                return marker;--}}
+{{--            });--}}
+
+{{--            const markerCluster = new markerClusterer.MarkerClusterer({markers, map});--}}
+{{--        }--}}
+
+{{--        window.initMap = initMap;--}}
+
+{{--    </script>--}}
 @endsection

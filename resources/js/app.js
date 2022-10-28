@@ -1,7 +1,7 @@
 import 'bootstrap'
 import './vendor'
 import  './cemetery'
-
+import './map'
 
 
 

@@ -1,15 +1,15 @@
-import { MarkerClusterer } from "@googlemaps/markerclusterer";
+import {MarkerClusterer} from "@googlemaps/markerclusterer";
 
-import { Fancybox } from "@fancyapps/ui/src/Fancybox/Fancybox.js";
+import {Fancybox} from "@fancyapps/ui/src/Fancybox/Fancybox.js";
 import axios from "axios";
 
 Fancybox.bind(".gallery", {
-    groupAll : true, // Group all items
+    groupAll: true, // Group all items
     Toolbar: {
         display: [
-            { id: "prev", position: "center" },
-            { id: "counter", position: "center" },
-            { id: "next", position: "center" },
+            {id: "prev", position: "center"},
+            {id: "counter", position: "center"},
+            {id: "next", position: "center"},
             "zoom",
             "slideshow",
             "fullscreen",
@@ -60,7 +60,7 @@ let checkCemeteryContent = function () {
 
     for (let i = 0; i < cemeteryMenuItems.length; i++) {
         cemeteryMenuItems[i].addEventListener('click', function () {
-            if(!cemeteryMenuItems[i].classList.contains('current')) {
+            if (!cemeteryMenuItems[i].classList.contains('current')) {
 
                 let x = 0;
                 while (x < cemeteryMenuItems.length) {
@@ -120,7 +120,6 @@ let cemeteryPhotoLength = function () {
     }
 
 
-
     let changeNamber = function () {
         if (innerWidth >= 980) {
             viewPhotosLength = 5;
@@ -139,11 +138,73 @@ let cemeteryPhotoLength = function () {
     window.addEventListener('load', changeNamber);
 }
 
+
+const cemeteryPageMap = function initMap() {
+    const locations = [];
+
+    document.querySelectorAll('.famous-persons__item').forEach(function (element) {
+        locations.push({
+            lat: parseFloat(element.getAttribute('data-lat')),
+            lng: parseFloat(element.getAttribute('data-lng'))
+        })
+    })
+
+    const cemeteryCoords = {
+        lat: parseFloat(document.querySelector('.cemetery-named__info').getAttribute('data-lat')),
+        lng: parseFloat(document.querySelector('.cemetery-named__info').getAttribute('data-lng'))
+    }
+
+    const contactMap = new google.maps.Map(document.querySelector(".cemetery-contacts-map"), {
+        zoom: 4,
+        center: cemeteryCoords,
+    });
+
+    const contactMarker = new google.maps.Marker({
+        position: cemeteryCoords,
+        map: contactMap,
+    });
+
+
+    const map = new google.maps.Map(document.querySelector(".famous-persons__map"), {
+        zoom: 4,
+        center: locations[0],
+    });
+
+    const infoWindow = new google.maps.InfoWindow({
+        content: "",
+        disableAutoPan: true,
+    });
+
+    const labels = document.querySelectorAll('.famous-persons__name');
+
+    const markers = locations.map((position, i) => {
+        const label = labels[i % labels.length];
+        const marker = new google.maps.Marker({
+            position,
+            label,
+        });
+
+        marker.addListener("click", () => {
+            infoWindow.setContent(label.textContent);
+            infoWindow.open(map, marker);
+        });
+        return marker;
+    });
+
+    new MarkerClusterer({map, markers});
+}
+
+
+
+window.initMap = cemeteryPageMap;
+
+
 if (document.querySelector('.cemetery-menu')) {
     checkCemeteryContent();
     openMenuCemetery();
     cemeteryPhotoLength();
     loadFamous();
+    cemeteryPageMap();
 }
 
 
