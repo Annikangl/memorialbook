@@ -6,15 +6,15 @@
         <div class="tree__nav">
             <div class="tree-nav__items">
                 <div class="tree-nav__item">
-                    <a class="tree-nav__link active" href="{{route('tree')}}">Семейное древо</a>
+                    <a class="tree-nav__link active" href="{{ route('tree') }}">Семейное древо</a>
                 </div>
                 <div class="tree-nav__item">
-                    <a class="tree-nav__link" href="{{route('tree.list')}}">Список профилей</a>
+                    <a class="tree-nav__link" href="{{ route('tree.list') }}">Список профилей</a>
                 </div>
             </div>
         </div>
         <div class="tree__controls">
-            <a class="tree-controls__button -new btn btn-primary btn-sm" href="{{route('profile.create')}}">+ Добавить
+            <a class="tree-controls__button -new btn btn-primary btn-sm" href="{{ route('profile.create') }}">+ Добавить
                 профиль</a>
 
         </div>
@@ -83,7 +83,7 @@
         family.on('click', function (sender, args,) {
             var link = args.node.gender;
             console.log(args)
-            window.location.href = 'profile/card/'+ link
+            window.location.href = 'profile/card/' + link
         });
 
         let profiles = @json($profiles);
@@ -104,8 +104,8 @@
                 placebirth: profile.birth_place,
                 burialplace: profile.burial_place,
                 reasondeath: profile.reason_death,
-                date: new Date(profile.date_birth).getFullYear() + ' - ' +  new Date(profile.date_death).getFullYear() + ' ' + 'г.',
-                link: 'profile/update/'+profile.id,
+                date: new Date(profile.date_birth).getFullYear() + ' - ' + new Date(profile.date_death).getFullYear() + ' ' + 'г.',
+                link: 'profile/update/' + profile.id,
             },)
         });
     }
