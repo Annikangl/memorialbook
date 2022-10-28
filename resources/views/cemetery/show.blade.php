@@ -21,7 +21,10 @@
                     </div>
                     <div class="cemetery-named">
                         <h4 class="cemetery-named__title">{{ $cemetery->title }}</h4>
-                        <span class="cemetery-named__info">{{ $cemetery->subtitle }}</span>
+                        <span class="cemetery-named__info"
+                              data-lat="{{ $cemetery->latitude }}"
+                              data-lng="{{ $cemetery->longitude }}">
+                            {{ $cemetery->subtitle }}</span>
                     </div>
                 </div>
                 <ul class="cemetery-photo">

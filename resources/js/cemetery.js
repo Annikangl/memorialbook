@@ -139,21 +139,64 @@ let cemeteryPhotoLength = function () {
 }
 
 
-const contactMap = function initMap() {
-    const uluru = {lat: -25.344, lng: 131.031}
+const cemeteryPageMap = function initMap() {
+    const locations = [];
+
+    document.querySelectorAll('.famous-persons__item').forEach(function (element) {
+        locations.push({
+            lat: parseFloat(element.getAttribute('data-lat')),
+            lng: parseFloat(element.getAttribute('data-lng'))
+        })
+    })
+
+    const cemeteryCoords = {
+        lat: parseFloat(document.querySelector('.cemetery-named__info').getAttribute('data-lat')),
+        lng: parseFloat(document.querySelector('.cemetery-named__info').getAttribute('data-lng'))
+    }
 
     const contactMap = new google.maps.Map(document.querySelector(".cemetery-contacts-map"), {
         zoom: 4,
-        center: uluru,
+        center: cemeteryCoords,
     });
 
     const contactMarker = new google.maps.Marker({
-        position: uluru,
+        position: cemeteryCoords,
         map: contactMap,
     });
+
+
+    const map = new google.maps.Map(document.querySelector(".famous-persons__map"), {
+        zoom: 4,
+        center: locations[0],
+    });
+
+    const infoWindow = new google.maps.InfoWindow({
+        content: "",
+        disableAutoPan: true,
+    });
+
+    const labels = document.querySelectorAll('.famous-persons__name');
+
+    const markers = locations.map((position, i) => {
+        const label = labels[i % labels.length];
+        const marker = new google.maps.Marker({
+            position,
+            label,
+        });
+
+        marker.addListener("click", () => {
+            infoWindow.setContent(label.textContent);
+            infoWindow.open(map, marker);
+        });
+        return marker;
+    });
+
+    new MarkerClusterer({map, markers});
 }
 
-window.initMap = contactMap;
+
+
+window.initMap = cemeteryPageMap;
 
 
 if (document.querySelector('.cemetery-menu')) {
@@ -161,7 +204,7 @@ if (document.querySelector('.cemetery-menu')) {
     openMenuCemetery();
     cemeteryPhotoLength();
     loadFamous();
-    contactMap();
+    cemeteryPageMap();
 }
 
 
