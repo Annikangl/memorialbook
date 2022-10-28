@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="cemetery-content__item @if (Request::has('page')) current @endif"
-            ">
+            >
             <ul class="memorials">
                 @foreach($memorials as $profile)
                     <li class="memorials__item">

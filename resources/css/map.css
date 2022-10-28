@@ -139,6 +139,16 @@ section {
     font-size: 14px;
 }
 
+.bg-img {
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
 .map-results__unwrap {
     padding: 0 18px;
     height: 36px;
