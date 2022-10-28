@@ -91,6 +91,7 @@
                                     <label class="profile-section__label" for="hobby_id">Увлечения:</label>
                                     <select class="profile-section__select select form-control" id="hobby_id" name="hobby_id[]" multiple="" hidden=""
                                             data-select="">
+                                        <option value="">Выберите из списка</option>
                                         @foreach($hobbys as $hobby)
                                         <option value="{{$hobby->id}}">{{$hobby->title}}</option>
                                         @endforeach

@@ -133,6 +133,7 @@ class Profile extends Model implements HasMedia
         'access',
         'spouse_id',
         'child_id',
+        'user_id',
         'mother_id',
         'father_id',
         'published_at',
