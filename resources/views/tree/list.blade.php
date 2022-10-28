@@ -23,7 +23,7 @@
                             @foreach($profiles as $profile)
 
                             <div class="tree-list__item">
-                                <a class="tree-list-item__avatar" href="../member-card">
+                                <a class="tree-list-item__avatar" href="{{route('profile.show',$profile->slug)}}">
 
                                     <img class="tree-list-item-avatar__image" src="{{ asset('storage/'. $profile->avatar) }}" alt="" style="height: 60px">
 

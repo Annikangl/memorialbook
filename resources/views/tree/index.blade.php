@@ -30,6 +30,7 @@
 
 <script>
     window.onload = function () {
+
         var family = new FamilyTree(document.getElementById("tree"), {
             template: 'john',
 
@@ -61,10 +62,8 @@
                         {type: 'textbox', label: 'Место смерти', binding: 'burialplace'},
                     ],
                     {type: 'textbox', label: 'Причина смерти', binding: 'reasondeath'},
-                    // {type: 'textbox', label: 'Photo Url', }
-
-
                 ],
+
                 buttons: {
                     edit: {
                         icon: FamilyTree.icon.edit(24, 24, '#fff'),
@@ -83,7 +82,7 @@
         family.on('click', function (sender, args,) {
             var link = args.node.gender;
             console.log(args)
-            window.location.href = 'profile/update/'+ link
+            window.location.href = 'profile/card/'+ link
         });
 
         let profiles = @json($profiles);

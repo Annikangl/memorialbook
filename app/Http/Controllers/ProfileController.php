@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Profile\ProfileCreateRequest;
+use App\Http\Requests\Profile\ProfileCreateStep2Request;
 use App\Http\Requests\Profile\SearchRequest;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
 use App\Models\Profile\Religion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use Nette\Schema\ValidationException;
+use PhpParser\Node\Stmt\Return_;
 
 
 /**
@@ -33,9 +38,9 @@ class ProfileController extends Controller
             return view('tree.error');
         }
 
-        $medias=Profile::find(45)->getMedia('avatar')->all();
+//        $medias=Profile::find(45)->getMedia('avatar')->all();
 
-        return view('tree.list', compact('profiles','medias'));
+        return view('tree.list', compact('profiles'));
     }
 
     public function show(string $slug)
@@ -81,14 +86,11 @@ class ProfileController extends Controller
         $params['death_certificate'] = $certificate_path;
 
         $request->session()->put('profile_step1', $params);
-
 //        $profile = Profile::create($params)
 //            ->addMedia($request->file('avatar'))
 //            ->toMediaCollection('avatar','avatar');
 
         return redirect()->route('profile.create.step2');
-// Перебрасывать на шаг 2 с id который только создал и его там сохранять чтобы при записи дополнялись данные уже в текущую запись
-        //загрузка данных в сессию с дальнейшей переброской по маршрутам
     }
 
     public function create_step2()
@@ -100,7 +102,7 @@ class ProfileController extends Controller
     }
 
 
-    public function store_step2(Request $request)
+    public function store_step2(ProfileCreateStep2Request $request)
     {
 
         $params = $request->all();
@@ -108,18 +110,56 @@ class ProfileController extends Controller
 
         $request->session()->put('profile_step2', $params);
         $value = $request->session()->all();
-//        dd($value);
+
         return redirect()->route('profile.create.step3');
     }
 
 
-    public function create_step3()
+    public function create_step3(Request $request)
     {
-//        $value = $request->;
-        dd(session()->all());
-        return view('profile.create_step3');
+        $profile_step1 = $request->session()->get('profile_step1');
+
+        return view('profile.create_step3',compact('profile_step1'));
     }
-    public function store_step3(Request $request){
+
+    public function store_step3(Request $request)
+    {
+        DB::beginTransaction();
+
+        try{
+            $params = $request->session()->get('profile_step1');
+
+            $params_step2 = $request->session()->get('profile_step2');
+
+            $params['user_id'] = \Auth::id();
+            $params['description'] = $params_step2['description'];
+
+            $profile = Profile::create($params);
+            $id_profile = $profile->id;
+
+            if ($params['spouse_id']!=null){
+                Profile::query()->where('id',$params['spouse_id'])
+                    ->update(['spouse_id'=>$id_profile]);
+            }
+
+            if ($params_step2['hobby_id']!=null){
+                $profile->hobbies()->attach($params_step2['hobby_id']);
+            }
+
+            if ($params_step2['religious_id']!=null){
+                $profile->religions()->attach($params_step2['religious_id']);
+            }
+
+        }catch (ValidationException $e)
+            {
+            DB::rollBack();
+                return Redirect::to('/create')
+                    ->withErrors($e->getErrors())
+                    ->withInput();
+            }
+        // Если всё хорошо - фиксируем
+        DB::commit();
+        return redirect()->route('tree');
 
     }
 

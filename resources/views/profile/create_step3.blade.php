@@ -28,21 +28,23 @@
 
             <div class="profile__side -step-content col">
                 <div class="base-form -full">
-                    <form class="form" action="{{route('profile.store_step3')}}" method="post" data-base-form="">
+                    <form class="form" method="POST" enctype="multipart/form-data" action="{{route('profile.store.step3')}}">
+                        @csrf
                         <div class="profile__section">
                             <div class="profile-section__row row">
                                 <div class="profile-section__side -avatar">
                                     <div class="profile-avatar -small">
                                         <div class="profile-avatar__inner">
                                             <div class="profile-avatar__image-container">
-                                                <img class="profile-avatar__image" src="../assets/uploads/profile/avatar-5.jpg" alt="Аватар">
+                                                <img class="profile-avatar__image" src="{{asset('storage/'.$profile_step1['avatar'])}}" alt="Аватар">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="profile-section__side -content">
                                     <div class="profile__total-info">
-                                        <h2 class="profile-total-info__title">Иванов Михаил Сергеевич</h2>
+                                        <h2 class="profile-total-info__title">{{$profile_step1['first_name'].' '
+                                                        . $profile_step1['last_name'].' '.$profile_step1['patronymic']}}</h2>
                                         <div class="profile-total-info__content">
                                             <div class="profile-total-info__text">Статус модерации:</div>
                                             <div class="profile-total-info__text -error">Публикация отклонена 14:31 22.10.2021</div>
@@ -105,8 +107,8 @@
                                     черновик</a>
                             </div>
                             <div class="profile-bottom__item">
-                                <a class="profile-bottom__button btn btn-primary" href="javascript:void(0)" role="button">Сохранить и
-                                    опубликовать</a>
+                                <button class="profile-bottom__button btn btn-primary" >Сохранить и
+                                    опубликовать</button>
                             </div>
                         </div>
                     </form>
