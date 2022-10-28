@@ -1,15 +1,15 @@
-import { MarkerClusterer } from "@googlemaps/markerclusterer";
+import {MarkerClusterer} from "@googlemaps/markerclusterer";
 
-import { Fancybox } from "@fancyapps/ui/src/Fancybox/Fancybox.js";
+import {Fancybox} from "@fancyapps/ui/src/Fancybox/Fancybox.js";
 import axios from "axios";
 
 Fancybox.bind(".gallery", {
-    groupAll : true, // Group all items
+    groupAll: true, // Group all items
     Toolbar: {
         display: [
-            { id: "prev", position: "center" },
-            { id: "counter", position: "center" },
-            { id: "next", position: "center" },
+            {id: "prev", position: "center"},
+            {id: "counter", position: "center"},
+            {id: "next", position: "center"},
             "zoom",
             "slideshow",
             "fullscreen",
@@ -60,7 +60,7 @@ let checkCemeteryContent = function () {
 
     for (let i = 0; i < cemeteryMenuItems.length; i++) {
         cemeteryMenuItems[i].addEventListener('click', function () {
-            if(!cemeteryMenuItems[i].classList.contains('current')) {
+            if (!cemeteryMenuItems[i].classList.contains('current')) {
 
                 let x = 0;
                 while (x < cemeteryMenuItems.length) {
@@ -120,7 +120,6 @@ let cemeteryPhotoLength = function () {
     }
 
 
-
     let changeNamber = function () {
         if (innerWidth >= 980) {
             viewPhotosLength = 5;
@@ -139,11 +138,30 @@ let cemeteryPhotoLength = function () {
     window.addEventListener('load', changeNamber);
 }
 
+
+const contactMap = function initMap() {
+    const uluru = {lat: -25.344, lng: 131.031}
+
+    const contactMap = new google.maps.Map(document.querySelector(".cemetery-contacts-map"), {
+        zoom: 4,
+        center: uluru,
+    });
+
+    const contactMarker = new google.maps.Marker({
+        position: uluru,
+        map: contactMap,
+    });
+}
+
+window.initMap = contactMap;
+
+
 if (document.querySelector('.cemetery-menu')) {
     checkCemeteryContent();
     openMenuCemetery();
     cemeteryPhotoLength();
     loadFamous();
+    contactMap();
 }
 
 
