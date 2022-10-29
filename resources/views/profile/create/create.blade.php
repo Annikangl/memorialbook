@@ -118,7 +118,7 @@
                                                 <label class="profile-section__label" for="burial_place">Место захоронения:</label>
                                                 <div class="profile-section__input-container">
                                                     <input class="profile-section__input form-control" type="text" id="burial_place"
-                                                           name="burial_place" placeholder="Укажите место захоронения" readonly="" data-popup="#popup-map">
+                                                           name="burial_place" placeholder="" readonly="" data-popup="#popup-map">
                                                     <div class="popup -map mfp-hide" role="dialog" id="popup-map" aria-hidden="true"
                                                          aria-labelledby="popup-map-title">
                                                         <div class="popup__inner">
@@ -143,9 +143,9 @@
                                             </div>
                                             <div class="profile-section__form-group -half form-group">
                                                 <label class="profile-section__label" for="death_certificate">Свидетельство о смерти:</label>
-                                                <div class="profile-section__input-container">
+                                                <div class="profile-section__input-container" >
                                                     <input class="profile-section__input form-control" type="file" id="death_certificate"
-                                                           name="death_certificate">
+                                                           name="death_certificate" >
                                                 </div>
                                             </div>
                                         </div>
@@ -157,7 +157,7 @@
                                                 <select class="profile-section__select select" id="father_id" name="father_id" hidden="" data-select="">
                                                     <option value="">Выберите из списка</option>
                                                     @foreach($fathers as $father)
-                                                    <option value="{{$father->id}}" id="father_id" name="father_id">{{$father->first_name.' '.$father->last_name}}</option>
+                                                        <option value="{{$father->id}}" id="father_id" name="father_id">{{$father->first_name.' '.$father->last_name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -166,7 +166,7 @@
                                                 <select class="profile-section__select select" id="mother_id" name="mother_id" hidden="" data-select="">
                                                     <option value="">Выберите из списка</option>
                                                     @foreach($mothers as $mother)
-                                                    <option value="{{$mother->id}}" id="mother_id" name="mother_id">{{$mother->first_name.' '.$mother->last_name}}</option>
+                                                        <option value="{{$mother->id}}" id="mother_id" name="mother_id">{{$mother->first_name.' '.$mother->last_name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -175,7 +175,7 @@
                                                 <select class="profile-section__select select" id="spouse_id" name="spouse_id" hidden="" data-select="">
                                                     <option value="">Выберите из списка</option>
                                                     @foreach($profiles as $profile)
-                                                    <option value="{{$profile->id}}" id="spouse_id" name="spouse_id">{{$profile->first_name.' '.$profile->last_name}}</option>
+                                                        <option value="{{$profile->id}}" id="spouse_id" name="spouse_id">{{$profile->first_name.' '.$profile->last_name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

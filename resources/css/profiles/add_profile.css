@@ -1,72 +1,6 @@
-/* style general
------------------*/
-
-body {
-    color: var(--black);
-}
-
-body.fix {
-    overflow: hidden;
-}
-
-a {
-    text-decoration: none;
-}
-
-li {
-    list-style: none;
-}
-
-button {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-input[type="radio"], input[type="checkbox"], input[type="file"] {
-    display: none;
-}
-
-:root {
-    --content-size: calc(50% - 700px);
-    --normal: .4s ease;
-    --blue: #175ed9;
-    --black: #201e1f;
-    --red: #fa122e;
-    --gray: #f5f7f9;
-    --light-gray: #e5e8eb;
-}
-
-#page.active {
-    filter: blur(5px);
-}
-
-section {
-    width: 100%;
-    padding: 0 var(--content-size);
-}
-
-.bg-img {
-    width: 100%;
-    min-height: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-}
-
-/* header
----------------*/
 
 /* main
 ---------------*/
-.content {
-    width: 100%;
-    min-height: calc(100vh - 116px);
-    display: flex;
-    padding-top: 97px;
-}
 
 .preview {
     background-color: var(--gray);
@@ -109,23 +43,11 @@ section {
     left: 100%;
 }
 
-.preview-form, .login-form {
+.preview-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.login-form {
-    width: 340px;
-}
-
-.login-form__title {
-    line-height: 1.3;
-    color: var(--black);
-    text-align: left;
-    width: 100%;
-    font: 900 22px sans-serif;
 }
 
 .input-wrap {
@@ -163,16 +85,6 @@ section {
 
 .form__submit:hover {
     background-color: #6799ef;
-}
-
-.login-form__registration-link {
-    margin-top: 40px;
-    color: var(--blue);
-    font-size: 14px;
-}
-
-.login-form__registration-link:hover {
-    text-decoration: underline;
 }
 
 .input-form, .select-form, .textarea-form {
@@ -379,6 +291,10 @@ section {
     display: flex;
 }
 
+/*#death_certificate {*/
+/*    display: block;*/
+/*}*/
+
 .form-recover {
     width: 100%;
     max-width: 1220px;
@@ -394,322 +310,6 @@ section {
     color: var(--black);
 }
 
-.list, .member-card {
-    background-color: var(--gray);
-}
-
-.cemeteries__link {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.cemetery-bg {
-    width: 100%;
-    background-color: url("../img/bg.jpg") no-repeat;
-    background-size: cover;
-    overflow: hidden;
-    padding: 25% 0 0;
-    height: auto;
-}
-
-.cemetery-title-wrap {
-    width: 100%;
-    padding: 26px var(--content-size) 0;
-    background-color: #fff;
-    border-bottom: 1px solid var(--light-gray);
-}
-
-.cemetery-title {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-}
-
-.cemetery-title-img {
-    width: 122px;
-    height: 122px;
-    position: relative;
-    overflow-y: hidden;
-    border-radius: 50%;
-}
-
-.cemetery-named-wrap {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.cemetery-named {
-    width: calc(100% - 122px);
-    padding-left: 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.cemetery-photo {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 5px;
-    position: relative;
-    top: 20px;
-}
-
-.cemetery-photo__item, .cemetery-photo__link {
-    width: 100%;
-    display: block;
-}
-
-.cemetery-photo__item.hide {
-    display: none;
-}
-
-.cemetery-photo__link {
-    padding-top: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-.cemetery-photo__number-hide {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    background-color: rgba(0, 0, 0, .6);
-    color: #fff;
-    font-size: 12px;
-    left: 0;
-    padding: 0 8px;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-}
-
-.cemetery-named__title {
-    font-size: 30px;
-    color: var(--black);
-    margin-bottom: 30px;
-    width: 100%;
-}
-
-.cemetery-named__info {
-    color: rgba(32, 30, 31, .7);
-    font-size: 16px;
-}
-
-.cemetery {
-    width: 100%;
-    padding: 0;
-}
-
-.cemetery-menu {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
-    top: 1px;
-    margin-top: 40px;
-}
-
-.cemetery-menu__item {
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: 14px 24px;
-    border-radius: 7px 7px 0 0;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: var(--normal);
-    border-bottom: none;
-    color: rgba(32, 30, 31, .7);
-    cursor: pointer;
-}
-
-.cemetery-menu__item.current {
-    border-color: var(--light-gray);
-    background-color: var(--gray);
-    color: var(--black);
-}
-
-.cemetery-menu__item:hover {
-    color: var(--black);
-}
-
-.cemetery-content {
-    width: 100%;
-    padding: 24px var(--content-size) 64px;
-    background-color: var(--gray);
-    border: 1px solid var(--gray);
-    overflow: hidden;
-}
-
-.cemetery-content__item {
-    opacity: 0;
-    position: absolute;
-    transition: var(--normal);
-    height: 0;
-    overflow: hidden;
-}
-
-.cemetery-content__item.current {
-    opacity: 1;
-    position: relative;
-    z-index: 10;
-    height: auto;
-    overflow: visible;
-}
-
-.cemetery-text-wrap {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 24px;
-}
-
-.cemetery-text p {
-    color: rgba(32, 30, 31, .7);
-    font-size: 16px;
-    line-height: 1.1;
-    margin-bottom: 24px;
-}
-
-.cemetery-text p:last-child {
-    margin-bottom: 0;
-}
-
-.famous-persons__title {
-    color: rgba(32, 30, 31, .8);
-    font: 700 20px sans-serif;
-}
-
-.famous-persons__map {
-    margin-top: 32px;
-}
-
-.famous-persons__map, .cemetery-contacts-map {
-    padding-top: 50%;
-    overflow: hidden;
-
-    /*удалить следующие (ниже) стили при вставке карты*/
-    background-color: rgba(32, 30, 31, .7);
-    color: #fff;
-}
-
-.famous-persons-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-top: 20px;
-}
-
-.famous-persons__item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: #fff;
-    border: 1px solid var(--light-gray);
-    border-radius: 64px;
-    margin: 8px 10px 0 0;
-    padding: 3px;
-}
-
-.famous-persons-img {
-    width: 34px;
-    height: 34px;
-}
-
-.famous-persons__name {
-    font: 600 14px sans-serif;
-    padding: 2px 16px 2px 8px;
-    color: var(--black);
-}
-
-.memorials__item {
-    width: 100%;
-    background-color: #fff;
-    border-radius: 7px;
-    padding: 9px 18px;
-    margin-bottom: 4px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.memorials__item:last-child {
-    margin-bottom: 0;
-}
-
-.memorials-img {
-    width: 68px;
-    height: 68px;
-}
-
-.famous-persons-img, .memorials-img {
-    border-radius: 50%;
-    position: relative;
-    overflow: hidden;
-}
-
-.memorials-info {
-    width: calc(100% - 68px);
-    padding-left: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.memorials-info__name {
-    line-height: 1.4;
-    font-size: 16px;
-    color: var(--black);
-}
-
-.memorials-info__ages {
-    color: rgba(32, 30, 31, .8);
-    font-size: 14px;
-    margin-top: 6px;
-}
-
-.price {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 272px 1fr;
-    grid-gap: 18px;
-}
-
-.price .cemeteries-buttons {
-    grid-column: 2/3;
-}
-
-.price-filter {
-    width: 100%;
-    height: max-content;
-    background-color: #fff;
-    border-radius: 7px;
-    padding: 12px 32px;
-}
-
-.price-filter__item {
-    padding: 7px 0;
-}
-
-.price-filter__link {
-    color: rgba(32, 30, 31, .6);
-    font: 600 18px sans-serif;
-    transition: var(--normal);
-}
-
-.price-filter__item.active .price-filter__link, .price-filter__link:hover {
-    color: var(--blue);
-}
 
 /** Modal */
 
@@ -722,17 +322,22 @@ section {
     right: 0;
     z-index: 99999;
 }
+
 .modal_vis {
     display: block;
 }
+
 .body_block {
     overflow: hidden;
     margin-right: 17px;
 }
-.open_modal{
+
+.open_modal {
+    width: 100%;
     color: black;
-    text-decoration: none;
+    text-decoration: none !important;
 }
+
 #close_modal {
     color: #BFE2FF;
     font-size: 40px;
@@ -752,102 +357,22 @@ section {
     transition: all 0.6s;
     box-sizing: content-box;
 }
+
 #close_modal:hover {
     color: #FFF;
     transform: rotate(135deg);
 }
+
 .modal_txt {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 16px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 16px 20px rgba(0, 0, 0, 0.2);
     background: #FFF;
     padding: 30px;
     margin: 100px auto;
     max-width: 800px;
 }
+
 /** */
 
-.price-list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 18px 16px;
-    width: 100%;
-}
-
-.price-list__item {
-    background-color: #fff;
-    padding: 16px 12px;
-    border: 1px solid var(--gray);
-    border-radius: 7px;
-}
-
-.price-list__link {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-}
-
-.price-img {
-    max-height: 200px;
-}
-
-.price-title {
-    color: var(--black);
-    transition: var(--normal);
-    font: 100 14px sans-serif;
-    margin-top: 16px;
-}
-
-.price-title:hover {
-    color: var(--blue);
-}
-
-.price-list-wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-top: 25px;
-}
-
-.price-title-wrap {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.cost {
-    font: 700 18px sans-serif;
-    color: var(--black);
-}
-
-.buy {
-    font: 700 18px sans-serif;
-    color: var(--blue);
-}
-
-.cemetery-contacts {
-    width: 100%;
-    background-color: #fff;
-    padding: 24px 27px;
-    border-radius: 0 0 7px 7px;
-}
-
-.button-add-message, .button-route {
-    width: 100%;
-    height: 54px;
-    line-height: 1.3;
-    font: 600 14px sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    letter-spacing: .05em;
-    transition: var(--normal);
-    border-radius: 7px;
-    cursor: pointer;
-    text-transform: uppercase;
-}
 
 .button-add-message {
     background-color: var(--blue);
@@ -867,160 +392,6 @@ section {
 .button-route:hover {
     color: #fff;
     background-color: var(--blue);
-}
-
-.cemetery-contacts-list {
-    margin-bottom: 44px;
-}
-
-.cemetery-contacts-list__item {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-top: 15px;
-}
-
-.cemetery-contacts-list__title {
-    font-size: 14px;
-    color: var(--black);
-}
-
-.cemetery-contacts-list__text {
-    font-size: 18px;
-    color: var(--black);
-    transition: var(--normal);
-}
-
-a.cemetery-contacts-list__text:hover {
-    color: var(--blue);
-}
-
-.cemeteries {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    margin-top: 26px;
-}
-
-.cemeteries__item {
-    width: 100%;
-    background-color: #fff;
-    border-radius: 7px;
-    color: var(--black);
-    padding: 15px;
-}
-
-.cemeteries-img {
-    width: 118px;
-    height: 118px;
-    position: relative;
-    overflow: hidden;
-    margin-right: 24px;
-}
-
-.cemeteries-info {
-    width: calc(100% - 142px);
-    height: 118px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.cemeteries-info__title {
-    color: var(--black);
-    font: 600 18px sans-serif;
-    line-height: 1.1;
-    transition: var(--normal);
-}
-
-.cemeteries-info__city {
-    color: #797879;
-    font-size: 16px;
-}
-
-.cemeteries__item:hover .cemeteries-info__title {
-    color: var(--blue);
-}
-
-.search {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 10px;
-    position: relative;
-    z-index: 10;
-}
-
-.cemeteries-buttons {
-    width: 100%;
-    margin: 32px 0 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.button-more {
-    padding: 10px 15px;
-    border: 1px solid var(--blue);
-    min-width: 194px;
-    height: 44px;
-    color: var(--blue);
-    text-transform: uppercase;
-    transition: var(--normal);
-    border-radius: 7px;
-    font-size: 14px;
-    letter-spacing: .05em;
-    min-height: 44px;
-    background-color: transparent;
-    position: relative;
-    left: 50px;
-}
-
-.button-more:hover {
-    background-color: var(--blue);
-    color: #fff;
-}
-
-.cemeteries-buttons:before {
-    content: "";
-}
-
-.pagination-left, .pagination-right {
-    border: 1px solid var(--light-gray);
-    border-radius: 7px;
-    color: rgba(32, 30, 31, .3);
-    height: 44px;
-    width: 44px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: var(--normal);
-    cursor: pointer;
-}
-
-.pagination-left:hover, .pagination-right:hover {
-    background-color: #fff;
-    color: var(--black);
-}
-
-.cemeteries-pagination {
-    display: flex;
-    align-items: center;
-}
-
-.pagination-number {
-    display: flex;
-    font-size: 18px;
-    margin: 0 20px;
-    color: rgba(32, 30, 31, .6);
-}
-
-.pagination-number__delimiter {
-    margin: 0 8px;
 }
 
 .pagination-number__current {
@@ -1046,253 +417,6 @@ a.cemetery-contacts-list__text:hover {
     fill: var(--black);
 }
 
-.search-filter {
-    background-color: #fff;
-    border-radius: 44px;
-    color: var(--black);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font: 600 18px sans-serif;
-    height: 44px;
-    width: 150px;
-    cursor: pointer;
-}
-
-.search-filter:hover .search-filter__title {
-    color: var(--blue);
-}
-
-.search-filter__title {
-    padding: 0 28px;
-    transition: var(--normal);
-    font: 600 18px sans-serif;
-}
-
-.search-filter__icon {
-    border-radius: 50%;
-    border: 1px solid var(--light-gray);
-    width: 44px;
-    height: 44px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.search-filter__icon svg {
-    fill: var(--blue);
-    width: 18px;
-    height: 18px;
-}
-
-.search-filter__current-filters {
-    color: #fff;
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: var(--blue);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    right: -8px;
-    top: -8px;
-    font-size: 14px;
-}
-
-.select-search {
-    background-color: rgba(245, 247, 249, .7);
-    border-radius: 44px;
-    display: flex;
-    border: 1px solid #fff;
-}
-
-.select-search__map, .select-search__list {
-    padding: 0 24px;
-    height: 44px;
-    color: var(--black);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: var(--normal);
-    background-color: transparent;
-    border-radius: 44px;
-    font-size: 16px;
-}
-
-.select-search__map.active, .select-search__list.active {
-    background-color: #fff;
-}
-
-.select-search__map:hover, .select-search__list:hover {
-    color: var(--blue);
-}
-
-.select-search__map.active:hover, .select-search__list.active:hover {
-    color: var(--black);
-    cursor: auto;
-}
-
-.map {
-    width: 100%;
-    min-height: calc(100vh - 97px);
-    background-color: var(--black);
-    display: grid;
-    grid-template-columns: 1fr 360px;
-    position: relative;
-    padding-top: 10px;
-    justify-content: space-between;
-    align-items: flex-start;
-    grid-column-gap: 20px;
-}
-
-.map-results {
-    width: 100%;
-    background-color: #fff;
-    position: relative;
-    z-index: 10;
-    border-radius: 7px;
-    height: 588px;
-}
-
-.map-results__title-wrap {
-    width: 100%;
-    display: flex;
-    height: 44px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    background-color: var(--gray);
-}
-
-.map-results__title {
-    color: rgba(32, 30, 31, .7);
-    font-size: 14px;
-}
-
-.map-results__unwrap {
-    padding: 0 18px;
-    height: 36px;
-    background-color: #fff;
-    border-radius: 7px;
-    color: rgba(23, 94, 217, .7);
-    justify-content: center;
-    align-items: center;
-    width: max-content;
-    display: none;
-}
-
-.map-results__unwrap svg {
-    width: 14px;
-    height: 8px;
-    fill: rgba(23, 94, 217, .7);
-    margin-left: 5px;
-}
-
-.map-wrap {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(23, 94, 217, 0.34);
-}
-
-.map-results__list {
-    width: 100%;
-    max-height: calc(100% - 44px);
-    overflow-y: scroll;
-    padding: 0 20px;
-}
-
-.map-results__list::-webkit-scrollbar {
-    width: 7px;
-    background-color: rgba(61, 64, 80, 0);
-    border-radius: 3px;
-}
-
-.map-results__list::-webkit-scrollbar-thumb {
-    background-color: #5f5f60;
-    border-radius: 9em;
-}
-
-.map-results__link {
-    width: 100%;
-    height: 76px;
-    padding: 8px 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.map-results__img {
-    width: 60px;
-    height: 60px;
-    position: relative;
-    overflow: hidden;
-    margin-right: 16px;
-}
-
-.map-results__info {
-    width: calc(100% - 76px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.map-results__info:hover .map-results__name {
-    color: var(--blue);
-}
-
-.map-results__name {
-    line-height: 1.1;
-    font-size: 16px;
-    color: var(--black);
-    margin-bottom: 4px;
-    transition: var(--normal);
-}
-
-.map-results__years {
-    color: rgba(32, 30, 31, .8);
-    font-size: 14px;
-}
-
-.member-card {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.member-info {
-    width: 100%;
-}
-
-.member-images-wrap {
-    height: 100%;
-    background-color: var(--light-gray);
-}
-
-.member-images {
-    width: 100%;
-    padding: 18px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-}
-
-.member-images__item {
-    width: 210px;
-    height: 210px;
-}
-
-.member-images__item a {
-    width: 100%;
-    display: block;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
 .video-play {
     width: 31px;
     height: 36px;
@@ -1302,83 +426,6 @@ a.cemetery-contacts-list__text:hover {
     transform: translate(-50%, -50%);
     z-index: 100;
     fill: var(--blue);
-}
-
-.member-info {
-    width: 100%;
-    padding-top: 27px;
-}
-
-.member-avatar, .member-avatar__wrap {
-    width: 71px;
-    height: 71px;
-    border-radius: 50%;
-    position: relative;
-}
-
-.member-avatar__wrap {
-    overflow: hidden;
-}
-
-.member-avatar__change-link svg {
-    width: 16px;
-    height: 16px;
-    fill: var(--black);
-    transition: var(--normal);
-}
-
-.member-info-wrap {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.member-avatar__change-link {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    background-color: #fff;
-    border-radius: 50%;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: -15px;
-    right: -10px;
-}
-
-.member-avatar__change-link:hover svg {
-    fill: var(--blue);
-}
-
-.member-name-wrap {
-    width: calc(100% - 71px);
-    padding-left: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-.member-name {
-    line-height: 1.1;
-    color: var(--black);
-    font: 900 30px sans-serif;
-}
-
-.member-ages {
-    margin-top: 10px;
-    font-size: 16px;
-    color: var(--black);
-}
-
-.member-info-biography {
-    margin-top: 15px;
-}
-
-.member-info-biography p {
-    color: #797879;
-    font-size: 14px;
-    margin-top: 10px;
 }
 
 .social {
@@ -1507,7 +554,6 @@ a.cemetery-contacts-list__text:hover {
 }
 
 
-
 /* add profile
 ---------------*/
 .add-profile {
@@ -1526,6 +572,10 @@ a.cemetery-contacts-list__text:hover {
 
 .add-profile__text {
     font-size: 16px;
+}
+
+#death_certificate {
+    display: block;
 }
 
 .add-profile-content__title {
@@ -1751,8 +801,7 @@ a.cemetery-contacts-list__text:hover {
 }
 
 .select-form.focus-select .select-list {
-    height: 150px;
-    overflow-y:scroll;
+    height: auto;
     border-color: #cdd1d6;
 }
 
@@ -2178,44 +1227,14 @@ a.cemetery-contacts-list__text:hover {
         padding: 26px 20px 60px;
     }
 
-    .add-memorial {
-        padding: 13px 20px 15px;
-    }
-
-    .cemetery-title-wrap {
-        padding: 26px 0 0;
-        margin: 0 20px;
-        width: calc(100% - 40px);
-    }
-
     .preview-modal.aside-top .aside-form {
         padding: 64px 20px 80px;
     }
 
-    .list, .member-card, .header {
+    .list, .header {
         padding: 0 20px;
     }
 
-    .map {
-        padding: 10px 20px 0;
-    }
-
-    .member-card {
-        grid-template-columns: 1fr 560px;
-    }
-
-    .member-images__item {
-        width: 160px;
-        height: 160px;
-    }
-
-    .member-info {
-        padding-right: 20px;
-    }
-
-    .cemetery-content {
-        padding: 24px 20px;
-    }
 
     .steep-wrap.grid-col-2 {
         grid-column-gap: 20px;
@@ -2227,10 +1246,6 @@ a.cemetery-contacts-list__text:hover {
         width: 100%;
     }
 
-    .price-list {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
     .add-profile-content {
         grid-template-columns: 325px 1fr;
     }
@@ -2238,46 +1253,6 @@ a.cemetery-contacts-list__text:hover {
     .add-profile__text {
         grid-column: 1/3;
         grid-row: 1/2;
-    }
-}
-
-@media screen and (max-width: 1120px) {
-    .footer {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-        height: 210px;
-    }
-
-    .footer-menu {
-        width: auto;
-        margin: 24px 0 32px;
-    }
-
-    .content {
-        min-height: calc(100vh - 210px);
-    }
-
-    .menu__link, .menu-list__link, .cookie-link {
-        font-size: 14px;
-    }
-
-    .menu__item {
-        margin-right: 16px;
-    }
-
-    .logo-header__img {
-        width: 175px;
-    }
-
-    .form-recover__title {
-        font-size: 4vw;
-    }
-
-    .cemeteries, .price-list {
-        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -2321,80 +1296,11 @@ a.cemetery-contacts-list__text:hover {
         padding: 32px 0 48px;
     }
 
-    .form-recover {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
-
-    .form-recover__title {
-        font-size: 32px;
-        margin-bottom: 20px;
-    }
 
     .content {
         padding-top: 56px;
     }
 
-    .map {
-        min-height: calc(100vh - 56px);
-    }
-
-    .map-results {
-        position: absolute;
-        bottom: 0;
-        height: 125px;
-        overflow: hidden;
-        transition: var(--normal);
-    }
-
-    .map-results.unwrap {
-        height: 70vh;
-    }
-
-    .map-results__unwrap {
-        display: flex;
-    }
-
-    .map-results:not(.unwrap) .map-results__list {
-        overflow: visible;
-    }
-
-    .map {
-        grid-template-columns: 1fr;
-    }
-
-    .map-results.unwrap .map-results__unwrap svg {
-        transform: rotate(180deg);
-    }
-
-    .member-card {
-        grid-template-columns: 1fr 430px;
-    }
-
-    .member-images__item {
-        width: 125px;
-        height: 125px;
-    }
-
-    .price {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    .cemetery-title {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
-
-    .cemetery-photo {
-        grid-template-columns: repeat(4, 1fr);
-    }
 
     .add-profile-content {
         grid-template-columns: 1fr;
@@ -2485,15 +1391,6 @@ a.cemetery-contacts-list__text:hover {
     .content {
         min-height: calc(100vh - 147px);
     }
-
-    .member-card {
-        grid-template-columns: 1fr 330px;
-    }
-
-    .member-images__item {
-        width: 90px;
-        height: 90px;
-    }
 }
 
 @media screen and (max-width: 768px) {
@@ -2517,134 +1414,9 @@ a.cemetery-contacts-list__text:hover {
         width: 100%;
     }
 
-    .cemeteries-img {
-        width: 80px;
-        height: 80px;
-    }
-
-    .cemeteries-info {
-        width: calc(100% - 102px);
-        height: 80px;
-    }
-
-    .cemeteries-info__title {
-        font-size: 16px;
-    }
-
-    .member-card {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
-
-    .member-images-wrap {
-        width: 100%;
-    }
-
-    .member-images__item, .member-images__item a {
-        height: auto;
-        width: 100%;
-    }
-
-    .member-images__item a {
-        padding-top: 100%;
-    }
-
-    .member-info {
-        padding-right: 0;
-    }
-
-    .cemetery-text-wrap {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    .cemetery-menu__item {
-        font-size: 14px;
-        padding: 7px 12px;
-    }
-
-    .new-password__title {
-        font: 900 44px sans-serif;
-    }
-
-    .form-new-password {
-        grid-gap: 35px;
-    }
 }
 
 @media screen and (max-width: 600px) {
-    .cemeteries__link {
-        flex-direction: column;
-    }
-
-    .cemeteries-info {
-        width: 100%;
-        margin-top: 20px;
-        height: auto;
-        align-items: center;
-    }
-
-    .cemeteries-img {
-        margin: 0;
-    }
-
-    .cemeteries-info__title {
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
-    .login {
-        position: absolute;
-        top: 30px;
-        left: 40px;
-    }
-
-    .member-name {
-        font-size: 21px;
-    }
-
-    .cemetery-named-wrap {
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    .cemetery-named {
-        padding: 0;
-        width: 100%;
-        margin-top: 25px;
-        text-align: center;
-    }
-
-    .cemetery-photo {
-        grid-template-columns: repeat(3, 1fr);
-    }
-
-    .form-new-password {
-        grid-template-columns: 1fr;
-    }
-
-    .form-new-password__text {
-        grid-row: 1/2;
-        max-width: 100%;
-    }
-
-    .form-new-password__wrap .form__submit {
-        width: 100%;
-    }
-
-    .new-password__title {
-        font: 900 10vw sans-serif;
-    }
-
-    .add-memorial__title {
-        font-size: 24px;
-    }
-
     .steep-wrap.grid-col-2, .grid-col-2_3 {
         grid-template-columns: 1fr;
     }
@@ -2675,165 +1447,4 @@ a.cemetery-contacts-list__text:hover {
     }
 }
 
-@media screen and (max-width: 560px) {
-    .registration {
-        width: 100%;
-        padding: 35px 20px;
-        height: auto;
-        min-height: 100vh;
-    }
 
-    .form-registration {
-        width: 100%;
-        padding: 0 20px;
-    }
-
-    .form-registration__title {
-        font-size: 30px;
-    }
-
-    .preview-modal {
-        overflow-y: scroll;
-    }
-
-    .form-recover__title {
-        font-size: 22px;
-        margin-bottom: 10px;
-    }
-
-    .aside-form {
-        width: 100%;
-    }
-
-    .cemeteries-buttons {
-        flex-direction: column;
-    }
-
-    .cemeteries-buttons:before {
-        content: none;
-    }
-
-    .button-more {
-        margin-bottom: 15px;
-        left: 0;
-    }
-
-    .logo-header__img {
-        width: 140px;
-    }
-
-    .famous-persons__name, .memorials-info__ages {
-        font-size: 12px;
-    }
-
-    .memorials-info__name {
-        font-size: 14px;
-    }
-
-    .cemetery-contacts {
-        padding: 24px 10px;
-    }
-
-    .cemetery-menu__item {
-        padding: 5px 10px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .login-form {
-        width: 100%;
-    }
-
-    .cemeteries {
-        grid-template-columns: 1fr;
-    }
-
-    .search {
-        flex-direction: column-reverse;
-        justify-content: flex-start;
-    }
-
-    .search-filter {
-        margin-top: 20px;
-    }
-
-    .logo-header__img {
-        width: 100%;
-        max-width: 140px;
-        padding-right: 10px;
-    }
-
-    .member-info-wrap {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .member-name-wrap {
-        padding: 0;
-        margin-top: 20px;
-    }
-
-    .member-name {
-        text-align: center;
-    }
-
-    .price-list {
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    .cemetery-title-wrap {
-        margin: 0 10px;
-        width: calc(100% - 20px);
-    }
-
-    .cemetery-menu {
-        flex-direction: column;
-        justify-content: flex-start;
-        position: relative;
-        border: 1px solid var(--light-gray);
-        background-color: var(--gray);
-        border-bottom: none;
-        border-radius: 7px 7px 0 0;
-        cursor: pointer;
-    }
-
-    .cemetery-menu:before {
-        content: "";
-        background-color: url("../img/arrow.svg") no-repeat center center;
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        width: 14px;
-        height: 8px;
-        z-index: 10;
-        transition: var(--normal);
-        transform: rotate(0);
-    }
-
-    .cemetery-menu.open:before {
-        transform: rotate(180deg);
-    }
-
-    .cemetery-menu__item {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        justify-content: flex-start;
-        opacity: 0;
-        visibility: hidden;
-        background-color: transparent;
-        border: none;
-    }
-
-    .cemetery-menu.open .cemetery-menu__item, .cemetery-menu__item.current {
-        opacity: 1;
-        visibility: visible;
-        position: static;
-        z-index: 1;
-    }
-
-    .cemetery-menu__item.current {
-        order: 1;
-    }
-}

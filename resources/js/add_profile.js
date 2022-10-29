@@ -1,3 +1,5 @@
+import './mask'
+
 let buttonClose = document.querySelector('#close-aside');
 let page = document.querySelector('#page');
 let buttonOpenMenu = document.querySelector('#mobile-menu');
@@ -68,168 +70,37 @@ function changeParent () {
 
 buttonClose.addEventListener('click', openModal);
 buttonClose.addEventListener('click', openModal);
-window.addEventListener('resize', changeParent);
-window.addEventListener('DOMContentLoaded', changeParent);
+// window.addEventListener('resize', changeParent);
+// window.addEventListener('DOMContentLoaded', changeParent);
 buttonOpenMenu.addEventListener('click', openMenu);
 
 
-let checkCemeteryContent = function () {
-    let cemeteryMenuItems = document.querySelectorAll('.cemetery-menu__item');
-    let cemeteryContentItems = document.querySelectorAll('.cemetery-content__item');
 
-    for (let i = 0; i < cemeteryMenuItems.length; i++) {
-        cemeteryMenuItems[i].addEventListener('click', function () {
-            if(!cemeteryMenuItems[i].classList.contains('current')) {
-
-                let x = 0;
-                while (x < cemeteryMenuItems.length) {
-                    cemeteryMenuItems[x].classList.remove('current');
-                    cemeteryContentItems[x].classList.remove('current');
-                    x++;
-                }
-
-                cemeteryMenuItems[i].classList.add('current');
-                cemeteryContentItems[i].classList.add('current');
-            }
-        })
-    }
-}
-
-let openMenuCemetery = function () {
-    let menuCemetery = document.querySelector('.cemetery-menu');
-
-    let mobileMenuCemetery = function () {
-        menuCemetery.classList.toggle('open');
-    }
-
-    let checkEvent = function () {
-        if (innerWidth <= 480) {
-            menuCemetery.addEventListener('click', mobileMenuCemetery);
-        } else {
-            menuCemetery.removeEventListener('click', mobileMenuCemetery);
-        }
-    }
-
-    window.addEventListener('resize', checkEvent);
-    window.addEventListener('load', checkEvent);
-}
-
-let cemeteryPhotoLength = function () {
-    let photos = document.querySelectorAll('.cemetery-photo__item');
-    let viewPhotosLength = 5;
-
-
-    let hidePhoto = function () {
-        for (let i = 3; i < photos.length; i++) {
-            photos[i].classList.remove('hide');
-        }
-
-        for (let i = viewPhotosLength; i < photos.length; i++) {
-            photos[i].classList.add('hide');
-        }
-
-        if (document.querySelector('.cemetery-photo__number-hide')) {
-            document.querySelector('.cemetery-photo__number-hide').remove();
-        }
-
-        let div = document.createElement('div');
-        div.className = 'cemetery-photo__number-hide';
-        div.innerHTML = `Смотреть еще ${photos.length - viewPhotosLength} фото`;
-        photos[viewPhotosLength - 1].querySelector('.gallery').append(div);
-    }
-
-
-
-    let changeNamber = function () {
-        if (innerWidth >= 980) {
-            viewPhotosLength = 5;
-        } else {
-            if (innerWidth < 980 && innerWidth >= 600) {
-                viewPhotosLength = 4;
-            } else {
-                viewPhotosLength = 3;
-            }
-        }
-
-        hidePhoto();
-    }
-
-    window.addEventListener('resize', changeNamber);
-    window.addEventListener('load', changeNamber);
-}
-
-if (document.querySelector('.cemetery-menu')) {
-    checkCemeteryContent();
-    openMenuCemetery();
-    cemeteryPhotoLength();
-}
 
 //Modal
 
-let open_modal = document.querySelectorAll('.open_modal');
-let close_modal = document.getElementById('close_modal');
-let modalbtn = document.getElementById('modal');
-let body = document.getElementsByTagName('body')[0];
-for (let i = 0; i < open_modal.length; i++) {
-    open_modal[i].onclick = function() {
-        modalbtn.classList.add('modal_vis');
-        modalbtn.classList.remove('bounceOutDown');
-        body.classList.add('body_block');
-    };
-}
-close_modal.onclick = function() {
-    modalbtn.classList.add('bounceOutDown');
-    window.setTimeout(function() {
-        modalbtn.classList.remove('modal_vis');
-        body.classList.remove('body_block');
-    }, 500);
-};
+// let open_modal = document.querySelectorAll('.open_modal');
+// let close_modal = document.getElementById('close_modal');
+// let modalbtn = document.getElementById('modal');
+// let body = document.getElementsByTagName('body')[0];
+//
+// for (let i = 0; i < open_modal.length; i++) {
+//     open_modal[i].onclick = function() {
+//         modalbtn.classList.add('modal_vis');
+//         modalbtn.classList.remove('bounceOutDown');
+//         body.classList.add('body_block');
+//     };
+// }
+//
+// close_modal.onclick = function() {
+//     modalbtn.classList.add('bounceOutDown');
+//     window.setTimeout(function() {
+//         modalbtn.classList.remove('modal_vis');
+//         body.classList.remove('body_block');
+//     }, 500);
+// };
 
 
-// FUNCTION UNWRAP RESULT SEARCH
-if (document.querySelector('.map-results')) {
-    let buttonUnwrap = document.querySelector('.map-results__unwrap');
-
-    let mapResultsUnwrap = function () {
-        let listResult = document.querySelector('.map-results');
-        listResult.classList.toggle('unwrap');
-    }
-
-    buttonUnwrap.addEventListener('click', mapResultsUnwrap);
-}
-
-
-//VALIDATION FORM
-function validation(items) {
-    let inputStatusValidate = [];
-
-    // validation form
-    for (let i = 0; i < items.length; i++) {
-        if (items[i].value === '') {
-
-            if (!items[i].parentElement.classList.contains('no-valid')) {
-                items[i].parentElement.classList.add('no-valid');
-                items[i].parentElement.insertAdjacentHTML('afterend',
-                    '<span class="is-invalid">Это обязательное поле</span>');
-            }
-
-            inputStatusValidate.push(false);
-
-        } else {
-            items[i].classList.remove('no-valid');
-            inputStatusValidate.push(true);
-            if (items[i].parentElement.classList.contains('no-valid')) {
-                items[i].parentElement.nextElementSibling.remove();
-                items[i].parentElement.classList.remove('no-valid');
-            }
-        }
-    }
-
-    // true = canceled sending
-    if (inputStatusValidate.includes(false)) {
-        return false;
-    }
-}
 
 //INIT FANCYBOX
 if (document.querySelector('.gallery')) {
@@ -249,33 +120,7 @@ if (document.querySelector('.gallery')) {
     });
 }
 
-if (document.querySelector('#login-form')) {
-    document.querySelector('#login-form').addEventListener('submit', function (event) {
-        event.preventDefault();
 
-        let inputs = this.querySelectorAll('.input-text');
-
-        validation(inputs);
-
-        if (validation(inputs) === false) {
-            return false;
-        }
-    })
-}
-
-if (document.querySelector('#form-registration')) {
-    document.querySelector('#form-registration').addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        let inputs = this.querySelectorAll('.input-text');
-
-        validation(inputs);
-
-        if (validation(inputs) === false) {
-            return false;
-        }
-    })
-}
 
 //CHANGE USER AVATAR
 let showFile = function () {
@@ -410,22 +255,6 @@ if (document.querySelector('.load-files')) {
 
 
 
-//MASK TADE FORM
-if (document.querySelector('.mask-data')) {
-    let inputsMask = document.querySelectorAll('.mask-data');
-
-    for (inpDate of inputsMask) {
-
-        var lazyMask = IMask(inpDate, {
-            mask: Date,
-            autofix: true,
-            blocks: {
-                d: {mask: IMask.MaskedRange, placeholderChar: 'd', from: 1, to: 31, maxLength: 2},
-                m: {mask: IMask.MaskedRange, placeholderChar: 'm', from: 1, to: 12, maxLength: 2},
-                Y: {mask: IMask.MaskedRange, placeholderChar: 'y', from: 1900, to: 2999, maxLength: 4}
-            }})}
-
-}
 
 
 //CUSTOM SELECT
@@ -461,6 +290,45 @@ let select = function() {
 if (document.querySelector('.select-form')) {
     select();
 }
+
+//MASK TADE FORM
+if (document.querySelector('.mask-data')) {
+    let inputsMask = document.querySelectorAll('.mask-data');
+
+    for (let inpDate of inputsMask) {
+
+        let lazyMask = IMask(inpDate, {
+            mask: Date,
+            autofix: true,
+            blocks: {
+                d: {mask: IMask.MaskedRange, placeholderChar: 'd', from: 1, to: 31, maxLength: 2},
+                m: {mask: IMask.MaskedRange, placeholderChar: 'm', from: 1, to: 12, maxLength: 2},
+                Y: {mask: IMask.MaskedRange, placeholderChar: 'y', from: 1900, to: 2999, maxLength: 4}
+            }})
+    }
+}
+
+//Modal
+
+let open_modal = document.querySelectorAll('.open_modal');
+let close_modal = document.getElementById('close_modal');
+let modalbtn = document.getElementById('modal');
+let body = document.getElementsByTagName('body')[0];
+for (let i = 0; i < open_modal.length; i++) {
+    open_modal[i].onclick = function() {
+        modalbtn.classList.add('modal_vis');
+        modalbtn.classList.remove('bounceOutDown');
+        body.classList.add('body_block');
+    };
+}
+close_modal.onclick = function() {
+    modalbtn.classList.add('bounceOutDown');
+    window.setTimeout(function() {
+        modalbtn.classList.remove('modal_vis');
+        body.classList.remove('body_block');
+    }, 500);
+};
+
 
 
 if (document.querySelector('.add-profile')) {

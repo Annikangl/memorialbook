@@ -262,6 +262,7 @@
         <button type="button" class="close-registration" id="close-aside"></button>
     </div>
 </div>
+
 @yield('scripts')
 
 </body>

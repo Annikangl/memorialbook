@@ -2,6 +2,7 @@
 -----------------*/
 @import "_vars.css";
 @import "./fonts.css";
+@import "main.css";
 @import "./template.css";
 @import "cemeteries/cemetery_pagination.css";
 @import "profiles/profile_card.css";
@@ -343,75 +344,75 @@ iframe {
     margin-top: 0
 }
 
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-    color: #201e1f;
-    display: block;
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 1.05em;
-    margin-top: 1.4em
-}
+/*.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {*/
+/*    color: #201e1f;*/
+/*    display: block;*/
+/*    font-weight: 900;*/
+/*    line-height: 1.1;*/
+/*    margin-bottom: 1.05em;*/
+/*    margin-top: 1.4em*/
+/*}*/
 
-.h1, h1 {
-    font-size: 1.875rem;
-    margin-bottom: 1.5em
-}
+/*.h1, h1 {*/
+/*    font-size: 1.875rem;*/
+/*    margin-bottom: 1.5em*/
+/*}*/
 
-.h1:first-child, h1:first-child {
-    margin-top: 0
-}
+/*.h1:first-child, h1:first-child {*/
+/*    margin-top: 0*/
+/*}*/
 
-.h2, h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5em
-}
+/*.h2, h2 {*/
+/*    font-size: 1.5rem;*/
+/*    margin-bottom: 1.5em*/
+/*}*/
 
-.h3, h3 {
-    font-size: 1.375rem;
-    margin-bottom: 1.25em
-}
+/*.h3, h3 {*/
+/*    font-size: 1.375rem;*/
+/*    margin-bottom: 1.25em*/
+/*}*/
 
-.h4, h4 {
-    font-size: 1.125rem
-}
+/*.h4, h4 {*/
+/*    font-size: 1.125rem*/
+/*}*/
 
-.h4, .h5, h4, h5 {
-    margin-bottom: 1em
-}
+/*.h4, .h5, h4, h5 {*/
+/*    margin-bottom: 1em*/
+/*}*/
 
-.h5, h5 {
-    font-size: 1rem
-}
+/*.h5, h5 {*/
+/*    font-size: 1rem*/
+/*}*/
 
-.h6, h6 {
-    font-size: .875rem;
-    margin-bottom: .8em
-}
+/*.h6, h6 {*/
+/*    font-size: .875rem;*/
+/*    margin-bottom: .8em*/
+/*}*/
 
-button, input, optgroup, select, textarea {
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    margin: 0
-}
+/*button, input, optgroup, select, textarea {*/
+/*    font-family: inherit;*/
+/*    font-size: inherit;*/
+/*    font-weight: inherit;*/
+/*    line-height: inherit;*/
+/*    margin: 0*/
+/*}*/
 
-button:focus, input:focus, optgroup:focus, select:focus, textarea:focus {
-    outline: 5px auto #5e9ed6
-}
+/*button:focus, input:focus, optgroup:focus, select:focus, textarea:focus {*/
+/*    outline: 5px auto #5e9ed6*/
+/*}*/
 
-button, input {
-    overflow: visible
-}
+/*button, input {*/
+/*    overflow: visible*/
+/*}*/
 
-button, select {
-    text-transform: none
-}
+/*button, select {*/
+/*    text-transform: none*/
+/*}*/
 
-button {
-    border-radius: 0;
-    color: #175ed9
-}
+/*button {*/
+/*    border-radius: 0;*/
+/*    color: #175ed9*/
+/*}*/
 
 button:focus:not(:focus-visible) {
     outline: 0
@@ -426,68 +427,68 @@ button:focus:not(:focus-visible) {
     cursor: pointer
 }
 
-input::-ms-clear, input::-ms-reveal {
-    display: none;
-    height: 0;
-    width: 0
-}
+/*input::-ms-clear, input::-ms-reveal {*/
+/*    display: none;*/
+/*    height: 0;*/
+/*    width: 0*/
+/*}*/
 
-input:-webkit-autofill {
-    -webkit-box-shadow: inset 0 0 0 1000px #fff
-}
+/*input:-webkit-autofill {*/
+/*    -webkit-box-shadow: inset 0 0 0 1000px #fff*/
+/*}*/
 
-input:autofill {
-    -webkit-box-shadow: inset 0 0 0 1000px #fff
-}
+/*input:autofill {*/
+/*    -webkit-box-shadow: inset 0 0 0 1000px #fff*/
+/*}*/
 
-input::-webkit-search-cancel-button {
-    display: none
-}
+/*input::-webkit-search-cancel-button {*/
+/*    display: none*/
+/*}*/
 
-input::-webkit-search-decoration {
-    -webkit-appearance: none
-}
+/*input::-webkit-search-decoration {*/
+/*    -webkit-appearance: none*/
+/*}*/
 
-input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
-    height: auto
-}
+/*input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {*/
+/*    height: auto*/
+/*}*/
 
-input[type=search] {
-    -webkit-appearance: none;
-    outline-offset: -2px
-}
+/*input[type=search] {*/
+/*    -webkit-appearance: none;*/
+/*    outline-offset: -2px*/
+/*}*/
 
-label {
-    color: #797879;
-    display: inline-block;
-    font-size: 14px;
-    margin-bottom: .2em
-}
+/*label {*/
+/*    color: #797879;*/
+/*    display: inline-block;*/
+/*    font-size: 14px;*/
+/*    margin-bottom: .2em*/
+/*}*/
 
-label[for], select {
-    cursor: pointer
-}
+/*label[for], select {*/
+/*    cursor: pointer*/
+/*}*/
 
-select {
-    word-wrap: normal
-}
+/*select {*/
+/*    word-wrap: normal*/
+/*}*/
 
-select[multiple] {
-    overflow: auto
-}
+/*select[multiple] {*/
+/*    overflow: auto*/
+/*}*/
 
-select[multiple] option {
-    padding: 4px 0
-}
+/*select[multiple] option {*/
+/*    padding: 4px 0*/
+/*}*/
 
-textarea {
-    overflow: auto;
-    resize: vertical
-}
+/*textarea {*/
+/*    overflow: auto;*/
+/*    resize: vertical*/
+/*}*/
 
-[role=button] {
-    cursor: pointer
-}
+/*[role=button] {*/
+/*    cursor: pointer*/
+/*}*/
 
 legend {
     color: inherit;
@@ -558,9 +559,6 @@ table caption {
     text-align: left
 }
 
-ol, ul {
-    padding-left: 2em
-}
 
 
 
@@ -587,10 +585,10 @@ ol > li:before {
     left: -1.3333333333em
 }
 
-li {
-    margin-top: .5em;
-    position: relative
-}
+/*li {*/
+/*    margin-top: .5em;*/
+/*    position: relative*/
+/*}*/
 
 li:before {
     position: absolute

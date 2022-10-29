@@ -2,7 +2,6 @@ import 'bootstrap'
 import './vendor'
 import  './cemetery'
 import './map'
-import './mask'
 import './add_profile'
 
 
