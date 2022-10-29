@@ -47,8 +47,6 @@ class ProfileController extends Controller
             return view('tree.error');
         }
 
-//        $medias=Profile::find(45)->getMedia('avatar')->all();
-
         return view('tree.list', compact('profiles'));
     }
 
@@ -108,9 +106,6 @@ class ProfileController extends Controller
         $params['death_certificate'] = $certificate_path;
 
         $request->session()->put('profile_step1', $params);
-//        $profile = Profile::create($params)
-//            ->addMedia($request->file('avatar'))
-//            ->toMediaCollection('avatar','avatar');
 
         return redirect()->route('profile.create.step2');
     }
@@ -124,9 +119,8 @@ class ProfileController extends Controller
     }
 
 
-    public function store_step2(ProfileCreateStep2Request $request)
+    public function store_step2(Request $request)
     {
-
         $params = $request->all();
         $params = $request->except(['_token']);
 
@@ -179,7 +173,7 @@ class ProfileController extends Controller
                     ->withErrors($e->getErrors())
                     ->withInput();
             }
-        // Если всё хорошо - фиксируем
+
         DB::commit();
         return redirect()->route('tree');
 

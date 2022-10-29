@@ -2,7 +2,8 @@ import 'bootstrap'
 import './vendor'
 import  './cemetery'
 import './map'
-
+import './mask'
+import './add_profile'
 
 
 /*! For license information please see main.scripts.js.LICENSE.txt */

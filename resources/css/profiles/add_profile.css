@@ -1,0 +1,2839 @@
+/* style general
+-----------------*/
+
+body {
+    color: var(--black);
+}
+
+body.fix {
+    overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+input[type="radio"], input[type="checkbox"], input[type="file"] {
+    display: none;
+}
+
+:root {
+    --content-size: calc(50% - 700px);
+    --normal: .4s ease;
+    --blue: #175ed9;
+    --black: #201e1f;
+    --red: #fa122e;
+    --gray: #f5f7f9;
+    --light-gray: #e5e8eb;
+}
+
+#page.active {
+    filter: blur(5px);
+}
+
+section {
+    width: 100%;
+    padding: 0 var(--content-size);
+}
+
+.bg-img {
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+/* header
+---------------*/
+
+/* main
+---------------*/
+.content {
+    width: 100%;
+    min-height: calc(100vh - 116px);
+    display: flex;
+    padding-top: 97px;
+}
+
+.preview {
+    background-color: var(--gray);
+    display: grid;
+    grid-template-columns: 59% 41%;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+}
+
+.preview-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.preview-img img {
+    width: 744px;
+}
+
+.preview-img img:last-child {
+    display: none;
+}
+
+.preview-form {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: relative;
+}
+
+.preview-form:after {
+    content: "";
+    height: 100%;
+    width: 1000%;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 100%;
+}
+
+.preview-form, .login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    width: 340px;
+}
+
+.login-form__title {
+    line-height: 1.3;
+    color: var(--black);
+    text-align: left;
+    width: 100%;
+    font: 900 22px sans-serif;
+}
+
+.input-wrap {
+    width: 100%;
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.input-wrap__title {
+    color: #797879;
+    font-size: 14px;
+    margin-bottom: 0.2em;
+    padding-bottom: 3px;
+}
+
+.form__submit {
+    line-height: 1.3;
+    background-color: var(--blue);
+    color: #fff;
+    padding: 1em 1.1em 0.9em;
+    height: 54px;
+    font: 600 14px sans-serif;
+    justify-content: center;
+    letter-spacing: .05em;
+    border-radius: 7px;
+    text-transform: uppercase;
+    margin-top: 32px;
+    min-width: 160px;
+    cursor: pointer;
+    transition: var(--normal);
+}
+
+.form__submit:hover {
+    background-color: #6799ef;
+}
+
+.login-form__registration-link {
+    margin-top: 40px;
+    color: var(--blue);
+    font-size: 14px;
+}
+
+.login-form__registration-link:hover {
+    text-decoration: underline;
+}
+
+.input-form, .select-form, .textarea-form {
+    width: 100%;
+    height: 44px;
+    padding: 6.4px 17.6px;
+    background-color: var(--gray);
+    border: 1px solid #cdd1d6;
+    border-radius: 7px;
+    transition: var(--normal);
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-form:hover, .input-form:focus-within, .select-form:hover, .select-form:focus-within, .textarea-form,
+.textarea-form:focus-within {
+    border: 1px solid var(--blue);
+}
+
+.textarea-form {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.select-form {
+    position: relative;
+    padding-right: 30px;
+    cursor: pointer;
+}
+
+.input-link {
+    color: var(--blue);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.input-link:hover {
+    text-decoration: underline;
+}
+
+.input-link + .input-text {
+    width: calc(100% - 120px);
+}
+
+.input-text {
+    width: 100%;
+    color: var(--black);
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+}
+
+.no-valid {
+    border-color: var(--red);
+}
+
+.no-valid ~ .is-invalid {
+    display: block;
+}
+
+.is-invalid {
+    display: none;
+    color: var(--red);
+    padding-left: 18px;
+    font-size: 12px;
+    margin: 2.4px 0 0;
+    position: relative;
+}
+
+.is-invalid:before {
+    content: "";
+    border-radius: 50%;
+    height: 4px;
+    left: 7px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    background-color: var(--red);
+}
+
+.preview-modal {
+    width: 100%;
+    height: 100%;
+    background-color: hsla(0, 0%, 81%, .6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -150;
+    overflow: hidden;
+}
+
+.preview-modal.open {
+    opacity: 1;
+    visibility: visible;
+    z-index: 150;
+}
+
+.preview-modal.aside-top {
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.preview-modal.aside-right {
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.preview-modal.aside-top .form-registration, .preview-modal.aside-right .form-recover,
+.preview-modal.aside-menu .form-registration, .preview-modal.aside-menu .form-recover {
+    display: none;
+}
+
+.preview-modal.aside-top .aside-form {
+    width: 100%;
+    padding: 64px var(--content-size) 80px;
+    height: auto;
+    justify-content: flex-start;
+}
+
+.aside-form {
+    width: 536px;
+    background-color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    transition: var(--normal);
+    padding-top: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 100;
+}
+
+.form-registration {
+    width: 310px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-registration__text, .form-registration__text a {
+    margin-top: 18px;
+    text-align: center;
+    color: #797879;
+    font-size: 14px;
+}
+
+.form-registration__text a {
+    text-decoration: underline;
+}
+
+.form-registration__text a:hover {
+    text-decoration: none;
+}
+
+.form-registration__title {
+    width: 100%;
+    text-align: left;
+    font-size: 52px;
+    color: var(--black);
+}
+
+.close-registration {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    border: 1px solid var(--light-gray);
+    transition: var(--normal);
+}
+
+.close-registration:before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close-registration:after, .close-registration:before {
+    content: "";
+    border-radius: 1px;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    width: 16px;
+    background-color: var(--black);
+}
+
+.close-registration:after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.close-registration:hover {
+    opacity: .65;
+}
+
+.reg-visible .form-registration {
+    display: flex;
+}
+
+.form-recover {
+    width: 100%;
+    max-width: 1220px;
+    display: grid;
+    grid-template-columns: 1fr 520px;
+    grid-column-gap: 10px;
+    justify-content: flex-start;
+}
+
+.form-recover__title {
+    font: 900 52px sans-serif;
+    line-height: 1.3;
+    color: var(--black);
+}
+
+.list, .member-card {
+    background-color: var(--gray);
+}
+
+.cemeteries__link {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.cemetery-bg {
+    width: 100%;
+    background-color: url("../img/bg.jpg") no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    padding: 25% 0 0;
+    height: auto;
+}
+
+.cemetery-title-wrap {
+    width: 100%;
+    padding: 26px var(--content-size) 0;
+    background-color: #fff;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.cemetery-title {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.cemetery-title-img {
+    width: 122px;
+    height: 122px;
+    position: relative;
+    overflow-y: hidden;
+    border-radius: 50%;
+}
+
+.cemetery-named-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.cemetery-named {
+    width: calc(100% - 122px);
+    padding-left: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.cemetery-photo {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
+    position: relative;
+    top: 20px;
+}
+
+.cemetery-photo__item, .cemetery-photo__link {
+    width: 100%;
+    display: block;
+}
+
+.cemetery-photo__item.hide {
+    display: none;
+}
+
+.cemetery-photo__link {
+    padding-top: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.cemetery-photo__number-hide {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .6);
+    color: #fff;
+    font-size: 12px;
+    left: 0;
+    padding: 0 8px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+}
+
+.cemetery-named__title {
+    font-size: 30px;
+    color: var(--black);
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.cemetery-named__info {
+    color: rgba(32, 30, 31, .7);
+    font-size: 16px;
+}
+
+.cemetery {
+    width: 100%;
+    padding: 0;
+}
+
+.cemetery-menu {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    top: 1px;
+    margin-top: 40px;
+}
+
+.cemetery-menu__item {
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 14px 24px;
+    border-radius: 7px 7px 0 0;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--normal);
+    border-bottom: none;
+    color: rgba(32, 30, 31, .7);
+    cursor: pointer;
+}
+
+.cemetery-menu__item.current {
+    border-color: var(--light-gray);
+    background-color: var(--gray);
+    color: var(--black);
+}
+
+.cemetery-menu__item:hover {
+    color: var(--black);
+}
+
+.cemetery-content {
+    width: 100%;
+    padding: 24px var(--content-size) 64px;
+    background-color: var(--gray);
+    border: 1px solid var(--gray);
+    overflow: hidden;
+}
+
+.cemetery-content__item {
+    opacity: 0;
+    position: absolute;
+    transition: var(--normal);
+    height: 0;
+    overflow: hidden;
+}
+
+.cemetery-content__item.current {
+    opacity: 1;
+    position: relative;
+    z-index: 10;
+    height: auto;
+    overflow: visible;
+}
+
+.cemetery-text-wrap {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 24px;
+}
+
+.cemetery-text p {
+    color: rgba(32, 30, 31, .7);
+    font-size: 16px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.cemetery-text p:last-child {
+    margin-bottom: 0;
+}
+
+.famous-persons__title {
+    color: rgba(32, 30, 31, .8);
+    font: 700 20px sans-serif;
+}
+
+.famous-persons__map {
+    margin-top: 32px;
+}
+
+.famous-persons__map, .cemetery-contacts-map {
+    padding-top: 50%;
+    overflow: hidden;
+
+    /*удалить следующие (ниже) стили при вставке карты*/
+    background-color: rgba(32, 30, 31, .7);
+    color: #fff;
+}
+
+.famous-persons-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.famous-persons__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid var(--light-gray);
+    border-radius: 64px;
+    margin: 8px 10px 0 0;
+    padding: 3px;
+}
+
+.famous-persons-img {
+    width: 34px;
+    height: 34px;
+}
+
+.famous-persons__name {
+    font: 600 14px sans-serif;
+    padding: 2px 16px 2px 8px;
+    color: var(--black);
+}
+
+.memorials__item {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 9px 18px;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.memorials__item:last-child {
+    margin-bottom: 0;
+}
+
+.memorials-img {
+    width: 68px;
+    height: 68px;
+}
+
+.famous-persons-img, .memorials-img {
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.memorials-info {
+    width: calc(100% - 68px);
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.memorials-info__name {
+    line-height: 1.4;
+    font-size: 16px;
+    color: var(--black);
+}
+
+.memorials-info__ages {
+    color: rgba(32, 30, 31, .8);
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.price {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 272px 1fr;
+    grid-gap: 18px;
+}
+
+.price .cemeteries-buttons {
+    grid-column: 2/3;
+}
+
+.price-filter {
+    width: 100%;
+    height: max-content;
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 12px 32px;
+}
+
+.price-filter__item {
+    padding: 7px 0;
+}
+
+.price-filter__link {
+    color: rgba(32, 30, 31, .6);
+    font: 600 18px sans-serif;
+    transition: var(--normal);
+}
+
+.price-filter__item.active .price-filter__link, .price-filter__link:hover {
+    color: var(--blue);
+}
+
+/** Modal */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 99999;
+}
+.modal_vis {
+    display: block;
+}
+.body_block {
+    overflow: hidden;
+    margin-right: 17px;
+}
+.open_modal{
+    color: black;
+    text-decoration: none;
+}
+#close_modal {
+    color: #BFE2FF;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: Times, sans-serif;
+    border-radius: 50%;
+    border: 4px solid #BFE2FF;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    box-sizing: content-box;
+}
+#close_modal:hover {
+    color: #FFF;
+    transform: rotate(135deg);
+}
+.modal_txt {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 16px 20px rgba(0,0,0,0.2);
+    background: #FFF;
+    padding: 30px;
+    margin: 100px auto;
+    max-width: 800px;
+}
+/** */
+
+.price-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 18px 16px;
+    width: 100%;
+}
+
+.price-list__item {
+    background-color: #fff;
+    padding: 16px 12px;
+    border: 1px solid var(--gray);
+    border-radius: 7px;
+}
+
+.price-list__link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.price-img {
+    max-height: 200px;
+}
+
+.price-title {
+    color: var(--black);
+    transition: var(--normal);
+    font: 100 14px sans-serif;
+    margin-top: 16px;
+}
+
+.price-title:hover {
+    color: var(--blue);
+}
+
+.price-list-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 25px;
+}
+
+.price-title-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.cost {
+    font: 700 18px sans-serif;
+    color: var(--black);
+}
+
+.buy {
+    font: 700 18px sans-serif;
+    color: var(--blue);
+}
+
+.cemetery-contacts {
+    width: 100%;
+    background-color: #fff;
+    padding: 24px 27px;
+    border-radius: 0 0 7px 7px;
+}
+
+.button-add-message, .button-route {
+    width: 100%;
+    height: 54px;
+    line-height: 1.3;
+    font: 600 14px sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: .05em;
+    transition: var(--normal);
+    border-radius: 7px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.button-add-message {
+    background-color: var(--blue);
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.button-add-message:hover {
+    background-color: #6799ef;
+}
+
+.button-route {
+    border: 1px solid var(--blue);
+    color: var(--blue);
+}
+
+.button-route:hover {
+    color: #fff;
+    background-color: var(--blue);
+}
+
+.cemetery-contacts-list {
+    margin-bottom: 44px;
+}
+
+.cemetery-contacts-list__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 15px;
+}
+
+.cemetery-contacts-list__title {
+    font-size: 14px;
+    color: var(--black);
+}
+
+.cemetery-contacts-list__text {
+    font-size: 18px;
+    color: var(--black);
+    transition: var(--normal);
+}
+
+a.cemetery-contacts-list__text:hover {
+    color: var(--blue);
+}
+
+.cemeteries {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    margin-top: 26px;
+}
+
+.cemeteries__item {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 7px;
+    color: var(--black);
+    padding: 15px;
+}
+
+.cemeteries-img {
+    width: 118px;
+    height: 118px;
+    position: relative;
+    overflow: hidden;
+    margin-right: 24px;
+}
+
+.cemeteries-info {
+    width: calc(100% - 142px);
+    height: 118px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cemeteries-info__title {
+    color: var(--black);
+    font: 600 18px sans-serif;
+    line-height: 1.1;
+    transition: var(--normal);
+}
+
+.cemeteries-info__city {
+    color: #797879;
+    font-size: 16px;
+}
+
+.cemeteries__item:hover .cemeteries-info__title {
+    color: var(--blue);
+}
+
+.search {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    position: relative;
+    z-index: 10;
+}
+
+.cemeteries-buttons {
+    width: 100%;
+    margin: 32px 0 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-more {
+    padding: 10px 15px;
+    border: 1px solid var(--blue);
+    min-width: 194px;
+    height: 44px;
+    color: var(--blue);
+    text-transform: uppercase;
+    transition: var(--normal);
+    border-radius: 7px;
+    font-size: 14px;
+    letter-spacing: .05em;
+    min-height: 44px;
+    background-color: transparent;
+    position: relative;
+    left: 50px;
+}
+
+.button-more:hover {
+    background-color: var(--blue);
+    color: #fff;
+}
+
+.cemeteries-buttons:before {
+    content: "";
+}
+
+.pagination-left, .pagination-right {
+    border: 1px solid var(--light-gray);
+    border-radius: 7px;
+    color: rgba(32, 30, 31, .3);
+    height: 44px;
+    width: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--normal);
+    cursor: pointer;
+}
+
+.pagination-left:hover, .pagination-right:hover {
+    background-color: #fff;
+    color: var(--black);
+}
+
+.cemeteries-pagination {
+    display: flex;
+    align-items: center;
+}
+
+.pagination-number {
+    display: flex;
+    font-size: 18px;
+    margin: 0 20px;
+    color: rgba(32, 30, 31, .6);
+}
+
+.pagination-number__delimiter {
+    margin: 0 8px;
+}
+
+.pagination-number__current {
+    color: var(--black);
+}
+
+.left-arrow, .right-arrow {
+    width: 14px;
+    height: 8px;
+    fill: rgba(32, 30, 31, .6);
+    transition: var(--normal);
+}
+
+.left-arrow {
+    transform: rotate(90deg);
+}
+
+.right-arrow {
+    transform: rotate(-90deg);
+}
+
+.pagination-left:hover .left-arrow, .pagination-right:hover .right-arrow {
+    fill: var(--black);
+}
+
+.search-filter {
+    background-color: #fff;
+    border-radius: 44px;
+    color: var(--black);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font: 600 18px sans-serif;
+    height: 44px;
+    width: 150px;
+    cursor: pointer;
+}
+
+.search-filter:hover .search-filter__title {
+    color: var(--blue);
+}
+
+.search-filter__title {
+    padding: 0 28px;
+    transition: var(--normal);
+    font: 600 18px sans-serif;
+}
+
+.search-filter__icon {
+    border-radius: 50%;
+    border: 1px solid var(--light-gray);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.search-filter__icon svg {
+    fill: var(--blue);
+    width: 18px;
+    height: 18px;
+}
+
+.search-filter__current-filters {
+    color: #fff;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: -8px;
+    top: -8px;
+    font-size: 14px;
+}
+
+.select-search {
+    background-color: rgba(245, 247, 249, .7);
+    border-radius: 44px;
+    display: flex;
+    border: 1px solid #fff;
+}
+
+.select-search__map, .select-search__list {
+    padding: 0 24px;
+    height: 44px;
+    color: var(--black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--normal);
+    background-color: transparent;
+    border-radius: 44px;
+    font-size: 16px;
+}
+
+.select-search__map.active, .select-search__list.active {
+    background-color: #fff;
+}
+
+.select-search__map:hover, .select-search__list:hover {
+    color: var(--blue);
+}
+
+.select-search__map.active:hover, .select-search__list.active:hover {
+    color: var(--black);
+    cursor: auto;
+}
+
+.map {
+    width: 100%;
+    min-height: calc(100vh - 97px);
+    background-color: var(--black);
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    position: relative;
+    padding-top: 10px;
+    justify-content: space-between;
+    align-items: flex-start;
+    grid-column-gap: 20px;
+}
+
+.map-results {
+    width: 100%;
+    background-color: #fff;
+    position: relative;
+    z-index: 10;
+    border-radius: 7px;
+    height: 588px;
+}
+
+.map-results__title-wrap {
+    width: 100%;
+    display: flex;
+    height: 44px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: var(--gray);
+}
+
+.map-results__title {
+    color: rgba(32, 30, 31, .7);
+    font-size: 14px;
+}
+
+.map-results__unwrap {
+    padding: 0 18px;
+    height: 36px;
+    background-color: #fff;
+    border-radius: 7px;
+    color: rgba(23, 94, 217, .7);
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    display: none;
+}
+
+.map-results__unwrap svg {
+    width: 14px;
+    height: 8px;
+    fill: rgba(23, 94, 217, .7);
+    margin-left: 5px;
+}
+
+.map-wrap {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(23, 94, 217, 0.34);
+}
+
+.map-results__list {
+    width: 100%;
+    max-height: calc(100% - 44px);
+    overflow-y: scroll;
+    padding: 0 20px;
+}
+
+.map-results__list::-webkit-scrollbar {
+    width: 7px;
+    background-color: rgba(61, 64, 80, 0);
+    border-radius: 3px;
+}
+
+.map-results__list::-webkit-scrollbar-thumb {
+    background-color: #5f5f60;
+    border-radius: 9em;
+}
+
+.map-results__link {
+    width: 100%;
+    height: 76px;
+    padding: 8px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.map-results__img {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    overflow: hidden;
+    margin-right: 16px;
+}
+
+.map-results__info {
+    width: calc(100% - 76px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.map-results__info:hover .map-results__name {
+    color: var(--blue);
+}
+
+.map-results__name {
+    line-height: 1.1;
+    font-size: 16px;
+    color: var(--black);
+    margin-bottom: 4px;
+    transition: var(--normal);
+}
+
+.map-results__years {
+    color: rgba(32, 30, 31, .8);
+    font-size: 14px;
+}
+
+.member-card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.member-info {
+    width: 100%;
+}
+
+.member-images-wrap {
+    height: 100%;
+    background-color: var(--light-gray);
+}
+
+.member-images {
+    width: 100%;
+    padding: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+.member-images__item {
+    width: 210px;
+    height: 210px;
+}
+
+.member-images__item a {
+    width: 100%;
+    display: block;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-play {
+    width: 31px;
+    height: 36px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    fill: var(--blue);
+}
+
+.member-info {
+    width: 100%;
+    padding-top: 27px;
+}
+
+.member-avatar, .member-avatar__wrap {
+    width: 71px;
+    height: 71px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.member-avatar__wrap {
+    overflow: hidden;
+}
+
+.member-avatar__change-link svg {
+    width: 16px;
+    height: 16px;
+    fill: var(--black);
+    transition: var(--normal);
+}
+
+.member-info-wrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.member-avatar__change-link {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    background-color: #fff;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -15px;
+    right: -10px;
+}
+
+.member-avatar__change-link:hover svg {
+    fill: var(--blue);
+}
+
+.member-name-wrap {
+    width: calc(100% - 71px);
+    padding-left: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.member-name {
+    line-height: 1.1;
+    color: var(--black);
+    font: 900 30px sans-serif;
+}
+
+.member-ages {
+    margin-top: 10px;
+    font-size: 16px;
+    color: var(--black);
+}
+
+.member-info-biography {
+    margin-top: 15px;
+}
+
+.member-info-biography p {
+    color: #797879;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.social {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px 0 0;
+}
+
+.social__item {
+    margin-right: 10px;
+}
+
+.social__item img {
+    width: 25px;
+    transition: var(--normal);
+}
+
+.social__item:hover img {
+    transform: scale(1.05);
+}
+
+.interests, .relatives-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.interests__item {
+    background-color: var(--light-gray);
+    border-radius: 32px;
+    color: #797879;
+    padding: 5px 15px;
+    margin: 12px 6px 0 0;
+    font: 600 14px sans-serif;
+}
+
+.relatives {
+    margin-top: 32px;
+}
+
+.relatives__title {
+    color: #797879;
+    line-height: 1.1;
+    font: 900 20px sans-serif;
+}
+
+.relatives-list {
+    margin-top: 10px;
+}
+
+.relatives-list__item {
+    margin: 8px 4px 0 0;
+}
+
+.relatives__link {
+    background-color: #fff;
+    border: 1px solid var(--light-gray);
+    border-radius: 64px;
+    display: flex;
+    padding: 3px;
+    justify-content: flex-start;
+    align-items: center;
+    width: max-content;
+}
+
+.relatives__avatar {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.relatives__name, .view-relatives__text {
+    padding: 2px 16px 2px 8px;
+    font: 600 14px sans-serif;
+}
+
+.relatives__name {
+    color: var(--black);
+}
+
+.view-relatives__text {
+    color: var(--blue);
+}
+
+.relatives__link:hover .relatives__name, .view-relatives:hover .view-relatives__text {
+    text-decoration: underline;
+}
+
+.view-relatives {
+    background-color: #fff;
+    border: 1px solid var(--light-gray);
+    border-radius: 64px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 3px;
+    width: max-content;
+    margin-top: 10px;
+}
+
+.view-relatives__icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-gray);
+}
+
+.view-relatives__icon svg {
+    fill: var(--blue);
+    width: 20px;
+    height: 25px;
+}
+
+.steep-wrap.grid-col-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 40px;
+}
+
+
+
+/* add profile
+---------------*/
+.add-profile {
+    width: 100%;
+    padding: 26px var(--content-size) 60px;
+    background-color: var(--gray);
+}
+
+.add-profile-content {
+    margin-top: 10px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 325px 1fr 325px;
+    grid-gap: 50px;
+}
+
+.add-profile__text {
+    font-size: 16px;
+}
+
+.add-profile-content__title {
+    color: #201e1f;
+    font: 700 30px/1.1 sans-serif;
+}
+
+.steeps-nav__item {
+    margin-top: 45px;
+    cursor: pointer;
+}
+
+.steeps-nav__title {
+    font: 700 20px/1.1 sans-serif;
+}
+
+.steeps-nav__desc {
+    line-height: 1.1;
+    margin-top: 3px;
+}
+
+.steeps-nav__item *:not(.steeps-nav__item.active *) {
+    color: #797879;
+    transition: var(--normal);
+}
+
+.steeps-nav__item:hover *:not(.steeps-nav__item.active *) {
+    color: var(--blue);
+}
+
+.steeps-nav__item {
+    padding-left: 34px;
+    position: relative;
+}
+
+.steeps-nav__icon {
+    content: "";
+    background-color: #b5b6b8;
+    border-radius: 50%;
+    height: 14px;
+    width: 14px;
+    top: 3px;
+    left: 0;
+    position: absolute;
+}
+
+.steeps-nav__item.active .steeps-nav__icon {
+    background-color: var(--blue);
+}
+
+.steeps-nav__icon:before {
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+}
+
+.steeps-nav__icon:before, .steeps-nav__icon:after {
+    content: "";
+    background-color: #175ed9;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: var(--normal);
+}
+
+.steeps-nav__icon:after {
+    width: calc(100% + 18px);
+    height: calc(100% + 18px);
+}
+
+.steeps-nav__item.current .steeps-nav__icon:before, .steeps-nav__item.current .steeps-nav__icon:after {
+    opacity: .1;
+}
+
+.steep {
+    width: 100%;
+    transition: var(--normal);
+}
+
+.steep.hide {
+    position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -10;
+}
+
+.add-profile-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.steep-wrap {
+    background-color: #fff;
+    padding: 28px 34px;
+    border-radius: 7px;
+    margin-top: 10px;
+}
+
+.steep-wrap:first-child {
+    margin-top: 0;
+}
+
+.save-and-next, .save-draft {
+    background-color: #175ed9;
+    color: #fff;
+    border-radius: 7px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    padding: 12px 15px 10px;
+    text-transform: uppercase;
+    transition: var(--normal);
+    margin-top: 30px;
+}
+
+.save-and-next:hover, .preview-avatar__icon:hover {
+    background-color: #6799ef;
+}
+
+.input-text::placeholder {
+    font-size: 12px;
+}
+
+.user-avatar {
+    width: 100%;
+    grid-column: 1/2;
+    grid-row: 1/4;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.preview-avatar {
+    position: relative;
+}
+
+.preview-avatar-wrap {
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #f5f7f9;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+}
+
+.preview-avatar-wrap__text {
+    font: 400 16px sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    transition: var(--normal);
+    width: max-content;
+}
+
+.preview-avatar-wrap:hover .preview-avatar-wrap__text {
+    color: #797879;
+}
+
+.preview-avatar__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #175ed9;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    bottom: 3px;
+    transition: var(--normal);
+    z-index: 10;
+}
+
+.preview-avatar__icon svg {
+    width: 22px;
+    height: 19px;
+    fill: #fff;
+}
+
+.delete-avatar {
+    color: #cdd1d6;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.delete-avatar.hide {
+    display: none;
+}
+
+.preview-avatar-wrap .bg-img {
+    z-index: 5;
+}
+
+.select-arrow {
+    width: 13px;
+    height: 10px;
+    fill: #8b8b8c;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    transition: var(--normal);
+}
+
+.select, .select__output {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #201e1f;
+}
+
+.select-form.focus-select .select-list {
+    height: 150px;
+    overflow-y:scroll;
+    border-color: #cdd1d6;
+}
+
+.select-form.focus-select {
+    border-color: #cdd1d6;
+    border-radius: 7px 7px 0 0;
+}
+
+.select-form.focus-select:hover {
+    border-color: #cdd1d6;
+}
+
+.select-form.focus-select .select-arrow {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.select-list {
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    z-index: 3;
+    overflow: hidden;
+    width: calc(100% + 2px);
+    height: 0;
+    border: 1px solid transparent;
+    border-bottom: none;
+}
+
+.select-list__item {
+    width: 100%;
+    min-height: 40px;
+    background-color: #fff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.4em 1.1em;
+    border-bottom: 1px solid #cdd1d6;
+}
+
+.select-list__item:hover {
+    background-color: #f5f7f9;
+}
+
+.select-list__item:last-child {
+    border-radius: 0 0 7px 7px;
+}
+
+.text-public {
+    color: #797879;
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.settings-public {
+    width: 100%;
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 18px;
+}
+
+.settings-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 36px;
+    cursor: pointer;
+}
+
+.settings-wrap__title {
+    color: #201e1f;
+    display: block;
+    font: 600 16px sans-serif;
+    margin-top: 4px;
+    position: relative;
+}
+
+.settings-wrap__title:before {
+    height: 14px;
+    left: -31px;
+    top: 1px;
+    width: 14px;
+    background-color: #175ed9;
+    opacity: 0;
+    transition: var(--normal);
+}
+
+.settings-wrap__title:after, .settings-wrap__title:before {
+    position: absolute;
+    content: "";
+    border-radius: 50%;
+}
+
+.settings-wrap__title:after {
+    border: 2px solid #175ed9;
+    height: 24px;
+    left: -36px;
+    top: -4px;
+    width: 24px;
+}
+
+.settings-wrap__radio:checked + .settings-wrap__title:before {
+    opacity: 1;
+}
+
+.settings-wrap__desc {
+    color: #8b8b8c;
+    display: block;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.user-current-avatar, .input-photo-preview, .input-photo-load {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+}
+
+.grid-col-2_3 {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    grid-gap: 20px;
+}
+
+.user-total-info__name {
+    color: #201e1f;
+    font: 900 24px/1.1 sans-serif;
+}
+
+.status-moderation, .moderation-text {
+    margin-top: 10px;
+}
+
+.status-moderation__text, .moderation-text, .status-moderation__title {
+    font-size: 16px;
+}
+
+.-status-error {
+    color: var(--red);
+}
+
+.save-draft {
+    background-color: #fff;
+    color: var(--blue);
+    margin-right: 10px;
+    border: 1px solid var(--blue);
+}
+
+.save-draft.hide {
+    display: none;
+}
+
+.save-draft:hover {
+    background-color: var(--blue);
+    color: #fff;
+}
+
+.buttons-save {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-photo {
+    background-color: #f5f7f9;
+    border: 1px solid #cdd1d6;
+    border-radius: 7px;
+    color: #201e1f;
+    padding: 15px 15px 0;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.input-photo-preview, .input-photo-load {
+    border-radius: 7px;
+    margin: 0 6px 20px;
+}
+
+.input-photo-load {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    cursor: pointer;
+    opacity: .75;
+    transition: var(--normal);
+}
+
+.input-photo-load__text {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.input-photo-load:hover {
+    opacity: 1;
+}
+
+.input-photo-preview {
+    width: 95px;
+    height: 95px;
+}
+
+.delete-resurs {
+    position: absolute;
+    height: 31px;
+    width: 31px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: .7;
+    transition: var(--normal);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-resurs:hover {
+    opacity: 1;
+}
+
+.delete-resurs svg {
+    width: 11px;
+    height: 11px;
+}
+
+/* footer
+---------------*/
+.footer {
+    width: 100%;
+    height: 116px;
+    padding: 0 var(--content-size);
+    background-color: var(--black);
+    display: grid;
+    grid-column-gap: 24px;
+    grid-template-columns: max-content 1fr max-content;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-footer__img {
+    width: 36px;
+}
+
+.footer-menu {
+    width: 100%;
+}
+
+.menu-list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.menu-list__item {
+    margin-right: 24px;
+}
+
+.menu-list__item:last-child {
+    margin: 0;
+}
+
+.menu-list__link, .cookie-link {
+    font-size: 16px;
+    color: #fff;
+    line-height: 24px;
+}
+
+.menu-list__link:hover, .cookie-link:hover {
+    text-decoration: underline;
+}
+
+.new-password {
+    padding: 32px var(--content-size);
+}
+
+.new-password__title {
+    font: 900 62px sans-serif;
+    margin-bottom: 10px;
+    color: var(--black);
+}
+
+.form-new-password {
+    display: grid;
+    grid-template-columns: 295px 1fr;
+    grid-gap: 108px;
+    margin-top: 18px;
+}
+
+.form-new-password .input-wrap:first-child {
+    margin: 0;
+}
+
+.form-new-password__text {
+    max-width: 382px;
+}
+
+.add-memorial {
+    padding: 13px var(--content-size) 15px;
+}
+
+.breadcrumbs {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.breadcrumbs__item {
+    position: relative;
+    padding-right: 24px;
+}
+
+.breadcrumbs__item:before {
+    content: "/";
+    position: absolute;
+    top: 0;
+    right: 10px;
+    color: #b5b6b8;
+}
+
+.breadcrumbs__item:last-child:before {
+    content: none;
+}
+
+.breadcrumbs__link, .breadcrumbs__item:last-child .breadcrumbs__link:hover {
+    transition: var(--normal);
+    border-bottom: 1px solid transparent;
+    font: 400 14px sans-serif;
+}
+
+.breadcrumbs__item:last-child .breadcrumbs__link {
+    color: #cdd1d6;
+}
+
+.breadcrumbs__link:not(.breadcrumbs__item:last-child .breadcrumbs__link) {
+    color: #b5b6b8;
+}
+
+.breadcrumbs__link:hover:not(.breadcrumbs__item:last-child .breadcrumbs__link) {
+    color: var(--blue);
+    border-color: var(--blue);
+}
+
+.add-memorial__title {
+    font: 700 32px sans-serif;
+}
+
+.add-memorial-wrap {
+    margin-top: 20px;
+    width: 100%;
+    padding: 32px 24px 36px;
+    border: 1px dashed #c3c3c3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+
+.add-memorial-wrap__title {
+    font: 700 24px sans-serif;
+    color: var(--black);
+}
+
+.add-memorial-wrap__text {
+    margin-top: 22px;
+}
+
+.add-memorial-wrap__text, .add-memorial-wrap__text a {
+    color: var(--black);
+    font-size: 16px;
+}
+
+.add-memorial-wrap__text a {
+    text-decoration: underline;
+}
+
+.add-memorial-wrap__text a:hover {
+    text-decoration: none;
+}
+
+.add-memorial-wrap__link {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #175ed9;
+    color: #fff;
+    letter-spacing: .05em;
+    font: 600 14px sans-serif;
+    height: 44px;
+    border-radius: 7px;
+    padding: 0.7em 1.1em 0.6em;
+    transition: var(--normal);
+}
+
+.add-memorial-wrap__link:hover {
+    background-color: #6799ef;
+}
+
+/* @media
+---------------*/
+@media screen and (max-width: 1430px) {
+    .footer, .header.login-page, .new-password {
+        padding: 26px 20px 0;
+    }
+
+    .add-profile {
+        padding: 26px 20px 60px;
+    }
+
+    .add-memorial {
+        padding: 13px 20px 15px;
+    }
+
+    .cemetery-title-wrap {
+        padding: 26px 0 0;
+        margin: 0 20px;
+        width: calc(100% - 40px);
+    }
+
+    .preview-modal.aside-top .aside-form {
+        padding: 64px 20px 80px;
+    }
+
+    .list, .member-card, .header {
+        padding: 0 20px;
+    }
+
+    .map {
+        padding: 10px 20px 0;
+    }
+
+    .member-card {
+        grid-template-columns: 1fr 560px;
+    }
+
+    .member-images__item {
+        width: 160px;
+        height: 160px;
+    }
+
+    .member-info {
+        padding-right: 20px;
+    }
+
+    .cemetery-content {
+        padding: 24px 20px;
+    }
+
+    .steep-wrap.grid-col-2 {
+        grid-column-gap: 20px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .preview-img img {
+        width: 100%;
+    }
+
+    .price-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .add-profile-content {
+        grid-template-columns: 325px 1fr;
+    }
+
+    .add-profile__text {
+        grid-column: 1/3;
+        grid-row: 1/2;
+    }
+}
+
+@media screen and (max-width: 1120px) {
+    .footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        height: 210px;
+    }
+
+    .footer-menu {
+        width: auto;
+        margin: 24px 0 32px;
+    }
+
+    .content {
+        min-height: calc(100vh - 210px);
+    }
+
+    .menu__link, .menu-list__link, .cookie-link {
+        font-size: 14px;
+    }
+
+    .menu__item {
+        margin-right: 16px;
+    }
+
+    .logo-header__img {
+        width: 175px;
+    }
+
+    .form-recover__title {
+        font-size: 4vw;
+    }
+
+    .cemeteries, .price-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .header {
+        background-color: #fff;
+        border-bottom: 1px solid var(--light-gray);
+        position: fixed;
+        height: 56px;
+        padding: 0 20px;
+    }
+
+    .header.login-page {
+        border: none;
+    }
+
+    .preview {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 85px;
+        height: auto;
+    }
+
+    .preview-img img:last-child {
+        display: block;
+        width: 744px;
+    }
+
+    .preview-img img:first-child {
+        display: none;
+    }
+
+    .preview-img {
+        justify-content: center;
+        padding: 16px 0;
+    }
+
+    .preview-form {
+        padding: 32px 0 48px;
+    }
+
+    .form-recover {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .form-recover__title {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .content {
+        padding-top: 56px;
+    }
+
+    .map {
+        min-height: calc(100vh - 56px);
+    }
+
+    .map-results {
+        position: absolute;
+        bottom: 0;
+        height: 125px;
+        overflow: hidden;
+        transition: var(--normal);
+    }
+
+    .map-results.unwrap {
+        height: 70vh;
+    }
+
+    .map-results__unwrap {
+        display: flex;
+    }
+
+    .map-results:not(.unwrap) .map-results__list {
+        overflow: visible;
+    }
+
+    .map {
+        grid-template-columns: 1fr;
+    }
+
+    .map-results.unwrap .map-results__unwrap svg {
+        transform: rotate(180deg);
+    }
+
+    .member-card {
+        grid-template-columns: 1fr 430px;
+    }
+
+    .member-images__item {
+        width: 125px;
+        height: 125px;
+    }
+
+    .price {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .cemetery-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .cemetery-photo {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .add-profile-content {
+        grid-template-columns: 1fr;
+        grid-gap: 30px;
+    }
+
+    .add-profile__text {
+        grid-column: 1/2;
+    }
+
+    .steeps-nav {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .steeps-nav__item {
+        margin: 30px 30px 0 0;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .footer {
+        height: auto;
+        padding: 32px 0 48px;
+    }
+
+    .header-menu, .header-buttons__registration, .footer-menu {
+        display: none;
+    }
+
+    .aside-menu .header-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        height: 100%;
+        padding: 0 40px;
+        width: 100%;
+    }
+
+    .menu {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .menu__item {
+        margin: 0 0 32px 0;
+    }
+
+    .menu__link {
+        font: 900 26px sans-serif;
+        color: var(--black);
+    }
+
+    .header-buttons__menu {
+        display: block;
+        width: 44px;
+        height: 44px;
+        position: relative;
+    }
+
+    .header-buttons__menu span {
+        width: 18px;
+        height: 2px;
+        border-radius: 1px;
+        background-color: var(--black);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .header-buttons__menu span:nth-child(1) {
+        top: calc(50% - 6px);
+    }
+
+    .header-buttons__menu span:nth-child(3) {
+        top: calc(50% + 6px);
+    }
+
+    .header-buttons__lang {
+        margin-right: 6px;
+    }
+
+    .content {
+        min-height: calc(100vh - 147px);
+    }
+
+    .member-card {
+        grid-template-columns: 1fr 330px;
+    }
+
+    .member-images__item {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .preview-img img:last-child {
+        width: 100%;
+    }
+
+    .preview-img {
+        padding: 16px 20px;
+    }
+
+    .preview-form {
+        padding: 32px 20px 48px;
+    }
+
+    .preview-modal.aside-top .aside-form {
+        height: 100vh;
+    }
+
+    .form-recover-wrap .form__submit {
+        width: 100%;
+    }
+
+    .cemeteries-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .cemeteries-info {
+        width: calc(100% - 102px);
+        height: 80px;
+    }
+
+    .cemeteries-info__title {
+        font-size: 16px;
+    }
+
+    .member-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .member-images-wrap {
+        width: 100%;
+    }
+
+    .member-images__item, .member-images__item a {
+        height: auto;
+        width: 100%;
+    }
+
+    .member-images__item a {
+        padding-top: 100%;
+    }
+
+    .member-info {
+        padding-right: 0;
+    }
+
+    .cemetery-text-wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .cemetery-menu__item {
+        font-size: 14px;
+        padding: 7px 12px;
+    }
+
+    .new-password__title {
+        font: 900 44px sans-serif;
+    }
+
+    .form-new-password {
+        grid-gap: 35px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .cemeteries__link {
+        flex-direction: column;
+    }
+
+    .cemeteries-info {
+        width: 100%;
+        margin-top: 20px;
+        height: auto;
+        align-items: center;
+    }
+
+    .cemeteries-img {
+        margin: 0;
+    }
+
+    .cemeteries-info__title {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .login {
+        position: absolute;
+        top: 30px;
+        left: 40px;
+    }
+
+    .member-name {
+        font-size: 21px;
+    }
+
+    .cemetery-named-wrap {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .cemetery-named {
+        padding: 0;
+        width: 100%;
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    .cemetery-photo {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .form-new-password {
+        grid-template-columns: 1fr;
+    }
+
+    .form-new-password__text {
+        grid-row: 1/2;
+        max-width: 100%;
+    }
+
+    .form-new-password__wrap .form__submit {
+        width: 100%;
+    }
+
+    .new-password__title {
+        font: 900 10vw sans-serif;
+    }
+
+    .add-memorial__title {
+        font-size: 24px;
+    }
+
+    .steep-wrap.grid-col-2, .grid-col-2_3 {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-col-2_3 {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .user-current-avatar {
+        margin: 0;
+    }
+
+    .steep-wrap {
+        padding: 15px 10px;
+    }
+
+    .settings-public, .buttons-save {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .save-and-next, .save-draft {
+        width: 100%;
+        margin-top: 15px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .registration {
+        width: 100%;
+        padding: 35px 20px;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .form-registration {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .form-registration__title {
+        font-size: 30px;
+    }
+
+    .preview-modal {
+        overflow-y: scroll;
+    }
+
+    .form-recover__title {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .aside-form {
+        width: 100%;
+    }
+
+    .cemeteries-buttons {
+        flex-direction: column;
+    }
+
+    .cemeteries-buttons:before {
+        content: none;
+    }
+
+    .button-more {
+        margin-bottom: 15px;
+        left: 0;
+    }
+
+    .logo-header__img {
+        width: 140px;
+    }
+
+    .famous-persons__name, .memorials-info__ages {
+        font-size: 12px;
+    }
+
+    .memorials-info__name {
+        font-size: 14px;
+    }
+
+    .cemetery-contacts {
+        padding: 24px 10px;
+    }
+
+    .cemetery-menu__item {
+        padding: 5px 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .login-form {
+        width: 100%;
+    }
+
+    .cemeteries {
+        grid-template-columns: 1fr;
+    }
+
+    .search {
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+    }
+
+    .search-filter {
+        margin-top: 20px;
+    }
+
+    .logo-header__img {
+        width: 100%;
+        max-width: 140px;
+        padding-right: 10px;
+    }
+
+    .member-info-wrap {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .member-name-wrap {
+        padding: 0;
+        margin-top: 20px;
+    }
+
+    .member-name {
+        text-align: center;
+    }
+
+    .price-list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .cemetery-title-wrap {
+        margin: 0 10px;
+        width: calc(100% - 20px);
+    }
+
+    .cemetery-menu {
+        flex-direction: column;
+        justify-content: flex-start;
+        position: relative;
+        border: 1px solid var(--light-gray);
+        background-color: var(--gray);
+        border-bottom: none;
+        border-radius: 7px 7px 0 0;
+        cursor: pointer;
+    }
+
+    .cemetery-menu:before {
+        content: "";
+        background-color: url("../img/arrow.svg") no-repeat center center;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 14px;
+        height: 8px;
+        z-index: 10;
+        transition: var(--normal);
+        transform: rotate(0);
+    }
+
+    .cemetery-menu.open:before {
+        transform: rotate(180deg);
+    }
+
+    .cemetery-menu__item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        justify-content: flex-start;
+        opacity: 0;
+        visibility: hidden;
+        background-color: transparent;
+        border: none;
+    }
+
+    .cemetery-menu.open .cemetery-menu__item, .cemetery-menu__item.current {
+        opacity: 1;
+        visibility: visible;
+        position: static;
+        z-index: 1;
+    }
+
+    .cemetery-menu__item.current {
+        order: 1;
+    }
+}

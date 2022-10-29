@@ -3,25 +3,25 @@
     "file": "assets/lato-black.1933944b.woff2",
     "src": "resources/fonts/lato-black.woff2"
   },
-  "resources/fonts/lato-bold.woff2": {
-    "file": "assets/lato-bold.0cc3d792.woff2",
-    "src": "resources/fonts/lato-bold.woff2"
+  "resources/fonts/lato-regular.woff2": {
+    "file": "assets/lato-regular.de81d909.woff2",
+    "src": "resources/fonts/lato-regular.woff2"
   },
   "resources/fonts/lato-semibold.woff2": {
     "file": "assets/lato-semibold.e42a071f.woff2",
     "src": "resources/fonts/lato-semibold.woff2"
   },
-  "resources/fonts/lato-regular.woff2": {
-    "file": "assets/lato-regular.de81d909.woff2",
-    "src": "resources/fonts/lato-regular.woff2"
+  "resources/fonts/lato-bold.woff2": {
+    "file": "assets/lato-bold.0cc3d792.woff2",
+    "src": "resources/fonts/lato-bold.woff2"
   },
   "resources/js/app.js": {
-    "file": "assets/app.2a4294b7.js",
+    "file": "assets/app.21d5c433.js",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/css/app.css": {
-    "file": "assets/app.9d2095e0.css",
+    "file": "assets/app.deb70b21.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }

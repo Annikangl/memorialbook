@@ -1,12 +1,11 @@
 /* style general
-
-
 -----------------*/
 @import "_vars.css";
 @import "./fonts.css";
 @import "./template.css";
 @import "cemeteries/cemetery_pagination.css";
 @import "profiles/profile_card.css";
+@import "profiles/add_profile.css";
 @import "cemeteries/cemetery_card.css";
 @import "map.css";
 

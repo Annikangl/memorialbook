@@ -30,6 +30,8 @@
     <!-- Scripts -->
 
     <script src="{{ asset('js/polyfills.scripts.js') }}"></script>
+
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <script data-skip-moving="true">
@@ -156,6 +158,14 @@
                                         <div class="header-slideout-menu__bars"></div>
                                     </button>
                                 </div>
+                                <div class="header-buttons" id="header-button">
+
+                                    <button type="button" class="header-buttons__menu" id="mobile-menu">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </button>
+                                </div>
 
                                 @include('includes.forms.auth.login')
                                 @include('includes.forms.auth.restore_password')
@@ -247,6 +257,11 @@
     </div>
 </div>
 
+<div class="preview-modal" id="modal-from">
+    <div class="aside-form" id="form-aside">
+        <button type="button" class="close-registration" id="close-aside"></button>
+    </div>
+</div>
 @yield('scripts')
 
 </body>
