@@ -1,6 +1,6 @@
 @extends('layouts.app')
-
 @section('content')
+
     <div id="page">
         <section class="add-profile">
             <ul class="breadcrumbs">
@@ -14,173 +14,48 @@
                     <a class="breadcrumbs__link">Создание профиля</a>
                 </li>
             </ul>
-
             <div class="add-profile-content">
+            <div>
                 <div>
-                    <x-profile.steps_menu></x-profile.steps_menu>
+                    <h3 class="add-profile-content__title">Новый профиль</h3>
+                    <ul class="steeps-nav">
+                        <li class="steeps-nav__item active current">
+                            <i class="steeps-nav__icon"></i>
+                            <span class="steeps-nav__title">Шаг 1</span>
+                            <p class="steeps-nav__desc">Основная информация</p>
+                        </li>
+                        <li class="steeps-nav__item">
+                            <i class="steeps-nav__icon"></i>
+                            <span class="steeps-nav__title">Шаг 2</span>
+                            <p class="steeps-nav__desc">Описание</p>
+                        </li>
+                        <li class="steeps-nav__item">
+                            <i class="steeps-nav__icon"></i>
+                            <span class="steeps-nav__title">Шаг 3</span>
+                            <p class="steeps-nav__desc">Публикация</p>
+                        </li>
+                    </ul>
                 </div>
+            </div>
                 <form class="add-profile-wrap" id="add-profile" method="POST" enctype="multipart/form-data"
                       action="{{route('profile.store')}}">
                     @csrf
-                    <div class="steep">
-                        <div class="steep-wrap grid-col-2">
 
-                            <div class="user-avatar">
-                                <div class="preview-avatar">
-                                    <label class="preview-avatar-wrap">
-                                        <input type="file" accept=".jpg,.jpeg,.png" class="input-avatar"
-                                               id="change-avatar" name="avatar"/>
-                                        <span class="preview-avatar-wrap__text">Выберите фото</span>
-                                    </label>
-                                    <label class="preview-avatar__icon" for="change-avatar">
-                                        <svg>
-                                            <path class="st0"
-                                                  d="M18.1 19.1h-15c-.8 0-1.6-.3-2.2-.9-.6-.6-.9-1.4-.9-2.3V6.3c0-.8.3-1.6.9-2.2s1.4-.9 2.2-.9h1c.2 0 .4 0 .5-.1.2-.1.4-.2.5-.4L6 1.4c.3-.4.7-.8 1.1-1C7.5.1 8 0 8.5 0h4.1c.5 0 1 .1 1.5.4.5.2.8.6 1.1 1l.9 1.3c.1.2.2.3.4.4s.3.1.5.1h1c.8 0 1.6.3 2.2.9.6.6.9 1.4.9 2.2v9.6c0 .8-.3 1.6-.9 2.2-.5.6-1.3 1-2.1 1zM3.1 5.2c-.3 0-.6.1-.8.3S2 6 2 6.3v9.6c0 .3.1.6.3.8.2.2.5.3.8.3H18c.3 0 .6-.1.8-.3.2-.2.3-.5.3-.8V6.3c0-.3-.1-.6-.3-.8-.2-.2-.5-.3-.8-.3h-1c-.5 0-1-.1-1.5-.4-.5-.2-.8-.6-1.1-1l-.9-1.3c-.1-.2-.2-.3-.4-.4s-.2-.1-.4-.1H8.5c-.1 0-.3 0-.5.1s-.3.3-.4.4l-.9 1.3c-.3.4-.7.8-1.1 1-.5.2-1 .4-1.5.4h-1z"/>
-                                            <path class="st0"
-                                                  d="M10.6 14.8c-1.1 0-2.2-.4-3-1.2-.8-.8-1.2-1.8-1.2-3 0-1.1.4-2.2 1.2-3 .8-.8 1.9-1.2 3-1.2s2.2.4 3 1.2c.8.8 1.2 1.9 1.2 3s-.4 2.2-1.2 3-1.9 1.2-3 1.2zm0-6.4c-.6 0-1.1.2-1.6.6-.4.4-.6 1-.6 1.6 0 .6.2 1.1.6 1.6.8.8 2.3.8 3.1 0 .4-.4.6-1 .6-1.6s-.2-1.1-.6-1.6c-.3-.4-.9-.6-1.5-.6z"/>
-                                        </svg>
-                                    </label>
-                                </div>
-                                <button type="button" class="delete-avatar hide">Удалить фото</button>
-                            </div>
+                        @include('profile.partials.create_step1')
 
-                            <div class="input-wrap">
-                                <span class="input-wrap__title">Имя:</span>
-                                <div class="input-form">
-                                    <input type="text" class="input-text input-required" placeholder="Иван"
-                                           id="first_name" name="first_name" title="">
-                                </div>
-                            </div>
+                        @include('profile.partials.create_step2')
 
-                            <div class="input-wrap">
-                                <span class="input-wrap__title">Отчество:</span>
-                                <div class="input-form">
-                                    <input type="text" class="input-text input-required" placeholder="Иванович"
-                                           id="patronymic" name="patronymic" title="">
-                                </div>
-                            </div>
-
-                            <div class="input-wrap">
-                                <span class="input-wrap__title">Фамилия:</span>
-                                <div class="input-form">
-                                    <input type="text" class="input-text input-required" placeholder="Иванов"
-                                           id="last_name" name="last_name" title="">
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="steep-wrap grid-col-2">
-                            <div class="input-wrap">
-                                <span class="input-wrap__title">Дата рождения:</span>
-                                <div class="input-form">
-                                    <input type="date" class="input-text input-required mask-data"
-                                           placeholder="дд.мм.гггг" id="date_birth" name="date_birth" title="">
-                                </div>
-                            </div>
-                            <div class="input-wrap">
-                                <span class="input-wrap__title">Место рождения:</span>
-                                <div class="input-form">
-                                    <input type="text" class="input-text" name="birth_place" title="">
-                                </div>
-                            </div>
-                            <div class="input-wrap">
-                                <span class="input-wrap__title">Дата смерти:</span>
-                                <div class="input-form">
-                                    <input type="date" class="input-text mask-data" placeholder="дд.мм.гггг"
-                                           id="date_death" name="date_death" title="">
-                                </div>
-                            </div>
-                            <div class="input-wrap">
-                                <span class="input-wrap__title">Место захоронения:</span>
-                                <div class="input-form">
-{{--                                    TODO сделать нормальное модальное окно --}}
-                                <a class="open_modal" href="#open" data-modal="1">Укажите место захоронения</a>
-                                <div id="modal" class="modal bounceIn">
-                                    <div id="close_modal">+</div>
-                                    <div class="modal_txt">Текст в модальном окне</div>
-                                </div>
-                                </div>
-                            </div>
-
-                            <div class="input-wrap">
-                                <span class="input-wrap__title">Причина смерти:</span>
-                                <div class="input-form">
-                                    <input type="text" class="input-text" id="death_reason" name="death_reason"
-                                           title="">
-                                </div>
-                            </div>
-                            <div class="input-wrap">
-                                <span class="input-wrap__title">Свидетельство о смерти:</span>
-                                <div class="input-form">
-                                    <input type="file" class="load-files" id="death_certificate" name="death_certificate">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="steep-wrap grid-col-2">
-                            <div class="input-wrap">
-                                <span class="input-wrap__title">Отец</span>
-                                <div class="select-form">
-                                    <div class="select">
-                                        <output class="select__output" name="">Выберите из списка</output>
-                                        <ul class="select-list">
-                                            <li class="select-list__item">Алексеев Алексей Алексеевич</li>
-                                            <li class="select-list__item">Алексеев Алексей Алексеевич</li>
-                                        </ul>
-                                    </div>
-                                    <svg aria-hidden="true" class="select-arrow">
-                                        <path
-                                            d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                                    </svg>
-                                </div>
-
-                            </div>
-                            <div class="input-wrap">
-                                <span class="input-wrap__title">Мать</span>
-
-                                <div class="select-form">
-                                    <div class="select">
-                                        <output class="select__output" name="">Выберите из списка</output>
-                                        <ul class="select-list">
-                                            @foreach($mothers as $mother)
-                                            <li class="select-list__item" data-name="mother_id" id="mother_id">{{$mother->first_name.' '.$mother->last_name}}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-
-                                    <svg aria-hidden="true" class="select-arrow">
-                                        <path
-                                            d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                                    </svg>
-                                </div>
-
-                            </div>
-                            <div class="input-wrap">
-                                <span class="input-wrap__title">Супруг / Супруга</span>
-
-                                <div class="select-form">
-                                    <div class="select">
-                                        <output class="select__output" name="">Выберите из списка</output>
-                                        <ul class="select-list">
-                                            @foreach($profiles as $profile)
-                                                <li class="select-list__item" data-name="spouse_id" id="spouse_id">
-                                                    {{$profile->first_name.' '.$profile->last_name}}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                    <svg aria-hidden="true" class="select-arrow">
-                                        <path
-                                            d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                                    </svg>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
+                        @include('profile.partials.create_step3')
 
                     <div class="buttons-save">
-                        <button type="submit" class="save-and-next">Сохранить и продолжить</button>
+                        <button type="button" class="save-draft hide">Сохранить как черновик</button>
+                        <button type="button" class="save-and-next">Сохранить и продолжить</button>
+
+                        <button type="submit" class="save-end hide">Сохранить и опубликовать</button>
+
+
+
+
                     </div>
 
                 </form>
@@ -188,4 +63,5 @@
                     основную информацию профиля.</p>
             </div>
         </section>
+    </div>
 @endsection

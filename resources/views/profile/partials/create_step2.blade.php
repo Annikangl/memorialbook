@@ -1,27 +1,5 @@
-@extends('layouts.app')
-@section('content')
-    <section class="add-profile">
-        <ul class="breadcrumbs">
-            <li class="breadcrumbs__item">
-                <a href="#" class="breadcrumbs__link">Главная</a>
-            </li>
-            <li class="breadcrumbs__item">
-                <a href="#" class="breadcrumbs__link">Личный кабинет</a>
-            </li>
-            <li class="breadcrumbs__item">
-                <a class="breadcrumbs__link">Создание профиля</a>
-            </li>
-        </ul>
 
-        <div class="add-profile-content">
-            <div>
-                <x-profile.step2_menu></x-profile.step2_menu>
-            </div>
-
-            <form class="add-profile-wrap" id="add-profile" method="POST" enctype="multipart/form-data" action="{{route('profile.store.step2')}}">
-                @csrf
-
-                <div class="steep">
+                <div class="steep hide">
                     <div class="steep-wrap">
 
                         <div class="input-wrap">
@@ -66,14 +44,3 @@
                     </div>
                 </div>
 
-                <div class="buttons-save">
-                    <button type="submit" class="save-and-next">Сохранить и продолжить</button>
-                </div>
-
-            </form>
-            <p class="add-profile__text">Давайте создавать и хранить историю вместе? Для начала необходимо заполнить основную информацию профиля.</p>
-        </div>
-    </section>
-
-
-@endsection

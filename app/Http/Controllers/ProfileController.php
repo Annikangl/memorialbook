@@ -64,8 +64,7 @@ class ProfileController extends Controller
         return view('profile.show', compact('profile', 'relatives'));
     }
 
-    public function create()
-    {
+    public function create(){
         $fathers = Profile::query()
             ->where('gender','male')
             ->with('users')
@@ -83,11 +82,21 @@ class ProfileController extends Controller
             ->where('user_id',\Auth::id())
             ->get();
 
-        return view('profile.create', compact('fathers','mothers','profiles'));
+        $hobbys = Hobby::query()->orderBy('id')->get();
+
+        $religions = Religion::query()->orderBy('id')->get();
+
+        return view('profile.create',compact('fathers','mothers','profiles','hobbys','religions'));
+    }
+
+    public function create_step1()
+    {
+        return view('profile.partials.create_step1', );
     }
 
     public function store(ProfileCreateRequest $request)
     {
+        dd($request);
         if ($request->hasFile('avatar')) {
             $avatar_path = $request->file('avatar')->store('uploads/profiles/avatar', 'public');
         } else {

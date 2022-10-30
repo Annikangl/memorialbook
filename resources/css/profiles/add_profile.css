@@ -315,6 +315,8 @@
 
 .modal {
     display: none;
+    background:rgba(0,0,0,0.5);
+    opacity: 1;
     position: fixed;
     top: 0;
     left: 0;
@@ -322,34 +324,30 @@
     right: 0;
     z-index: 99999;
 }
-
 .modal_vis {
     display: block;
 }
-
 .body_block {
     overflow: hidden;
     margin-right: 17px;
 }
-
-.open_modal {
-    width: 100%;
+.open_modal{
     color: black;
-    text-decoration: none !important;
+    font-size:15px ;
+    text-decoration: none;
 }
-
 #close_modal {
-    color: #BFE2FF;
-    font-size: 40px;
+    color: black;
+    font-size: 30px;
     font-weight: bold;
     font-family: Times, sans-serif;
     border-radius: 50%;
-    border: 4px solid #BFE2FF;
     width: 50px;
     height: 50px;
     line-height: 50px;
     text-align: center;
-    margin: 20px;
+    margin-top:5%;
+    margin-right: 29%;
     cursor: pointer;
     position: absolute;
     right: 0;
@@ -357,22 +355,27 @@
     transition: all 0.6s;
     box-sizing: content-box;
 }
-
-#close_modal:hover {
-    color: #FFF;
-    transform: rotate(135deg);
+/*#close_modal:hover {*/
+/*    color: #FFF;*/
+/*    transform: rotate(135deg);*/
+/*}*/
+.burial_place{
+    background: #f5f7f9;
+    padding: 10px;
+    border: 1px solid var(--gray);
+    border-radius: 7px;
+    width: 50%;
+    font-size: 14px;
 }
-
 .modal_txt {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 16px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2), 0 16px 20px rgba(0,0,0,0.2);
     background: #FFF;
     padding: 30px;
     margin: 100px auto;
+    text-align: center;
     max-width: 800px;
 }
-
 /** */
-
 
 .button-add-message {
     background-color: var(--blue);
@@ -683,7 +686,7 @@
     margin-top: 0;
 }
 
-.save-and-next, .save-draft {
+.save-and-next, .save-draft, .save-end {
     background-color: #175ed9;
     color: #fff;
     border-radius: 7px;
@@ -1441,7 +1444,7 @@
         align-items: flex-start;
     }
 
-    .save-and-next, .save-draft {
+    .save-and-next, .save-draft, .save-end {
         width: 100%;
         margin-top: 15px;
     }

@@ -17,7 +17,6 @@ class ProfileCreateRequest extends FormRequest
     {
         return [
             'first_name' => 'required',
-            'patronymic' => 'required',
             'last_name' => 'required',
             'date_birth' => 'required',
             'birth_place' => 'required',
@@ -27,7 +26,6 @@ class ProfileCreateRequest extends FormRequest
     {
         return[
             'first_name.required' => 'Укажите имя профиля',
-            'patronymic.required' => 'Укажите отчество профиля',
             'last_name.required' => 'Укажите фамилию профиля',
             'date_birth.required' => 'Укажите дату рождения',
             'birth_place.required' => 'Укажите место рождения',

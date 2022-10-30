@@ -336,6 +336,7 @@ if (document.querySelector('.add-profile')) {
     let steeps = document.querySelectorAll('.steep');
     let btnSave = document.querySelector('.save-and-next');
     let btnSaveDraft = document.querySelector('.save-draft');
+    let btnSaveEnd = document.querySelector('.save-end');
 
     let currentSteep = 0;
 
@@ -360,7 +361,10 @@ if (document.querySelector('.add-profile')) {
 
             if (currentSteep + 1 === steeps.length) {
                 btnSaveDraft.classList.remove('hide');
+                btnSaveEnd.classList.remove('hide');
                 btnSave.innerHTML = 'Сохранить и опубликовать';
+                btnSave.classList.add('hide');
+
             } else {
                 btnSaveDraft.classList.add('hide');
                 btnSave.innerHTML = 'Сохранить и продолжить';
@@ -386,7 +390,11 @@ if (document.querySelector('.add-profile')) {
 
             if (currentSteep === steeps.length-1) {
                 btnSaveDraft.classList.remove('hide');
+                btnSaveEnd.classList.remove('hide');
                 btnSave.innerHTML = 'Сохранить и опубликовать';
+                btnSave.classList.add('hide');
+
+                // btnSave.type = 'submit';
 
                 if (document.querySelector('.preview-avatar-wrap .bg-img')) {
                     let wrap = document.querySelector('.user-current-avatar');
