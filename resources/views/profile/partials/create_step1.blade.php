@@ -28,14 +28,6 @@
             </div>
         </div>
 
-{{--        <div class="input-wrap">--}}
-{{--            <span class="input-wrap__title">Отчество:</span>--}}
-{{--            <div class="input-form">--}}
-{{--                <input type="text" class="input-text input-required" placeholder="Иванович"--}}
-{{--                       id="patronymic" name="patronymic" title="">--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
         <div class="input-wrap">
             <span class="input-wrap__title">Фамилия:</span>
             <div class="input-form">
@@ -68,14 +60,20 @@
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Место захоронения:</span>
-            <div class="input-form">
-                <a class="open_modal" href="#open">Укажите место захоронения</a>
+            <div class="input-form" style="position:relative;">
+                <input type="text" class="input-text"
+                       id="burial_place" name="burial_place" title="Место захоронения">
+                <a class="open_modal" href="#open" style="position:absolute;" title="Указать на карте">
+                    <img src="{{ asset('assets/media/media/icons/location.svg') }}" alt="Указать на карте" width="20" >
+                </a>
+
                 <div id="modal" class="modal bounceIn">
                     <div id="close_modal">+</div>
                     <div class="modal_txt">
-                        <p>
-                            <input class="burial_place" type="text" id="burial_place" name="burial_place" placeholder="Введите запрос">
-                        </p>
+                        <div class="input-form">
+                            <input type="text" class="input-text" placeholder="Найдите место на карте"
+                                   id="burial_place_search" title="Найдите место на карте">
+                        </div>
                     </div>
 
                 </div>

@@ -15,47 +15,43 @@
                 </li>
             </ul>
             <div class="add-profile-content">
-            <div>
                 <div>
-                    <h3 class="add-profile-content__title">Новый профиль</h3>
-                    <ul class="steeps-nav">
-                        <li class="steeps-nav__item active current">
-                            <i class="steeps-nav__icon"></i>
-                            <span class="steeps-nav__title">Шаг 1</span>
-                            <p class="steeps-nav__desc">Основная информация</p>
-                        </li>
-                        <li class="steeps-nav__item">
-                            <i class="steeps-nav__icon"></i>
-                            <span class="steeps-nav__title">Шаг 2</span>
-                            <p class="steeps-nav__desc">Описание</p>
-                        </li>
-                        <li class="steeps-nav__item">
-                            <i class="steeps-nav__icon"></i>
-                            <span class="steeps-nav__title">Шаг 3</span>
-                            <p class="steeps-nav__desc">Публикация</p>
-                        </li>
-                    </ul>
+                    <div>
+                        <h3 class="add-profile-content__title">Новый профиль</h3>
+                        <ul class="steeps-nav">
+                            <li class="steeps-nav__item active current">
+                                <i class="steeps-nav__icon"></i>
+                                <span class="steeps-nav__title">Шаг 1</span>
+                                <p class="steeps-nav__desc">Основная информация</p>
+                            </li>
+                            <li class="steeps-nav__item">
+                                <i class="steeps-nav__icon"></i>
+                                <span class="steeps-nav__title">Шаг 2</span>
+                                <p class="steeps-nav__desc">Описание</p>
+                            </li>
+                            <li class="steeps-nav__item">
+                                <i class="steeps-nav__icon"></i>
+                                <span class="steeps-nav__title">Шаг 3</span>
+                                <p class="steeps-nav__desc">Публикация</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
                 <form class="add-profile-wrap" id="add-profile" method="POST" enctype="multipart/form-data"
-                      action="{{route('profile.store')}}">
+                      action="{{ route('profile.store' )}}">
                     @csrf
 
-                        @include('profile.partials.create_step1')
+                    @include('profile.partials.create_step1')
 
-                        @include('profile.partials.create_step2')
+                    @include('profile.partials.create_step2')
 
-                        @include('profile.partials.create_step3')
+                    @include('profile.partials.create_step3')
 
                     <div class="buttons-save">
                         <button type="button" class="save-draft hide">Сохранить как черновик</button>
                         <button type="button" class="save-and-next">Сохранить и продолжить</button>
 
                         <button type="submit" class="save-end hide">Сохранить и опубликовать</button>
-
-
-
-
                     </div>
 
                 </form>
