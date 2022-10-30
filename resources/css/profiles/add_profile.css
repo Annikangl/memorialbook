@@ -342,12 +342,13 @@
     font-weight: bold;
     font-family: Times, sans-serif;
     border-radius: 50%;
+    /*float: right;*/
     width: 50px;
     height: 50px;
     line-height: 50px;
     text-align: center;
-    margin-top:5%;
-    margin-right: 29%;
+    margin-top:92px;
+    margin-right:29%;
     cursor: pointer;
     position: absolute;
     right: 0;
@@ -1221,6 +1222,9 @@
 
 /* @media
 ---------------*/
+@media screen and (max-width: 1600px) {
+#close_modal {    margin-right: 25%;}
+}
 @media screen and (max-width: 1430px) {
     .footer, .header.login-page, .new-password {
         padding: 26px 20px 0;
@@ -1237,6 +1241,7 @@
     .list, .header {
         padding: 0 20px;
     }
+    #close_modal {    margin-right: 23%;}
 
 
     .steep-wrap.grid-col-2 {
@@ -1248,7 +1253,7 @@
     .preview-img img {
         width: 100%;
     }
-
+    #close_modal {    margin-right: 18%;}
     .add-profile-content {
         grid-template-columns: 325px 1fr;
     }
@@ -1267,7 +1272,7 @@
         height: 56px;
         padding: 0 20px;
     }
-
+    #close_modal {    margin-right: 15%;}
     .header.login-page {
         border: none;
     }
@@ -1331,6 +1336,7 @@
         height: auto;
         padding: 32px 0 48px;
     }
+    #close_modal {    margin-right: 10%;}
 
     .header-menu, .header-buttons__registration, .footer-menu {
         display: none;
@@ -1400,7 +1406,7 @@
     .preview-img img:last-child {
         width: 100%;
     }
-
+    #close_modal {    margin-right: 5%;}
     .preview-img {
         padding: 16px 20px;
     }
@@ -1428,7 +1434,7 @@
         justify-content: flex-start;
         align-items: flex-start;
     }
-
+    #close_modal {    margin-right: 3%;}
     .user-current-avatar {
         margin: 0;
     }
