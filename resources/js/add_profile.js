@@ -1,116 +1,36 @@
 import './mask'
 
-let buttonClose = document.querySelector('#close-aside');
-let page = document.querySelector('#page');
-let buttonOpenMenu = document.querySelector('#mobile-menu');
-let modal = document.querySelector('#modal-from');
-
-let openModal = function () {
-    modal.classList.remove('aside-right', 'aside-top', 'aside-menu');
-    modal.classList.toggle('open');
-    page.classList.toggle('active');
-    document.querySelector('body').classList.toggle('fix');
-}
-
-let openFormRegistration = function () {
-    openModal();
-    modal.classList.add('aside-right');
-}
-
-let openMenu = function () {
-    openModal();
-    modal.classList.add('aside-right', 'aside-menu');
-}
-
-
-if (document.querySelectorAll('.open-registration')) {
-    let buttonOpen = document.querySelectorAll('.open-registration');
-
-    for (let i = 0; i < buttonOpen.length; i++) {
-        buttonOpen[i].addEventListener('click', openFormRegistration);
-    }
-}
-
-if (document.querySelector('#input-link')) {
-    let buttonRecover = document.querySelector('#input-link');
-
-    buttonRecover.addEventListener('click', function () {
-        openModal();
-        modal.classList.add('aside-top');
-    })
-}
-
-
-function changeParent () {
-    let menu = document.querySelector('#header-menu');
-    let aside = document.querySelector('#form-aside');
-
-    if (window.innerWidth <= 860 && menu.parentElement.classList.contains('header')) {
-        aside.appendChild(menu);
-    } else {
-        if (window.innerWidth > 860 && menu.parentElement.classList.contains('aside-form')) {
-            document.querySelector('header').insertBefore(menu, document.querySelector('#header-button'));
-            if (modal.classList.contains('aside-menu')) {
-                openModal();
-            }
-        }
-    }
-
-    if (document.querySelector('.login')) {
-        let login = document.querySelector('.login');
-        if (window.innerWidth <= 600 && login.parentElement.classList.contains('header-buttons')) {
-            aside.appendChild(login);
-        } else {
-            if (window.innerWidth > 600 && login.parentElement.classList.contains('aside-form')) {
-                document.querySelector('#header-button').insertBefore(login, document.querySelector('#mobile-menu'));
-            }
-        }
-    }
-}
-
-buttonClose.addEventListener('click', openModal);
-buttonClose.addEventListener('click', openModal);
-// window.addEventListener('resize', changeParent);
-// window.addEventListener('DOMContentLoaded', changeParent);
-buttonOpenMenu.addEventListener('click', openMenu);
-
-
-
-
 //Modal
 
-// let open_modal = document.querySelectorAll('.open_modal');
-// let close_modal = document.getElementById('close_modal');
-// let modalbtn = document.getElementById('modal');
-// let body = document.getElementsByTagName('body')[0];
-//
-// for (let i = 0; i < open_modal.length; i++) {
-//     open_modal[i].onclick = function() {
-//         modalbtn.classList.add('modal_vis');
-//         modalbtn.classList.remove('bounceOutDown');
-//         body.classList.add('body_block');
-//     };
-// }
-//
-// close_modal.onclick = function() {
-//     modalbtn.classList.add('bounceOutDown');
-//     window.setTimeout(function() {
-//         modalbtn.classList.remove('modal_vis');
-//         body.classList.remove('body_block');
-//     }, 500);
-// };
 
+let burialLocationModal = function () {
+    const modal = new HystModal({
+        linkAttributeName: "data-hystmodal",
+        beforeOpen: function (modal) {
+            console.log('Message before opening the modal');
+            console.log(modal); //modal window object
+        },
+        afterClose: function (modal) {
+            let textSearch = document.querySelector('#burial_place_search').value;
+            document.querySelector('#burial_place').value = textSearch;
+        },
+    });
+}
+
+if (document.querySelector('#burial_place')) {
+    document.querySelector('.burialPlaceModal').addEventListener('click', burialLocationModal)
+}
 
 
 //INIT FANCYBOX
 if (document.querySelector('.gallery')) {
     Fancybox.bind(".gallery", {
-        groupAll : true, // Group all items
+        groupAll: true, // Group all items
         Toolbar: {
             display: [
-                { id: "prev", position: "center" },
-                { id: "counter", position: "center" },
-                { id: "next", position: "center" },
+                {id: "prev", position: "center"},
+                {id: "counter", position: "center"},
+                {id: "next", position: "center"},
                 "zoom",
                 "slideshow",
                 "fullscreen",
@@ -119,7 +39,6 @@ if (document.querySelector('.gallery')) {
         },
     });
 }
-
 
 
 //CHANGE USER AVATAR
@@ -168,7 +87,9 @@ let loadPhoto = function () {
     let previewResurs = document.querySelector('.input-photo');
     let resurs = inputFiles.files;
 
+
     for (let x = 0; x < resurs.length; x++) {
+        console.log(resurs[x])
         if (resurs[x].type.startsWith('image/')) {
             let div = document.createElement("div");
             let img = document.createElement("img");
@@ -211,7 +132,7 @@ let loadPhoto = function () {
                 let reader = new FileReader();
                 reader.readAsDataURL(resurs[x]);
 
-                reader.onload = function() {
+                reader.onload = function () {
                     video.src = reader.result;
                 };
 
@@ -249,16 +170,14 @@ let loadPhoto = function () {
     }
 }
 
+
 if (document.querySelector('.load-files')) {
     document.querySelector('.load-files').addEventListener('change', loadPhoto);
 }
 
 
-
-
-
 //CUSTOM SELECT
-let select = function() {
+let select = function () {
     let selects = document.querySelectorAll('.select-form');
     let items = document.querySelectorAll('.select-list__item');
 
@@ -281,7 +200,7 @@ let select = function() {
 
     for (let item of items) {
         item.addEventListener('click', function () {
-            item.parentElement.previousElementSibling.setAttribute('name',item.getAttribute('data-name'))
+            item.parentElement.previousElementSibling.setAttribute('name', item.getAttribute('data-name'))
             item.parentElement.previousElementSibling.innerHTML = item.innerHTML;
         })
     }
@@ -304,31 +223,10 @@ if (document.querySelector('.mask-data')) {
                 d: {mask: IMask.MaskedRange, placeholderChar: 'd', from: 1, to: 31, maxLength: 2},
                 m: {mask: IMask.MaskedRange, placeholderChar: 'm', from: 1, to: 12, maxLength: 2},
                 Y: {mask: IMask.MaskedRange, placeholderChar: 'y', from: 1900, to: 2999, maxLength: 4}
-            }})
+            }
+        })
     }
 }
-
-//Modal
-
-let open_modal = document.querySelectorAll('.open_modal');
-let close_modal = document.getElementById('close_modal');
-let modalbtn = document.getElementById('modal');
-let body = document.getElementsByTagName('body')[0];
-for (let i = 0; i < open_modal.length; i++) {
-    open_modal[i].onclick = function() {
-        modalbtn.classList.add('modal_vis');
-        modalbtn.classList.remove('bounceOutDown');
-        body.classList.add('body_block');
-    };
-}
-close_modal.onclick = function() {
-    modalbtn.classList.add('bounceOutDown');
-    window.setTimeout(function() {
-        modalbtn.classList.remove('modal_vis');
-        body.classList.remove('body_block');
-    }, 500);
-};
-
 
 
 if (document.querySelector('.add-profile')) {
@@ -358,7 +256,6 @@ if (document.querySelector('.add-profile')) {
             currentSteep = i;
 
 
-
             if (currentSteep + 1 === steeps.length) {
                 btnSaveDraft.classList.remove('hide');
                 btnSaveEnd.classList.remove('hide');
@@ -373,7 +270,7 @@ if (document.querySelector('.add-profile')) {
     }
 
     btnSave.addEventListener('click', function () {
-        if (currentSteep < steeps.length-1) {
+        if (currentSteep < steeps.length - 1) {
             ++currentSteep;
 
             for (let x = 0; x < itemsNav.length; x++) {
@@ -388,7 +285,7 @@ if (document.querySelector('.add-profile')) {
 
             itemsNav[currentSteep].classList.add('active', 'current');
 
-            if (currentSteep === steeps.length-1) {
+            if (currentSteep === steeps.length - 1) {
                 btnSaveDraft.classList.remove('hide');
                 btnSaveEnd.classList.remove('hide');
                 btnSave.innerHTML = 'Сохранить и опубликовать';

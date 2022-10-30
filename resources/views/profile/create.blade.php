@@ -2,6 +2,7 @@
 @section('content')
 
     <div id="page">
+
         <section class="add-profile">
             <ul class="breadcrumbs">
                 <li class="breadcrumbs__item">
@@ -58,6 +59,20 @@
                 <p class="add-profile__text">Давайте создавать и хранить историю вместе? Для начала необходимо заполнить
                     основную информацию профиля.</p>
             </div>
+
+            <x-modal id="burial_place_location" class="inner_map" >
+                <div class="input-wrap">
+                    <div class="input-form">
+                        <input type="text" class="input-text" id="burial_place_search"
+                               placeholder="Найдите место на карте"
+                               title="">
+                    </div>
+                </div>
+                <div class="map-wrap__inner" >
+
+                </div>
+            </x-modal>
+
         </section>
     </div>
 @endsection

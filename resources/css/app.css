@@ -157,6 +157,16 @@
     min-width: 100%
 }
 
+.hystmodal__window {
+    border-radius: 5px;
+    padding: 30px 30px;
+}
+
+.hystmodal__window--long {
+    width: 1000px !important;
+    height: 600px;
+}
+
 .content-preloader:not(.no-js) .main-content.preloader-active .bottom {
     left: -9999px;
     position: absolute;
@@ -287,10 +297,6 @@ a[href^="mailto:"], a[href^="tel:"] {
 a:not([href]):not([class]), a:not([href]):not([class]):focus, a:not([href]):not([class]):hover {
     color: inherit;
     text-decoration: none
-}
-
-p {
-    margin: 1.5rem 0 0
 }
 
 p:empty {
@@ -5101,68 +5107,46 @@ label.is-valid {
 }
 
 .breadcrumbs {
-    margin-bottom: 0;
-    margin-top: 13px;
-    min-width: 100%
-}
-
-.breadcrumbs__inner {
-    align-items: center;
-    display: flex
-}
-
-.breadcrumbs__icon {
-    display: block;
-    line-height: 6px;
-    margin-top: 4px;
-    transform: rotate(90deg)
-}
-
-.breadcrumbs__list {
     display: flex;
-    flex-wrap: nowrap;
-    margin: 0 -20px;
-    overflow-x: scroll;
-    padding: 0 8px 1rem
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
 }
 
 .breadcrumbs__item {
-    display: none;
-    font-size: 14px;
-    margin-top: 4px;
-    padding: 0 12px;
     position: relative;
-    white-space: nowrap
+    padding-right: 24px;
 }
 
 .breadcrumbs__item:before {
-    display: none
-}
-
-.breadcrumbs__item:not(:last-child):after {
-    color: #797879;
     content: "/";
-    left: calc(100% - 4px);
     position: absolute;
-    top: 0
-}
-
-.breadcrumbs__item:nth-last-child(-n+2), .breadcrumbs__link {
-    display: inline-block
-}
-
-.breadcrumbs__link {
+    top: 0;
+    right: 10px;
     color: #b5b6b8;
-    text-decoration: underline
 }
 
-span.breadcrumbs__link {
+.breadcrumbs__item:last-child:before {
+    content: none;
+}
+
+.breadcrumbs__link, .breadcrumbs__item:last-child .breadcrumbs__link:hover {
+    transition: var(--normal);
+    border-bottom: 1px solid transparent;
+    font: 400 14px sans-serif;
+}
+
+.breadcrumbs__item:last-child .breadcrumbs__link {
     color: #cdd1d6;
-    text-decoration: none !important
 }
 
-.breadcrumbs + .main-content-inner__col {
-    margin-top: 1rem
+.breadcrumbs__link:not(.breadcrumbs__item:last-child .breadcrumbs__link) {
+    color: #b5b6b8;
+}
+
+.breadcrumbs__link:hover:not(.breadcrumbs__item:last-child .breadcrumbs__link) {
+    color: var(--blue);
+    border-color: var(--blue);
 }
 
 @media (min-width: 992px) {

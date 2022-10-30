@@ -63,21 +63,12 @@
             <div class="input-form" style="position:relative;">
                 <input type="text" class="input-text"
                        id="burial_place" name="burial_place" title="Место захоронения">
-                <a class="open_modal" href="#open" style="position:absolute;" title="Указать на карте">
+                <a class="burialPlaceModal" data-hystmodal="#burial_place_location" href="#" style="position:absolute;" title="Указать на карте">
                     <img src="{{ asset('assets/media/media/icons/location.svg') }}" alt="Указать на карте" width="20" >
                 </a>
 
-                <div id="modal" class="modal bounceIn">
-                    <div id="close_modal">+</div>
-                    <div class="modal_txt">
-                        <div class="input-form">
-                            <input type="text" class="input-text" placeholder="Найдите место на карте"
-                                   id="burial_place_search" title="Найдите место на карте">
-                        </div>
-                    </div>
-
-                </div>
             </div>
+
         </div>
 
         <div class="input-wrap">
@@ -90,7 +81,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Свидетельство о смерти:</span>
             <div class="input-form">
-                <input type="file" class="load-files" id="death_certificate" name="death_certificate">
+                <input type="file" class="profileDocument" id="death_certificate" name="death_certificate">
             </div>
         </div>
     </div>
