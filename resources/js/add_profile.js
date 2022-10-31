@@ -4,18 +4,14 @@ import {Loader} from "google-maps";
 //Modal
 
 const searchLocation = async function initMap() {
-
-    const uluru = { lat: -25.344, lng: 131.031 };
-
     let markers = [];
 
     const map = new google.maps.Map(document.querySelector(".map"), {
         zoom: 1,
-        center: uluru,
+        center: { lat: 0, lng: 0},
     });
 
     map.addListener('click', function(e) {
-        console.log(e.latLng)
         placeMarker(e.latLng, map);
     });
 
@@ -40,7 +36,9 @@ const searchLocation = async function initMap() {
         geocoder.geocode({ location: latLang })
             .then((response) => {
                 if (response.results[0]) {
-                    console.log(response.results[0].formatted_address)
+                    console.log(response.results)
+                    document.querySelector('#burial_place_search').value = response.results[0].formatted_address;
+                    document.querySelector('#burial_place_coords').value = JSON.stringify(latLang)
                 } else {
                     window.alert("No results found");
                 }
