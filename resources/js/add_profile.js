@@ -1,14 +1,71 @@
 import './mask'
+import {Loader} from "google-maps";
 
 //Modal
+
+const searchLocation = async function initMap() {
+
+    const uluru = { lat: -25.344, lng: 131.031 };
+
+    let markers = [];
+
+    const map = new google.maps.Map(document.querySelector(".map"), {
+        zoom: 1,
+        center: uluru,
+    });
+
+    map.addListener('click', function(e) {
+        console.log(e.latLng)
+        placeMarker(e.latLng, map);
+    });
+
+    function placeMarker(position, map) {
+        clearMarkers();
+
+        let marker = new google.maps.Marker({
+            position: position,
+            map: map
+        });
+
+        markers.push(marker)
+        map.panTo(position);
+
+        const geocoder = new google.maps.Geocoder();
+
+        const latLang = {
+            lat: position.lat(),
+            lng: position.lng()
+        };
+
+        geocoder.geocode({ location: latLang })
+            .then((response) => {
+                if (response.results[0]) {
+                    console.log(response.results[0].formatted_address)
+                } else {
+                    window.alert("No results found");
+                }
+            })
+            .catch((e) => window.alert("Geocoder failed due to: " + e));
+    }
+
+    function clearMarkers() {
+        if (markers) {
+            for (let i in markers) {
+                markers[i].setMap(null);
+            }
+        }
+    }
+
+    google.maps.event.trigger(map, 'resize')
+}
+
 
 
 let burialLocationModal = function () {
     const modal = new HystModal({
         linkAttributeName: "data-hystmodal",
         beforeOpen: function (modal) {
-            console.log('Message before opening the modal');
-            console.log(modal); //modal window object
+            searchLocation();
         },
         afterClose: function (modal) {
             let textSearch = document.querySelector('#burial_place_search').value;
@@ -19,6 +76,8 @@ let burialLocationModal = function () {
 
 if (document.querySelector('#burial_place')) {
     document.querySelector('.burialPlaceModal').addEventListener('click', burialLocationModal)
+    const loader = new Loader(app.globalConfig.gmapsApikey);
+    const google = await loader.load();
 }
 
 
