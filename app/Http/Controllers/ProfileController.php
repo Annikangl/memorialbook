@@ -94,7 +94,7 @@ class ProfileController extends Controller
         return view('profile.partials.create_step1', );
     }
 
-    public function store(ProfileCreateRequest $request)
+    public function store(Request $request)
     {
         dd($request);
         if ($request->hasFile('avatar')) {
@@ -121,10 +121,10 @@ class ProfileController extends Controller
 
     public function create_step2()
     {
-        $hobbys = Hobby::query()->orderBy('id')->get();
-        $religions = Religion::query()->orderBy('id')->get();
-
-        return view('profile.create_step2',compact('hobbys','religions'));
+//        $hobbys = Hobby::query()->orderBy('id')->get();
+//        $religions = Religion::query()->orderBy('id')->get();
+//
+//        return view('profile.create_step2',compact('hobbys','religions'));
     }
 
 

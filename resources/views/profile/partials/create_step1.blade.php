@@ -90,55 +90,84 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Отец</span>
             <div class="select-form">
-                <div class="select">
-                    <output class="select__output" name="">Выберите из списка</output>
-                    <ul class="select-list">
-                        @foreach($fathers as $father)
-                        <li class="select-list__item" data-name="father_id"
-                            id="father_id">{{$father->first_name.' '.$father->last_name}}</li>
-                        @endforeach
-                    </ul>
-                </div>
+
+                <select class="profile-section__select select"   id="father_id" name="father_id" hidden=""
+                        data-select="">
+
+                    <option value="">Выберите из списка</option>
+                    @foreach($fathers as $father)
+                        <option value="{{$father->id}}" id="father_id"
+                                name="father_id">{{$father->first_name.' '.$father->last_name}}</option>
+                    @endforeach
+                </select>
+
                 <svg aria-hidden="true" class="select-arrow">
                     <path
                         d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
                 </svg>
             </div>
-
         </div>
+
+{{--        <div class="input-wrap">--}}
+{{--            <span class="input-wrap__title">Отец</span>--}}
+
+{{--            <div class="select-form">--}}
+{{--                <div class="select">--}}
+{{--                    <input class="select__output" type="text" value="" placeholder="Выберите из списка">--}}
+{{--                    <input type="hidden" value="" name="father_id">--}}
+
+{{--                    <ul class="select-list">--}}
+{{--                        @foreach($fathers as $father)--}}
+{{--                            <li class="select-list__item" data-value="{{$father->id}}"--}}
+{{--                                 id="father_id">--}}
+{{--                                {{$father->first_name.' '.$father->last_name}}</li>--}}
+{{--                        @endforeach--}}
+{{--                    </ul>--}}
+{{--                </div>--}}
+
+{{--                <svg aria-hidden="true" class="select-arrow">--}}
+{{--                    <path--}}
+{{--                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>--}}
+{{--                </svg>--}}
+{{--            </div>--}}
+
+{{--        </div>--}}
+
         <div class="input-wrap">
             <span class="input-wrap__title">Мать</span>
-
             <div class="select-form">
-                <div class="select">
-                    <output class="select__output" name="">Выберите из списка</output>
-                    <ul class="select-list">
-                        @foreach($mothers as $mother)
-                            <li class="select-list__item" data-name="mother_id" id="mother_id">{{$mother->first_name.' '.$mother->last_name}}</li>
-                        @endforeach
-                    </ul>
-                </div>
+
+                <select class="profile-section__select select"  id="mother_id" name="mother_id" hidden=""
+                        data-select="">
+
+                    <option value="">Выберите из списка</option>
+                    @foreach($mothers as $mother)
+                        <option value="{{$mother->id}}" id="mother_id"
+                                name="mother_id">{{$mother->first_name.' '.$mother->last_name}}</option>
+                    @endforeach
+                </select>
 
                 <svg aria-hidden="true" class="select-arrow">
                     <path
                         d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
                 </svg>
             </div>
-
         </div>
+
         <div class="input-wrap">
             <span class="input-wrap__title">Супруг / Супруга</span>
-
             <div class="select-form">
-                <div class="select">
-                    <output class="select__output" name="">Выберите из списка</output>
-                    <ul class="select-list">
-                        @foreach($profiles as $profile)
-                            <li class="select-list__item" data-name="spouse_id" id="spouse_id">
-                                {{$profile->first_name.' '.$profile->last_name}}</li>
-                        @endforeach
-                    </ul>
-                </div>
+
+                <select class="profile-section__select select"  id="spouse_id" name="spouse_id" hidden=""
+                        data-select="">
+
+                    <option value="">Выберите из списка</option>
+                    @foreach($profiles as $profile)
+                        <option value="{{$profile->id}}" id="spouse_id"
+                                name="spouse_id">{{$profile->first_name.' '.$profile->last_name}}</option>
+                    @endforeach
+                </select>
+
                 <svg aria-hidden="true" class="select-arrow">
                     <path
                         d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>

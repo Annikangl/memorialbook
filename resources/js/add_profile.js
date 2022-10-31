@@ -177,9 +177,13 @@ if (document.querySelector('.load-files')) {
 
 
 //CUSTOM SELECT
+
 let select = function () {
+
+
     let selects = document.querySelectorAll('.select-form');
     let items = document.querySelectorAll('.select-list__item');
+    let itemsnames = document.querySelectorAll('.select-list__item_name');
 
     for (let select of selects) {
         select.addEventListener('click', function () {
@@ -200,10 +204,17 @@ let select = function () {
 
     for (let item of items) {
         item.addEventListener('click', function () {
-            item.parentElement.previousElementSibling.setAttribute('name', item.getAttribute('data-name'))
+            item.parentElement.previousElementSibling.setAttribute('value', item.getAttribute('data-value'))
+            item.parentElement.previousElementSibling.setAttribute('placeholder', item.getAttribute('data-name'))
             item.parentElement.previousElementSibling.innerHTML = item.innerHTML;
         })
     }
+    // for (let itemsname of itemsnames) {
+    //     itemsname.addEventListener('click', function () {
+    //         itemsname.parentElement.previousElementSibling.setAttribute('placeholder', itemsname.getAttribute('data-name'))
+    //         itemsname.parentElement.previousElementSibling.innerHTML = itemsname.innerHTML;
+    //     })
+    // }
 }
 
 if (document.querySelector('.select-form')) {
