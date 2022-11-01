@@ -23,12 +23,13 @@ return new class extends Migration
 
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('patronymic')->nullable();
             $table->string('slug')->nullable()->index();
             $table->text('description')->nullable();
-            $table->string('gender', 10)->nullable();
+            $table->string('gender', 10);
             $table->string('avatar')->nullable();
             $table->date('date_birth');
             $table->date('date_death');
@@ -49,9 +50,10 @@ return new class extends Migration
             $table->unsignedBigInteger('spouse_id')->nullable();
             $table->unsignedBigInteger('child_id')->nullable();
 
-            $table->unsignedBigInteger('user_id')->nullable();
+            //TODO не забыть убрать nullable and cascade
 
-            //TODO не забыть убрать nullable
+
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->foreign('mother_id')->references('id')->on('profiles')
                 ->onDelete('CASCADE');
@@ -59,8 +61,6 @@ return new class extends Migration
                 ->onDelete('CASCADE');
             $table->foreign('spouse_id')->references('id')->on('profiles')
                 ->onDelete('CASCADE');
-
-            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

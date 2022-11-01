@@ -20,7 +20,9 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Описание:</span>
             <textarea class="textarea-form" placeholder="Текст описания..." id="description" name="description"
-                      title=""></textarea>
+                       title="">
+                {{ old('description') }}
+            </textarea>
         </div>
 
         <div class="input-wrap">

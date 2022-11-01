@@ -24,7 +24,7 @@
             <span class="input-wrap__title">Имя:</span>
             <div class="input-form">
                 <input type="text" class="input-text input-required" placeholder="Иван"
-                       id="first_name" name="first_name" title="">
+                       id="first_name" name="first_name" value="{{ old('first_name') }}" title="">
             </div>
         </div>
 
@@ -32,7 +32,24 @@
             <span class="input-wrap__title">Фамилия:</span>
             <div class="input-form">
                 <input type="text" class="input-text input-required" placeholder="Иванов"
-                       id="last_name" name="last_name" title="">
+                       id="last_name" name="last_name" value="{{ old('last_name') }}" title="">
+            </div>
+        </div>
+
+        <div class="input-wrap">
+            <span class="input-wrap__title">Пол</span>
+            <div class="select-form">
+                <select class="profile-section__select select"  id="gender" name="gender"
+                        data-select="">
+                    <option value="">Выберите из списка</option>
+                        <option value="male" name="gender">Мужской</option>
+                        <option value="female" name="gender">Женский</option>
+                </select>
+
+                <svg aria-hidden="true" class="select-arrow">
+                    <path
+                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
+                </svg>
             </div>
         </div>
 
@@ -42,20 +59,20 @@
             <span class="input-wrap__title">Дата рождения:</span>
             <div class="input-form">
                 <input type="text" class="input-text input-required mask-data"
-                       placeholder="дд.мм.гггг" id="date_birth" name="date_birth" title="">
+                       placeholder="дд.мм.гггг" id="date_birth" name="date_birth" value="{{ old('date_birth') }}" title="">
             </div>
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Место рождения:</span>
             <div class="input-form">
-                <input type="text" class="input-text" name="birth_place" title="">
+                <input type="text" class="input-text" name="birth_place" value="{{ old('birth_place') }}" title="">
             </div>
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Дата смерти:</span>
             <div class="input-form">
                 <input type="text" class="input-text mask-data" placeholder="дд.мм.гггг"
-                       id="date_death" name="date_death" title="">
+                       id="date_death" name="date_death" value="{{ old('date_death') }}" title="">
             </div>
         </div>
         <div class="input-wrap">
@@ -75,6 +92,7 @@
             <span class="input-wrap__title">Причина смерти:</span>
             <div class="input-form">
                 <input type="text" class="input-text" id="death_reason" name="death_reason"
+                       value="{{ old('death_reason') }}"
                        title="">
             </div>
         </div>
@@ -87,26 +105,7 @@
     </div>
 
     <div class="steep-wrap grid-col-2">
-{{--        <div class="input-wrap">--}}
-{{--            <span class="input-wrap__title">Отец</span>--}}
-{{--            <div class="select-form">--}}
 
-{{--                <select class="profile-section__select select"   id="father_id" name="father_id" hidden=""--}}
-{{--                        data-select="">--}}
-
-{{--                    <option value="">Выберите из списка</option>--}}
-{{--                    @foreach($fathers as $father)--}}
-{{--                        <option value="{{$father->id}}" id="father_id"--}}
-{{--                                name="father_id">{{$father->first_name.' '.$father->last_name}}</option>--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
-
-{{--                <svg aria-hidden="true" class="select-arrow">--}}
-{{--                    <path--}}
-{{--                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>--}}
-{{--                </svg>--}}
-{{--            </div>--}}
-{{--        </div>--}}
 
         <div class="input-wrap">
             <span class="input-wrap__title">Отец</span>

@@ -106,6 +106,10 @@ class Profile extends Model implements HasMedia
     public const STATUS_ACTIVE = 'Опубликован';
     public const STATUS_CLOSED = 'Закрыт';
 
+    public const AVATAR_PATH = 'uploads/profiles/avatar';
+    public const DOCUMENTS_PATH = 'uploads/profiles/document';
+    public const GALLERY_PATH = 'uploads/profiles/gallery';
+
     protected $guarded = [
         '_token'
     ];
