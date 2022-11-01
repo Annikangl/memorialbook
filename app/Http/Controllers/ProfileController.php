@@ -96,7 +96,9 @@ class ProfileController extends Controller
 
     public function store(ProfileCreateRequest $request)
     {
-        dd($request->all());
+        dd($request->input());
+        $father = json_decode($request->get('father_id'), true);
+
         if ($request->hasFile('avatar')) {
             $avatar_path = $request->file('avatar')->store('uploads/profiles/avatar', 'public');
         } else {

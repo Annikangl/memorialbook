@@ -257,8 +257,13 @@ let select = function () {
 
     for (let item of items) {
         item.addEventListener('click', function () {
-            item.parentElement.previousElementSibling.setAttribute('name', item.getAttribute('data-name'))
-            item.parentElement.previousElementSibling.innerHTML = item.innerHTML;
+            let itemData = {
+                id: item.getAttribute('data-id'),
+                value: item.textContent.trim()
+            };
+            item.parentElement.previousElementSibling.value = itemData.value
+            let hiddenInputId = '#' + item.getAttribute('data-name') + '_hidden';
+            document.querySelector(hiddenInputId).value = JSON.stringify(itemData)
         })
     }
 }

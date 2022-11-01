@@ -18,20 +18,20 @@ class ProfileCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => [
-                Rule::requiredIf(function () {
-                    $this->hasFile('avatar');
-                }),
-                File::image()
-                ->min(100)
-                ->max(5 * 1024)
-                ->dimensions(Rule::dimensions()->maxWidth(1920)->maxHeight(1080))
-            ],
-            'first_name' => ['required', 'string', 'min:3'],
-            'last_name' => ['required', 'string', 'min:3'],
-            'date_birth' => ['required', 'string', 'min:3'],
-            'birth_place' => ['required', 'string', 'min:3'],
-            'date_death' => ['required']
+//            'avatar' => [
+//                Rule::requiredIf(function () {
+//                    $this->hasFile('avatar');
+//                }),
+//                File::image()
+//                ->min(100)
+//                ->max(5 * 1024)
+//                ->dimensions(Rule::dimensions()->maxWidth(1920)->maxHeight(1080))
+//            ],
+//            'first_name' => ['required', 'string', 'min:3'],
+//            'last_name' => ['required', 'string', 'min:3'],
+//            'date_birth' => ['required', 'string', 'min:3'],
+//            'birth_place' => ['required', 'string', 'min:3'],
+//            'date_death' => ['required']
         ];
     }
 

@@ -62,12 +62,11 @@
             <span class="input-wrap__title">Место захоронения:</span>
             <div class="input-form" style="position:relative;">
                 <input type="text" class="input-text"
-                       id="burial_place" name="burial_place" title="Место захоронения" disabled>
+                       id="burial_place" name="burial_place" title="Место захоронения" readonly>
                 <a class="burialPlaceModal" data-hystmodal="#burial_place_location" href="#" style="position:absolute;" title="Указать на карте">
                     <img src="{{ asset('assets/media/media/icons/location.svg') }}" alt="Указать на карте" width="20" >
                 </a>
                 <input type="hidden" name="burial_place_coords" id="burial_place_coords">
-
             </div>
 
         </div>
@@ -92,10 +91,13 @@
             <span class="input-wrap__title">Отец</span>
             <div class="select-form">
                 <div class="select">
-                    <output class="select__output" name="">Выберите из списка</output>
+{{--                    <output class="select__output" name="">Выберите из списка</output>--}}
+                    <input type="hidden" class="select-output" id="father_id_hidden" name="father_id" readonly>
+                    <input type="text" class="select-output" placeholder="Выберите из списка" readonly>
+
                     <ul class="select-list">
                         @foreach($fathers as $father)
-                        <li class="select-list__item" data-name="father_id"
+                        <li class="select-list__item" data-name="father_id" data-id="{{ $father->id }}"
                             id="father_id">{{$father->first_name.' '.$father->last_name}}</li>
                         @endforeach
                     </ul>
@@ -112,10 +114,13 @@
 
             <div class="select-form">
                 <div class="select">
-                    <output class="select__output" name="">Выберите из списка</output>
+                    <input type="hidden" class="select__output" id="mother_id_hidden" name="mother_id" readonly>
+                    <input type="text" class="select__output" placeholder="Выберите из списка"  readonly>
                     <ul class="select-list">
                         @foreach($mothers as $mother)
-                            <li class="select-list__item" data-name="mother_id" id="mother_id">{{$mother->first_name.' '.$mother->last_name}}</li>
+                            <li class="select-list__item" data-name="mother_id" data-id="{{ $mother->id }}">
+                                {{$mother->first_name.' '.$mother->last_name}}
+                            </li>
                         @endforeach
                     </ul>
                 </div>
@@ -132,10 +137,11 @@
 
             <div class="select-form">
                 <div class="select">
-                    <output class="select__output" name="output" for="">Выберите из списка</output>
+                    <input type="hidden" class="select__output" id="spouse_id_hidden" name="spouse_id" readonly>
+                    <input type="text" class="select__output" placeholder="Выберите из списка"  readonly>
                     <ul class="select-list">
                         @foreach($profiles as $profile)
-                            <li class="select-list__item" data-name="spouse_id" id="spouse_id">
+                            <li class="select-list__item" data-name="spouse_id" data-id="{{ $mother->id }}">
                                 {{$profile->first_name.' '.$profile->last_name}}</li>
                         @endforeach
                     </ul>
