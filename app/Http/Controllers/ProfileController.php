@@ -107,6 +107,8 @@ class ProfileController extends Controller
 
         $religious = json_decode($request->get('religious_id'), true);
 
+
+
         if ($request->hasFile('avatar')) {
             $avatar_path = $request->file('avatar')->store('uploads/profiles/avatar', 'public');
         } else {
@@ -119,10 +121,9 @@ class ProfileController extends Controller
             $certificate_path = null;
         }
 
-
         $params = $request->all();
 
-        $params = $request->except(['_token','burial_place_coords']);
+        $params = $request->except(['_token','burial_place_coords','profile_images']);
 
         $params['date_birth']=Carbon::parse($params['date_birth'])->format('Y-m-d');
         $params['date_death']=Carbon::parse($params['date_death'])->format('Y-m-d');
@@ -175,10 +176,29 @@ class ProfileController extends Controller
             $params['cemetery_id']=$cemetery->id;
         }
 
-
-
         $profile = Profile::create($params);
         $id_profile = $profile->id;
+
+        $images = $request->file('profile_images');
+
+        if ($request->hasFile('profile_images')) {
+
+            foreach ($images as $image){
+                $images_path = $image->store('uploads/profiles/gallery', 'public');
+                $profile->galleries()->create([
+                'item'=> $images_path,
+                'item_sm'=>$images_path,
+                'extension'=>$image->extension(),
+                'profile_id'=>$id_profile
+                ]);
+
+            }
+
+        } else {
+            $images_path = null;
+        }
+
+
 
 
         if ($params['spouse_id']!=null){

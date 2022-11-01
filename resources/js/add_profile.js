@@ -160,7 +160,7 @@ let loadPhoto = function () {
             let inputHidden = document.createElement("input");
             inputHidden.setAttribute("type", "file");
             inputHidden.setAttribute("hidden", "hidden");
-            inputHidden.setAttribute("name", "load-resurs");
+            // inputHidden.setAttribute("name", "load-resurs");
             inputHidden.files = resurs;
 
             img.resurs = resurs[x];
@@ -203,7 +203,7 @@ let loadPhoto = function () {
                 let inputHidden = document.createElement("input");
                 inputHidden.setAttribute("type", "file");
                 inputHidden.setAttribute("hidden", "hidden");
-                inputHidden.setAttribute("name", "load-resurs");
+                // inputHidden.setAttribute("name", "load-resurs");
                 inputHidden.files = resurs;
 
                 video.resurs = resurs[x];

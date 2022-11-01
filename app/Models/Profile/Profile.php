@@ -138,6 +138,7 @@ class Profile extends Model implements HasMedia
         'father_id',
         'published_at',
         'religious_id',
+        'profile_images'
 //        'burial_place_coords',
 
     ];

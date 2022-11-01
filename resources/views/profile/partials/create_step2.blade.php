@@ -11,7 +11,7 @@
                             d="M10.5 21c-.6 0-1-.4-1-1v-8.5H1c-.6 0-1-.4-1-1s.4-1 1-1h8.5V1c0-.6.4-1 1-1s1 .4 1 1v8.5H20c.6 0 1 .4 1 1s-.4 1-1 1h-8.5V20c0 .6-.4 1-1 1z"/>
                     </svg>
                     <span class="input-photo-load__text">Добавить фото/видео</span>
-                    <input type="file" class="load-files" name="profile-images[]" id="profile-images"
+                    <input type="file" class="load-files" name="profile_images[]" id="profile_images"
                            accept=".jpg,.jpeg,.png,.mp4" multiple/>
                 </label>
             </div>
