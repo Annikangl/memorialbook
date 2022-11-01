@@ -68,13 +68,13 @@ class ProfileController extends Controller
 
     public function create(){
         $fathers = Profile::query()
-            ->where('gender','male')
+//            ->where('gender','male')
             ->with('users')
             ->where('user_id',\Auth::id())
             ->get();
 
         $mothers = Profile::query()
-            ->where('gender','female')
+//            ->where('gender','female')
             ->with('users')
             ->where('user_id',\Auth::id())
             ->get();

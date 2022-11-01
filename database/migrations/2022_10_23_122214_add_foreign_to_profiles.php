@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->foreignIdFor(\App\Models\Cemetery\Cemetery::class)->after('id')
+            $table->foreignIdFor(\App\Models\Cemetery\Cemetery::class)->after('id')->nullable()
                 ->constrained();
         });
     }
