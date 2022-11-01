@@ -8,6 +8,7 @@ use App\Http\Requests\Profile\SearchRequest;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
 use App\Models\Profile\Religion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -96,7 +97,7 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+
         if ($request->hasFile('avatar')) {
             $avatar_path = $request->file('avatar')->store('uploads/profiles/avatar', 'public');
         } else {
@@ -108,23 +109,37 @@ class ProfileController extends Controller
         } else {
             $certificate_path = null;
         }
-
+//
         $params = $request->all();
-        $params = $request->except(['_token']);
+        $params = $request->except(['_token','burial_place_coords']);
+
+        $params['date_birth']=Carbon::parse($params['date_birth'])->format('Y-m-d');
+        $params['date_death']=Carbon::parse($params['date_death'])->format('Y-m-d');
+
         $params['avatar'] = $avatar_path;
         $params['death_certificate'] = $certificate_path;
+        $params['user_id'] = \Auth::id();
 
-        $request->session()->put('profile_step1', $params);
 
-        return redirect()->route('profile.create.step2');
+        $profile = Profile::create($params);
+        $id_profile = $profile->id;
+
+
+        if ($params['spouse_id']!=null){
+            Profile::query()->where('id',$params['spouse_id'])
+                ->update(['spouse_id'=>$id_profile]);
+        }
+
+        if ($params['religious_id']!=null){
+            $profile->religions()->attach($params['religious_id']);
+        }
+
+        return redirect()->route('tree');
     }
 
     public function create_step2()
     {
-//        $hobbys = Hobby::query()->orderBy('id')->get();
-//        $religions = Religion::query()->orderBy('id')->get();
-//
-//        return view('profile.create_step2',compact('hobbys','religions'));
+
     }
 
 

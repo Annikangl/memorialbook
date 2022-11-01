@@ -137,7 +137,10 @@ class Profile extends Model implements HasMedia
         'mother_id',
         'father_id',
         'published_at',
-        'user_id',
+
+        'religious_id',
+//        'burial_place_coords',
+        'settings_public',
     ];
 
     public function registerMediaConversions(Media $media = null): void

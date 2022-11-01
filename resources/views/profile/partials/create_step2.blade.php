@@ -24,27 +24,25 @@
         </div>
 
         <div class="input-wrap">
+            <span class="input-wrap__title">Религиозные взгляды:</span>
 
             <div class="select-form">
-                <span class="input-wrap__title">Религиозные взгляды:</span>
-                <div class="select-form">
-
-                    <select class="profile-section__select select"  id="religious_id" name="religious_id" hidden=""
-                            data-select="">
-
-                        <option value="">Выберите из списка</option>
+                <div class="select">
+                    <input class="select__output_religious" placeholder="Выберите из списка">
+                    <input type="hidden" name="religious_id" value="">
+                    <ul class="select-list">
                         @foreach($religions as $religion)
-                            <option value="{{$religion->id}}" id="religious_id"
-                                    name="religious_id">{{$religion->title}}</option>
+                            <li class="select-list__item" id="religious_id"
+                                data-value="{{ $religion->id}}"
+                                data-religion="{{$religion->title}}"
+                                value="{{$religion->id}}">{{$religion->title}}</li>
                         @endforeach
-                    </select>
-
-                    <svg aria-hidden="true" class="select-arrow">
-                        <path
-                            d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                    </svg>
+                    </ul>
                 </div>
 
+                <svg aria-hidden="true" class="select-arrow">
+                    <path d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
+                </svg>
             </div>
 
         </div>

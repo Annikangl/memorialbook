@@ -808,7 +808,7 @@
     transition: var(--normal);
 }
 
-.select,.select__output {
+.select,.select__output,.select__output_father,.select__output_mother,.select__output_spouse,.select__output_religious {
     width: 100%;
     height: 100%;
     display: flex;
@@ -819,69 +819,8 @@
     font-size: 16px;
 }
 
-/* */
-
-.profile__section {
-    background-color: #fff;
-    border-radius: 7px;
-    height: 100%;
-    padding: 26px 22px
-}
-
-.profile__section:not(:first-child) {
-    margin-top: 10px
-}
-
-.profile-section__row.-m-up {
-    margin-top: -18px
-}
-
-.profile-section__form-group, .profile-section__side {
-    max-width: 100%;
-    min-width: 100%;
-    padding-left: 12px;
-    padding-right: 12px
-}
-
-.profile-section__form-group.-mt-0 {
-    margin-top: 0
-}
-
-.profile-section__form-group.-address .form-control {
-    cursor: pointer
-}
-
-.profile-section__form-group.-address label.is-invalid {
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px
-}
-.choices__inner.form-control{
-    /*border: none;*/
 
 
-}
-.select-form{
-    border: none;
-    display: flow-root;
-    background: #ffffff;
-}
-.select-form:hover{
-    border: none;
-}
-.select-form:focus{
-    border: none;
-}
-.select-arrow{
-    margin-top: 6px;
-}
-/* */
 
 .select-form.focus-select .select-list {
     height: auto;
@@ -889,18 +828,18 @@
 }
 
 
-/*.select-form.focus-select {*/
-/*    border-color: #cdd1d6;*/
-/*    border-radius: 7px 7px 0 0;*/
-/*}*/
+.select-form.focus-select {
+    border-color: #cdd1d6;
+    border-radius: 7px 7px 0 0;
+}
 
-/*.select-form.focus-select:hover {*/
-/*    border-color: #cdd1d6;*/
-/*}*/
+.select-form.focus-select:hover {
+    border-color: #cdd1d6;
+}
 
-/*.select-form.focus-select .select-arrow {*/
-/*    transform: translateY(-50%) rotate(180deg);*/
-/*}*/
+.select-form.focus-select .select-arrow {
+    transform: translateY(-50%) rotate(180deg);
+}
 
 .select-list {
     position: absolute;

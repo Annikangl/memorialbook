@@ -1,14 +1,69 @@
 import './mask'
+import {Loader} from "google-maps";
 
 //Modal
+
+const searchLocation = async function initMap() {
+    let markers = [];
+
+    const map = new google.maps.Map(document.querySelector(".map"), {
+        zoom: 1,
+        center: { lat: 0, lng: 0},
+    });
+
+    map.addListener('click', function(e) {
+        placeMarker(e.latLng, map);
+    });
+
+    function placeMarker(position, map) {
+        clearMarkers();
+
+        let marker = new google.maps.Marker({
+            position: position,
+            map: map
+        });
+
+        markers.push(marker)
+        map.panTo(position);
+
+        const geocoder = new google.maps.Geocoder();
+
+        const latLang = {
+            lat: position.lat(),
+            lng: position.lng()
+        };
+
+        geocoder.geocode({ location: latLang })
+            .then((response) => {
+                if (response.results[0]) {
+                    console.log(response.results)
+                    document.querySelector('#burial_place_search').value = response.results[0].formatted_address;
+                    document.querySelector('#burial_place_coords').value = JSON.stringify(latLang)
+                } else {
+                    window.alert("No results found");
+                }
+            })
+            .catch((e) => window.alert("Geocoder failed due to: " + e));
+    }
+
+    function clearMarkers() {
+        if (markers) {
+            for (let i in markers) {
+                markers[i].setMap(null);
+            }
+        }
+    }
+
+    google.maps.event.trigger(map, 'resize')
+}
+
 
 
 let burialLocationModal = function () {
     const modal = new HystModal({
         linkAttributeName: "data-hystmodal",
         beforeOpen: function (modal) {
-            console.log('Message before opening the modal');
-            console.log(modal); //modal window object
+            searchLocation();
         },
         afterClose: function (modal) {
             let textSearch = document.querySelector('#burial_place_search').value;
@@ -19,6 +74,8 @@ let burialLocationModal = function () {
 
 if (document.querySelector('#burial_place')) {
     document.querySelector('.burialPlaceModal').addEventListener('click', burialLocationModal)
+    const loader = new Loader(app.globalConfig.gmapsApikey);
+    const google = await loader.load();
 }
 
 
@@ -183,7 +240,13 @@ let select = function () {
 
     let selects = document.querySelectorAll('.select-form');
     let items = document.querySelectorAll('.select-list__item');
-    let itemsnames = document.querySelectorAll('.select-list__item_name');
+
+    let namesFather = document.querySelector('.select__output_father');
+    let namesMother = document.querySelector('.select__output_mother');
+    let namesSpouse = document.querySelector('.select__output_spouse');
+    let namesReligious= document.querySelector('.select__output_religious');
+
+
 
     for (let select of selects) {
         select.addEventListener('click', function () {
@@ -205,16 +268,24 @@ let select = function () {
     for (let item of items) {
         item.addEventListener('click', function () {
             item.parentElement.previousElementSibling.setAttribute('value', item.getAttribute('data-value'))
-            item.parentElement.previousElementSibling.setAttribute('placeholder', item.getAttribute('data-name'))
+            // item.parentElement.previousElementSibling.setAttribute('placeholder', item.getAttribute('data-name'))
+
+            if (item.getAttribute('data-father')!=null){
+                namesFather.setAttribute('placeholder', item.getAttribute('data-father'));
+            }if (item.getAttribute('data-mother')!=null){
+                namesMother.setAttribute('placeholder', item.getAttribute('data-mother'));
+            }if (item.getAttribute('data-spouse')!=null){
+                namesSpouse.setAttribute('placeholder', item.getAttribute('data-spouse'));
+            }if (item.getAttribute('data-religion')!=null){
+                namesReligious.setAttribute('placeholder', item.getAttribute('data-religion'));
+            }
+
+
+            console.log(namesMother);
+
             item.parentElement.previousElementSibling.innerHTML = item.innerHTML;
         })
     }
-    // for (let itemsname of itemsnames) {
-    //     itemsname.addEventListener('click', function () {
-    //         itemsname.parentElement.previousElementSibling.setAttribute('placeholder', itemsname.getAttribute('data-name'))
-    //         itemsname.parentElement.previousElementSibling.innerHTML = itemsname.innerHTML;
-    //     })
-    // }
 }
 
 if (document.querySelector('.select-form')) {
