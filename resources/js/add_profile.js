@@ -267,23 +267,15 @@ let select = function () {
 
     for (let item of items) {
         item.addEventListener('click', function () {
-            item.parentElement.previousElementSibling.setAttribute('value', item.getAttribute('data-value'))
-            // item.parentElement.previousElementSibling.setAttribute('placeholder', item.getAttribute('data-name'))
 
-            if (item.getAttribute('data-father')!=null){
-                namesFather.setAttribute('placeholder', item.getAttribute('data-father'));
-            }if (item.getAttribute('data-mother')!=null){
-                namesMother.setAttribute('placeholder', item.getAttribute('data-mother'));
-            }if (item.getAttribute('data-spouse')!=null){
-                namesSpouse.setAttribute('placeholder', item.getAttribute('data-spouse'));
-            }if (item.getAttribute('data-religion')!=null){
-                namesReligious.setAttribute('placeholder', item.getAttribute('data-religion'));
-            }
+            let itemData = {
+                id: item.getAttribute('data-id'),
+                value: item.textContent.trim()
+            };
+            item.parentElement.previousElementSibling.value = itemData.value
+            let hiddenInputId = '#' + item.getAttribute('data-name') + '_hidden';
+            document.querySelector(hiddenInputId).value = JSON.stringify(itemData)
 
-
-            console.log(namesMother);
-
-            item.parentElement.previousElementSibling.innerHTML = item.innerHTML;
         })
     }
 }

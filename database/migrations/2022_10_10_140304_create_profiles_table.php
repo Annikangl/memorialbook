@@ -38,6 +38,7 @@ return new class extends Migration
             $table->double('longitude')->nullable();
             $table->string('death_reason')->nullable();
             $table->string('death_certificate')->nullable();
+            $table->string('religious_id')->nullable();
 
             $table->string('status',16);
             $table->string('moderators_comment')->nullable();

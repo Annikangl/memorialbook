@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Profile\ProfileCreateRequest;
 use App\Http\Requests\Profile\ProfileCreateStep2Request;
 use App\Http\Requests\Profile\SearchRequest;
+use App\Models\Cemetery\Cemetery;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
 use App\Models\Profile\Religion;
@@ -83,11 +84,11 @@ class ProfileController extends Controller
             ->where('user_id',\Auth::id())
             ->get();
 
-        $hobbys = Hobby::query()->orderBy('id')->get();
+//        $hobbys = Hobby::query()->orderBy('id')->get();
 
         $religions = Religion::query()->orderBy('id')->get();
 
-        return view('profile.create',compact('fathers','mothers','profiles','hobbys','religions'));
+        return view('profile.create',compact('fathers','mothers','profiles','religions'));
     }
 
     public function create_step1()
@@ -95,8 +96,16 @@ class ProfileController extends Controller
         return view('profile.partials.create_step1', );
     }
 
-    public function store(Request $request)
+    public function store(ProfileCreateRequest $request)
     {
+        $burial_place_coords = json_decode($request->get('burial_place_coords'),true);
+
+        $father = json_decode($request->get('father_id'), true);
+        $spouse = json_decode($request->get('spouse_id'), true);
+
+        $mother = json_decode($request->get('mother_id'), true);
+
+        $religious = json_decode($request->get('religious_id'), true);
 
         if ($request->hasFile('avatar')) {
             $avatar_path = $request->file('avatar')->store('uploads/profiles/avatar', 'public');
@@ -109,8 +118,10 @@ class ProfileController extends Controller
         } else {
             $certificate_path = null;
         }
-//
+
+
         $params = $request->all();
+
         $params = $request->except(['_token','burial_place_coords']);
 
         $params['date_birth']=Carbon::parse($params['date_birth'])->format('Y-m-d');
@@ -118,7 +129,52 @@ class ProfileController extends Controller
 
         $params['avatar'] = $avatar_path;
         $params['death_certificate'] = $certificate_path;
+
+        if ($burial_place_coords==null){
+            $params['latitude']=null;
+            $params['longitude']=null;
+        }else{
+            $params['latitude']=$burial_place_coords['lat'];
+            $params['longitude']=$burial_place_coords['lng'];
+        }
         $params['user_id'] = \Auth::id();
+
+        if ($father==null){
+            $params['father_id']=null;
+        }else{
+            $params['father_id']=$father['id'];
+        }
+
+       if ($spouse==null){
+           $params['spouse_id']=null;
+       }else{
+           $params['spouse_id']=$spouse['id'];
+       }
+
+        if ($mother==null){
+            $params['mother_id']=null;
+        }else{
+            $params['mother_id']=$mother['id'];
+        }
+
+        if ($religious==null){
+            $params['religious_id']=null;
+        }else{
+            $params['religious_id']=$religious['id'];
+        }
+
+        if ($params['burial_place']){
+            $cemetery = Cemetery::create([
+                'title'=>$params['burial_place'],
+                'latitude'=>$params['latitude'],
+                'longitude'=> $params['longitude'],
+                'address'=> $params['burial_place'],
+                'status'=>Cemetery::STATUS_DRAFT,
+                'access'=>Cemetery::ACCESS_DENIED,
+            ]);
+            $params['cemetery_id']=$cemetery->id;
+        }
+
 
 
         $profile = Profile::create($params);
@@ -133,6 +189,9 @@ class ProfileController extends Controller
         if ($params['religious_id']!=null){
             $profile->religions()->attach($params['religious_id']);
         }
+
+
+
 
         return redirect()->route('tree');
     }

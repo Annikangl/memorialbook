@@ -28,14 +28,15 @@
 
             <div class="select-form">
                 <div class="select">
-                    <input class="select__output_religious" placeholder="Выберите из списка">
-                    <input type="hidden" name="religious_id" value="">
+
+                    <input type="hidden" class="select__output" id="religious_id_hidden" name="religious_id" readonly>
+                    <input type="text" class="select__output" placeholder="Выберите из списка" readonly>
+
                     <ul class="select-list">
                         @foreach($religions as $religion)
-                            <li class="select-list__item" id="religious_id"
-                                data-value="{{ $religion->id}}"
-                                data-religion="{{$religion->title}}"
-                                value="{{$religion->id}}">{{$religion->title}}</li>
+                            <li class="select-list__item" data-name="religious_id" data-id="{{$religion->id }}"
+                                id="religious_id">
+                                {{$religion->title}}</li>
                         @endforeach
                     </ul>
                 </div>

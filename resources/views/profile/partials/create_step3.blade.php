@@ -18,14 +18,14 @@
         <ul class="settings-public">
             <li class="settings-public__item">
                 <label class="settings-wrap">
-                    <input type="radio" class="settings-wrap__radio" name="settings_public" value="Открытый" checked/>
+                    <input type="radio" class="settings-wrap__radio" name="access" value="Открытый" checked/>
                     <span class="settings-wrap__title">Открытый</span>
                     <span class="settings-wrap__desc">Данные профиля видят все пользователи</span>
                 </label>
             </li>
             <li class="settings-public__item">
                 <label class="settings-wrap">
-                    <input type="radio" class="settings-wrap__radio" name="settings_public" value="Доступный"/>
+                    <input type="radio" class="settings-wrap__radio" name="access" value="Доступный"/>
                     <span class="settings-wrap__title">Доступный</span>
                     <span
                         class="settings-wrap__desc">Часть данных профиля скрыты: место захоронения, родственники</span>
@@ -33,7 +33,7 @@
             </li>
             <li class="settings-public__item">
                 <label class="settings-wrap">
-                    <input type="radio" class="settings-wrap__radio" name="settings_public" value="Закрытый"/>
+                    <input type="radio" class="settings-wrap__radio" name="access" value="Закрытый"/>
                     <span class="settings-wrap__title">Закрытый</span>
                     <span class="settings-wrap__desc">Профиль вижу только я</span>
                 </label>

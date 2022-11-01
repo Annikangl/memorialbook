@@ -17,12 +17,12 @@ return new class extends Migration
         Schema::create('cemeteries', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('title_en');
+            $table->string('title_en')->nullable();
             $table->string('slug')->nullable()->index();
-            $table->string('subtitle');
+            $table->string('subtitle')->nullable();
             $table->string('email')->nullable();
             $table->string('phone',20)->nullable();
-            $table->string('schedule');
+            $table->string('schedule')->nullable();
             $table->string('address');
 
             $table->double('latitude')->nullable();
