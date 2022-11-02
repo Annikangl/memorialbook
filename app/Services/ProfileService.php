@@ -67,12 +67,25 @@ class ProfileService
 
                 $profile->users()->associate($userId);
                 $profile->cemeteries()->associate($cemetery);
+
                 $profile->father()->associate($request->get('father_id')['id'] ?? null);
-                $profile->mother()->associate($request->get('mother')['id'] ?? null);
-                $profile->spouse()->associate($request->get('spouse')['id'] ?? null);
+                $profile->mother()->associate($request->get('mother_id')['id'] ?? null);
+                $profile->spouse()->associate($request->get('spouse_id')['id'] ?? null);
                 $profile->religions()->associate($request->get('religious_id')['id'] ?? null);
 
                 $profile->save();
+
+                // TODO move to queue
+                if ($request->get('father_id') || $request->get('mother_id') ) {
+                    Profile::updateChildForParent($request->get('father_id')['id']
+                        ?? $request->get('mother_id')['id'],
+                        $profile->id
+                    );
+                }
+
+                if ($spouse = $request->get('spouse_id')) {
+                    Profile::updateSpouse($spouse['id'], $profile->id);
+                }
 
                 if ($images = $request->file('profile_images')) {
                     foreach ($images as $image) {

@@ -79,11 +79,11 @@
             <span class="input-wrap__title">Место захоронения:</span>
             <div class="input-form" style="position:relative;">
                 <input type="text" class="input-text"
-                       id="burial_place" name="burial_place" title="Место захоронения" readonly>
+                       id="burial_place" name="burial_place" title="Место захоронения" readonly value="{{ old('burial_place') }}">
                 <a class="burialPlaceModal" data-hystmodal="#burial_place_location" href="#" style="position:absolute;" title="Указать на карте">
                     <img src="{{ asset('assets/media/media/icons/location.svg') }}" alt="Указать на карте" width="20" >
                 </a>
-                <input type="hidden" name="burial_place_coords" id="burial_place_coords">
+                <input type="hidden" name="burial_place_coords" id="burial_place_coords" value="{{ old('burial_place_coords') }}">
             </div>
 
         </div>

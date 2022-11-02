@@ -147,6 +147,18 @@ class Profile extends Model implements HasMedia
 
     ];
 
+    public static function updateChildForParent(int $parentId, int $childId): void
+    {
+        self::where('id', $parentId)
+            ->update(['child_id' => $childId]);
+    }
+
+    public static function updateSpouse(int $parentId, int $currentId): void
+    {
+        self::where('id', $parentId)
+            ->update(['spouse_id' => $currentId]);
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')

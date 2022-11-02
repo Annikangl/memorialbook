@@ -63,7 +63,7 @@ class ProfileCreateRequest extends FormRequest
                     $this->hasFile('death_certificate');
                 }),
                 File::types(['jpg', 'jpeg', 'png', 'pdf'])
-                    ->max(10 * 1024)
+                    ->max(40 * 1024)
             ],
             'profile_images.*' => ['required', 'mimes:jpg,jpeg,png,bmp,mp4', 'max:20000'],
         ];

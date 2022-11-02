@@ -64,6 +64,7 @@
                 <div class="input-wrap" style="margin: 0 0 10px 0;">
                     <div class="input-form" >
                         <input type="text" class="input-text" id="burial_place_search"
+                               name="burial_place_search"
                                placeholder="Выберите место на карте или введите адрес"
                                title="Выберите место на карте">
 {{--                        <button class="btn">Найти</button>--}}
