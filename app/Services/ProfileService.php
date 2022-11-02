@@ -61,7 +61,7 @@ class ProfileService
                     'longitude' => $request->get('burial_place_coords')['lng'] ?? null,
                     'death_reason' => $request->get('death_reason'),
                     'death_certificate' => $documentPath,
-                    'status' => Profile::STATUS_MODERATION,
+                    'status' => Profile::STATUS_ACTIVE,
                     'access' => $request->get('access')
                 ]);
 

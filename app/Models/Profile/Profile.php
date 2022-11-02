@@ -184,7 +184,7 @@ class Profile extends Model implements HasMedia
     public function scopeFiltered(Builder $query): Builder
     {
         return $query->when($value = request('FIO'), function (Builder $q) use ($value) {
-            $q->where(\DB::raw('CONCAT(profiles.first_name, " ", profiles.last_name, " ", profiles.patronymic)'), 'LIKE', "%$value%");
+            $q->where(\DB::raw('CONCAT_WS(" ",profiles.first_name, " ", profiles.last_name, " ", profiles.patronymic)'), 'LIKE', "%$value%");
         })->when($value = request('BIRTH'), function (Builder $q) use ($value) {
             $q->whereBetween(\DB::raw('YEAR(date_birth)'), explode('-', $value));
         })->when($value = request('DEATH'), function (Builder $query) use ($value) {

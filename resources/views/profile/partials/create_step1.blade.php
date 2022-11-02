@@ -38,7 +38,7 @@
 
         <div class="input-wrap">
             <span class="input-wrap__title">Пол</span>
-            <div class="select-form">
+            <div class="select-forms" style="width: 100%">
                 <select class="profile-section__select select"  id="gender" name="gender"
                         data-select="">
                     <option value="">Выберите из списка</option>
@@ -46,10 +46,7 @@
                         <option value="female" name="gender">Женский</option>
                 </select>
 
-                <svg aria-hidden="true" class="select-arrow">
-                    <path
-                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                </svg>
+
             </div>
         </div>
 

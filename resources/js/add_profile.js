@@ -75,7 +75,7 @@ let burialLocationModal = function () {
 if (document.querySelector('#burial_place')) {
     document.querySelector('.burialPlaceModal').addEventListener('click', burialLocationModal)
     const loader = new Loader(app.globalConfig.gmapsApikey);
-    const google = await loader.load();
+    const google =  loader.load();
 }
 
 
