@@ -106,107 +106,12 @@ class ProfileController extends Controller
     public function store(ProfileCreateRequest $request)
     {
         try {
-            $this->service->create(\Auth::id(), $request);
+            $profile = $this->service->create(\Auth::id(), $request);
         } catch (\DomainException $exception) {
             return back()->withErrors($exception->getMessage());
         }
 
-        if ($request->hasFile('avatar')) {
-            $avatar_path = $request->file('avatar')->store('uploads/profiles/avatar', 'public');
-        } else {
-            $avatar_path = null;
-        }
-
-        if ($request->hasFile('death_certificate')) {
-            $certificate_path = $request->file('death_certificate')->store('uploads/profiles/document', 'public');
-        } else {
-            $certificate_path = null;
-        }
-
-        $params = $request->all();
-
-        $params = $request->except(['_token', 'burial_place_coords', 'profile_images']);
-
-        $params['avatar'] = $avatar_path;
-        $params['death_certificate'] = $certificate_path;
-
-        if ($burial_place_coords == null) {
-            $params['latitude'] = null;
-            $params['longitude'] = null;
-        } else {
-            $params['latitude'] = $burial_place_coords['lat'];
-            $params['longitude'] = $burial_place_coords['lng'];
-        }
-        $params['user_id'] = \Auth::id();
-
-        if ($father == null) {
-            $params['father_id'] = null;
-        } else {
-            $params['father_id'] = $father['id'];
-        }
-
-        if ($spouse == null) {
-            $params['spouse_id'] = null;
-        } else {
-            $params['spouse_id'] = $spouse['id'];
-        }
-
-        if ($mother == null) {
-            $params['mother_id'] = null;
-        } else {
-            $params['mother_id'] = $mother['id'];
-        }
-
-        if ($religious == null) {
-            $params['religious_id'] = null;
-        } else {
-            $params['religious_id'] = $religious['id'];
-        }
-
-        if ($params['burial_place']) {
-            $cemetery = Cemetery::create([
-                'title' => $params['burial_place'],
-                'latitude' => $params['latitude'],
-                'longitude' => $params['longitude'],
-                'address' => $params['burial_place'],
-                'status' => Cemetery::STATUS_DRAFT,
-                'access' => Cemetery::ACCESS_DENIED,
-            ]);
-            $params['cemetery_id'] = $cemetery->id;
-        }
-
-        $profile = Profile::create($params);
-        $id_profile = $profile->id;
-
-        $images = $request->file('profile_images');
-
-        if ($request->hasFile('profile_images')) {
-
-            foreach ($images as $image) {
-                $images_path = $image->store('uploads/profiles/gallery', 'public');
-                $profile->galleries()->create([
-                    'item' => $images_path,
-                    'item_sm' => $images_path,
-                    'extension' => $image->extension(),
-                    'profile_id' => $id_profile
-                ]);
-            }
-        } else {
-            $images_path = null;
-        }
-
-
-        if ($params['spouse_id'] != null) {
-            Profile::query()->where('id', $params['spouse_id'])
-                ->update(['spouse_id' => $id_profile]);
-        }
-
-        if ($params['religious_id'] != null) {
-            $profile->religions()->attach($params['religious_id']);
-        }
-
-
-        return redirect()->route('tree');
+        return redirect()->route('profile.show', $profile->slug);
     }
 
     public function store_step2(Request $request)

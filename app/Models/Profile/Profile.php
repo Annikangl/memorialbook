@@ -220,12 +220,12 @@ class Profile extends Model implements HasMedia
 
     public function galleries(): HasMany
     {
-        return $this->hasMany(Gallery::class);
+        return $this->hasMany(Gallery::class,'');
     }
 
     public function users(): BelongsTo
     {
-        return $this->BelongsTo(User::class);
+        return $this->BelongsTo(User::class, 'user_id');
     }
 
     public function hobbies(): BelongsToMany
@@ -233,14 +233,14 @@ class Profile extends Model implements HasMedia
         return $this->belongsToMany(Hobby::class);
     }
 
-    public function religions(): BelongsToMany
+    public function religions(): BelongsTo
     {
-        return $this->belongsToMany(Religion::class,'religion_profile');
+        return $this->belongsTo(Religion::class, 'religious_id');
     }
 
     public function cemeteries(): BelongsTo
     {
-        return $this->belongsTo(Cemetery::class);
+        return $this->belongsTo(Cemetery::class, 'cemetery_id');
     }
 
     public function spouse(): BelongsTo

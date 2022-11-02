@@ -92,6 +92,18 @@ class Cemetery extends Model
         'access'
     ];
 
+    public static function createFromProfile(string $title, array $coords, string $address): self
+    {
+        return self::create([
+            'title' => $title,
+            'latitude' => (double) $coords['lat'],
+            'longitude' => (double) $coords['lng'],
+            'address' => $address,
+            'status' => self::STATUS_DRAFT,
+            'access' => self::ACCESS_DENIED,
+        ]);
+    }
+
     public function scopeFiltered(Builder $query): Builder
     {
         return $query->when($name = request('NAME'), function (Builder $q) use ($name) {

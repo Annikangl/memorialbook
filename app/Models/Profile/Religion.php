@@ -5,6 +5,7 @@ namespace App\Models\Profile;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Profile\Religion
@@ -30,6 +31,11 @@ class Religion extends Model
     public $timestamps = false;
 
     protected $fillable = ['title','slug'];
+
+    public function profiles(): HasMany
+    {
+        return $this->hasMany(Profile::class);
+    }
 
     public function sluggable(): array
     {
