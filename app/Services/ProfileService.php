@@ -103,8 +103,8 @@ class ProfileService
                 return $profile;
             });
 
-        } catch (\DomainException $exception) {
-            throw $exception;
+        } catch (\Throwable $exception) {
+            throw new \DomainException('Ошибка создания профиля');
         }
     }
 }

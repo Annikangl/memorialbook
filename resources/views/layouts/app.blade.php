@@ -133,9 +133,6 @@
                                                     <div class="header-personal__icon">
                                                         <img src="{{ asset('assets/media/media/sprite-bell.svg') }}"
                                                              alt="notification" width="18px" height="21px">
-                                                        {{--                                                        <svg style="width: 18px; height: 21px;" aria-hidden="true">--}}
-                                                        {{--                                                            <use xlink:href="{{ asset('assets/media/media/sprite-bell.svg') }}"></use>--}}
-                                                        {{--                                                        </svg>--}}
                                                     </div>
                                                     <span class="header-personal__badge badge badge-danger">1</span>
                                                 </button>

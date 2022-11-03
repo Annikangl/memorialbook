@@ -2,9 +2,11 @@ import 'bootstrap'
 import './vendor'
 import 'hystmodal/dist/hystmodal.min'
 import 'hystmodal/dist/hystmodal.min.css'
+import './news'
 import  './cemetery'
 import './map'
 import './add_profile'
+
 
 
 /*! For license information please see main.scripts.js.LICENSE.txt */

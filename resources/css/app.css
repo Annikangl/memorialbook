@@ -3,6 +3,7 @@
 @import "_vars.css";
 @import "./fonts.css";
 @import "main.css";
+@import "news.css";
 @import "./template.css";
 @import "cemeteries/cemetery_pagination.css";
 @import "profiles/profile_card.css";

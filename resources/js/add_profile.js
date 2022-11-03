@@ -80,22 +80,22 @@ if (document.querySelector('#burial_place')) {
 
 
 //INIT FANCYBOX
-if (document.querySelector('.gallery')) {
-    Fancybox.bind(".gallery", {
-        groupAll: true, // Group all items
-        Toolbar: {
-            display: [
-                {id: "prev", position: "center"},
-                {id: "counter", position: "center"},
-                {id: "next", position: "center"},
-                "zoom",
-                "slideshow",
-                "fullscreen",
-                "close",
-            ],
-        },
-    });
-}
+// if (document.querySelector('.gallery')) {
+//     Fancybox.bind(".gallery", {
+//         groupAll: true, // Group all items
+//         Toolbar: {
+//             display: [
+//                 {id: "prev", position: "center"},
+//                 {id: "counter", position: "center"},
+//                 {id: "next", position: "center"},
+//                 "zoom",
+//                 "slideshow",
+//                 "fullscreen",
+//                 "close",
+//             ],
+//         },
+//     });
+// }
 
 
 //CHANGE USER AVATAR
