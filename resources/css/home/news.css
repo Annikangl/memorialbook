@@ -1,3 +1,5 @@
+@import "../libs/swiper.min.css";
+
 /* news
 ---------------*/
 .news {
@@ -18,6 +20,7 @@
 
 .news-menu__link:hover, .news-menu__item.active .news-menu__link {
     color: var(--blue);
+    text-decoration: none;
 }
 
 .news-wrap {

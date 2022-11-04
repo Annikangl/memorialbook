@@ -1,6 +1,4 @@
-import Swiper from "swiper";
-import 'swiper/swiper.min.css';
-
+import './libs/swiper.min'
 
 if (document.querySelector('.swiper')) {
     let sliders = document.querySelectorAll('.swiper');
