@@ -71,13 +71,15 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|Profile newModelQuery()
  * @method static Builder|Profile newQuery()
 
- * @method static Builder|Profile withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  * @mixin \Eloquent
  */
 
 class Profile extends Model implements HasMedia
 {
     use HasFactory, Sluggable, InteractsWithMedia;
+
+    public const MALE = 'male';
+    public const FEMALE = 'female';
 
     public const STATUS_DRAFT = 'Черновик';
     public const STATUS_MODERATION = 'На модерации';
@@ -136,6 +138,17 @@ class Profile extends Model implements HasMedia
             ->update(['spouse_id' => $currentId]);
     }
 
+    public static function genderList(): array
+    {
+        return [
+            'male' => self::MALE,
+            'female' => self::FEMALE
+        ];
+    }
+
+    /**
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     */
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
@@ -181,7 +194,7 @@ class Profile extends Model implements HasMedia
             ->orHas('child')->orHas('spouse');
     }
 
-    public function scopePets(Builder $query)
+    public function scopePets(Builder $query): Builder
     {
         return $query->where('gender','pet');
     }

@@ -65,38 +65,31 @@ class ProfileController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
-        $relatives = Profile::query()
-            ->select(['first_name', 'last_name', 'patronymic', 'slug', 'avatar'])
-            ->whereIn('id', [$profile->mother_id, $profile->father_id, $profile->spouse_id, $profile->child_id])
-            ->get();
+        $relatives = Profile::withRelatives()->get();
 
         return view('profile.show', compact('profile', 'relatives'));
     }
 
     public function create()
     {
-        // TODO add with()
-        $fathers = Profile::query()
-            ->where('gender','male')
-            ->with('users')
-            ->where('user_id', \Auth::id())
-            ->get();
-
-        $mothers = Profile::query()
-            ->where('gender','female')
-            ->with('users')
-            ->where('user_id', \Auth::id())
-            ->get();
-
-        $profiles = Profile::query()
-            ->with('users')
-            ->where('user_id', \Auth::id())
+        $profiles = Profile::byUser(auth()->id())
+            ->addSelect('gender')
             ->get();
 
         $religions = Religion::query()->orderBy('id')->get();
 
+        $fathers = $profiles->filter(function ($item) {
+            return $item->gender == Profile::MALE;
+        });
+
+        $mothers = $profiles->filter(function ($item) {
+            return $item->gender == Profile::FEMALE;
+        });
+
+        $genders = Profile::genderList();
+
         return view('profile.create',
-            compact('fathers', 'mothers', 'profiles', 'religions'));
+            compact('profiles','fathers', 'mothers', 'religions', 'genders'));
     }
 
     public function create_step1()

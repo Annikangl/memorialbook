@@ -31,7 +31,7 @@ class ProfileFactory extends Factory
                 ]
             ),
             'description' => $this->faker->text(),
-            'gender' => $this->faker->titleMale(),
+            'gender' => $this->faker->randomElement(['male', 'female']),
             'date_birth' => $birth = $this->faker->date("Y-m-d", '2000'),
             'date_death' => Carbon::createFromFormat('Y-m-d', $birth)->addYears(25),
             'birth_place' => $this->faker->address(),

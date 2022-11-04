@@ -42,10 +42,11 @@
                 <select class="profile-section__select select"  id="gender" name="gender"
                         data-select="">
                     <option value="">Выберите из списка</option>
-                        <option value="male" name="gender">Мужской</option>
-                        <option value="female" name="gender">Женский</option>
+                    @foreach($genders as $key => $gender)
+                        @dump($gender)
+                        <option value="{{ $key }}" name="gender">{{ __($gender) }}</option>
+                    @endforeach
                 </select>
-
 
             </div>
         </div>
@@ -102,11 +103,8 @@
     </div>
 
     <div class="steep-wrap grid-col-2">
-
-
         <div class="input-wrap">
             <span class="input-wrap__title">Отец</span>
-
             <div class="select-form">
                 <div class="select">
 
