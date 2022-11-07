@@ -2,8 +2,10 @@
     --content-size: calc(50% - 700px);
     --normal: .4s ease;
     --blue: #175ed9;
+    --blue-hover: #6799ef;
     --black: #201e1f;
     --red: #fa122e;
     --gray: #f5f7f9;
     --light-gray: #e5e8eb;
+    --dark-gray: #797879;
 }

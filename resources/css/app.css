@@ -10,6 +10,7 @@
 @import "profiles/add_profile.css";
 @import "cemeteries/cemetery_card.css";
 @import "map.css";
+@import "cabinet/cabinet.css";
 
 *, :before, :after {
     margin: 0;
@@ -2770,32 +2771,6 @@ a.text-dark:focus, a.text-dark:hover {
     background: #fb445a
 }
 
-.btn {
-    align-items: center;
-    border: 1px solid transparent;
-    border-radius: 7px;
-    cursor: pointer;
-    display: inline-flex;
-    font-family: Lato, Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    justify-content: center;
-    letter-spacing: .05em;
-    line-height: 1.5;
-    min-height: 44px;
-    padding: .7em 1.1em .6em;
-    position: relative;
-    text-align: center;
-    text-transform: uppercase;
-    transition-duration: .25s;
-    transition-property: color, background, border-color, box-shadow;
-    transition-timing-function: ease-in-out;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    vertical-align: middle;
-    white-space: nowrap
-}
 
 .btn, .btn:hover {
     text-decoration: none

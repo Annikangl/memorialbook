@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\NetworkController;
+use App\Http\Controllers\Cabinet\CabinetController;
 use App\Http\Controllers\Cemetery\CemeteryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,11 @@ Route::get('login/{driver}/callback', [NetworkController::class, 'callback'])->n
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('index');
 
 Route::middleware('auth')->group(function () {
+    Route::group(['prefix' => 'cabinet', 'as' => 'cabinet.'], function () {
+        Route::get('/{user}', [CabinetController::class, 'index'])->name('show');
+    });
+
+
     Route::get('/tree', [App\Http\Controllers\ProfileController::class, 'index'])->name('tree');
     Route::get('/tree-list', [App\Http\Controllers\ProfileController::class, 'list'])->name('tree.list');
 

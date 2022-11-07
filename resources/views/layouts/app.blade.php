@@ -56,6 +56,7 @@
 </script>
 
 @include('includes.toasters.toasters')
+
 <div class="page-wrapper">
     <div class="page-wrapper-inner">
         <div class="header">
@@ -139,7 +140,7 @@
                                             </div>
                                             <div class="header-personal__item -small -user col">
                                                 <a class="header-personal__link"
-                                                   href="../profile-edit">{{ \Illuminate\Support\Facades\Auth::user()->username }}</a>
+                                                   href="{{ route('cabinet.show', Auth::user()) }}">{{ \Illuminate\Support\Facades\Auth::user()->username }}</a>
                                             </div>
                                             <div class="header-personal__item -small -exit col">
                                                 <form action="{{ route('logout') }}" method="post">

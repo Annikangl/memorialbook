@@ -64,3 +64,29 @@ section {
     transform: translate(-50%, -50%);
     object-fit: cover;
 }
+
+.blue-btn, .white-btn:hover {
+    color: #fff;
+    background-color: var(--blue);
+}
+
+.blue-btn:hover {
+    background-color: var(--blue-hover);
+    color: #fff;
+}
+
+.white-btn {
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    background-color: transparent;
+}
+
+.btn {
+    height: 44px;
+    text-transform: uppercase;
+    transition: var(--normal);
+    padding: 3px 15px 0;
+    letter-spacing: .05em;
+    border-radius: 7px;
+    cursor: pointer;
+}
