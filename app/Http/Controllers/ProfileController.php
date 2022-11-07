@@ -89,13 +89,8 @@ class ProfileController extends Controller
 
         $genders = Profile::genderList();
 
-        return view('profile.create',
+        return view('profile.create.create',
             compact('profiles','fathers', 'mothers', 'religions', 'genders'));
-    }
-
-    public function create_step1()
-    {
-        return view('profile.partials.create_step1',);
     }
 
     public function store(ProfileCreateRequest $request)
@@ -110,23 +105,25 @@ class ProfileController extends Controller
         return redirect()->route('profile.show', $profile->slug);
     }
 
-    public function store_step2(Request $request)
+    public function edit(Profile $profile)
     {
-        $params = $request->all();
-        $params = $request->except(['_token']);
+        $profiles = Profile::byUser(auth()->id())
+            ->addSelect('gender')
+            ->get();
 
-        $request->session()->put('profile_step2', $params);
-        $value = $request->session()->all();
+        $religions = Religion::query()->orderBy('id')->get();
 
-        return redirect()->route('profile.create.step3');
-    }
+        $fathers = $profiles->filter(function ($item) {
+            return $item->gender == Profile::MALE;
+        });
 
+        $mothers = $profiles->filter(function ($item) {
+            return $item->gender == Profile::FEMALE;
+        });
 
-    public function create_step3(Request $request)
-    {
-        $profile_step1 = $request->session()->get('profile_step1');
-
-        return view('profile.create_step3', compact('profile_step1'));
+        $genders = Profile::genderList();
+        return view('profile.edit.edit',
+            compact('profile', 'profiles','genders','mothers','fathers', 'religions'));
     }
 
     public function map(SearchRequest $request)

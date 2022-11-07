@@ -26,6 +26,7 @@
         "google-maps": "^4.3.3",
         "hystmodal": "^0.5.1",
         "jquery": "^3.6.1",
-        "slideout": "^1.0.1"
+        "slideout": "^1.0.1",
+        "swiper": "^8.4.4"
     }
 }

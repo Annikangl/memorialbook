@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
 
     <div id="page">
@@ -42,11 +43,11 @@
                       action="{{ route('profile.store' )}}">
                     @csrf
 
-                    @include('profile.partials.create_step1')
+                    @include('profile.create.create_step_1')
 
-                    @include('profile.partials.create_step2')
+                    @include('profile.create.create_step_2')
 
-                    @include('profile.partials.create_step3')
+                    @include('profile.create.create_step_3')
 
                     <div class="buttons-save">
                         <button type="button" class="save-draft hide">Сохранить как черновик</button>
@@ -67,7 +68,7 @@
                                name="burial_place_search"
                                placeholder="Выберите место на карте или введите адрес"
                                title="Выберите место на карте">
-{{--                        <button class="btn">Найти</button>--}}
+                        {{--                        <button class="btn">Найти</button>--}}
                     </div>
 
                 </div>

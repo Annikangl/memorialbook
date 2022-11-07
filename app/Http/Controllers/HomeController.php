@@ -23,10 +23,12 @@ class HomeController extends Controller
             ->withRelatives()->get();
 
         $pets = Profile::pets()->get();
-        $news = News::with(['author','galleries','profile'])->get();
 
+        $news = News::with(['author','galleries','profile'])
+            ->orderByDesc('created_at')
+            ->get();
 
         return view('home',
-            compact('profiles','relatives','pets', 'news'));
+            compact('profiles','relatives', 'pets', 'news'));
     }
 }
