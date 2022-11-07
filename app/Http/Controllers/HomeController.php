@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News\News;
 use App\Models\Profile\Profile;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -22,8 +23,10 @@ class HomeController extends Controller
             ->withRelatives()->get();
 
         $pets = Profile::pets()->get();
+        $news = News::with(['author','galleries','profile'])->get();
+
 
         return view('home',
-            compact('profiles','relatives','pets'));
+            compact('profiles','relatives','pets', 'news'));
     }
 }

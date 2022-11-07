@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CreateNews;
 use App\Http\Requests\Profile\ProfileCreateRequest;
 use App\Http\Requests\Profile\ProfileCreateStep2Request;
 use App\Http\Requests\Profile\SearchRequest;
@@ -101,6 +102,7 @@ class ProfileController extends Controller
     {
         try {
             $profile = $this->service->create(\Auth::id(), $request);
+            event(new CreateNews($profile, CreateNews::USER_ADDED_PROFILE));
         } catch (\DomainException $exception) {
             return back()->withErrors($exception->getMessage());
         }

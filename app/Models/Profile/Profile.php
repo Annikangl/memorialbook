@@ -184,7 +184,7 @@ class Profile extends Model implements HasMedia
 
     public function scopeByUser(Builder $query, int $userId): Builder
     {
-        return $query->select(['first_name', 'last_name', 'slug', 'avatar', 'date_birth', 'date_death'])
+        return $query->select(['id', 'first_name', 'last_name', 'slug', 'avatar', 'date_birth', 'date_death'])
             ->where('user_id', $userId);
     }
 

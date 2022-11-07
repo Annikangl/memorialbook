@@ -19,7 +19,7 @@ class ProfileService
         $this->fileUploader = $fileUploader;
     }
 
-    public function create(int $userId, ProfileCreateRequest $request)
+    public function create(int $userId, ProfileCreateRequest $request): Profile
     {
         $avatarPath = null;
         $documentPath = null;
@@ -104,7 +104,7 @@ class ProfileService
             });
 
         } catch (\Throwable $exception) {
-            throw new \DomainException('Ошибка создания профиля');
+            throw new \DomainException($exception->getMessage());
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\News\News;
 use App\Models\Profile\Profile;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -78,6 +79,11 @@ class User extends Authenticatable
     public function profiles(): HasMany
     {
         return $this->hasMany(Profile::class);
+    }
+
+    public function news(): HasMany
+    {
+        return $this->hasMany(News::class,'author_id');
     }
 
     public static function register(string $name, string $email, string $phone, string $password): self
