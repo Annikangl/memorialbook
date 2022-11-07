@@ -5,12 +5,14 @@
         <div class="user-total-info">
             <h3 class="user-total-info__name">Иванов Михаил Сергеевич</h3>
 
-            <div class="status-moderation">
-                <span class="status-moderation__title">Статус модерации:</span>
-                <p class="status-moderation__text -status-error">Публикация отклонена 14:31 22.10.2021</p>
-            </div>
+            @if($profile->isClosed())
+                <div class="status-moderation">
+                    <span class="status-moderation__title">Статус модерации:</span>
+                    <p class="status-moderation__text -status-error">Публикация отклонена 14:31 22.10.2021</p>
+                </div>
 
-            <p class="moderation-text">Свидетельство о смерти не соответствует установленному образцу</p>
+                <p class="moderation-text">{{ $profile->moderators_comment }}</p>
+            @endif
         </div>
     </div>
     <div class="steep-wrap">

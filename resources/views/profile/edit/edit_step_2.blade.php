@@ -11,6 +11,7 @@
                             d="M10.5 21c-.6 0-1-.4-1-1v-8.5H1c-.6 0-1-.4-1-1s.4-1 1-1h8.5V1c0-.6.4-1 1-1s1 .4 1 1v8.5H20c.6 0 1 .4 1 1s-.4 1-1 1h-8.5V20c0 .6-.4 1-1 1z"/>
                     </svg>
                     <span class="input-photo-load__text">Добавить фото/видео</span>
+
                     <input type="file" class="load-files" name="profile_images[]" id="profile_images"
                            accept=".jpg,.jpeg,.png,.mp4" multiple/>
                 </label>
@@ -20,9 +21,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Описание:</span>
             <textarea class="textarea-form" placeholder="Текст описания..." id="description" name="description"
-                       title="">
-                {{ old('description') }}
-            </textarea>
+                       title="{{ $profile->description }}">{{ $profile->description }}</textarea>
         </div>
 
         <div class="input-wrap">
@@ -32,13 +31,18 @@
                 <div class="select">
 
                     <input type="hidden" class="select__output" id="religious_id_hidden" name="religious_id" readonly>
-                    <input type="text" class="select__output" placeholder="Выберите из списка" readonly>
+                    <input type="text" class="select__output" placeholder="Выберите из списка"
+                           value="{{ $profile->religions->title ?? '' }}"
+                           readonly>
 
                     <ul class="select-list">
                         @foreach($religions as $religion)
-                            <li class="select-list__item" data-name="religious_id" data-id="{{$religion->id }}"
-                                id="religious_id">
-                                {{$religion->title}}</li>
+                            <li class="select-list__item"
+                                id="religious_id"
+                                data-name="religious_id"
+                                data-id="{{$religion->id }}">
+                                {{ $religion->title }}
+                            </li>
                         @endforeach
                     </ul>
                 </div>

@@ -122,6 +122,7 @@ class ProfileController extends Controller
         });
 
         $genders = Profile::genderList();
+
         return view('profile.edit.edit',
             compact('profile', 'profiles','genders','mothers','fathers', 'religions'));
     }

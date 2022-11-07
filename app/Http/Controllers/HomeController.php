@@ -18,7 +18,8 @@ class HomeController extends Controller
 
     public function index(): Factory|View|Application
     {
-        $profiles = Profile::byUser(auth()->id())->get();
+        $profiles = Profile::byUser(auth()->id())->addSelect('status')->get();
+
         $relatives = Profile::byUser(auth()->id())
             ->withRelatives()->get();
 

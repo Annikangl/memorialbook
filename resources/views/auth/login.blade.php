@@ -42,6 +42,7 @@
                                data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Нет аккаунта? Зарегистироваться</a>
                         </div>
                     </form>
+
                     @include('auth.partials.socials')
                 </div>
             </div>

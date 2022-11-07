@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/store_step2', [ProfileController::class, 'store_step2'])->name('store.step2');
         Route::post('/store_step3', [ProfileController::class, 'store_step3'])->name('store.step3');
 
-        Route::get('/edit/{profile}', [ProfileController::class, 'edit'])->name('edit');
+        Route::get('/{profile}/edit', [ProfileController::class, 'edit'])->name('edit');
 
         Route::get('/card/{slug}', [ProfileController::class, 'show'])->name('show');
         Route::get('/map', [ProfileController::class, 'map'])->name('search.map');

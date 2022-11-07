@@ -43,11 +43,11 @@
                       action="{{ route('profile.store' )}}">
                     @csrf
 
-                    @include('profile.create.create_step_1')
+                    @include('profile.edit.edit_step_1')
 
-                    @include('profile.create.create_step_2')
+                    @include('profile.edit.edit_step_2')
 
-                    @include('profile.create.create_step_3')
+                    @include('profile.edit.edit_step_3')
 
                     <div class="buttons-save">
                         <button type="button" class="save-draft hide">Сохранить как черновик</button>

@@ -70,10 +70,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @method static Builder|Profile findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static Builder|Profile newModelQuery()
  * @method static Builder|Profile newQuery()
-
  * @mixin \Eloquent
  */
-
 class Profile extends Model implements HasMedia
 {
     use HasFactory, Sluggable, InteractsWithMedia;
@@ -84,7 +82,7 @@ class Profile extends Model implements HasMedia
     public const STATUS_DRAFT = 'Черновик';
     public const STATUS_MODERATION = 'На модерации';
     public const STATUS_ACTIVE = 'Опубликован';
-    public const STATUS_CLOSED = 'Закрыт';
+    public const STATUS_CLOSED = 'Отклонен';
 
     public const AVATAR_PATH = 'uploads/profiles/avatar';
     public const DOCUMENTS_PATH = 'uploads/profiles/document';
@@ -146,24 +144,19 @@ class Profile extends Model implements HasMedia
         ];
     }
 
-    /**
-     * @throws \Spatie\Image\Exceptions\InvalidManipulation
-     */
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-            ->fit(Manipulations::FIT_CROP, 150, 150)
-            ->nonQueued();
-    }
-
     public static function statusList(): array
     {
         return [
             'Опубликован' => self::STATUS_ACTIVE,
             'Черновик' => self::STATUS_DRAFT,
-            'Закрыт' => self::STATUS_CLOSED,
+            'Отклонен' => self::STATUS_CLOSED,
             'На модерации' => self::STATUS_MODERATION
         ];
+    }
+
+    public function isClosed(): bool
+    {
+        return $this->status === self::STATUS_CLOSED;
     }
 
     public function scopeActive(Builder $query): Builder
@@ -196,21 +189,21 @@ class Profile extends Model implements HasMedia
 
     public function scopePets(Builder $query): Builder
     {
-        return $query->where('gender','pet');
+        return $query->where('gender', 'pet');
     }
 
     protected function lifeExpectancy(): Attribute
     {
         return new Attribute(
-            get: fn () => Carbon::make($this->date_birth)->format('d.m.Y') . ' - ' .
-                Carbon::make($this->date_death)->format('d.m.Y')
+            get: fn() => Carbon::make($this->date_birth)->format('d.m.Y') . ' - ' .
+            Carbon::make($this->date_death)->format('d.m.Y')
         );
     }
 
     protected function fullName(): Attribute
     {
         return new Attribute(
-            get: fn () => "{$this->first_name} {$this->last_name} {$this->patronymic}"
+            get: fn() => "{$this->first_name} {$this->last_name} {$this->patronymic}"
         );
     }
 
@@ -239,7 +232,7 @@ class Profile extends Model implements HasMedia
 
     public function galleries(): HasMany
     {
-        return $this->hasMany(Gallery::class,'');
+        return $this->hasMany(Gallery::class, '');
     }
 
     public function users(): BelongsTo
@@ -280,5 +273,15 @@ class Profile extends Model implements HasMedia
     public function child(): BelongsTo
     {
         return self::belongsTo(static::class);
+    }
+
+    /**
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     */
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->fit(Manipulations::FIT_CROP, 150, 150)
+            ->nonQueued();
     }
 }
