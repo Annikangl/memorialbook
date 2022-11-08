@@ -19,7 +19,8 @@ class UserService
 
     public function update(User $user, string $username, ?string $email, ?string $phone, ?UploadedFile $avatar): User
     {
-        // TODO
+        $avatarPath = $user->avatar;
+
         if ($avatar) {
             $avatarPath = $this->fileUploader->upload($avatar, User::AVATAR_PATH);
         }
