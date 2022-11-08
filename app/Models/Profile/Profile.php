@@ -240,6 +240,12 @@ class Profile extends Model implements HasMedia
         return $this->BelongsTo(User::class, 'user_id');
     }
 
+    public function owners(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'users_access_profiles')
+            ->withPivot('status');
+    }
+
     public function hobbies(): BelongsToMany
     {
         return $this->belongsToMany(Hobby::class);

@@ -12,6 +12,45 @@
 @import "map.css";
 @import "cabinet/cabinet.css";
 
+.header-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-buttons__lang {
+    width: 44px;
+    margin-right: 12px;
+    border: 1px solid var(--gray);
+    color: var(--dark-gray);
+    transition: var(--normal);
+    background-color: transparent;
+}
+
+.header-buttons__lang:hover {
+    background-color: var(--gray);
+    border-color: var(--gray);
+    color: rgba(32, 30, 31, .8);
+}
+
+.header-buttons__registration, .header-buttons__lang {
+    font: 500 14px sans-serif;
+    letter-spacing: .05em;
+    height: 44px;
+    text-transform: uppercase;
+    border-radius: 7px;
+}
+
+.header-buttons__registration {
+    padding: 0 15.4px;
+}
+
+.header-buttons__menu {
+    display: none;
+}
+
+
+
 *, :before, :after {
     margin: 0;
     padding: 0;

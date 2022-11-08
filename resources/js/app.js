@@ -6,7 +6,7 @@ import './news'
 import  './cemetery'
 import './map'
 import './add_profile'
-
+import './account'
 
 
 /*! For license information please see main.scripts.js.LICENSE.txt */

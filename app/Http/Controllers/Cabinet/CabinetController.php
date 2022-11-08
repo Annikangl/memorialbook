@@ -23,7 +23,15 @@ class CabinetController extends Controller
 
     public function index(User $user): Factory|View|Application
     {
-        return view('cabinet.cabinet', compact('user'));
+        $profiles = $user->profiles()->has('owners')->with('owners')->get();
+
+        $owners = [];
+
+        foreach ($profiles as $profile) {
+            $owners[] = $profile->owners->first();
+        }
+
+        return view('cabinet.cabinet', compact('user', 'owners'));
     }
 
     public function update(User $user, UpdateRequest $request): RedirectResponse
@@ -38,7 +46,7 @@ class CabinetController extends Controller
             );
 
         } catch (\DomainException $exception) {
-            return back()->withErrors($exception->getMessage());
+            return back()->with('message', $exception->getMessage());
         }
 
         session()->flash('message', 'Данные успешно обновлены');
@@ -47,5 +55,13 @@ class CabinetController extends Controller
         return redirect()->route('cabinet.show', [
             'user' => $updatedUser
         ]);
+    }
+
+    public function delete(Request $request)
+    {
+        return redirect()->back();
+//        return response()->json([
+//            'status' => true
+//        ]);
     }
 }

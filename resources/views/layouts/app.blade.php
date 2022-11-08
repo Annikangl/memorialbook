@@ -111,22 +111,22 @@
                         <div class="header__right -small col-auto">
                             <div class="row -small">
                                 <div class="header__language -small col">
-                                    <a class="header-language__button btn btn-outline-secondary"
-                                       href="javascript:void(0)" role="button">RU</a>
+                                    <button type="button" class="header-buttons__lang"
+                                       href="javascript:void(0)" role="button">RU</button>
                                 </div>
                                 <div class="header__personal -small col">
                                     <div class="row -small">
                                         @guest
-                                            <div class="header-personal__item -small -auth col">
-                                                <a class="header-personal__button btn btn-primary" href="#slideout-auth"
-                                                   role="button" data-slideout=""
-                                                   data-slideout-options="{&quot;type&quot;:&quot;auth&quot;}">Вход</a>
-                                            </div>
+{{--                                            <div class="header-personal__item -small -auth col">--}}
+{{--                                                <button class="header-personal__button btn btn-primary" href="#slideout-auth"--}}
+{{--                                                   role="button" data-slideout=""--}}
+{{--                                                   data-slideout-options="{&quot;type&quot;:&quot;auth&quot;}">Вход</button>--}}
+{{--                                            </div>--}}
                                             <div class="header-personal__item -small -register col">
-                                                <a class="header-personal__button btn btn-outline-primary"
+                                                <button class="header-buttons__registration open-registration btn white-btn"
                                                    href="#slideout-register" role="button"
                                                    data-slideout=""
-                                                   data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Регистрация</a>
+                                                   data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Регистрация</button>
                                             </div>
                                         @else
                                             <div class="header-personal__item -small -notifications col">
