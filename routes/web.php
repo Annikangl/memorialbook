@@ -29,6 +29,7 @@ Route::get('/', [LoginController::class, 'showLoginForm'])->name('index');
 Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'cabinet', 'as' => 'cabinet.'], function () {
         Route::get('/{user}', [CabinetController::class, 'index'])->name('show');
+        Route::put('/{user}/update', [CabinetController::class, 'update'])->name('update');
     });
 
 

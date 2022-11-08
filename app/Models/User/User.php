@@ -5,11 +5,13 @@ namespace App\Models\User;
 use App\Models\News\News;
 use App\Models\Profile\Profile;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 
@@ -54,10 +56,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public const AVATAR_PATH = 'uploads/users/avatar';
+
     protected $fillable = [
         'username',
         'email',
         'phone',
+        'avatar',
         'password',
     ];
 
@@ -118,5 +123,12 @@ class User extends Authenticatable
         return $query->whereHas('networks', function (Builder $query) use ($network, $identity) {
             $query->where('network', $network)->where('identity', $identity);
         });
+    }
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => Str::of($this->username)->explode(' ')
+        );
     }
 }
