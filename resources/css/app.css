@@ -2492,10 +2492,10 @@ a.text-dark:focus, a.text-dark:hover {
     top: .5rem
 }
 
-.alert:not(.show) {
-    opacity: 0;
-    pointer-events: none
-}
+/*.alert:not(.show) {*/
+/*    opacity: 0;*/
+/*    pointer-events: none*/
+/*}*/
 
 .alert-primary {
     background: #95b8f4;

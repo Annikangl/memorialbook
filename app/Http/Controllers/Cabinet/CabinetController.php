@@ -41,7 +41,8 @@ class CabinetController extends Controller
             return back()->withErrors($exception->getMessage());
         }
 
-        session()->flash('success', 'Данные успешно обновлены');
+        session()->flash('message', 'Данные успешно обновлены');
+        session()->flash('alert-class', 'alert-success');
 
         return redirect()->route('cabinet.show', [
             'user' => $updatedUser
