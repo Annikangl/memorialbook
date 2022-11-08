@@ -2,7 +2,6 @@
 
 @section('content')
 
-    {{ dump(session('success')) }}
     <section class="edit">
 
         @include('includes.partials.breadcrumbs')
@@ -44,7 +43,11 @@
                     </div>
                 </div>
                 <button type="button" id="input-link" class="button-change-password white-btn btn"
-                        title="Сменить пароль">Смена пароля
+                        title="Сменить пароль"
+                        href="#slideout-restorepass"
+                        data-slideout=""
+                        data-slideout-options="{&quot;type&quot;:&quot;restorepass&quot;,&quot;position&quot;:&quot;top&quot;}">
+                    Смена пароля
                 </button>
                 <a href="#" class="delete-profile" title="Удалить аккаунт">Удалить аккаунт</a>
             </div>
@@ -60,7 +63,7 @@
                         <div class="input-wrap">
                             <span class="input-wrap__title">Имя:</span>
                             <div class="input-form">
-                                <input type="text" class="input-text" name="first_name" value="{{ $user->fullName[1] }}"
+                                <input type="text" class="input-text" name="first_name" value="{{ $user->fullName[1] ?? ''}}"
                                        title=""/>
                             </div>
                         </div>
@@ -88,7 +91,7 @@
                         <div class="input-wrap">
                             <span class="input-wrap__title">Телефон:</span>
                             <div class="input-form">
-                                <input type="email" class="input-text" name="phone" value="{{ $user->phone }}"
+                                <input type="text" class="input-text" name="phone" value="{{ $user->phone }}"
                                        title=""/>
                             </div>
                         </div>
