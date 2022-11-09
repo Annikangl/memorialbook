@@ -22,8 +22,9 @@ class CabinetController extends Controller
         $this->service = $service;
     }
 
-    public function index(User $user): Factory|View|Application
+    public function index(string $slug): Factory|View|Application
     {
+        $user = User::where('slug', $slug)->first();
         $profiles = $user->profiles()->has('owners')->with('owners')->get();
 
         $owners = [];
@@ -38,6 +39,7 @@ class CabinetController extends Controller
     public function update(User $user, UpdateRequest $request): RedirectResponse
     {
         try {
+
             $updatedUser = $this->service->update(
                 $user,
                 $request->get('username'),
@@ -54,7 +56,7 @@ class CabinetController extends Controller
         session()->flash('alert-class', 'alert-success');
 
         return redirect()->route('cabinet.show', [
-            'user' => $updatedUser
+            'slug' => $updatedUser->slug
         ]);
     }
 

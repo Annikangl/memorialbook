@@ -8,6 +8,7 @@ use App\Models\Cemetery\Gallery;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
 use App\Models\Profile\Religion;
+use App\Models\User\User;
 use Database\Seeders\Profile\DeathReasonSeeder;
 use Illuminate\Database\Seeder;
 
@@ -32,15 +33,14 @@ class DatabaseSeeder extends Seeder
 
             ->create();
 
-
-        \DB::table('users')->insert([
-            'username' => 'Shahed_136',
+        User::create([
+            'username' => 'Ivanov Ivan Ivanovich',
             'email' => 'svinpauk78@gmail.com',
             'password' => \Hash::make('test1234'),
         ]);
 
-        \DB::table('users')->insert([
-            'username' => 'Shahed',
+        User::create([
+            'username' => 'Petrov Petr Pen',
             'email' => 'shahed@gmail.com',
             'password' => \Hash::make('test1234'),
         ]);

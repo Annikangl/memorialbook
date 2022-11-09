@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Models\News\News;
 use App\Models\Profile\Profile;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,6 +23,7 @@ use Laravel\Sanctum\HasApiTokens;
  * App\Models\User\User
  *
  * @property int $id
+ * @property string $slug
  * @property string $username
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
@@ -57,7 +59,7 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Sluggable;
 
     public const AVATAR_PATH = 'uploads/users/avatar';
 
@@ -139,5 +141,14 @@ class User extends Authenticatable
         return Attribute::make(
             get: fn() => Str::of($this->username)->explode(' ')
         );
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'username',
+            ]
+        ];
     }
 }
