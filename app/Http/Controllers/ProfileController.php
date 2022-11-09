@@ -12,7 +12,11 @@ use App\Models\Profile\Profile;
 use App\Models\Profile\Religion;
 use App\Services\ProfileService;
 use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -26,14 +30,14 @@ use PhpParser\Node\Stmt\Return_;
  */
 class ProfileController extends Controller
 {
-    private $service;
+    private ProfileService $service;
 
     public function __construct(ProfileService $profileService)
     {
         $this->service = $profileService;
     }
 
-    public function index()
+    public function index(): Factory|View|Application
     {
         $profiles = Profile::query()->orderBy('id')
             ->with('users')
@@ -46,7 +50,7 @@ class ProfileController extends Controller
         return view('tree.index', compact('profiles'));
     }
 
-    public function list()
+    public function list(): Factory|View|Application
     {
         $profiles = Profile::query()
             ->orderBy('date_birth')
@@ -61,7 +65,7 @@ class ProfileController extends Controller
         return view('tree.list', compact('profiles'));
     }
 
-    public function show(string $slug)
+    public function show(string $slug): Factory|View|Application
     {
         $profile = Profile::query()->with(['hobbies', 'religions', 'galleries'])
             ->where('slug', $slug)
@@ -72,7 +76,7 @@ class ProfileController extends Controller
         return view('profile.show', compact('profile', 'relatives'));
     }
 
-    public function create()
+    public function create(): Factory|View|Application
     {
         $profiles = $this->getProfiles();
 
@@ -92,7 +96,7 @@ class ProfileController extends Controller
             compact('profiles','fathers', 'mothers', 'religions', 'genders'));
     }
 
-    public function store(ProfileCreateRequest $request)
+    public function store(ProfileCreateRequest $request): RedirectResponse
     {
         $request->validated();
         try {
@@ -108,7 +112,7 @@ class ProfileController extends Controller
         return redirect()->route('profile.show', $profile->slug);
     }
 
-    public function edit(Profile $profile)
+    public function edit(Profile $profile): Factory|View|Application
     {
         $profiles = $this->getProfiles();
         $religions = Religion::query()->orderBy('id')->get();
@@ -127,7 +131,7 @@ class ProfileController extends Controller
             compact('profile', 'profiles','genders','mothers','fathers', 'religions'));
     }
 
-    public function map(SearchRequest $request)
+    public function map(SearchRequest $request): Factory|View|Application
     {
         $profiles = Profile::active()->filtered()->paginate(30);
 

@@ -28,26 +28,25 @@ class CabinetController extends Controller
         $profiles = $user->profiles()->has('owners')->with('owners')->get();
 
         $owners = [];
-
-        foreach ($profiles as $profile) {
+        $profiles->each(function ($profile) use (&$owners) {
             $owners[] = $profile->owners->first();
-        }
+        });
 
         return view('cabinet.cabinet', compact('user', 'owners'));
     }
 
     public function update(User $user, UpdateRequest $request): RedirectResponse
     {
-        try {
+        $validated_data = $request->validated();
 
+        try {
             $updatedUser = $this->service->update(
                 $user,
-                $request->get('username'),
-                $request->get('email'),
-                $request->get('phone'),
-                $request->file('avatar')
+                $validated_data['username'],
+                $validated_data['email'],
+                $validated_data['phone'],
+                $validated_data['avatar'] ?? null
             );
-
         } catch (\DomainException $exception) {
             return back()->with('message', $exception->getMessage());
         }
