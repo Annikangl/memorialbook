@@ -12,6 +12,7 @@ use App\Models\Profile\Profile;
 use App\Models\Profile\Religion;
 use App\Services\ProfileService;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -73,9 +74,7 @@ class ProfileController extends Controller
 
     public function create()
     {
-        $profiles = Profile::byUser(auth()->id())
-            ->addSelect('gender')
-            ->get();
+        $profiles = $this->getProfiles();
 
         $religions = Religion::query()->orderBy('id')->get();
 
@@ -95,11 +94,15 @@ class ProfileController extends Controller
 
     public function store(ProfileCreateRequest $request)
     {
+        $request->validated();
         try {
             $profile = $this->service->create(\Auth::id(), $request);
             event(new CreateNews($profile, CreateNews::USER_ADDED_PROFILE));
         } catch (\DomainException $exception) {
-            return back()->withErrors($exception->getMessage());
+            return back()->with([
+                'message' => $exception->getMessage(),
+                'alert-class' => 'alert-danger'
+            ]);
         }
 
         return redirect()->route('profile.show', $profile->slug);
@@ -107,10 +110,7 @@ class ProfileController extends Controller
 
     public function edit(Profile $profile)
     {
-        $profiles = Profile::byUser(auth()->id())
-            ->addSelect('gender')
-            ->get();
-
+        $profiles = $this->getProfiles();
         $religions = Religion::query()->orderBy('id')->get();
 
         $fathers = $profiles->filter(function ($item) {
@@ -137,6 +137,13 @@ class ProfileController extends Controller
 
 
         return view('profile.map', compact('profiles', 'count_filters'));
+    }
+
+    private function getProfiles(): array|Collection|\Illuminate\Support\Collection
+    {
+     return Profile::byUser(auth()->id())
+            ->addSelect('gender')
+            ->get();
     }
 
 }

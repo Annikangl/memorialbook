@@ -5,6 +5,7 @@ namespace App\Http\Requests\Profile;
 
 
 use Carbon\Carbon;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
@@ -26,6 +27,14 @@ class ProfileCreateRequest extends FormRequest
     public function authorize(): bool
     {
         return \Auth::check();
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        return redirect()->back()->with([
+            'message' => $validator->errors()->first(),
+            'alert-class' => 'alert-danger'
+        ]);
     }
 
     protected function prepareForValidation()

@@ -6,24 +6,20 @@ let deleteAccount = function () {
     deleteBtn.addEventListener('click', function (event) {
         let isDelete = confirm('Вы уверены что хотите удалить свой аккаунт?');
 
-        let uri = '/cabinet/delete';
-
-        axios.delete(uri, {})
-            .then(function (response) {
-                console.log(response);
-                if (response.status === 200) {
-
-                }
-            }).catch(function (error) {
-            console.log(error);
-        })
-
-
         if (isDelete) {
+            const uri = '/cabinet/delete';
 
-        } else {
-            console.log('NO DELETE');
+            axios.delete(uri, {})
+                .then(function (response) {
+                    console.log(response);
+                    if (response.status === 200) {
+                        location.reload();
+                    }
+                }).catch(function (error) {
+                    alert('Ошибка удаления аккаунта');
+            })
         }
+
     })
 }
 

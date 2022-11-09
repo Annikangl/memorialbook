@@ -9,6 +9,7 @@ use App\Services\UserService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -57,11 +58,14 @@ class CabinetController extends Controller
         ]);
     }
 
-    public function delete(Request $request)
+    public function delete(): JsonResponse
     {
-        return redirect()->back();
-//        return response()->json([
-//            'status' => true
-//        ]);
+        try {
+            $this->service->delete(auth()->user());
+        } catch (\DomainException $exception) {
+            return response()->json(['status' => false, 'message' => $exception->getMessage()]);
+        }
+
+        return response()->json(['status' => true]);
     }
 }

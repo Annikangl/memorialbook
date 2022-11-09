@@ -5,7 +5,9 @@ namespace App\Services;
 
 
 use App\Classes\Files\FileUploader;
+use App\Models\Profile\Profile;
 use App\Models\User\User;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\UploadedFile;
 
 class UserService
@@ -31,5 +33,15 @@ class UserService
             'phone' => $phone,
             'avatar' => $avatarPath
         ]);
+    }
+
+    public function delete(User|Authenticatable $user): void
+    {
+        if (!$user->delete()) {
+            throw new \DomainException('Ошибка удаления аккаунта');
+        }
+
+        $user->profiles()->update(['status' => Profile::STATUS_DRAFT]);
+        \Auth::logout();
     }
 }
