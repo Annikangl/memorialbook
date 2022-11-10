@@ -39,11 +39,7 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
         Route::get('/create', [ProfileController::class, 'create'])->name('create');
-        Route::get('/create_step2', [ProfileController::class, 'create_step2'])->name('create.step2');
-        Route::get('/create_step3', [ProfileController::class, 'create_step3'])->name('create.step3');
         Route::post('/store', [ProfileController::class, 'store'])->name('store');
-        Route::post('/store_step2', [ProfileController::class, 'store_step2'])->name('store.step2');
-        Route::post('/store_step3', [ProfileController::class, 'store_step3'])->name('store.step3');
 
         Route::get('/{profile}/edit', [ProfileController::class, 'edit'])->name('edit');
 
@@ -55,6 +51,9 @@ Route::middleware('auth')->group(function () {
         Route::get('map', [CemeteryController::class, 'map'])->name('search.map');
         Route::get('list', [CemeteryController::class, 'list'])->name('search.list');
         Route::get('show/{slug}', [CemeteryController::class, 'show'])->name('show');
+
+        Route::get('/create', [CemeteryController::class, 'create'])->name('create');
+        Route::post('/store', [CemeteryController::class, 'store'])->name('store');
     });
 
 

@@ -67,6 +67,26 @@
     padding-bottom: 3px;
 }
 
+.input-banner .input-photo-preview, .input-banner .input-photo-load {
+    width: 100%;
+}
+.input-banner .input-photo-preview {
+    margin-bottom: 10px;
+}
+
+.input-photo-preview {
+    height: auto;
+}
+
+.input-banner .input-photo-preview .bg-img {
+    position: static;
+    transform: none;
+}
+
+.input-banner .input-photo-preview ~ .input-photo-load {
+    display: none;
+}
+
 .form__submit {
     line-height: 1.3;
     background-color: var(--blue);

@@ -25,7 +25,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Memorialbook') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
 
@@ -182,18 +182,7 @@
         <main class="main-content" role="main">
 
             <div class="message">
-
                 @include('includes.partials.message')
-
-{{--                @if ($errors->any())--}}
-{{--                    <div class="message alert-danger">--}}
-{{--                        <ul>--}}
-{{--                            @foreach ($errors->all() as $error)--}}
-{{--                                <li>{{ $error }}</li>--}}
-{{--                            @endforeach--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
-{{--                @endif--}}
             </div>
 
             @yield('content')

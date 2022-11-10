@@ -3,7 +3,9 @@ import {Loader} from "google-maps";
 
 //Modal
 
-const searchLocation = async function initMap() {
+const searchLocation = async function initMap(searchInput, coordsInput) {
+    console.log(searchInput, coordsInput);
+
     let markers = [];
 
     const map = new google.maps.Map(document.querySelector(".map"), {
@@ -36,9 +38,9 @@ const searchLocation = async function initMap() {
         geocoder.geocode({ location: latLang })
             .then((response) => {
                 if (response.results[0]) {
-                    console.log(response.results)
-                    document.querySelector('#burial_place_search').value = response.results[0].formatted_address;
-                    document.querySelector('#burial_place_coords').value = JSON.stringify(latLang)
+                    console.log(response.results[0])
+                    searchInput.value = response.results[0].formatted_address;
+                    coordsInput.value = JSON.stringify(latLang)
                 } else {
                     window.alert("No results found");
                 }
@@ -58,12 +60,35 @@ const searchLocation = async function initMap() {
 }
 
 
+let cemeteryAddressModal = function () {
+    const searchInput = document.querySelector('#cemetery_address-search');
+    const coordsInput = document.querySelector('#cemetery_address_coords');
 
-let burialLocationModal = function () {
     const modal = new HystModal({
         linkAttributeName: "data-hystmodal",
         beforeOpen: function (modal) {
-            searchLocation();
+            searchLocation(searchInput, coordsInput);
+        },
+        afterClose: function (modal) {
+            document.querySelector('#cemetery_address').value = searchInput.value;
+        },
+    });
+}
+
+if (document.querySelector('#cemetery_address')) {
+    document.querySelector('.cemeteryAddressModal').addEventListener('click', cemeteryAddressModal)
+    const loader = new Loader(app.globalConfig.gmapsApikey);
+    const google =  loader.load();
+}
+
+let burialLocationModal = function () {
+    const searchInput = document.querySelector('#burial_place_search');
+    const coordsInput = document.querySelector('#burial_place_coords');
+
+    const modal = new HystModal({
+        linkAttributeName: "data-hystmodal",
+        beforeOpen: function (modal) {
+            searchLocation(searchInput, coordsInput);
         },
         afterClose: function (modal) {
             let textSearch = document.querySelector('#burial_place_search').value;
@@ -77,25 +102,6 @@ if (document.querySelector('#burial_place')) {
     const loader = new Loader(app.globalConfig.gmapsApikey);
     const google =  loader.load();
 }
-
-
-//INIT FANCYBOX
-// if (document.querySelector('.gallery')) {
-//     Fancybox.bind(".gallery", {
-//         groupAll: true, // Group all items
-//         Toolbar: {
-//             display: [
-//                 {id: "prev", position: "center"},
-//                 {id: "counter", position: "center"},
-//                 {id: "next", position: "center"},
-//                 "zoom",
-//                 "slideshow",
-//                 "fullscreen",
-//                 "close",
-//             ],
-//         },
-//     });
-// }
 
 
 //CHANGE USER AVATAR
