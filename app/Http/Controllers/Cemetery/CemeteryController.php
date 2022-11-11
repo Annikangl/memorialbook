@@ -6,12 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Cemetery\CreateRequest;
 use App\Http\Requests\Cemetery\SearchRequest;
 use App\Models\Cemetery\Cemetery;
+use App\Services\CemeteryService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 
 class CemeteryController extends Controller
 {
+    private CemeteryService $service;
+
+    public function __construct(CemeteryService $service)
+    {
+        $this->service = $service;
+    }
+
     public function map(SearchRequest $request): Factory|View|Application
     {
         $cemeteries = Cemetery::active()->filtered()->paginate(30);
@@ -51,6 +59,12 @@ class CemeteryController extends Controller
 
     public function store(CreateRequest $request)
     {
-        dd($request->validated());
+        $validated_data = $request->validated();
+
+        try {
+            $cemetery = $this->service->create();
+        } catch (\DomainException $exception) {
+            return back()->with('message', $exception->getMessage());
+        }
     }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('cemeteries', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\User\User::class)->constrained();
             $table->string('title');
             $table->string('title_en')->nullable();
             $table->string('slug')->nullable()->index();

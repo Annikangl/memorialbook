@@ -3,6 +3,7 @@
 namespace Database\Factories\Cemetery;
 
 use App\Models\Cemetery\Cemetery;
+use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -13,6 +14,7 @@ class CemeteryFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::query()->inRandomOrder()->value('id'),
             'title' => $title = $this->faker->text(25),
             'title_en' => str($title)->slug(),
             'subtitle' => $this->faker->sentence(3),

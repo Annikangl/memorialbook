@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        $this->createUsers();
+
         Religion::factory(10)->create();
         Hobby::factory(10)->create();
 
@@ -30,9 +32,11 @@ class DatabaseSeeder extends Seeder
             ->has(Hobby::factory()->count(3))
             ->has(Religion::factory()->count(3))
             ->has(\App\Models\Profile\Gallery::factory()->count(5))
-
             ->create();
+    }
 
+    private function createUsers(): void
+    {
         User::create([
             'username' => 'Ivanov Ivan Ivanovich',
             'email' => 'svinpauk78@gmail.com',
