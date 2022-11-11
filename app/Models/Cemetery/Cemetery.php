@@ -79,7 +79,7 @@ class Cemetery extends Model
     public const AVATAR_PATH = 'uploads/cemeteries/avatar';
     public const BANNER_PATH = 'uploads/cemeteries/banner';
     public const DOCUMENTS_PATH = 'uploads/cemeteries/document';
-    public const GALLERY_PATH = 'uploads/profiles/gallery';
+    public const GALLERY_PATH = 'uploads/cemeteries/gallery';
 
     protected $fillable = [
         'title',
@@ -105,6 +105,16 @@ class Cemetery extends Model
             self::ACCESS_OPEN,
             self::ACCESS_DENIED
         ];
+    }
+
+    public function onModeration(): bool
+    {
+        return $this->status === self::STATUS_MODERATION;
+    }
+
+    public function isClosed(): bool
+    {
+        return $this->status === self::STATUS_CLOSED;
     }
 
     public static function createFromProfile(string $title, array $coords, string $address): self

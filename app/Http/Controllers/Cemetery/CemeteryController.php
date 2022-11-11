@@ -64,9 +64,9 @@ class CemeteryController extends Controller
         try {
             $cemetery = $this->service->create($request->validated(), auth()->user()->id);
         } catch (\DomainException $exception) {
-            return back()->with('message', $exception->getMessage())->withInput($request->validated());
+            return back()->with('message', $exception->getMessage());
         }
 
-        return redirect()->route('cemetery.show', ['slug' => $cemetery->slug]);
+        return redirect()->route('cemetery.show', $cemetery->slug);
     }
 }

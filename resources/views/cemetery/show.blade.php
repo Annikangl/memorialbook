@@ -71,7 +71,7 @@
                         <h4 class="famous-persons__title">Известные личности</h4>
 
                         <ul class="famous-persons-list">
-                            @foreach($famous as $profile)
+                            @forelse($famous as $profile)
                                 <li class="famous-persons__item" data-lat="{{ $profile->latitude }}"
                                     data-lng="{{ $profile->longitude }}">
                                     <div class="famous-persons-img">
@@ -81,7 +81,9 @@
                                     </div>
                                     <span class="famous-persons__name">{{ $profile->full_name }}</span>
                                 </li>
-                            @endforeach
+                            @empty
+                                <p>На этом кладбище пока не отмечены известные личности.</p>
+                            @endforelse
                         </ul>
 
                         <div class="famous-persons__map"></div>

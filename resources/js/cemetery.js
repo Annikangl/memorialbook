@@ -116,6 +116,7 @@ let cemeteryPhotoLength = function () {
         let div = document.createElement('div');
         div.className = 'cemetery-photo__number-hide';
         div.innerHTML = `Смотреть еще ${photos.length - viewPhotosLength} фото`;
+        console.log(photos[1]);
         photos[viewPhotosLength - 1].querySelector('.gallery').append(div);
     }
 
@@ -171,7 +172,7 @@ const cemeteryPageMap = async function initMap() {
 
     const map = new google.maps.Map(document.querySelector(".famous-persons__map"), {
         zoom: 4,
-        center: locations[0],
+        center: locations[0] ?? {lat: 0, lng: 0},
     });
 
     const infoWindow = new google.maps.InfoWindow({
@@ -197,8 +198,6 @@ const cemeteryPageMap = async function initMap() {
 
     new MarkerClusterer({map, markers});
 }
-
-// window.initMap = cemeteryPageMap;
 
 
 if (document.querySelector('.cemetery-menu')) {

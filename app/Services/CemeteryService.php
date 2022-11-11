@@ -49,24 +49,28 @@ class CemeteryService
                ]);
 
                $cemetery->user()->associate($userId);
-
                $cemetery->save();
 
                if (isset($data['cemetery_gallery'])) {
-                   foreach ($data['cemetery_gallery'] as $item) {
-                       $imagePath = $this->fileUploader->upload($item, Cemetery::GALLERY_PATH);
-
-                       $cemetery->galleries()->create([
-                           'cemetery_id' => $cemetery->id,
-                           'item' => $imagePath
-                       ]);
-                   }
+                   $this->uploadGalleries($data['cemetery_gallery'], $cemetery);
                }
 
                return $cemetery;
             });
         } catch (\Exception $exception) {
             throw new \DomainException($exception->getMessage());
+        }
+    }
+
+    private function uploadGalleries(array $files, Cemetery $cemetery): void
+    {
+        foreach ($files as $item) {
+            $imagePath = $this->fileUploader->upload($item, Cemetery::GALLERY_PATH);
+
+            $cemetery->galleries()->create([
+                'cemetery_id' => $cemetery->id,
+                'item' => $imagePath
+            ]);
         }
     }
 }
