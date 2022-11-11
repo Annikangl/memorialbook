@@ -17,7 +17,6 @@ use Illuminate\Validation\Rules\File;
  */
 class CreateRequest extends FormRequest
 {
-
     public function authorize(): bool
     {
         return \Auth::check();
@@ -44,8 +43,12 @@ class CreateRequest extends FormRequest
             'title' => ['required', 'string', 'min:3'],
             'title_en' => ['nullable', 'string', 'min:3'],
             'subtitle' => ['nullable', 'string', 'min:3'],
-            'cemetery_address' => ['nullable', 'string', 'min:5'],
-            'cemetery_address_coords' => [Rule::requiredIf($this->cemetery_address), 'nullable', 'array:lat,lng'],
+            'cemetery_address' => ['required', 'string', 'min:5'],
+            'cemetery_address_coords' => [
+                Rule::requiredIf((bool)$this->get('cemetery_address')),
+                'nullable',
+                'array:lat,lng'
+            ],
             'email' => ['nullable', 'email:dns', 'unique:cemeteries', 'unique:users'],
             'phone' => ['nullable', 'string', 'min:5', 'max:15'],
             'schedule' => ['nullable', 'string'],
@@ -53,7 +56,7 @@ class CreateRequest extends FormRequest
             'settings-public' => Rule::in(Cemetery::getAccessList()),
 
             'avatar' => [
-                Rule::requiredIf(fn () => $this->hasFile('avatar')),
+                'sometimes',
                 File::image()->min(5)->max(10 * 1024),
             ],
             'input-banner' => [
@@ -61,7 +64,7 @@ class CreateRequest extends FormRequest
                 File::image()->min(100)->max(10 * 1024),
             ],
             'cemetery_gallery.*' => [
-                Rule::requiredIf(fn () => $this->get('cemetery_gallery')),
+                Rule::requiredIf(fn () => is_array($this->get('cemetery_gallery'))),
                 File::image()->min(10)->max(10 * 1024),
             ],
         ];

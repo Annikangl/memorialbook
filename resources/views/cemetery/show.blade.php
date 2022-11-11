@@ -4,7 +4,7 @@
     <style>
         .cemetery-bg {
             width: 100%;
-            background: url("{{ asset('storage/uploads/cemeteries/banner/bg.jpg') }}") no-repeat;
+            background: url("{{ asset('storage/' . $cemetery->banner) }}") no-repeat;
             background-size: cover;
             overflow: hidden;
             padding: 25% 0 0;

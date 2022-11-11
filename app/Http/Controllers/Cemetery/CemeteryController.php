@@ -9,7 +9,9 @@ use App\Models\Cemetery\Cemetery;
 use App\Services\CemeteryService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CemeteryController extends Controller
 {
@@ -36,7 +38,7 @@ class CemeteryController extends Controller
         return view('cemetery.list', compact('cemeteries', 'count_filters'));
     }
 
-    public function show(string $slug): Factory|View|Application
+    public function show(string $slug): Factory|\Illuminate\Contracts\View\View|Application
     {
         $cemetery = Cemetery::query()->where('slug', $slug)->with(['profiles','galleries','socials'])->firstOrFail();
         $memorials = $cemetery->profiles()->paginate(3);
@@ -57,14 +59,14 @@ class CemeteryController extends Controller
         return view('cemetery.create.create');
     }
 
-    public function store(CreateRequest $request)
+    public function store(CreateRequest $request): RedirectResponse
     {
-        $validated_data = $request->validated();
-
         try {
-            $cemetery = $this->service->create();
+            $cemetery = $this->service->create($request->validated(), auth()->user()->id);
         } catch (\DomainException $exception) {
-            return back()->with('message', $exception->getMessage());
+            return back()->with('message', $exception->getMessage())->withInput($request->validated());
         }
+
+        return redirect()->route('cemetery.show', ['slug' => $cemetery->slug]);
     }
 }

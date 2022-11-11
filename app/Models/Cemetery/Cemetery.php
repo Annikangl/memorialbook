@@ -3,10 +3,12 @@
 namespace App\Models\Cemetery;
 
 use App\Models\Profile\Profile;
+use App\Models\User\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -74,6 +76,11 @@ class Cemetery extends Model
     public const ACCESS_OPEN = 'Открытый';
     public const ACCESS_DENIED = 'Закрытый';
 
+    public const AVATAR_PATH = 'uploads/cemeteries/avatar';
+    public const BANNER_PATH = 'uploads/cemeteries/banner';
+    public const DOCUMENTS_PATH = 'uploads/cemeteries/document';
+    public const GALLERY_PATH = 'uploads/profiles/gallery';
+
     protected $fillable = [
         'title',
         'title_en',
@@ -125,6 +132,11 @@ class Cemetery extends Model
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('status', self::STATUS_ACTIVE);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function profiles(): HasMany
