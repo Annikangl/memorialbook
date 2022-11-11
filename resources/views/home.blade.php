@@ -16,6 +16,9 @@
                 <li class="news-menu__item">
                     <a href="#" class="news-menu__link">Питомцы</a>
                 </li>
+                <li class="news-menu__item">
+                    <a href="{{ route('cemetery.create') }}" class="news-menu__link">Создать кладбище</a>
+                </li>
                 {{--                <li class="news-menu__item">--}}
                 {{--                    <a href="#" class="news-menu__link">Семейное дерево</a>--}}
                 {{--                </li>--}}

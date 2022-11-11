@@ -92,6 +92,14 @@ class Cemetery extends Model
         'access'
     ];
 
+    public static function getAccessList(): array
+    {
+        return [
+            self::ACCESS_OPEN,
+            self::ACCESS_DENIED
+        ];
+    }
+
     public static function createFromProfile(string $title, array $coords, string $address): self
     {
         return self::create([

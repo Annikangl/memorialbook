@@ -83,7 +83,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">График работы:</span>
             <div class="input-form">
-                <input type="text" class="input-text mask-data"
+                <input type="text" class="input-text"
                        name="schedule"
                        value="{{ old('schedule') }}"
                        title="Расписание">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cemetery;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Cemetery\CreateRequest;
 use App\Http\Requests\Cemetery\SearchRequest;
 use App\Models\Cemetery\Cemetery;
 use Illuminate\Contracts\Foundation\Application;
@@ -48,8 +49,8 @@ class CemeteryController extends Controller
         return view('cemetery.create.create');
     }
 
-    public function store(Request $request)
+    public function store(CreateRequest $request)
     {
-        dd($request);
+        dd($request->validated());
     }
 }

@@ -4,8 +4,6 @@ import {Loader} from "google-maps";
 //Modal
 
 const searchLocation = async function initMap(searchInput, coordsInput) {
-    console.log(searchInput, coordsInput);
-
     let markers = [];
 
     const map = new google.maps.Map(document.querySelector(".map"), {
@@ -38,7 +36,6 @@ const searchLocation = async function initMap(searchInput, coordsInput) {
         geocoder.geocode({ location: latLang })
             .then((response) => {
                 if (response.results[0]) {
-                    console.log(response.results[0])
                     searchInput.value = response.results[0].formatted_address;
                     coordsInput.value = JSON.stringify(latLang)
                 } else {
@@ -88,11 +85,10 @@ let burialLocationModal = function () {
     const modal = new HystModal({
         linkAttributeName: "data-hystmodal",
         beforeOpen: function (modal) {
-            searchLocation(searchInput, coordsInput);
+            searchLocation(searchInput, coordsInput).then(r => console.log('Init map'));
         },
         afterClose: function (modal) {
-            let textSearch = document.querySelector('#burial_place_search').value;
-            document.querySelector('#burial_place').value = textSearch;
+            document.querySelector('#burial_place').value = searchInput.value;
         },
     });
 }
