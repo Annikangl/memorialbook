@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\NetworkController;
 use App\Http\Controllers\Cabinet\CabinetController;
 use App\Http\Controllers\Cemetery\CemeteryController;
+use App\Http\Controllers\Community\CommunityController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,10 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
         Route::get('/create', [App\Http\Controllers\ProfileController::class, 'create'])->name('create');
+    });
+
+    Route::group(['prefix' => 'community', 'as' => 'community.'], function () {
+       Route::get('/{slug}', [CommunityController::class, 'show'])->name('show');
     });
 });
 

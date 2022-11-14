@@ -7,6 +7,7 @@ import  './cemetery'
 import './map'
 import './add_profile'
 import './account'
+import './community/script'
 
 
 /*! For license information please see main.scripts.js.LICENSE.txt */

@@ -11,6 +11,7 @@
 @import "cemeteries/cemetery_card.css";
 @import "map.css";
 @import "cabinet/cabinet.css";
+@import "community/community.css";
 
 .header-buttons {
     display: flex;
@@ -344,12 +345,7 @@ p:empty {
     display: none
 }
 
-.blockquote, .figure, blockquote, embed, figure, iframe, img, object, video {
-    display: block;
-    margin: 1.5rem 0;
-    max-width: 100%;
-    vertical-align: top
-}
+
 
 .blockquote.left, .blockquote.right, .blockquote[align], .figure.left, .figure.right, .figure[align], blockquote.left, blockquote.right, blockquote[align], embed.left, embed.right, embed[align], figure.left, figure.right, figure[align], iframe.left, iframe.right, iframe[align], img.left, img.right, img[align], object.left, object.right, object[align], video.left, video.right, video[align] {
     float: none

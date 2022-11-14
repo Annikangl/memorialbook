@@ -803,16 +803,6 @@
     display: none;
 }
 
-.bg-img {
-    width: 100%;
-    min-height: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
-}
-
 .preview-avatar-wrap .bg-img {
     z-index: 5;
 }
