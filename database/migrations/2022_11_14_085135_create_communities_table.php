@@ -12,7 +12,7 @@ return new class extends Migration
     {
         Schema::create('communities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('author_id')
+            $table->foreignId('owner_id')
                 ->references('id')->on('users')->onDelete('cascade');
 
             $table->string('slug')->nullable()->index();

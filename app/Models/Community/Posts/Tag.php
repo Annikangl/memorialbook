@@ -10,4 +10,6 @@ class Tag extends Model
     use HasFactory;
 
     protected $table = 'community_tags';
+
+    protected $fillable = ['tag'];
 }

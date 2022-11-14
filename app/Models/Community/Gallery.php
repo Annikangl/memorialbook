@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Community\Posts;
+namespace App\Models\Community;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,17 +11,18 @@ class Gallery extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $table = 'community_post_galleries';
+
+    protected $table = 'community_galleries';
 
     protected $fillable = [
-        'post_id',
+        'community_id',
         'item',
-        'extension'
+        'extension',
     ];
 
-    public function post(): BelongsTo
-    {
-        return $this->belongsTo(Post::class);
-    }
 
+    public function community(): BelongsTo
+    {
+        return $this->belongsTo(Community::class);
+    }
 }
