@@ -6,6 +6,7 @@ use App\Http\Controllers\Cabinet\CabinetController;
 use App\Http\Controllers\Cemetery\CemeteryController;
 use App\Http\Controllers\Community\CommunityController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,10 +29,16 @@ Route::get('login/{driver}/callback', [NetworkController::class, 'callback'])->n
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('index');
 
 Route::middleware('auth')->group(function () {
+
     Route::group(['prefix' => 'cabinet', 'as' => 'cabinet.'], function () {
         Route::get('/{slug}', [CabinetController::class, 'index'])->name('show');
         Route::put('/{user}/update', [CabinetController::class, 'update'])->name('update');
         Route::delete('/delete', [CabinetController::class, 'delete'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+        Route::post('/subscribe/community', [UserController::class, 'subscribe'])
+            ->name('community.subscribe');
     });
 
 

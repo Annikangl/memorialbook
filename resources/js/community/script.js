@@ -1,5 +1,6 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
+import axios from "axios";
 
 let communityPhotoLength = function () {
     let photos = document.querySelectorAll('.community-photo__item');
@@ -18,7 +19,6 @@ let communityPhotoLength = function () {
         let div = document.createElement('div');
         div.className = 'photo-hide';
         div.innerHTML = `Смотреть еще ${photos.length - viewPhotosLength} фото`;
-        console.log(photos[viewPhotosLength - 1])
         photos[viewPhotosLength - 1].querySelector('.gallery').append(div);
         photos[viewPhotosLength - 1].classList.add('last-item');
     }
@@ -90,4 +90,47 @@ if (videos) {
         video.addEventListener('click', play);
         bntPlay.addEventListener('click', play);
     }
+}
+
+
+let searchPosts = function () {
+    let btnSearch = document.querySelector('.button-search');
+
+    btnSearch.addEventListener('click', function (event) {
+        const myModal = new HystModal({
+            linkAttributeName: "data-hystmodal",
+        });
+    })
+}
+
+
+if (document.querySelector('.button-search')) {
+    searchPosts();
+}
+
+
+let subscribe = function () {
+    const subscribeBtn = document.querySelector('#community_subscribe');
+
+    subscribeBtn.addEventListener('click', function (event) {
+        let slug = this.getAttribute('data-slug');
+        const url = app.globalConfig.baseUrl + `user/subscribe/community`
+
+        axios.post(url, {
+            slug
+        }).then(function (response) {
+            console.log(response);
+            if (response.status === 200 && response.data.status) {
+                event.target.classList.toggle('blue-btn');
+                event.target.textContent = 'Вы подписаны';
+            }
+        }).catch(function (error) {
+            console.log(error);
+        })
+    })
+}
+
+
+if (document.querySelector('.community_subscribe')) {
+    subscribe();
 }

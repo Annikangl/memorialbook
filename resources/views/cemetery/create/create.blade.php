@@ -62,7 +62,7 @@
         </div>
     </section>
 
-    <x-modal id="cemetery_address_location" class="inner_map" >
+    <x-modal id="cemetery_address_location" class="inner_map" long="hystmodal__window--long">
         <div class="input-wrap" style="margin: 0 0 10px 0;">
             <div class="input-form" >
                 <input type="text" class="input-text" id="cemetery_address-search"

@@ -60,7 +60,7 @@
                     основную информацию профиля.</p>
             </div>
 
-            <x-modal id="burial_place_location" class="inner_map" >
+            <x-modal id="burial_place_location" class="inner_map" long="hystmodal__window--long">
                 <div class="input-wrap" style="margin: 0 0 10px 0;">
                     <div class="input-form" >
                         <input type="text" class="input-text" id="burial_place_search"

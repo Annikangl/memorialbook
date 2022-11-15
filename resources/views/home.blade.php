@@ -4,30 +4,7 @@
     <section class="news">
         <nav class="news-menu-nav">
             <ul class="news-menu">
-                {{--                <li class="news-menu__item">--}}
-                {{--                    <a href="#" class="news-menu__link">Люди</a>--}}
-                {{--                </li>--}}
-                {{--                <li class="news-menu__item">--}}
-                {{--                    <a href="#" class="news-menu__link"> Места</a>--}}
-                {{--                </li>--}}
-                <li class="news-menu__item">
-                    <a href="#" class="news-menu__link">Сообщества</a>
-                </li>
-                <li class="news-menu__item">
-                    <a href="#" class="news-menu__link">Питомцы</a>
-                </li>
-                <li class="news-menu__item">
-                    <a href="{{ route('cemetery.create') }}" class="news-menu__link">Создать кладбище</a>
-                </li>
-                {{--                <li class="news-menu__item">--}}
-                {{--                    <a href="#" class="news-menu__link">Семейное дерево</a>--}}
-                {{--                </li>--}}
-                {{--                <li class="news-menu__item">--}}
-                {{--                    <a href="#" class="news-menu__link">Магазин</a>--}}
-                {{--                </li>--}}
-                <li class="news-menu__item active">
-                    <a href="#" class="news-menu__link">Новости</a>
-                </li>
+                @include('includes.partials.main-menu')
             </ul>
         </nav>
         <div class="news-content">

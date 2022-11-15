@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('community_users', function (Blueprint $table) {
+        Schema::create('community_user', function (Blueprint $table) {
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Community::class)->constrained();
             $table->primary(['user_id','community_id']);

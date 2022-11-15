@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Community\Community;
 use App\Models\News\News;
 use App\Models\Profile\Profile;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -100,6 +101,11 @@ class User extends Authenticatable
     public function news(): HasMany
     {
         return $this->hasMany(News::class,'author_id');
+    }
+
+    public function communities(): BelongsToMany
+    {
+        return $this->belongsToMany(Community::class);
     }
 
     public static function register(string $name, string $email, string $phone, string $password): self
