@@ -5,6 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Cemetery\Cemetery;
 use App\Models\Cemetery\Gallery;
+use App\Models\Community\Community;
+use App\Models\Community\Posts\Post;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
 use App\Models\Profile\Religion;
@@ -32,6 +34,11 @@ class DatabaseSeeder extends Seeder
             ->has(Hobby::factory()->count(3))
             ->has(Religion::factory()->count(3))
             ->has(\App\Models\Profile\Gallery::factory()->count(5))
+            ->create();
+
+        Community::factory(5)
+            ->has(Post::factory(5))
+            ->has(\App\Models\Community\Gallery::factory(5))
             ->create();
     }
 

@@ -117,12 +117,22 @@ let subscribe = function () {
         const url = app.globalConfig.baseUrl + `user/subscribe/community`
 
         axios.post(url, {
-            slug
+            slug,
+            action: event.target.textContent
         }).then(function (response) {
-            console.log(response);
+            let btnText = '';
             if (response.status === 200 && response.data.status) {
                 event.target.classList.toggle('blue-btn');
-                event.target.textContent = 'Вы подписаны';
+
+                if (response.data.action === 'Отписаться') {
+                    btnText = 'Подписаться';
+                } else {
+                    btnText = 'Отписаться'
+                }
+
+                event.target.textContent = btnText;
+            } else {
+                alert(response.data.error);
             }
         }).catch(function (error) {
             console.log(error);
