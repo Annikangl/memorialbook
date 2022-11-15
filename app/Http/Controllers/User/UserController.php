@@ -21,6 +21,7 @@ class UserController extends Controller
     {
         $communitySlug = $request->get('slug');
         $action = $request->get('action');
+        // TODO if (action->isSubscribe())
 
         try {
             $this->service->subscribeOnCommunity($request->user()->id, $communitySlug);

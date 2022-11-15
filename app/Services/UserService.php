@@ -62,6 +62,5 @@ class UserService
     public function unsubscribeOnCommunity(int $userId, Community $community): void
     {
         $community->users()->detach($userId);
-        return;
     }
 }

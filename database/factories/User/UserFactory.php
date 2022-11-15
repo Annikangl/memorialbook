@@ -18,8 +18,8 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'username' => 'Герань-2',
-            'email' => 'svinpauk78@gmail.com',
+            'username' => $this->faker->userName(),
+            'email' => $this->faker->email,
             'email_verified_at' => now(),
             'password' => \Hash::make('test1234'), // password
             'remember_token' => Str::random(10),
