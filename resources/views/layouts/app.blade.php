@@ -37,7 +37,7 @@
     <script data-skip-moving="true">
         window.app = window.app || {};
         window.app.globalConfig = {
-            baseUrl: 'http://memorialbook.loc:8080/',
+            baseUrl: 'http://memorialbook.loc/',
             relPath: './',
             assetsPath: '/assets/media/',
             gmapsApikey: 'AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y'
