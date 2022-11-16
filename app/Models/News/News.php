@@ -31,7 +31,7 @@ class News extends Model
         return $this->hasMany(Gallery::class);
     }
 
-    public function profile()
+    public function profile(): BelongsTo
     {
         return $this->belongsTo(Profile::class);
     }

@@ -27,9 +27,6 @@
 
                                     <img class="tree-list-item-avatar__image" src="{{ asset('storage/'. $profile->avatar) }}" alt="" style="height: 60px">
 
-{{--                                    @foreach($medias as $media)--}}
-{{--                                    <img class="tree-list-item-avatar__image" src="{{$media->getUrl('thumb')}}" alt="">--}}
-{{--                                    @endforeach--}}
                                 </a>
                                 <div class="tree-list-item__info">
                                     <div class="tree-list-item-info__row row">
