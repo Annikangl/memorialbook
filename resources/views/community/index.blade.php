@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    <title>Мои сообщества</title>
+    Мои сообщества
 @endsection
 
 @section('content')

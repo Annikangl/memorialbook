@@ -23,7 +23,7 @@ class CommunityController extends Controller
     public function show(string $slug): Factory|View|Application
     {
         $community = Community::query()->with(['posts' => function ($query) {
-            $query->with(['author']);
+            $query->with(['author', 'galleries']);
         }, 'galleries', 'users'])
             ->where('slug', $slug)->first();
 
