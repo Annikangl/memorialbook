@@ -104,7 +104,6 @@ if (document.querySelector('.button-search')) {
     searchPosts();
 }
 
-
 let subscribe = function () {
     const subscribeBtn = document.querySelector('#community_subscribe');
 
@@ -134,9 +133,6 @@ let subscribe = function () {
 if (document.querySelector('.community_subscribe')) {
     subscribe();
 }
-
-
-
 
 let checkMenuContent = (menu, blocks) => {
     let items = menu.children;

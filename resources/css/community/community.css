@@ -1,4 +1,46 @@
 
+.cemetery-menu, .community-nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    top: 1px;
+    margin-top: 40px;
+}
+
+.cemetery-menu__item, .community-nav__item {
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 14px 24px;
+    border-radius: 7px 7px 0 0;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--normal);
+    border-bottom: none;
+    color: rgba(32, 30, 31, .7);
+    cursor: pointer;
+}
+
+.cemetery-menu__item.current, .community-nav__item.current {
+    border-color: var(--light-gray);
+    background-color: var(--gray);
+    color: var(--black);
+}
+
+.cemetery-menu__item:hover, .community-nav__item:hover {
+    color: var(--black);
+}
+
+.community-nav {
+    margin: 0;
+    background-color: #fff;
+    padding: 0 var(--content-size);
+    top: 0;
+}
+
+
 /* community
 ---------------*/
 .community {
@@ -145,46 +187,14 @@
 
 .community-preview__logo {
     grid-column: 1/2;
-    grid-row: 1/4;
+    grid-row: 1/5;
 }
 
 .followers-wrap {
     margin-top: 22px;
 }
 
-.community-nav {
-    width: 100%;
-    padding: 35px var(--content-size) 0;
-    background-color: #fff;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    border-bottom: 1px solid #E5E8EB;
-}
-
-.community-nav__item {
-    padding: 17px 23px;
-    background-color: transparent;
-    border: 1px solid transparent;
-    border-radius: 8px 8px 0 0;
-    transition: var(--normal);
-    border-bottom: none;
-    position: relative;
-    cursor: pointer;
-    top: 1px;
-    font: 600 18px/131.5% 'Lato', sans-serif;
-    color: var(--black);
-    opacity: 0.7;
-}
-
-.community-nav__item.current {
-    border-color: #E5E8EB;
-    background-color: var(--gray);
-    opacity: 1;
-}
-
 .community-content {
-    display: grid;
     grid-template-columns: repeat(2, 690px);
     grid-column-gap: 20px;
     padding: 30px var(--content-size) 0;
@@ -334,7 +344,7 @@
     border-radius: 6px;
 }
 
-.btn-play-video {
+.btn-play-video, .community-photos-list__link svg {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -345,7 +355,11 @@
     visibility: visible;
 }
 
-.btn-play-video:hover {
+.community-photos-list__link svg {
+    width: 52px;
+}
+
+.btn-play-video:hover, .community-photos-list__link:hover svg {
     transform: translate(-50%, -50%) scale(1.05);
 }
 
@@ -587,4 +601,237 @@
     letter-spacing: -0.2px;
     color: #4F4F4F;
     font: 400 14px/22px "Lato", sans-serif;
+}
+
+.community-content-left, .community-content-right {
+    width: 100%;
+}
+
+.community-photos, .community-content {
+    display: none;
+}
+
+.community-photos.current {
+    display: flex;
+}
+
+.community-content.current {
+    display: grid;
+}
+
+.community-photos {
+    padding: 30px var(--content-size) 0;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.community-photos-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 14px 18px;
+    padding-bottom: 30px;
+}
+
+.community-photos-list__item {
+    width: 100%;
+}
+
+.community-photos-list__link {
+    position: relative;
+    width: 100%;
+    padding-top: 69.8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+
+/* @media
+---------------*/
+@media screen and (max-width: 1430px) {
+    .community-content {
+        padding: 30px 20px 0;
+        grid-template-columns: 45% 50%;
+    }
+
+    .community-nav {
+        padding: 35px 20px 0;
+    }
+
+    .community-preview {
+        padding: 30px 20px 35px;
+    }
+
+    .article-profile__img {
+        width: 100%;
+    }
+
+    .community-photos {
+        padding: 30px 20px 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .cemetery-menu__item, .community-nav__item {
+        font-size: 14px;
+        padding: 7px 12px;
+    }
+
+    .community-content, .community-preview {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .community-preview {
+        align-items: flex-start;
+    }
+
+    .community-preview-title {
+        width: 100%;
+    }
+
+    .community-preview-buttons {
+        flex-direction: row-reverse;
+        margin: 15px 0 0;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .button-search {
+        margin: 0 0 0 10px;
+    }
+
+
+    .article-profile__img {
+        height: auto;
+        padding-top: 135%;
+    }
+
+    .community-photos-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .community-preview-buttons button:not(.button-search) {
+        width: calc(100% - 54px);
+    }
+
+    .article-author {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .cemetery-menu__item, .community-nav__item {
+        padding: 5px 10px;
+    }
+
+    .community-preview-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .community-name {
+        margin-top: 15px;
+    }
+
+    .community-photos-list {
+        grid-gap: 10px;
+    }
+
+    .community-photos-list__link svg {
+        width: 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .community-nav {
+        padding-top: 5px;
+    }
+
+    .cemetery-menu:before, .community-nav:before {
+        content: "";
+        background: url("../img/arrow.svg") no-repeat center center;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 14px;
+        height: 8px;
+        z-index: 10;
+        transition: var(--normal);
+        transform: rotate(0);
+    }
+
+    .cemetery-menu, .community-nav {
+        flex-direction: column;
+        justify-content: flex-start;
+        position: relative;
+        border: 1px solid var(--light-gray);
+        background-color: var(--gray);
+        border-bottom: none;
+        border-radius: 7px 7px 0 0;
+        cursor: pointer;
+    }
+
+    .cemetery-menu.open:before, .community-nav.open:before {
+        transform: rotate(180deg);
+    }
+
+    .cemetery-menu__item, .community-nav__item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        justify-content: flex-start;
+        opacity: 0;
+        visibility: hidden;
+        background-color: transparent;
+        border: none;
+    }
+
+    .cemetery-menu.open .cemetery-menu__item, .cemetery-menu__item.current, .community-nav.open .community-nav__item,
+    .community-nav__item.current {
+        opacity: 1;
+        visibility: visible;
+        position: static;
+        z-index: 1;
+    }
+
+    .cemetery-menu__item.current, .community-nav__item.current {
+        order: 1;
+    }
+
+    .community-name {
+        font-size: 19px;
+        line-height: 1;
+    }
+
+    .community-country {
+        font-size: 14px;
+    }
+
+    .followers-number {
+        margin: 0 0 5px 0;
+    }
+
+    .article-profile__item {
+        width: 110px;
+    }
+
+    .article-profile__img {
+        height: 150px;
+    }
+
 }

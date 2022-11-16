@@ -8,6 +8,7 @@ use App\Models\User\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class CommunityController extends Controller
@@ -21,7 +22,9 @@ class CommunityController extends Controller
 
     public function show(string $slug): Factory|View|Application
     {
-        $community = Community::query()->with(['posts', 'galleries', 'users'])
+        $community = Community::query()->with(['posts' => function ($query) {
+            $query->with(['author']);
+        }, 'galleries', 'users'])
             ->where('slug', $slug)->first();
 
         $followers = $community->users()->paginate(7);
