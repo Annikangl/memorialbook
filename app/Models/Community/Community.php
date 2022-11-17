@@ -3,6 +3,7 @@
 namespace App\Models\Community;
 
 use App\Models\Community\Posts\Post;
+use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
@@ -67,6 +68,11 @@ class Community extends Model
     {
         return $this->belongsToMany(User::class)
             ->as('subscribers');
+    }
+
+    public function profiles(): BelongsToMany
+    {
+        return $this->belongsToMany(Profile::class);
     }
 
     public function sluggable(): array

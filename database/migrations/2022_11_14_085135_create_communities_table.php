@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Community\Community;
+use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -29,6 +30,12 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Community::class)->constrained();
             $table->primary(['user_id','community_id']);
+        });
+
+        Schema::create('community_profile', function (Blueprint $table) {
+            $table->foreignIdFor(Profile::class)->constrained();
+            $table->foreignIdFor(Community::class)->constrained();
+            $table->primary(['profile_id','community_id']);
         });
 
         Schema::create('community_galleries', function (Blueprint $table) {
