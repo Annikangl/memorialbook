@@ -12,22 +12,32 @@ class CommunityController extends Controller
 {
     public function index(): Factory|View|Application
     {
-        $communities = Community::byUser(auth()->id())->paginate(15);
+        $communities = Community::query()->paginate(4);
 
         return view('community.index', compact('communities'));
     }
 
     public function show(string $slug): Factory|View|Application
     {
-        $community = Community::query()->with(['posts' => function ($query) {
-            $query->with(['author', 'galleries']);
-        }, 'galleries', 'users'])
+        /** @var Community $community */
+        $community = Community::query()->with(
+            [
+                'profiles', 'galleries', 'users',
+                'posts' => function ($query) {
+                    $query->with(['author', 'galleries']);
+                },
+            ]
+        )
             ->where('slug', $slug)->first();
 
         $followers = $community->users()->paginate(7);
         $followersCount = $community->users->count();
 
+        $videos = $community->galleries->filter(function ($item) {
+           return $item->extension === 'mp4';
+        });
+
         return view('community.show',
-            compact('community', 'followersCount', 'followers'));
+            compact('community', 'followersCount', 'followers', 'videos'));
     }
 }

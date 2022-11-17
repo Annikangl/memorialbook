@@ -23,11 +23,11 @@ class ProfileFactory extends Factory
             'patronymic' => $this->faker->name(),
             'avatar' => $this->faker->randomElement(
                 [
-                    'uploads/profiles/avatar/avatar-1.jpg',
-                    'uploads/profiles/avatar/avatar-2.jpg',
-                    'uploads/profiles/avatar/avatar-3.jpg',
-                    'uploads/profiles/avatar/avatar-4.jpg',
-                    'uploads/profiles/avatar/avatar-5.jpg',
+                    'uploads/profiles/avatar/avatar-1.png',
+                    'uploads/profiles/avatar/avatar-2.png',
+                    'uploads/profiles/avatar/avatar-3.png',
+                    'uploads/profiles/avatar/avatar-4.png',
+                    'uploads/profiles/avatar/avatar-5.png',
                 ]
             ),
             'description' => $this->faker->text(),

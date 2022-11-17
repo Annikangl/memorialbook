@@ -118,7 +118,7 @@ let subscribe = function () {
             let btnText = '';
             if (response.status === 200 && response.data.status) {
                 event.target.classList.toggle('blue-btn');
-
+                event.target.classList.add('white-btn');
                 event.target.textContent = response.data.action;
             } else {
                 alert(response.data.error);

@@ -75,6 +75,16 @@ class Community extends Model
         return $this->belongsToMany(Profile::class);
     }
 
+    public function hasVideo(): bool
+    {
+        return $this->galleries()->where('extension', 'mp4')->exists();
+    }
+
+    public function isSubscribe(int $userId): bool
+    {
+        return $this->users()->where('id', $userId)->exists();
+    }
+
     public function sluggable(): array
     {
         return [

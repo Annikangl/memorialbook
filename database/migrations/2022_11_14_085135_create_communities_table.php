@@ -58,6 +58,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->boolean('pinned')->default(0);
+            $table->integer('reposts')->default(0);
 
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
