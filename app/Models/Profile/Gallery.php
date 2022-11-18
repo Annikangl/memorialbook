@@ -35,7 +35,7 @@ class Gallery extends Model
 {
     use HasFactory;
 
-    protected $table = 'profile_gallery';
+    protected $table = 'profile_galleries';
 
     protected $fillable = ['profile_id', 'item', 'item_sm', 'extension'];
 

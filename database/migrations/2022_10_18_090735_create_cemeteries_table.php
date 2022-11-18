@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Cemetery\Cemetery;
+use App\Models\User\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,9 @@ return new class extends Migration
     {
         Schema::create('cemeteries', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User\User::class)->constrained();
+
+            $table->foreignIdFor(User::class)->constrained();
+
             $table->string('title');
             $table->string('title_en')->nullable();
             $table->string('slug')->nullable()->index();
@@ -45,7 +48,7 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->string('item')->nullable();
+            $table->string('item');
         });
 
         Schema::create('cemetery_documents', function (Blueprint $table) {
@@ -55,7 +58,7 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->string('file')->nullable();
+            $table->string('file');
         });
 
         Schema::create('cemetery_socials', function (Blueprint $table) {
@@ -76,7 +79,8 @@ return new class extends Migration
     public function down()
     {
         if (app()->isLocal()) {
-            Schema::dropIfExists('cemetery_gallery');
+            Schema::dropIfExists('cemetery_socials');
+            Schema::dropIfExists('cemetery_galleries');
             Schema::dropIfExists('cemetery_documents');
             Schema::dropIfExists('cemeteries');
         }

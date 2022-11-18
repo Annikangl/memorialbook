@@ -7,14 +7,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
-        Schema::create('profile_gallery', function (Blueprint $table) {
+        Schema::create('profile_galleries', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Profile::class)
                 ->constrained()
@@ -36,7 +32,7 @@ return new class extends Migration
     public function down()
     {
         if (app()->isLocal()) {
-            Schema::dropIfExists('profile_gallery');
+            Schema::dropIfExists('profile_galleries');
         }
     }
 };

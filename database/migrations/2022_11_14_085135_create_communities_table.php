@@ -7,14 +7,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('communities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('owner_id')
-                ->references('id')->on('users')->onDelete('cascade');
+                ->references('id')->on('users')
+                ->cascadeOnDelete();
 
             $table->string('slug')->nullable()->index();
             $table->string('title');
@@ -29,13 +29,13 @@ return new class extends Migration
         Schema::create('community_user', function (Blueprint $table) {
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Community::class)->constrained();
-            $table->primary(['user_id','community_id']);
+            $table->primary(['user_id', 'community_id']);
         });
 
         Schema::create('community_profile', function (Blueprint $table) {
             $table->foreignIdFor(Profile::class)->constrained();
             $table->foreignIdFor(Community::class)->constrained();
-            $table->primary(['profile_id','community_id']);
+            $table->primary(['profile_id', 'community_id']);
         });
 
         Schema::create('community_galleries', function (Blueprint $table) {
@@ -43,6 +43,7 @@ return new class extends Migration
             $table->foreignIdFor(Community::class)
                 ->constrained()
                 ->cascadeOnDelete();
+
             $table->string('item');
             $table->string('extension');
         });
@@ -50,7 +51,8 @@ return new class extends Migration
         Schema::create('community_posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id')
-                ->references('id')->on('users')->onDelete('cascade');
+                ->references('id')->on('users')
+                ->cascadeOnDelete();
             $table->foreignIdFor(Community::class)
                 ->constrained()
                 ->cascadeOnDelete();
@@ -67,7 +69,9 @@ return new class extends Migration
         Schema::create('community_post_galleries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id')
-                ->references('id')->on('community_posts')->onDelete('cascade');
+                ->references('id')->on('community_posts')
+                ->cascadeOnDelete();
+
             $table->string('item');
             $table->string('extension');
         });
@@ -81,9 +85,12 @@ return new class extends Migration
         Schema::create('community_post_tags', function (Blueprint $table) {
             $table->id();
             $table->foreignId('post_id')
-                ->references('id')->on('community_posts')->onDelete('cascade');
+                ->references('id')->on('community_posts')
+                ->cascadeOnDelete();
+
             $table->foreignId('tag_id')
-                ->references('id')->on('community_tags')->onDelete('cascade');
+                ->references('id')->on('community_tags')
+                ->cascadeOnDelete();
         });
     }
 

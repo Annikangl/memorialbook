@@ -3,8 +3,10 @@
 namespace Database\Factories\Profile;
 
 use App\Models\Cemetery\Cemetery;
+use App\Models\Profile\DeathReason;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Profile;
+use App\Models\User\User;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -18,9 +20,14 @@ class ProfileFactory extends Factory
     {
         return [
             'cemetery_id' => Cemetery::query()->inRandomOrder()->value('id'),
+            'user_id' => User::query()->inRandomOrder()->value('id'),
+            'spouse_id' =>  null,
+            'child_id' =>  null,
+            'mother_id' =>  null,
+            'father_id' =>  null,
+
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-            'patronymic' => $this->faker->name(),
             'avatar' => $this->faker->randomElement(
                 [
                     'uploads/profiles/avatar/avatar-1.png',
@@ -38,15 +45,11 @@ class ProfileFactory extends Factory
             'burial_place' => $this->faker->address(),
             'latitude' => $this->faker->latitude(),
             'longitude' => $this->faker->longitude(),
-            'death_reason' => null,
+            'death_reason' => DeathReason::query()->inRandomOrder()->value('title'),
             'death_certificate' => null,
             'status' => Profile::STATUS_ACTIVE,
             'moderators_comment' => null,
             'access' => null,
-            'spouse_id' =>  null,
-            'child_id' =>  null,
-            'mother_id' =>  null,
-            'father_id' =>  null,
             'published_at' => Carbon::now()
         ];
     }

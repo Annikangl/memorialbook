@@ -4,8 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
+
     public function up()
     {
         Schema::create('religions', function (Blueprint $table) {
@@ -23,9 +23,39 @@ return new class extends Migration
 
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
+
+            $table->foreignId('user_id')
+                ->references('id')
+                ->on('users');
+
+            $table->foreignId('mother_id')->nullable()
+                ->references('id')
+                ->on('profiles')
+                ->nullOnDelete();
+
+            $table->foreignId('father_id')
+                ->nullable()
+                ->references('id')
+                ->on('profiles')
+                ->nullOnDelete();
+
+            $table->foreignId('spouse_id')->nullable()
+                ->references('id')
+                ->on('profiles')
+                ->nullOnDelete();
+
+            $table->foreignId('child_id')->nullable()
+                ->references('id')
+                ->on('profiles')
+                ->nullOnDelete();
+
+            $table->foreignId('religion_id')->nullable()
+                ->references('id')
+                ->on('religions')
+                ->nullOnDelete();
+
             $table->string('first_name');
-            $table->string('last_name')->nullable();
+            $table->string('last_name');
             $table->string('patronymic')->nullable();
             $table->string('slug')->nullable()->index();
             $table->text('description')->nullable();
@@ -41,53 +71,27 @@ return new class extends Migration
             $table->string('death_certificate')->nullable();
             $table->string('religious_id')->nullable();
 
-            $table->string('status',16)->nullable();
+            $table->string('status', 16)->nullable();
             $table->string('moderators_comment')->nullable();
             $table->string('access')->nullable();
-
-            $table->unsignedBigInteger('mother_id')->nullable();
-            $table->unsignedBigInteger('father_id')->nullable();
-            $table->unsignedBigInteger('spouse_id')->nullable();
-            $table->unsignedBigInteger('child_id')->nullable();
-
-            //TODO не забыть убрать nullable and cascade
-
-
-            $table->foreign('user_id')->references('id')->on('users');
-
-            $table->foreign('mother_id')->references('id')->on('profiles')
-                ->onDelete('CASCADE');
-            $table->foreign('father_id')->references('id')->on('profiles')
-                ->onDelete('CASCADE');
-            $table->foreign('spouse_id')->references('id')->on('profiles')
-                ->onDelete('CASCADE');
 
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
 
-        Schema::create('religion_profile', function (Blueprint $table) {
-            $table->id();
-
-            $table->bigInteger('profile_id')->unsigned();
-            $table->foreign('profile_id')->references('id')->on('profiles')
-                ->onDelete('CASCADE');
-
-            $table->bigInteger('religion_id')->unsigned();
-            $table->foreign('religion_id')->references('id')->on('religions')
-                ->onDelete('CASCADE');
-        });
 
         Schema::create('hobby_profile', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('profile_id')->unsigned();
-            $table->foreign('profile_id')->references('id')->on('profiles')
-                ->onDelete('CASCADE');
+            $table->foreignId('profile_id')
+                ->references('id')
+                ->on('profiles')
+                ->cascadeOnDelete();
 
-            $table->bigInteger('hobby_id')->unsigned();
-            $table->foreign('hobby_id')->references('id')->on('hobbies')
-                ->onDelete('CASCADE');
+            $table->foreignId('hobby_id')
+                ->references('id')
+                ->on('hobbies')
+                ->cascadeOnDelete();
         });
     }
 

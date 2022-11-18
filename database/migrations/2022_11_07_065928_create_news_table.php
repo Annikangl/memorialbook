@@ -1,31 +1,28 @@
 <?php
 
+use App\Models\News\News;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+
+    public function up(): void
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('author_id')->references('id')->on('users');
-            $table->unsignedBigInteger('profile_id')->nullable()->references('id')->on('profiles');
+            $table->foreignId('author_id')->references('id')->on('users');
+            $table->foreignId('profile_id')->nullable()->references('id')->on('profiles');
             $table->string('title');
             $table->text('content')->nullable();
 
             $table->timestamps();
         });
 
-        Schema::create('news_gallery', function (Blueprint $table) {
+        Schema::create('news_galleries', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\News\News::class)
+            $table->foreignIdFor(News::class)
                 ->constrained()
                 ->cascadeOnDelete();
 
@@ -33,13 +30,12 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+
+    public function down(): void
     {
-        Schema::dropIfExists('news');
+        if (!app()->isProduction()) {
+            Schema::dropIfExists('news_galleries');
+            Schema::dropIfExists('news');
+        }
     }
 };

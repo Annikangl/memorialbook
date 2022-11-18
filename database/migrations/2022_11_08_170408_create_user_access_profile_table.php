@@ -1,36 +1,32 @@
 <?php
 
+use App\Models\Profile\Profile;
+use App\Models\User\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+
+    public function up(): void
     {
-        Schema::create('users_access_profiles', function (Blueprint $table) {
+        Schema::create('available_profile_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\User\User::class)
+            $table->foreignIdFor(User::class)
                 ->constrained();
-            $table->foreignIdFor(\App\Models\Profile\Profile::class)
+            $table->foreignIdFor(Profile::class)
                 ->constrained();
+
             $table->string('status', 30);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('user_access_profile');
+        if (!app()->isProduction()) {
+            Schema::dropIfExists('available_profile_user');
+        }
     }
 };

@@ -82,32 +82,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function networks(): HasMany
-    {
-        return $this->hasMany(Network::class);
-    }
-
-    public function profiles(): HasMany
-    {
-        return $this->hasMany(Profile::class);
-    }
-
-    public function availableProfiles(): BelongsToMany
-    {
-        return $this->belongsToMany(Profile::class, 'users_access_profiles')
-            ->withPivot('status', 'created_at');
-    }
-
-    public function news(): HasMany
-    {
-        return $this->hasMany(News::class,'author_id');
-    }
-
-    public function communities(): BelongsToMany
-    {
-        return $this->belongsToMany(Community::class);
-    }
-
     public static function register(string $name, string $email, string $phone, string $password): self
     {
         return static::create([
@@ -135,7 +109,7 @@ class User extends Authenticatable
         return $user;
     }
 
-    public function scopeByNetwork(Builder $query, string $network, string $identity)
+    public function scopeByNetwork(Builder $query, string $network, string $identity): Builder
     {
         return $query->whereHas('networks', function (Builder $query) use ($network, $identity) {
             $query->where('network', $network)->where('identity', $identity);
@@ -156,5 +130,31 @@ class User extends Authenticatable
                 'source' => 'username',
             ]
         ];
+    }
+
+    public function networks(): HasMany
+    {
+        return $this->hasMany(Network::class);
+    }
+
+    public function profiles(): HasMany
+    {
+        return $this->hasMany(Profile::class);
+    }
+
+    public function availableProfiles(): BelongsToMany
+    {
+        return $this->belongsToMany(Profile::class, 'available_profile_user')
+            ->withPivot('status', 'created_at');
+    }
+
+    public function news(): HasMany
+    {
+        return $this->hasMany(News::class,'author_id');
+    }
+
+    public function communities(): BelongsToMany
+    {
+        return $this->belongsToMany(Community::class);
     }
 }

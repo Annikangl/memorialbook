@@ -15,13 +15,16 @@ return new class extends Migration
 
         Schema::create('roles_user', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('role_id')->unsigned();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('CASCADE');
+            $table->foreignId('user_id')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete();
 
-            $table->timestamps();
+            $table->foreignId('role_id')
+                ->references('id')
+                ->on('roles')
+                ->cascadeOnDelete();
         });
     }
 
