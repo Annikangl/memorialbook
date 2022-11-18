@@ -8,6 +8,8 @@ use App\Models\Cemetery\Gallery;
 use App\Models\Community\Community;
 use App\Models\Community\Posts\Post;
 use App\Models\Profile\Hobby;
+use App\Models\Profile\Pet;
+use App\Models\Profile\PetGallery;
 use App\Models\Profile\Profile;
 use App\Models\Profile\Religion;
 use App\Models\User\User;
@@ -34,6 +36,10 @@ class DatabaseSeeder extends Seeder
             ->has(Hobby::factory()->count(3))
             ->has(Religion::factory()->count(3))
             ->has(\App\Models\Profile\Gallery::factory()->count(5))
+            ->create();
+
+        Pet::factory(15)
+            ->has(PetGallery::factory()->count(5))
             ->create();
 
         Community::factory(5)
