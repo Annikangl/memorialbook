@@ -12,7 +12,7 @@ use Illuminate\Validation\Rules\File;
 
 /**
  * Class ProfileCreateRequest
- * @package App\Http\Requests\Profile
+ * @package App\Http\Requests\Human
  *
  * @property string $date_birth
  * @property string $date_death

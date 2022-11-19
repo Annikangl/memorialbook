@@ -1,18 +1,17 @@
 <?php
 
-use App\Models\Profile\Profile;
+use App\Models\Profile\Human\Human;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
-    public function up()
+    public function up(): void
     {
-        Schema::create('profile_galleries', function (Blueprint $table) {
+        Schema::create('human_galleries', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Profile::class)
+            $table->foreignIdFor(Human::class)
                 ->constrained()
                 ->cascadeOnDelete();
 
@@ -24,15 +23,10 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         if (app()->isLocal()) {
-            Schema::dropIfExists('profile_galleries');
+            Schema::dropIfExists('human_galleries');
         }
     }
 };

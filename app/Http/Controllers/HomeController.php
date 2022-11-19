@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\News\News;
-use App\Models\Profile\Profile;
+use App\Models\Profile\Human\Human;
+use App\Models\Profile\Pet\Pet;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -18,18 +18,17 @@ class HomeController extends Controller
 
     public function index(): Factory|View|Application
     {
-        $profiles = Profile::byUser(auth()->id())->addSelect('status')->get();
+        $humans = Human::byUser(auth()->id())->addSelect('status')->get();
+        $pets = Pet::byUser(auth()->id())->get();
 
-        $relatives = Profile::byUser(auth()->id())
+        $relatives = Human::byUser(auth()->id())
             ->withRelatives()->get();
-
-        $pets = Profile::pets()->get();
 
         $news = News::with(['author','galleries','profile'])
             ->orderByDesc('created_at')
             ->get();
 
         return view('home',
-            compact('profiles','relatives', 'pets', 'news'));
+            compact('humans','relatives', 'pets', 'news'));
     }
 }

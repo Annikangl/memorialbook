@@ -1,12 +1,13 @@
 <?php
 
-namespace Database\Factories\Profile;
+namespace Database\Factories\Profile\Pet;
 
+use App\Models\Profile\DeathReason;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Profile\Pet>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Human\Pet>
  */
 class PetFactory extends Factory
 {
@@ -17,7 +18,9 @@ class PetFactory extends Factory
     {
         return [
             'user_id' => User::query()->inRandomOrder()->value('id'),
-            'name' => $this->faker->name(),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'description' => $this->faker->realText(),
             'breed' => $this->faker->words(2, true),
             'avatar' => $this->faker->randomElement(
                 [
@@ -26,8 +29,9 @@ class PetFactory extends Factory
                 ]
             ),
             'banner' => 'uploads/pets/banner.jpg',
-            'birth_date' => now()->subYears(random_int(1,10)),
-            'death_date' => now()->addYears(10),
+            'date_birth' => now()->subYears(random_int(1,10)),
+            'date_death' => now()->addYears(10),
+            'death_reason' => DeathReason::query()->inRandomOrder()->value('title'),
             'facebook' => 'https://facebook.com',
         ];
     }

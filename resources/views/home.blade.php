@@ -10,7 +10,7 @@
         <div class="news-content">
             <div class="news-wrap">
                 <div class="profiles-title-wrap">
-                    <h3 class="profiles-title">Ваши профили ({{ $profiles->count() }})</h3>
+                    <h3 class="profiles-title">Ваши профили ({{ $humans->count() }})</h3>
                     <div class="profiles-title-arrows">
                         <button type="button" class="arrows-left">
                             <svg width="9" height="13" viewBox="0 0 9 13" fill="none"
@@ -42,13 +42,13 @@
                                 <span class="profile-text">Создать профиль</span>
                             </a>
                         </li>
-                        @forelse($profiles as $profile)
+                        @forelse($humans as $human)
                             <li class="list-profiles__item swiper-slide">
                                 <div class="list-profiles-img-wrap">
                                     <div class="list-profiles__img">
-                                        <img src="{{ asset('storage/' . $profile->avatar) }}" class="bg-img"
-                                             alt="{{ $profile->full_name }}"
-                                             title="{{ $profile->full_name }}"/>
+                                        <img src="{{ asset('storage/' . $human->avatar) }}" class="bg-img"
+                                             alt="{{ $human->full_name }}"
+                                             title="{{ $human->full_name }}"/>
                                     </div>
                                     <a href="#" class="list-profiles-mark" title="Редактировать профиль">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -59,9 +59,9 @@
                                         </svg>
                                     </a>
                                 </div>
-                                <span class="profile-time">{{ $profile->yearBirth}} {{ $profile->yearDeath }} г.</span>
-                                <a href="{{ route('profile.show', ['slug' => $profile->slug]) }}"
-                                   class="profile-text">{{ $profile->full_name }}</a>
+                                <span class="profile-time">{{ $human->yearBirth}} {{ $human->yearDeath }} г.</span>
+                                <a href="{{ route('profile.show', ['slug' => $human->slug]) }}"
+                                   class="profile-text">{{ $human->full_name }}</a>
                             </li>
                         @empty
 
@@ -145,9 +145,11 @@
                                     <div class="list-profiles__img">
                                         <img src="{{ asset('storage/' . $pet->avatar) }}" class="bg-img"
                                              alt="{{ $pet->full_name }}"
-                                             title=""/>
+                                             title="avatar"/>
                                     </div>
-                                    <a href="#" class="list-profiles-mark" title="Редактировать профиль">
+                                    <a href="#"
+                                       class="list-profiles-mark"
+                                       title="Редактировать профиль">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -157,7 +159,7 @@
                                     </a>
                                 </div>
                                 <span class="profile-time">{{ $pet->yearBirth }} - {{ $pet->yearDeath }}г.</span>
-                                <a href="#" class="profile-text">
+                                <a href="{{ route('profile.pet.show', $pet->slug) }}" class="profile-text">
                                     {{ $pet->full_name }}
                                 </a>
                             </li>

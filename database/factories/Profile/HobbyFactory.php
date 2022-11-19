@@ -5,16 +5,12 @@ namespace Database\Factories\Profile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Profile\Hobby>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Human\Hobby>
  */
 class HobbyFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition()
+
+    public function definition(): array
     {
         return [
             'title' => $this->faker->text(10)

@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Models\Community\Community;
 use App\Models\News\News;
+use App\Models\Profile\Human\Human;
 use App\Models\Profile\Profile;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
@@ -137,14 +138,14 @@ class User extends Authenticatable
         return $this->hasMany(Network::class);
     }
 
-    public function profiles(): HasMany
+    public function humans(): HasMany
     {
-        return $this->hasMany(Profile::class);
+        return $this->hasMany(Human::class);
     }
 
     public function availableProfiles(): BelongsToMany
     {
-        return $this->belongsToMany(Profile::class, 'available_profile_user')
+        return $this->belongsToMany(Human::class, 'available_human_user')
             ->withPivot('status', 'created_at');
     }
 

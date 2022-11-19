@@ -3,6 +3,7 @@
 namespace App\Models\Community;
 
 use App\Models\Community\Posts\Post;
+use App\Models\Profile\Human\Human;
 use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -70,9 +71,9 @@ class Community extends Model
             ->as('subscribers');
     }
 
-    public function profiles(): BelongsToMany
+    public function humans(): BelongsToMany
     {
-        return $this->belongsToMany(Profile::class);
+        return $this->belongsToMany(Human::class);
     }
 
     public function hasVideo(): bool

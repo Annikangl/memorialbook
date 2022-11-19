@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Profile\Profile;
+use App\Models\Profile\Human\Human;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -18,10 +18,10 @@ class CreateNews
     public const USER_ADDED_PHOTO = 'Добавил новые фотографии';
     public const USER_ADDED_PROFILE = 'Добавил новый профиль';
 
-    public Profile $profile;
+    public Human $profile;
     public ?string $action;
 
-    public function __construct(Profile $profile, ?string $action)
+    public function __construct(Human $profile, ?string $action)
     {
         $this->profile = $profile;
         $this->action = $action;

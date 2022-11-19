@@ -25,7 +25,7 @@ class CabinetController extends Controller
     public function index(string $slug): Factory|View|Application
     {
         $user = User::where('slug', $slug)->first();
-        $profiles = $user->profiles()->has('owners')->with('owners')->get();
+        $profiles = $user->humans()->has('owners')->with('owners')->get();
 
         $owners = [];
         $profiles->each(function ($profile) use (&$owners) {

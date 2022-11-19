@@ -8,12 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class DeathReasonSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         $reasons = ['рак', 'инсульт', 'несчастный случай', 'болезнь легких', 'болезнь Альцгеймера', 'сахарный диабет'];
 

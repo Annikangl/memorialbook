@@ -1,20 +1,19 @@
 <?php
 
-namespace Database\Factories\Profile;
+namespace Database\Factories\Profile\Human;
 
 use App\Models\Cemetery\Cemetery;
 use App\Models\Profile\DeathReason;
-use App\Models\Profile\Hobby;
-use App\Models\Profile\Profile;
+use App\Models\Profile\Human\Human;
 use App\Models\User\User;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Profile>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Human>
  */
-class ProfileFactory extends Factory
+class HumanFactory extends Factory
 {
     public function definition(): array
     {
@@ -30,11 +29,11 @@ class ProfileFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'avatar' => $this->faker->randomElement(
                 [
-                    'uploads/profiles/avatar/avatar-1.png',
-                    'uploads/profiles/avatar/avatar-2.png',
-                    'uploads/profiles/avatar/avatar-3.png',
-                    'uploads/profiles/avatar/avatar-4.png',
-                    'uploads/profiles/avatar/avatar-5.png',
+                    'uploads/profiles/avatar/avatar-1.jpg',
+                    'uploads/profiles/avatar/avatar-2.jpg',
+                    'uploads/profiles/avatar/avatar-3.jpg',
+                    'uploads/profiles/avatar/avatar-4.jpg',
+                    'uploads/profiles/avatar/avatar-5.jpg',
                 ]
             ),
             'description' => $this->faker->text(),
@@ -47,7 +46,7 @@ class ProfileFactory extends Factory
             'longitude' => $this->faker->longitude(),
             'death_reason' => DeathReason::query()->inRandomOrder()->value('title'),
             'death_certificate' => null,
-            'status' => Profile::STATUS_ACTIVE,
+            'status' => Human::STATUS_ACTIVE,
             'moderators_comment' => null,
             'access' => null,
             'published_at' => Carbon::now()

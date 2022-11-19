@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Profile\Profile;
+use App\Models\Profile\Human\Human;
 use App\Models\User\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -11,11 +11,11 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('available_profile_user', function (Blueprint $table) {
+        Schema::create('available_human_user', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)
                 ->constrained();
-            $table->foreignIdFor(Profile::class)
+            $table->foreignIdFor(Human::class)
                 ->constrained();
 
             $table->string('status', 30);
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down(): void
     {
         if (!app()->isProduction()) {
-            Schema::dropIfExists('available_profile_user');
+            Schema::dropIfExists('available_human_user');
         }
     }
 };

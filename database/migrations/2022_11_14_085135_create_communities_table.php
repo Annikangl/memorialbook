@@ -1,14 +1,15 @@
 <?php
 
 use App\Models\Community\Community;
-use App\Models\Profile\Profile;
+use App\Models\Profile\Human\Human;
 use App\Models\User\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up()
+
+    public function up(): void
     {
         Schema::create('communities', function (Blueprint $table) {
             $table->id();
@@ -32,10 +33,10 @@ return new class extends Migration {
             $table->primary(['user_id', 'community_id']);
         });
 
-        Schema::create('community_profile', function (Blueprint $table) {
-            $table->foreignIdFor(Profile::class)->constrained();
+        Schema::create('community_human', function (Blueprint $table) {
+            $table->foreignIdFor(Human::class)->constrained();
             $table->foreignIdFor(Community::class)->constrained();
-            $table->primary(['profile_id', 'community_id']);
+            $table->primary(['human_id', 'community_id']);
         });
 
         Schema::create('community_galleries', function (Blueprint $table) {
@@ -94,17 +95,13 @@ return new class extends Migration {
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         if (app()->isLocal()) {
             Schema::dropIfExists('community_users');
             Schema::dropIfExists('community_galleries');
             Schema::dropIfExists('community_post_galleries');
+            Schema::dropIfExists('community_humans');
             Schema::dropIfExists('community_post_tags');
             Schema::dropIfExists('community_tags');
             Schema::dropIfExists('community_posts');

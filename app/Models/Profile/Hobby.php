@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Profile\Hobby
+ * App\Models\Human\Hobby
  *
  * @property int $id
  * @property string $title

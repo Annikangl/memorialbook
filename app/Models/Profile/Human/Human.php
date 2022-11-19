@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Models\Profile;
+namespace App\Models\Profile\Human;
 
 use App\Models\Cemetery\Cemetery;
+use App\Models\Profile\Base\Profile;
+use App\Models\Profile\Hobby;
+use App\Models\Profile\Religion;
 use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,22 +24,13 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
 /**
- * App\Models\Profile
+ * App\Models\Human
+ * @package App\Models\Profile\Human
  *
- * @property int $id
- * @property string $first_name
- * @property string|null $last_name
- * @property string|null $patronymic
- * @property string $slug
  * @property string|null $gender
- * @property string|null $avatar
- * @property string $date_birth
- * @property string $date_death
  * @property string|null $birth_place
  * @property string|null $burial_place
- * @property string|null $reason_death
  * @property string|null $death_certificate
- * @property string $status
  * @property string|null $moderators_comment
  * @property string|null $access
  * @property int|null $father_id
@@ -44,45 +38,36 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int|null $child_id
  * @property int|null $spouse_id
  * @property string|null $published_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read string $full_name
- * @method static Builder|Profile filtered()
- * @method static Builder|Profile query()
- * @property string|null $description
+ *
+ * @method static Builder|Human filtered()
+ * @method static Builder|Human query()
  * @property float|null $latitude
  * @property float|null $longitude
- * @property string|null $death_reason
- * @property-read Profile|null $child
- * @property-read Profile|null $father
- * @property-read Collection|\App\Models\Profile\Gallery[] $galleries
+ * @property-read Human|null $child
+ * @property-read Human|null $father
+ * @property-read Collection|\App\Models\Profile\Human\Gallery[] $galleries
  * @property-read int|null $galleries_count
  * @property-read Collection|\App\Models\Profile\Hobby[] $hobbies
  * @property-read int|null $hobbies_count
- * @property-read Profile|null $mother
+ * @property-read Human|null $mother
  * @property-read Collection|\App\Models\Profile\Religion[] $religions
  * @property-read int|null $religions_count
- * @property-read Profile|null $spouse
- * @method static Builder|Profile active()
- * @method static Builder|Profile byUser(int $userId)
- * @method static Builder|Profile withRelatives()
- * @method static Builder|Profile pets()
- * @method static Builder|Profile findSimilarSlugs(string $attribute, array $config, string $slug)
- * @method static Builder|Profile newModelQuery()
- * @method static Builder|Profile newQuery()
+ * @property-read Human|null $spouse
+ * @method static Builder|Human active()
+ * @method static Builder|Human byUser(int $userId)
+ * @method static Builder|Human withRelatives()
+ * @method static Builder|Human pets()
+ * @method static Builder|Human findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static Builder|Human newModelQuery()
+ * @method static Builder|Human newQuery()
  * @mixin \Eloquent
  */
-class Profile extends Model implements HasMedia
+class Human extends Profile implements HasMedia
 {
     use HasFactory, Sluggable, InteractsWithMedia;
 
     public const MALE = 'male';
     public const FEMALE = 'female';
-
-    public const STATUS_DRAFT = 'Черновик';
-    public const STATUS_MODERATION = 'На модерации';
-    public const STATUS_ACTIVE = 'Опубликован';
-    public const STATUS_CLOSED = 'Отклонен';
 
     public const AVATAR_PATH = 'uploads/profiles/avatar';
     public const DOCUMENTS_PATH = 'uploads/profiles/document';
@@ -144,21 +129,6 @@ class Profile extends Model implements HasMedia
         ];
     }
 
-    public static function statusList(): array
-    {
-        return [
-            'Опубликован' => self::STATUS_ACTIVE,
-            'Черновик' => self::STATUS_DRAFT,
-            'Отклонен' => self::STATUS_CLOSED,
-            'На модерации' => self::STATUS_MODERATION
-        ];
-    }
-
-    public function isClosed(): bool
-    {
-        return $this->status === self::STATUS_CLOSED;
-    }
-
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('status', self::STATUS_ACTIVE);
@@ -192,35 +162,6 @@ class Profile extends Model implements HasMedia
         return $query->where('gender', 'pet');
     }
 
-    protected function lifeExpectancy(): Attribute
-    {
-        return new Attribute(
-            get: fn() => Carbon::make($this->date_birth)->format('d.m.Y') . ' - ' .
-            Carbon::make($this->date_death)->format('d.m.Y')
-        );
-    }
-
-    protected function fullName(): Attribute
-    {
-        return new Attribute(
-            get: fn() => "{$this->first_name} {$this->last_name} {$this->patronymic}"
-        );
-    }
-
-    protected function yearBirth(): Attribute
-    {
-        return new Attribute(
-            get: fn() => Carbon::createFromFormat('Y-m-d', $this->date_birth)->year
-        );
-    }
-
-    protected function yearDeath(): Attribute
-    {
-        return new Attribute(
-            get: fn() => Carbon::createFromFormat('Y-m-d', $this->date_death)->year
-        );
-    }
-
     public function sluggable(): array
     {
         return [
@@ -242,7 +183,7 @@ class Profile extends Model implements HasMedia
 
     public function owners(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'users_access_profiles')
+        return $this->belongsToMany(User::class, 'available_human_user')
             ->withPivot('status');
     }
 
@@ -279,15 +220,5 @@ class Profile extends Model implements HasMedia
     public function child(): BelongsTo
     {
         return self::belongsTo(static::class);
-    }
-
-    /**
-     * @throws \Spatie\Image\Exceptions\InvalidManipulation
-     */
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-            ->fit(Manipulations::FIT_CROP, 150, 150)
-            ->nonQueued();
     }
 }

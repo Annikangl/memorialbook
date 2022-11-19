@@ -21,7 +21,7 @@ return new class extends Migration {
         });
 
 
-        Schema::create('profiles', function (Blueprint $table) {
+        Schema::create('humans', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('user_id')
@@ -30,23 +30,23 @@ return new class extends Migration {
 
             $table->foreignId('mother_id')->nullable()
                 ->references('id')
-                ->on('profiles')
+                ->on('humans')
                 ->nullOnDelete();
 
             $table->foreignId('father_id')
                 ->nullable()
                 ->references('id')
-                ->on('profiles')
+                ->on('humans')
                 ->nullOnDelete();
 
             $table->foreignId('spouse_id')->nullable()
                 ->references('id')
-                ->on('profiles')
+                ->on('humans')
                 ->nullOnDelete();
 
             $table->foreignId('child_id')->nullable()
                 ->references('id')
-                ->on('profiles')
+                ->on('humans')
                 ->nullOnDelete();
 
             $table->foreignId('religion_id')->nullable()
@@ -80,12 +80,12 @@ return new class extends Migration {
         });
 
 
-        Schema::create('hobby_profile', function (Blueprint $table) {
+        Schema::create('hobby_human', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('profile_id')
+            $table->foreignId('human_id')
                 ->references('id')
-                ->on('profiles')
+                ->on('humans')
                 ->cascadeOnDelete();
 
             $table->foreignId('hobby_id')
@@ -100,9 +100,8 @@ return new class extends Migration {
         if (app()->isLocal()) {
             Schema::dropIfExists('religions');
             Schema::dropIfExists('hobbies');
-            Schema::dropIfExists('profiles');
-            Schema::dropIfExists('religion_profile');
-            Schema::dropIfExists('hobby_profile');
+            Schema::dropIfExists('humans');
+            Schema::dropIfExists('hobby_human');
         }
     }
 };

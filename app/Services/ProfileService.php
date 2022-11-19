@@ -7,7 +7,7 @@ namespace App\Services;
 use App\Classes\Files\FileUploader;
 use App\Http\Requests\Profile\ProfileCreateRequest;
 use App\Models\Cemetery\Cemetery;
-use App\Models\Profile\Profile;
+use App\Models\Profile\Human\Human;
 use Illuminate\Support\Facades\DB;
 
 class ProfileService
@@ -19,7 +19,7 @@ class ProfileService
         $this->fileUploader = $fileUploader;
     }
 
-    public function create(int $userId, ProfileCreateRequest $request): Profile
+    public function create(int $userId, ProfileCreateRequest $request): Human
     {
         $avatarPath = null;
         $documentPath = null;
@@ -27,12 +27,12 @@ class ProfileService
 
         if ($request->hasFile('avatar')) {
             $avatarPath = $this->fileUploader
-                ->upload($request->file('avatar'), Profile::AVATAR_PATH);
+                ->upload($request->file('avatar'), Human::AVATAR_PATH);
         }
 
         if ($request->hasFile('death_certificate')) {
             $documentPath = $this->fileUploader
-                ->upload($request->file('death_certificate'), Profile::DOCUMENTS_PATH);
+                ->upload($request->file('death_certificate'), Human::DOCUMENTS_PATH);
         }
 
         try {
@@ -46,7 +46,7 @@ class ProfileService
                     );
                 }
 
-                $profile = Profile::make([
+                $profile = Human::make([
                     'first_name' => $request->get('first_name'),
                     'last_name' => $request->get('last_name'),
                     'patronymic' => $request->get('patronymic'),
@@ -61,7 +61,7 @@ class ProfileService
                     'longitude' => $request->get('burial_place_coords')['lng'] ?? null,
                     'death_reason' => $request->get('death_reason'),
                     'death_certificate' => $documentPath,
-                    'status' => Profile::STATUS_ACTIVE,
+                    'status' => Human::STATUS_ACTIVE,
                     'access' => $request->get('access')
                 ]);
 
@@ -77,19 +77,19 @@ class ProfileService
 
                 // TODO move to queue
                 if ($request->get('father_id') || $request->get('mother_id') ) {
-                    Profile::updateChildForParent($request->get('father_id')['id']
+                    Human::updateChildForParent($request->get('father_id')['id']
                         ?? $request->get('mother_id')['id'],
                         $profile->id
                     );
                 }
 
                 if ($spouse = $request->get('spouse_id')) {
-                    Profile::updateSpouse($spouse['id'], $profile->id);
+                    Human::updateSpouse($spouse['id'], $profile->id);
                 }
 
                 if ($images = $request->file('profile_images')) {
                     foreach ($images as $image) {
-                        $images_path = $this->fileUploader->upload($image, Profile::GALLERY_PATH);
+                        $images_path = $this->fileUploader->upload($image, Human::GALLERY_PATH);
 
                         $profile->galleries()->create([
                             'item' => $images_path,

@@ -35,7 +35,7 @@
                     </div>
                     <div class="info-profile-value">
                         <div class="info-profile-value-wrap">
-                            <span class="info-profile-value-num">{{ $user->profiles->count() }}</span>
+                            <span class="info-profile-value-num">{{ $user->humans->count() }}</span>
                             <span class="info-profile-value-text">Профилей</span>
                         </div>
                         <div class="info-profile-value-wrap">

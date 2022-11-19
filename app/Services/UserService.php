@@ -6,7 +6,7 @@ namespace App\Services;
 
 use App\Classes\Files\FileUploader;
 use App\Models\Community\Community;
-use App\Models\Profile\Profile;
+use App\Models\Profile\Human\Human;
 use App\Models\User\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\UploadedFile;
@@ -42,7 +42,7 @@ class UserService
             throw new \DomainException('Ошибка удаления аккаунта');
         }
 
-        $user->profiles()->update(['status' => Profile::STATUS_DRAFT]);
+        $user->profiles()->update(['status' => Human::STATUS_DRAFT]);
         \Auth::logout();
     }
 

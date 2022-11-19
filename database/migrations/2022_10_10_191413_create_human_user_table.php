@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Profile\Profile;
+use App\Models\Profile\Human\Human;
 use App\Models\User\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -10,14 +10,14 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('user_profiles', function (Blueprint $table) {
+        Schema::create('human_user', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(User::class)
+            $table->foreignIdFor(Human::class)
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->foreignIdFor(Profile::class)
+            $table->foreignIdFor(User::class)
                 ->constrained()
                 ->cascadeOnDelete();
         });
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         if (app()->isLocal()) {
-            Schema::dropIfExists('user_profiles');
+            Schema::dropIfExists('human_user');
         }
     }
 };

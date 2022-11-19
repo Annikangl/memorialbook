@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Profile;
+namespace App\Models\Profile\Pet;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PetGallery extends Model
+class Gallery extends Model
 {
     use HasFactory;
 

@@ -5,7 +5,8 @@ use App\Http\Controllers\Auth\NetworkController;
 use App\Http\Controllers\Cabinet\CabinetController;
 use App\Http\Controllers\Cemetery\CemeteryController;
 use App\Http\Controllers\Community\CommunityController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Profile\HumanController;
+use App\Http\Controllers\Profile\PetController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -42,17 +43,21 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::get('/tree', [App\Http\Controllers\ProfileController::class, 'index'])->name('tree');
-    Route::get('/tree-list', [App\Http\Controllers\ProfileController::class, 'list'])->name('tree.list');
+    Route::get('/tree', [HumanController::class, 'index'])->name('tree');
+    Route::get('/tree-list', [HumanController::class, 'list'])->name('tree.list');
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-        Route::get('/create', [ProfileController::class, 'create'])->name('create');
-        Route::post('/store', [ProfileController::class, 'store'])->name('store');
+        Route::get('/create', [HumanController::class, 'create'])->name('create');
+        Route::post('/store', [HumanController::class, 'store'])->name('store');
 
-        Route::get('/{profile}/edit', [ProfileController::class, 'edit'])->name('edit');
+        Route::get('/{profile}/edit', [HumanController::class, 'edit'])->name('edit');
 
-        Route::get('/card/{slug}', [ProfileController::class, 'show'])->name('show');
-        Route::get('/map', [ProfileController::class, 'map'])->name('search.map');
+        Route::get('/card/{slug}', [HumanController::class, 'show'])->name('show');
+        Route::get('/map', [HumanController::class, 'map'])->name('search.map');
+
+        Route::group(['prefix' => 'pet', 'as' => 'pet.'], function () {
+            Route::get('/{slug}/show', [PetController::class, 'show'])->name('show');
+        });
     });
 
     Route::group(['prefix' => 'cemetery', 'as' => 'cemetery.'], function () {
@@ -68,7 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-        Route::get('/create', [App\Http\Controllers\ProfileController::class, 'create'])->name('create');
+        Route::get('/create', [HumanController::class, 'create'])->name('create');
     });
 
     Route::group(['prefix' => 'community', 'as' => 'community.'], function () {

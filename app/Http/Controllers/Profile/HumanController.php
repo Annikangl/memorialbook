@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Profile;
 
 use App\Events\CreateNews;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\ProfileCreateRequest;
 use App\Http\Requests\Profile\ProfileCreateStep2Request;
 use App\Http\Requests\Profile\SearchRequest;
 use App\Models\Cemetery\Cemetery;
 use App\Models\Profile\Hobby;
-use App\Models\Profile\Profile;
+use App\Models\Profile\Human\Human;
 use App\Models\Profile\Religion;
 use App\Services\ProfileService;
 use Carbon\Carbon;
@@ -24,22 +25,18 @@ use Nette\Schema\ValidationException;
 use PhpParser\Node\Stmt\Return_;
 
 
-/**
- * Class ProfileController
- * @package App\Http\Controllers
- */
-class ProfileController extends Controller
+class HumanController extends Controller
 {
     private ProfileService $service;
 
-    public function __construct(ProfileService $profileService)
+    public function __construct(ProfileService $personservice)
     {
-        $this->service = $profileService;
+        $this->service = $personservice;
     }
 
     public function index(): Factory|View|Application
     {
-        $profiles = Profile::query()->orderBy('id')
+        $profiles = Human::query()->orderBy('id')
             ->with('users')
             ->where('user_id', \Auth::id())
             ->get();
@@ -52,7 +49,7 @@ class ProfileController extends Controller
 
     public function list(): Factory|View|Application
     {
-        $profiles = Profile::query()
+        $profiles = Human::query()
             ->orderBy('date_birth')
             ->with('users')
             ->where('user_id', \Auth::id())
@@ -67,11 +64,11 @@ class ProfileController extends Controller
 
     public function show(string $slug): Factory|View|Application
     {
-        $profile = Profile::query()->with(['hobbies', 'religions', 'galleries'])
+        $profile = Human::query()->with(['hobbies', 'religions', 'galleries'])
             ->where('slug', $slug)
             ->firstOrFail();
 
-        $relatives = Profile::withRelatives()->get();
+        $relatives = Human::withRelatives()->get();
 
         return view('profile.show', compact('profile', 'relatives'));
     }
@@ -82,15 +79,15 @@ class ProfileController extends Controller
 
         $religions = Religion::query()->orderBy('id')->get();
 
-        $fathers = $profiles->filter(function ($item) {
-            return $item->gender == Profile::MALE;
+        $fathers = $persons->filter(function ($item) {
+            return $item->gender == Human::MALE;
         });
 
-        $mothers = $profiles->filter(function ($item) {
-            return $item->gender == Profile::FEMALE;
+        $mothers = $persons->filter(function ($item) {
+            return $item->gender == Human::FEMALE;
         });
 
-        $genders = Profile::genderList();
+        $genders = Human::genderList();
 
         return view('profile.create.create',
             compact('profiles','fathers', 'mothers', 'religions', 'genders'));
@@ -112,40 +109,40 @@ class ProfileController extends Controller
         return redirect()->route('profile.show', $profile->slug);
     }
 
-    public function edit(Profile $profile): Factory|View|Application
+    public function edit(Human $profile): Factory|View|Application
     {
-        $profiles = $this->getProfiles();
+        $profile = $this->getProfiles();
         $religions = Religion::query()->orderBy('id')->get();
 
-        $fathers = $profiles->filter(function ($item) {
-            return $item->gender == Profile::MALE;
+        $fathers = $persons->filter(function ($item) {
+            return $item->gender == Human::MALE;
         });
 
-        $mothers = $profiles->filter(function ($item) {
-            return $item->gender == Profile::FEMALE;
+        $mothers = $persons->filter(function ($item) {
+            return $item->gender == Human::FEMALE;
         });
 
-        $genders = Profile::genderList();
+        $genders = Human::genderList();
 
         return view('profile.edit.edit',
-            compact('profile', 'profiles','genders','mothers','fathers', 'religions'));
+            compact('profile', 'persons','genders','mothers','fathers', 'religions'));
     }
 
     public function map(SearchRequest $request): Factory|View|Application
     {
-        $profiles = Profile::active()->filtered()->paginate(30);
+        $profiles = Human::active()->filtered()->paginate(30);
 
         $count_filters = collect($request->input())->filter(function ($value) {
             return !is_null($value);
         })->count();
 
 
-        return view('profile.map', compact('profiles', 'count_filters'));
+        return view('profile.map', compact('persons', 'count_filters'));
     }
 
     private function getProfiles(): array|Collection|\Illuminate\Support\Collection
     {
-     return Profile::byUser(auth()->id())
+     return Human::byUser(auth()->id())
             ->addSelect('gender')
             ->get();
     }

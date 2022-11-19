@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id')->references('id')->on('users');
-            $table->foreignId('profile_id')->nullable()->references('id')->on('profiles');
+            $table->foreignId('human_id')->nullable()->references('id')->on('humans');
             $table->string('title');
             $table->text('content')->nullable();
 
@@ -27,6 +27,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('item');
+            $table->string('item_sm')->nullable();
         });
     }
 
