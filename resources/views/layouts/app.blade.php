@@ -56,197 +56,136 @@
     document.documentElement.classList.remove('no-js');
 </script>
 
-@include('includes.toasters.toasters')
+{{--@include('includes.toasters.toasters')--}}
 
-<div class="page-wrapper">
-    <div class="page-wrapper-inner">
-        <div class="header">
-            <div class="header-top">
-                <div class="container">
-                    <div class="row -small">
-                        <div class="header__logo -small col-auto">
-                                <span class="header-logo__inner">
-                                    <a href="{{ route('index') }}">
-                                    <img class="header-logo__image"
-                                         src="{{ asset('assets/media/media/logo/logo.svg') }}"
-                                         alt="Логотип Memorial book">
-                                </span></a>
-                        </div>
-                        <div class="header__menu -small col-auto">
-                            <nav class="header-menu__container">
-                                <ul class="header-menu__list">
+<style>
 
-                                    @guest
-                                        <li class="header-menu__item">
-                                            <a class="header-menu__link" href="#slideout-people" data-slideout=""
-                                               data-slideout-options="{&quot;type&quot;:&quot;people&quot;,&quot;position&quot;:&quot;top&quot;}">Люди</a>
-                                        </li>
-                                        <li class="header-menu__item">
-                                            <a class="header-menu__link" href="#slideout-places" data-slideout=""
-                                               data-slideout-options="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}">Места</a>
-                                        </li>
-                                    @else
-                                        <li class="header-menu__item">
-                                            <a class="header-menu__link" href="#slideout-people" data-slideout=""
-                                               data-slideout-options="{&quot;type&quot;:&quot;people&quot;,&quot;position&quot;:&quot;top&quot;}">Люди</a>
-                                        </li>
-                                        <li class="header-menu__item">
-                                            <a class="header-menu__link" href="#slideout-places" data-slideout=""
-                                               data-slideout-options="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}">Места</a>
-                                        </li>
-                                        <li class="header-menu__item -secondary">
-                                            <a class="header-menu__link" href="{{ route('tree') }}">Семейное
-                                                древо</a>
-                                        </li>
-                                        <li class="header-menu__item -secondary">
-                                            <a class="header-menu__link" href="#">Магазин</a>
-                                        </li>
-{{--                                        <li class="header-menu__item -secondary">--}}
-{{--                                            <a class="header-menu__link" href="#">Заказы</a>--}}
-{{--                                        </li>--}}
-                                    @endif
+</style>
 
-                                </ul>
-                            </nav>
-                        </div>
-                        <div class="header__right -small col-auto">
-                            <div class="row -small">
-                                <div class="header__language -small col">
-                                    <button type="button" class="header-buttons__lang"
-                                       href="javascript:void(0)" role="button">RU</button>
-                                </div>
-                                <div class="header__personal -small col">
-                                    <div class="row -small">
-                                        @guest
-{{--                                            <div class="header-personal__item -small -auth col">--}}
-{{--                                                <button class="header-personal__button btn btn-primary" href="#slideout-auth"--}}
-{{--                                                   role="button" data-slideout=""--}}
-{{--                                                   data-slideout-options="{&quot;type&quot;:&quot;auth&quot;}">Вход</button>--}}
-{{--                                            </div>--}}
-                                            <div class="header-personal__item -small -register col">
-                                                <button class="header-buttons__registration open-registration btn white-btn"
-                                                   href="#slideout-register" role="button"
-                                                   data-slideout=""
-                                                   data-slideout-options="{&quot;type&quot;:&quot;register&quot;}">Регистрация</button>
-                                            </div>
-                                        @else
-                                            <div class="header-personal__item -small -notifications col">
-                                                <button class="header-personal__button -notifications" type="button">
-                                                    <div class="header-personal__icon">
-                                                        <img src="{{ asset('assets/media/media/sprite-bell.svg') }}"
-                                                             alt="notification" width="18px" height="21px">
-                                                    </div>
-                                                    <span class="header-personal__badge badge badge-danger">1</span>
-                                                </button>
-                                            </div>
-                                            <div class="header-personal__item -small -user col">
-                                                <a class="header-personal__link"
-                                                   href="{{ route('cabinet.show', ['slug' => auth()->user()->slug]) }}">{{ \Illuminate\Support\Facades\Auth::user()->username }}</a>
-                                            </div>
-                                            <div class="header-personal__item -small -exit col">
-                                                <form action="{{ route('logout') }}" method="post">
-                                                    @csrf
-                                                    <input class="btn" type="submit" value="Выйти">
-                                                </form>
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="header__slideout-menu -small col">
-                                    <button class="header-slideout-menu__button" type="button">
-                                        <div class="header-slideout-menu__bars"></div>
-                                    </button>
-                                </div>
-                                <div class="header-buttons" id="header-button">
+<div id="page">
 
-                                    <button type="button" class="header-buttons__menu" id="mobile-menu">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </button>
-                                </div>
+    <header class="header">
+        <!--logo header-->
+        <a href="{{ route('home') }}" class="logo-header">
+            <img src="{{ asset('assets/media/media/logo/logo.svg') }}" class="logo-header__img"
+                 alt="Memorialbook"
+                 title="Memorialbook"/>
+        </a>
 
-                                @include('includes.forms.auth.login')
-                                @include('includes.forms.auth.restore_password')
-                                @include('includes.forms.auth.register')
+        <!--menu-->
+        <nav class="header-menu" id="header-menu">
+            <ul class="menu">
+                @guest
+                    <li class="menu__item">
+                        <a href="#" class="menu__link">Люди</a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="#" class="menu__link">Места</a>
+                    </li>
+                @else
+                    <li class="menu__item">
+                        <a href="#" class="menu__link">Люди</a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="#" class="menu__link">Места</a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="{{ route('tree') }}" class="menu__link">Семейное древо</a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="#" class="menu__link">Магазин</a>
+                    </li>
+                @endif
+            </ul>
+        </nav>
 
-                                @include('includes.forms.filter_people')
-                                @include('includes.forms.filter_places')
+        <!--buttons-->
+        @auth
+        <div class="header-buttons" id="header-button">
+            <button type="button" class="header-buttons__lang">Ru</button>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <button type="button" class="notifications">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="m17.6 14.5-.2-.3c-1-1.2-1.7-2-1.7-5.5 0-3.2-1.3-5.3-4-6.4C11.4.9 10.3 0 9 0 7.7 0 6.6.9 6.2 2.3 3.6 3.4 2.3 5.5 2.3 8.7c0 3.5-.6 4.3-1.7 5.5l-.2.3c-.4.5-.5 1.2-.2 1.8.3.6.9 1 1.6 1h3.5c0 1 .4 1.9 1.1 2.6C7.1 20.6 8 21 9 21s1.9-.4 2.7-1.1c.7-.7 1.1-1.7 1.1-2.6h3.5c.7 0 1.3-.4 1.6-1 .2-.6.2-1.3-.3-1.8zm-7 4.3c-.8.9-2.3.9-3.2 0-.4-.4-.7-1-.7-1.6h4.5c.1.6-.2 1.2-.6 1.6zm5.7-3H1.8c-.2 0-.2-.1-.3-.1v-.2l.2-.3c1.1-1.4 2-2.4 2-6.5 0-3.3 1.6-4.4 3-5 .4-.2.8-.5.9-1 .2-.6.7-1.2 1.4-1.2s1.2.6 1.3 1.2c.1.4.5.8.9 1 1.4.6 3 1.7 3 5 0 4.1.9 5.1 2 6.5l.2.3v.2c.1 0 0 .1-.1.1z"/>
+                </svg>
+                <span class="notifications__number">1</span>
+            </button>
+
+            <a href="{{ route('cabinet.show', auth()->user()->slug ) }}" class="login">{{ auth()->user()->fullName[0] }}</a>
+
+            <button type="button" class="header-buttons__menu" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        @else
+            <div class="header-buttons" id="header-button">
+                <button type="button" class="header-buttons__lang">Ru</button>
+                <button type="button" class="header-buttons__registration open-registration btn white-btn">Регистрация</button>
+                <button type="button" class="header-buttons__menu" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
+        @endif
+    </header>
+
+    <main class="content" role="main">
+
+        <div class="message">
+            @include('includes.partials.message')
         </div>
 
-        <main class="main-content" role="main">
+        @yield('content')
 
-            <div class="message">
-                @include('includes.partials.message')
-            </div>
+    </main>
 
-            @yield('content')
+    <footer class="footer">
+        <!--logo footer-->
+        <a href="#" class="logo-footer">
+            <img src="{{ asset('assets/media/media/logo/logo-light.svg') }}" class="logo-footer__img" alt="Memorialbook" title="Memorialbook"/>
+        </a>
 
-        </main>
+        <!--menu-->
+        <nav class="footer-menu">
+            <ul class="menu-list">
+                @guest
+                    <li class="menu-list__item">
+                        <a href="#" class="menu-list__link">О проекте</a>
+                    </li>
+                    <li class="menu-list__item">
+                        <a href="#" class="menu-list__link">Контакты</a>
+                    </li>
+                @else
+                    <li class="menu-list__item">
+                        <a href="#" class="menu-list__link">О проекте</a>
+                    </li>
+                    <li class="menu-list__item">
+                        <a href="{{ route('tree') }}" class="menu-list__link">Семейное древо</a>
+                    </li>
+                    <li class="menu-list__item">
+                        <a href="#" class="menu-list__link">Магазин</a>
+                    </li>
+                    <li class="menu-list__item">
+                        <a href="#" class="menu-list__link">Поиск людей</a>
+                    </li>
+                    <li class="menu-list__item">
+                        <a href="#" class="menu-list__link">Кладбища</a>
+                    </li>
+                    <li class="menu-list__item">
+                        <a href="#" class="menu-list__link">Контакты</a>
+                    </li>
+                @endif
+            </ul>
+        </nav>
 
-        <div class="footer">
-            <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="footer__logo col-auto">
-                                <span class="footer-logo__inner">
-                                    <img class="footer-logo__image"
-                                         src="{{ asset('assets/media/media/logo/logo-light.svg') }}"
-                                         alt="Логотип Memorial book">
-                                </span>
-                        </div>
-                        <div class="footer__menu col-auto">
-                            <nav class="footer-menu__container">
-                                <ul class="footer-menu__list">
-                                    @guest
-                                        <li class="footer-menu__item -slideout">
-                                            <a class="footer-menu__link" href="./text">О проекте</a>
-                                        </li>
-                                        <li class="footer-menu__item -slideout">
-                                            <a class="footer-menu__link" href="./text">Контакты</a>
-                                        </li>
-                                    @else
-                                        <li class="footer-menu__item -slideout">
-                                            <a class="footer-menu__link" href="./text">О проекте</a>
-                                        </li>
-                                        <li class="footer-menu__item">
-                                            <a class="footer-menu__link" href="{{ route('tree') }}">Семейное древо</a>
-                                        </li>
-                                        <li class="footer-menu__item">
-                                            <a class="footer-menu__link" href="./text">Магазин</a>
-                                        </li>
-                                        <li class="footer-menu__item">
-                                            <a class="footer-menu__link" href="#slideout-people" data-slideout=""
-                                               data-slideout-options="{&quot;type&quot;:&quot;people&quot;,&quot;position&quot;:&quot;top&quot;}">Поиск
-                                                людей
-                                            </a>
-                                        </li>
-                                        <li class="footer-menu__item">
-                                            <a class="footer-menu__link" href="#slideout-places" data-slideout=""
-                                               data-slideout-options="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}">Кладбища</a>
-                                        </li>
-                                        <li class="footer-menu__item -slideout">
-                                            <a class="footer-menu__link" href="./text">Контакты</a>
-                                        </li>
-                                    @endif
-                                </ul>
-                            </nav>
-                        </div>
-                        <div class="footer__policy col-auto">
-                            <a class="footer-policy__link" href="javascript:void(0)">Политика обработки персональных
-                                данных</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!--cookie link-->
+        <a href="#" class="cookie-link">Политика обработки персональных данных</a>
+    </footer>
+
 </div>
 
 <div class="preview-modal" id="modal-from">

@@ -314,6 +314,7 @@ if (document.querySelector('.add-profile')) {
 
     let currentSteep = 0;
 
+
     for (let i = 0; i < itemsNav.length; i++) {
         itemsNav[i].addEventListener('click', function () {
             for (let x = 0; x < itemsNav.length; x++) {
@@ -332,7 +333,9 @@ if (document.querySelector('.add-profile')) {
             currentSteep = i;
 
 
+
             if (currentSteep + 1 === steeps.length) {
+
                 btnSaveDraft.classList.remove('hide');
                 btnSaveEnd.classList.remove('hide');
                 btnSave.innerHTML = 'Сохранить и опубликовать';
@@ -362,8 +365,10 @@ if (document.querySelector('.add-profile')) {
             itemsNav[currentSteep].classList.add('active', 'current');
 
             if (currentSteep === steeps.length - 1) {
+
                 btnSaveDraft.classList.remove('hide');
                 btnSaveEnd.classList.remove('hide');
+                btnSave.classList.add('hide')
                 btnSave.innerHTML = 'Сохранить и опубликовать';
                 btnSave.classList.add('hide');
 

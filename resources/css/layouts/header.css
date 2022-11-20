@@ -1,0 +1,130 @@
+/* header
+---------------*/
+.header {
+    width: 100%;
+    padding: 0 var(--content-size);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    height: 97px;
+    background-color: #fff;
+    border-bottom: 1px solid var(--gray);
+}
+
+.header.login-page {
+    height: 76px;
+    padding: 26px var(--content-size) 0;
+    background-color: transparent;
+    border: none;
+}
+
+.header.login-page ~ .content {
+    padding-top: 0;
+}
+
+.logo-header {
+    display: flex;
+}
+
+.logo-header__img {
+    width: 272px;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu__item {
+    margin-right: 32px;
+}
+
+.menu__item:last-child {
+    margin: 0;
+}
+
+.menu__link {
+    color: var(--black);
+    font-size: 16px;
+}
+
+.menu__link:hover {
+    text-decoration: underline;
+}
+
+.header-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-buttons__lang {
+    width: 44px;
+    margin-right: 12px;
+    border: 1px solid var(--gray);
+    color: var(--dark-gray);
+    transition: var(--normal);
+    background-color: transparent;
+}
+
+.header-buttons__lang:hover {
+    background-color: var(--gray);
+    border-color: var(--gray);
+    color: rgba(32, 30, 31, .8);
+}
+
+.header-buttons__registration, .header-buttons__lang {
+    font: 500 14px sans-serif;
+    letter-spacing: .05em;
+    height: 44px;
+    text-transform: uppercase;
+    border-radius: 7px;
+}
+
+.header-buttons__registration {
+    padding: 0 15.4px;
+}
+
+.header-buttons__menu {
+    display: none;
+}
+
+.notifications {
+    margin-right: 12px;
+    position: relative;
+    width: 40px;
+    height: 44px;
+}
+
+.notifications svg {
+    width: 18px;
+    height: 21px;
+    fill: var(--black);
+}
+
+.notifications__number {
+    position: absolute;
+    font-size: 8px;
+    right: 7px;
+    line-height: 12px;
+    min-width: 12px;
+    padding: 0 3px;
+    top: 5px;
+    background-color: #fa122e;
+    color: #fff;
+    border-radius: 7px;
+}
+
+.login {
+    color: var(--black);
+    font-size: 16px;
+}
+
+.login:hover {
+    text-decoration: underline;
+}

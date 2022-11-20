@@ -83,46 +83,6 @@
     top: 0;
 }
 
-.cemetery-named__title {
-    font-size: 30px;
-    color: var(--black);
-    margin-bottom: 30px;
-    width: 100%;
-}
-
-.cemetery-named__info {
-    color: rgba(32, 30, 31, .7);
-    font-size: 16px;
-}
-
-.cemetery {
-    width: 100%;
-    padding: 0;
-}
-
-.cemetery-menu {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
-    top: 1px;
-    margin-top: 40px;
-}
-
-.cemetery-menu__item {
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: 14px 24px;
-    border-radius: 7px 7px 0 0;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: var(--normal);
-    border-bottom: none;
-    color: rgba(32, 30, 31, .7);
-    cursor: pointer;
-}
 
 .cemetery-menu__item.current {
     border-color: var(--light-gray);
@@ -372,45 +332,6 @@
     color: var(--blue);
 }
 
-.button-add-message, .button-route {
-    width: 100%;
-    height: 54px;
-    line-height: 1.3;
-    font: 600 14px sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    letter-spacing: .05em;
-    transition: var(--normal);
-    border-radius: 7px;
-    cursor: pointer;
-    text-transform: uppercase;
-}
-
-.button-add-message {
-    background-color: var(--blue);
-    margin-bottom: 8px;
-    color: #fff;
-}
-
-.button-add-message:hover {
-    background-color: #6799ef;
-}
-
-.button-route {
-    border: 1px solid var(--blue);
-    color: var(--blue);
-}
-
-.button-route:hover {
-    color: #fff;
-    background-color: var(--blue);
-}
-
-.cemetery-contacts-list {
-    margin-bottom: 44px;
-}
-
 .cemetery-contacts-list__item {
     display: flex;
     flex-direction: column;
@@ -479,9 +400,6 @@ a.cemetery-contacts-list__text:hover {
     font-size: 16px;
 }
 
-.cemeteries__item:hover .cemeteries-info__title {
-    color: var(--blue);
-}
 
 .cemeteries-buttons {
     width: 100%;
@@ -496,27 +414,6 @@ a.cemetery-contacts-list__text:hover {
     color: #fff;
 }
 
-.cemeteries-buttons:before {
-    content: "";
-}
-
-.pagination-left, .pagination-right {
-    border: 1px solid var(--light-gray);
-    border-radius: 7px;
-    color: rgba(32, 30, 31, .3);
-    height: 44px;
-    width: 44px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: var(--normal);
-    cursor: pointer;
-}
-
-.pagination-left:hover, .pagination-right:hover {
-    background: #fff;
-    color: var(--black);
-}
 
 .cemeteries-pagination {
     display: flex;

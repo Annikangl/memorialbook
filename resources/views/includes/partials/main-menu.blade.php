@@ -5,6 +5,9 @@
     <a href="#" class="news-menu__link">Питомцы</a>
 </li>
 <li class="news-menu__item">
+    <a href="{{ route('community.create') }}" class="news-menu__link">Создать сообщество</a>
+</li>
+<li class="news-menu__item">
     <a href="{{ route('cemetery.create') }}" class="news-menu__link">Создать кладбище</a>
 </li>
 <li class="news-menu__item active">

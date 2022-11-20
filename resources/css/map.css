@@ -37,57 +37,6 @@ section {
     transition: var(--normal);
 }
 
-.search-filter__icon {
-    border-radius: 50%;
-    border: 1px solid #e5e8eb;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.search-filter__icon svg {
-    fill: var(--blue);
-    width: 18px;
-    height: 18px;
-}
-
-.search-filter__current-filters {
-    color: #fff;
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: var(--blue);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    right: -8px;
-    top: -8px;
-    font-size: 14px;
-}
-
-.select-search {
-    background: rgba(245,247,249,.7);
-    border-radius: 44px;
-    display: flex;
-    border: 1px solid #fff;
-}
-
-.select-search__map, .select-search__list {
-    padding: 0 24px;
-    height: 44px;
-    color: var(--black);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: var(--normal);
-    background-color: transparent;
-    border-radius: 44px;
-    font-size: 16px;
-}
 
 .select-search__map.active, .select-search__list.active {
     background-color: #fff;

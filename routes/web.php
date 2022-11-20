@@ -78,7 +78,9 @@ Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'community', 'as' => 'community.'], function () {
         Route::get('/index', [CommunityController::class, 'index'])->name('index');
-       Route::get('/show/{slug}', [CommunityController::class, 'show'])->name('show');
+        Route::get('/show/{slug}', [CommunityController::class, 'show'])->name('show');
+        Route::get('/create', [CommunityController::class, 'create'])->name('create');
+        Route::post('/store', [CommunityController::class, 'store'])->name('store');
     });
 });
 

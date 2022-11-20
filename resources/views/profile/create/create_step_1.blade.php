@@ -38,17 +38,24 @@
 
         <div class="input-wrap">
             <span class="input-wrap__title">Пол</span>
-            <div class="select-forms" style="width: 100%">
-                <select class="profile-section__select select"  id="gender" name="gender"
-                        data-select="">
-                    <option value="">Выберите из списка</option>
-                    @foreach($genders as $key => $gender)
-                        @dump($gender)
-                        <option value="{{ $key }}" name="gender">{{ __($gender) }}</option>
-                    @endforeach
-                </select>
-
+            <div class="select-form">
+                <div class="select">
+                    <input type="hidden" class="select__output" id="gender" name="gender" readonly>
+                    <input type="text" class="select__output" readonly>
+                    <ul class="select-list">
+                        @foreach($genders as $gender)
+                            <li class="select-list__item" data-name="gender" data-id="{{ $gender}}">
+                                {{$gender}}
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <svg aria-hidden="true" class="select-arrow">
+                    <path
+                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
+                </svg>
             </div>
+
         </div>
 
     </div>
@@ -57,7 +64,8 @@
             <span class="input-wrap__title">Дата рождения:</span>
             <div class="input-form">
                 <input type="text" class="input-text input-required mask-data"
-                       placeholder="дд.мм.гггг" id="date_birth" name="date_birth" value="{{ old('date_birth') }}" title="">
+                       placeholder="дд.мм.гггг" id="date_birth" name="date_birth" value="{{ old('date_birth') }}"
+                       title="">
             </div>
         </div>
         <div class="input-wrap">
@@ -77,11 +85,14 @@
             <span class="input-wrap__title">Место захоронения:</span>
             <div class="input-form" style="position:relative;">
                 <input type="text" class="input-text"
-                       id="burial_place" name="burial_place" title="Место захоронения" readonly value="{{ old('burial_place') }}">
-                <a class="burialPlaceModal" data-hystmodal="#burial_place_location" href="#" style="position:absolute;" title="Указать на карте">
-                    <img src="{{ asset('assets/media/media/icons/location.svg') }}" alt="Указать на карте" width="20" >
+                       id="burial_place" name="burial_place" title="Место захоронения" readonly
+                       value="{{ old('burial_place') }}">
+                <a class="burialPlaceModal" data-hystmodal="#burial_place_location" href="#" style="position:absolute;"
+                   title="Указать на карте">
+                    <img src="{{ asset('assets/media/media/icons/location.svg') }}" alt="Указать на карте" width="20">
                 </a>
-                <input type="hidden" name="burial_place_coords" id="burial_place_coords" value="{{ old('burial_place_coords') }}">
+                <input type="hidden" name="burial_place_coords" id="burial_place_coords"
+                       value="{{ old('burial_place_coords') }}">
             </div>
 
         </div>
@@ -114,8 +125,8 @@
                     <ul class="select-list">
                         @foreach($fathers as $father)
 
-                        <li class="select-list__item" data-name="father_id" data-id="{{ $father->id }}"
-                            id="father_id">{{$father->first_name.' '.$father->last_name}}</li>
+                            <li class="select-list__item" data-name="father_id" data-id="{{ $father->id }}"
+                                id="father_id">{{$father->first_name.' '.$father->last_name}}</li>
 
                         @endforeach
                     </ul>
@@ -135,7 +146,7 @@
                 <div class="select">
 
                     <input type="hidden" class="select__output" id="mother_id_hidden" name="mother_id" readonly>
-                    <input type="text" class="select__output" placeholder="Выберите из списка"  readonly>
+                    <input type="text" class="select__output" placeholder="Выберите из списка" readonly>
                     <ul class="select-list">
                         @foreach($mothers as $mother)
                             <li class="select-list__item" data-name="mother_id" data-id="{{ $mother->id }}">
@@ -157,7 +168,7 @@
             <div class="select-form">
                 <div class="select">
                     <input type="hidden" class="select__output" id="spouse_id_hidden" name="spouse_id" readonly>
-                    <input type="text" class="select__output" placeholder="Выберите из списка"  readonly>
+                    <input type="text" class="select__output" placeholder="Выберите из списка" readonly>
                     <ul class="select-list">
                         @foreach($profiles as $profile)
                             <li class="select-list__item" data-name="spouse_id" data-id="{{ $profile->id }}">

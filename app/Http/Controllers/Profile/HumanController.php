@@ -79,11 +79,11 @@ class HumanController extends Controller
 
         $religions = Religion::query()->orderBy('id')->get();
 
-        $fathers = $persons->filter(function ($item) {
+        $fathers = $profiles->filter(function ($item) {
             return $item->gender == Human::MALE;
         });
 
-        $mothers = $persons->filter(function ($item) {
+        $mothers = $profiles->filter(function ($item) {
             return $item->gender == Human::FEMALE;
         });
 

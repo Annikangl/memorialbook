@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Community;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Community\CreateCommunityRequest;
 use App\Models\Community\Community;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -22,7 +23,7 @@ class CommunityController extends Controller
         /** @var Community $community */
         $community = Community::query()->with(
             [
-                'profiles', 'galleries', 'users',
+                'humans', 'galleries', 'users',
                 'posts' => function ($query) {
                     $query->with(['author', 'galleries']);
                 },
@@ -39,5 +40,16 @@ class CommunityController extends Controller
 
         return view('community.show',
             compact('community', 'followersCount', 'followers', 'videos'));
+    }
+
+    public function create()
+    {
+        return view('community.create.create');
+    }
+
+    public function store(CreateCommunityRequest $request)
+    {
+        $request_data = $request->validated();
+        dd($request_data);
     }
 }

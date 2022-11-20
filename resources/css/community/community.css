@@ -1,34 +1,3 @@
-
-.cemetery-menu, .community-nav {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
-    top: 1px;
-    margin-top: 40px;
-}
-
-.cemetery-menu__item, .community-nav__item {
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: 14px 24px;
-    border-radius: 7px 7px 0 0;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: var(--normal);
-    border-bottom: none;
-    color: rgba(32, 30, 31, .7);
-    cursor: pointer;
-}
-
-.cemetery-menu__item.current, .community-nav__item.current {
-    border-color: var(--light-gray);
-    background-color: var(--gray);
-    color: var(--black);
-}
-
 .cemetery-menu__item:hover, .community-nav__item:hover {
     color: var(--black);
 }
@@ -761,18 +730,6 @@
         padding-top: 5px;
     }
 
-    .cemetery-menu:before, .community-nav:before {
-        content: "";
-        background: url("../img/arrow.svg") no-repeat center center;
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        width: 14px;
-        height: 8px;
-        z-index: 10;
-        transition: var(--normal);
-        transform: rotate(0);
-    }
 
     .cemetery-menu, .community-nav {
         flex-direction: column;

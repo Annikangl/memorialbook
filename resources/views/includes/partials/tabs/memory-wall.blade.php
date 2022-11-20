@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            @include('includes.profiles-slider', ['profiles' => $community->profiles ])
+            @include('includes.profiles-slider', ['profiles' => $community->humans ])
         </article>
 
         <article class="community-article">
