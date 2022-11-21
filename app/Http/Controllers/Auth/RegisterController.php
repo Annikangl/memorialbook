@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -48,14 +48,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
     {
         return Validator::make($data, [
-            'FIO' => ['required', 'string', 'max:255'],
-            'EMAIL' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'PHONE' => ['required', 'string', 'max:15', 'unique:users,phone'],
-            'PASSWORD' => ['required', 'string', Password::default()],
-            'PASSWORD_CONFIRM' => ['required',' string', 'min:8']
+            'full_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'phone' => ['required', 'string', 'max:15', 'unique:users,phone'],
+            'password' => ['required', 'string', Password::default()],
+            'password_confirm' => ['required',' string', 'min:8']
         ]);
     }
 
@@ -65,8 +65,8 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User\User
      */
-    protected function create(array $data)
+    protected function create(array $data): User
     {
-        return User::register($data['FIO'], $data['EMAIL'], $data['PHONE'], $data['PASSWORD']);
+        return User::register($data['full_name'], $data['email'], $data['phone'], $data['password']);
     }
 }

@@ -64,23 +64,23 @@ class LoginController extends Controller
         return $this->sendFailedLoginResponse($request);
     }
 
-    protected function attemptLogin(Request $request)
+    protected function attemptLogin(Request $request): bool
     {
         return $this->guard()->attempt(
             $this->credentials($request), $request->boolean('remember')
         );
     }
 
-    public function username()
+    public function username(): string
     {
         return 'email';
     }
 
-    protected function credentials(Request $request)
+    protected function credentials(Request $request): array
     {
         return [
-            'email' => $request->get('EMAIL'),
-            'password' => $request->get('PASSWORD')
+            'email' => $request->get('email'),
+            'password' => $request->get('password')
         ];
     }
 

@@ -37,24 +37,16 @@
     <script data-skip-moving="true">
         window.app = window.app || {};
         window.app.globalConfig = {
-            baseUrl: 'http://memorialbook.loc/',
+            baseUrl: 'http://memorialbook.loc',
             relPath: './',
             assetsPath: '/assets/media/',
             gmapsApikey: 'AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y'
-        };
-        window.app.ready = function (callback) {
-            if (typeof callback === 'function') document.addEventListener('DOMContentLoaded', function () {
-                callback();
-            });
         };
     </script>
 
 </head>
 <body>
 
-<script data-skip-moving="true">
-    document.documentElement.classList.remove('no-js');
-</script>
 
 {{--@include('includes.toasters.toasters')--}}
 
@@ -113,6 +105,10 @@
             </button>
 
             <a href="{{ route('cabinet.show', auth()->user()->slug ) }}" class="login">{{ auth()->user()->fullName[0] }}</a>
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button type="submit"  class="" style="margin-left: 10px">Выйти</button>
+            </form>
 
             <button type="button" class="header-buttons__menu" id="mobile-menu">
                 <span></span>
@@ -188,11 +184,69 @@
 
 </div>
 
-<div class="preview-modal" id="modal-from">
-    <div class="aside-form" id="form-aside">
-        <button type="button" class="close-registration" id="close-aside"></button>
-    </div>
-</div>
+<x-previews-modal>
+    <button type="button" class="close-registration" id="close-aside"></button>
+
+    <form class="form-registration" id="form-registration">
+        <h3 class="form-registration__title">Регистрация</h3>
+        <div class="input-wrap">
+            <span class="input-wrap__title">ФИО:</span>
+            <div class="input-form">
+                <input type="text" class="input-text" name="full_name" title="full name"/>
+            </div>
+        </div>
+
+        <div class="input-wrap">
+            <span class="input-wrap__title">Email:</span>
+            <div class="input-form">
+                <input type="email" class="input-text" name="email" title="email"/>
+            </div>
+        </div>
+
+        <div class="input-wrap">
+            <span class="input-wrap__title">Телефон:</span>
+            <div class="input-form">
+                <input type="tel" class="input-text" name="phone" title="phone"/>
+            </div>
+        </div>
+
+        <div class="input-wrap">
+            <span class="input-wrap__title">Пароль:</span>
+            <div class="input-form">
+                <input type="password" class="input-text" name="password" title="password"/>
+            </div>
+        </div>
+
+        <div class="input-wrap">
+            <span class="input-wrap__title">Повторите пароль:</span>
+            <div class="input-form">
+                <input type="password" class="input-text" name="password_confirm" title="password confirm"/>
+            </div>
+        </div>
+
+        <input type="submit" class="form__submit btn blue-btn" value="Зарегистрироваться" title="Зарегистрироваться"/>
+        <p class="form-registration__text">Нажимая кнопку, вы соглашаетесь с условиями
+            <a href="#">политики обработки персональных данных</a></p>
+    </form>
+
+    <form class="form-recover">
+        <h3 class="form-recover__title">Восстановить пароль</h3>
+        <div class="form-recover-wrap">
+            <p>Если вы забыли пароль, введите email. <br/>Контрольная строка для смены пароля, а также ваши
+                регистрационные данные, будут высланы вам по электронной почте.</p>
+            <div class="input-wrap">
+                <span class="input-wrap__title">Email:</span>
+                <div class="input-form">
+                    <input type="email" class="input-text" name="form-recover__email" title=""/>
+                </div>
+            </div>
+            <input type="submit" class="form__submit blue-btn btn" value="Выслать" title="Зарегистрироваться"/>
+        </div>
+    </form>
+</x-previews-modal>
+
+
+
 
 @yield('scripts')
 
