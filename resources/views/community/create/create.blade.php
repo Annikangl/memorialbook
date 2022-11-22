@@ -53,4 +53,20 @@
             <p class="add-profile__text">Давайте создавать и хранить историю вместе? Для начала необходимо заполнить основную информацию профиля.</p>
         </div>
     </section>
+
+    <x-modal id="community_address_location" class="inner_map" long="hystmodal__window--long">
+        <div class="input-wrap" style="margin: 0 0 10px 0;">
+            <div class="input-form" >
+                <input type="text" class="input-text" id="community_address-search"
+                       name="community_address"
+                       placeholder="Укажите местоположение на карте"
+                       title="Укажите местоположение на карте">
+            </div>
+
+        </div>
+        <div class="map" style="min-height: 550px" >
+
+        </div>
+    </x-modal>
 @endsection
+

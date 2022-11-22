@@ -39,7 +39,7 @@
         window.app.globalConfig = {
             baseUrl: 'http://memorialbook.loc',
             relPath: './',
-            assetsPath: '/assets/media/',
+            assetsPath:  '{{ asset('assets/media/media/') }}',
             gmapsApikey: 'AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y'
         };
     </script>

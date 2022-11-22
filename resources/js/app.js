@@ -3,9 +3,9 @@ import 'hystmodal/dist/hystmodal.min'
 import 'hystmodal/dist/hystmodal.min.css'
 import './auth'
 import './news'
-import './cemetery'
+import './cemetery/cemetery'
 import './map'
-import './add_profile'
+import './profile/add_profile'
 import './account'
 import './community/script'
 import axios from "axios";
@@ -123,3 +123,5 @@ function showErrors(errors) {
         }
     }
 }
+
+

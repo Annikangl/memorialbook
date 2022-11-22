@@ -2,6 +2,7 @@ import {Loader} from 'google-maps';
 import {MarkerClusterer} from "@googlemaps/markerclusterer";
 import {Fancybox} from "@fancyapps/ui/src/Fancybox/Fancybox.js";
 import axios from "axios";
+import './create';
 
 Fancybox.bind(".gallery", {
     groupAll: true, // Group all items
@@ -207,5 +208,7 @@ if (document.querySelector('.cemetery-menu')) {
     loadFamous();
     cemeteryPageMap();
 }
+
+
 
 

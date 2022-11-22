@@ -1,62 +1,8 @@
-import './mask'
+import '../mask'
 import {Loader} from "google-maps";
+import {loadPhoto, searchLocation} from "../functions";
 
 //Modal
-
-const searchLocation = async function initMap(searchInput, coordsInput) {
-    let markers = [];
-
-    const map = new google.maps.Map(document.querySelector(".map"), {
-        zoom: 1,
-        center: { lat: 0, lng: 0},
-    });
-
-    map.addListener('click', function(e) {
-        placeMarker(e.latLng, map);
-    });
-
-    function placeMarker(position, map) {
-        clearMarkers();
-
-        let marker = new google.maps.Marker({
-            position: position,
-            map: map
-        });
-
-        markers.push(marker)
-        map.panTo(position);
-
-        const geocoder = new google.maps.Geocoder();
-
-        const latLang = {
-            lat: position.lat(),
-            lng: position.lng()
-        };
-
-        geocoder.geocode({ location: latLang })
-            .then((response) => {
-                if (response.results[0]) {
-                    searchInput.value = response.results[0].formatted_address;
-                    coordsInput.value = JSON.stringify(latLang)
-                } else {
-                    window.alert("No results found");
-                }
-            })
-            .catch((e) => window.alert("Geocoder failed due to: " + e));
-    }
-
-    function clearMarkers() {
-        if (markers) {
-            for (let i in markers) {
-                markers[i].setMap(null);
-            }
-        }
-    }
-
-    google.maps.event.trigger(map, 'resize')
-}
-
-
 let cemeteryAddressModal = function () {
     const searchInput = document.querySelector('#cemetery_address-search');
     const coordsInput = document.querySelector('#cemetery_address_coords');
@@ -141,98 +87,29 @@ if (document.querySelector('.input-avatar')) {
 }
 
 
-let loadPhoto = function () {
-    let inputFiles = document.querySelector('.load-files');
-    let previewResurs = document.querySelector('.input-photo');
-    let resurs = inputFiles.files;
+if (document.querySelector('.load-files-profile')) {
+    let inputsFile = document.querySelectorAll('.load-files-profile');
+    console.log(inputsFile)
 
+    for (let input of inputsFile) {
+        input.addEventListener('change', function () {
+            let files = input.files;
+            console.log(input)
 
-    for (let x = 0; x < resurs.length; x++) {
-        console.log(resurs[x])
-        if (resurs[x].type.startsWith('image/')) {
-            let div = document.createElement("div");
-            let img = document.createElement("img");
-            let button = document.createElement("button");
-            div.classList.add('input-photo-preview');
-            img.classList.add('bg-img');
-            button.setAttribute("type", "button");
-            button.classList.add('delete-resurs');
-            button.innerHTML = "<svg><path d=\"m11 9.5-4-4 3.9-3.9c.4-.4.4-1 0-1.3s-1-.4-1.3 0L5.7 4.2l-4-4C1.3-.2.7-.2.4.2c-.4.4-.4 1 0 1.4l4 4-4.1 4c-.4.4-.4 1 0 1.3s1 .4 1.3 0l4.1-4.1 4 4c.4.4 1 .4 1.3 0s.3-.9 0-1.3z\"/></svg>"
-
-            let inputHidden = document.createElement("input");
-            inputHidden.setAttribute("type", "file");
-            inputHidden.setAttribute("hidden", "hidden");
-            // inputHidden.setAttribute("name", "load-resurs");
-            inputHidden.files = resurs;
-
-            img.resurs = resurs[x];
-            previewResurs.prepend(div);
-            div.append(button);
-
-            div.append(inputHidden);
-
-            let reader = new FileReader();
-
-            reader.onload = (function () {
-                return function (e) {
-                    img.src = e.target.result
-                    div.append(img);
-                };
-            })(img);
-
-            reader.readAsDataURL(resurs[x]);
-
-        } else {
-            if (resurs[x].type.startsWith('video/')) {
-                let div = document.createElement("div");
-                let tagLoad = document.createElement("video");
-                let video = document.createElement("video");
-
-                let reader = new FileReader();
-                reader.readAsDataURL(resurs[x]);
-
-                reader.onload = function () {
-                    video.src = reader.result;
-                };
-
-                div.classList.add('input-photo-preview');
-                video.classList.add('bg-img');
-                let button = document.createElement("button");
-                button.setAttribute("type", "button");
-                button.classList.add('delete-resurs');
-                button.innerHTML = "<svg><path d=\"m11 9.5-4-4 3.9-3.9c.4-.4.4-1 0-1.3s-1-.4-1.3 0L5.7 4.2l-4-4C1.3-.2.7-.2.4.2c-.4.4-.4 1 0 1.4l4 4-4.1 4c-.4.4-.4 1 0 1.3s1 .4 1.3 0l4.1-4.1 4 4c.4.4 1 .4 1.3 0s.3-.9 0-1.3z\"/></svg>"
-
-                let inputHidden = document.createElement("input");
-                inputHidden.setAttribute("type", "file");
-                inputHidden.setAttribute("hidden", "hidden");
-                // inputHidden.setAttribute("name", "load-resurs");
-                inputHidden.files = resurs;
-
-                video.resurs = resurs[x];
-                previewResurs.prepend(div);
-                div.append(button);
-
-                div.append(inputHidden);
-
-                div.append(video);
-                previewResurs.prepend(div);
-            }
-        }
-    }
-
-    let btnDelete = document.querySelectorAll('.delete-resurs');
-
-    for (let i = 0; i < btnDelete.length; i++) {
-        btnDelete[i].addEventListener('click', function () {
-            btnDelete[i].parentElement.remove();
-        })
+            loadPhoto(input, files);
+        });
     }
 }
 
+// if (document.querySelector('.input-photo')) {
+//     const inputFiles = document.querySelector('.load-files');
+//     const resource = document.querySelector('.input-photo');
+//
+//     inputFiles.addEventListener('change', function () {
+//         loadPhoto(inputFiles, resource)
+//     })
+// }
 
-if (document.querySelector('.load-files')) {
-    document.querySelector('.load-files').addEventListener('change', loadPhoto);
-}
 
 
 //CUSTOM SELECT

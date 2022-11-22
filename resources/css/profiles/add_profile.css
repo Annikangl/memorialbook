@@ -405,7 +405,9 @@
     align-items: center;
 }
 
-.input-photo {
+.input-photo, .input-photo-community,
+.input-photo-cemetery, .input-photo-profile
+{
     background-color: var(--gray);
     border: 1px solid #cdd1d6;
     border-radius: 7px;

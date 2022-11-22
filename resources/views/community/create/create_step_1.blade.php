@@ -4,7 +4,11 @@
         <div class="user-avatar">
             <div class="preview-avatar">
                 <label class="preview-avatar-wrap">
-                    <input type="file" accept=".jpg,.jpeg,.png" class="input-avatar" id="change-avatar"/>
+                    <input type="file" accept=".jpg,.jpeg,.png"
+                           class="input-avatar"
+                           id="change-avatar"
+                           name="avatar"
+                    />
                     <span class="preview-avatar-wrap__text">Выберите фото</span>
                 </label>
                 <label class="preview-avatar__icon" for="change-avatar">
@@ -23,33 +27,52 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Название:</span>
             <div class="input-form">
-                <input type="text" class="input-text input-required" name="" title="">
+                <input type="text" class="input-text input-required" name="title" title="">
             </div>
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Местоположение:</span>
-            <div class="input-form">
-                <button type="button" class="open-map">Указать на карте</button>
+            <div class="input-form" style="position:relative;">
+                <input type="text"
+                       class="input-text"
+                       id="community_address"
+                       name="community_address"
+                       title="Местоположение"
+                       readonly
+                       value="{{ old('community_address') }}">
+                <a href="#" style="position:absolute;"
+                   class="communityAddressModal"
+                   data-hystmodal="#community_address_location"
+                   title="Указать на карте">
+                    <img src="{{ asset('assets/media/media/icons/location.svg') }}" alt="Указать на карте" width="20" />
+                </a>
+                <input
+                    type="hidden"
+                    name="community_address_coords"
+                    id="community_address_coords"
+                    value="{{ old('community_address_coords') }}"
+                >
             </div>
+
         </div>
     </div>
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
             <span class="input-wrap__title">Email:</span>
             <div class="input-form">
-                <input type="email" class="input-text input-required" name="" title="">
+                <input type="email" class="input-text input-required" name="email" title="email">
             </div>
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Телефон:</span>
             <div class="input-form">
-                <input type="tel" class="input-text mask-tel" name="" title="">
+                <input type="tel" class="input-text mask-tel" name="phone" title="phone">
             </div>
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Website</span>
             <div class="input-form">
-                <input type="text" class="input-text" name="" title="">
+                <input type="text" class="input-text" name="website" title="website">
             </div>
         </div>
     </div>

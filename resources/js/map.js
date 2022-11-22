@@ -54,3 +54,5 @@ async function initMap() {
 if (document.querySelector('.map-results')) {
     initMap()
 }
+
+
