@@ -67,11 +67,10 @@ if (document.querySelector('#login-form')) {
                 location.reload();
             }
         }).catch(function (error) {
-            console.log(error.response.data)
-            inputs[0].parentElement.classList.add('no-valid');
-            inputs[0].parentElement.insertAdjacentHTML('afterend',
-                `<span class="is-invalid">${error.response.data.message}</span>`);
             console.log(error)
+            if (error.response.status === 422) {
+                showErrors(error.response.data.errors)
+            }
         })
     })
 }
@@ -89,10 +88,6 @@ if (document.querySelector('#form-registration')) {
             return false;
         }
 
-        // inputs.forEach(function (item) {
-        //     console.log(item.value);
-        // })
-
         axios.post(url,
             {
                 full_name: inputs[0].value,
@@ -107,18 +102,23 @@ if (document.querySelector('#form-registration')) {
             }
         }).catch(function (error) {
             console.log(error)
-            if (error.response.data !== '' && error.response.data !== undefined) {
-                inputs.forEach(function (item) {
-                    if (item.getAttribute('name') === Object.keys(error.response.data.errors)[0]) {
-                        item.parentElement.classList.add('no-valid');
-                        item.parentElement.insertAdjacentHTML('afterend',
-                            `<span class="is-invalid">${error.response.data.message}</span>`);
-                    }
-                })
+            if (error.response.status === 422) {
+                showErrors(error.response.data.errors);
             } else {
                 alert('Неизвестная ошибка');
                 console.log(error);
             }
         })
     })
+}
+
+function showErrors(errors) {
+    for (let err in errors) {
+        if (errors.hasOwnProperty(err)) {
+            let item = document.querySelector(`[name='${err}']`);
+            item.parentElement.classList.add('no-valid');
+            item.parentElement.insertAdjacentHTML('afterend',
+                `<span class="is-invalid">${errors[err]}</span>`);
+        }
+    }
 }
