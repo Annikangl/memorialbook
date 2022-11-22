@@ -16,7 +16,7 @@
                 <div class="input-wrap">
                     <span class="input-wrap__title">Email:</span>
                     <div class="input-form">
-                        <input type="email" class="input-text" name="email" title=""/>
+                        <input type="email" class="input-text" name="login-email" title=""/>
                     </div>
                 </div>
 
@@ -24,7 +24,7 @@
                     <span class="input-wrap__title">Пароль:</span>
                     <div class="input-form">
                         <a class="input-link" id="input-link">Забыли пароль?</a>
-                        <input type="password" class="input-text" name="password" title=""/>
+                        <input type="password" class="input-text" name="login-password" title=""/>
                     </div>
                 </div>
 

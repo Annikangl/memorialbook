@@ -43,6 +43,7 @@ function validation(items) {
     }
 }
 
+// LOGIN
 if (document.querySelector('#login-form')) {
     document.querySelector('#login-form').addEventListener('submit', function (event) {
         event.preventDefault();
@@ -74,7 +75,7 @@ if (document.querySelector('#login-form')) {
         })
     })
 }
-
+// REGISTER
 if (document.querySelector('#form-registration')) {
     document.querySelector('#form-registration').addEventListener('submit', function (event) {
         event.preventDefault();
