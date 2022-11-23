@@ -508,3 +508,8 @@
     width: 150px;
     height: 150px;
 }
+
+
+#death_certificate {
+    display: block;
+}

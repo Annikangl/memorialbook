@@ -14,6 +14,7 @@ use Illuminate\Validation\Rules\File;
  * Class ProfileCreateRequest
  * @package App\Http\Requests\Human
  *
+ * @property string $gender
  * @property string $date_birth
  * @property string $date_death
  * @property string $burial_place_coords
@@ -40,6 +41,7 @@ class ProfileCreateRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
+            'gender' => json_decode($this->gender, true)['value'] ?? '',
             'date_birth' => Carbon::parse($this->date_birth)->format('Y-m-d'),
             'date_death' => Carbon::parse($this->date_death)->format('Y-m-d'),
             'burial_place_coords' => json_decode($this->burial_place_coords, true),
@@ -52,6 +54,7 @@ class ProfileCreateRequest extends FormRequest
 
     public function rules(): array
     {
+
         return [
             'avatar' => [
                 Rule::requiredIf(function () {

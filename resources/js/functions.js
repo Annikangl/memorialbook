@@ -1,6 +1,4 @@
 export let loadPhoto = function (input, files) {
-
-    console.log(files)
     let previewresource = input.closest('.input-photo');
 
     for (let x = 0; x < files.length; x++) {

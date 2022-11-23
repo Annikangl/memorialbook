@@ -31,7 +31,7 @@ class PublishCreatedNews
         // TODO add to queue
         $news = News::query()->create([
             'author_id' => $event->profile->users->id,
-            'profile_id' => $event->profile->id ?? null,
+            'human_id' => $event->profile->id ?? null,
             'title' => $event->action,
         ]);
 

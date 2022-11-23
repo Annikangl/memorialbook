@@ -82,6 +82,7 @@ class Cemetery extends Model
     public const GALLERY_PATH = 'uploads/cemeteries/gallery';
 
     protected $fillable = [
+        'user_id',
         'title',
         'title_en',
         'subtitle',
@@ -117,9 +118,10 @@ class Cemetery extends Model
         return $this->status === self::STATUS_CLOSED;
     }
 
-    public static function createFromProfile(string $title, array $coords, string $address): self
+    public static function createFromProfile(int $userId, string $title, array $coords, string $address): self
     {
         return self::create([
+            'user_id' => $userId,
             'title' => $title,
             'latitude' => (double) $coords['lat'],
             'longitude' => (double) $coords['lng'],

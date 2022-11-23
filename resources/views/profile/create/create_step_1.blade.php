@@ -38,14 +38,15 @@
 
         <div class="input-wrap">
             <span class="input-wrap__title">Пол</span>
+
             <div class="select-form">
                 <div class="select">
-                    <input type="hidden" class="select__output" id="gender" name="gender" readonly>
+                    <input type="hidden" class="select__output" id="gender_hidden" name="gender" readonly>
                     <input type="text" class="select__output" readonly>
                     <ul class="select-list">
                         @foreach($genders as $gender)
                             <li class="select-list__item" data-name="gender" data-id="{{ $gender}}">
-                                {{$gender}}
+                                {{ $gender }}
                             </li>
                         @endforeach
                     </ul>

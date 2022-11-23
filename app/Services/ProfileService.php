@@ -40,13 +40,14 @@ class ProfileService
 
                 if ($request->get('burial_place')) {
                     $cemetery = Cemetery::createFromProfile(
+                        \Auth::id(),
                         $request->get('burial_place'),
                         $request->get('burial_place_coords'),
                         $request->get('burial_place')
                     );
                 }
 
-                $profile = Human::make([
+                $human = Human::make([
                     'first_name' => $request->get('first_name'),
                     'last_name' => $request->get('last_name'),
                     'patronymic' => $request->get('patronymic'),
@@ -65,42 +66,41 @@ class ProfileService
                     'access' => $request->get('access')
                 ]);
 
-                $profile->users()->associate($userId);
-                $profile->cemeteries()->associate($cemetery);
+                $human->users()->associate($userId);
+                $human->cemeteries()->associate($cemetery);
 
-                $profile->father()->associate($request->get('father_id')['id'] ?? null);
-                $profile->mother()->associate($request->get('mother_id')['id'] ?? null);
-                $profile->spouse()->associate($request->get('spouse_id')['id'] ?? null);
-                $profile->religions()->associate($request->get('religious_id')['id'] ?? null);
+                $human->father()->associate($request->get('father_id')['id'] ?? null);
+                $human->mother()->associate($request->get('mother_id')['id'] ?? null);
+                $human->spouse()->associate($request->get('spouse_id')['id'] ?? null);
+                $human->religions()->associate($request->get('religious_id')['id'] ?? null);
 
-                $profile->save();
+                $human->save();
 
-                // TODO move to queue
                 if ($request->get('father_id') || $request->get('mother_id') ) {
                     Human::updateChildForParent($request->get('father_id')['id']
                         ?? $request->get('mother_id')['id'],
-                        $profile->id
+                        $human->id
                     );
                 }
 
                 if ($spouse = $request->get('spouse_id')) {
-                    Human::updateSpouse($spouse['id'], $profile->id);
+                    Human::updateSpouse($spouse['id'], $human->id);
                 }
 
                 if ($images = $request->file('profile_images')) {
                     foreach ($images as $image) {
                         $images_path = $this->fileUploader->upload($image, Human::GALLERY_PATH);
 
-                        $profile->galleries()->create([
+                        $human->galleries()->create([
                             'item' => $images_path,
                             'item_sm' => $images_path,
                             'extension' => $image->extension(),
-                            'profile_id' => $profile->id
+                            'human_id' => $human->id
                         ]);
                     }
                 }
 
-                return $profile;
+                return $human;
             });
 
         } catch (\Throwable $exception) {

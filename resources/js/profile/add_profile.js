@@ -101,21 +101,9 @@ if (document.querySelector('.load-files-profile')) {
     }
 }
 
-// if (document.querySelector('.input-photo')) {
-//     const inputFiles = document.querySelector('.load-files');
-//     const resource = document.querySelector('.input-photo');
-//
-//     inputFiles.addEventListener('change', function () {
-//         loadPhoto(inputFiles, resource)
-//     })
-// }
-
-
-
 //CUSTOM SELECT
 
 let select = function () {
-
 
     let selects = document.querySelectorAll('.select-form');
     let items = document.querySelectorAll('.select-list__item');

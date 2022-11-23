@@ -111,21 +111,20 @@ class HumanController extends Controller
 
     public function edit(Human $profile): Factory|View|Application
     {
-        $profile = $this->getProfiles();
         $religions = Religion::query()->orderBy('id')->get();
 
-        $fathers = $persons->filter(function ($item) {
+        $fathers = $profile->filter(function ($item) {
             return $item->gender == Human::MALE;
         });
 
-        $mothers = $persons->filter(function ($item) {
+        $mothers = $profile->filter(function ($item) {
             return $item->gender == Human::FEMALE;
         });
 
         $genders = Human::genderList();
 
         return view('profile.edit.edit',
-            compact('profile', 'persons','genders','mothers','fathers', 'religions'));
+            compact('profile','genders','mothers','fathers', 'religions'));
     }
 
     public function map(SearchRequest $request): Factory|View|Application

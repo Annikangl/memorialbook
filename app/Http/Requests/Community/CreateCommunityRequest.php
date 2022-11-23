@@ -11,7 +11,7 @@ class CreateCommunityRequest extends FormRequest
         return auth()->check();
     }
 
-    public function rules(): array
+    public function rules()
     {
         return [
             //

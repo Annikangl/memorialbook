@@ -15,7 +15,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'login-email' => ['required','email'],
+            'login-email' => ['required', 'email:dns'],
             'login-password' => Password::default()
         ];
     }
