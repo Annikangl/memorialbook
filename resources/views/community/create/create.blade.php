@@ -35,7 +35,11 @@
                     </li>
                 </ul>
             </div>
-            <form class="add-cemetery-wrap" id="add-community" action="{{ route('community.store') }}" method="post">
+            <form class="add-cemetery-wrap"
+                  id="add-community"
+                  action="{{ route('community.store') }}"
+                  method="post"
+                  enctype="multipart/form-data">
                 @csrf
 
                 @include('community.create.create_step_1')

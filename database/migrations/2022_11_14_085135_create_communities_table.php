@@ -20,9 +20,15 @@ return new class extends Migration {
             $table->string('slug')->nullable()->index();
             $table->string('title');
             $table->string('subtitle')->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->string('email')->nullable();
+            $table->string('website')->nullable();
+            $table->string('phone')->nullable();
             $table->string('banner')->nullable();
             $table->string('avatar')->nullable();
+            $table->string('address');
+            $table->double('latitude');
+            $table->double('longitude');
 
             $table->timestamps();
         });
@@ -47,6 +53,15 @@ return new class extends Migration {
 
             $table->string('item');
             $table->string('extension');
+        });
+
+        Schema::create('community_documents', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Community::class)
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->string('item');
         });
 
         Schema::create('community_posts', function (Blueprint $table) {

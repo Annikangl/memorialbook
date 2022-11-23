@@ -25,19 +25,16 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title')</title>
+    <title>@yield('title', 'Memorialbook')</title>
 
     <!-- Scripts -->
-
-    <script src="{{ asset('js/polyfills.scripts.js') }}"></script>
-
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <script data-skip-moving="true">
         window.app = window.app || {};
         window.app.globalConfig = {
-            baseUrl: 'http://memorialbook.loc',
+            baseUrl: `{{ env('APP_URL') }}`,
             relPath: './',
             assetsPath:  '{{ asset('assets/media/media/') }}',
             gmapsApikey: 'AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y'

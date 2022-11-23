@@ -19,8 +19,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @package App\Models\Community
  *
  * @property int $id
- * @property int $author_id
+ * @property int $owner_id
  * @property string $slug
+ * @property string $email
+ * @property string $website
+ * @property string $phone
+ * @property string $address
+ * @property double $latitude
+ * @property double $longitude
  * @property string $title
  * @property string $avatar
  * @property string $subtitle
@@ -33,9 +39,20 @@ class Community extends Model
 {
     use HasFactory, Sluggable;
 
+    public const AVATAR_PATH = 'uploads/communities/avatar';
+    public const BANNER_PATH = 'uploads/communities/banner';
+    public const DOCUMENTS_PATH = 'uploads/communities/document';
+    public const GALLERY_PATH = 'uploads/communities/gallery';
+
     protected $fillable = [
-        'author_id',
+        'owner_id',
         'slug',
+        'email',
+        'website',
+        'phone',
+        'address',
+        'latitude',
+        'longitude',
         'title',
         'avatar',
         'subtitle',
@@ -53,6 +70,11 @@ class Community extends Model
     public function galleries(): HasMany
     {
         return $this->hasMany(Gallery::class);
+    }
+
+    public function documents(): HasMany
+    {
+        return $this->hasMany(Document::class);
     }
 
     public function posts(): HasMany

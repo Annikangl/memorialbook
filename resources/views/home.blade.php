@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title') Главная @endsection
+
 @section('content')
     <section class="news">
         <nav class="news-menu-nav">

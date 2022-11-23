@@ -27,7 +27,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Название:</span>
             <div class="input-form">
-                <input type="text" class="input-text input-required" name="title" title="">
+                <input type="text" class="input-text input-required" name="title" title="title">
             </div>
         </div>
         <div class="input-wrap">

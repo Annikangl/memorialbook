@@ -40,16 +40,16 @@
                         <li class="list-profiles__item swiper-slide">
                             <div class="list-profiles-img-wrap">
                                 <div class="list-profiles__img">
-                                    <img src="{{ asset('storage/' . $newsItem->profile->avatar ) }}"
+                                    <img src="{{ asset('storage/' . $newsItem->human->avatar ) }}"
                                          class="bg-img"
-                                         alt="{{ $newsItem->profile->full_name }}"
-                                         title="{{ $newsItem->profile->full_name }}"/>
+                                         alt="{{ $newsItem->human->full_name }}"
+                                         title="{{ $newsItem->human->full_name }}"/>
                                 </div>
                             </div>
-                            <span class="profile-time">{{ $newsItem->profile->lifeExpectancy }} г.</span>
-                            <a href="{{ route('profile.show', ['slug' => $newsItem->profile->slug ]) }}"
+                            <span class="profile-time">{{ $newsItem->human->lifeExpectancy }} г.</span>
+                            <a href="{{ route('profile.show', ['slug' => $newsItem->human->slug ]) }}"
                                class="profile-text">
-                                {{ $newsItem->profile->full_name }}
+                                {{ $newsItem->human->full_name }}
                             </a>
                         </li>
                     </ul>

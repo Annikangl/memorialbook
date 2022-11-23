@@ -5,12 +5,20 @@ namespace App\Http\Controllers\Community;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Community\CreateCommunityRequest;
 use App\Models\Community\Community;
+use App\Services\CommunityService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 
 class CommunityController extends Controller
 {
+    private CommunityService $service;
+
+    public function __construct(CommunityService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index(): Factory|View|Application
     {
         $communities = Community::query()->paginate(4);
@@ -29,7 +37,7 @@ class CommunityController extends Controller
                 },
             ]
         )
-            ->where('slug', $slug)->first();
+            ->where('slug', $slug)->firstOrFail();
 
         $followers = $community->users()->paginate(7);
         $followersCount = $community->users->count();
@@ -50,6 +58,13 @@ class CommunityController extends Controller
     public function store(CreateCommunityRequest $request)
     {
         $request_data = $request->validated();
-        dd($request_data);
+
+        try {
+            $community = $this->service->create(\Auth::id(), $request_data);
+        } catch (\DomainException $exception) {
+            return back()->with('message', $exception->getMessage());
+        }
+
+        return redirect()->route('community.show', $community->slug);
     }
 }

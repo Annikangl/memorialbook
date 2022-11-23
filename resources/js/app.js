@@ -49,7 +49,9 @@ if (document.querySelector('#login-form')) {
         event.preventDefault();
 
         let inputs = this.querySelectorAll('.input-text');
-        let url = app.globalConfig.baseUrl + ':8080/login';
+        let url = app.globalConfig.baseUrl + 'login';
+
+        console.log(url)
 
         validation(inputs);
 

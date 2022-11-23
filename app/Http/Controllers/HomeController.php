@@ -24,7 +24,7 @@ class HomeController extends Controller
         $relatives = Human::byUser(auth()->id())
             ->withRelatives()->get();
 
-        $news = News::with(['author','galleries','profile'])
+        $news = News::with(['author','galleries','human'])
             ->orderByDesc('created_at')
             ->get();
 

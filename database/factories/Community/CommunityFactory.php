@@ -13,6 +13,12 @@ class CommunityFactory extends Factory
     {
         return [
             'owner_id' => 1,
+            'email' => $this->faker->email,
+            'website' => $this->faker->url,
+            'phone' => $this->faker->phoneNumber,
+            'address' => $this->faker->address,
+            'latitude' => $this->faker->latitude,
+            'longitude' => $this->faker->longitude,
             'title' => $this->faker->words(3,true),
             'subtitle' => $this->faker->text(),
             'description' => $this->faker->realText(400),
