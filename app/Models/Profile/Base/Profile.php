@@ -60,11 +60,11 @@ class Profile extends Model
         return $this->status === self::STATUS_CLOSED;
     }
 
-    protected function lifeExpectancy(): Attribute
+    protected function lifeExpectancy(): ?Attribute
     {
         return new Attribute(
-            get: fn() => Carbon::make($this->date_birth)->format('d.m.Y') . ' - ' .
-                Carbon::make($this->date_death)->format('d.m.Y')
+            get: fn() => Carbon::make($this->date_birth)?->format('d.m.Y') . ' - ' .
+                Carbon::make($this->date_death)?->format('d.m.Y')
         );
     }
 

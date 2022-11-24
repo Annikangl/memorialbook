@@ -1,6 +1,5 @@
 <div class="steep">
     <div class="steep-wrap grid-col-2">
-
         <div class="user-avatar">
             <div class="preview-avatar">
                 <label class="preview-avatar-wrap">
@@ -42,7 +41,7 @@
             <div class="select-form">
                 <div class="select">
                     <input type="hidden" class="select__output" id="gender_hidden" name="gender" readonly>
-                    <input type="text" class="select__output" readonly>
+                    <input type="text" class="select__output" placeholder="Выберите пол" readonly>
                     <ul class="select-list">
                         @foreach($genders as $gender)
                             <li class="select-list__item" data-name="gender" data-id="{{ $gender}}">
@@ -66,13 +65,17 @@
             <div class="input-form">
                 <input type="text" class="input-text input-required mask-data"
                        placeholder="дд.мм.гггг" id="date_birth" name="date_birth" value="{{ old('date_birth') }}"
-                       title="">
+                       title="date birth">
             </div>
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Место рождения:</span>
             <div class="input-form">
-                <input type="text" class="input-text" name="birth_place" value="{{ old('birth_place') }}" title="">
+                <input type="text" class="input-text"
+                       name="birth_place"
+                       placeholder="Страна, город"
+                       value="{{ old('birth_place') }}"
+                       title="Место рождения">
             </div>
         </div>
         <div class="input-wrap">
@@ -86,7 +89,11 @@
             <span class="input-wrap__title">Место захоронения:</span>
             <div class="input-form" style="position:relative;">
                 <input type="text" class="input-text"
-                       id="burial_place" name="burial_place" title="Место захоронения" readonly
+                       id="burial_place"
+                       name="burial_place"
+                       title="Место захоронения"
+                       placeholder="Выбрать на карте"
+                       readonly
                        value="{{ old('burial_place') }}">
                 <a class="burialPlaceModal" data-hystmodal="#burial_place_location" href="#" style="position:absolute;"
                    title="Указать на карте">
@@ -109,7 +116,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Свидетельство о смерти:</span>
             <div class="input-form">
-                <input type="file" class="profileDocument" id="death_certificate" name="death_certificate">
+                <input type="file" class="profileDocument" id="death_certificate" name="death_certificate" accept=".pdf">
             </div>
         </div>
     </div>

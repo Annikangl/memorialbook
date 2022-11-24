@@ -70,6 +70,7 @@ class Human extends Profile implements HasMedia
     public const FEMALE = 'female';
 
     public const AVATAR_PATH = 'uploads/profiles/avatar';
+    public const EMPTY_AVATAR_PATH = 'uploads/profiles/avatar/empty-avatar.png';
     public const DOCUMENTS_PATH = 'uploads/profiles/document';
     public const GALLERY_PATH = 'uploads/profiles/gallery';
 

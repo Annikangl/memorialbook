@@ -19,76 +19,76 @@ class ProfileService
         $this->fileUploader = $fileUploader;
     }
 
-    public function create(int $userId, ProfileCreateRequest $request): Human
+    public function create(int $userId, array $data): Human
     {
-        $avatarPath = null;
+        $avatarPath = Human::EMPTY_AVATAR_PATH;
         $documentPath = null;
         $cemetery = null;
 
-        if ($request->hasFile('avatar')) {
+        if (isset($data['avatar'])) {
             $avatarPath = $this->fileUploader
-                ->upload($request->file('avatar'), Human::AVATAR_PATH);
+                ->upload($data['avatar'], Human::AVATAR_PATH);
         }
 
-        if ($request->hasFile('death_certificate')) {
+        if (isset($data['death_certificate'])) {
             $documentPath = $this->fileUploader
-                ->upload($request->file('death_certificate'), Human::DOCUMENTS_PATH);
+                ->upload($data['death_certificate'], Human::DOCUMENTS_PATH);
         }
 
         try {
-            return DB::transaction(function () use ($avatarPath, $documentPath, $request, $userId, $cemetery) {
+            return DB::transaction(function () use ($avatarPath, $documentPath, $data, $userId, $cemetery) {
 
-                if ($request->get('burial_place')) {
+                if ($data['burial_place']) {
                     $cemetery = Cemetery::createFromProfile(
                         \Auth::id(),
-                        $request->get('burial_place'),
-                        $request->get('burial_place_coords'),
-                        $request->get('burial_place')
+                        $data['burial_place'],
+                        $data['burial_place_coords'],
+                        $data['burial_place'],
                     );
                 }
 
+
                 $human = Human::make([
-                    'first_name' => $request->get('first_name'),
-                    'last_name' => $request->get('last_name'),
-                    'patronymic' => $request->get('patronymic'),
-                    'description' => $request->get('description'),
-                    'gender' => $request->get('gender'),
+                    'first_name' => $data['first_name'],
+                    'last_name' => $data['last_name'],
+                    'description' => $data['description'],
+                    'gender' => $data['gender'],
                     'avatar' => $avatarPath,
-                    'date_birth' => $request->get('date_birth'),
-                    'date_death' => $request->get('date_death'),
-                    'birth_place' => $request->get('birth_place'),
-                    'burial_place' => $request->get('burial_place'),
-                    'latitude' => $request->get('burial_place_coords')['lat'] ?? null,
-                    'longitude' => $request->get('burial_place_coords')['lng'] ?? null,
-                    'death_reason' => $request->get('death_reason'),
+                    'date_birth' => $data['date_birth'],
+                    'date_death' => $data['date_death'],
+                    'birth_place' => $data['birth_place'],
+                    'burial_place' => $data['burial_place'],
+                    'latitude' => $data['burial_place_coords']['lat'] ?? null,
+                    'longitude' => $data['burial_place_coords']['lng'] ?? null,
+                    'death_reason' => $data['death_reason'],
                     'death_certificate' => $documentPath,
                     'status' => Human::STATUS_ACTIVE,
-                    'access' => $request->get('access')
+                    'access' => $data['access']
                 ]);
 
                 $human->users()->associate($userId);
                 $human->cemeteries()->associate($cemetery);
 
-                $human->father()->associate($request->get('father_id')['id'] ?? null);
-                $human->mother()->associate($request->get('mother_id')['id'] ?? null);
-                $human->spouse()->associate($request->get('spouse_id')['id'] ?? null);
-                $human->religions()->associate($request->get('religious_id')['id'] ?? null);
+                $human->father()->associate($data['father_id']['id'] ?? null);
+                $human->father()->associate($data['mother_id']['id'] ?? null);
+                $human->father()->associate($data['spouse_id']['id'] ?? null);
+                $human->father()->associate($data['religious_id']['id'] ?? null);
 
                 $human->save();
 
-                if ($request->get('father_id') || $request->get('mother_id') ) {
-                    Human::updateChildForParent($request->get('father_id')['id']
-                        ?? $request->get('mother_id')['id'],
+                if ($data['father_id'] || $data['mother_id'] ) {
+                    Human::updateChildForParent($data['father_id']['id']
+                        ?? $data['mother_id']['id'],
                         $human->id
                     );
                 }
 
-                if ($spouse = $request->get('spouse_id')) {
+                if ($spouse = $data['spouse_id']) {
                     Human::updateSpouse($spouse['id'], $human->id);
                 }
 
-                if ($images = $request->file('profile_images')) {
-                    foreach ($images as $image) {
+                if (isset($data['profile_images'])) {
+                    foreach ($data['profile_images'] as $image) {
                         $images_path = $this->fileUploader->upload($image, Human::GALLERY_PATH);
 
                         $human->galleries()->create([

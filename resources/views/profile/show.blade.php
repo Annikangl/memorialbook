@@ -27,7 +27,7 @@
             <div class="member-info-biography">
                 <p class="member-info__death">Причина смерти: <span class="reason">{{ $profile->death_reason }}</span>
                 </p>
-                <p>Руководитель государственного музея современного искусства</p>
+{{--                <p>Руководитель государственного музея современного искусства</p>--}}
                 <ul class="interests">
                     @foreach($profile->hobbies as $hobby)
                         <li class="interests__item">{{ $hobby->title }}</li>

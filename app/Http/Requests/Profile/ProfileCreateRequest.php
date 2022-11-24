@@ -4,6 +4,7 @@
 namespace App\Http\Requests\Profile;
 
 
+use App\Models\Profile\Human\Human;
 use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -42,8 +43,12 @@ class ProfileCreateRequest extends FormRequest
     {
         $this->merge([
             'gender' => json_decode($this->gender, true)['value'] ?? '',
-            'date_birth' => Carbon::parse($this->date_birth)->format('Y-m-d'),
-            'date_death' => Carbon::parse($this->date_death)->format('Y-m-d'),
+            'date_birth' => $this->date_birth ?
+                Carbon::parse($this?->date_birth)->format('Y-m-d')
+                : $this?->date_birth,
+            'date_death' => $this->date_death ?
+                Carbon::parse($this->date_death)->format('Y-m-d')
+                : $this->date_death,
             'burial_place_coords' => json_decode($this->burial_place_coords, true),
             'father_id' => json_decode($this->father_id, true),
             'spouse_id' => json_decode($this->spouse_id, true),
@@ -54,30 +59,40 @@ class ProfileCreateRequest extends FormRequest
 
     public function rules(): array
     {
-
         return [
-            'avatar' => [
-                Rule::requiredIf(function () {
-                    $this->hasFile('avatar');
-                }),
-                File::image()
-                    ->min(10)
-                    ->max(5 * 1024)
-            ],
             'first_name' => ['required', 'string', 'min:3'],
             'last_name' => ['required', 'string', 'min:3'],
-            'gender' => ['required', 'string', Rule::in(['male', 'female'])],
-            'date_birth' => ['required', 'string', 'min:3'],
-            'birth_place' => ['required', 'string', 'min:3'],
-            'date_death' => ['required'],
-            'death_certificate' => [
-                Rule::requiredIf(function () {
-                    $this->hasFile('death_certificate');
-                }),
-                File::types(['jpg', 'jpeg', 'png', 'pdf'])
-                    ->max(40 * 1024)
-            ],
+            'gender' => ['required', 'string', Rule::in(array_values(Human::genderList()))],
+            'date_birth' => ['required', 'date', 'min:3'],
+            'birth_place' => ['nullable', 'string', 'min:3'],
+            'burial_place' => ['nullable', 'string', 'min:3'],
+            'death_reason' => ['nullable', 'string'],
+            'date_death' => ['required', 'date'],
+            'burial_place_coords' => [
+                Rule::requiredIf(fn() => (bool)$this->get('burial_place')),
+                'nullable',
+                'array'
+            ] ,
+            'father_id' => ['sometimes', 'nullable', 'array'],
+            'spouse_id' => ['sometimes', 'nullable', 'array'],
+            'mother_id' => ['sometimes', 'nullable', 'array'],
             'profile_images.*' => ['required', 'mimes:jpg,jpeg,png,bmp,mp4', 'max:20000'],
+            'description' => ['sometimes', 'nullable', 'string'],
+            'religious_id' => ['sometimes', 'nullable'],
+            'access' => ['required'],
+
+            'avatar' => [
+                Rule::requiredIf(fn () => $this->hasFile('avatar')),
+                File::image()
+                    ->min(1)
+                    ->max(5 * 1024)
+            ],
+
+            'death_certificate' => [
+                Rule::requiredIf(fn() =>  $this->hasFile('death_certificate')),
+                File::types(['pdf'])
+                    ->max(10 * 1024)
+            ],
         ];
     }
 
@@ -87,8 +102,10 @@ class ProfileCreateRequest extends FormRequest
             'avatar' => 'Изображение аватара должно быть более 5 мб',
             'first_name.required' => 'Укажите Имя',
             'last_name.required' => 'Укажите Фамилию',
+            'gender' => 'Выберите пол',
             'date_birth.required' => 'Укажите дату рождения',
             'birth_place.required' => 'Укажите место рождения',
+            'burial_place.required' => 'Укажите место захоронения',
             'date_death.required' => 'Укажите дату смерти',
             'death_certificate.file' => 'Документ "Свидетельство о смерти" должен быть в одном из форматов: pdf, jpg, png',
             'death_certificate.max' => 'Документ "Свидетельство о смерти" слишком большой',

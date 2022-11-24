@@ -61,8 +61,8 @@ return new class extends Migration {
             $table->text('description')->nullable();
             $table->string('gender', 10);
             $table->string('avatar')->nullable();
-            $table->date('date_birth');
-            $table->date('date_death');
+            $table->date('date_birth')->nullable();
+            $table->date('date_death')->nullable();
             $table->string('birth_place')->nullable();
             $table->string('burial_place')->nullable();
             $table->double('latitude')->nullable();

@@ -83,7 +83,7 @@ if (document.querySelector('#form-registration')) {
         event.preventDefault();
 
         let inputs = this.querySelectorAll('.input-text');
-        let url = app.globalConfig.baseUrl + ':8080/register';
+        let url = app.globalConfig.baseUrl + 'register';
 
         validation(inputs);
 

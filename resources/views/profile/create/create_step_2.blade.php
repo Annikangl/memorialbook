@@ -23,9 +23,7 @@
                       placeholder="Текст описания..."
                       id="description"
                       name="description"
-                       title="">
-                {{ old('description') }}
-            </textarea>
+                       title="description">{{ old('description') }}</textarea>
         </div>
 
         <div class="input-wrap">

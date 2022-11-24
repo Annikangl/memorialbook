@@ -95,9 +95,10 @@ class HumanController extends Controller
 
     public function store(ProfileCreateRequest $request): RedirectResponse
     {
-        $request->validated();
+        $request_data = $request->validated();
+
         try {
-            $profile = $this->service->create(\Auth::id(), $request);
+            $profile = $this->service->create(\Auth::id(), $request_data);
             event(new CreateNews($profile, CreateNews::USER_ADDED_PROFILE));
         } catch (\DomainException $exception) {
             return back()->with([
