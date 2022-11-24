@@ -28,7 +28,7 @@ class Pet extends Profile
 
     public function scopeByUser(Builder $query, int $userId): Builder
     {
-        return $query->select(['id', 'first_name', 'last_name', 'slug', 'avatar', 'date_birth', 'date_death'])
+        return $query->select(['id', 'name', 'slug', 'avatar', 'date_birth', 'date_death'])
             ->where('user_id', $userId);
     }
 

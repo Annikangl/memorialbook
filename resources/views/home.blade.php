@@ -130,7 +130,9 @@
                 <div class="swiper swiper-profiles">
                     <ul class="list-profiles swiper-wrapper">
                         <li class="list-profiles__item swiper-slide">
-                            <a href="{{ route('profile.create') }}" class="list-profiles__link" title="Создать профиль">
+                            <a href="{{ route('profile.pet.create') }}"
+                               class="list-profiles__link"
+                               title="Создать профиль питомца">
                                 <div class="list-profiles__img">
                                     <svg width="19" height="20" viewBox="0 0 19 20" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -146,7 +148,7 @@
                                 <div class="list-profiles-img-wrap">
                                     <div class="list-profiles__img">
                                         <img src="{{ asset('storage/' . $pet->avatar) }}" class="bg-img"
-                                             alt="{{ $pet->full_name }}"
+                                             alt="{{ $pet->name }}"
                                              title="avatar"/>
                                     </div>
                                     <a href="#"
@@ -162,7 +164,7 @@
                                 </div>
                                 <span class="profile-time">{{ $pet->yearBirth }} - {{ $pet->yearDeath }}г.</span>
                                 <a href="{{ route('profile.pet.show', $pet->slug) }}" class="profile-text">
-                                    {{ $pet->full_name }}
+                                    {{ $pet->name }}
                                 </a>
                             </li>
                         @empty

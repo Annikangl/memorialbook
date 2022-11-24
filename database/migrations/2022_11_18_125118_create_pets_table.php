@@ -17,19 +17,22 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
 
-            $table->string('first_name');
-            $table->string('last_name')->nullable();
+            $table->string('name');
             $table->string('slug')->nullable()->index();
             $table->string('breed');
             $table->string('avatar')->nullable();
             $table->string('banner')->nullable();
             $table->text('description')->nullable();
-            $table->date('date_birth');
-            $table->date('date_death');
+            $table->date('date_birth')->nullable();
+            $table->date('date_death')->nullable();
+            $table->string('birth_place')->nullable();
+            $table->string('burial_place')->nullable();
+            $table->string('death_reason')->nullable();
+
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
             $table->string('twitter')->nullable();
-            $table->string('death_reason')->nullable();
+
 
             $table->timestamps();
         });

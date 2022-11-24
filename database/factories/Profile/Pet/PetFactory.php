@@ -18,8 +18,7 @@ class PetFactory extends Factory
     {
         return [
             'user_id' => User::query()->inRandomOrder()->value('id'),
-            'first_name' => $this->faker->firstName(),
-            'last_name' => $this->faker->lastName(),
+            'name' => $this->faker->firstName(),
             'description' => $this->faker->realText(),
             'breed' => $this->faker->words(2, true),
             'avatar' => $this->faker->randomElement(
@@ -31,6 +30,8 @@ class PetFactory extends Factory
             'banner' => 'uploads/pets/banner.jpg',
             'date_birth' => now()->subYears(random_int(1,10)),
             'date_death' => now()->addYears(10),
+            'birth_place' => $this->faker->address,
+            'burial_place' => $this->faker->address,
             'death_reason' => DeathReason::query()->inRandomOrder()->value('title'),
             'facebook' => 'https://facebook.com',
         ];

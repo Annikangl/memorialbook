@@ -1457,3 +1457,41 @@ a.cemetery-contacts-list__text:hover {
     width: 1000px !important;
 }
 
+/* page not found
+---------------*/
+.page-not-found {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: var(--gray);
+    padding: 0;
+}
+
+.page-not-found-wrap {
+    width: calc(100% - 140px);
+    padding: 16px 70px 48px;
+    background-color: #fff;
+}
+
+.page-not-found__title {
+    color: var(--blue);
+    font: bold 51px/1 Lato, sans-serif;
+}
+
+.page-not-found__text {
+    margin-top: 16px;
+    color: var(--black);
+}
+
+.page-not-found__link {
+    font: 400 14px/1 Lato, sans-serif;
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--blue);
+}
+
+.page-not-found__link:hover {
+    text-decoration: underline;
+}
+

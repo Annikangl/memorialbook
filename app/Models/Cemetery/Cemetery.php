@@ -2,6 +2,7 @@
 
 namespace App\Models\Cemetery;
 
+use App\Models\Profile\Human\Human;
 use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -151,9 +152,9 @@ class Cemetery extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function profiles(): HasMany
+    public function humans(): HasMany
     {
-        return $this->hasMany(Profile::class);
+        return $this->hasMany(Human::class);
     }
 
     public function galleries(): HasMany

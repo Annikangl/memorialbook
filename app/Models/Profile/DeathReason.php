@@ -11,11 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $title
  * @method static \Database\Factories\Profile\DeathReasonFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|DeathReason newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|DeathReason newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|DeathReason query()
- * @method static \Illuminate\Database\Eloquent\Builder|DeathReason whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|DeathReason whereTitle($value)
+
  * @mixin \Eloquent
  */
 class DeathReason extends Model
@@ -25,4 +22,9 @@ class DeathReason extends Model
     public $timestamps = false;
 
     protected $fillable = ['title'];
+
+    public static function getReasonList()
+    {
+        return self::all()->toArray();
+    }
 }

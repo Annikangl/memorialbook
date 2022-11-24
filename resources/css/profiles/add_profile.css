@@ -229,6 +229,7 @@
     justify-content: flex-start;
     align-items: center;
     color: var(--black);
+    cursor: pointer;
 }
 
 .select-form.focus-select .select-list {

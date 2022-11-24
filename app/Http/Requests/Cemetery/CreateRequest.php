@@ -61,7 +61,7 @@ class CreateRequest extends FormRequest
             ],
             'input-banner' => [
                 Rule::requiredIf(fn () => $this->hasFile('input-banner')),
-                File::image()->min(100)->max(10 * 1024),
+                File::image()->min(5)->max(10 * 1024),
             ],
             'cemetery_gallery.*' => [
                 Rule::requiredIf(fn () => is_array($this->get('cemetery_gallery'))),

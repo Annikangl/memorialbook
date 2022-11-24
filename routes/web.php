@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/map', [HumanController::class, 'map'])->name('search.map');
 
         Route::group(['prefix' => 'pet', 'as' => 'pet.'], function () {
+            Route::get('/create', [PetController::class, 'create'])->name('create');
+            Route::post('/store', [PetController::class, 'store'])->name('store');
             Route::get('/{slug}/show', [PetController::class, 'show'])->name('show');
         });
     });
