@@ -10,7 +10,7 @@
                         <path d="M10.5 21c-.6 0-1-.4-1-1v-8.5H1c-.6 0-1-.4-1-1s.4-1 1-1h8.5V1c0-.6.4-1 1-1s1 .4 1 1v8.5H20c.6 0 1 .4 1 1s-.4 1-1 1h-8.5V20c0 .6-.4 1-1 1z"/>
                     </svg>
                     <span class="input-photo-load__text">Выберите стартовый баннер</span>
-                    <input type="file" class="load-files-profile" name="pet-banner" accept=".jpg,.jpeg,.png"/>
+                    <input type="file" class="load-files-profile" name="pet_banner" accept=".jpg,.jpeg,.png"/>
                 </label>
             </div>
         </div>

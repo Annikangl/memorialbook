@@ -7,6 +7,7 @@ use App\Http\Requests\User\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 
 class LoginController extends Controller
@@ -62,6 +63,13 @@ class LoginController extends Controller
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
+    }
+
+    protected function sendFailedLoginResponse(Request $request): void
+    {
+        throw ValidationException::withMessages([
+            'login-email' => [trans('auth.failed')],
+        ]);
     }
 
     protected function attemptLogin(Request $request): bool

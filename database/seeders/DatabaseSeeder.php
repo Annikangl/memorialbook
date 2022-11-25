@@ -14,6 +14,7 @@ use App\Models\Profile\Religion;
 use App\Models\User\User;
 use Database\Seeders\Profile\DeathReasonSeeder;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -53,14 +54,16 @@ class DatabaseSeeder extends Seeder
     {
         User::create([
             'username' => 'Ivanov Ivan Ivanovich',
-            'email' => 'svinpauk78@gmail.com',
+            'email' => 'test@gmail.com',
             'password' => \Hash::make('test1234'),
+            'avatar' => 'uploads/users/avatar/avatar-1.jpg',
         ]);
 
         User::create([
             'username' => 'Petrov Petr Pen',
-            'email' => 'shahed@gmail.com',
+            'email' => 'test2@gmail.com',
             'password' => \Hash::make('test1234'),
+            'avatar' => 'uploads/users/avatar/avatar-1.jpg',
         ]);
     }
 }

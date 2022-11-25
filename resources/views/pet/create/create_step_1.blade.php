@@ -38,7 +38,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Дата рождения:</span>
             <div class="input-form">
-                <input type="text" class="input-text input-required mask-data" name="birth_date"
+                <input type="text" class="input-text input-required mask-data" name="date_birth"
                        {{ old('birth_date') }} title="Дата рождения">
             </div>
         </div>
@@ -52,7 +52,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Дата смерти:</span>
             <div class="input-form">
-                <input type="text" class="input-text input-required mask-data" name="death_date"
+                <input type="text" class="input-text input-required mask-data" name="date_death"
                        value="{{ old('death_date') }}" title="Дата смерти">
             </div>
         </div>

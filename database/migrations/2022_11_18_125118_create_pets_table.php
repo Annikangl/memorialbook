@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
     public function up(): void
     {
         Schema::create('pets', function (Blueprint $table) {
@@ -29,11 +28,6 @@ return new class extends Migration
             $table->string('burial_place')->nullable();
             $table->string('death_reason')->nullable();
 
-            $table->string('facebook')->nullable();
-            $table->string('instagram')->nullable();
-            $table->string('twitter')->nullable();
-
-
             $table->timestamps();
         });
 
@@ -45,18 +39,11 @@ return new class extends Migration
            $table->string('item_sm')->nullable();
            $table->string('extension', 4);
         });
-
-        Schema::create('hobby_pet', function (Blueprint $table) {
-            $table->foreignIdFor(Hobby::class);
-            $table->foreignIdFor(Pet::class);
-            $table->primary(['hobby_id', 'pet_id']);
-        });
     }
 
     public function down(): void
     {
         if (app()->isLocal()) {
-            Schema::dropIfExists('hobby_pet');
             Schema::dropIfExists('pet_galleries');
             Schema::dropIfExists('pets');
         }

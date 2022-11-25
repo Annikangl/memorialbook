@@ -13,4 +13,6 @@ class Gallery extends Model
 
     protected $table = 'pet_galleries';
 
+    protected $fillable = ['item', 'item_sm', 'extension'];
+
 }

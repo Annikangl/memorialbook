@@ -51,10 +51,10 @@
                 @include('cemetery.create.create_step_3')
 
                 <div class="buttons-save">
-                    <button type="button" class="save-draft hide">Сохранить как черновик</button>
-                    <button type="button" class="save-and-next">Сохранить и продолжить</button>
+                    <button type="button" class="save-draft hide btn white-btn">Сохранить как черновик</button>
+                    <button type="button" class="save-and-next btn blue-btn">Сохранить и продолжить</button>
 
-                    <button type="submit" class="save-end hide">Сохранить и опубликовать</button>
+                    <button type="submit" class="save-end hide btn blue-btn">Сохранить и опубликовать</button>
                 </div>
 
             </form>

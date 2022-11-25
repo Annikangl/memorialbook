@@ -36,6 +36,7 @@ class Profile extends Model
     public const STATUS_ACTIVE = 'Опубликован';
     public const STATUS_CLOSED = 'Отклонен';
 
+    public const EMPTY_AVATAR_PATH = 'uploads/profiles/avatar/empty-avatar.png';
     public const AVATAR_PATH = 'uploads/profiles/avatar';
     public const DOCUMENTS_PATH = 'uploads/profiles/document';
     public const GALLERY_PATH = 'uploads/profiles/gallery';
@@ -78,14 +79,30 @@ class Profile extends Model
     protected function yearBirth(): Attribute
     {
         return new Attribute(
-            get: fn() => Carbon::createFromFormat('Y-m-d', $this->date_birth)->year
+            get: fn() => Carbon::parse($this->date_birth)->year
         );
     }
 
     protected function yearDeath(): Attribute
     {
         return new Attribute(
-            get: fn() => Carbon::createFromFormat('Y-m-d', $this->date_death)->year
+            get: fn() => Carbon::parse($this->date_death)->year
+        );
+    }
+
+    protected function dateBirth(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::parse($value)->format('d.m.Y'),
+            set: fn ($value) => Carbon::parse($value)->format('Y-m-d'),
+        );
+    }
+
+    protected function dateDeath(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::parse($value)->format('d.m.Y'),
+            set: fn ($value) => Carbon::parse($value)->format('Y-m-d'),
         );
     }
 

@@ -23,8 +23,16 @@ class Pet extends Profile
     use HasFactory, Sluggable;
 
     public const AVATAR_PATH = 'uploads/pets/avatar';
+    public const BANNER_PATH = 'uploads/pets/banner';
     public const DOCUMENTS_PATH = 'uploads/pets/document';
     public const GALLERY_PATH = 'uploads/pets/gallery';
+
+    protected $fillable = ['name', 'breed', 'avatar', 'banner', 'description', 'date_birth',
+        'date_death',
+        'birth_place',
+        'burial_place',
+        'death_reason'
+    ];
 
     public function scopeByUser(Builder $query, int $userId): Builder
     {
@@ -37,11 +45,6 @@ class Pet extends Profile
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function hobbies(): BelongsToMany
-    {
-        return $this->belongsToMany(Hobby::class);
-    }
-
     public function galleries(): HasMany
     {
         return $this->hasMany(Gallery::class);
@@ -51,7 +54,7 @@ class Pet extends Profile
     {
         return [
             'slug' => [
-                'source' => ['first_name', 'last_name']
+                'source' => ['name']
             ]
         ];
     }

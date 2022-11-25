@@ -33,7 +33,6 @@ class PetFactory extends Factory
             'birth_place' => $this->faker->address,
             'burial_place' => $this->faker->address,
             'death_reason' => DeathReason::query()->inRandomOrder()->value('title'),
-            'facebook' => 'https://facebook.com',
         ];
     }
 }

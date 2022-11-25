@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="member-name-wrap">
-                        <span class="member-name">{{ $pet->fullName }}</span>
+                        <span class="member-name">{{ $pet->name }}</span>
                         <span class="member-ages">28.12.2004 - 14.04.2008</span>
                     </div>
                 </div>
@@ -35,29 +35,6 @@
                         {!! nl2br($pet->description) !!}
                     </p>
 
-                    <ul class="interests">
-                        @foreach($pet->hobbies as $hobby)
-                            <li class="interests__item">{{ $hobby->title }}</li>
-                        @endforeach
-                    </ul>
-
-                    <ul class="social">
-                        <li class="social__item">
-                            <a href="#" class="social__link">
-                                <img src="img/social/facebook.svg" alt="" title="facebook"/>
-                            </a>
-                        </li>
-                        <li class="social__item">
-                            <a href="#" class="social__link">
-                                <img src="img/social/instagram.svg" alt="" title=""/>
-                            </a>
-                        </li>
-                        <li class="social__item">
-                            <a href="#" class="social__link">
-                                <img src="img/social/twitter.svg" alt="" title=""/>
-                            </a>
-                        </li>
-                    </ul>
                 </div>
                 <div class="relatives">
                     <h3 class="relatives__title">Владелец</h3>

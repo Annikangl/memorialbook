@@ -18,8 +18,8 @@ class HomeController extends Controller
 
     public function index(): Factory|View|Application
     {
-        $humans = Human::byUser(auth()->id())->addSelect('status')->get();
-        $pets = Pet::byUser(auth()->id())->get();
+        $humans = Human::byUser(auth()->id())->addSelect('status')->latest()->get();
+        $pets = Pet::byUser(auth()->id())->latest()->get();
 
         $relatives = Human::byUser(auth()->id())
             ->withRelatives()->get();

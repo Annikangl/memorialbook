@@ -7,7 +7,10 @@ namespace App\Services;
 use App\Classes\Files\FileUploader;
 use App\Http\Requests\Profile\ProfileCreateRequest;
 use App\Models\Cemetery\Cemetery;
+use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
+use App\Models\Profile\Pet\Pet;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 
 class ProfileService
@@ -21,7 +24,7 @@ class ProfileService
 
     public function create(int $userId, array $data): Human
     {
-        $avatarPath = Human::EMPTY_AVATAR_PATH;
+        $avatarPath = Profile::EMPTY_AVATAR_PATH;
         $documentPath = null;
         $cemetery = null;
 
@@ -46,7 +49,6 @@ class ProfileService
                         $data['burial_place'],
                     );
                 }
-
 
                 $human = Human::make([
                     'first_name' => $data['first_name'],
@@ -76,7 +78,7 @@ class ProfileService
 
                 $human->save();
 
-                if ($data['father_id'] || $data['mother_id'] ) {
+                if ($data['father_id'] || $data['mother_id']) {
                     Human::updateChildForParent($data['father_id']['id']
                         ?? $data['mother_id']['id'],
                         $human->id
@@ -105,6 +107,60 @@ class ProfileService
 
         } catch (\Throwable $exception) {
             throw new \DomainException($exception->getMessage());
+        }
+    }
+
+    public function createPet(int $ownerId, array $data): Pet
+    {
+        $avatarPath = Profile::EMPTY_AVATAR_PATH;
+        $bannerPath = null;
+
+        if (isset($data['avatar'])) {
+            $avatarPath = $this->fileUploader->upload($data['avatar'], Pet::AVATAR_PATH);
+        }
+
+        if (isset($data['pet_banner'])) {
+            $bannerPath = $this->fileUploader->upload($data['pet_banner'], Pet::BANNER_PATH);
+        }
+
+        try {
+            return DB::transaction(function () use ($data, $avatarPath, $bannerPath, $ownerId) {
+                /** @var Pet $pet */
+                $pet = Pet::query()->make([
+                    'name' => $data['name'],
+                    'breed' => $data['breed'],
+                    'date_birth' => $data['date_birth'],
+                    'date_death' => $data['date_death'],
+                    'birth_place' => $data['birth_place'],
+                    'burial_place' => $data['burial_place'],
+                    'death_reason' => $data['death_reason'],
+                    'description' => $data['description'],
+                    'avatar' => $avatarPath,
+                    'banner' => $bannerPath,
+                ]);
+
+                $pet->user()->associate($ownerId);
+
+                $pet->save();
+
+                if (isset($data['pet_gallery'])) {
+                    /** @var UploadedFile $item */
+                    foreach ($data['pet_gallery'] as $item) {
+                        $itemPath = $this->fileUploader->upload($item, Pet::GALLERY_PATH);
+
+                        $pet->galleries()->create([
+                            'item' => $itemPath,
+                            'extension' => $item->getExtension(),
+                        ]);
+                    }
+                }
+
+                return $pet;
+            });
+        } catch (\DomainException $exception) {
+            throw new \DomainException($exception->getMessage());
+        } catch (\Throwable $e) {
+            throw new \DomainException($e->getMessage());
         }
     }
 }
