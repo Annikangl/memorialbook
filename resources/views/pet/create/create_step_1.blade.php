@@ -1,6 +1,6 @@
 <div class="steep">
     <div class="steep-wrap grid-col-2">
-        <div class="user-avatar">
+        <div class="user-avatar  @error('avatar') no-valid @enderror">
             <div class="preview-avatar">
                 <label class="preview-avatar-wrap">
                     <input type="file" accept=".jpg,.jpeg,.png" class="input-avatar" name="avatar" id="change-avatar"/>
@@ -17,63 +17,85 @@
             </div>
             <button type="button" class="delete-avatar hide">Удалить фото</button>
         </div>
+        @error('avatar')
+            <span class="is-invalid">{{ $message }}</span>
+        @enderror
 
         <div class="input-wrap">
             <span class="input-wrap__title">Имя питомца:</span>
-            <div class="input-form">
+            <div class="input-form @error('name')  no-valid @enderror">
                 <input type="text" class="input-text input-required" name="name" value="{{ old('name') }}"
                        title="Имя питомца">
             </div>
+            @error('name')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="input-wrap">
             <span class="input-wrap__title">Порода:</span>
-            <div class="input-form">
+            <div class="input-form @error('breed')  no-valid @enderror">
                 <input type="text" class="input-text input-required" name="breed" value="{{ old('breed') }}"
                        title="Порода">
             </div>
+            @error('breed')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
     </div>
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
             <span class="input-wrap__title">Дата рождения:</span>
-            <div class="input-form">
+            <div class="input-form @error('date_birth')  no-valid @enderror">
                 <input type="text" class="input-text input-required mask-data" name="date_birth"
                        {{ old('birth_date') }} title="Дата рождения">
             </div>
+            @error('date_birth')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Место рождения:</span>
-            <div class="input-form">
+            <div class="input-form @error('birth_place')  no-valid @enderror">
                 <input type="text" class="input-text" name="birth_place" value="{{ old('birth_place') }}"
                        title="Место рождения">
             </div>
+            @error('birth_place')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Дата смерти:</span>
-            <div class="input-form">
+            <div class="input-form @error('date_death')  no-valid @enderror">
                 <input type="text" class="input-text input-required mask-data" name="date_death"
                        value="{{ old('death_date') }}" title="Дата смерти">
             </div>
+            @error('date_death')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Место захоронения:</span>
-            <div class="input-form">
+            <div class="input-form @error('burial_place')  no-valid @enderror">
                 <input type="text" class="input-text" name="burial_place" value="{{ old('burial_place') }}"
                        title="Место захоронения">
             </div>
+            @error('burial_place')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Причина смерти:</span>
 
-            <div class="select-form">
+            <div class="select-form @error('death_reason') no-valid @enderror">
                 <div class="select">
                     <input type="hidden" class="select__output" id="death_reason_hidden" name="death_reason" readonly>
                     <input type="text" class="select__output" id="pet_death_reason" name="death_reason"
                            placeholder="Выберите причину" readonly>
                     <ul class="select-list">
                         @foreach($deathReasons as $reason)
-                            <li class="select-list__item" data-name="death_reason" data-id="{{ $reason->id }}">{{ $reason->title }}</li>
+                            <li class="select-list__item" data-name="death_reason"
+                                data-id="{{ $reason->id }}">{{ $reason->title }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -81,7 +103,9 @@
                     <path d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
                 </svg>
             </div>
-
+            @error('death_reason')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
     </div>
 </div>

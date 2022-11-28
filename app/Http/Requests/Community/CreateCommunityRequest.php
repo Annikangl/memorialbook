@@ -43,7 +43,7 @@ class CreateCommunityRequest extends FormRequest
                     $this->hasFile('avatar');
                 }),
                 File::image()
-                    ->min(10)
+                    ->min(100)
                     ->max(5 * 1024)
             ],
             'title' => ['required', 'string', 'min:3','max:100'],
@@ -55,7 +55,7 @@ class CreateCommunityRequest extends FormRequest
             ],
             'email' => ['sometimes', 'nullable', 'email:dns', 'unique:communities'],
             'phone' => ['sometimes', 'nullable', 'string', 'min:10', 'max:15', 'unique:communities'],
-            'website' => ['sometimes', 'nullable', 'string'],
+            'website' => ['sometimes', 'nullable', 'url'],
             'community_banner' => [
                 Rule::requiredIf(fn () => $this->hasFile('input-banner')),
                 File::image()->min(50)->max(10 * 1024),
@@ -70,7 +70,7 @@ class CreateCommunityRequest extends FormRequest
                     ->min(5)
                     ->max(10 * 1024)
                 ],
-            'description' => ['sometimes', 'nullable', 'string']
+            'description' => ['sometimes', 'nullable', 'string', 'min:20']
         ];
     }
 }

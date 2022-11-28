@@ -3,7 +3,7 @@
 
         <div class="input-wrap">
             <span class="input-wrap__title">Фотографии и видео:</span>
-            <div class="input-photo">
+            <div class="input-photo  @error('profile_images.*') no-valid @enderror">
 
                 <label class="input-photo-load">
                     <svg style="width: 20px; height: 20px;" aria-hidden="true">
@@ -15,31 +15,36 @@
                            accept=".jpg,.jpeg,.png,.mp4" multiple/>
                 </label>
             </div>
+            @error('profile_images.*')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="input-wrap">
             <span class="input-wrap__title">Описание:</span>
-            <textarea class="textarea-form"
+            <textarea class="textarea-form @error('description') no-valid @enderror"
                       placeholder="Текст описания..."
                       id="description"
                       name="description"
-                       title="description">{{ old('description') }}</textarea>
+                      title="description">{{ old('description') }}</textarea>
+            @error('description')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="input-wrap">
             <span class="input-wrap__title">Религиозные взгляды:</span>
 
-            <div class="select-form">
+            <div class="select-form @error('religious_id') no-valid @enderror">
                 <div class="select">
-
                     <input type="hidden" class="select__output" id="religious_id_hidden" name="religious_id" readonly>
                     <input type="text" class="select__output" placeholder="Выберите из списка" readonly>
 
                     <ul class="select-list">
                         @foreach($religions as $religion)
-                            <li class="select-list__item" data-name="religious_id" data-id="{{$religion->id }}"
-                                id="religious_id">
-                                {{$religion->title}}</li>
+                            <li class="select-list__item" data-name="religious_id" data-id="{{$religion->id }}" id="religious_id">
+                                {{$religion->title}}
+                            </li>
                         @endforeach
                     </ul>
                 </div>
@@ -48,7 +53,9 @@
                     <path d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
                 </svg>
             </div>
-
+            @error('religious_id')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
     </div>
 </div>

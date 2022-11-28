@@ -16,78 +16,109 @@
             </div>
             <button type="button" class="delete-avatar hide">Удалить фото</button>
         </div>
-        <h3 class="name-cemetery">Аватарка кладбища</h3>
+        <h3 class="name-cemetery @error('avatar') no-valid @enderror">Аватарка кладбища</h3>
+        @error('avatar')
+            <span class="is-invalid">{{ $message }}</span>
+        @enderror
 
     </div>
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
             <span class="input-wrap__title">Название:</span>
-            <div class="input-form">
+            <div class="input-form  @error('title') no-valid @enderror">
                 <input type="text" class="input-text input-required"
                        name="title"
                        value="{{ old('title') }}"
                        title="Название">
             </div>
+            @error('title')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Название латиницей:</span>
-            <div class="input-form">
-                <input type="text" class="input-text"
+            <div class="input-form  @error('title_en')  no-valid @enderror">
+                <input type="text"
+                       class="input-text"
                        name="title_en"
                        value="{{ old('title_en') }}"
                        title="Название латиницей">
             </div>
+            @error('title_en')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Подпись:</span>
-            <div class="input-form">
+            <div class="input-form  @error('subtitle')  no-valid @enderror">
                 <input type="text" class="input-text"
                        name="subtitle"
                        value="{{ old('subtitle') }}"
                        title="Подпись">
             </div>
+            @error('subtitle')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Местоположение:</span>
-            <div class="input-form" style="position:relative;">
+            <div class="input-form @error('cemetery_address') no-valid @enderror" style="position:relative;">
                 <input type="text" class="input-text"
-                       id="cemetery_address" name="cemetery_address" title="Местоположение" readonly value="{{ old('cemetery_address') }}">
+                       id="cemetery_address"
+                       name="cemetery_address"
+                       title="Местоположение"
+                       readonly
+                       value="{{ old('cemetery_address') }}">
                 <a class="cemeteryAddressModal" data-hystmodal="#cemetery_address_location" href="#" style="position:absolute;" title="Указать на карте">
                     <img src="{{ asset('assets/media/media/icons/location.svg') }}" alt="Указать на карте" width="20" >
                 </a>
                 <input type="hidden" name="cemetery_address_coords" id="cemetery_address_coords" value="{{ old('cemetery_address_coords') }}">
             </div>
-
+            @error('cemetery_address')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
+            @error('cemetery_address_coords')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
     </div>
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
             <span class="input-wrap__title">Email:</span>
-            <div class="input-form">
+            <div class="input-form @error('email') no-valid @enderror">
                 <input type="email" class="input-text input-required"
                        name="email"
                        value="{{ old('email') }}"
                        title="Email">
             </div>
+            @error('email')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Телефон:</span>
-            <div class="input-form">
+            <div class="input-form @error('phone') no-valid @enderror">
                 <input type="tel" class="input-text"
                        name="phone"
                        value="{{ old('phone') }}"
                        title="Телефон">
             </div>
+            @error('phone')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">График работы:</span>
-            <div class="input-form">
+            <div class="input-form @error('schedule') no-valid @enderror">
                 <input type="text" class="input-text"
                        name="schedule"
                        value="{{ old('schedule') }}"
                        title="Расписание">
             </div>
+            @error('schedule')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
     </div>
 </div>

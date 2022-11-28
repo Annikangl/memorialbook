@@ -29,6 +29,7 @@ let openFormRegistration = function () {
     aside.classList.remove('hide');
 }
 
+
 let openMenu = function () {
     openModal();
     modal.classList.add('aside-right', 'aside-menu');
@@ -43,6 +44,7 @@ if (document.querySelectorAll('.open-registration')) {
         btn.addEventListener('click', openFormRegistration);
     }
 }
+
 
 if (document.querySelector('#input-link')) {
 

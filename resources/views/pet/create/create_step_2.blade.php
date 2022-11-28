@@ -3,7 +3,7 @@
 
         <div class="input-wrap">
             <span class="input-wrap__title">Стартовый баннер:</span>
-            <div class="input-photo input-banner">
+            <div class="input-photo input-banner @error('pet_banner') no-valid @enderror">
 
                 <label class="input-photo-load">
                     <svg style="width: 20px; height: 20px;" aria-hidden="true">
@@ -13,11 +13,14 @@
                     <input type="file" class="load-files-profile" name="pet_banner" accept=".jpg,.jpeg,.png"/>
                 </label>
             </div>
+            @error('pet_banner')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="input-wrap">
             <span class="input-wrap__title">Фотографии и видео:</span>
-            <div class="input-photo">
+            <div class="input-photo @error('pet_gallery.*') no-valid @enderror">
 
                 <label class="input-photo-load">
                     <svg style="width: 20px; height: 20px;" aria-hidden="true">
@@ -27,11 +30,20 @@
                     <input type="file" class="load-files-profile" name="pet_gallery[]" accept=".jpg,.jpeg,.png,.mp4" multiple/>
                 </label>
             </div>
+            @error('pet_gallery.*')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="input-wrap">
             <span class="input-wrap__title">Описание:</span>
-            <textarea class="textarea-form" placeholder="Текст описания..." name="description" title="Описание">{{ old('description') }}</textarea>
+            <textarea class="textarea-form @error('description') no-valid @enderror"
+                      placeholder="Текст описания..."
+                      name="description"
+                      title="Описание">{{ old('description') }}</textarea>
+            @error('description')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
     </div>

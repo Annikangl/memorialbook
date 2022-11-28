@@ -1,14 +1,13 @@
 <div class="steep">
     <div class="steep-wrap grid-col-2_3">
 
-        <div class="user-avatar">
+        <div class="user-avatar @error('avatar') no-valid @enderror">
             <div class="preview-avatar">
                 <label class="preview-avatar-wrap">
                     <input type="file" accept=".jpg,.jpeg,.png"
                            class="input-avatar"
                            id="change-avatar"
-                           name="avatar"
-                    />
+                           name="avatar"/>
                     <span class="preview-avatar-wrap__text">Выберите фото</span>
                 </label>
                 <label class="preview-avatar__icon" for="change-avatar">
@@ -21,18 +20,23 @@
             <button type="button" class="delete-avatar hide">Удалить фото</button>
         </div>
         <h3 class="name-cemetery">Название сообщества</h3>
-
+        @error('avatar')
+            <span class="is-invalid">{{ $message }}</span>
+        @enderror
     </div>
     <div class="steep-wrap">
         <div class="input-wrap">
             <span class="input-wrap__title">Название:</span>
-            <div class="input-form">
+            <div class="input-form @error('title') no-valid @enderror">
                 <input type="text" class="input-text input-required" name="title" title="title">
             </div>
+            @error('title')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Местоположение:</span>
-            <div class="input-form" style="position:relative;">
+            <div class="input-form @error('community_address') no-valid @enderror" style="position:relative;">
                 <input type="text"
                        class="input-text"
                        id="community_address"
@@ -50,30 +54,43 @@
                     type="hidden"
                     name="community_address_coords"
                     id="community_address_coords"
-                    value="{{ old('community_address_coords') }}"
-                >
+                    value="{{ old('community_address_coords') }}">
             </div>
-
+            @error('community_address')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
+            @error('community_address_coords')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
     </div>
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
             <span class="input-wrap__title">Email:</span>
-            <div class="input-form">
+            <div class="input-form  @error('email') no-valid @enderror">
                 <input type="email" class="input-text input-required" name="email" title="email">
             </div>
+            @error('email')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Телефон:</span>
-            <div class="input-form">
+            <div class="input-form  @error('phone') no-valid @enderror">
                 <input type="tel" class="input-text mask-tel" name="phone" title="phone">
             </div>
+            @error('phone')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Website</span>
-            <div class="input-form">
-                <input type="text" class="input-text" name="website" title="website">
+            <div class="input-form  @error('website') no-valid @enderror">
+                <input type="text" class="input-text" name="website" placeholder="https://yoursite.com" title="website">
             </div>
+            @error('website')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
     </div>
 </div>

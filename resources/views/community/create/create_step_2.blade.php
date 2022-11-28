@@ -3,7 +3,7 @@
 
         <div class="input-wrap">
             <span class="input-wrap__title">Стартовый баннер:</span>
-            <div class="input-photo input-banner">
+            <div class="input-photo input-banner @error('community_banner') no-valid @enderror">
 
                 <label class="input-photo-load">
                     <svg style="width: 20px; height: 20px;" aria-hidden="true">
@@ -13,11 +13,14 @@
                     <input type="file" class="load-files-community" name="community_banner" accept=".jpg,.jpeg,.png"/>
                 </label>
             </div>
+            @error('community_banner')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="input-wrap">
             <span class="input-wrap__title">Фотографии и видео:</span>
-            <div class="input-photo">
+            <div class="input-photo @error('community_gallery.*') no-valid @enderror">
 
                 <label class="input-photo-load">
                     <svg style="width: 20px; height: 20px;" aria-hidden="true">
@@ -30,15 +33,21 @@
                            multiple/>
                 </label>
             </div>
+            @error('community_gallery.*')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="input-wrap">
             <span class="input-wrap__title">Описание:</span>
             <textarea
-                class="textarea-form"
+                class="textarea-form @error('description') no-valid @enderror"
                 placeholder="Текст описания..."
                 name="description"
                 title="description"></textarea>
+            @error('description')
+                <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
     </div>

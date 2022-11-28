@@ -50,7 +50,7 @@ class CreateRequest extends FormRequest
                 'array:lat,lng'
             ],
             'email' => ['nullable', 'email:dns', 'unique:cemeteries', 'unique:users'],
-            'phone' => ['nullable', 'string', 'min:5', 'max:15'],
+            'phone' => ['nullable', 'string', 'min:8', 'max:15'],
             'schedule' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
             'settings-public' => Rule::in(Cemetery::getAccessList()),

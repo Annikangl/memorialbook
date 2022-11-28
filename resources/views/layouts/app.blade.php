@@ -128,9 +128,9 @@
 
     <main class="content" role="main">
 
-        <div class="message">
-            @include('includes.partials.message')
-        </div>
+{{--        <div class="message">--}}
+{{--            @include('includes.partials.message')--}}
+{{--        </div>--}}
 
         @yield('content')
 
@@ -182,8 +182,6 @@
 </div>
 
 <x-previews-modal>
-    <button type="button" class="close-registration" id="close-aside"></button>
-
     <form class="form-registration" id="form-registration">
         <h3 class="form-registration__title">Регистрация</h3>
         <div class="input-wrap">
@@ -226,7 +224,7 @@
             <a href="#">политики обработки персональных данных</a></p>
     </form>
 
-    <form class="form-recover">
+    <form class="form-recover" id="form-recover">
         <h3 class="form-recover__title">Восстановить пароль</h3>
         <div class="form-recover-wrap">
             <p>Если вы забыли пароль, введите email. <br/>Контрольная строка для смены пароля, а также ваши
@@ -240,8 +238,8 @@
             <input type="submit" class="form__submit blue-btn btn" value="Выслать" title="Зарегистрироваться"/>
         </div>
     </form>
-</x-previews-modal>
 
+</x-previews-modal>
 
 
 

@@ -30,10 +30,10 @@ class CreateRequest extends FormRequest
             'breed' => ['required', 'string'],
             'date_birth' => ['required', 'date'],
             'date_death' => ['required', 'date'],
-            'birth_place' => ['sometimes', 'nullable', 'string'],
-            'burial_place' => ['sometimes', 'nullable', 'string'],
+            'birth_place' => ['sometimes', 'nullable', 'string', 'min:3'],
+            'burial_place' => ['sometimes', 'nullable', 'string', 'min:3'],
             'death_reason' => ['required', 'exists:death_reasons,title'],
-            'description' => ['sometimes', 'nullable', 'string'],
+            'description' => ['sometimes', 'nullable', 'string', 'min:20'],
 
             'avatar' => [
                 Rule::requiredIf(fn () => $this->hasFile('avatar')),
