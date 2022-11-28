@@ -48,7 +48,7 @@
             <span class="input-wrap__title">Дата рождения:</span>
             <div class="input-form @error('date_birth')  no-valid @enderror">
                 <input type="text" class="input-text input-required mask-data" name="date_birth"
-                       {{ old('birth_date') }} title="Дата рождения">
+                       value="{{ old('date_birth') }}" title="Дата рождения">
             </div>
             @error('date_birth')
                 <span class="is-invalid">{{ $message }}</span>
@@ -68,7 +68,7 @@
             <span class="input-wrap__title">Дата смерти:</span>
             <div class="input-form @error('date_death')  no-valid @enderror">
                 <input type="text" class="input-text input-required mask-data" name="date_death"
-                       value="{{ old('death_date') }}" title="Дата смерти">
+                       value="{{ old('date_death') }}" title="Дата смерти">
             </div>
             @error('date_death')
                 <span class="is-invalid">{{ $message }}</span>

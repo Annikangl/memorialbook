@@ -28,7 +28,8 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Название:</span>
             <div class="input-form @error('title') no-valid @enderror">
-                <input type="text" class="input-text input-required" name="title" title="title">
+                <input type="text" class="input-text input-required" name="title" value="{{ old('title') }}"
+                       title="Title">
             </div>
             @error('title')
                 <span class="is-invalid">{{ $message }}</span>
@@ -68,7 +69,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Email:</span>
             <div class="input-form  @error('email') no-valid @enderror">
-                <input type="email" class="input-text input-required" name="email" title="email">
+                <input type="email" class="input-text input-required" name="email" value="{{ old('email') }}" title="email">
             </div>
             @error('email')
             <span class="is-invalid">{{ $message }}</span>
@@ -77,7 +78,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Телефон:</span>
             <div class="input-form  @error('phone') no-valid @enderror">
-                <input type="tel" class="input-text mask-tel" name="phone" title="phone">
+                <input type="tel" class="input-text mask-tel" name="phone" value="{{ old('phone') }}" title="phone">
             </div>
             @error('phone')
                 <span class="is-invalid">{{ $message }}</span>
@@ -86,7 +87,11 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Website</span>
             <div class="input-form  @error('website') no-valid @enderror">
-                <input type="text" class="input-text" name="website" placeholder="https://yoursite.com" title="website">
+                <input type="text" class="input-text"
+                       name="website"
+                       placeholder="https://yoursite.com"
+                       value="{{ old('website') }}"
+                       title="website">
             </div>
             @error('website')
                 <span class="is-invalid">{{ $message }}</span>

@@ -21,7 +21,7 @@ class CommunityController extends Controller
 
     public function index(): Factory|View|Application
     {
-        $communities = Community::query()->paginate(4);
+        $communities = Community::query()->latest()->paginate(4);
 
         return view('community.index', compact('communities'));
     }

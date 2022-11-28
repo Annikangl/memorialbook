@@ -241,8 +241,6 @@
 
 </x-previews-modal>
 
-
-
 @yield('scripts')
 
 </body>

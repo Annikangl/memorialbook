@@ -43,7 +43,7 @@ class CreateCommunityRequest extends FormRequest
                     $this->hasFile('avatar');
                 }),
                 File::image()
-                    ->min(100)
+                    ->min(1)
                     ->max(5 * 1024)
             ],
             'title' => ['required', 'string', 'min:3','max:100'],
