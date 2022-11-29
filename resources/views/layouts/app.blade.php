@@ -53,7 +53,7 @@
 
 <div id="page">
 
-    <header class="header">
+    <header class="header @if(Route::is('index')) login-page @endif">
         <!--logo header-->
         <a href="{{ route('home') }}" class="logo-header">
             <img src="{{ asset('assets/media/media/logo/logo.svg') }}" class="logo-header__img"
@@ -181,6 +181,7 @@
 
 </div>
 
+
 <x-previews-modal>
     <form class="form-registration" id="form-registration">
         <h3 class="form-registration__title">Регистрация</h3>
@@ -224,16 +225,21 @@
             <a href="#">политики обработки персональных данных</a></p>
     </form>
 
-    <form class="form-recover" id="form-recover">
+    <form class="form-recover" id="form-recover" action="{{ route('password.email') }}" method="post">
+        @csrf
         <h3 class="form-recover__title">Восстановить пароль</h3>
         <div class="form-recover-wrap">
             <p>Если вы забыли пароль, введите email. <br/>Контрольная строка для смены пароля, а также ваши
                 регистрационные данные, будут высланы вам по электронной почте.</p>
             <div class="input-wrap">
                 <span class="input-wrap__title">Email:</span>
-                <div class="input-form">
+                <div class="input-form @error('message') no-valid @enderror">
                     <input type="email" class="input-text" name="form-recover__email" title=""/>
                 </div>
+                @error('message')
+                    <span class="is-invalid">{{ $message }}</span>
+                @enderror
+
             </div>
             <input type="submit" class="form__submit blue-btn btn" value="Выслать" title="Зарегистрироваться"/>
         </div>

@@ -1,6 +1,7 @@
 import 'bootstrap'
 import 'hystmodal/dist/hystmodal.min'
 import 'hystmodal/dist/hystmodal.min.css'
+import iziToast from "izitoast";
 import './auth'
 import './news'
 import './cemetery/cemetery'
@@ -9,6 +10,14 @@ import './profile/add_profile'
 import './account'
 import './community/script'
 import axios from "axios";
+
+
+iziToast.show({
+    title: 'Test',
+    message: 'What would you like to add?',
+    color: 'green',
+    position: 'topRight',
+});
 
 
 //VALIDATION FORM
@@ -49,7 +58,7 @@ if (document.querySelector('#login-form')) {
         event.preventDefault();
 
         let inputs = this.querySelectorAll('.input-text');
-        let url = app.globalConfig.baseUrl + 'login';
+        let url = app.globalConfig.baseUrl + '/login';
 
         console.log(url)
 
@@ -69,6 +78,7 @@ if (document.querySelector('#login-form')) {
             if (response.status === 204) {
                 location.reload();
             }
+
         }).catch(function (error) {
             console.log(error)
             if (error.response.status === 422) {
@@ -83,7 +93,7 @@ if (document.querySelector('#form-registration')) {
         event.preventDefault();
 
         let inputs = this.querySelectorAll('.input-text');
-        let url = app.globalConfig.baseUrl + 'register';
+        let url = app.globalConfig.baseUrl + '/register';
 
         validation(inputs);
 
