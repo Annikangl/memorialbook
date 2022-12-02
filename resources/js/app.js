@@ -1,9 +1,9 @@
 import 'bootstrap'
+import './news'
 import 'hystmodal/dist/hystmodal.min'
 import 'hystmodal/dist/hystmodal.min.css'
 import iziToast from "izitoast";
 import './auth'
-import './news'
 import './cemetery/cemetery'
 import './map'
 import './profile/add_profile'
@@ -12,13 +12,25 @@ import './community/script'
 import axios from "axios";
 
 
-iziToast.show({
-    title: 'Test',
-    message: 'What would you like to add?',
-    color: 'green',
-    position: 'topRight',
-});
+// iziToast.info({
+//     title: 'Test',
+//     message: 'What would you like to add?',
+//     position: 'topRight',
+// });
 
+const imgObjects = document.querySelectorAll('[data-src]');
+
+
+Array.from(imgObjects).map(function (item) {
+    const img = new Image();
+    img.src = item.dataset.src;
+
+    img.onload = function () {
+        return item.nodeName === 'IMG' ?
+            item.src = item.dataset.src :
+            item.style.backgroundImage = `url(${item.dataset.src})`;
+    }
+})
 
 //VALIDATION FORM
 function validation(items) {

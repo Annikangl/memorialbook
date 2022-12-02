@@ -14,3 +14,4 @@ yarn-error.log
 /.idea
 /.vscode
 /dump.sql
+/public/build/*

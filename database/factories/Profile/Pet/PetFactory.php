@@ -23,11 +23,10 @@ class PetFactory extends Factory
             'breed' => $this->faker->words(2, true),
             'avatar' => $this->faker->randomElement(
                 [
-                    'uploads/pets/img-1.png',
-                    'uploads/pets/img-2.png'
+                    'uploads/pets/img-1.webp',
                 ]
             ),
-            'banner' => 'uploads/pets/banner.jpg',
+            'banner' => 'uploads/pets/banner.webp',
             'date_birth' => now()->subYears(random_int(1,10)),
             'date_death' => now()->addYears(10),
             'birth_place' => $this->faker->address,

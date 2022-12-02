@@ -9,13 +9,14 @@
                     <a class="tree-nav__link active" href="{{ route('tree') }}">Семейное древо</a>
                 </div>
                 <div class="tree-nav__item">
-                    <a class="tree-nav__link" href="{{ route('tree.list') }}">Список профилей</a>
+                    <a class="tree-nav__link" href="#">Список профилей</a>
                 </div>
             </div>
         </div>
         <div class="tree__controls">
-            <a class="tree-controls__button -new btn btn-primary btn-sm" href="{{ route('profile.create') }}">+ Добавить
-                профиль</a>
+            <a class="tree-controls__button btn blue-btn" href="{{ route('profile.create') }}">+
+                Добавить профиль
+            </a>
 
         </div>
     </div>

@@ -29,11 +29,10 @@ class HumanFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'avatar' => $this->faker->randomElement(
                 [
-                    'uploads/profiles/avatar/avatar-1.jpg',
-                    'uploads/profiles/avatar/avatar-2.jpg',
-                    'uploads/profiles/avatar/avatar-3.jpg',
-                    'uploads/profiles/avatar/avatar-4.jpg',
-                    'uploads/profiles/avatar/avatar-5.jpg',
+                    'uploads/profiles/avatar/avatar-1.webp',
+                    'uploads/profiles/avatar/avatar-2.webp',
+                    'uploads/profiles/avatar/avatar-3.webp',
+                    'uploads/profiles/avatar/avatar-4.webp',
                 ]
             ),
             'description' => $this->faker->text(),

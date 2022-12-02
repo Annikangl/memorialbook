@@ -17,7 +17,6 @@
 @import "layouts/responsive.css";
 
 
-
 /* Breadcrumbs
 ------------------------*/
 
@@ -63,8 +62,6 @@
     color: var(--blue);
     border-color: var(--blue);
 }
-
-
 
 
 .list, .member-card, .pet-card-wrap {
@@ -1174,3 +1171,166 @@ a.cemetery-contacts-list__text:hover {
     text-decoration: underline;
 }
 
+
+.new-password {
+    padding: 32px var(--content-size);
+}
+
+.new-password__title {
+    font: 900 62px sans-serif;
+    margin-bottom: 10px;
+    color: var(--black);
+}
+
+.form-new-password {
+    display: grid;
+    grid-template-columns: 295px 1fr;
+    grid-gap: 108px;
+    margin-top: 18px;
+}
+
+.form-new-password .input-wrap:first-child {
+    margin: 0;
+}
+
+.form-new-password__text {
+    max-width: 382px;
+}
+
+
+/***family-tree*/
+.tree__inner {
+    position: relative
+}
+
+.tree__nav {
+    left: 0;
+    top: 30px;
+    transform: none
+}
+
+.tree__nav {
+    left: 15%;
+    position: absolute;
+    top: 6px;
+    transform: translateX(-50%);
+    z-index: 10
+}
+
+.tree-nav__items {
+    display: flex
+}
+
+.tree-nav__link {
+    align-items: center;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    color: rgba(32, 30, 31, .7) !important;
+    display: flex;
+    font-size: 14px;
+    height: 54px;
+    justify-content: center;
+    max-width: calc(50vw - 20px);
+    padding: 0;
+    text-decoration: none !important;
+    white-space: nowrap;
+    width: 172px
+}
+
+.tree-nav__link.active, .tree-nav__link:focus, .tree-nav__link:hover {
+    color: #201e1f !important
+}
+
+.tree-nav__link.active {
+    background: #fff;
+    border-color: #e5e8eb;
+    box-shadow: 0 0 30px 0 rgba(15, 20, 37, .1);
+    pointer-events: none
+}
+
+.tree__content {
+    background: none !important;
+    height: 100%
+}
+
+.tree__content .node {
+    cursor: pointer;
+    height: 164px
+}
+
+.tree__content .node:focus .node-edit, .tree__content .node:hover .node-edit {
+    opacity: 1
+}
+
+.tree__content .node-image {
+    height: 95px;
+    margin: 0 auto;
+    width: 95px
+}
+
+.tree__content .node-image-inner {
+    border-radius: 50%;
+    height: 95px;
+    margin: -32px 0 0;
+    overflow: hidden;
+    width: 95px
+}
+
+.tree__content .node-edit {
+    background: #fff url(../../assets/media/tree/pencil.svg) no-repeat 50%;
+    border: none;
+    border-radius: 50%;
+    height: 32px;
+    margin-left: 63px;
+    opacity: 0;
+    padding: 0;
+    right: 0;
+    top: 0;
+    transition: opacity .25s ease-in-out;
+    width: 32px
+}
+
+.touch .tree__content .node-edit {
+    opacity: 1
+}
+
+.tree__content .node-info {
+    font-size: 12px;
+    margin-top: 10px;
+    text-align: center
+}
+
+.tree__content .node-name {
+    font-weight: 600;
+    margin-top: 6px
+}
+
+.tree-nav__link.active, .tree-nav__link:focus, .tree-nav__link:hover {
+    color: #201e1f !important
+}
+
+.tree-nav__link.active {
+    background: #fff;
+    border-color: #e5e8eb;
+    box-shadow: 0 0 30px 0 rgba(15, 20, 37, .1);
+    pointer-events: none
+}
+
+.tree__controls {
+    margin-top: 15px;
+    position: fixed;
+    background-color: #F5F7F9;
+    right: 50%;
+    transform: translateX(390%);
+    z-index: 10
+}
+
+.tree__content {
+    background: none !important;
+    height: 100%
+}
+
+.tree-controls__button {
+    padding: 12px 15px 10px;
+}

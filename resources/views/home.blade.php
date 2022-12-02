@@ -48,9 +48,13 @@
                             <li class="list-profiles__item swiper-slide">
                                 <div class="list-profiles-img-wrap">
                                     <div class="list-profiles__img">
-                                        <img src="{{ asset('storage/' . $human->avatar) }}" class="bg-img"
-                                             alt="{{ $human->full_name }}"
-                                             title="{{ $human->full_name }}"/>
+                                        <img
+                                            data-src="{{ asset('assets/media/media/empty-avatar.png') }}"
+                                            data-srcset="{{ asset('storage/' . $human->avatar) }}"
+                                            class="bg-img swiper-lazy"
+                                            alt="{{ $human->full_name }}"
+                                            title="{{ $human->full_name }}"/>
+                                        <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                                     </div>
                                     <a href="#" class="list-profiles-mark" title="Редактировать профиль">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -66,7 +70,6 @@
                                    class="profile-text">{{ $human->full_name }}</a>
                             </li>
                         @empty
-
                         @endforelse
 
                     </ul>
@@ -98,9 +101,13 @@
                             <li class="list-profiles__item swiper-slide">
                                 <div class="list-profiles-img-wrap">
                                     <div class="list-profiles__img">
-                                        <img src="{{ asset('storage/' . $relative->avatar) }}" class="bg-img"
-                                             alt="{{ $relative->full_name }}"
-                                             title="{{ $relative->full_name }}"/>
+                                        <img
+                                            data-src="{{ asset('assets/media/media/empty-avatar.png') }}"
+                                            data-srcset="{{ asset('storage/' . $relative->avatar) }}"
+                                            class="bg-img swiper-lazy"
+                                            alt="Avatar {{ $relative->full_name }}"
+                                            title="Avatar {{ $relative->full_name }}"/>
+                                        <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                                     </div>
                                     <a href="#" class="list-profiles-mark" title="Редактировать профиль">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -147,9 +154,13 @@
                             <li class="list-profiles__item swiper-slide">
                                 <div class="list-profiles-img-wrap">
                                     <div class="list-profiles__img">
-                                        <img src="{{ asset('storage/' . $pet->avatar) }}" class="bg-img"
-                                             alt="{{ $pet->name }}"
-                                             title="avatar"/>
+                                        <img
+                                            data-src="{{ asset('assets/media/media/empty-avatar.png') }}"
+                                            data-srcset="{{ asset('storage/' . $pet->avatar) }}"
+                                            class="bg-img swiper-lazy"
+                                            alt="{{ $pet->name }}"
+                                            title="avatar"/>
+                                        <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                                     </div>
                                     <a href="#"
                                        class="list-profiles-mark"
