@@ -113,14 +113,22 @@ return new class extends Migration {
     public function down(): void
     {
         if (app()->isLocal()) {
-            Schema::dropIfExists('community_users');
+
+
             Schema::dropIfExists('community_galleries');
             Schema::dropIfExists('community_post_galleries');
-            Schema::dropIfExists('community_humans');
+
             Schema::dropIfExists('community_post_tags');
             Schema::dropIfExists('community_tags');
             Schema::dropIfExists('community_posts');
+            Schema::dropIfExists('community_documents');
+//            Schema::table('communities', function (Blueprint $table) {
+//                $table->dropForeign('communities_owner_id_foreign');
+//            });
+            Schema::dropIfExists('community_user');
+            Schema::dropIfExists('community_human');
             Schema::dropIfExists('communities');
+
         }
 
     }

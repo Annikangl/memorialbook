@@ -98,10 +98,10 @@ return new class extends Migration {
     public function down()
     {
         if (app()->isLocal()) {
-            Schema::dropIfExists('religions');
+            Schema::dropIfExists('hobby_human');
             Schema::dropIfExists('hobbies');
             Schema::dropIfExists('humans');
-            Schema::dropIfExists('hobby_human');
+            Schema::dropIfExists('religions');
         }
     }
 };

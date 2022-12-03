@@ -29,4 +29,11 @@ return new class extends Migration
             $table->nullableTimestamps();
         });
     }
+
+    public function down()
+    {
+        if (app()->isLocal()) {
+            Schema::dropIfExists('media');
+        }
+    }
 };
