@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\NetworkController;
 use App\Http\Controllers\Cabinet\CabinetController;
 use App\Http\Controllers\Cemetery\CemeteryController;
 use App\Http\Controllers\Community\CommunityController;
+use App\Http\Controllers\Profile\FamilyBurialController;
 use App\Http\Controllers\Profile\HumanController;
 use App\Http\Controllers\Profile\PetController;
 use App\Http\Controllers\User\UserController;
@@ -59,6 +60,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', [PetController::class, 'create'])->name('create');
             Route::post('/store', [PetController::class, 'store'])->name('store');
             Route::get('/{slug}/show', [PetController::class, 'show'])->name('show');
+        });
+
+        Route::group(['prefix' => 'family', 'as' => 'family.'], function () {
+            Route::get('/create', [FamilyBurialController::class, 'create'])->name('create');
+            Route::get('/search/', [FamilyBurialController::class, 'searchProfile'])->name('search.profile');
         });
     });
 

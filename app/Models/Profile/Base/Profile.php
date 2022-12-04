@@ -41,6 +41,7 @@ class Profile extends Model
     public const DOCUMENTS_PATH = 'uploads/profiles/document';
     public const GALLERY_PATH = 'uploads/profiles/gallery';
 
+
     public static function statusList(): array
     {
         return [
@@ -59,6 +60,21 @@ class Profile extends Model
     public function isClosed(): bool
     {
         return $this->status === self::STATUS_CLOSED;
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        return  "{$this->first_name} {$this->last_name}";
+    }
+
+    public function getYearBirthAttribute(): int
+    {
+        return Carbon::parse($this->date_birth)->year;
+    }
+
+    public function getYearDeathAttribute(): int
+    {
+        return Carbon::parse($this->date_death)->year;
     }
 
     protected function lifeExpectancy(): ?Attribute

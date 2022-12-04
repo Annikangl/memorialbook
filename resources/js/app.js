@@ -6,7 +6,7 @@ import iziToast from "izitoast";
 import './auth'
 import './cemetery/cemetery'
 import './map'
-import './profile/add_profile'
+import './profile/main'
 import './account'
 import './community/script'
 import axios from "axios";

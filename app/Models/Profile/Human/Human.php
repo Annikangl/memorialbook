@@ -55,6 +55,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property-read Human|null $spouse
  * @method static Builder|Human active()
  * @method static Builder|Human byUser(int $userId)
+ * @method static Builder|Collection bySearch(string $searchText)
  * @method static Builder|Human withRelatives()
  * @method static Builder|Human pets()
  * @method static Builder|Human findSimilarSlugs(string $attribute, array $config, string $slug)
@@ -72,10 +73,6 @@ class Human extends Profile implements HasMedia
     public const AVATAR_PATH = 'uploads/profiles/avatar';
     public const DOCUMENTS_PATH = 'uploads/profiles/document';
     public const GALLERY_PATH = 'uploads/profiles/gallery';
-
-    protected $guarded = [
-        '_token'
-    ];
 
     protected $fillable = [
         'cemetery_id',
@@ -109,6 +106,9 @@ class Human extends Profile implements HasMedia
         'profile_images'
     ];
 
+    protected $appends = ['fullName', 'yearBirth', 'yearDeath'];
+
+
     public static function updateChildForParent(int $parentId, int $childId): void
     {
         self::where('id', $parentId)
@@ -132,6 +132,13 @@ class Human extends Profile implements HasMedia
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('status', self::STATUS_ACTIVE);
+    }
+
+    public function scopeBySearch(Builder $query, string $searchText): Builder
+    {
+        return $query->select(['first_name', 'last_name', 'slug', 'avatar'])->where(
+            \DB::raw('CONCAT_WS(" ", humans.first_name, " ", humans.last_name)'),
+            'LIKE', "%$searchText%");
     }
 
     public function scopeFiltered(Builder $query): Builder

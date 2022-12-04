@@ -10,6 +10,7 @@ use App\Models\Cemetery\Cemetery;
 use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 
@@ -162,5 +163,10 @@ class ProfileService
         } catch (\Throwable $e) {
             throw new \DomainException($e->getMessage());
         }
+    }
+
+    public function search(string $searchText): LengthAwarePaginator
+    {
+        return Human::bySearch($searchText)->paginate(5);
     }
 }
