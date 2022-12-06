@@ -28,9 +28,15 @@ class FamilyBurialController extends Controller
         try {
             $profiles = $this->service->search($searchText);
         } catch (\DomainException $exception) {
-            return response()->json(['error' => $exception->getMessage()]);
+            return response()->json(['status' => false, 'error' => $exception->getMessage()]);
         }
 
         return response()->json(['status' => true, 'profiles' => $profiles]);
+    }
+
+    public function store(Request $request)
+    {
+        dd($request->input());
+        dd(explode(',', $request->get('profiles_ids')));
     }
 }

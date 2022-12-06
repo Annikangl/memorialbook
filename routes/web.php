@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
 
         Route::group(['prefix' => 'family', 'as' => 'family.'], function () {
             Route::get('/create', [FamilyBurialController::class, 'create'])->name('create');
+            Route::post('/store', [FamilyBurialController::class, 'store'])->name('store');
             Route::get('/search/', [FamilyBurialController::class, 'searchProfile'])->name('search.profile');
         });
     });

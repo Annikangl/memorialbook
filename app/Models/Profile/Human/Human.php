@@ -136,7 +136,7 @@ class Human extends Profile implements HasMedia
 
     public function scopeBySearch(Builder $query, string $searchText): Builder
     {
-        return $query->select(['first_name', 'last_name', 'slug', 'avatar'])->where(
+        return $query->select(['first_name', 'last_name', 'slug', 'avatar', 'date_birth', 'date_death'])->where(
             \DB::raw('CONCAT_WS(" ", humans.first_name, " ", humans.last_name)'),
             'LIKE', "%$searchText%");
     }
