@@ -249,3 +249,4 @@ if (document.querySelector('.add-profile')) {
         }
     })
 }
+

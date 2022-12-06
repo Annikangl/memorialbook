@@ -1,12 +1,12 @@
 import 'bootstrap'
+import './news'
 import 'hystmodal/dist/hystmodal.min'
 import 'hystmodal/dist/hystmodal.min.css'
 import iziToast from "izitoast";
 import './auth'
-import './news'
 import './cemetery/cemetery'
 import './map'
-import './profile/add_profile'
+import './profile/main'
 import './account'
 import './community/script'
 import axios from "axios";

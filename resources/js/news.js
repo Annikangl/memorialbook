@@ -1,8 +1,5 @@
-import Swiper, { Navigation, Pagination } from 'swiper';
+import Swiper, { Navigation, Pagination, Lazy } from 'swiper';
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 if (document.querySelector('.swiper')) {
     let sliders = document.querySelectorAll('.swiper');
@@ -10,7 +7,9 @@ if (document.querySelector('.swiper')) {
     for (let slider of sliders) {
 
         const swiper = new Swiper(slider, {
-            modules: [Navigation, Pagination],
+            modules: [Navigation, Pagination, Lazy],
+            preloadImages: false,
+            lazy: true,
             slidesPerView: 5,
             spaceBetween: 25,
             freeMode: true,

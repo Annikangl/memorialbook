@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export let loadPhoto = function (input, files) {
     let previewresource = input.closest('.input-photo');
 
@@ -43,7 +45,7 @@ export let loadPhoto = function (input, files) {
                 let reader = new FileReader();
                 reader.readAsDataURL(files[x]);
 
-                reader.onload = function() {
+                reader.onload = function () {
                     video.src = reader.result;
                 };
 
@@ -108,10 +110,10 @@ export const searchLocation = async function initMap(searchInput, coordsInput) {
 
     const map = new google.maps.Map(document.querySelector(".map"), {
         zoom: 1,
-        center: { lat: 0, lng: 0},
+        center: {lat: 0, lng: 0},
     });
 
-    map.addListener('click', function(e) {
+    map.addListener('click', function (e) {
         placeMarker(e.latLng, map);
     });
 
@@ -133,7 +135,7 @@ export const searchLocation = async function initMap(searchInput, coordsInput) {
             lng: position.lng()
         };
 
-        geocoder.geocode({ location: latLang })
+        geocoder.geocode({location: latLang})
             .then((response) => {
                 if (response.results[0]) {
                     searchInput.value = response.results[0].formatted_address;
@@ -154,4 +156,9 @@ export const searchLocation = async function initMap(searchInput, coordsInput) {
     }
 
     google.maps.event.trigger(map, 'resize')
+}
+
+export const filteredProfile = async function (url, searchText = null) {
+    let response = await axios.get(url);
+    return response.data;
 }
