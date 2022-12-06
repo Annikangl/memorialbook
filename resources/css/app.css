@@ -1172,32 +1172,6 @@ a.cemetery-contacts-list__text:hover {
 }
 
 
-.new-password {
-    padding: 32px var(--content-size);
-}
-
-.new-password__title {
-    font: 900 62px sans-serif;
-    margin-bottom: 10px;
-    color: var(--black);
-}
-
-.form-new-password {
-    display: grid;
-    grid-template-columns: 295px 1fr;
-    grid-gap: 108px;
-    margin-top: 18px;
-}
-
-.form-new-password .input-wrap:first-child {
-    margin: 0;
-}
-
-.form-new-password__text {
-    max-width: 382px;
-}
-
-
 /***family-tree*/
 .tree__inner {
     position: relative
@@ -1332,5 +1306,5 @@ a.cemetery-contacts-list__text:hover {
 }
 
 .tree-controls__button {
-    padding: 12px 15px 10px;
+    padding: 15px 10px;
 }
