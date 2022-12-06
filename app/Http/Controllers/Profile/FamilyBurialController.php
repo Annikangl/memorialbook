@@ -3,8 +3,14 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Models\Profile\FamilyBurial;
+use App\Models\Profile\Human\Human;
 use App\Services\ProfileService;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class FamilyBurialController extends Controller
@@ -16,7 +22,7 @@ class FamilyBurialController extends Controller
         $this->service = $service;
     }
 
-    public function create()
+    public function create(): Factory|View|Application
     {
         return view('family_burial.create');
     }
@@ -34,9 +40,18 @@ class FamilyBurialController extends Controller
         return response()->json(['status' => true, 'profiles' => $profiles]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        dd($request->input());
-        dd(explode(',', $request->get('profiles_ids')));
+        $humans = Human::whereIn('slug', $request->get('profile_ids'))->get();
+
+        $burial = FamilyBurial::query()->create();
+
+        $humans->each(function ($human) use ($burial) {
+            /** @var Human $human */
+           $human->familyBurial()->associate($burial);
+           $human->save();
+        });
+
+        return redirect()->route('home');
     }
 }
