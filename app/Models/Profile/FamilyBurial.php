@@ -13,7 +13,7 @@ class FamilyBurial extends Model
 
     protected $fillable = ['banner'];
 
-    public const DEFAULT_BANNER = '/family/banner.png';
+    public const DEFAULT_BANNER = '/family/banner.webp';
 
     public function humans(): HasMany
     {

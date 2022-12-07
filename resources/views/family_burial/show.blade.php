@@ -3,7 +3,9 @@
 @section('content')
     <section class="family-card">
         <div class="family-card-banner">
-            <img src="{{ asset('assets/media/media/' . $familyBurial->banner) }}" class="bg-img"
+            <img src="{{ asset('assets/media/media/family/banner_small.webp') }}"
+                 data-src="{{ asset('assets/media/media/family/banner.webp') }}"
+                 class="bg-img"
                  alt="Баннер семейного захоронения" title="Биннер"/>
         </div>
         <ul class="family-card-nav">
