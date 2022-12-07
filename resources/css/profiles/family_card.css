@@ -1,0 +1,95 @@
+/*style family card
+-------------------------*/
+.family-card {
+    width: 100%;
+    padding: 0;
+    background-color: #f5f7f9;
+}
+
+.family-card-banner {
+    width: 100%;
+    padding-top: 31%;
+    position: relative;
+}
+
+.family-card-img {
+    width: 142px;
+    height: 142px;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    top: -38px;
+    filter: drop-shadow(5px 5px 25px rgba(0, 0, 0, 0.1));
+}
+
+.family-card-nav {
+    width: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+}
+
+.family-card-nav__item:last-child {
+    position: absolute;
+    left: calc(100% + 25px);
+    top: -38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background-color: #E5E8EB;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.family-card-nav__item:last-child svg {
+    width: 40px;
+}
+
+.family-card-nav__item {
+    max-width: 332px;
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+}
+
+.family-card-nav__item.active {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 100%);
+}
+
+.family-info {
+    width: 100%;
+    padding: 50px var(--content-size);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: #fff;
+}
+
+.family-info .member-images {
+    padding: 0;
+}
+
+.family-card__name {
+    letter-spacing: 0.1px;
+    font: 800 32px/38px "Lato", sans-serif;
+    position: relative;
+    top: -28px;
+}
+
+.family-card__live, .family-card__death {
+    letter-spacing: -0.2px;
+    color: #201E1F;
+    opacity: 0.8;
+    position: relative;
+    top: -28px;
+    margin-top: 15px;
+}

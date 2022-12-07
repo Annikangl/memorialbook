@@ -1,10 +1,17 @@
 import Swiper, {Navigation, Pagination, Lazy} from 'swiper';
 import {filteredProfile} from "../functions";
 
+const hideResult = function () {
+    document.querySelector('.profiles-search-result').classList.add('hide');
+}
 
 if (document.querySelector('.profiles-search__input')) {
     const searchInput = document.querySelector('.profiles-search__input');
     const searchResult = document.querySelector('.profiles-search-result');
+    const btnReset = document.querySelector('.profiles-search__reset');
+    const swiperNav = document.querySelector('.family-profiles-nav');
+
+    btnReset.addEventListener('click', hideResult);
 
     let url = app.globalConfig.baseUrl + '/profile/family/search/';
 
@@ -45,7 +52,7 @@ if (document.querySelector('.profiles-search__input')) {
                                 item.addEventListener('click', function (event) {
                                     event.preventDefault();
                                     if (searchResult.querySelectorAll('li').length === 1) {
-                                        searchResult.classList.add('hide');
+                                        hideResult();
                                     }
                                     const sliderContent = document.querySelector('#slider-content');
                                     sliderContent.parentElement.classList.remove('hide');
@@ -81,6 +88,10 @@ if (document.querySelector('.profiles-search__input')) {
 
                                     initSwiper();
 
+                                    if (sliderContent.parentNode.childElementCount > 3) {
+                                        swiperNav.classList.remove('hide');
+                                    }
+
                                     if (document.querySelector('#icon-remove')) {
                                         document.querySelectorAll('#icon-remove').forEach(item => {
                                             item.addEventListener('click', function (event) {
@@ -104,7 +115,7 @@ if (document.querySelector('.profiles-search__input')) {
                 });
 
         } else {
-            searchResult.classList.add('hide');
+            hideResult();
         }
     });
 }
@@ -151,6 +162,7 @@ const initSwiper = function () {
 
     }
 }
+
 
 
 

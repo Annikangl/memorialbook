@@ -11,6 +11,10 @@ class FamilyBurial extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['banner'];
+
+    public const DEFAULT_BANNER = '/family/banner.png';
+
     public function humans(): HasMany
     {
         return $this->hasMany(Human::class);

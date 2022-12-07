@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FamilyBurial\CreateRequest;
 use App\Models\Profile\FamilyBurial;
 use App\Models\Profile\Human\Human;
+use App\Services\FamilyBurialService;
 use App\Services\ProfileService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -16,10 +18,20 @@ use Illuminate\Http\Request;
 class FamilyBurialController extends Controller
 {
     private ProfileService $service;
+    private FamilyBurialService $burialService;
 
-    public function __construct(ProfileService $service)
+    public function __construct(ProfileService $service, FamilyBurialService $burialService)
     {
         $this->service = $service;
+        $this->burialService = $burialService;
+    }
+
+    public function show(FamilyBurial $familyBurial)
+    {
+        $firstHuman = $familyBurial->humans()->with(['hobbies', 'galleries'])->first();
+        $relatives = $firstHuman->WithRelatives()->get();
+
+        return view('family_burial.show', compact('familyBurial', 'firstHuman', 'relatives'));
     }
 
     public function create(): Factory|View|Application
@@ -40,18 +52,16 @@ class FamilyBurialController extends Controller
         return response()->json(['status' => true, 'profiles' => $profiles]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(CreateRequest $request): RedirectResponse
     {
-        $humans = Human::whereIn('slug', $request->get('profile_ids'))->get();
+        $humans = Human::whereIn('slug', $request->validated('profile_ids'))->get();
 
-        $burial = FamilyBurial::query()->create();
+        try {
+            $familyBurial = $this->burialService->create($humans);
+        } catch (\DomainException $exception) {
+            return  redirect()->back()->with('message', $exception->getMessage());
+        }
 
-        $humans->each(function ($human) use ($burial) {
-            /** @var Human $human */
-           $human->familyBurial()->associate($burial);
-           $human->save();
-        });
-
-        return redirect()->route('home');
+        return redirect()->route('profile.family.show', $familyBurial);
     }
 }
