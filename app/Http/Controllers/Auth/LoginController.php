@@ -68,7 +68,7 @@ class LoginController extends Controller
     protected function sendFailedLoginResponse(Request $request): void
     {
         throw ValidationException::withMessages([
-            'login-email' => [trans('auth.failed')],
+            'login_email' => [trans('auth.failed')],
         ]);
     }
 
@@ -87,8 +87,8 @@ class LoginController extends Controller
     protected function credentials(Request $request): array
     {
         return [
-            'email' => $request->get('login-email'),
-            'password' => $request->get('login-password')
+            'email' => $request->get('login_email'),
+            'password' => $request->get('login_password')
         ];
     }
 

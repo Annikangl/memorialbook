@@ -22,7 +22,7 @@
                 <div class="input-wrap">
                     <span class="input-wrap__title">Email:</span>
                     <div class="input-form">
-                        <input type="email" class="input-text" name="login-email" title="email"/>
+                        <input type="email" class="input-text" name="login_email" title="email"/>
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
                     <span class="input-wrap__title">Пароль:</span>
                     <div class="input-form">
                         <a class="input-link open-recover" id="input-link">Забыли пароль?</a>
-                        <input type="password" class="input-text" name="login-password" title="password"/>
+                        <input type="password" class="input-text" name="login_password" title="password"/>
                     </div>
                 </div>
 

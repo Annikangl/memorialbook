@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('family_burials', function (Blueprint $table) {
             $table->id();
+            $table->string('banner');
             $table->timestamps();
         });
 

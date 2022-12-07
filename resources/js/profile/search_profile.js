@@ -1,16 +1,22 @@
 import Swiper, {Navigation, Pagination, Lazy} from 'swiper';
 import {filteredProfile} from "../functions";
 
+const hideResult = function () {
+    document.querySelector('.profiles-search-result').classList.add('hide');
+}
 
 if (document.querySelector('.profiles-search__input')) {
     const searchInput = document.querySelector('.profiles-search__input');
     const searchResult = document.querySelector('.profiles-search-result');
+    const btnReset = document.querySelector('.profiles-search__reset');
+    const swiperNav = document.querySelector('.family-profiles-nav');
+
+    btnReset.addEventListener('click', hideResult);
 
     let url = app.globalConfig.baseUrl + '/profile/family/search/';
 
     searchInput.addEventListener('input', function () {
         let searchText = this.value.trim().toLowerCase();
-        let profileIdsInput = document.querySelector('#profile_ids');
 
         if (searchText && searchText.length >= 3) {
             filteredProfile(url + '?searchText=' + searchText, searchText)
@@ -23,7 +29,7 @@ if (document.querySelector('.profiles-search__input')) {
 
                         if (items.length > 0) {
                             items.forEach(function (item) {
-                                console.log(item)
+
                                 let html = `<li class="profiles-search-result__item" data-slug="${item.slug}">
                                                 <label class="profiles-search-result__wrap">
                                                     <input type="radio" class="search-result__radio" name="profiles-family" value=""/>
@@ -45,6 +51,9 @@ if (document.querySelector('.profiles-search__input')) {
                             document.querySelectorAll('.profiles-search-result__item').forEach(function (item) {
                                 item.addEventListener('click', function (event) {
                                     event.preventDefault();
+                                    if (searchResult.querySelectorAll('li').length === 1) {
+                                        hideResult();
+                                    }
                                     const sliderContent = document.querySelector('#slider-content');
                                     sliderContent.parentElement.classList.remove('hide');
 
@@ -72,17 +81,23 @@ if (document.querySelector('.profiles-search__input')) {
                                     let input = document.createElement('input');
                                     input.name = 'profile_ids[]';
                                     input.type = 'hidden';
+                                    input.id = item.getAttribute('data-slug');
                                     input.value = item.getAttribute('data-slug');
                                     input.classList.add('profile_id');
                                     sliderContent.append(input);
 
                                     initSwiper();
 
+                                    if (sliderContent.parentNode.childElementCount > 3) {
+                                        swiperNav.classList.remove('hide');
+                                    }
+
                                     if (document.querySelector('#icon-remove')) {
                                         document.querySelectorAll('#icon-remove').forEach(item => {
                                             item.addEventListener('click', function (event) {
-                                                let sibling = this.parentNode.nextElementSibling;
+                                                let slug = this.parentElement.parentElement.getAttribute('data-slug');
 
+                                                document.getElementById(slug).remove();
                                                 this.closest('.profiles-slider__item').remove();
                                                 if (document.querySelectorAll('.profiles-slider__item').length < 1) {
                                                     sliderContent.parentElement.classList.add('hide')
@@ -90,7 +105,6 @@ if (document.querySelector('.profiles-search__input')) {
                                             })
                                         })
                                     }
-
                                 })
                             })
                         } else {
@@ -101,7 +115,7 @@ if (document.querySelector('.profiles-search__input')) {
                 });
 
         } else {
-            searchResult.classList.add('hide');
+            hideResult();
         }
     });
 }
@@ -148,6 +162,7 @@ const initSwiper = function () {
 
     }
 }
+
 
 
 

@@ -82,8 +82,8 @@ if (document.querySelector('#login-form')) {
 
         axios.post(url,
             {
-                "login-email": inputs[0].value,
-                "login-password": inputs[1].value,
+                "login_email": inputs[0].value,
+                "login_password": inputs[1].value,
             }
         ).then(function (response) {
             console.log(response)
