@@ -21,12 +21,17 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::post('/register', [RegisterController::class, 'register']);
     Route::post('/login', [LoginController::class, 'login']);
     Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/logout', [LoginController::class, 'logout']);
+
+        Route::prefix('cabinet')->group(function () {
+
+        });
+    });
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return (new \App\Http\Resources\UserResource($request->user));
-});
 
-Route::fallback(function () {
-   return response()->json(['message' => 'Page Not Found.'], 404);
-});
+
+
+
