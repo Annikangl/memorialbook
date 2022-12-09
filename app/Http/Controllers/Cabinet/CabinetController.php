@@ -42,17 +42,14 @@ class CabinetController extends Controller
         try {
             $updatedUser = $this->service->update(
                 $user,
-                $validated_data['username'],
+                $validated_data['full_name'],
                 $validated_data['email'],
                 $validated_data['phone'],
-                $validated_data['avatar'] ?? null
+                $validated_data['avatar']
             );
         } catch (\DomainException $exception) {
             return back()->with('message', $exception->getMessage());
         }
-
-        session()->flash('message', 'Данные успешно обновлены');
-        session()->flash('alert-class', 'alert-success');
 
         return redirect()->route('cabinet.show', [
             'slug' => $updatedUser->slug

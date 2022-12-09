@@ -17,7 +17,7 @@ class LoginRequest extends FormRequest
         return [
             'login_email' => ['required', 'email:dns'],
             'login_password' => ['required',Password::default()],
-            'device' => ['required', 'string', 'min:5', 'max:255']
+            'device' => ['sometimes', 'string', 'min:5', 'max:255']
         ];
     }
 }

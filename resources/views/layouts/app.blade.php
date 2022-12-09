@@ -101,7 +101,7 @@
                 <span class="notifications__number">1</span>
             </button>
 
-            <a href="{{ route('cabinet.show', auth()->user()->slug ) }}" class="login">{{ auth()->user()->fullName[0] }}</a>
+            <a href="{{ route('cabinet.show', auth()->user()->slug ) }}" class="login">{{ auth()->user()->shortName }}</a>
             <form action="{{ route('logout') }}" method="post">
                 @csrf
                 <button type="submit"  class="" style="margin-left: 10px">Выйти</button>

@@ -117,10 +117,10 @@ class User extends Authenticatable
         });
     }
 
-    protected function fullName(): Attribute
+    protected function shortName(): Attribute
     {
         return Attribute::make(
-            get: fn() => Str::of($this->username)->explode(' ')
+            get: fn() => strstr($this->username, ' ', true)
         );
     }
 

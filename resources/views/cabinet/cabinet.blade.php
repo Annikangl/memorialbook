@@ -8,6 +8,7 @@
 
         <h3 class="edit__title">Управление аккаунтом</h3>
         <form action="{{ route('cabinet.update', ['user' => $user]) }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="edit-wrap">
                 <div class="info-profile">
                     <div class="user-avatar">
@@ -17,6 +18,7 @@
                                 <input type="file" accept=".jpg,.jpeg,.png" name="avatar" class="input-avatar"
                                        id="change-avatar"/>
                                 <span class="preview-avatar-wrap__text">Выберите фото</span>
+
                             </label>
                             <label class="preview-avatar__icon" for="change-avatar">
                                 <svg>
@@ -27,6 +29,9 @@
                                 </svg>
                             </label>
                         </div>
+                        @error('avatar')
+                            {{ $message }}
+                        @enderror
                         <button type="button" class="delete-avatar hide">Удалить фото</button>
                     </div>
                     <div class="info-profile-name-wrap">
@@ -58,49 +63,47 @@
 
                 <div class="edit-profile">
                     <h4 class="edit-profile__title">Основная информация</h4>
-
                     @csrf
                     @method('PUT')
                     <div class="edit-profile-wrap grid-col-2">
 
                         <div class="input-wrap">
                             <span class="input-wrap__title">Имя:</span>
-                            <div class="input-form">
-                                <input type="text" class="input-text" name="first_name"
-                                       value="{{ $user->fullName[1] ?? ''}}"
-                                       title=""/>
+                            <div class="input-form @error('full_name') no-valid @enderror">
+                                <input type="text" class="input-text" name="full_name"
+                                       value="{{ $user->username }}"
+                                       title="Username"/>
                             </div>
+                            @error('full_name')
+                                <span class="is-invalid">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <div class="input-wrap">
-                            <span class="input-wrap__title">Отчество:</span>
-                            <div class="input-form">
-                                <input type="text" class="input-text" name="patronymic"
-                                       value="{{ $user->fullName[2] ?? '' }}" title=""/>
-                            </div>
-                        </div>
-                        <div class="input-wrap">
-                            <span class="input-wrap__title">Фамилия:</span>
-                            <div class="input-form">
-                                <input type="text" class="input-text" name="last_name"
-                                       value="{{ $user->fullName[0] ?? '' }}" title=""/>
-                            </div>
-                        </div>
+
                         <div class="input-wrap">
                             <span class="input-wrap__title">Email:</span>
-                            <div class="input-form">
-                                <input type="email" class="input-text" name="email" value="{{ $user->email }}"
-                                       title=""/>
+                            <div class="input-form @error('email') no-valid @enderror">
+                                <input type="email" class="input-text" name="email"
+                                       value="{{ $user->email }}"
+                                       title="Email"/>
                             </div>
+                            @error('email')
+                                <span class="is-invalid">{{ $message }}</span>
+                            @enderror
                         </div>
+
                         <div class="input-wrap">
                             <span class="input-wrap__title">Телефон:</span>
-                            <div class="input-form">
+                            <div class="input-form @error('phone') no-valid @enderror">
                                 <input type="text" class="input-text" name="phone" value="{{ $user->phone }}"
-                                       title=""/>
+                                       title="Phone"/>
                             </div>
+                            @error('phone')
+                                <span class="is-invalid">{{ $message }}</span>
+                            @enderror
                         </div>
                         <button type="submit" class="button-save btn blue-btn">Сохранить</button>
                     </div>
+
         </form>
 
         <h4 class="edit-profile__title">Доступ к профилям</h4>
@@ -111,7 +114,8 @@
                 <li class="access-profiles__item">
                     <div class="access-profiles__wrap">
                         <div class="access-profiles__img">
-                            <img src="{{ asset('storage/' . $owner->avatar) }}" class="bg-img" alt="" title=""/>
+                            <img src="{{ asset('storage/' . $owner->avatar) }}" class="bg-img" alt="Avatar"
+                                 title="user avatar"/>
                         </div>
                         <span class="access-profiles__name">{{ $owner->username }}</span>
                     </div>
@@ -122,7 +126,6 @@
         </ul>
 
         <button type="button" class="button-share">Поделиться доступом к профилю</button>
-        </div>
-        </div>
+
     </section>
 @endsection

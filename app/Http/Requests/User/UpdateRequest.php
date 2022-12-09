@@ -25,21 +25,20 @@ class UpdateRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'username' => $this->first_name . ' ' . $this->last_name . ' ' . $this->patronymic,
+           'avatar' => $this->file('avatar')
         ]);
     }
 
+
     public function rules(): array
     {
+
+//        TODO email validate
         return [
-            'username' => ['required', 'string', 'min:3'],
+            'full_name' => ['required', 'string', 'min:3'],
             'email' => ['required', 'email:dns'],
-            'phone' => [
-                Rule::requiredIf(function () {
-                    $this->get('phone');
-                })
-            ],
-            'avatar' => [
+            'phone' => ['sometimes', 'nullable', 'string', 'min:8', 'max:20'],
+            'avatar' => ['nullable',
                 Rule::requiredIf(function () {
                     $this->hasFile('avatar');
                 }),
