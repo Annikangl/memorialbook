@@ -6,7 +6,7 @@
                 <img src="{{ asset('storage/' . $post->author->avatar) }}" class="bg-img" alt="" title=""/>
             </div>
             <div class="article-author-name-wrap">
-                <h6 class="article-author__name">{{ $post->author->fullName[0] }}</h6>
+                <h6 class="article-author__name">{{ $post->author->username }}</h6>
                 <span class="article-author__mark">запись закреплена</span>
                 <time class="article-author-date">{{ $post->published_at }}</time>
             </div>
