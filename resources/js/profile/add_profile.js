@@ -1,4 +1,4 @@
-import '../mask'
+import '../libs/mask'
 import {Loader} from "google-maps";
 import {loadPhoto, searchLocation} from "../functions";
 

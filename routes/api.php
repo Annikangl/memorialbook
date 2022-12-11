@@ -4,7 +4,6 @@ use App\Http\Controllers\Api\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\Auth\RegisterController;
 use App\Http\Controllers\Api\v1\Cabinet\CabinetController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*

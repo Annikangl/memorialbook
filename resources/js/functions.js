@@ -162,3 +162,45 @@ export const filteredProfile = async function (url, searchText = null) {
     let response = await axios.get(url);
     return response.data;
 }
+
+export function validation(items) {
+    let inputStatusValidate = [];
+
+    // validation form
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].value === '') {
+
+            if (!items[i].parentElement.classList.contains('no-valid')) {
+                items[i].parentElement.classList.add('no-valid');
+                items[i].parentElement.insertAdjacentHTML('afterend',
+                    '<span class="is-invalid">Это обязательное поле</span>');
+            }
+
+            inputStatusValidate.push(false);
+
+        } else {
+            items[i].classList.remove('no-valid');
+            inputStatusValidate.push(true);
+            if (items[i].parentElement.classList.contains('no-valid')) {
+                items[i].parentElement.nextElementSibling.remove();
+                items[i].parentElement.classList.remove('no-valid');
+            }
+        }
+    }
+
+    // true = canceled sending
+    if (inputStatusValidate.includes(false)) {
+        return false;
+    }
+}
+
+export function showErrors(errors) {
+    for (let err in errors) {
+        if (errors.hasOwnProperty(err)) {
+            let item = document.querySelector(`[name='${err}']`);
+            item.parentElement.classList.add('no-valid');
+            item.parentElement.insertAdjacentHTML('afterend',
+                `<span class="is-invalid">${errors[err]}</span>`);
+        }
+    }
+}

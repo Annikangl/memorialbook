@@ -1,4 +1,3 @@
-
 let buttonClose = document.querySelector('#close-aside');
 let page = document.querySelector('#page');
 let buttonOpenMenu = document.querySelector('#mobile-menu');
