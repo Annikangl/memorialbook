@@ -47,12 +47,7 @@ return new class extends Migration {
             $table->primary(['human_id', 'community_id']);
         });
 
-        Schema::create('community_pet', function (Blueprint $table) {
-            $table->foreignIdFor(Community::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Pet::class)->constrained()->cascadeOnDelete();
 
-            $table->primary(['pet_id', 'community_id']);
-        });
 
         Schema::create('community_galleries', function (Blueprint $table) {
             $table->id();

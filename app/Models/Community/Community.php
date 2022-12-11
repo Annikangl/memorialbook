@@ -4,6 +4,7 @@ namespace App\Models\Community;
 
 use App\Models\Community\Posts\Post;
 use App\Models\Profile\Human\Human;
+use App\Models\Profile\Pet\Pet;
 use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -96,6 +97,11 @@ class Community extends Model
     public function humans(): BelongsToMany
     {
         return $this->belongsToMany(Human::class);
+    }
+
+    public function pets(): BelongsToMany
+    {
+        return $this->belongsToMany(Pet::class);
     }
 
     public function hasVideo(): bool

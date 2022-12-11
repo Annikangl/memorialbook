@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
             ->has(\App\Models\Community\Gallery::factory(5))
             ->has(User::factory()->count(30))
             ->has(Human::factory(5))
+            ->has(Pet::factory(5))
             ->create();
     }
 

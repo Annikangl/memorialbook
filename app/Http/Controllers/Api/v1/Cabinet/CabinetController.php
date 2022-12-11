@@ -62,6 +62,7 @@ class CabinetController extends Controller
 
         try {
             $this->service->delete($user);
+            $user->tokens()->delete();
         } catch (\DomainException $exception) {
             return response()->json(['status' => false,'error' => $exception->getMessage()], 500);
         }
