@@ -42,7 +42,7 @@ class CabinetController extends Controller
     public function update(UpdateRequest $request, int $userId): JsonResponse
     {
         $data = $request->validated();
-        $user = User::findOrFail($userId);
+        $user = User::query()->findOrFail($userId);
 
         try {
             $user = $this->service->update($user, $data['full_name'], $data['email'], $data['phone'], $data['avatar']);
@@ -54,5 +54,18 @@ class CabinetController extends Controller
             'status' => true,
             'user' => new UserResource($user),
         ]);
+    }
+
+    public function delete(int $userId): JsonResponse
+    {
+        $user = User::findOrFail($userId);
+
+        try {
+            $this->service->delete($user);
+        } catch (\DomainException $exception) {
+            return response()->json(['status' => false,'error' => $exception->getMessage()], 500);
+        }
+
+        return response()->json(['status' => true, 'message' => 'Account deleted'], 200);
     }
 }

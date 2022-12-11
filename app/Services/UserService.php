@@ -38,12 +38,13 @@ class UserService
 
     public function delete(User|Authenticatable $user): void
     {
-        if (!$user->delete()) {
-            throw new \DomainException('Ошибка удаления аккаунта');
+        try {
+            $user->delete();
+            $user->humans()->delete();
+            $user->pets()->delete();
+        } catch (\Exception) {
+            throw new \DomainException('Failed to delete associate data');
         }
-
-        $user->profiles()->update(['status' => Human::STATUS_DRAFT]);
-        \Auth::logout();
     }
 
     public function subscribeOnCommunity(int $userId, string $communitySlug): void

@@ -10,7 +10,14 @@ class DeathReasonSeeder extends Seeder
 {
     public function run(): void
     {
-        $reasons = ['рак', 'инсульт', 'несчастный случай', 'болезнь легких', 'болезнь Альцгеймера', 'сахарный диабет'];
+        $reasons = [
+            'рак',
+            'инсульт',
+            'несчастный случай',
+            'болезнь легких',
+            'болезнь Альцгеймера',
+            'сахарный диабет'
+        ];
 
         foreach ($reasons as $reason) {
             DB::table('death_reasons')->insert(['title' => $reason]);

@@ -28,6 +28,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         Route::prefix('cabinet')->group(function () {
             Route::get('/users/{id}', [CabinetController::class, 'show']);
             Route::put('/users/{id}', [CabinetController::class, 'update']);
+            Route::delete('/users/{id}', [CabinetController::class, 'delete']);
         });
     });
 });
