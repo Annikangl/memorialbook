@@ -47,7 +47,7 @@ class CabinetController extends Controller
         try {
             $user = $this->service->update($user, $data['full_name'], $data['email'], $data['phone'], $data['avatar']);
         } catch (\Throwable $exception) {
-            return response()->json(['status' => false, 'error' => $exception->getMessage()]);
+            return response()->json(['status' => false, 'error' => $exception->getMessage()], 500);
         }
 
         return response()->json([
