@@ -43,7 +43,7 @@ class UpdateRequest extends FormRequest
                     $this->hasFile('avatar');
                 }),
                 File::image()
-                    ->min(10)->max(5 * 1024)
+                    ->min(1)->max(5 * 1024)
             ]
         ];
     }

@@ -90,6 +90,7 @@ class User extends Authenticatable
             'username' => $name,
             'email' => $email,
             'phone' => $phone,
+            'avatar' => self::AVATAR_PATH . '/empty_avatar.webp',
             'password' => Hash::make($password),
         ]);
     }
