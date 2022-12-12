@@ -25,6 +25,7 @@ class UserService
         $avatarPath = $user->avatar;
 
         if ($avatar) {
+            $this->fileUploader->remove($avatarPath);
             $avatarPath = $this->fileUploader->upload($avatar, User::AVATAR_PATH);
         }
 

@@ -43,7 +43,7 @@ class CabinetController extends Controller
     {
         $data = $request->validated();
         $user = User::query()->findOrFail($userId);
-d
+
         try {
             $user = $this->service->update($user, $data['full_name'], $data['email'], $data['phone'], $data['avatar']);
         } catch (\Throwable $exception) {

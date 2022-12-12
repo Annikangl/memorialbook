@@ -13,4 +13,9 @@ class FileUploader
     {
         return Storage::disk('public')->put($path, $file);
     }
+
+    public function remove(string $path): bool
+    {
+        return Storage::disk('public')->delete($path);
+    }
 }
