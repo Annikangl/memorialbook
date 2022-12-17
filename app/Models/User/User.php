@@ -6,7 +6,6 @@ use App\Models\Community\Community;
 use App\Models\News\News;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
-use App\Models\Profile\Profile;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -18,10 +17,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
 /**
@@ -143,6 +142,14 @@ class User extends Authenticatable implements HasMedia
             ->singleFile()
             ->useFallbackUrl(asset('assets/media/media/empty_user_avatar.webp'))
             ->useFallbackPath(asset('assets/media/media/empty_user_avatar.webp'));
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(368)
+            ->height(232)
+            ->nonQueued();
     }
 
     public function networks(): HasMany

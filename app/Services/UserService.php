@@ -19,7 +19,7 @@ class UserService
      */
     public function update(User $user, string $username, ?string $email, ?string $phone, ?UploadedFile $avatar): User
     {
-        $avatarPath = $user->avatar;
+        $avatarPath = $user->getFirstMediaUrl('avatar');
 
         if ($avatar) {
             $user->addMedia($avatar)->toMediaCollection('avatar');

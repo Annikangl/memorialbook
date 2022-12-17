@@ -12,6 +12,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class CabinetController extends Controller
 {
@@ -25,6 +27,7 @@ class CabinetController extends Controller
     public function index(string $slug): Factory|View|Application
     {
         $user = User::where('slug', $slug)->first();
+
         $profiles = $user->humans()->has('owners')->with('owners')->get();
 
         $owners = [];
@@ -48,7 +51,10 @@ class CabinetController extends Controller
                 $validated_data['avatar']
             );
         } catch (\DomainException $exception) {
-            return back()->with('message', $exception->getMessage());
+            dd($exception->getMessage());
+//            return back()->with('message', $exception->getMessage());
+        } catch (FileDoesNotExist | FileIsTooBig $e) {
+            dd($e->getMessage());
         }
 
         return redirect()->route('cabinet.show', [

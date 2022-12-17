@@ -14,7 +14,7 @@
                     <div class="user-avatar">
                         <div class="preview-avatar">
                             <label class="preview-avatar-wrap">
-                                <img src="{{ $user->getFirstMediaUrl('avatar') }}" alt="" class="bg-img">
+                                <img src="{{ $user->getFirstMediaUrl('avatar', 'thumb') }}"  class="bg-img">
                                 <input type="file" accept=".jpg,.jpeg,.png" name="avatar" class="input-avatar"
                                        id="change-avatar"/>
                                 <span class="preview-avatar-wrap__text">Выберите фото</span>
