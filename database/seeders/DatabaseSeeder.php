@@ -57,14 +57,14 @@ class DatabaseSeeder extends Seeder
             'username' => 'Ivanov Ivan Ivanovich',
             'email' => 'test@gmail.com',
             'password' => \Hash::make('test1234'),
-            'avatar' => User::AVATAR_PATH . '/empty_avatar.webp',
+            'avatar' => User::AVATAR_PATH . '/empty_user_avatar.webp',
         ]);
 
         User::create([
             'username' => 'Petrov Petr Pen',
             'email' => 'test2@gmail.com',
             'password' => \Hash::make('test1234'),
-            'avatar' => User::AVATAR_PATH . '/empty_avatar.webp',
+            'avatar' => User::AVATAR_PATH . '/empty_user_avatar.webp',
         ]);
     }
 }

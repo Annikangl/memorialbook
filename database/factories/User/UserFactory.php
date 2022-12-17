@@ -22,7 +22,7 @@ class UserFactory extends Factory
             'username' => $this->faker->userName(),
             'email' => $this->faker->email,
             'email_verified_at' => now(),
-            'avatar' => User::AVATAR_PATH . '/empty_avatar.webp',
+            'avatar' => User::AVATAR_PATH . '/empty_user_avatar.webp',
             'password' => \Hash::make('test1234'), // password
             'remember_token' => Str::random(10),
         ];

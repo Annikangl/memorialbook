@@ -13,20 +13,16 @@ use Illuminate\Http\UploadedFile;
 
 class UserService
 {
-    private FileUploader $fileUploader;
-
-    public function __construct(FileUploader $fileUploader)
-    {
-        $this->fileUploader = $fileUploader;
-    }
-
+    /**
+     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig
+     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist
+     */
     public function update(User $user, string $username, ?string $email, ?string $phone, ?UploadedFile $avatar): User
     {
         $avatarPath = $user->avatar;
 
         if ($avatar) {
-            $this->fileUploader->remove($avatarPath);
-            $avatarPath = $this->fileUploader->upload($avatar, User::AVATAR_PATH);
+            $user->addMedia($avatar)->toMediaCollection('avatar');
         }
 
         return tap($user)->update([

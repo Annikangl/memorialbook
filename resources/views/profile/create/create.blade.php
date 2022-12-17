@@ -39,6 +39,7 @@
                         </ul>
                     </div>
                 </div>
+
                 <form class="add-profile-wrap" id="add-profile" method="POST" enctype="multipart/form-data"
                       action="{{ route('profile.store' )}}">
                     @csrf

@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
@@ -29,14 +31,16 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  */
-class Profile extends Model
+class Profile extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+
     public const STATUS_DRAFT = 'Черновик';
     public const STATUS_MODERATION = 'На модерации';
     public const STATUS_ACTIVE = 'Опубликован';
     public const STATUS_CLOSED = 'Отклонен';
 
-    public const EMPTY_AVATAR_PATH = 'uploads/profiles/avatar/empty-avatar.png';
+    public const EMPTY_AVATAR_PATH = 'uploads/profiles/avatar/empty_profile_avatar.png';
     public const AVATAR_PATH = 'uploads/profiles/avatar';
     public const DOCUMENTS_PATH = 'uploads/profiles/document';
     public const GALLERY_PATH = 'uploads/profiles/gallery';

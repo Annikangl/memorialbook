@@ -7,7 +7,7 @@
             <div class="member-info-wrap">
                 <div class="member-avatar">
                     <div class="member-avatar__wrap">
-                        <img src="{{ asset('storage/' . $profile->avatar ) }}" class="bg-img" alt="avatar"
+                        <img src="{{ $profile->getFirstMediaUrl('avatars') }}" class="bg-img" alt="avatar"
                              title="avatar"/>
                     </div>
                     @if($profile->user_id === auth()->id())

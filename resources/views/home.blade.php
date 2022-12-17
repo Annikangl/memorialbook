@@ -49,8 +49,8 @@
                                 <div class="list-profiles-img-wrap">
                                     <div class="list-profiles__img">
                                         <img
-                                            data-src="{{ asset('assets/media/media/empty-avatar.png') }}"
-                                            data-srcset="{{ asset('storage/' . $human->avatar) }}"
+                                            data-src="{{ asset('assets/media/media/empty_profile_avatar.png') }}"
+                                            data-srcset="{{ $human->getFirstMediaUrl('avatars') }}"
                                             class="bg-img swiper-lazy"
                                             alt="{{ $human->full_name }}"
                                             title="{{ $human->full_name }}"/>
@@ -102,7 +102,7 @@
                                 <div class="list-profiles-img-wrap">
                                     <div class="list-profiles__img">
                                         <img
-                                            data-src="{{ asset('assets/media/media/empty-avatar.png') }}"
+                                            data-src="{{ asset('assets/media/media/empty_profile_avatar.png') }}"
                                             data-srcset="{{ asset('storage/' . $relative->avatar) }}"
                                             class="bg-img swiper-lazy"
                                             alt="Avatar {{ $relative->full_name }}"
@@ -155,7 +155,7 @@
                                 <div class="list-profiles-img-wrap">
                                     <div class="list-profiles__img">
                                         <img
-                                            data-src="{{ asset('assets/media/media/empty-avatar.png') }}"
+                                            data-src="{{ asset('assets/media/media/empty_profile_avatar.png') }}"
                                             data-srcset="{{ asset('storage/' . $pet->avatar) }}"
                                             class="bg-img swiper-lazy"
                                             alt="{{ $pet->name }}"

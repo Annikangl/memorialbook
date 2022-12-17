@@ -25,14 +25,8 @@ class ProfileService
 
     public function create(int $userId, array $data): Human
     {
-        $avatarPath = Profile::EMPTY_AVATAR_PATH;
         $documentPath = null;
         $cemetery = null;
-
-        if (isset($data['avatar'])) {
-            $avatarPath = $this->fileUploader
-                ->upload($data['avatar'], Human::AVATAR_PATH);
-        }
 
         if (isset($data['death_certificate'])) {
             $documentPath = $this->fileUploader
@@ -40,7 +34,7 @@ class ProfileService
         }
 
         try {
-            return DB::transaction(function () use ($avatarPath, $documentPath, $data, $userId, $cemetery) {
+            return DB::transaction(function () use ($documentPath, $data, $userId, $cemetery) {
 
                 if ($data['burial_place']) {
                     $cemetery = Cemetery::createFromProfile(
@@ -56,7 +50,6 @@ class ProfileService
                     'last_name' => $data['last_name'],
                     'description' => $data['description'],
                     'gender' => $data['gender'],
-                    'avatar' => $avatarPath,
                     'date_birth' => $data['date_birth'],
                     'date_death' => $data['date_death'],
                     'birth_place' => $data['birth_place'],
@@ -65,6 +58,7 @@ class ProfileService
                     'longitude' => $data['burial_place_coords']['lng'] ?? null,
                     'death_reason' => $data['death_reason'],
                     'death_certificate' => $documentPath,
+                    'avatar' => Human::EMPTY_AVATAR_PATH,
                     'status' => Human::STATUS_ACTIVE,
                     'access' => $data['access']
                 ]);
@@ -78,6 +72,11 @@ class ProfileService
                 $human->father()->associate($data['religious_id']['id'] ?? null);
 
                 $human->save();
+
+                if (isset($data['avatar'])) {
+                    $human->addMedia($data['avatar'])
+                        ->toMediaCollection('avatars');
+                }
 
                 if ($data['father_id'] || $data['mother_id']) {
                     Human::updateChildForParent($data['father_id']['id']

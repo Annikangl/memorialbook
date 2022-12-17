@@ -20,6 +20,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 
 /**
@@ -60,9 +62,9 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static Builder|User whereUsername($value)
  * @method static \Database\Factories\User\UserFactory factory(...$parameters)
  */
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Sluggable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Sluggable, InteractsWithMedia;
 
     public const AVATAR_PATH = 'uploads/users/avatar';
 
@@ -90,7 +92,7 @@ class User extends Authenticatable
             'username' => $name,
             'email' => $email,
             'phone' => $phone,
-            'avatar' => self::AVATAR_PATH . '/empty_avatar.webp',
+            'avatar' => self::AVATAR_PATH . '/empty_user_avatar.webp',
             'password' => Hash::make($password),
         ]);
     }
@@ -133,6 +135,14 @@ class User extends Authenticatable
                 'source' => 'username',
             ]
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('avatar')
+            ->singleFile()
+            ->useFallbackUrl(asset('assets/media/media/empty_user_avatar.webp'))
+            ->useFallbackPath(asset('assets/media/media/empty_user_avatar.webp'));
     }
 
     public function networks(): HasMany

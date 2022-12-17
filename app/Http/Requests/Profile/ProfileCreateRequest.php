@@ -42,6 +42,7 @@ class ProfileCreateRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
+            'avatar' => $this->file('avatar'),
             'gender' => json_decode($this->gender, true)['value'] ?? '',
             'date_birth' => $this->date_birth ?
                 Carbon::parse($this?->date_birth)->format('Y-m-d')
@@ -82,6 +83,7 @@ class ProfileCreateRequest extends FormRequest
             'access' => ['required'],
 
             'avatar' => [
+                'nullable',
                 Rule::requiredIf(fn () => $this->hasFile('avatar')),
                 File::image()
                     ->min(1)

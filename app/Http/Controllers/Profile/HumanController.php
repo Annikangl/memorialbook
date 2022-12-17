@@ -70,6 +70,7 @@ class HumanController extends Controller
 
         $relatives = Human::withRelatives()->get();
 
+
         return view('profile.show', compact('profile', 'relatives'));
     }
 
