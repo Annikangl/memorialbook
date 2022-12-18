@@ -18,7 +18,7 @@ class HomeController extends Controller
 
     public function index(): Factory|View|Application
     {
-        $humans = Human::byUser(auth()->id())->addSelect('status')->latest()->get();
+        $humans = Human::byUser(auth()->id())->addSelect('status')->with('media')->latest()->get();
         $pets = Pet::byUser(auth()->id())->latest()->get();
 
         $relatives = Human::byUser(auth()->id())
@@ -27,6 +27,7 @@ class HomeController extends Controller
         $news = News::with(['author','galleries','human'])
             ->orderByDesc('created_at')
             ->get();
+
 
         return view('home',
             compact('humans','relatives', 'pets', 'news'));

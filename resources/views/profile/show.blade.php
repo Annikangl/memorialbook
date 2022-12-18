@@ -7,7 +7,7 @@
             <div class="member-info-wrap">
                 <div class="member-avatar">
                     <div class="member-avatar__wrap">
-                        <img src="{{ $profile->getFirstMediaUrl('avatars') }}" class="bg-img" alt="avatar"
+                        <img src="{{ $profile->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt="avatar"
                              title="avatar"/>
                     </div>
                     @if($profile->user_id === auth()->id())
@@ -37,18 +37,23 @@
                 <ul class="social">
                     <li class="social__item">
                         <a href="#" class="social__link">
-                            <img src="{{ asset('assets/media/media/icons/social/facebook.svg') }}" alt=""
+                            <img src="{{ asset('assets/media/media/icons/social/facebook.svg') }}"
+                                 alt="facebook"
                                  title="facebook"/>
                         </a>
                     </li>
                     <li class="social__item">
                         <a href="#" class="social__link">
-                            <img src="{{ asset('assets/media/media/icons/social/instagram.svg') }}" alt="" title=""/>
+                            <img src="{{ asset('assets/media/media/icons/social/instagram.svg') }}"
+                                 alt="instagram"
+                                 title="instagram"/>
                         </a>
                     </li>
                     <li class="social__item">
                         <a href="#" class="social__link">
-                            <img src="{{ asset('assets/media/media/icons/social/twitter.svg') }}" alt="" title=""/>
+                            <img src="{{ asset('assets/media/media/icons/social/twitter.svg') }}"
+                                 alt="twitter"
+                                 title="twitter"/>
                         </a>
                     </li>
                 </ul>
@@ -61,8 +66,8 @@
                             <li class="relatives-list__item">
                                 <a href="{{ route('profile.show', $relative->slug ) }}" class="relatives__link">
                                     <div class="relatives__avatar">
-                                        <img src="{{ asset('storage/'. $relative->avatar ) }}"
-                                             class="bg-img" alt="avatar" title="avatar"/>
+                                        <img src="{{  $relative->getFirstMediaUrl('avatars') }}"
+                                             class="bg-img" alt="{{ $relative->fullName }}" title="{{ $relative->fullName }}"/>
                                     </div>
                                     <span class="relatives__name">{{ $relative->full_name }}</span>
                                 </a>
@@ -83,18 +88,19 @@
         </div>
         <div class="member-images-wrap">
             <ul class="member-images">
-                @forelse($profile->galleries as $gallery)
+                @forelse($profile->getMedia('gallery') as $gallery)
                     <li class="member-images__item">
-                        @if($gallery->isVideo())
-                            <a href="{{ asset('storage/' . $gallery->item ) }}" class="gallery">
-                                <video src="{{ asset('storage/' . $gallery->item ) }}" class="bg-img"></video>
+                        @if($gallery->mime_type === 'video/mp4')
+                            <a href="{{$gallery->getUrl() }}" class="gallery">
+                                <video src="{{ $gallery->getUrl() }}" class="bg-img"></video>
                                 <svg class="video-play" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M33 19.5 0 39V0l33 19.5z"/>
                                 </svg>
                             </a>
                         @else
-                            <a href="{{ asset('storage/' . $gallery->item ) }}" class="gallery">
-                                <img src="{{ asset('storage/' . $gallery->item ) }}" class="bg-img" alt="" title=""/>
+                            <a href="{{ $gallery->getUrl() }}" class="gallery">
+                                <img src="{{ $gallery->getUrl('thumb_500') }}" class="bg-img" alt="{{ $gallery->name }}"
+                                     title="{{ $gallery->name }}"/>
                             </a>
                         @endif
                     </li>

@@ -50,11 +50,8 @@ class CabinetController extends Controller
                 $validated_data['phone'],
                 $validated_data['avatar']
             );
-        } catch (\DomainException $exception) {
-            dd($exception->getMessage());
-//            return back()->with('message', $exception->getMessage());
-        } catch (FileDoesNotExist | FileIsTooBig $e) {
-            dd($e->getMessage());
+        } catch (\DomainException | FileDoesNotExist | FileIsTooBig $exception) {
+            return back()->with('message', $exception->getMessage());
         }
 
         return redirect()->route('cabinet.show', [

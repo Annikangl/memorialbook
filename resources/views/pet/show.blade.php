@@ -3,15 +3,15 @@
 @section('content')
     <section class="pet-card">
         <div class="pet-banner">
-            <img src="{{ asset('storage/' . $pet->banner) }}" class="bg-img" alt="" title=""/>
+            <img src="{{ $pet->getFirstMediaUrl('banner', 'thumb_900')}}" class="bg-img" alt="" title=""/>
         </div>
         <div class="pet-card-wrap">
             <div class="member-info">
                 <div class="member-info-wrap">
                     <div class="pet-avatar">
                         <div class="member-avatar__wrap">
-                            <img src="{{ asset('storage/' . $pet->avatar) }}" class="bg-img" alt="avatar"
-                                 title="avatar"/>
+                            <img src="{{ $pet->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt="{{ $pet->name }}"
+                                 title="{{ $pet->name }}"/>
                         </div>
                         <a href="#" class="member-avatar__change-link">
                             <svg width="24" height="20" viewBox="0 0 24 20" fill="none"
@@ -25,7 +25,7 @@
 
                     <div class="member-name-wrap">
                         <span class="member-name">{{ $pet->name }}</span>
-                        <span class="member-ages">28.12.2004 - 14.04.2008</span>
+                        <span class="member-ages">{{ $pet->lifeExpectancy }}</span>
                     </div>
                 </div>
                 <div class="member-info-biography">
@@ -42,7 +42,7 @@
                         <li class="relatives-list__item">
                             <a href="#" class="relatives__link">
                                 <div class="relatives__avatar">
-                                    <img src="{{ asset('storage/' . $pet->user->avatar) }}" class="bg-img" alt=""
+                                    <img src="{{ $pet->user->getFirstMediaUrl('avatar') }}" class="bg-img" alt=""
                                          title=""/>
                                 </div>
                                 <span class="relatives__name"> {{ $pet->user->username }} </span>
@@ -52,10 +52,11 @@
                 </div>
             </div>
             <ul class="pet-images">
-                @foreach($pet->galleries as $gallery)
+                @foreach($pet->getMedia('gallery') as $gallery)
                     <li class="member-images__item">
-                        <a href="{{ asset('storage/' . $gallery->item) }}" class="gallery" data-fancybox="pet-gallery">
-                            <img src="{{ asset('storage/' . $gallery->item) }}" class="bg-img" alt="" title=""/>
+                        <a href="{{ $gallery->getUrl() }}" class="gallery" data-fancybox="pet-gallery">
+                            <img src="{{ $gallery->getUrl('thumb_500') }}" class="bg-img" alt="{{ $gallery->name }}"
+                                 title="{{ $gallery->name }}"/>
                         </a>
                     </li>
                 @endforeach

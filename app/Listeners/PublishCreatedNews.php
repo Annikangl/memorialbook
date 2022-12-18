@@ -35,12 +35,12 @@ class PublishCreatedNews
             'title' => $event->action,
         ]);
 
-        if ($event->profile->galleries()->exists()) {
-            foreach ($event->profile->galleries as $item) {
+        if ($event->profile->media()->exists()) {
+            foreach ($event->profile->media as $item) {
                 /** @var News $news */
                 $news->galleries()->create([
                     'news_id' => $news->id,
-                    'item' => $item->item
+                    'item' => $item->name
                 ]);
             }
         }

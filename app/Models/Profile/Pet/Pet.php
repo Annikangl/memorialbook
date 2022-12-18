@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Class Pet
@@ -45,10 +46,10 @@ class Pet extends Profile
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function galleries(): HasMany
-    {
-        return $this->hasMany(Gallery::class);
-    }
+//    public function galleries(): HasMany
+//    {
+//        return $this->hasMany(Gallery::class);
+//    }
 
     public function sluggable(): array
     {
@@ -57,5 +58,37 @@ class Pet extends Profile
                 'source' => ['name']
             ]
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('avatars')
+            ->singleFile()
+            ->useFallbackUrl(asset('assets/media/media/empty_profile_avatar.png'))
+            ->useFallbackPath(asset('assets/media/media/empty_profile_avatar.png'));
+
+        $this->addMediaCollection('gallery');
+        $this->addMediaCollection('banner')
+            ->singleFile();
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->performOnCollections('avatars')
+            ->width(150)
+            ->height(150)
+            ->nonQueued();
+
+        $this->addMediaConversion('thumb_500')
+            ->width(500)
+            ->height(550)
+            ->nonQueued();
+
+        $this->addMediaConversion('thumb_900')
+            ->performOnCollections('banner')
+            ->width(1000)
+            ->height(600)
+            ->nonQueued();
     }
 }

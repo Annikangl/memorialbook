@@ -50,7 +50,7 @@
                                     <div class="list-profiles__img">
                                         <img
                                             data-src="{{ asset('assets/media/media/empty_profile_avatar.png') }}"
-                                            data-srcset="{{ $human->getFirstMediaUrl('avatars') }}"
+                                            data-srcset="{{ $human->getFirstMediaUrl('avatars', 'thumb') }}"
                                             class="bg-img swiper-lazy"
                                             alt="{{ $human->full_name }}"
                                             title="{{ $human->full_name }}"/>
@@ -103,7 +103,7 @@
                                     <div class="list-profiles__img">
                                         <img
                                             data-src="{{ asset('assets/media/media/empty_profile_avatar.png') }}"
-                                            data-srcset="{{ asset('storage/' . $relative->avatar) }}"
+                                            data-srcset="{{ $relative->getFirstMediaUrl('avatars', 'thumb') }}"
                                             class="bg-img swiper-lazy"
                                             alt="Avatar {{ $relative->full_name }}"
                                             title="Avatar {{ $relative->full_name }}"/>
@@ -156,7 +156,7 @@
                                     <div class="list-profiles__img">
                                         <img
                                             data-src="{{ asset('assets/media/media/empty_profile_avatar.png') }}"
-                                            data-srcset="{{ asset('storage/' . $pet->avatar) }}"
+                                            data-srcset="{{ $pet->getFirstMediaUrl('avatars', 'thumb') }}"
                                             class="bg-img swiper-lazy"
                                             alt="{{ $pet->name }}"
                                             title="avatar"/>

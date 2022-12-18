@@ -69,18 +69,19 @@ class ProfileCreateRequest extends FormRequest
             'burial_place' => ['nullable', 'string', 'min:3'],
             'death_reason' => ['nullable', 'string'],
             'date_death' => ['required', 'date'],
+            'father_id' => ['sometimes', 'nullable', 'array'],
+            'spouse_id' => ['sometimes', 'nullable', 'array'],
+            'mother_id' => ['sometimes', 'nullable', 'array'],
+            'profile_images.*' => ['required', 'mimes:jpg,jpeg,png,webp,mp4', 'max:20000'],
+            'description' => ['sometimes', 'nullable', 'string'],
+            'religious_id' => ['sometimes', 'nullable'],
+            'access' => ['required'],
+
             'burial_place_coords' => [
                 Rule::requiredIf(fn() => (bool)$this->get('burial_place')),
                 'nullable',
                 'array'
             ] ,
-            'father_id' => ['sometimes', 'nullable', 'array'],
-            'spouse_id' => ['sometimes', 'nullable', 'array'],
-            'mother_id' => ['sometimes', 'nullable', 'array'],
-            'profile_images.*' => ['required', 'mimes:jpg,jpeg,png,bmp,mp4', 'max:20000'],
-            'description' => ['sometimes', 'nullable', 'string'],
-            'religious_id' => ['sometimes', 'nullable'],
-            'access' => ['required'],
 
             'avatar' => [
                 'nullable',
@@ -91,7 +92,7 @@ class ProfileCreateRequest extends FormRequest
             ],
 
             'death_certificate' => [
-                Rule::requiredIf(fn() =>  $this->hasFile('death_certificate')),
+                'sometimes',
                 File::types(['pdf'])
                     ->max(10 * 1024)
             ],

@@ -64,12 +64,13 @@ class HumanController extends Controller
 
     public function show(string $slug): Factory|View|Application
     {
-        $profile = Human::query()->with(['hobbies', 'religions', 'galleries'])
+        $profile = Human::query()->with(['hobbies', 'religions', 'media' => function ($query) {
+                $query->whereIn('collection_name', ['avatars', 'gallery']);
+            }])
             ->where('slug', $slug)
             ->firstOrFail();
 
         $relatives = Human::withRelatives()->get();
-
 
         return view('profile.show', compact('profile', 'relatives'));
     }
@@ -91,7 +92,7 @@ class HumanController extends Controller
         $genders = Human::genderList();
 
         return view('profile.create.create',
-            compact('profiles','fathers', 'mothers', 'religions', 'genders'));
+            compact('profiles', 'fathers', 'mothers', 'religions', 'genders'));
     }
 
     public function store(ProfileCreateRequest $request): RedirectResponse
@@ -102,6 +103,7 @@ class HumanController extends Controller
             $profile = $this->service->create(\Auth::id(), $request_data);
             event(new CreateNews($profile, CreateNews::USER_ADDED_PROFILE));
         } catch (\DomainException $exception) {
+            dd($exception->getMessage());
             return back()->with([
                 'message' => $exception->getMessage(),
                 'alert-class' => 'alert-danger'
@@ -126,7 +128,7 @@ class HumanController extends Controller
         $genders = Human::genderList();
 
         return view('profile.edit.edit',
-            compact('profile','genders','mothers','fathers', 'religions'));
+            compact('profile', 'genders', 'mothers', 'fathers', 'religions'));
     }
 
     public function map(SearchRequest $request): Factory|View|Application
@@ -143,7 +145,7 @@ class HumanController extends Controller
 
     private function getProfiles(): array|Collection|\Illuminate\Support\Collection
     {
-     return Human::byUser(auth()->id())
+        return Human::byUser(auth()->id())
             ->addSelect('gender')
             ->get();
     }

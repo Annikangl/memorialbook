@@ -31,14 +31,14 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('pet_galleries', function(Blueprint $table) {
-           $table->id();
-           $table->foreignIdFor(Pet::class)->constrained()->cascadeOnDelete();
-
-           $table->string('item');
-           $table->string('item_sm')->nullable();
-           $table->string('extension', 4);
-        });
+//        Schema::create('pet_galleries', function(Blueprint $table) {
+//           $table->id();
+//           $table->foreignIdFor(Pet::class)->constrained()->cascadeOnDelete();
+//
+//           $table->string('item');
+//           $table->string('item_sm')->nullable();
+//           $table->string('extension', 4);
+//        });
     }
 
     public function down(): void

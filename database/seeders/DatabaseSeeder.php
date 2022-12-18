@@ -35,11 +35,11 @@ class DatabaseSeeder extends Seeder
             ->has(Cemetery::factory()->count(3))
             ->has(Hobby::factory()->count(3))
             ->has(Religion::factory()->count(3))
-            ->has(\App\Models\Profile\Human\Gallery::factory()->count(5))
+//            ->has(\App\Models\Profile\Human\Gallery::factory()->count(5))
             ->create();
 
         Pet::factory(15)
-            ->has(\App\Models\Profile\Pet\Gallery::factory()->count(5))
+//            ->has(\App\Models\Profile\Pet\Gallery::factory()->count(5))
             ->create();
 
         Community::factory(5)

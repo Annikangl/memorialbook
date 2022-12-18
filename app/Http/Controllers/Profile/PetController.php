@@ -24,7 +24,7 @@ class PetController extends Controller
 
     public function show(string $slug): Factory|View|Application
     {
-        $pet = Pet::query()->with(['user', 'galleries'])
+        $pet = Pet::query()->with(['user', 'media'])
             ->where('slug', $slug)
             ->firstOrFail();
 

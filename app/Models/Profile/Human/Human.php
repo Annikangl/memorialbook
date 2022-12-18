@@ -185,11 +185,23 @@ class Human extends Profile implements HasMedia
             ->singleFile()
             ->useFallbackUrl(asset('assets/media/media/empty_profile_avatar.png'))
             ->useFallbackPath(asset('assets/media/media/empty_profile_avatar.png'));
+
+        $this->addMediaCollection('gallery');
+        $this->addMediaCollection('attached_document')
+            ->singleFile();
     }
 
-    public function galleries(): HasMany
+    public function registerMediaConversions(Media $media = null): void
     {
-        return $this->hasMany(Gallery::class, '');
+        $this->addMediaConversion('thumb')
+            ->width(150)
+            ->height(150)
+            ->nonQueued();
+
+        $this->addMediaConversion('thumb_500')
+            ->width(500)
+            ->height(550)
+            ->nonQueued();
     }
 
     public function users(): BelongsTo

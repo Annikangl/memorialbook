@@ -16,34 +16,13 @@ use Illuminate\Support\Facades\DB;
 
 class ProfileService
 {
-    private FileUploader $fileUploader;
-
-    public function __construct(FileUploader $fileUploader)
-    {
-        $this->fileUploader = $fileUploader;
-    }
-
     public function create(int $userId, array $data): Human
     {
-        $documentPath = null;
         $cemetery = null;
 
-        if (isset($data['death_certificate'])) {
-            $documentPath = $this->fileUploader
-                ->upload($data['death_certificate'], Human::DOCUMENTS_PATH);
-        }
-
         try {
-            return DB::transaction(function () use ($documentPath, $data, $userId, $cemetery) {
+            return DB::transaction(function () use ($data, $userId, $cemetery) {
 
-                if ($data['burial_place']) {
-                    $cemetery = Cemetery::createFromProfile(
-                        \Auth::id(),
-                        $data['burial_place'],
-                        $data['burial_place_coords'],
-                        $data['burial_place'],
-                    );
-                }
 
                 $human = Human::make([
                     'first_name' => $data['first_name'],
@@ -57,19 +36,27 @@ class ProfileService
                     'latitude' => $data['burial_place_coords']['lat'] ?? null,
                     'longitude' => $data['burial_place_coords']['lng'] ?? null,
                     'death_reason' => $data['death_reason'],
-                    'death_certificate' => $documentPath,
-                    'avatar' => Human::EMPTY_AVATAR_PATH,
                     'status' => Human::STATUS_ACTIVE,
                     'access' => $data['access']
                 ]);
 
                 $human->users()->associate($userId);
-                $human->cemeteries()->associate($cemetery);
 
                 $human->father()->associate($data['father_id']['id'] ?? null);
                 $human->father()->associate($data['mother_id']['id'] ?? null);
                 $human->father()->associate($data['spouse_id']['id'] ?? null);
                 $human->father()->associate($data['religious_id']['id'] ?? null);
+
+                if ($data['burial_place']) {
+                    $cemetery = Cemetery::createFromProfile(
+                        \Auth::id(),
+                        $data['burial_place'],
+                        $data['burial_place_coords'],
+                        $data['burial_place'],
+                    );
+                }
+
+                $human->cemeteries()->associate($cemetery);
 
                 $human->save();
 
@@ -91,15 +78,12 @@ class ProfileService
 
                 if (isset($data['profile_images'])) {
                     foreach ($data['profile_images'] as $image) {
-                        $images_path = $this->fileUploader->upload($image, Human::GALLERY_PATH);
-
-                        $human->galleries()->create([
-                            'item' => $images_path,
-                            'item_sm' => $images_path,
-                            'extension' => $image->extension(),
-                            'human_id' => $human->id
-                        ]);
+                        $human->addMedia($image)->toMediaCollection('gallery');
                     }
+                }
+
+                if (isset($data['death_certificate'])) {
+                    $human->addMedia($data['death_certificate'])->toMediaCollection('attached_document');
                 }
 
                 return $human;
@@ -112,19 +96,8 @@ class ProfileService
 
     public function createPet(int $ownerId, array $data): Pet
     {
-        $avatarPath = Profile::EMPTY_AVATAR_PATH;
-        $bannerPath = null;
-
-        if (isset($data['avatar'])) {
-            $avatarPath = $this->fileUploader->upload($data['avatar'], Pet::AVATAR_PATH);
-        }
-
-        if (isset($data['pet_banner'])) {
-            $bannerPath = $this->fileUploader->upload($data['pet_banner'], Pet::BANNER_PATH);
-        }
-
         try {
-            return DB::transaction(function () use ($data, $avatarPath, $bannerPath, $ownerId) {
+            return DB::transaction(function () use ($data, $ownerId) {
                 /** @var Pet $pet */
                 $pet = Pet::query()->make([
                     'name' => $data['name'],
@@ -135,30 +108,28 @@ class ProfileService
                     'burial_place' => $data['burial_place'],
                     'death_reason' => $data['death_reason'],
                     'description' => $data['description'],
-                    'avatar' => $avatarPath,
-                    'banner' => $bannerPath,
                 ]);
 
                 $pet->user()->associate($ownerId);
 
                 $pet->save();
 
-                if (isset($data['pet_gallery'])) {
-                    /** @var UploadedFile $item */
-                    foreach ($data['pet_gallery'] as $item) {
-                        $itemPath = $this->fileUploader->upload($item, Pet::GALLERY_PATH);
+                if (isset($data['avatar'])) {
+                    $pet->addMedia($data['avatar'])->toMediaCollection('avatars');
+                }
 
-                        $pet->galleries()->create([
-                            'item' => $itemPath,
-                            'extension' => $item->getExtension(),
-                        ]);
+                if (isset($data['pet_banner'])) {
+                    $pet->addMedia($data['pet_banner'])->toMediaCollection('banner');
+                }
+
+                if (isset($data['pet_gallery'])) {
+                    foreach ($data['pet_gallery'] as $image) {
+                        $pet->addMedia($image)->toMediaCollection('gallery');
                     }
                 }
 
                 return $pet;
             });
-        } catch (\DomainException $exception) {
-            throw new \DomainException($exception->getMessage());
         } catch (\Throwable $e) {
             throw new \DomainException($e->getMessage());
         }

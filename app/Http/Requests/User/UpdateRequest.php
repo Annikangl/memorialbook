@@ -42,8 +42,8 @@ class UpdateRequest extends FormRequest
                 Rule::requiredIf(function () {
                     $this->hasFile('avatar');
                 }),
-                File::image()
-                    ->min(1)->max(5 * 1024)
+                File::image()->min(1)->max(5 * 1024)
+                    ->dimensions(Rule::dimensions()->minWidth(100)->minHeight(100)),
             ]
         ];
     }
