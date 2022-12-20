@@ -39,6 +39,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int|null $child_id
  * @property int|null $spouse_id
  * @property string|null $published_at
+ * @property string|null $life_expectancy
  *
  * @method static Builder|Human filtered()
  * @method static Builder|Human query()
@@ -46,7 +47,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property float|null $longitude
  * @property-read Human|null $child
  * @property-read Human|null $father
- * @property-read Collection|\App\Models\Profile\Human\Gallery[] $galleries
  * @property-read int|null $galleries_count
  * @property-read Collection|\App\Models\Profile\Hobby[] $hobbies
  * @property-read int|null $hobbies_count

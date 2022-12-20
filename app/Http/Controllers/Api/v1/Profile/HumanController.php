@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Http\Controllers\Api\v1\Profile;
+
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Profile\HumanResource;
+use App\Models\Profile\Human\Human;
+use Illuminate\Http\Request;
+
+class HumanController extends Controller
+{
+    public function show(int $id)
+    {
+        $human = Human::query()
+            ->with(['hobbies', 'media'])
+            ->select(['id', 'first_name', 'last_name', 'description', 'date_birth', 'date_death', 'death_reason'])
+            ->findOrFail($id);
+
+        return response()->json(['status' => true, 'profile' => new HumanResource($human)])
+            ->setStatusCode(200);
+    }
+}

@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\Auth\RegisterController;
 use App\Http\Controllers\Api\v1\Cabinet\CabinetController;
+use App\Http\Controllers\Api\v1\Profile\HumanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,10 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::get('/users/{id}', [CabinetController::class, 'show']);
             Route::put('/users/{id}', [CabinetController::class, 'update']);
             Route::delete('/users/{id}', [CabinetController::class, 'delete']);
+        });
+
+        Route::prefix('profiles')->group(function () {
+            Route::get('/{id}', [HumanController::class, 'show']);
         });
     });
 });
