@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Api\v1\Profile;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Profile\HumanResource;
 use App\Models\Profile\Human\Human;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class HumanController extends Controller
 {
-    public function show(int $id)
+    public function show(int $id): JsonResponse
     {
         $human = Human::query()
             ->with(['hobbies', 'media'])

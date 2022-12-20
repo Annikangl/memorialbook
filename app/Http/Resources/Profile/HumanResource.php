@@ -20,13 +20,13 @@ class HumanResource extends JsonResource
         $gallery = $this->media()->select('id', 'file_name', 'disk')->where('collection_name', 'gallery')
             ->simplePaginate(6);
 
-
         return [
             'id' => $this->id,
             'full_name' => $this->full_name,
             'death_reason' => $this->death_reason,
             'life_expectancy' => $this->life_expectancy,
             'avatar' => $this->getFirstMediaUrl('avatars'),
+            'hobbies' => $this->hobbies->pluck('title'),
             'gallery' => $gallery
         ];
     }
