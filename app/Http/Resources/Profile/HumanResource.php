@@ -18,12 +18,15 @@ class HumanResource extends JsonResource
     public function toArray($request): array|\JsonSerializable|Arrayable
     {
         /** @var Human $this */
-        $gallery = $this->media()->select('id', 'file_name', 'disk')->where('collection_name', 'gallery')
+        $gallery = $this->media()
+            ->select('id', 'file_name', 'disk', 'model_id')
+            ->where('collection_name', 'gallery')
             ->simplePaginate(6);
 
         // TODO move to resource collection
         $relatives = Human::withRelatives()->get()->map(function ($item) {
             return [
+                'id' => $item->id,
                 'full_name' => $item->fullName,
                 'avatar' => $item->getFirstMediaUrl('avatars')
             ];
@@ -38,7 +41,8 @@ class HumanResource extends JsonResource
             'relatives' => $relatives,
             'avatar' => $this->getFirstMediaUrl('avatars'),
             'hobbies' => $this->hobbies->pluck('title'),
-            'gallery' => $gallery
+            'gallery' => $gallery,
+            'updated_at' => $this->updated_at
         ];
     }
 }
