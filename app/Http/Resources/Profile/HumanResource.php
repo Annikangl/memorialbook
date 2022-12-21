@@ -33,6 +33,7 @@ class HumanResource extends JsonResource
             'id' => $this->id,
             'full_name' => $this->full_name,
             'death_reason' => $this->death_reason,
+            'description' => $this->description,
             'life_expectancy' => $this->life_expectancy,
             'relatives' => $relatives,
             'avatar' => $this->getFirstMediaUrl('avatars'),
