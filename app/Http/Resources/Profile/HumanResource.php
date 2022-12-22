@@ -28,7 +28,7 @@ class HumanResource extends JsonResource
             return [
                 'id' => $item->id,
                 'full_name' => $item->fullName,
-                'avatar' => $item->getFirstMediaUrl('avatars')
+                'avatar' => $item->getFirstMediaUrl('avatars', 'thumb')
             ];
         });
 
@@ -39,7 +39,7 @@ class HumanResource extends JsonResource
             'description' => $this->description,
             'life_expectancy' => $this->life_expectancy,
             'relatives' => $relatives,
-            'avatar' => $this->getFirstMediaUrl('avatars'),
+            'avatar' => $this->getFirstMediaUrl('avatars','thumb'),
             'hobbies' => $this->hobbies->pluck('title'),
             'gallery' => $gallery,
             'updated_at' => $this->updated_at

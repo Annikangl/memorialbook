@@ -199,6 +199,7 @@ class Human extends Profile implements HasMedia
             ->nonQueued();
 
         $this->addMediaConversion('thumb_500')
+            ->performOnCollections('gallery')
             ->width(500)
             ->height(550)
             ->nonQueued();
