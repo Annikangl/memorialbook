@@ -31,6 +31,12 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         Route::prefix('profiles')->group(function () {
             Route::get('/{id}', [HumanController::class, 'show']);
         });
+
+        Route::prefix('search')->group(function () {
+            Route::get('/profile', [HumanController::class, 'search']);
+        });
+
+
     });
 });
 

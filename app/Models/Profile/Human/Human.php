@@ -144,11 +144,11 @@ class Human extends Profile implements HasMedia
 
     public function scopeFiltered(Builder $query): Builder
     {
-        return $query->when($value = request('FIO'), function (Builder $q) use ($value) {
-            $q->where(\DB::raw('CONCAT_WS(" ",profiles.first_name, " ", profiles.last_name, " ", profiles.patronymic)'), 'LIKE', "%$value%");
-        })->when($value = request('BIRTH'), function (Builder $q) use ($value) {
+        return $query->when($value = request('full_name'), function (Builder $q) use ($value) {
+            $q->where(\DB::raw('CONCAT_WS(" ",humans.first_name, " ", humans.last_name, " ", humans.patronymic)'), 'LIKE', "%$value%");
+        })->when($value = request('birth_date'), function (Builder $q) use ($value) {
             $q->whereBetween(\DB::raw('YEAR(date_birth)'), explode('-', $value));
-        })->when($value = request('DEATH'), function (Builder $query) use ($value) {
+        })->when($value = request('death_date'), function (Builder $query) use ($value) {
             $query->whereBetween(\DB::raw('YEAR(date_death)'), explode('-', $value));
         });
     }
