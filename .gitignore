@@ -17,3 +17,4 @@ yarn-error.log
 /dump.sql
 /docker/nginx/ssl
 /docker/nginx/logrotate
+/docker/logs
