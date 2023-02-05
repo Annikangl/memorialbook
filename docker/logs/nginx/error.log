@@ -1,5 +1,0 @@
-2023/02/05 18:01:34 [emerg] 1#1: "daemon" directive is duplicate in /etc/nginx/nginx.conf:4
-2023/02/05 18:05:18 [emerg] 1#1: "daemon" directive is duplicate in /etc/nginx/nginx.conf:4
-2023/02/05 18:08:25 [emerg] 1#1: "daemon" directive is duplicate in /etc/nginx/nginx.conf:4
-2023/02/05 18:10:43 [emerg] 1#1: "daemon" directive is duplicate in /etc/nginx/nginx.conf:4
-2023/02/05 18:23:29 [warn] 1#1: the "ssl" directive is deprecated, use the "listen ... ssl" directive instead in /etc/nginx/sites-available/laravel.conf:13
