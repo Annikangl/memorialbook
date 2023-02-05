@@ -15,3 +15,5 @@ yarn-error.log
 /.idea
 /.vscode
 /dump.sql
+/docker/nginx/ssl
+/docker/nginx/logrotate
