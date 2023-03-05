@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         Model::preventSilentlyDiscardingAttributes(!$this->app->isProduction());
 
         Password::defaults(function () {
-            $rule = Password::min(8);
+            $rule = Password::min(6);
 
             return $this->app->isProduction()
                 ? $rule->letters()->uncompromised()->numbers()->mixedCase()

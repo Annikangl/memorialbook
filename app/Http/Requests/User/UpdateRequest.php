@@ -36,7 +36,7 @@ class UpdateRequest extends FormRequest
 //        TODO email validate
         return [
             'full_name' => ['required', 'string', 'min:3'],
-            'email' => ['required', 'email:dns'],
+            'email' => ['required', 'email'],
             'phone' => ['sometimes', 'nullable', 'string', 'min:8', 'max:20'],
             'avatar' => ['nullable',
                 Rule::requiredIf(function () {

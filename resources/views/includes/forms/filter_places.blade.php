@@ -1,68 +1,19 @@
-<div class="filter -places" id="slideout-places">
-    <form class="form" action="{{ route('cemetery.search.map') }}" method="get">
-        <div class="container">
-            <div class="form__top">
-                <div class="form__inner">
-                    <div class="form__left">
-                        <div class="form__title">Поиск мест</div>
-                    </div>
-                    <div class="form__right">
-                        <div class="form__form-group form-group">
-                            <div class="form__message">Введите фамилию, имя, отчество
-                                профиля, который вы хотите найти. Если
-                                вы не уверенны в датах, укажите примерные.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form__items">
-                <div class="form__inner">
-                    <div class="form__left">
-                        <div class="form__row row">
-                            <div class="form__col -name col">
-                                <div class="form__form-group form-group">
-                                    <label class="form__label" for="filter-places-name">Название:</label>
-                                    <div class="form__input-container">
-                                        <input class="form__input form-control"
-                                               type="text" id="filter-places-name"
-                                               name="NAME" value="{{ request('NAME') }}" placeholder=" ">
-                                        <button class="form__button -close close"
-                                                type="button"></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form__right">
-                        <div class="form__row row">
-                            <div class="form__col -address col">
-                                <div class="form__form-group form-group">
-                                    <label class="form__label"
-                                           for="filter-places-address">Местоположение:</label>
-                                    <div class="form__input-container">
-                                        <input class="form__input form-control"
-                                               type="text" id="filter-places-address"
-                                               name="ADDRESS"  value="{{ request('ADDRESS') }}" placeholder=" ">
-                                        <button class="form__button -close close"
-                                                type="button"></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form__col -submit col">
-                                <div class="form__form-group -submit form-group">
-                                    <button
-                                        class="form__button -submit btn btn-primary btn-lg"
-                                        type="submit">
-                                        <span>Показать</span>
-{{--                                        <span>2 799</span>--}}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<form class="form-search-places" action="{{ route('cemetery.search.map') }}" method="get">
+    <h3 class="form-search-places__title">Поиск мест</h3>
+    <p>Введите фамилию, имя, отчество профиля, который вы хотите найти. <br/>Если вы не уверенны в датах, укажите примерные.</p>
+    <div class="input-wrap">
+        <span class="input-wrap__title">Название:</span>
+        <div class="input-form">
+            <input type="text" class="input-text" name="place_name" value="{{ request('place_name') }}" title="Place name"/>
+        </div>
+    </div>
+    <div class="form-search-places__row">
+        <div class="input-wrap">
+            <span class="input-wrap__title">Местоположение:</span>
+            <div class="input-form">
+                <input type="text" class="input-text" name="place" title="Place" value="{{ request('place') }}"/>
             </div>
         </div>
-    </form>
-</div>
+        <input type="submit" value="Показать" class="btn blue-btn"/>
+    </div>
+</form>

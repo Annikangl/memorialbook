@@ -15,8 +15,8 @@ class SearchRequest extends FormRequest
     {
         return [
             'full_name' => ['required', 'string', 'min:3'],
-            'birth_date' => ['sometimes', 'string'],
-            'death_date' => ['sometimes', 'string'],
+            'birth_date' => ['nullable', 'string'],
+            'death_date' => ['nullable', 'string'],
         ];
     }
 }

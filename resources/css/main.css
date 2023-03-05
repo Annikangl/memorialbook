@@ -184,6 +184,35 @@ section {
     min-width: 160px;
 }
 
+.form-search-people, .form-search-places {
+    width: 100%;
+    display: none;
+    grid-template-columns: 1fr 496px;
+    grid-column-gap: 30px;
+}
+
+.form-search-people__row, .form-search-places__row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-end;
+    grid-gap: 10px;
+}
+
+.form-search-places__row {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.search-people .form-search-people, .search-places .form-search-places {
+    display: grid;
+}
+
+.form-recover__title, .form-search-people__title, .form-search-places__title {
+    font: 900 52px sans-serif;
+    line-height: 1.3;
+    color: var(--black);
+}
+
+
 .login-form__registration-link {
     margin-top: 40px;
     color: var(--blue);
@@ -306,7 +335,8 @@ section {
 }
 
 .preview-modal.aside-top .form-registration, .preview-modal.aside-right .form-recover,
-.preview-modal.aside-menu .form-registration, .preview-modal.aside-menu .form-recover {
+.preview-modal.aside-menu .form-registration, .preview-modal.aside-menu .form-recover,
+.aside-form.search-people .form-recover, .aside-form.search-places .form-recover {
     display: none;
 }
 

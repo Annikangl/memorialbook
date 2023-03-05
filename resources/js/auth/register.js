@@ -16,11 +16,11 @@ if (document.querySelector('#form-registration')) {
 
         axios.post(url,
             {
-                full_name: inputs[0].value,
-                email: inputs[1].value,
-                phone: inputs[2].value,
-                password: inputs[3].value,
-                password_confirm: inputs[4].value,
+                registration_full_name: inputs[0].value,
+                registration_email: inputs[1].value,
+                registration_phone: inputs[2].value,
+                registration_password: inputs[3].value,
+                registration_password_confirm: inputs[4].value,
             }
         ).then(function (response) {
             if (response.status === 201) {

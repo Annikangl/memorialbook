@@ -8,7 +8,7 @@
             list="true"
             modalHref="#slideout-places"
             slideoutOptions="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}"
-            hrefList="{{ route('cemetery.search.list') . '?NAME=' . request('NAME') . '&ADDRESS=' . request('ADDRESS') }}"
+            hrefList="{{ route('cemetery.search.list') . '?place_name=' . request('place_name') . '&place=' . request('place') }}"
         >
         </x-search-filter>
 

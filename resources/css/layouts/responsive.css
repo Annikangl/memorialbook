@@ -391,6 +391,10 @@
     .family-card-nav__item:last-child {
         left: calc(100% + 0px);
     }
+
+    .form-search-people, .form-search-places {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media screen and (max-width: 860px) {
@@ -800,6 +804,23 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
+    }
+
+    .form-search-people__row, .form-search-places__row {
+        grid-template-columns: 1fr;
+        grid-gap: 0;
+    }
+
+    .form-search-people__row input[type='submit'], .form-search-places__row input[type='submit'] {
+        margin-top: 18px;
+    }
+
+    .form-recover__title, .form-search-people__title, .form-search-places__title {
+        font-size: 30px;
+    }
+
+    .form-search-people__title, .form-search-places__title {
+        margin-bottom: 15px;
     }
 }
 

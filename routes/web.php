@@ -30,6 +30,23 @@ Route::get('login/{driver}/callback', [NetworkController::class, 'callback'])->n
 
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('index');
 
+
+
+Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+    Route::get('/map', [HumanController::class, 'map'])->name('search.map');
+});
+
+Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+    Route::get('/map', [HumanController::class, 'map'])->name('search.map');
+});
+
+Route::group(['prefix' => 'cemetery', 'as' => 'cemetery.'], function () {
+    Route::get('/map', [CemeteryController::class, 'map'])->name('search.map');
+    Route::get('/list', [CemeteryController::class, 'list'])->name('search.list');
+});
+
+
+
 Route::middleware('auth')->group(function () {
 
     Route::group(['prefix' => 'cabinet', 'as' => 'cabinet.'], function () {
@@ -54,7 +71,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{profile}/edit', [HumanController::class, 'edit'])->name('edit');
 
         Route::get('/card/{slug}', [HumanController::class, 'show'])->name('show');
-        Route::get('/map', [HumanController::class, 'map'])->name('search.map');
+
 
         Route::group(['prefix' => 'pet', 'as' => 'pet.'], function () {
             Route::get('/create', [PetController::class, 'create'])->name('create');
@@ -71,8 +88,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::group(['prefix' => 'cemetery', 'as' => 'cemetery.'], function () {
-        Route::get('map', [CemeteryController::class, 'map'])->name('search.map');
-        Route::get('list', [CemeteryController::class, 'list'])->name('search.list');
+//        Route::get('map', [CemeteryController::class, 'map'])->name('search.map');
+//        Route::get('list', [CemeteryController::class, 'list'])->name('search.list');
         Route::get('show/{slug}', [CemeteryController::class, 'show'])->name('show');
 
         Route::get('/create', [CemeteryController::class, 'create'])->name('create');

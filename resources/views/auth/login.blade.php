@@ -29,7 +29,7 @@
                 <div class="input-wrap">
                     <span class="input-wrap__title">Пароль:</span>
                     <div class="input-form">
-                        <a class="input-link open-recover" id="input-link">Забыли пароль?</a>
+                        <a class="input-link" id="input-link">Забыли пароль?</a>
                         <input type="password" class="input-text" name="login_password" title="password"/>
                     </div>
                 </div>

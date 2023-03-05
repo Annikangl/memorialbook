@@ -141,7 +141,7 @@ class HumanController extends Controller
         })->count();
 
 
-        return view('profile.map', compact('persons', 'count_filters'));
+        return view('profile.map', compact('profiles', 'count_filters'));
     }
 
     private function getProfiles(): array|Collection|\Illuminate\Support\Collection

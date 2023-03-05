@@ -4,8 +4,13 @@ let buttonOpenMenu = document.querySelector('#mobile-menu');
 let modal = document.querySelector('#modal-from');
 let aside = document.querySelector('#form-aside');
 
+let buttonOpenSearchPeople = document.querySelector('.search-people');
+let buttonOpenSearchPlaces = document.querySelector('.search-places');
+let buttonOpenSearchFilters = document.querySelector('.search-filter');
+
 let openModal = function () {
     modal.classList.remove('aside-right', 'aside-top', 'aside-menu');
+    aside.classList.remove('search-people', 'search-places');
     modal.classList.add('open');
     page.classList.add('active');
     document.body.classList.add('fix');
@@ -46,7 +51,6 @@ if (document.querySelectorAll('.open-registration')) {
 
 
 if (document.querySelector('#input-link')) {
-
     let buttonRecover = document.querySelector('#input-link');
 
     buttonRecover.addEventListener('click', function () {
@@ -71,6 +75,38 @@ let openFormInvite = function () {
         closeModal()
     })
 
+}
+
+if (buttonOpenSearchPeople) {
+    buttonOpenSearchPeople.addEventListener('click', function () {
+        openModal();
+        modal.classList.add('aside-top');
+        aside.classList.remove('hide');
+        aside.classList.add('search-people');
+    });
+
+    buttonOpenSearchPlaces.addEventListener('click', function () {
+        openModal();
+        modal.classList.add('aside-top');
+        aside.classList.remove('hide');
+        aside.classList.add('search-places');
+    })
+}
+
+if (buttonOpenSearchFilters) {
+    buttonOpenSearchFilters.addEventListener('click', function () {
+       let attributes = JSON.parse(this.getAttribute('data-slideout-options'));
+
+        openModal();
+        modal.classList.add('aside-top');
+        aside.classList.remove('hide');
+
+       if (attributes.type === 'places') {
+           aside.classList.add('search-places');
+       } else if (attributes.type === 'people') {
+           aside.classList.add('search-people');
+       }
+    });
 }
 
 if (document.querySelector('.button-share')) {

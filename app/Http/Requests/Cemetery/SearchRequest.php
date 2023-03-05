@@ -24,7 +24,8 @@ class SearchRequest extends FormRequest
     public function rules()
     {
         return [
-            'NAME' => ['required', 'string', 'min:3']
+            'place_name' => ['required', 'string', 'min:3'],
+            'place' => ['nullable', 'string'],
         ];
     }
 }
