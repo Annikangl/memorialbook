@@ -28,10 +28,17 @@ class FamilyBurialController extends Controller
 
     public function show(FamilyBurial $familyBurial)
     {
-        $firstHuman = $familyBurial->humans()->with(['hobbies', 'galleries'])->first();
+        $firstHuman = $familyBurial->humans()->with(['hobbies'])->first();
         $relatives = $firstHuman->WithRelatives()->get();
 
         return view('family_burial.show', compact('familyBurial', 'firstHuman', 'relatives'));
+    }
+
+    public function showShortPage(FamilyBurial $familyBurial): Factory|View|Application
+    {
+        $human = $familyBurial->humans()->firstOrFail();
+
+        return view('family_burial.short_page', compact('familyBurial', 'human'));
     }
 
     public function create(): Factory|View|Application
@@ -59,7 +66,7 @@ class FamilyBurialController extends Controller
         try {
             $familyBurial = $this->burialService->create($humans);
         } catch (\DomainException $exception) {
-            return  redirect()->back()->with('message', $exception->getMessage());
+            return redirect()->back()->with('message', $exception->getMessage());
         }
 
         return redirect()->route('profile.family.show', $familyBurial);

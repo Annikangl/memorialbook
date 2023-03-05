@@ -31,7 +31,6 @@ Route::get('login/{driver}/callback', [NetworkController::class, 'callback'])->n
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('index');
 
 
-
 Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
     Route::get('/map', [HumanController::class, 'map'])->name('search.map');
 });
@@ -44,7 +43,6 @@ Route::group(['prefix' => 'cemetery', 'as' => 'cemetery.'], function () {
     Route::get('/map', [CemeteryController::class, 'map'])->name('search.map');
     Route::get('/list', [CemeteryController::class, 'list'])->name('search.list');
 });
-
 
 
 Route::middleware('auth')->group(function () {
@@ -72,7 +70,6 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/card/{slug}', [HumanController::class, 'show'])->name('show');
 
-
         Route::group(['prefix' => 'pet', 'as' => 'pet.'], function () {
             Route::get('/create', [PetController::class, 'create'])->name('create');
             Route::post('/store', [PetController::class, 'store'])->name('store');
@@ -84,6 +81,9 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', [FamilyBurialController::class, 'store'])->name('store');
             Route::get('/search/', [FamilyBurialController::class, 'searchProfile'])->name('search.profile');
             Route::get('/{familyBurial}/show', [FamilyBurialController::class, 'show'])->name('show');
+            Route::get('/{familyBurial}/short/show', [FamilyBurialController::class, 'showShortPage'])
+                ->middleware('agent')
+                ->name('short.page');
         });
     });
 

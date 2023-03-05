@@ -12,7 +12,7 @@
             @foreach($familyBurial->humans as $human)
                 <li class="family-card-nav__item" data-src="{{ route('profile.show', $human->slug) }}">
                     <div class="family-card-img">
-                        <img src="{{ asset('storage/' . $human->avatar) }}" class="bg-img" alt="Аватар профиля"
+                        <img src="{{ $human->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt="Аватар профиля"
                              title="Аватар"/>
                     </div>
                     <span class="family-card__name">{{ $human->fullName }}</span>
@@ -104,18 +104,19 @@
             </div>
             <div class="member-images-wrap">
                 <ul class="member-images">
-                    @forelse($firstHuman->galleries as $gallery)
+                    @forelse($firstHuman->getMedia('gallery') as $gallery)
                         <li class="member-images__item">
-                            @if($gallery->isVideo())
-                                <a href="{{ asset('storage/' . $gallery->item ) }}" class="gallery">
-                                    <video src="{{ asset('storage/' . $gallery->item ) }}" class="bg-img"></video>
+                            @if($gallery->mime_type === 'video/mp4')
+                                <a href="{{ $gallery->getUrl() }}" class="gallery">
+                                    <video src="{{ $gallery->getUrl() }}" class="bg-img"></video>
                                     <svg class="video-play" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M33 19.5 0 39V0l33 19.5z"/>
                                     </svg>
                                 </a>
                             @else
-                                <a href="{{ asset('storage/' . $gallery->item ) }}" class="gallery">
-                                    <img src="{{ asset('storage/' . $gallery->item ) }}" class="bg-img" alt="" title=""/>
+                                <a href="{{ $gallery->getUrl() }}" class="gallery">
+                                    <img src="{{ $gallery->getUrl('thumb_500') }}" class="bg-img" alt="{{ $gallery->name }}"
+                                         title="{{ $gallery->name }}"/>
                                 </a>
                             @endif
                         </li>

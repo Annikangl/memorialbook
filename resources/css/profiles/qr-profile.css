@@ -1,0 +1,161 @@
+
+/* qr-page style
+---------------*/
+.member-images.no-grid {
+    grid-template-columns: 1fr;
+}
+
+.qr-profile__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: -25px;
+    padding: 0 15px;
+}
+
+.qr-profile__info-text {
+    font: 600 16px/22px "Lato", sans-serif;
+    letter-spacing: -0.2px;
+    color: rgba(32, 30, 31, 0.8);
+    margin-bottom: 10px;
+}
+
+.qr-profile__info-item {
+    font: 400 14px/22px "Lato", sans-serif;
+    letter-spacing: -0.2px;
+    color: rgba(32, 30, 31, 0.8);
+    margin-bottom: 5px;
+}
+
+.qr-code-slider__avatar {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+    filter: drop-shadow(5px 5px 25px rgba(0, 0, 0, 0.1));
+}
+
+.qr-code-slider__item {
+    width: 167px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 25px;
+}
+
+.qr-code-slider__list {
+    display: inline-flex;
+    align-items: center;
+}
+
+.qr-code-slider__name {
+    display: inline-block;
+    margin-top: 25px;
+    max-width: 120px;
+    font: 700 20px/25px "Lato", sans-serif;
+    text-align: center;
+    letter-spacing: -0.2px;
+    color: #201E1F;
+}
+
+.qr-code-slider {
+    position: relative;
+    overflow: hidden;
+    top: -35px;
+}
+
+.qr-code-slider__next {
+    right: 15px;
+    transform: translateY(-50%);
+}
+
+.qr-code-slider__prev {
+    left: 15px;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.qr-code-slider__next, .qr-code-slider__prev {
+    width: 32px;
+    height: 32px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    z-index: 50;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14);
+}
+
+.qr-code-slider__next:disabled, .qr-code-slider__prev:disabled {
+    opacity: 0;
+}
+
+.qr-page {
+    max-width: 600px;
+}
+
+.qr-code__banner {
+    position: relative;
+    padding-top: 33%;
+}
+
+.qr-code__mark {
+    padding: 5px 15px;
+    background: rgba(23, 94, 217, 0.9);
+    border-radius: 0 6px 6px 6px;
+    font: 700 14px/1.4 "Lato", sans-serif;
+    z-index: 10;
+    position: absolute;
+    top: 5px;
+    left: 11px;
+    color: #fff;
+}
+
+.full-profile-link, .member-images__style button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.full-profile-link {
+    height: 39px;
+    width: calc(100% - 30px);
+    margin: 0 15px;
+    border-radius: 7px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font: 600 14px/17px "Lato", sans-serif;
+    margin-top: 25px;
+}
+
+.member-images__style {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    margin-top: 25px;
+    background-color: #fff;
+}
+
+.member-images__style button {
+    height: 46px;
+    width: 100%;
+}
+
+.member-images__style + .member-images {
+    padding: 0 0 20px;
+}
+
+.full-profile-link, .member-images__style button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
