@@ -52,6 +52,11 @@ class FamilyBurialController extends Controller
 
         try {
             $profiles = $this->service->search($searchText);
+
+            foreach ($profiles as $profile) {
+                $profile->avatar = $profile->getFirstMediaUrl('avatars', 'thumb');
+            }
+
         } catch (\DomainException $exception) {
             return response()->json(['status' => false, 'error' => $exception->getMessage()]);
         }

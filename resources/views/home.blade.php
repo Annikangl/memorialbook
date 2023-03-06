@@ -49,7 +49,7 @@
                                 <div class="list-profiles-img-wrap">
                                     <div class="list-profiles__img">
                                         <img
-                                            data-src="{{ asset('assets/media/media/empty_profile_avatar.png') }}"
+                                            data-src="{{ $human->getFirstMediaUrl('avatars', 'thumb') }}"
                                             data-srcset="{{ $human->getFirstMediaUrl('avatars', 'thumb') }}"
                                             class="bg-img swiper-lazy"
                                             alt="{{ $human->full_name }}"

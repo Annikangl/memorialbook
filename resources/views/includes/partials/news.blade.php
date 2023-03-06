@@ -11,7 +11,7 @@
         <div class="news-wrap">
             <div class="news-title-profile">
                 <div class="news-title-profile__img">
-                    <img src="{{ asset('storage/' . $newsItem->author->avatar) }}" class="bg-img"
+                    <img src="{{ $newsItem->author->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img"
                          alt="" title=""/>
                 </div>
                 <div class="news-title-profile__title">

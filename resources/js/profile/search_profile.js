@@ -27,6 +27,8 @@ if (document.querySelector('.profiles-search__input')) {
 
                         let items = response.profiles.data;
 
+                        console.log(items);
+
                         if (items.length > 0) {
                             items.forEach(function (item) {
 
@@ -34,7 +36,7 @@ if (document.querySelector('.profiles-search__input')) {
                                                 <label class="profiles-search-result__wrap">
                                                     <input type="radio" class="search-result__radio" name="profiles-family" value=""/>
                                                     <span class="search-result__img">
-                                                       <img src="${app.globalConfig.baseUrl + '/storage/' + item.avatar}" class="bg-img" alt="" title=""/>
+                                                       <img src="${item.avatar}" class="bg-img" alt="" title=""/>
                                                         <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                                                                              <path d="M18 1.99984L6 13.9998L0.5 8.49984L1.91 7.08984L6 11.1698L16.59 0.589844L18 1.99984Z"
                                                                                                                                    fill="white"/>
