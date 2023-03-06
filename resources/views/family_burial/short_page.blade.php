@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        .footer {
+            display: none !important;
+        }
+    </style>
     <section class="qr-page">
         <div class="qr-code__banner">
             <img src="{{ asset('assets/media/media/family/banner_small.webp') }}"
@@ -33,7 +38,7 @@
                         <img src="{{ $human->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt="Аватар профиля"
                              title="Аватар"/>
                     </div>
-                    <span class="qr-code-slider__name">Lido Anthony Iacocca</span>
+                    <span class="qr-code-slider__name">{{ $human->fullName }}</span>
                 </li>
                 @endforeach
             </ul>
@@ -58,8 +63,8 @@
             <p class="qr-profile__info-text">
                 Head of the State Museum contemporary art.
             </p>
-            <span class="qr-profile__info-item">11.01.1973 - 20.02.2011</span>
-            <span class="qr-profile__info-item">Cause of death: Cancer</span>
+            <span class="qr-profile__info-item">{{ $human->lifeExpectancy }}</span>
+            <span class="qr-profile__info-item">Причина смерти: {{ $human->death_reason }}</span>
         </div>
 
         <a href="{{ route('profile.family.show', $familyBurial) }}" class="full-profile-link blue-btn">View full profile</a>
@@ -100,133 +105,36 @@
                 </button>
             </div>
             <ul class="member-images">
+                @forelse($human->getMedia('gallery') as $gallery)
+
                 <li class="member-images__item">
-                    <a
-                        href="{{ asset('assets/uploads/profile/img-1.jpg') }}"
-                        class="gallery"
-                        rel="gallery"
-                    >
-                        <img
-                            src="{{ asset('assets/uploads/profile/img-1.jpg') }}"
-                            class="bg-img"
-                            alt=""
-                            title=""
-                        />
-                    </a>
-                </li>
-                <li class="member-images__item">
-                    <a href="{{ asset('assets/uploads/profile/img-2.png') }}" class="gallery">
-                        <img
-                            src="{{ asset('assets/uploads/profile/img-2.png') }}"
-                            class="bg-img"
-                            alt=""
-                            title=""
-                        />
-                    </a>
-                </li>
-                <li class="member-images__item">
-                    <a href="{{ asset('assets/uploads/profile/img-3.jpg') }}" class="gallery">
-                        <img
-                            src="{{ asset('assets/uploads/profile/img-3.jpg') }}"
-                            class="bg-img"
-                            alt=""
-                            title=""
-                        />
-                    </a>
-                </li>
-                <li class="member-images__item">
-                    <a href="{{ asset('assets/uploads/video/test-video.mp4') }}" class="gallery">
+                    @if($gallery->mime_type === 'video/mp4')
+                    <a href="{{ $gallery->getUrl() }}" class="gallery">
                         <video
-                            src="{{ asset('assets/uploads/video/test-video.mp4') }}"
+                            src="{{ $gallery->getUrl() }}"
                             class="bg-img"
                         ></video>
                         <svg class="video-play" xmlns="http://www.w3.org/2000/svg">
                             <path d="M33 19.5 0 39V0l33 19.5z" />
                         </svg>
                     </a>
+                    @else
+                        <a
+                            href="{{ $gallery->getUrl() }}"
+                            class="gallery"
+                            rel="gallery"
+                        >
+                            <img
+                                src="{{ $gallery->getUrl('thumb_500') }}"
+                                class="bg-img"
+                                alt=""
+                                title="{{ $gallery->name }}"
+                            />
+                        </a>
+                    @endif
                 </li>
-                <li class="member-images__item">
-                    <a href="{{ asset('assets/uploads/profile/img-3.jpg') }}" class="gallery">
-                        <img
-                            src="{{ asset('assets/uploads/profile/img-3.jpg') }}"
-                            class="bg-img"
-                            alt=""
-                            title=""
-                        />
-                    </a>
-                </li>
-                <li class="member-images__item">
-                    <a href="{{ asset('assets/uploads/profile/img-3.jpg') }}" class="gallery">
-                        <img
-                            src="{{ asset('assets/uploads/profile/img-3.jpg') }}"
-                            class="bg-img"
-                            alt=""
-                            title=""
-                        />
-                    </a>
-                </li>
-                <li class="member-images__item">
-                    <a href="{{ asset('assets/uploads/profile/img-3.jpg') }}" class="gallery">
-                        <img
-                            src="{{ asset('assets/uploads/profile/img-3.jpg') }}"
-                            class="bg-img"
-                            alt=""
-                            title=""
-                        />
-                    </a>
-                </li>
-                <li class="member-images__item">
-                    <a href="{{ asset('assets/uploads/video/test-video.mp4') }}" class="gallery">
-                        <video
-                            src="{{ asset('assets/uploads/video/test-video.mp4') }}"
-                            class="bg-img"
-                        ></video>
-                        <svg class="video-play" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M33 19.5 0 39V0l33 19.5z" />
-                        </svg>
-                    </a>
-                </li>
-                <li class="member-images__item">
-                    <a href="{{ asset('assets/uploads/profile/img-3.jpg') }}" class="gallery">
-                        <img
-                            src="{{ asset('assets/uploads/profile/img-3.jpg') }}"
-                            class="bg-img"
-                            alt=""
-                            title=""
-                        />
-                    </a>
-                </li>
-                <li class="member-images__item">
-                    <a href="{{ asset('assets/uploads/profile/img-3.jpg') }}" class="gallery">
-                        <img
-                            src="{{ asset('assets/uploads/profile/img-3.jpg') }}"
-                            class="bg-img"
-                            alt=""
-                            title=""
-                        />
-                    </a>
-                </li>
-                <li class="member-images__item">
-                    <a href="{{ asset('assets/uploads/profile/img-3.jpg') }}" class="gallery">
-                        <img
-                            src="{{ asset('assets/uploads/profile/img-3.jpg') }}"
-                            class="bg-img"
-                            alt=""
-                            title=""
-                        />
-                    </a>
-                </li>
-                <li class="member-images__item">
-                    <a href="{{ asset('assets/uploads/video/test-video.mp4') }}" class="gallery">
-                        <video
-                            src="{{ asset('assets/uploads/video/test-video.mp4') }}"
-                            class="bg-img"
-                        ></video>
-                        <svg class="video-play" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M33 19.5 0 39V0l33 19.5z" />
-                        </svg>
-                    </a>
-                </li>
+                @empty
+                @endforelse
             </ul>
         </div>
     </section>
