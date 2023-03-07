@@ -24,7 +24,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Имя питомца:</span>
             <div class="input-form @error('name')  no-valid @enderror">
-                <input type="text" class="input-text input-required" name="name" value="{{ old('name') }}"
+                <input type="text" class="input-text input-required" id="first_name" name="name" value="{{ old('name') }}"
                        title="Имя питомца">
             </div>
             @error('name')

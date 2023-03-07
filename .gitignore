@@ -17,4 +17,5 @@ yarn-error.log
 /docker/nginx/ssl/*
 /docker/nginx/logrotate/*
 /docker/logs/*
+public/media
 

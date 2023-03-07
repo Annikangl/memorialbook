@@ -43,9 +43,8 @@ class CreateRequest extends FormRequest
             'title' => ['required', 'string', 'min:3'],
             'title_en' => ['nullable', 'string', 'min:3'],
             'subtitle' => ['nullable', 'string', 'min:3'],
-            'cemetery_address' => ['required', 'string', 'min:5'],
+            'cemetery_address' => ['nullable', 'string', 'min:5'],
             'cemetery_address_coords' => [
-                Rule::requiredIf((bool)$this->get('cemetery_address')),
                 'nullable',
                 'array:lat,lng'
             ],

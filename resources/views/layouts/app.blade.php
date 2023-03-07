@@ -183,6 +183,7 @@
         @include('includes.forms.filter_places')
 
     </div>
+    @include('includes.forms.form_invite')
 </div>
 
 {{--<x-previews-modal>--}}

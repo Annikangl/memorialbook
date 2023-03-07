@@ -11,7 +11,7 @@
             <img src="{{ asset('assets/media/media/family/banner_small.webp') }}"
                  data-src="{{ asset('assets/media/media/family/banner.webp') }}"
                  class="bg-img"
-                 alt="Баннер семейного захоронения" title="Биннер"/>
+                 alt="Баннер семейного захоронения" title="Баннер"/>
             <span class="qr-code__mark">Family burial</span>
         </div>
 

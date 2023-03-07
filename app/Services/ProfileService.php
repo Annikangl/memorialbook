@@ -10,6 +10,7 @@ use App\Models\Cemetery\Cemetery;
 use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
@@ -94,45 +95,40 @@ class ProfileService
         }
     }
 
-    public function createPet(int $ownerId, array $data): Pet
+    public function createPet(int $ownerId, array $data): Pet|Builder
     {
-        try {
-            return DB::transaction(function () use ($data, $ownerId) {
-                /** @var Pet $pet */
-                $pet = Pet::query()->make([
-                    'name' => $data['name'],
-                    'breed' => $data['breed'],
-                    'date_birth' => $data['date_birth'],
-                    'date_death' => $data['date_death'],
-                    'birth_place' => $data['birth_place'],
-                    'burial_place' => $data['burial_place'],
-                    'death_reason' => $data['death_reason'],
-                    'description' => $data['description'],
-                ]);
+        $pet = Pet::query()->make([
+            'name' => $data['name'],
+            'breed' => $data['breed'],
+            'date_birth' => $data['date_birth'],
+            'date_death' => $data['date_death'],
+            'birth_place' => $data['birth_place'],
+            'burial_place' => $data['burial_place'],
+            'death_reason' => $data['death_reason'],
+            'description' => $data['description'],
+        ]);
 
-                $pet->user()->associate($ownerId);
+        $pet->user()->associate($ownerId);
 
-                $pet->save();
+        $pet->save();
 
-                if (isset($data['avatar'])) {
-                    $pet->addMedia($data['avatar'])->toMediaCollection('avatars');
-                }
 
-                if (isset($data['pet_banner'])) {
-                    $pet->addMedia($data['pet_banner'])->toMediaCollection('banner');
-                }
-
-                if (isset($data['pet_gallery'])) {
-                    foreach ($data['pet_gallery'] as $image) {
-                        $pet->addMedia($image)->toMediaCollection('gallery');
-                    }
-                }
-
-                return $pet;
-            });
-        } catch (\Throwable $e) {
-            throw new \DomainException($e->getMessage());
+        if (isset($data['avatar'])) {
+            $pet->addMedia($data['avatar'])->toMediaCollection('avatars');
         }
+
+        if (isset($data['pet_banner'])) {
+            $pet->addMedia($data['pet_banner'])->toMediaCollection('banner');
+        }
+
+        if (isset($data['pet_gallery'])) {
+            foreach ($data['pet_gallery'] as $image) {
+                $pet->addMedia($image)->toMediaCollection('gallery');
+            }
+        }
+
+
+        return $pet;
     }
 
     public function search(string $searchText): LengthAwarePaginator

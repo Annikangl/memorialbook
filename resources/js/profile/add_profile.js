@@ -213,7 +213,10 @@ if (document.querySelector('.add-profile')) {
         })
     }
 
-    btnSave.addEventListener('click', function () {
+    btnSave.addEventListener('click', function (e) {
+        let totalInf = document.querySelector('.user-total-info__name');
+
+
         if (currentSteep < steeps.length - 1) {
             ++currentSteep;
 
@@ -236,6 +239,7 @@ if (document.querySelector('.add-profile')) {
                 btnSave.classList.add('hide')
                 btnSave.innerHTML = 'Сохранить и опубликовать';
                 btnSave.classList.add('hide');
+                totalInf.innerHTML = document.querySelector("#first_name").value;
 
                 // btnSave.type = 'submit';
 

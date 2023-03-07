@@ -68,7 +68,7 @@
                     <div class="edit-profile-wrap grid-col-2">
 
                         <div class="input-wrap">
-                            <span class="input-wrap__title">Имя:</span>
+                            <span class="input-wrap__title">ФИО:</span>
                             <div class="input-form @error('full_name') no-valid @enderror">
                                 <input type="text" class="input-text" name="full_name"
                                        value="{{ $user->username }}"

@@ -6,6 +6,11 @@
 
 @section('content')
     <section class="add-profile">
+        @if (session()->has('errors'))
+            @foreach($errors as $error)
+                <div>{{ $error }}</div>
+            @endforeach
+        @endif
         <ul class="breadcrumbs">
             <li class="breadcrumbs__item">
                 <a href="#" class="breadcrumbs__link">Главная</a>
@@ -21,7 +26,6 @@
         <div class="add-profile-content">
             <div>
                 <h3 class="add-profile-content__title">Новое кладбище</h3>
-{{--                TODO move to component --}}
                 <ul class="steeps-nav">
                     <li class="steeps-nav__item active current">
                         <i class="steeps-nav__icon"></i>

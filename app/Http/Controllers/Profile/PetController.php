@@ -28,6 +28,7 @@ class PetController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
+
         return view('pet.show', compact('pet'));
     }
 
@@ -42,7 +43,7 @@ class PetController extends Controller
     {
         try {
             $pet = $this->service->createPet(\Auth::id(),$request->validated());
-        } catch (\DomainException $exception) {
+        } catch (\Exception $exception) {
             return redirect()->back()->with('message', $exception->getMessage());
         }
 

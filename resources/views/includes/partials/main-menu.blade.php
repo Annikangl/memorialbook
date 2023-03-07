@@ -1,9 +1,9 @@
-<li class="news-menu__item search-people">
-    <a href="#" class="news-menu__link">Люди</a>
-</li>
-<li class="news-menu__item search-places">
-    <a href="#" class="news-menu__link">Места</a>
-</li>
+{{--<li class="news-menu__item search-people">--}}
+{{--    <a href="#" class="news-menu__link">Люди</a>--}}
+{{--</li>--}}
+{{--<li class="news-menu__item search-places">--}}
+{{--    <a href="#" class="news-menu__link">Места</a>--}}
+{{--</li>--}}
 <li class="news-menu__item">
     <a href="{{ route('community.index')}}" class="news-menu__link">Сообщества</a>
 </li>

@@ -62,6 +62,7 @@ if (document.querySelector('#input-link')) {
 
 
 let openFormInvite = function () {
+    console.log(aside);
     let invite = document.querySelector('#form-invite');
     let close = document.querySelector('.form-invite__close');
 
@@ -70,7 +71,6 @@ let openFormInvite = function () {
     invite.classList.remove('hide');
 
     close.addEventListener('click', function () {
-
         invite.classList.add('hide');
         closeModal()
     })

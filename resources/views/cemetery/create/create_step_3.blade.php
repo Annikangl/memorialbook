@@ -5,12 +5,12 @@
         <div class="user-total-info">
             <h3 class="user-total-info__name">Вашингтонское кладбище</h3>
 
-            <div class="status-moderation">
-                <span class="status-moderation__title">Статус модерации:</span>
-                <p class="status-moderation__text -status-error">Публикация отклонена 14:31 22.10.2021</p>
-            </div>
+{{--            <div class="status-moderation">--}}
+{{--                <span class="status-moderation__title">Статус модерации:</span>--}}
+{{--                <p class="status-moderation__text -status-error">Публикация отклонена 14:31 22.10.2021</p>--}}
+{{--            </div>--}}
 
-            <p class="moderation-text">Документы не соответствуют установленному образцу</p>
+{{--            <p class="moderation-text">Документы не соответствуют установленному образцу</p>--}}
         </div>
     </div>
     <div class="steep-wrap">

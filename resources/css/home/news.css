@@ -1,5 +1,4 @@
 
-
 /* news
 ---------------*/
 .news {
@@ -20,7 +19,6 @@
 
 .news-menu__link:hover, .news-menu__item.active .news-menu__link {
     color: var(--blue);
-    text-decoration: none;
 }
 
 .news-wrap {
@@ -62,7 +60,7 @@
 }
 
 .list-profiles__img svg {
-    fill: #201E1F;
+    fill: var(--black);
     transition: var(--normal);
 }
 
@@ -133,7 +131,7 @@
     align-items: center;
     width: 32px;
     height: 32px;
-    background-color: #F5F7F9;
+    background-color: var(--gray);
     position: absolute;
     top: 0;
     right: 0;
@@ -237,6 +235,13 @@
     height: max-content;
 }
 
+.arrows-left[aria-disabled="false"] svg,  .arrows-right[aria-disabled="false"] svg, .list-profiles-mark svg {
+    stroke: var(--black);
+}
+
+.arrows-left[aria-disabled="false"] svg, .arrows-right[aria-disabled="false"] svg, .list-profiles-mark svg {
+    stroke: var(--black);
+}
 
 @media screen and (max-width: 1430px) {
     .news {
