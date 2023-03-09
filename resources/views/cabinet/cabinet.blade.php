@@ -6,7 +6,7 @@
 
         @include('includes.partials.breadcrumbs')
 
-        <h3 class="edit__title">Управление аккаунтом</h3>
+        <h3 class="edit__title">{{ __('cabinet.manage_account') }}</h3>
         <form action="{{ route('cabinet.update', ['user' => $user]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="edit-wrap">
@@ -36,7 +36,7 @@
                     </div>
                     <div class="info-profile-name-wrap">
                         <h6 class="info-profile__name">{{ $user->username }}</h6>
-                        <span class="info-profile__status">Создатель профилей</span>
+                        <span class="info-profile__status">Profile creator</span>
                     </div>
                     <div class="info-profile-value">
                         <div class="info-profile-value-wrap">
@@ -53,22 +53,22 @@
                             href="#slideout-restorepass"
                             data-slideout=""
                             data-slideout-options="{&quot;type&quot;:&quot;restorepass&quot;,&quot;position&quot;:&quot;top&quot;}">
-                        Смена пароля
+                        {{ __('cabinet.btn_changePassword') }}
                     </button>
                     <button type="button" id="delete-account" class="delete-profile" title="Удалить аккаунт">
-                        Удалить аккаунт
+                        {{ __('cabinet.btn_deleteAccount') }}
                     </button>
                 </div>
 
 
                 <div class="edit-profile">
-                    <h4 class="edit-profile__title">Основная информация</h4>
+                    <h4 class="edit-profile__title">{{ __('cabinet.main_info') }}</h4>
                     @csrf
                     @method('PUT')
                     <div class="edit-profile-wrap grid-col-2">
 
                         <div class="input-wrap">
-                            <span class="input-wrap__title">ФИО:</span>
+                            <span class="input-wrap__title">{{ __('cabinet.input_fullName') }}:</span>
                             <div class="input-form @error('full_name') no-valid @enderror">
                                 <input type="text" class="input-text" name="full_name"
                                        value="{{ $user->username }}"
@@ -80,7 +80,7 @@
                         </div>
 
                         <div class="input-wrap">
-                            <span class="input-wrap__title">Email:</span>
+                            <span class="input-wrap__title">{{ __('cabinet.input_email') }}:</span>
                             <div class="input-form @error('email') no-valid @enderror">
                                 <input type="email" class="input-text" name="email"
                                        value="{{ $user->email }}"
@@ -92,7 +92,7 @@
                         </div>
 
                         <div class="input-wrap">
-                            <span class="input-wrap__title">Телефон:</span>
+                            <span class="input-wrap__title">{{ __('cabinet.input_phone') }}:</span>
                             <div class="input-form @error('phone') no-valid @enderror">
                                 <input type="text" class="input-text" name="phone" value="{{ $user->phone }}"
                                        title="Phone"/>
@@ -101,12 +101,12 @@
                                 <span class="is-invalid">{{ $message }}</span>
                             @enderror
                         </div>
-                        <button type="submit" class="button-save btn blue-btn">Сохранить</button>
+                        <button type="submit" class="button-save btn blue-btn">{{ __('cabinet.btn_save') }}</button>
                     </div>
 
         </form>
 
-        <h4 class="edit-profile__title">Доступ к профилям</h4>
+        <h4 class="edit-profile__title">{{ __('cabinet.access_profiles_title') }}</h4>
 
         <ul class="access-profiles">
             @foreach($owners as $owner)
@@ -125,7 +125,7 @@
             @endforeach
         </ul>
 
-        <button type="button" class="button-share">Поделиться доступом к профилю</button>
+        <button type="button" class="button-share">{{ __('cabinet.btn_shareAccess') }}</button>
 
     </section>
 @endsection

@@ -13,5 +13,12 @@ return [
     'title_search_places' => 'Places search',
     'input_place_title' => 'Place name',
     'input_place_location' => 'Location',
-    'place_modal_text' => 'Enter the name of the cemetery and its location'
+    'place_modal_text' => 'Enter the name of the cemetery and its location',
+
+    // Invite
+    'invite_title' => 'New invite',
+    'input_email' => 'Email',
+    'invite_subtitle' => 'Enrich the service together with friends and family',
+    'related_profiles' => 'Related Profiles',
+    'btn_submit' => 'Submit',
 ];

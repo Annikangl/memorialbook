@@ -1211,7 +1211,7 @@ a.cemetery-contacts-list__text:hover {
     left: 15%;
     position: absolute;
     top: 6px;
-    transform: translateX(-50%);
+    /*transform: translateX(-50%);*/
     z-index: 10
 }
 

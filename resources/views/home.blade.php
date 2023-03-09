@@ -12,7 +12,7 @@
         <div class="news-content">
             <div class="news-wrap">
                 <div class="profiles-title-wrap">
-                    <h3 class="profiles-title">Ваши профили ({{ $humans->count() }})</h3>
+                    <h3 class="profiles-title">{{ __('home.your_profiles') }} ({{ $humans->count() }})</h3>
                     <div class="profiles-title-arrows">
                         <button type="button" class="arrows-left">
                             <svg width="9" height="13" viewBox="0 0 9 13" fill="none"
@@ -41,7 +41,7 @@
                                             d="M18.2012 8.27148V11.3301H0.658203V8.27148H18.2012ZM11.0645 0.800781V19.4336H7.8125V0.800781H11.0645Z"/>
                                     </svg>
                                 </div>
-                                <span class="profile-text">Создать профиль</span>
+                                <span class="profile-text">{{__('home.people_new_profile')}}</span>
                             </a>
                         </li>
                         @forelse($humans as $human)
@@ -77,7 +77,7 @@
             </div>
             <div class="news-wrap">
                 <div class="profiles-title-wrap">
-                    <h3 class="profiles-title">Связанные профили</h3>
+                    <h3 class="profiles-title"> {{__('home.related_profiles')}}</h3>
                     <div class="profiles-title-arrows">
                         <button type="button" class="arrows-left">
                             <svg width="9" height="13" viewBox="0 0 9 13" fill="none"
@@ -132,7 +132,7 @@
             </div>
             <div class="news-wrap">
                 <div class="profiles-title-wrap">
-                    <h3 class="profiles-title">Питомцы</h3>
+                    <h3 class="profiles-title"> {{__('home.pets')}}</h3>
                 </div>
                 <div class="swiper swiper-profiles">
                     <ul class="list-profiles swiper-wrapper">
@@ -147,7 +147,7 @@
                                             d="M18.2012 8.27148V11.3301H0.658203V8.27148H18.2012ZM11.0645 0.800781V19.4336H7.8125V0.800781H11.0645Z"/>
                                     </svg>
                                 </div>
-                                <span class="profile-text">Создать профиль</span>
+                                <span class="profile-text">{{__('home.pet_new_profile')}}</span>
                             </a>
                         </li>
                         @forelse($pets as $pet)

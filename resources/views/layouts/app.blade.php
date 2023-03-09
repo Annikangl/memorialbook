@@ -95,10 +95,10 @@
                 </button>
 
                 <a href="{{ route('cabinet.show', auth()->user()->slug ) }}"
-                   class="login">{{ auth()->user()->shortName }}</a>
+                   class="login">{{ auth()->user()->username }}</a>
                 <form action="{{ route('logout') }}" method="post">
                     @csrf
-                    <button type="submit" class="" style="margin-left: 10px">Выйти</button>
+                    <button type="submit" class="login" style="margin-left: 10px">Выйти</button>
                 </form>
 
                 <button type="button" class="header-buttons__menu" id="mobile-menu">
