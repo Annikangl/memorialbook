@@ -5,7 +5,7 @@
                 <label class="preview-avatar-wrap">
                     <input type="file" accept=".jpg,.jpeg,.png" class="input-avatar"
                            id="change-avatar" name="avatar"/>
-                    <span class="preview-avatar-wrap__text">Выберите фото</span>
+                    <span class="preview-avatar-wrap__text">{{ __('create_profile.input_selectPhoto') }}</span>
                 </label>
                 <label class="preview-avatar__icon" for="change-avatar">
                     <svg>
@@ -16,36 +16,38 @@
                     </svg>
                 </label>
             </div>
-            <button type="button" class="delete-avatar hide">Удалить фото</button>
+            <button type="button" class="delete-avatar hide">{{ __('create_profile.input_removePhoto') }}</button>
         </div>
         @error('avatar')
-            <span class="is-invalid">{{ $message }}</span>
+        <span class="is-invalid">{{ $message }}</span>
         @enderror
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Имя:</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_firstName') }}:</span>
             <div class="input-form @error('first_name')  no-valid @enderror">
                 <input type="text" class="input-text input-required" placeholder="Иван"
-                       id="first_name" name="first_name" value="{{ old('first_name') }}" title="">
+                       id="first_name" name="first_name" value="{{ old('first_name') }}"
+                       title="{{ __('create_profile.input_firstName') }}">
             </div>
             @error('first_name')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Фамилия:</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_lastName') }}:</span>
             <div class="input-form @error('first_name')  no-valid @enderror">
                 <input type="text" class="input-text input-required" placeholder="Иванов"
-                       id="last_name" name="last_name" value="{{ old('last_name') }}" title="">
+                       id="last_name" name="last_name" value="{{ old('last_name') }}"
+                       title="{{ __('create_profile.input_lastName') }}">
             </div>
             @error('last_name')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Пол</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_gender') }}</span>
 
             <div class="select-form @error('gender') no-valid @enderror">
                 <div class="select">
@@ -65,101 +67,106 @@
                 </svg>
             </div>
             @error('gender')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
 
     </div>
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
-            <span class="input-wrap__title">Дата рождения:</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_birthDate') }}:</span>
             <div class="input-form @error('date_birth')  no-valid @enderror">
                 <input type="text" class="input-text input-required mask-data"
-                       placeholder="дд.мм.гггг" id="date_birth" name="date_birth" value="{{ old('date_birth') }}"
-                       title="date birth">
+                       placeholder="{{ __('create_profile.ymd') }}" id="date_birth" name="date_birth"
+                       value="{{ old('date_birth') }}"
+                       title="{{ __('create_profile.input_birthDate') }}">
             </div>
             @error('date_birth')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">Место рождения:</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_birthPlace') }}:</span>
             <div class="input-form @error('birth_place')  no-valid @enderror">
                 <input type="text" class="input-text"
                        name="birth_place"
-                       placeholder="Страна, город"
+                       placeholder="{{ __('create_profile.country_and_city') }}"
                        value="{{ old('birth_place') }}"
-                       title="Место рождения">
+                       title="{{ __('create_profile.input_birthPlace') }}">
             </div>
             @error('birth_place')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">Дата смерти:</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_deathDate') }}:</span>
             <div class="input-form @error('date_death')  no-valid @enderror">
-                <input type="text" class="input-text mask-data" placeholder="дд.мм.гггг"
-                       id="date_death" name="date_death" value="{{ old('date_death') }}" title="">
+                <input type="text" class="input-text mask-data" placeholder="{{ __('create_profile.ymd') }}"
+                       id="date_death" name="date_death" value="{{ old('date_death') }}"
+                       title="{{ __('create_profile.input_deathDate') }}">
             </div>
             @error('date_death')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">Место захоронения:</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_burialPlace') }}:</span>
             <div class="input-form @error('burial_place')  no-valid @enderror" style="position:relative;">
                 <input type="text" class="input-text"
                        id="burial_place"
                        name="burial_place"
-                       title="Место захоронения"
-                       placeholder="Выбрать на карте"
+                       title="{{ __('create_profile.input_burialPlace') }}"
+                       placeholder="{{ __('create_profile.choose_from_map') }}"
                        readonly
                        value="{{ old('burial_place') }}">
                 <a class="burialPlaceModal" data-hystmodal="#burial_place_location" href="#" style="position:absolute;"
-                   title="Указать на карте">
+                   title="{{ __('create_profile.choose_from_map') }}">
                     <img src="{{ asset('assets/media/media/icons/location.svg') }}" alt="Указать на карте" width="20">
                 </a>
                 <input type="hidden" name="burial_place_coords" id="burial_place_coords"
                        value="{{ old('burial_place_coords') }}">
             </div>
             @error('burial_place')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Причина смерти:</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_deathCause') }}:</span>
             <div class="input-form @error('death_reason')  no-valid @enderror">
                 <input type="text" class="input-text" id="death_reason" name="death_reason"
                        value="{{ old('death_reason') }}"
-                       title="">
+                       title="{{ __('create_profile.input_deathCause') }}">
             </div>
             @error('death_reason')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">Свидетельство о смерти:</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_deathCertificate') }}:</span>
             <div class="input-form @error('death_certificate')  no-valid @enderror">
-                <input type="file" class="profileDocument" id="death_certificate" name="death_certificate" accept=".pdf">
+                <input type="file" class="profileDocument" id="death_certificate" name="death_certificate" accept=".pdf"
+                       title="{{ __('create_profile.input_deathCertificate') }}">
             </div>
             @error('death_certificate')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
     </div>
 
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
-            <span class="input-wrap__title">Отец</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_father') }}</span>
             <div class="select-form @error('father_id') no-valid @enderror">
                 <div class="select">
                     <input type="hidden" class="select__output" id="father_id_hidden" name="father_id" readonly>
-                    <input type="text" class="select__output" placeholder="Выберите из списка" readonly>
+                    <input type="text" class="select__output" placeholder="{{ __('create_profile.choose_from_list') }}"
+                           readonly>
 
                     <ul class="select-list">
                         @foreach($fathers as $father)
-                            <li class="select-list__item" data-name="father_id" data-id="{{ $father->id }}" id="father_id">
+                            <li class="select-list__item" data-name="father_id" data-id="{{ $father->id }}"
+                                id="father_id">
                                 {{$father->first_name.' '.$father->last_name}}
                             </li>
                         @endforeach
@@ -171,16 +178,17 @@
                 </svg>
             </div>
             @error('father_id')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Мать</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_mother') }}</span>
             <div class="select-form @error('mother_id') no-valid @enderror">
                 <div class="select">
                     <input type="hidden" class="select__output" id="mother_id_hidden" name="mother_id" readonly>
-                    <input type="text" class="select__output" placeholder="Выберите из списка" readonly>
+                    <input type="text" class="select__output" placeholder="{{ __('create_profile.choose_from_list') }}"
+                           readonly>
 
                     <ul class="select-list">
                         @foreach($mothers as $mother)
@@ -197,16 +205,17 @@
                 </svg>
             </div>
             @error('mother_id')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Супруг / Супруга</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_spouse') }}</span>
             <div class="select-form @error('spouse_id') no-valid @enderror">
                 <div class="select">
                     <input type="hidden" class="select__output" id="spouse_id_hidden" name="spouse_id" readonly>
-                    <input type="text" class="select__output" placeholder="Выберите из списка" readonly>
+                    <input type="text" class="select__output" placeholder="{{ __('create_profile.choose_from_list') }}"
+                           readonly>
                     <ul class="select-list">
                         @foreach($profiles as $profile)
                             <li class="select-list__item" data-name="spouse_id" data-id="{{ $profile->id }}">
@@ -221,7 +230,7 @@
                 </svg>
             </div>
             @error('spouse_id')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
     </div>

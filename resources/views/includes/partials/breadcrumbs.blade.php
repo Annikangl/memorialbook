@@ -1,6 +1,6 @@
 <ul class="breadcrumbs">
     <li class="breadcrumbs__item">
-        <a href="#" class="breadcrumbs__link">Home</a>
+        <a href="{{ route('home') }}" class="breadcrumbs__link">Home</a>
     </li>
     <li class="breadcrumbs__item">
         <a href="#" class="breadcrumbs__link">Cabinet</a>

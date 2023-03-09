@@ -2,7 +2,7 @@
     <div class="steep-wrap">
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Фотографии и видео:</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_pictureAndMovies') }}:</span>
             <div class="input-photo  @error('profile_images.*') no-valid @enderror">
 
                 <label class="input-photo-load">
@@ -10,39 +10,41 @@
                         <path
                             d="M10.5 21c-.6 0-1-.4-1-1v-8.5H1c-.6 0-1-.4-1-1s.4-1 1-1h8.5V1c0-.6.4-1 1-1s1 .4 1 1v8.5H20c.6 0 1 .4 1 1s-.4 1-1 1h-8.5V20c0 .6-.4 1-1 1z"/>
                     </svg>
-                    <span class="input-photo-load__text">Добавить фото/видео</span>
+                    <span class="input-photo-load__text">{{ __('create_profile.input_addPhotoAndMovies') }}</span>
                     <input type="file" class="load-files-profile" name="profile_images[]" id="profile_images"
                            accept=".jpg,.jpeg,.png,.mp4" multiple/>
                 </label>
             </div>
             @error('profile_images.*')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Описание:</span>
+            <span class="input-wrap__title">{{ __('create_profile.input_description') }}:</span>
             <textarea class="textarea-form @error('description') no-valid @enderror"
                       placeholder="Текст описания..."
                       id="description"
                       name="description"
-                      title="description">{{ old('description') }}</textarea>
+                      title="{{ __('create_profile.input_description') }}">{{ old('description') }}</textarea>
             @error('description')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Религиозные взгляды:</span>
+            <span class="input-wrap__title">{{ __('create_profile.religion_views') }}:</span>
 
             <div class="select-form @error('religious_id') no-valid @enderror">
                 <div class="select">
                     <input type="hidden" class="select__output" id="religious_id_hidden" name="religious_id" readonly>
-                    <input type="text" class="select__output" placeholder="Выберите из списка" readonly>
+                    <input type="text" class="select__output" placeholder="{{ __('create_profile.choose_from_list') }}"
+                           readonly>
 
                     <ul class="select-list">
                         @foreach($religions as $religion)
-                            <li class="select-list__item" data-name="religious_id" data-id="{{$religion->id }}" id="religious_id">
+                            <li class="select-list__item" data-name="religious_id" data-id="{{$religion->id }}"
+                                id="religious_id">
                                 {{$religion->title}}
                             </li>
                         @endforeach
@@ -54,7 +56,7 @@
                 </svg>
             </div>
             @error('religious_id')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
     </div>
