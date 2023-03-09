@@ -23,7 +23,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create_profile.input_description') }}:</span>
             <textarea class="textarea-form @error('description') no-valid @enderror"
-                      placeholder="Текст описания..."
+                      placeholder="{{ __('create_profile.placeholder_description') }}"
                       id="description"
                       name="description"
                       title="{{ __('create_profile.input_description') }}">{{ old('description') }}</textarea>

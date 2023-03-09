@@ -5,24 +5,21 @@
     <section class="add-profile">
         <ul class="breadcrumbs">
             <li class="breadcrumbs__item">
-                <a href="#" class="breadcrumbs__link">Главная</a>
+                <a href="{{ route('home') }}" class="breadcrumbs__link">Home</a>
             </li>
             <li class="breadcrumbs__item">
-                <a href="#" class="breadcrumbs__link">Личный кабинет</a>
-            </li>
-            <li class="breadcrumbs__item">
-                <a class="breadcrumbs__link">Создание семейного захоронения</a>
+                <a href="#" class="breadcrumbs__link">New family burial</a>
             </li>
         </ul>
 
         <div class="add-profile-content">
             <div>
-                <h3 class="add-profile-content__title">Новое захоронение</h3>
+                <h3 class="add-profile-content__title">{{ __('create_burial.new_burial') }}</h3>
                 <ul class="steeps-nav">
                     <li class="steeps-nav__item active current">
                         <i class="steeps-nav__icon"></i>
-                        <span class="steeps-nav__title">Шаг 1</span>
-                        <p class="steeps-nav__desc">Основная информация</p>
+                        <span class="steeps-nav__title">{{ __('create_burial.step_1') }}</span>
+                        <p class="steeps-nav__desc">{{ __('create_burial.primary_information') }}</p>
                     </li>
                 </ul>
             </div>
@@ -34,7 +31,7 @@
                     <div class="steep-wrap">
 
                         <div class="family-profiles">
-                            <h3 class="family-profiles__title">Профили семейного захоронения</h3>
+                            <h3 class="family-profiles__title">{{ __('create_burial.family burial creation') }}</h3>
                             <div class="family-profiles-nav hide">
                                 <button type="button" class="family-profiles-nav__prev">
                                     <svg class="family-profiles-nav__icon" viewBox="0 0 9 13"
@@ -63,7 +60,7 @@
                             </svg>
 
                             <input type="text" class="profiles-search__input" name="profiles-search"
-                                   placeholder="Введите имя или фамилию"/>
+                                   placeholder="{{ __('create_burial.input_enterName') }}"/>
 
                             <button type="reset" class="profiles-search__reset " title="Очистить">
                                 <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,21 +91,20 @@
                                 </div>
                             </div>
 
-                            <p class="search-result-text">Воспользуйтесь поиском, чтобы добавить профиль человека <br/>или
+                            <p class="search-result-text">{{ __('create_burial.empty_search') }}<br/>{{ __('create_burial.or') }}
                                 <br/>
-                                <a href="{{ route('profile.create') }}">создайте новый</a></p>
+                                <a href="{{ route('profile.create') }}">{{ __('create_burial.create_profile') }}</a></p>
                         </div>
 
                     </div>
                 </div>
 
                 <div class="buttons-save">
-                    <button type="button" class="save-draft hide btn white-btn">Сохранить как черновик</button>
-                    <button type="submit" class="save-and-next btn blue-btn">Сохранить и продолжить</button>
+                    <button type="button" class="save-draft hide btn white-btn">{{ __('create_burial.btn_saveAsDraft') }}</button>
+                    <button type="submit" class="save-and-next btn blue-btn">{{ __('create_burial.btn_saveAndContinue') }}</button>
                 </div>
             </form>
-            <p class="add-profile__text">Давайте создавать и хранить историю вместе? Для начала необходимо заполнить
-                основную информацию профиля.</p>
+            <p class="add-profile__text">{{ __('create_burial.subtitle') }}</p>
         </div>
     </section>
 @endsection

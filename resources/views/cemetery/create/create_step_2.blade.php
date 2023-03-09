@@ -2,7 +2,7 @@
     <div class="steep-wrap">
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Стартовый баннер:</span>
+            <span class="input-wrap__title">{{ __('create_cemetery.input_banner') }}:</span>
             <div class="input-photo input-banner @error('input-banner') no-valid @enderror">
 
                 <label class="input-photo-load">
@@ -10,7 +10,7 @@
                         <path
                             d="M10.5 21c-.6 0-1-.4-1-1v-8.5H1c-.6 0-1-.4-1-1s.4-1 1-1h8.5V1c0-.6.4-1 1-1s1 .4 1 1v8.5H20c.6 0 1 .4 1 1s-.4 1-1 1h-8.5V20c0 .6-.4 1-1 1z"/>
                     </svg>
-                    <span class="input-photo-load__text">Выберите стартовый баннер</span>
+                    <span class="input-photo-load__text">{{ __('create_cemetery.upload_banner') }}</span>
                     <input type="file" class="load-files-cemetery" name="input-banner" accept=".jpg,.jpeg,.png"/>
                 </label>
             </div>
@@ -20,7 +20,7 @@
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Фотографии и видео:</span>
+            <span class="input-wrap__title">{{ __('create_cemetery.input_pictureAndMovies') }}:</span>
             <div class="input-photo @error('cemetery_gallery.*') no-valid @enderror"
                  style="display: flex; flex-wrap: wrap;">
 
@@ -29,7 +29,7 @@
                         <path
                             d="M10.5 21c-.6 0-1-.4-1-1v-8.5H1c-.6 0-1-.4-1-1s.4-1 1-1h8.5V1c0-.6.4-1 1-1s1 .4 1 1v8.5H20c.6 0 1 .4 1 1s-.4 1-1 1h-8.5V20c0 .6-.4 1-1 1z"/>
                     </svg>
-                    <span class="input-photo-load__text">Добавить фото/видео</span>
+                    <span class="input-photo-load__text">{{ __('create_cemetery.input_addPhotoAndMovies') }}</span>
                     <input type="file" class="load-files-cemetery" name="cemetery_gallery[]"
                            accept=".jpg,.jpeg,.png,.mp4" multiple/ >
                 </label>
@@ -40,12 +40,13 @@
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Описание:</span>
-            <textarea class="textarea-form @error('description') no-valid @enderror" placeholder="Текст описания..."
+            <span class="input-wrap__title">{{ __('create_cemetery.input_description') }}:</span>
+            <textarea class="textarea-form @error('description') no-valid @enderror"
+                      placeholder="{{ __('create_cemetery.placeholder_description') }}"
                       name="description"
-                      title="Описание">{{ old('description') }}</textarea>
+                      title="{{ __('create_cemetery.input_description') }}">{{ old('description') }}</textarea>
             @error('description')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
 

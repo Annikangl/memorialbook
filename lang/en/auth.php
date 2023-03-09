@@ -34,6 +34,8 @@ return [
     'text_policy' => 'By clicking the button, you agree to',
     'link_policy' => ' the terms of the personal data processing policy',
 
+    'sign_out' => 'Sign out',
+
     // Forgot password modal
 
     'forgot_title' => 'Password recovery',

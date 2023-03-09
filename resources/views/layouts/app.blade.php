@@ -98,7 +98,7 @@
                    class="login">{{ auth()->user()->username }}</a>
                 <form action="{{ route('logout') }}" method="post">
                     @csrf
-                    <button type="submit" class="login" style="margin-left: 10px">Выйти</button>
+                    <button type="submit" class="login" style="margin-left: 10px">{{ __('auth.sign_out') }}</button>
                 </form>
 
                 <button type="button" class="header-buttons__menu" id="mobile-menu">

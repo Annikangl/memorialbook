@@ -4,7 +4,7 @@
             <div class="preview-avatar">
                 <label class="preview-avatar-wrap">
                     <input type="file" accept=".jpg,.jpeg,.png" class="input-avatar" name="avatar" id="change-avatar"/>
-                    <span class="preview-avatar-wrap__text">Выберите фото</span>
+                    <span class="preview-avatar-wrap__text">{{ __('create-pet.input_selectPhoto') }}</span>
                 </label>
                 <label class="preview-avatar__icon" for="change-avatar">
                     <svg>
@@ -15,17 +15,17 @@
                     </svg>
                 </label>
             </div>
-            <button type="button" class="delete-avatar hide">Удалить фото</button>
+            <button type="button" class="delete-avatar hide">{{ __('create-pet.input_removePhoto') }}</button>
         </div>
         @error('avatar')
             <span class="is-invalid">{{ $message }}</span>
         @enderror
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Имя питомца:</span>
+            <span class="input-wrap__title">{{ __('create-pet.input_petName') }}:</span>
             <div class="input-form @error('name')  no-valid @enderror">
                 <input type="text" class="input-text input-required" id="first_name" name="name" value="{{ old('name') }}"
-                       title="Имя питомца">
+                       title="{{ __('create-pet.input_petName') }}">
             </div>
             @error('name')
                 <span class="is-invalid">{{ $message }}</span>
@@ -33,10 +33,10 @@
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Порода:</span>
+            <span class="input-wrap__title">{{ __('create-pet.input_breed') }}:</span>
             <div class="input-form @error('breed')  no-valid @enderror">
                 <input type="text" class="input-text input-required" name="breed" value="{{ old('breed') }}"
-                       title="Порода">
+                       title="{{ __('create-pet.input_breed') }}">
             </div>
             @error('breed')
                 <span class="is-invalid">{{ $message }}</span>
@@ -45,53 +45,53 @@
     </div>
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
-            <span class="input-wrap__title">Дата рождения:</span>
+            <span class="input-wrap__title">{{ __('create-pet.input_birthDate') }}:</span>
             <div class="input-form @error('date_birth')  no-valid @enderror">
                 <input type="text" class="input-text input-required mask-data" name="date_birth"
-                       value="{{ old('date_birth') }}" title="Дата рождения">
+                       value="{{ old('date_birth') }}" title={{ __('create-pet.input_birthDate') }}>
             </div>
             @error('date_birth')
                 <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">Место рождения:</span>
+            <span class="input-wrap__title">{{ __('create-pet.input_birthPlace') }}:</span>
             <div class="input-form @error('birth_place')  no-valid @enderror">
                 <input type="text" class="input-text" name="birth_place" value="{{ old('birth_place') }}"
-                       title="Место рождения">
+                       title={{ __('create-pet.input_birthPlace') }}>
             </div>
             @error('birth_place')
                 <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">Дата смерти:</span>
+            <span class="input-wrap__title">{{ __('create-pet.input_deathDate') }}:</span>
             <div class="input-form @error('date_death')  no-valid @enderror">
                 <input type="text" class="input-text input-required mask-data" name="date_death"
-                       value="{{ old('date_death') }}" title="Дата смерти">
+                       value="{{ old('date_death') }}" title={{ __('create-pet.input_deathDate') }}>
             </div>
             @error('date_death')
                 <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">Место захоронения:</span>
+            <span class="input-wrap__title">{{ __('create-pet.input_burialPlace') }}:</span>
             <div class="input-form @error('burial_place')  no-valid @enderror">
                 <input type="text" class="input-text" name="burial_place" value="{{ old('burial_place') }}"
-                       title="Место захоронения">
+                       title={{ __('create-pet.input_burialPlace') }}>
             </div>
             @error('burial_place')
                 <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">Причина смерти:</span>
+            <span class="input-wrap__title">{{ __('create-pet.input_deathCause') }}:</span>
 
             <div class="select-form @error('death_reason') no-valid @enderror">
                 <div class="select">
                     <input type="hidden" class="select__output" id="death_reason_hidden" name="death_reason" readonly>
                     <input type="text" class="select__output" id="pet_death_reason" name="death_reason"
-                           placeholder="Выберите причину" readonly>
+                           placeholder="{{ __('create-pet.choose_from_list') }}" readonly>
                     <ul class="select-list">
                         @foreach($deathReasons as $reason)
                             <li class="select-list__item" data-name="death_reason"

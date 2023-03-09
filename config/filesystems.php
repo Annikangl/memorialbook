@@ -58,17 +58,23 @@ return [
 
         'media' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/uploads'),
-            'url' => env('APP_URL').'/storage/uploads',
-            'visibility' => 'public',
+            'root'   => public_path('media'),
+            'url'    => env('APP_URL').'/media',
         ],
 
-        'avatar' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/uploads/profiles/avatar'),
-            'url' => env('APP_URL').'/memorialbook/public/storage/uploads/profiles/avatar',
-            'visibility' => 'public',
-        ],
+//        'media' => [
+//            'driver' => 'local',
+//            'root' => storage_path('app/public/uploads'),
+//            'url' => env('APP_URL').'/storage/uploads',
+//            'visibility' => 'public',
+//        ],
+
+//        'avatar' => [
+//            'driver' => 'local',
+//            'root' => storage_path('app/public/uploads/profiles/avatar'),
+//            'url' => env('APP_URL').'/app/public/storage/uploads/profiles/avatar',
+//            'visibility' => 'public',
+//        ],
 
 
     ],

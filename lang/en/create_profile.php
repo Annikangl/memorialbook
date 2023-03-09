@@ -26,6 +26,7 @@ return [
     'input_pictureAndMovies' => 'Pictures and movies',
     'input_addPhotoAndMovies' => 'Add photo and movies',
     'input_description' => 'Description',
+    'placeholder_description' => 'Description text...',
     'religion_views' => 'Religion views',
     'input_publicAccessSetting' => 'Public access settings',
     'input_public' => 'Public',
