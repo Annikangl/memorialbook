@@ -59,23 +59,23 @@
             <ul class="menu">
                 @guest
                     <li class="menu__item search-people">
-                        <a href="#" class="menu__link">Люди</a>
+                        <a href="#" class="menu__link">{{ __('layout.link_search_people') }}</a>
                     </li>
                     <li class="menu__item search-places">
-                        <a href="#" class="menu__link">Места</a>
+                        <a href="#" class="menu__link">{{ __('layout.link_search_place') }}</a>
                     </li>
                 @else
                     <li class="menu__item search-people">
-                        <a href="#" class="menu__link">Люди</a>
+                        <a href="#" class="menu__link">{{ __('layout.link_search_people') }}</a>
                     </li>
                     <li class="menu__item search-places">
-                        <a href="#" class="menu__link">Места</a>
+                        <a href="#" class="menu__link">{{ __('layout.link_search_place') }}</a>
                     </li>
                     <li class="menu__item">
-                        <a href="{{ route('tree') }}" class="menu__link">Семейное древо</a>
+                        <a href="{{ route('tree') }}" class="menu__link">{{ __('layout.link_family_tree') }}</a>
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__link">Магазин</a>
+                        <a href="#" class="menu__link">{{ __('layout.link_shop') }}</a>
                     </li>
                 @endif
             </ul>
@@ -84,7 +84,7 @@
         <!--buttons-->
         @auth
             <div class="header-buttons" id="header-button">
-                <button type="button" class="header-buttons__lang">Ru</button>
+                <button type="button" class="header-buttons__lang">EN</button>
 
                 <button type="button" class="notifications">
                     <svg xmlns="http://www.w3.org/2000/svg">
@@ -109,8 +109,8 @@
             </div>
         @else
             <div class="header-buttons" id="header-button">
-                <button type="button" class="header-buttons__lang">Ru</button>
-                <button type="button" class="header-buttons__registration open-registration btn white-btn">Регистрация
+                <button type="button" class="header-buttons__lang">En</button>
+                <button type="button" class="header-buttons__registration open-registration btn white-btn">{{ __('layout.btn_register') }}
                 </button>
                 <button type="button" class="header-buttons__menu" id="mobile-menu">
                     <span></span>
@@ -139,36 +139,36 @@
             <ul class="menu-list">
                 @guest
                     <li class="menu-list__item">
-                        <a href="#" class="menu-list__link">О проекте</a>
+                        <a href="#" class="menu-list__link">{{ __('layout.about_project') }}</a>
                     </li>
                     <li class="menu-list__item">
-                        <a href="#" class="menu-list__link">Контакты</a>
+                        <a href="#" class="menu-list__link">{{ __('layout.contacts') }}</a>
                     </li>
                 @else
                     <li class="menu-list__item">
-                        <a href="#" class="menu-list__link">О проекте</a>
+                        <a href="#" class="menu-list__link">{{ __('layout.about_project') }}</a>
                     </li>
                     <li class="menu-list__item">
-                        <a href="{{ route('tree') }}" class="menu-list__link">Семейное древо</a>
+                        <a href="{{ route('tree') }}" class="menu-list__link">{{ __('layout.link_family_tree') }}</a>
                     </li>
                     <li class="menu-list__item">
-                        <a href="#" class="menu-list__link">Магазин</a>
+                        <a href="#" class="menu-list__link">{{ __('layout.link_shop') }}</a>
                     </li>
                     <li class="menu-list__item">
-                        <a href="#" class="menu-list__link">Поиск людей</a>
+                        <a href="#" class="menu-list__link">{{ __('layout.link_search_people') }}</a>
                     </li>
                     <li class="menu-list__item">
-                        <a href="#" class="menu-list__link">Кладбища</a>
+                        <a href="#" class="menu-list__link">{{ __('layout.link_search_place') }}</a>
                     </li>
                     <li class="menu-list__item">
-                        <a href="#" class="menu-list__link">Контакты</a>
+                        <a href="#" class="menu-list__link">{{ __('layout.contacts') }}</a>
                     </li>
                 @endif
             </ul>
         </nav>
 
         <!--cookie link-->
-        <a href="#" class="cookie-link">Политика обработки персональных данных</a>
+        <a href="#" class="cookie-link">{{ __('layout.policy') }}</a>
     </footer>
 
 </div>

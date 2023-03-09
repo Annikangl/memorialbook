@@ -17,26 +17,26 @@
         <div class="preview-form">
             <form class="login-form" id="login-form" action="{{ route('login') }}" method="post" data-base-form="">
                 @csrf
-                <h3 class="login-form__title">Вход в систему</h3>
+                <h3 class="login-form__title">{{ __('auth.sign_in') }}</h3>
 
                 <div class="input-wrap">
-                    <span class="input-wrap__title">Email:</span>
+                    <span class="input-wrap__title">{{ __('auth.input_email') }}:</span>
                     <div class="input-form">
                         <input type="email" class="input-text" name="login_email" title="email"/>
                     </div>
                 </div>
 
                 <div class="input-wrap">
-                    <span class="input-wrap__title">Пароль:</span>
+                    <span class="input-wrap__title">{{ __('auth.input_password') }}:</span>
                     <div class="input-form">
-                        <a class="input-link" id="input-link">Забыли пароль?</a>
-                        <input type="password" class="input-text" name="login_password" title="password"/>
+                        <a class="input-link" id="input-link">{{ __('auth.link_forgotPassword') }}</a>
+                        <input type="password" class="input-text" name="login_password" title="{{ __('auth.link_forgotPassword') }}"/>
                     </div>
                 </div>
 
-                <input type="submit" class="form__submit btn blue-btn" value="Войти" title="Войти"/>
+                <input type="submit" class="form__submit btn blue-btn" value="{{ __('auth.btn_signIn') }}" title="Войти"/>
 
-                <a href="#" class="login-form__registration-link open-registration">Нет аккаунта? Зарегистироваться</a>
+                <a href="#" class="login-form__registration-link open-registration">{{ __('auth.link_register') }}</a>
             </form>
             @include('auth.partials.socials')
         </div>

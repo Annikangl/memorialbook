@@ -1,5 +1,5 @@
 <div class="form__form-group -submit form-group">
-    <span>Войти через: &nbsp;</span>
+    <span>{{ __('auth.sign_with') }}: &nbsp;</span>
     <a href="{{ route('social.login', ['driver' => 'facebook']) }}" style="margin-right: 10px;">
        Facebook
     </a>
