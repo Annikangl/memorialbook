@@ -5,11 +5,11 @@
     <section class="preview">
         <div class="preview-img">
             <img src="{{ asset('assets/uploads/index-page/image_small.webp') }}"
-                 data-src="{{ asset('assets/uploads/index-page/image.webp') }}"
+                 data-src="{{ asset('assets/uploads/index-page/image_en.png') }}"
                  alt="Memorialbook preview image"
                  title="Memorialbook"/>
             <img src="{{ asset('assets/uploads/index-page/image-mobile_small.webp') }}"
-                 data-src="{{ asset('assets/uploads/index-page/image-mobile.webp') }}"
+                 data-src="{{ asset('assets/uploads/index-page/image_en.png') }}"
                  alt="Memorialbook preview image for mobile"
                  title="Memorialbook"/>
         </div>

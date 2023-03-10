@@ -10,7 +10,7 @@
 <div class="search">
     <div class="search-filter" href="{{ $modalHref }}" role="button" data-slideout=""
          data-slideout-options="{!! $slideoutOptions  !!} ">
-        <span class="search-filter__title">Поиск</span>
+        <span class="search-filter__title">{{ __('map.search') }}</span>
         <div class="search-filter__icon">
             <svg xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -22,9 +22,9 @@
 
 {{--    TODO add active class --}}
     <div class="select-search">
-        <a href="{{ $hrefMap }}" class="select-search__map @if (Route::is('cemetery.search.map')) active @endif">На карте</a>
         @if ($list)
-            <a href="{{ $hrefList }}" class="select-search__list @if (Route::is('cemetery.search.list')) active @endif">Списком</a>
+            <a href="{{ $hrefMap }}" class="select-search__map @if (Route::is('cemetery.search.map')) active @endif">{{ __('map.on a map') }}</a>
+            <a href="{{ $hrefList }}" class="select-search__list @if (Route::is('cemetery.search.list')) active @endif">{{ __('map.as a list') }}</a>
         @endif
     </div>
 </div>

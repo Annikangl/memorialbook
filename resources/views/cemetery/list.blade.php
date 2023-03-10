@@ -37,7 +37,7 @@
 
         <!--cemeteries pagination start-->
         <div class="cemeteries-buttons">
-            <button type="button" class="button-more">Показать еще</button>
+            <button type="button" class="button-more">{{ __('cemeteries_list.load more') }}</button>
 
             <x-paginator :paginator="$cemeteries"></x-paginator>
         </div>

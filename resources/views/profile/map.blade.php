@@ -12,9 +12,12 @@
         <!--map result start-->
         <div class="map-results">
             <div class="map-results__title-wrap">
-                <span class="map-results__title">Найдено {{ $profiles->total() }} человек</span>
+                <span
+                    class="map-results__title">
+                    {{ __('map.founded', ['count' => $profiles->total(), 'entity' => 'people']) }}
+                </span>
                 <button type="button" class="map-results__unwrap">
-                    Развернуть
+                    {{ __('map.unwrap') }}
                     <svg xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
                     </svg>
@@ -28,8 +31,8 @@
                         <a href="{{ route('profile.show', ['slug' => $profile->slug]) }}" class="map-results__link">
                             <div class="map-results__img">
                                 <img src="{{ asset('storage/' . $profile->avatar) }}" class="bg-img"
-                                      alt="{{ $profile->full_name }}"
-                                      title="{{ $profile->full_name }}"/>
+                                     alt="{{ $profile->full_name }}"
+                                     title="{{ $profile->full_name }}"/>
                             </div>
                             <div class="map-results__info">
                                 <span class="map-results__name">{{ $profile->full_name }}</span>
