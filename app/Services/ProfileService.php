@@ -3,16 +3,11 @@
 
 namespace App\Services;
 
-
-use App\Classes\Files\FileUploader;
-use App\Http\Requests\Profile\ProfileCreateRequest;
 use App\Models\Cemetery\Cemetery;
-use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 
 class ProfileService
@@ -125,7 +120,6 @@ class ProfileService
                 $pet->addMedia($image)->toMediaCollection('gallery');
             }
         }
-
 
         return $pet;
     }

@@ -3,7 +3,7 @@
     <article class="community-article">
         <div class="article-author">
             <div class="article-author-avatar">
-                <img src="{{ asset('storage/' . $post->author->avatar) }}" class="bg-img" alt="" title=""/>
+                <img src="{{ $post->author->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt="" title=""/>
             </div>
             <div class="article-author-name-wrap">
                 <h6 class="article-author__name">{{ $post->author->username }}</h6>

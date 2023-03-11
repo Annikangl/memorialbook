@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * App\Models\Cemetery\Cemetery
@@ -65,9 +68,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|Cemetery whereSlug($value)
  * @method static Builder|Cemetery withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
-class Cemetery extends Model
+class Cemetery extends Model implements HasMedia
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, InteractsWithMedia;
 
     public const STATUS_DRAFT = 'Черновик';
     public const STATUS_MODERATION = 'На модерации';
@@ -76,11 +79,6 @@ class Cemetery extends Model
 
     public const ACCESS_OPEN = 'Открытый';
     public const ACCESS_DENIED = 'Закрытый';
-
-    public const AVATAR_PATH = 'uploads/cemeteries/avatar';
-    public const BANNER_PATH = 'uploads/cemeteries/banner';
-    public const DOCUMENTS_PATH = 'uploads/cemeteries/document';
-    public const GALLERY_PATH = 'uploads/cemeteries/gallery';
 
     protected $fillable = [
         'user_id',
@@ -174,5 +172,37 @@ class Cemetery extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('avatars')
+            ->singleFile()
+            ->useFallbackUrl(asset('assets/media/media/empty_profile_avatar.png'))
+            ->useFallbackPath(asset('assets/media/media/empty_profile_avatar.png'));
+
+        $this->addMediaCollection('gallery');
+        $this->addMediaCollection('banners')
+            ->singleFile();
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->performOnCollections('avatars')
+            ->width(150)
+            ->height(150)
+            ->nonQueued();
+
+        $this->addMediaConversion('thumb_500')
+            ->width(500)
+            ->height(550)
+            ->nonQueued();
+
+        $this->addMediaConversion('thumb_900')
+            ->performOnCollections('banners')
+            ->width(1000)
+            ->height(600)
+            ->nonQueued();
     }
 }

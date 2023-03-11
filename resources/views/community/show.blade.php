@@ -6,23 +6,25 @@
 
     <section class="community">
         <div class="community-banner">
-            <img src="{{ asset('storage/' . $community->banner) }}" class="bg-img" alt="banner" title="banner"/>
+            <img src="{{ $community->getFirstMediaUrl('banners', 'thumb_900') }}" class="bg-img" alt="banner"
+                 title="banner"/>
         </div>
         <div class="community-preview">
             <div class="community-preview-title">
                 <div class="community-preview__logo">
-                    <img src="{{ asset('storage/' . $community->avatar) }}" class="bg-img" alt="avatar" title="avatar"/>
+                    <img src="{{ $community->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt="avatar"
+                         title="{{ $community->title }}"/>
                 </div>
                 <h4 class="community-name">{{ $community->title }}</h4>
                 <h5 class="community-country">{{ $community->subtitle }}</h5>
                 <div class="followers-wrap">
-                    <span class="followers-number">Подписчики: {{ $followersCount }}</span>
+                    <span class="followers-number">Followers: {{ $followersCount }}</span>
                     <ul class="followers">
 
                         @foreach($followers as $follower)
                             @if($follower->avatar)
                                 <li class="followers__item" style="border-radius: 50px">
-                                    <img src="{{ asset('storage/' . $follower->avatar) }}"
+                                    <img src="{{ $follower->getFirstMediaUrl('avatars', 'thumb') }}"
                                          class="bg-img"
                                          alt="{{ $follower->full_name }}"
                                          title="{{ $follower->full_name }}"/>
@@ -45,24 +47,24 @@
                             class="white-btn btn community_subscribe"
                             id="community_subscribe"
                             data-slug="{{ $community->slug }}">
-                        Отписаться
+                        Unsubscribe
                     </button>
                 @else
                     <button type="button"
                             class="blue-btn btn community_subscribe"
                             id="community_subscribe"
                             data-slug="{{ $community->slug }}">
-                        Подписаться
+                        Subscribe
                     </button>
                 @endif
             </div>
         </div>
 
         <ul class="community-nav">
-            <li class="community-nav__item current">Стена памяти</li>
-            <li class="community-nav__item">Мемориалы</li>
-            <li class="community-nav__item">Фото</li>
-            <li class="community-nav__item">Видео</li>
+            <li class="community-nav__item current">Memory wall</li>
+            <li class="community-nav__item">Memorials</li>
+            <li class="community-nav__item">Photos</li>
+            <li class="community-nav__item">Videos</li>
         </ul>
 
         @include('includes.partials.tabs.memory-wall')
@@ -98,7 +100,7 @@
                 <article class="community-article">
                     <div class="article-author">
                         <div class="article-author-avatar">
-                            <img src="{{ asset('storage/uploads/community/logo.png') }}" class="bg-img" alt=""
+                            <img src="{{ $community->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt=""
                                  title=""/>
                         </div>
                         <div class="article-author-name-wrap">

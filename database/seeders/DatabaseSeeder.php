@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
             $pet->addMedia($faker->image(storage_path('app/images'),350,300))
                 ->toMediaCollection('avatars');
             $pet->addMedia($faker->image(storage_path('app/images'),1280,720))
-                ->toMediaCollection('banner');
+                ->toMediaCollection('banners');
 
             for ($i = 0; $i < 5; $i++) {
                 $pet->addMedia($faker->image(storage_path('app/images'), 1280, 720))
@@ -74,6 +74,14 @@ class DatabaseSeeder extends Seeder
 
         foreach ($communities as $community) {
             $community->addMedia($faker->image(storage_path('app/images'), 1280, 720))
+                ->toMediaCollection('avatars');
+
+            $community->addMedia($faker->image(storage_path('app/images'), 1280, 720))
+                ->toMediaCollection('banners');
+        }
+
+        foreach (User::all() as $user) {
+            $user->addMedia($faker->image(storage_path('app/images'), 1280, 720))
                 ->toMediaCollection('avatars');
         }
     }

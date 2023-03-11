@@ -1,10 +1,10 @@
 <div class="community-photos community-tab">
     <ul class="community-photos-list">
-        @foreach($community->galleries as $gallery)
+        @foreach($community->getMedia() as $item)
         <li class="community-photos-list__item">
-            <a href="{{ asset('storage/' . $gallery->item ) }}" class="community-photos-list__link gallery"
+            <a href="{{ $item->getMediaUrl('gallery') }}" class="community-photos-list__link gallery"
                data-fancybox="img-community">
-                <img src="{{ asset('storage/' . $gallery->item ) }}" class="bg-img" alt="" title=""/>
+                <img src="{{ $item->getMediaUrl('gallery') }}" class="bg-img" alt="" title=""/>
             </a>
         </li>
         @endforeach

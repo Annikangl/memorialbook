@@ -31,7 +31,7 @@ class CommunityController extends Controller
         /** @var Community $community */
         $community = Community::query()->with(
             [
-                'humans', 'galleries', 'users',
+                'humans', 'users',
                 'posts' => function ($query) {
                     $query->with(['author', 'galleries']);
                 },
@@ -42,7 +42,7 @@ class CommunityController extends Controller
         $followers = $community->users()->paginate(7);
         $followersCount = $community->users->count();
 
-        $videos = $community->galleries->filter(function ($item) {
+        $videos = $community->getMedia()->filter(function ($item) {
            return $item->extension === 'mp4';
         });
 

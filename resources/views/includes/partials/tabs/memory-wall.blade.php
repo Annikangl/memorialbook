@@ -45,11 +45,11 @@
                 <a href="#" class="community-content__link">Все</a>
             </div>
 
-            @include('includes.photo-slider', ['photos' => $community->galleries ])
+            @include('includes.photo-slider', ['photos' => $community->getMedia() ])
 
         </article>
 
-        @if($community->hasVideo())
+        @if($community->getMedia())
 
             <article class="community-article">
             <div class="community-content-title-wrap">

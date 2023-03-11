@@ -18,15 +18,11 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @package App\Models\Profile\Pet
  *
  *  * @method static Builder|Pet byUser(int $userId)
+ *  * @method static Builder|Pet query()
  */
 class Pet extends Profile
 {
     use HasFactory, Sluggable;
-
-    public const AVATAR_PATH = 'uploads/pets/avatar';
-    public const BANNER_PATH = 'uploads/pets/banner';
-    public const DOCUMENTS_PATH = 'uploads/pets/document';
-    public const GALLERY_PATH = 'uploads/pets/gallery';
 
     protected $fillable = ['name', 'breed', 'avatar', 'banner', 'description', 'date_birth',
         'date_death',
@@ -45,11 +41,6 @@ class Pet extends Profile
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
-//    public function galleries(): HasMany
-//    {
-//        return $this->hasMany(Gallery::class);
-//    }
 
     public function sluggable(): array
     {
