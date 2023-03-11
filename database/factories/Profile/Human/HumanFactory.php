@@ -24,17 +24,9 @@ class HumanFactory extends Factory
             'child_id' =>  null,
             'mother_id' =>  null,
             'father_id' =>  null,
-
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-            'avatar' => $this->faker->randomElement(
-                [
-                    'uploads/profiles/avatar/avatar-1.webp',
-                    'uploads/profiles/avatar/avatar-2.webp',
-                    'uploads/profiles/avatar/avatar-3.webp',
-                    'uploads/profiles/avatar/avatar-4.webp',
-                ]
-            ),
+            'avatar' => $this->faker->imageUrl(),
             'description' => $this->faker->text(),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'date_birth' => $birth = $this->faker->date("Y-m-d", '2000'),

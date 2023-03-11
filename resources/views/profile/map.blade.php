@@ -30,7 +30,7 @@
                         data-lng="{{ $profile->longitude }}">
                         <a href="{{ route('profile.show', ['slug' => $profile->slug]) }}" class="map-results__link">
                             <div class="map-results__img">
-                                <img src="{{ asset('storage/' . $profile->avatar) }}" class="bg-img"
+                                <img src="{{ $profile->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img"
                                      alt="{{ $profile->full_name }}"
                                      title="{{ $profile->full_name }}"/>
                             </div>

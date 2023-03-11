@@ -24,7 +24,6 @@ class ProfileService
         try {
             return DB::transaction(function () use ($data, $userId, $cemetery) {
 
-
                 $human = Human::make([
                     'first_name' => $data['first_name'],
                     'last_name' => $data['last_name'],
