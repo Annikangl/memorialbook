@@ -44,10 +44,10 @@ class CreateRequest extends FormRequest
 
             'pet_banner' => [
                 Rule::requiredIf(fn () => $this->hasFile('pet-banner')),
-                File::image()->max(10 * 1024),
+                File::image(),
             ],
 
-            'pet_gallery.*' => ['required', 'mimes:jpg,jpeg,png,bmp,mp4', 'max:20000'],
+            'pet_gallery.*' => ['required', 'mimes:jpg,jpeg,png,bmp,mp4'],
         ];
     }
 }

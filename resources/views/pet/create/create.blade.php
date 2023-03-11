@@ -48,7 +48,7 @@
                     <button type="button" class="save-draft hide btn white-btn">{{ __('create-pet.btn_saveAsDraft') }}</button>
                     <button type="button" class="save-and-next btn blue-btn">{{ __('create-pet.btn_saveAndContinue') }}</button>
 
-                    <button type="submit" class="save-end hide btn blue-btn">{{ __('btn_saveAndPost') }}</button>
+                    <button type="submit" class="save-end hide btn blue-btn">{{ __('create-pet.btn_saveAndPost') }}</button>
                 </div>
 
             </form>

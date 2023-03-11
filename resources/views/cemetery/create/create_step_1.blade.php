@@ -29,6 +29,7 @@
             <span class="input-wrap__title">{{ __('create_cemetery.input_name') }}:</span>
             <div class="input-form  @error('title') no-valid @enderror">
                 <input type="text" class="input-text input-required"
+                       id="first_name"
                        name="title"
                        value="{{ old('title') }}"
                        title="{{ __('create_cemetery.input_name') }}">

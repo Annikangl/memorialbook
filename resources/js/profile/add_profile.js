@@ -94,7 +94,6 @@ if (document.querySelector('.load-files-profile')) {
     for (let input of inputsFile) {
         input.addEventListener('change', function () {
             let files = input.files;
-            console.log(input)
 
             loadPhoto(input, files);
         });

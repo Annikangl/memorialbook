@@ -133,6 +133,22 @@
             <div class="news-wrap">
                 <div class="profiles-title-wrap">
                     <h3 class="profiles-title"> {{__('home.pets')}}</h3>
+                    <div class="profiles-title-arrows">
+                        <button type="button" class="arrows-left">
+                            <svg width="9" height="13" viewBox="0 0 9 13" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.99897 11.6387L1.13358 5.77323" stroke-width="2"/>
+                                <line x1="7.49519" y1="0.826247" x2="2.09519" y2="6.22625" stroke-width="2"/>
+                            </svg>
+                        </button>
+                        <button type="button" class="arrows-right">
+                            <svg width="9" height="13" viewBox="0 0 9 13" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.00103 1.12109L7.86642 6.98654" stroke-width="2"/>
+                                <line x1="1.50481" y1="11.9335" x2="6.90481" y2="6.53352" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                 <div class="swiper swiper-profiles">
                     <ul class="list-profiles swiper-wrapper">

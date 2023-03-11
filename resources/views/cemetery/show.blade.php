@@ -4,7 +4,7 @@
     <style>
         .cemetery-bg {
             width: 100%;
-            background: url("{{ asset('storage/' . $cemetery->banner) }}") no-repeat;
+            background: url("{{ $cemetery->getFirstMediaUrl('banners', 'thumb_900') }}") no-repeat;
             background-size: cover;
             overflow: hidden;
             padding: 25% 0 0;
@@ -17,7 +17,7 @@
             <div class="cemetery-title">
                 <div class="cemetery-named-wrap">
                     <div class="cemetery-title-img">
-                        <img src="{{ asset('storage/' . $cemetery->avatar) }}" class="bg-img" alt="" title=""/>
+                        <img src="{{ $cemetery->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt="" title=""/>
                     </div>
                     <div class="cemetery-named">
                         <h4 class="cemetery-named__title">{{ $cemetery->title }}</h4>
@@ -28,12 +28,12 @@
                     </div>
                 </div>
                 <ul class="cemetery-photo">
-                    @foreach($cemetery->galleries as $gallery)
+                    @foreach($cemetery->getMedia('gallery') as $item)
                         <li class="cemetery-photo__item">
-                            <a href="{{ asset('storage/' . $gallery->item ) }}"
+                            <a href="{{ $item->getUrl('thumb_500') }}"
                                class="cemetery-photo__link gallery">
-                                <img src="{{ asset('storage/' . $gallery->item) }}" class="bg-img"
-                                     alt="{{ $gallery->item }}" title="{{ $gallery->item }}"/>
+                                <img src="{{ $item->getUrl('thumb_500') }}" class="bg-img"
+                                     alt="{{ '' }}" title="{{ '' }}"/>
                             </a>
                         </li>
                     @endforeach
@@ -43,10 +43,14 @@
             {{--            // TODO change paginate --}}
 
             <ul class="cemetery-menu">
-                <li class="cemetery-menu__item @if (!Request::has('page')) current @endif">О кладбище</li>
-                <li class="cemetery-menu__item @if (Request::has('page')) current @endif">Мемориалы</li>
-                <li class="cemetery-menu__item">Товары и услуги</li>
-                <li class="cemetery-menu__item">Контакты</li>
+                <li class="cemetery-menu__item @if (!Request::has('page')) current @endif">
+                    {{ __('show_cemetery.About the cemetery') }}
+                </li>
+                <li class="cemetery-menu__item @if (Request::has('page')) current @endif">
+                    {{ __('show_cemetery.Memorials') }}
+                </li>
+                <li class="cemetery-menu__item">{{ __('show_cemetery.Products and services') }}</li>
+                <li class="cemetery-menu__item">{{ __('show_cemetery.Contacts') }}</li>
             </ul>
 
         </div>
@@ -56,33 +60,46 @@
                     <div class="cemetery-text">
                         <p>{!! nl2br($cemetery->description) !!} </p>
                         <ul class="social">
-                            @foreach($cemetery->socials as $social)
-                                <li class="social__item">
-                                    <a href="#" class="social__link">
-                                        <img src="{{ asset( $social->icon )}}" alt=""
-                                             title="{{ $social->social }}"/>
-                                    </a>
-                                </li>
-                            @endforeach
+                            <li class="social__item">
+                                <a href="#" class="social__link">
+                                    <img src="{{ asset('assets/media/media/icons/social/facebook.svg') }}"
+                                         alt="facebook"
+                                         title="facebook"/>
+                                </a>
+                            </li>
+                            <li class="social__item">
+                                <a href="#" class="social__link">
+                                    <img src="{{ asset('assets/media/media/icons/social/instagram.svg') }}"
+                                         alt="instagram"
+                                         title="instagram"/>
+                                </a>
+                            </li>
+                            <li class="social__item">
+                                <a href="#" class="social__link">
+                                    <img src="{{ asset('assets/media/media/icons/social/twitter.svg') }}"
+                                         alt="twitter"
+                                         title="twitter"/>
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
                     <div class="famous-persons">
-                        <h4 class="famous-persons__title">Известные личности</h4>
+                        <h4 class="famous-persons__title">{{ __('show_cemetery.Famous personalities') }}</h4>
 
                         <ul class="famous-persons-list">
                             @forelse($famous as $profile)
                                 <li class="famous-persons__item" data-lat="{{ $profile->latitude }}"
                                     data-lng="{{ $profile->longitude }}">
                                     <div class="famous-persons-img">
-                                        <img src="{{ asset('storage/' . $profile->avatar) }}" class="bg-img"
+                                        <img src="{{ $profile->gerFirstMediaUrl('avatars', 'thumb') }}" class="bg-img"
                                              alt="{{ $profile->full_name }}"
                                              title="{{ $profile->full_name }}"/>
                                     </div>
                                     <span class="famous-persons__name">{{ $profile->full_name }}</span>
                                 </li>
                             @empty
-                                <p>На этом кладбище пока не отмечены известные личности.</p>
+                                <p>{{ __('show_cemetery.Famous personalities have not yet been marked in this cemetery') }}</p>
                             @endforelse
                         </ul>
 
@@ -96,7 +113,7 @@
                 @foreach($memorials as $profile)
                     <li class="memorials__item">
                         <div class="memorials-img">
-                            <img src="{{ asset('storage/' . $profile->avatar) }}" class="bg-img"
+                            <img src="{{ $profile->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img"
                                  alt="{{ $profile->full_name }}"
                                  title="{{ $profile->full_name }}"/>
                         </div>
@@ -292,21 +309,21 @@
             <div class="cemetery-contacts">
                 <ul class="cemetery-contacts-list">
                     <li class="cemetery-contacts-list__item">
-                        <span class="cemetery-contacts-list__title">Email:</span>
+                        <span class="cemetery-contacts-list__title">{{ __('show_cemetery.Email') }}:</span>
                         <a href="mailto:thebestcemetery@mail.com"
                            class="cemetery-contacts-list__text">{{ $cemetery->email }}</a>
                     </li>
                     <li class="cemetery-contacts-list__item">
-                        <span class="cemetery-contacts-list__title">Телефон:</span>
+                        <span class="cemetery-contacts-list__title">{{ __('show_cemetery.Phone number') }}:</span>
                         <a href="tel:79022223333" class="cemetery-contacts-list__text">{{ $cemetery->phone }}</a>
                     </li>
                     <li class="cemetery-contacts-list__item">
-                        <span class="cemetery-contacts-list__title">Время работы:</span>
+                        <span class="cemetery-contacts-list__title">{{ __('show_cemetery.Working hours') }}:</span>
                         <span class="cemetery-contacts-list__text">{{ $cemetery->schedule }}</span>
                     </li>
                 </ul>
-                <a class="button-add-message">Написать сообщение</a>
-                <a class="button-route">Построить маршрут</a>
+                <a class="button-add-message">{{ __('show_cemetery.Write message') }}</a>
+                <a class="button-route">{{ __('show_cemetery.plot rout') }}</a>
             </div>
         </div>
         </div>

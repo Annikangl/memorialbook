@@ -3,7 +3,7 @@
 @section('content')
     <section class="pet-card">
         <div class="pet-banner">
-            <img src="{{ $pet->getFirstMediaUrl('banner', 'thumb_900')}}" class="bg-img" alt="" title=""/>
+            <img src="{{ $pet->getFirstMediaUrl('banners', 'thumb_900')}}" class="bg-img" alt="" title=""/>
         </div>
         <div class="pet-card-wrap">
             <div class="member-info">

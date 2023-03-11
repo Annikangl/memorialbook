@@ -182,6 +182,7 @@ class Cemetery extends Model implements HasMedia
             ->useFallbackPath(asset('assets/media/media/empty_profile_avatar.png'));
 
         $this->addMediaCollection('gallery');
+
         $this->addMediaCollection('banners')
             ->singleFile();
     }
