@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         foreach ($communities as $community) {
-            $community->addMedia(Image::imageUrl(350, 300))
+            $community->addMedia($faker->image(storage_path('app/images'), 1280, 720))
                 ->toMediaCollection('avatars');
         }
     }
