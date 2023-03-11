@@ -37,7 +37,7 @@
             baseUrl: `{{ env('APP_URL') }}`,
             relPath: './',
             assetsPath: '{{ asset('assets/media/media/') }}',
-            gmapsApikey: 'AIzaSyCO1W6X1LgXeZzrDSNL6YMbZm9Z9NAPH5Y'
+            gmapsApikey: '{{ env('GOOGLE_MAPS_API_KEY') }}',
         };
     </script>
 
