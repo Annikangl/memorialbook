@@ -59,7 +59,7 @@ class Pet extends Profile
             ->useFallbackPath(asset('assets/media/media/empty_profile_avatar.png'));
 
         $this->addMediaCollection('gallery');
-        $this->addMediaCollection('banner')
+        $this->addMediaCollection('banners')
             ->singleFile();
     }
 
@@ -77,7 +77,7 @@ class Pet extends Profile
             ->nonQueued();
 
         $this->addMediaConversion('thumb_900')
-            ->performOnCollections('banner')
+            ->performOnCollections('banners')
             ->width(1000)
             ->height(600)
             ->nonQueued();

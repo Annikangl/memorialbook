@@ -102,7 +102,7 @@
                                 <div class="list-profiles-img-wrap">
                                     <div class="list-profiles__img">
                                         <img
-                                            data-src="{{ asset('assets/media/media/empty_profile_avatar.png') }}"
+                                            data-src="{{ $relative->getFirstMediaUrl('avatars', 'thumb') }}"
                                             data-srcset="{{ $relative->getFirstMediaUrl('avatars', 'thumb') }}"
                                             class="bg-img swiper-lazy"
                                             alt="Avatar {{ $relative->full_name }}"

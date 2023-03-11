@@ -1,7 +1,6 @@
 import 'bootstrap'
 import 'hystmodal/dist/hystmodal.min'
 import 'hystmodal/dist/hystmodal.min.css'
-
 import './asideModal'
 import './auth/login'
 import './auth/register'
