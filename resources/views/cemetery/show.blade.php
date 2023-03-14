@@ -92,7 +92,7 @@
                                 <li class="famous-persons__item" data-lat="{{ $profile->latitude }}"
                                     data-lng="{{ $profile->longitude }}">
                                     <div class="famous-persons-img">
-                                        <img src="{{ $profile->gerFirstMediaUrl('avatars', 'thumb') }}" class="bg-img"
+                                        <img src="{{ $profile->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img"
                                              alt="{{ $profile->full_name }}"
                                              title="{{ $profile->full_name }}"/>
                                     </div>

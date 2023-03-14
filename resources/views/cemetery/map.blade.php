@@ -30,7 +30,7 @@
                         data-lng="{{ $cemetery->longitude }}">
                         <a href="{{ route('cemetery.show', ['slug' => $cemetery->slug]) }}" class="map-results__link">
                             <div class="map-results__img">
-                                <img src="{{ asset('storage/' . $cemetery->avatar) }}" class="bg-img"
+                                <img src="{{ $cemetery->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img"
                                      alt="{{ $cemetery->title }}"
                                      title="{{ $cemetery->title }}"/>
                             </div>

@@ -24,7 +24,7 @@ class CemeteryService
                    'latitude' => $data['cemetery_address_coords']['lat'] ?? null,
                    'longitude' => $data['cemetery_address_coords']['lng'] ?? null,
                    'description' => $data['description'],
-                   'status' => Cemetery::STATUS_MODERATION,
+                   'status' => Cemetery::STATUS_ACTIVE,
                    'access' => $data['settings-public']
                ]);
 

@@ -132,10 +132,10 @@ class Cemetery extends Model implements HasMedia
 
     public function scopeFiltered(Builder $query): Builder
     {
-        return $query->when($name = request('NAME'), function (Builder $q) use ($name) {
+        return $query->when($name = request('place_name'), function (Builder $q) use ($name) {
             $q->where('title', 'LIKE', "%$name%")
                 ->orWhere('title_en', 'LIKE', "%$name%");
-        })->when($address = request('ADDRESS'), function (Builder $query) use ($address) {
+        })->when($address = request('place'), function (Builder $query) use ($address) {
             $query->where('address', 'LIKE', "%$address%");
         });
     }

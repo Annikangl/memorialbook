@@ -40,7 +40,7 @@
                         <li class="list-profiles__item swiper-slide">
                             <div class="list-profiles-img-wrap">
                                 <div class="list-profiles__img">
-                                    <img src="{{ asset('storage/' . $newsItem->human->avatar ) }}"
+                                    <img src="{{ $newsItem->human->getFirstMediaUrl('avatars', 'thumb') }}"
                                          class="bg-img"
                                          alt="{{ $newsItem->human->full_name }}"
                                          title="{{ $newsItem->human->full_name }}"/>
