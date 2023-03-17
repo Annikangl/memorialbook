@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\NetworkController;
 use App\Http\Controllers\Cabinet\CabinetController;
 use App\Http\Controllers\Cemetery\CemeteryController;
 use App\Http\Controllers\Community\CommunityController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\Profile\FamilyBurialController;
 use App\Http\Controllers\Profile\HumanController;
 use App\Http\Controllers\Profile\PetController;
@@ -30,6 +31,8 @@ Route::get('login/{driver}/callback', [NetworkController::class, 'callback'])->n
 
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('index');
 
+Route::get('/policy', [PageController::class, 'policy'])->name('policy');
+Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
     Route::get('/map', [HumanController::class, 'map'])->name('search.map');

@@ -56,18 +56,18 @@ return [
             'throw' => false,
         ],
 
-//        'media' => [
-//            'driver' => 'local',
-//            'root'   => public_path('media'),
-//            'url'    => env('APP_URL').'/media',
-//        ],
-
         'media' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/uploads'),
-            'url' => env('APP_URL').'/storage/uploads',
-            'visibility' => 'public',
+            'root'   => public_path('media'),
+            'url'    => env('APP_URL').'/media',
         ],
+
+//        'media' => [
+//            'driver' => 'local',
+//            'root' => storage_path('app/public/uploads'),
+//            'url' => env('APP_URL').'/storage/uploads',
+//            'visibility' => 'public',
+//        ],
 
 //        'avatar' => [
 //            'driver' => 'local',
