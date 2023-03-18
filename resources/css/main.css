@@ -329,6 +329,14 @@ section {
     align-items: flex-start;
 }
 
+.aside-form {
+    overflow-y: auto;
+}
+.close-registration {
+    z-index: 90;
+    background: #fff;
+}
+
 .preview-modal.aside-right {
     justify-content: flex-end;
     align-items: flex-start;
