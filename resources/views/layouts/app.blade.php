@@ -168,7 +168,7 @@
         </nav>
 
         <!--cookie link-->
-        <a href="#" class="cookie-link">{{ __('layout.policy') }}</a>
+        <a href="{{ route('policy') }}" class="cookie-link">{{ __('layout.policy') }}</a>
     </footer>
 
 </div>
@@ -185,71 +185,6 @@
     </div>
     @include('includes.forms.form_invite')
 </div>
-
-{{--<x-previews-modal>--}}
-{{--    <form class="form-registration" id="form-registration">--}}
-{{--        <h3 class="form-registration__title">Регистрация</h3>--}}
-{{--        <div class="input-wrap">--}}
-{{--            <span class="input-wrap__title">ФИО:</span>--}}
-{{--            <div class="input-form">--}}
-{{--                <input type="text" class="input-text" name="full_name" title="full name"/>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
-{{--        <div class="input-wrap">--}}
-{{--            <span class="input-wrap__title">Email:</span>--}}
-{{--            <div class="input-form">--}}
-{{--                <input type="email" class="input-text" name="email" title="email"/>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
-{{--        <div class="input-wrap">--}}
-{{--            <span class="input-wrap__title">Телефон:</span>--}}
-{{--            <div class="input-form">--}}
-{{--                <input type="tel" class="input-text" name="phone" title="phone"/>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
-{{--        <div class="input-wrap">--}}
-{{--            <span class="input-wrap__title">Пароль:</span>--}}
-{{--            <div class="input-form">--}}
-{{--                <input type="password" class="input-text" name="password" title="password"/>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
-{{--        <div class="input-wrap">--}}
-{{--            <span class="input-wrap__title">Повторите пароль:</span>--}}
-{{--            <div class="input-form">--}}
-{{--                <input type="password" class="input-text" name="password_confirm" title="password confirm"/>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
-{{--        <input type="submit" class="form__submit btn blue-btn" value="Зарегистрироваться" title="Зарегистрироваться"/>--}}
-{{--        <p class="form-registration__text">Нажимая кнопку, вы соглашаетесь с условиями--}}
-{{--            <a href="#">политики обработки персональных данных</a></p>--}}
-{{--    </form>--}}
-
-{{--    <form class="form-recover" id="form-recover" action="{{ route('password.email') }}" method="post">--}}
-{{--        @csrf--}}
-{{--        <h3 class="form-recover__title">Восстановить пароль</h3>--}}
-{{--        <div class="form-recover-wrap">--}}
-{{--            <p>Если вы забыли пароль, введите email. <br/>Контрольная строка для смены пароля, а также ваши--}}
-{{--                регистрационные данные, будут высланы вам по электронной почте.</p>--}}
-{{--            <div class="input-wrap">--}}
-{{--                <span class="input-wrap__title">Email:</span>--}}
-{{--                <div class="input-form @error('message') no-valid @enderror">--}}
-{{--                    <input type="email" class="input-text" name="form-recover__email" title=""/>--}}
-{{--                </div>--}}
-{{--                @error('message')--}}
-{{--                    <span class="is-invalid">{{ $message }}</span>--}}
-{{--                @enderror--}}
-
-{{--            </div>--}}
-{{--            <input type="submit" class="form__submit blue-btn btn" value="Выслать" title="Зарегистрироваться"/>--}}
-{{--        </div>--}}
-{{--    </form>--}}
-
-{{--</x-previews-modal>--}}
 
 @yield('scripts')
 

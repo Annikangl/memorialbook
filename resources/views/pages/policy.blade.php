@@ -2,7 +2,8 @@
 
 @section('content')
     <section class="policy">
-        <h2>Private Policy</h2>
+        <h2>Personal data processing policy</h2>
+
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             Esse expedita facere fugit, molestiae numquam sint tenetur totam velit? Ab adipisci dicta illum rem sed
             soluta voluptates?
