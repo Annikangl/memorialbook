@@ -77,6 +77,16 @@
                     <li class="menu__item">
                         <a href="#" class="menu__link">{{ __('layout.link_shop') }}</a>
                     </li>
+                    <li class="menu__item">
+                        <a href="{{ route('community.create') }}" class="menu__link">{{__('left_menu.create_community')}}</a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="{{ route('cemetery.create') }}" class="menu__link">{{__('left_menu.create_cemetery')}}</a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="{{ route('profile.family.create') }}" class="menu__link">{{__('left_menu.create_burial')}}</a>
+                    </li>
+
                 @endif
             </ul>
         </nav>
@@ -96,6 +106,7 @@
 
                 <a href="{{ route('cabinet.show', auth()->user()->slug ) }}"
                    class="login">{{ auth()->user()->username }}</a>
+
                 <form action="{{ route('logout') }}" method="post">
                     @csrf
                     <button type="submit" class="login" style="margin-left: 10px">{{ __('auth.sign_out') }}</button>

@@ -6,7 +6,7 @@ return [
     'family' => 'family',
     'shop' => 'shop',
     'news' => 'news',
-    'create_community' => 'create community',
-    'create_cemetery' => 'create cemetery',
-    'create_burial' => 'create burial',
+    'create_community' => 'Create community',
+    'create_cemetery' => 'Create cemetery',
+    'create_burial' => 'Create burial',
 ];

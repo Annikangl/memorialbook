@@ -203,6 +203,8 @@
             @include('includes.partials.news')
 
         </div>
-        <div class="qr-code"></div>
+        <div class="qr-code">
+            <img src="{{ asset('assets/media/media/qr-code-example.svg') }}" width="200" height="200" alt="qr-code">
+        </div>
     </section>
 @endsection
