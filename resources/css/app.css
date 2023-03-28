@@ -1,6 +1,7 @@
 @import "_vars.css";
 @import "./fonts.css";
-@import "izitoast/dist/css/iziToast.min.css";
+@import "libs/jquery.fileuploader.min.css";
+@import "libs/jquery.fileuploader-theme-thumbnails.css";
 @import "main.css";
 @import "layouts/header.css";
 @import "layouts/footer.css";

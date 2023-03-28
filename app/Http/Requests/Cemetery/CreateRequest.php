@@ -60,13 +60,11 @@ class CreateRequest extends FormRequest
             ],
             'input-banner' => [
                 'sometimes',
-//                Rule::requiredIf(fn () => $this->hasFile('input-banner')),
-                File::image(),
+                File::image()->max(10 * 1024),
             ],
-            'cemetery_gallery.*' => [
+            'cemetery_files.*' => [
                 'sometimes',
-//                Rule::requiredIf(fn () => is_array($this->get('cemetery_gallery'))),
-                File::image(),
+                File::types(['video/mp4', 'image/jpeg', 'image/png'])->max(30 * 1024),
             ],
         ];
     }

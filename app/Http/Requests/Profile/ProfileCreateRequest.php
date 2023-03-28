@@ -96,6 +96,11 @@ class ProfileCreateRequest extends FormRequest
                 File::types(['pdf'])
                     ->max(10 * 1024)
             ],
+
+            'profiles_files.*' => [
+                'sometimes',
+                File::types(['video/mp4', 'image/jpeg', 'image/png'])->max(30 * 1024)
+            ],
         ];
     }
 

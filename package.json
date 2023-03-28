@@ -25,7 +25,7 @@
         "@googlemaps/markerclusterer": "^2.0.13",
         "google-maps": "^4.3.3",
         "hystmodal": "^0.5.1",
-        "jquery": "^3.6.1",
+        "jquery": "^3.6.4",
         "slideout": "^1.0.1",
         "swiper": "^8.4.4"
     }

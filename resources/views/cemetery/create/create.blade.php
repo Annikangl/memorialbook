@@ -75,3 +75,7 @@
     </x-modal>
 
 @endsection
+
+@section('scripts')
+    <script src="{{ asset('js/jquery.fileuploader.min.js') }}"></script>
+@endsection

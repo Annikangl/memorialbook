@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Models\Cemetery\Cemetery;
+use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
 use Illuminate\Contracts\Database\Query\Builder;
@@ -31,7 +32,7 @@ class ProfileService
                     'latitude' => $data['burial_place_coords']['lat'] ?? null,
                     'longitude' => $data['burial_place_coords']['lng'] ?? null,
                     'death_reason' => $data['death_reason'],
-                    'status' => Human::STATUS_ACTIVE,
+                    'status' => Profile::STATUS_ACTIVE,
                     'access' => $data['access']
                 ]);
 
@@ -71,8 +72,8 @@ class ProfileService
                     Human::updateSpouse($spouse['id'], $human->id);
                 }
 
-                if (isset($data['profile_images'])) {
-                    foreach ($data['profile_images'] as $image) {
+                if (isset($data['profiles_files'])) {
+                    foreach ($data['profiles_files'] as $image) {
                         $human->addMedia($image)->toMediaCollection('gallery');
                     }
                 }
@@ -115,8 +116,8 @@ class ProfileService
             $pet->addMedia($data['pet_banner'])->toMediaCollection('banner');
         }
 
-        if (isset($data['pet_gallery'])) {
-            foreach ($data['pet_gallery'] as $image) {
+        if (isset($data['pets_files'])) {
+            foreach ($data['pets_files'] as $image) {
                 $pet->addMedia($image)->toMediaCollection('gallery');
             }
         }

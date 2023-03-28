@@ -36,18 +36,19 @@ class CreateRequest extends FormRequest
             'description' => ['sometimes', 'nullable', 'string', 'min:20'],
 
             'avatar' => [
-                Rule::requiredIf(fn () => $this->hasFile('avatar')),
+                'sometimes',
                 File::image()
-                    ->min(1)
-                    ->max(5 * 1024)
+                    ->max(10 * 1024)
             ],
 
             'pet_banner' => [
-                Rule::requiredIf(fn () => $this->hasFile('pet-banner')),
-                File::image(),
+                'sometimes',
+                File::image()->max(10 * 1024),
             ],
 
-            'pet_gallery.*' => ['required', 'mimes:jpg,jpeg,png,bmp,mp4'],
+            'pets_files.*' => ['sometimes',
+                File::types(['video/mp4', 'image/jpeg', 'image/png'])->max(30 * 1024),
+            ],
         ];
     }
 }

@@ -47,10 +47,13 @@
                 @include('profile.create.create_step_3')
 
                 <div class="buttons-save">
-                    <button type="button" class="save-draft hide btn white-btn">{{ __('create_profile.btn_saveAsDraft') }}</button>
-                    <button type="button" class="save-and-next btn blue-btn">{{ __('create_profile.btn_saveAndContinue') }}</button>
+                    <button type="button"
+                            class="save-draft hide btn white-btn">{{ __('create_profile.btn_saveAsDraft') }}</button>
+                    <button type="button"
+                            class="save-and-next btn blue-btn">{{ __('create_profile.btn_saveAndContinue') }}</button>
 
-                    <button type="submit" class="save-end hide btn blue-btn">{{ __('create_profile.btn_saveAndPost') }}</button>
+                    <button type="submit"
+                            class="save-end hide btn blue-btn">{{ __('create_profile.btn_saveAndPost') }}</button>
                 </div>
 
             </form>
@@ -74,5 +77,9 @@
 
     </section>
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/jquery.fileuploader.min.js') }}"></script>
 @endsection
 

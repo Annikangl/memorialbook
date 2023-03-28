@@ -78,15 +78,18 @@
                         <a href="#" class="menu__link">{{ __('layout.link_shop') }}</a>
                     </li>
                     @if ($agent->isMobile())
-                    <li class="menu__item">
-                        <a href="{{ route('community.create') }}" class="menu__link">{{__('left_menu.create_community')}}</a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="{{ route('cemetery.create') }}" class="menu__link">{{__('left_menu.create_cemetery')}}</a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="{{ route('profile.family.create') }}" class="menu__link">{{__('left_menu.create_burial')}}</a>
-                    </li>
+                        <li class="menu__item">
+                            <a href="{{ route('community.create') }}"
+                               class="menu__link">{{__('left_menu.create_community')}}</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="{{ route('cemetery.create') }}"
+                               class="menu__link">{{__('left_menu.create_cemetery')}}</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="{{ route('profile.family.create') }}"
+                               class="menu__link">{{__('left_menu.create_burial')}}</a>
+                        </li>
                     @endif
 
                 @endif
@@ -123,7 +126,8 @@
         @else
             <div class="header-buttons" id="header-button">
                 <button type="button" class="header-buttons__lang">En</button>
-                <button type="button" class="header-buttons__registration open-registration btn white-btn">{{ __('layout.btn_register') }}
+                <button type="button"
+                        class="header-buttons__registration open-registration btn white-btn">{{ __('layout.btn_register') }}
                 </button>
                 <button type="button" class="header-buttons__menu" id="mobile-menu">
                     <span></span>
@@ -199,8 +203,10 @@
     @include('includes.forms.form_invite')
 </div>
 
-@yield('scripts')
 
+<script src="{{ asset('js/jquery-3.6.4.min.js') }}"></script>
+
+@yield('scripts')
 
 </body>
 </html>

@@ -57,10 +57,8 @@ class CommunityController extends Controller
 
     public function store(CreateCommunityRequest $request)
     {
-        $request_data = $request->validated();
-
         try {
-            $community = $this->service->create(\Auth::id(), $request_data);
+            $community = $this->service->create(\Auth::id(), $request->validated());
         } catch (\DomainException $exception) {
             return back()->with('message', $exception->getMessage());
         }

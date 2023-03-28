@@ -39,14 +39,12 @@ class CreateCommunityRequest extends FormRequest
     {
         return [
             'avatar' => [
-                Rule::requiredIf(function () {
-                    $this->hasFile('avatar');
-                }),
+                'sometimes',
                 File::image()
                     ->min(1)
                     ->max(5 * 1024)
             ],
-            'title' => ['required', 'string', 'min:3','max:100'],
+            'title' => ['required', 'string', 'min:3', 'max:100'],
             'community_address' => ['required', 'string'],
             'community_address_coords' => [
                 Rule::requiredIf((bool)$this->get('community_address_coords')),
@@ -57,19 +55,18 @@ class CreateCommunityRequest extends FormRequest
             'phone' => ['sometimes', 'nullable', 'string', 'min:10', 'max:15', 'unique:communities'],
             'website' => ['sometimes', 'nullable', 'url'],
             'community_banner' => [
-                Rule::requiredIf(fn () => $this->hasFile('input-banner')),
-                File::image()->min(50)->max(10 * 1024),
+                'sometimes',
+                File::image()->max(10 * 1024),
             ],
-            'community_gallery.*' => [
-                Rule::requiredIf(fn () => is_array($this->get('community-gallery.*'))),
-                File::image()->min(10)->max(10 * 1024),
+            'community_files.*' => [
+                'sometimes',
+                File::types(['video/mp4', 'image/jpeg', 'image/png'])->max(30 * 1024),
             ],
             'community_documents.*' => [
-                Rule::requiredIf(fn () => is_array($this->get('community_documents.*'))),
-                File::types('pdf')
-                    ->min(5)
+                'sometimes',
+                File::types('application/pdf')
                     ->max(10 * 1024)
-                ],
+            ],
             'description' => ['sometimes', 'nullable', 'string', 'min:20']
         ];
     }

@@ -12,6 +12,9 @@ import 'bootstrap';
 import axios from 'axios';
 window.axios = axios;
 
+import jQuery from 'jquery'
+window.$ = jQuery;
+
 import 'slideout/dist/slideout.min'
 
 

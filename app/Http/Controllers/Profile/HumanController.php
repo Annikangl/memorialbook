@@ -97,14 +97,10 @@ class HumanController extends Controller
 
     public function store(ProfileCreateRequest $request): RedirectResponse
     {
-        $request_data = $request->validated();
-
-
         try {
-            $profile = $this->service->create(\Auth::id(), $request_data);
+            $profile = $this->service->create(\Auth::id(), $request->validated());
             event(new CreateNews($profile, CreateNews::USER_ADDED_PROFILE));
         } catch (\DomainException $exception) {
-            dd($exception->getMessage());
             return back()->with([
                 'message' => $exception->getMessage(),
                 'alert-class' => 'alert-danger'

@@ -3,20 +3,20 @@
     "file": "assets/lato-black.1933944b.woff2",
     "src": "resources/fonts/lato-black.woff2"
   },
-  "resources/fonts/lato-regular.woff2": {
-    "file": "assets/lato-regular.de81d909.woff2",
-    "src": "resources/fonts/lato-regular.woff2"
-  },
   "resources/fonts/lato-bold.woff2": {
     "file": "assets/lato-bold.0cc3d792.woff2",
     "src": "resources/fonts/lato-bold.woff2"
+  },
+  "resources/fonts/lato-regular.woff2": {
+    "file": "assets/lato-regular.de81d909.woff2",
+    "src": "resources/fonts/lato-regular.woff2"
   },
   "resources/fonts/lato-semibold.woff2": {
     "file": "assets/lato-semibold.e42a071f.woff2",
     "src": "resources/fonts/lato-semibold.woff2"
   },
   "resources/js/app.js": {
-    "file": "assets/app.863a05a0.js",
+    "file": "assets/app.8d38a949.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
@@ -28,7 +28,7 @@
     "src": "resources/js/app.css"
   },
   "resources/css/app.css": {
-    "file": "assets/app.c7527266.css",
+    "file": "assets/app.dc7d8699.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }
