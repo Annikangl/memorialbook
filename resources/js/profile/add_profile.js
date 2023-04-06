@@ -1,27 +1,43 @@
 import '../libs/mask'
-import {Loader} from "google-maps";
+// import {Loader} from "google-maps";
 import {loadPhoto, searchLocation} from "../functions";
 
 //Modal
-let cemeteryAddressModal = function () {
-    const searchInput = document.querySelector('#cemetery_address-search');
-    const coordsInput = document.querySelector('#cemetery_address_coords');
-
-    const modal = new HystModal({
-        linkAttributeName: "data-hystmodal",
-        beforeOpen: function (modal) {
-            searchLocation(searchInput, coordsInput);
-        },
-        afterClose: function (modal) {
-            document.querySelector('#cemetery_address').value = searchInput.value;
-        },
-    });
-}
+// let cemeteryAddressModal = function () {
+//     const searchInput = document.querySelector('#cemetery_address');
+//     const coordsInput = document.querySelector('#cemetery_address_coords');
+//
+//     const modal = new HystModal({
+//         linkAttributeName: "data-hystmodal",
+//         beforeOpen: function (modal) {
+//             searchLocation(searchInput, coordsInput);
+//         },
+//         afterClose: function (modal) {
+//             document.querySelector('#cemetery_address').value = searchInput.value;
+//         },
+//     });
+// }
 
 if (document.querySelector('#cemetery_address')) {
-    document.querySelector('.cemeteryAddressModal').addEventListener('click', cemeteryAddressModal)
-    const loader = new Loader(app.globalConfig.gmapsApikey);
-    const google =  loader.load();
+    let autocomplete;
+
+    autocomplete = new google.maps.places.Autocomplete(document.querySelector('#cemetery_address'), {
+        fields: ["address_components", "geometry", "icon", "name"],
+        strictBounds: false,
+        types: ["establishment"],
+    });
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        let place = autocomplete.getPlace();
+
+        const latLang = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+        };
+
+        document.getElementById('cemetery_address_coords').value = JSON.stringify(latLang);
+    })
+
 }
 
 let burialLocationModal = function () {

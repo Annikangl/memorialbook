@@ -5,6 +5,13 @@
 @endsection
 
 @section('content')
+
+    <style>
+
+        .fileuploader {
+            max-width: 560px;
+        }
+    </style>
     <section class="add-profile">
 
         <ul class="breadcrumbs">
@@ -37,12 +44,13 @@
                     </li>
                 </ul>
             </div>
+
             <form class="add-cemetery-wrap" id="add-cemetery"
                   method="post"
                   action="{{ route('cemetery.store') }}"
                   enctype="multipart/form-data">
                 @csrf
-
+{{--                {{ dump(session()->get('message')) }}--}}
                 @include('cemetery.create.create_step_1')
                 @include('cemetery.create.create_step_2')
                 @include('cemetery.create.create_step_3')
@@ -59,23 +67,9 @@
         </div>
     </section>
 
-    <x-modal id="cemetery_address_location" class="inner_map" long="hystmodal__window--long">
-        <div class="input-wrap" style="margin: 0 0 10px 0;">
-            <div class="input-form" >
-                <input type="text" class="input-text" id="cemetery_address-search"
-                       name="cemetery_address"
-                       placeholder="{{ __('create_cemetery.choose_from_map') }}"
-                       title="{{ __('create_cemetery.choose_from_map') }}">
-            </div>
-
-        </div>
-        <div class="map" style="min-height: 550px" >
-
-        </div>
-    </x-modal>
-
 @endsection
 
 @section('scripts')
     <script src="{{ asset('js/jquery.fileuploader.min.js') }}"></script>
+
 @endsection

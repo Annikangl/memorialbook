@@ -1,4 +1,5 @@
 import axios from "axios";
+import {auto} from "@popperjs/core";
 
 export let loadPhoto = function (input, files) {
     console.log(files);
@@ -106,57 +107,70 @@ export let loadPhoto = function (input, files) {
 
 }
 
-export const searchLocation = async function initMap(searchInput, coordsInput) {
-    let markers = [];
+export const searchLocation = async function initMap(searchInput) {
+    // let autocomplete;
+    //
+    // autocomplete = new google.maps.places.Autocomplete(searchInput, {
+    //     fields: ["address_components", "geometry", "icon", "name"],
+    //     strictBounds: false,
+    //     types: ["establishment"],
+    // });
+    //
+    // google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    //     return autocomplete.getPlace();
+    // })
 
-    const map = new google.maps.Map(document.querySelector(".map"), {
-        zoom: 1,
-        center: {lat: 0, lng: 0},
-    });
 
-    map.addListener('click', function (e) {
-        placeMarker(e.latLng, map);
-    });
-
-    function placeMarker(position, map) {
-        clearMarkers();
-
-        let marker = new google.maps.Marker({
-            position: position,
-            map: map
-        });
-
-        markers.push(marker)
-        map.panTo(position);
-
-        const geocoder = new google.maps.Geocoder();
-
-        const latLang = {
-            lat: position.lat(),
-            lng: position.lng()
-        };
-
-        geocoder.geocode({location: latLang})
-            .then((response) => {
-                if (response.results[0]) {
-                    searchInput.value = response.results[0].formatted_address;
-                    coordsInput.value = JSON.stringify(latLang)
-                } else {
-                    window.alert("No results found");
-                }
-            })
-            .catch((e) => window.alert("Geocoder failed due to: " + e));
-    }
-
-    function clearMarkers() {
-        if (markers) {
-            for (let i in markers) {
-                markers[i].setMap(null);
-            }
-        }
-    }
-
-    google.maps.event.trigger(map, 'resize')
+    // let markers = [];
+    //
+    // const map = new google.maps.Map(document.querySelector(".map"), {
+    //     zoom: 1,
+    //     center: {lat: 0, lng: 0},
+    // });
+    //
+    // map.addListener('click', function (e) {
+    //     placeMarker(e.latLng, map);
+    // });
+    //
+    // function placeMarker(position, map) {
+    //     clearMarkers();
+    //
+    //     let marker = new google.maps.Marker({
+    //         position: position,
+    //         map: map
+    //     });
+    //
+    //     markers.push(marker)
+    //     map.panTo(position);
+    //
+    //     const geocoder = new google.maps.Geocoder();
+    //
+    //     const latLang = {
+    //         lat: position.lat(),
+    //         lng: position.lng()
+    //     };
+    //
+    //     geocoder.geocode({location: latLang})
+    //         .then((response) => {
+    //             if (response.results[0]) {
+    //                 searchInput.value = response.results[0].formatted_address;
+    //                 coordsInput.value = JSON.stringify(latLang)
+    //             } else {
+    //                 window.alert("No results found");
+    //             }
+    //         })
+    //         .catch((e) => window.alert("Geocoder failed due to: " + e));
+    // }
+    //
+    // function clearMarkers() {
+    //     if (markers) {
+    //         for (let i in markers) {
+    //             markers[i].setMap(null);
+    //         }
+    //     }
+    // }
+    //
+    // google.maps.event.trigger(map, 'resize')
 }
 
 export const filteredProfile = async function (url, searchText = null) {

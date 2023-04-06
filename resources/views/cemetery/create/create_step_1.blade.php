@@ -18,9 +18,9 @@
             </div>
             <button type="button" class="delete-avatar hide">{{ __('create_cemetery.input_removePhoto') }}</button>
         </div>
-        <h3 class="name-cemetery @error('avatar') no-valid @enderror">{{ __('create_cemetery.input_profilePicture') }}</h3>
+        <h3 class="name-cemetery @error('avatar') no-valid @enderror">{{ __('create_cemetery.Cemetery title') }}</h3>
         @error('avatar')
-        <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
         @enderror
 
     </div>
@@ -54,44 +54,56 @@
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create_cemetery.input_signature') }}:</span>
             <div class="input-form  @error('subtitle')  no-valid @enderror">
-                <input type="text" class="input-text"
-                       name="subtitle"
+                <input type="text" class="input-text" name="subtitle"
                        value="{{ old('subtitle') }}"
                        title="{{ __('create_cemetery.input_signature') }}">
             </div>
             @error('subtitle')
-            <span class="is-invalid">{{ $message }}</span>
+                <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">{{ __('create_cemetery.input_location') }}:</span>
-            <div class="input-form @error('cemetery_address') no-valid @enderror" style="position:relative;">
+            <span class="input-wrap__title">{{ __('create_cemetery.Location') }}:</span>
+            <div class="input-form">
                 <input type="text" class="input-text"
+                       placeholder="{{ __('create_cemetery.Select burial place') }}"
                        id="cemetery_address"
                        name="cemetery_address"
-                       title="{{ __('create_cemetery.input_location') }}"
-                       readonly
-                       value="{{ old('cemetery_address') }}">
-                <a class="cemeteryAddressModal" data-hystmodal="#cemetery_address_location" href="#"
-                   style="position:absolute;" title="Указать на карте">
-                    <img src="{{ asset('assets/media/media/icons/location.svg') }}"
-                         alt="{{ __('create_cemetery.choose_from_map') }}" width="20">
-                </a>
-                <input type="hidden" name="cemetery_address_coords" id="cemetery_address_coords"
-                       value="{{ old('cemetery_address_coords') }}">
+                       title="{{ __('create_cemetery.Location') }}">
             </div>
-            @error('cemetery_address')
-            <span class="is-invalid">{{ $message }}</span>
-            @enderror
-            @error('cemetery_address_coords')
-            <span class="is-invalid">{{ $message }}</span>
-            @enderror
+            <input type="hidden" id="cemetery_address_coords" name="cemetery_address_coords"
+                   value="{{ old('cemetery_address_coords') }}">
         </div>
+{{--        <div class="input-wrap">--}}
+{{--            <span class="input-wrap__title">{{ __('create_cemetery.Location') }}:</span>--}}
+{{--            <div class="input-form @error('cemetery_address') no-valid @enderror" style="position:relative;">--}}
+{{--                <input type="text" class="input-text"--}}
+{{--                       id="cemetery_address"--}}
+{{--                       name="cemetery_address"--}}
+{{--                       placeholder="{{ __('create_cemetery.choose_from_map') }}"--}}
+{{--                       title="{{ __('create_cemetery.Location') }}"--}}
+{{--                       readonly--}}
+{{--                       value="{{ old('cemetery_address') }}">--}}
+{{--                <a class="cemeteryAddressModal" data-hystmodal="#cemetery_address_location" href="#"--}}
+{{--                   style="position:absolute;" title="Указать на карте">--}}
+{{--                    <img src="{{ asset('assets/media/media/icons/location.svg') }}"--}}
+{{--                         alt="{{ __('create_cemetery.choose_from_map') }}" width="20">--}}
+{{--                </a>--}}
+{{--                <input type="hidden" name="cemetery_address_coords" id="cemetery_address_coords"--}}
+{{--                       value="{{ old('cemetery_address_coords') }}">--}}
+{{--            </div>--}}
+{{--            @error('cemetery_address')--}}
+{{--                <span class="is-invalid">{{ $message }}</span>--}}
+{{--            @enderror--}}
+{{--            @error('cemetery_address_coords')--}}
+{{--                <span class="is-invalid">{{ $message }}</span>--}}
+{{--            @enderror--}}
+{{--        </div>--}}
 
     </div>
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
-            <span class="input-wrap__title">{{ __('create_cemetery.input_email') }}:</span>
+            <span class="input-wrap__title">{{ __('create_cemetery.Email') }}:</span>
             <div class="input-form @error('email') no-valid @enderror">
                 <input type="email" class="input-text input-required"
                        name="email"
@@ -99,7 +111,7 @@
                        title="{{ __('create_cemetery.input_email') }}">
             </div>
             @error('email')
-            <span class="is-invalid">{{ $message }}</span>
+                <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
@@ -111,7 +123,7 @@
                        title="{{ __('create_cemetery.input_phone') }}">
             </div>
             @error('phone')
-            <span class="is-invalid">{{ $message }}</span>
+                <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
@@ -123,7 +135,7 @@
                        title="{{ __('create_cemetery.input_schedule') }}">
             </div>
             @error('schedule')
-            <span class="is-invalid">{{ $message }}</span>
+                <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
     </div>

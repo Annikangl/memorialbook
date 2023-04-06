@@ -1,11 +1,11 @@
-import { Loader } from 'google-maps';
-import { MarkerClusterer} from "@googlemaps/markerclusterer";
+import {Loader} from 'google-maps';
+import {MarkerClusterer} from "@googlemaps/markerclusterer";
 
 const locations = [];
 
 document.querySelectorAll('.map-results__item').forEach(function (element) {
     locations.push({
-        lat: parseFloat(element.getAttribute('data-lat')) ,
+        lat: parseFloat(element.getAttribute('data-lat')),
         lng: parseFloat(element.getAttribute('data-lng'))
     })
 })
@@ -48,7 +48,7 @@ async function initMap() {
         return marker;
     });
 
-     new MarkerClusterer({map, markers});
+    new MarkerClusterer({map, markers});
 }
 
 if (document.querySelector('.map-results')) {
