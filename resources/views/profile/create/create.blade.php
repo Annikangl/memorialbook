@@ -40,6 +40,7 @@
                   action="{{ route('profile.store' )}}">
                 @csrf
 
+                {{ dump(session()->get('message')) }}
                 @include('profile.create.create_step_1')
 
                 @include('profile.create.create_step_2')

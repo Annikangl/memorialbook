@@ -15,8 +15,8 @@ class CreateNews
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public const USER_ADDED_PHOTO = 'Добавил новые фотографии';
-    public const USER_ADDED_PROFILE = 'Добавил новый профиль';
+    public const USER_ADDED_PHOTO = 'Added new photos';
+    public const USER_ADDED_PROFILE = 'Added new profile';
 
     public Human $profile;
     public ?string $action;

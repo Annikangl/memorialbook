@@ -30,11 +30,7 @@
                 </p>
                 <p>{{ $profile->description }}</p>
 
-                <ul class="interests">
-                    @foreach($profile->hobbies as $hobby)
-                        <li class="interests__item">{{ $hobby->title }}</li>
-                    @endforeach
-                </ul>
+
                 <ul class="social">
                     <li class="social__item">
                         <a href="#" class="social__link">

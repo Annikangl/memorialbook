@@ -25,7 +25,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create_profile.input_firstName') }}:</span>
             <div class="input-form @error('first_name')  no-valid @enderror">
-                <input type="text" class="input-text input-required" placeholder="Иван"
+                <input type="text" class="input-text input-required" placeholder="{{ __('create_profile.John') }}"
                        id="first_name" name="first_name" value="{{ old('first_name') }}"
                        title="{{ __('create_profile.input_firstName') }}">
             </div>
@@ -37,7 +37,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create_profile.input_lastName') }}:</span>
             <div class="input-form @error('first_name')  no-valid @enderror">
-                <input type="text" class="input-text input-required" placeholder="Иванов"
+                <input type="text" class="input-text input-required" placeholder="{{ __('create_profile.Doe') }}"
                        id="last_name" name="last_name" value="{{ old('last_name') }}"
                        title="{{ __('create_profile.input_lastName') }}">
             </div>
@@ -52,7 +52,7 @@
             <div class="select-form @error('gender') no-valid @enderror">
                 <div class="select">
                     <input type="hidden" class="select__output" id="gender_hidden" name="gender" readonly>
-                    <input type="text" class="select__output" placeholder="Выберите пол" readonly>
+                    <input type="text" class="select__output" placeholder="{{ __('create_profile.Select gender') }}" readonly>
                     <ul class="select-list">
                         @foreach($genders as $gender)
                             <li class="select-list__item" data-name="gender" data-id="{{ $gender}}">
@@ -82,7 +82,7 @@
                        title="{{ __('create_profile.input_birthDate') }}">
             </div>
             @error('date_birth')
-            <span class="is-invalid">{{ $message }}</span>
+                <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
@@ -106,35 +106,27 @@
                        title="{{ __('create_profile.input_deathDate') }}">
             </div>
             @error('date_death')
-            <span class="is-invalid">{{ $message }}</span>
+                <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">{{ __('create_profile.input_burialPlace') }}:</span>
-            <div class="input-form @error('burial_place')  no-valid @enderror" style="position:relative;">
+            <span class="input-wrap__title">{{ __('create_profile.Location') }}:</span>
+            <div class="input-form">
                 <input type="text" class="input-text"
-                       id="burial_place"
-                       name="burial_place"
-                       title="{{ __('create_profile.input_burialPlace') }}"
-                       placeholder="{{ __('create_profile.choose_from_map') }}"
-                       readonly
-                       value="{{ old('burial_place') }}">
-                <a class="burialPlaceModal" data-hystmodal="#burial_place_location" href="#" style="position:absolute;"
-                   title="{{ __('create_profile.choose_from_map') }}">
-                    <img src="{{ asset('assets/media/media/icons/location.svg') }}" alt="Указать на карте" width="20">
-                </a>
-                <input type="hidden" name="burial_place_coords" id="burial_place_coords"
-                       value="{{ old('burial_place_coords') }}">
+                       placeholder="{{ __('create_profile.Select burial place') }}"
+                       id="profile_burial_place"
+                       name="profile_burial_place"
+                       title="{{ __('create_profile.Location') }}">
             </div>
-            @error('burial_place')
-            <span class="is-invalid">{{ $message }}</span>
-            @enderror
+            <input type="hidden" id="profile_burial_coords" name="profile_burial_coords"
+                   value="{{ old('profile_burial_coords') }}">
         </div>
 
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create_profile.input_deathCause') }}:</span>
             <div class="input-form @error('death_reason')  no-valid @enderror">
                 <input type="text" class="input-text" id="death_reason" name="death_reason"
+                       placeholder="{{ __('create_profile.input_deathCause') }}"
                        value="{{ old('death_reason') }}"
                        title="{{ __('create_profile.input_deathCause') }}">
             </div>

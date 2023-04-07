@@ -233,6 +233,9 @@
 }
 
 .select-form.focus-select .select-list {
+    max-height: 163px;
+    overflow: hidden;
+    overflow-y: scroll;
     height: auto;
     border-color: #cdd1d6;
 }

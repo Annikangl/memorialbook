@@ -15,10 +15,8 @@ class ProfileService
 {
     public function create(int $userId, array $data): Human
     {
-        $cemetery = null;
-
         try {
-            return DB::transaction(function () use ($data, $userId, $cemetery) {
+            return DB::transaction(function () use ($data, $userId) {
 
                 $human = Human::make([
                     'first_name' => $data['first_name'],
@@ -28,9 +26,9 @@ class ProfileService
                     'date_birth' => $data['date_birth'],
                     'date_death' => $data['date_death'],
                     'birth_place' => $data['birth_place'],
-                    'burial_place' => $data['burial_place'],
-                    'latitude' => $data['burial_place_coords']['lat'] ?? null,
-                    'longitude' => $data['burial_place_coords']['lng'] ?? null,
+                    'burial_place' => $data['profile_burial_place'],
+                    'latitude' => $data['profile_burial_coords']['lat'] ?? null,
+                    'longitude' => $data['profile_burial_coords']['lng'] ?? null,
                     'death_reason' => $data['death_reason'],
                     'status' => Profile::STATUS_ACTIVE,
                     'access' => $data['access']
@@ -42,17 +40,6 @@ class ProfileService
                 $human->father()->associate($data['mother_id']['id'] ?? null);
                 $human->father()->associate($data['spouse_id']['id'] ?? null);
                 $human->father()->associate($data['religious_id']['id'] ?? null);
-
-                if ($data['burial_place']) {
-                    $cemetery = Cemetery::createFromProfile(
-                        \Auth::id(),
-                        $data['burial_place'],
-                        $data['burial_place_coords'],
-                        $data['burial_place'],
-                    );
-                }
-
-                $human->cemeteries()->associate($cemetery);
 
                 $human->save();
 

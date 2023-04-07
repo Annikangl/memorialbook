@@ -64,20 +64,27 @@ class HumanController extends Controller
 
     public function show(string $slug): Factory|View|Application
     {
-        $profile = Human::query()->with(['hobbies', 'religions', 'media' => function ($query) {
+        $profile = Human::query()->with(['religions', 'media' => function ($query) {
                 $query->whereIn('collection_name', ['avatars', 'gallery']);
             }])
             ->where('slug', $slug)
             ->firstOrFail();
 
-        $relatives = Human::withRelatives()->get();
+//        $relatives = Human::withRelatives()->get();
+
+        $relatives = Human::query()
+            ->where('father_id', $profile->id)
+            ->orWhere('mother_id', $profile->id)
+            ->orWhere('spouse_id', $profile->id)
+            ->orWhere('children_id', $profile->id)
+            ->get();
 
         return view('profile.show', compact('profile', 'relatives'));
     }
 
     public function create(): Factory|View|Application
     {
-        $profiles = $this->getProfiles();
+        $profiles = Human::query()->where('user_id', auth()->id())->latest()->get();
 
         $religions = Religion::query()->orderBy('id')->get();
 
@@ -99,7 +106,7 @@ class HumanController extends Controller
     {
         try {
             $profile = $this->service->create(\Auth::id(), $request->validated());
-            event(new CreateNews($profile, CreateNews::USER_ADDED_PROFILE));
+//        TODO    event(new CreateNews($profile, CreateNews::USER_ADDED_PROFILE));
         } catch (\DomainException $exception) {
             return back()->with([
                 'message' => $exception->getMessage(),

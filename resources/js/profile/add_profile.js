@@ -2,21 +2,29 @@ import '../libs/mask'
 // import {Loader} from "google-maps";
 import {loadPhoto, searchLocation} from "../functions";
 
-//Modal
-// let cemeteryAddressModal = function () {
-//     const searchInput = document.querySelector('#cemetery_address');
-//     const coordsInput = document.querySelector('#cemetery_address_coords');
-//
-//     const modal = new HystModal({
-//         linkAttributeName: "data-hystmodal",
-//         beforeOpen: function (modal) {
-//             searchLocation(searchInput, coordsInput);
-//         },
-//         afterClose: function (modal) {
-//             document.querySelector('#cemetery_address').value = searchInput.value;
-//         },
-//     });
-// }
+
+
+if (document.querySelector('#profile_burial_place')) {
+    let autocomplete;
+
+    autocomplete = new google.maps.places.Autocomplete(document.querySelector('#profile_burial_place'), {
+        fields: ["address_components", "geometry", "icon", "name"],
+        strictBounds: false,
+        types: ["establishment"],
+    });
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        let place = autocomplete.getPlace();
+
+        const latLang = {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+        };
+
+        document.getElementById('profile_burial_coords').value = JSON.stringify(latLang);
+    })
+
+}
 
 if (document.querySelector('#cemetery_address')) {
     let autocomplete;
@@ -39,27 +47,6 @@ if (document.querySelector('#cemetery_address')) {
     })
 
 }
-
-// let burialLocationModal = function () {
-//     const searchInput = document.querySelector('#burial_place_search');
-//     const coordsInput = document.querySelector('#burial_place_coords');
-//
-//     const modal = new HystModal({
-//         linkAttributeName: "data-hystmodal",
-//         beforeOpen: function (modal) {
-//             searchLocation(searchInput, coordsInput).then(r => console.log('Init map'));
-//         },
-//         afterClose: function (modal) {
-//             document.querySelector('#burial_place').value = searchInput.value;
-//         },
-//     });
-// }
-//
-// if (document.querySelector('#burial_place')) {
-//     document.querySelector('.burialPlaceModal').addEventListener('click', burialLocationModal)
-//     const loader = new Loader(app.globalConfig.gmapsApikey);
-//     const google =  loader.load();
-// }
 
 
 //CHANGE USER AVATAR

@@ -9,6 +9,7 @@ use App\Models\Profile\Hobby;
 use App\Models\Profile\Religion;
 use App\Models\User\User;
 use Carbon\Carbon;
+use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -28,41 +29,48 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * App\Models\Human
  * @package App\Models\Profile\Human
  *
- * @property string|null $gender
- * @property string|null $birth_place
- * @property string|null $burial_place
- * @property string|null $death_certificate
- * @property string|null $moderators_comment
- * @property string|null $access
+ * @property int $id
+ * @property int $user_id
  * @property int|null $father_id
  * @property int|null $mother_id
- * @property int|null $child_id
+ * @property int|null $children_id
  * @property int|null $spouse_id
- * @property string|null $published_at
+ * @property int|null $religion_id
+ * @property int|null $cemetery_id
+ * @property int|null $family_burial_id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $slug
+ * @property string $description
+ * @property string|null $gender
+ * @property string|null $date_birth
+ * @property string|null $date_death
+ * @property string|null $birth_place
+ * @property string|null $burial_place
+ * @property string|null $death_reason
+ * @property float|null $latitude
+ * @property float|null $longitude
+ * @property string $status
+ * @property string|null $moderators_comment
+ * @property string|null $access
+ * @property Carbon|null $published_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string|null $life_expectancy
  *
  * @method static Builder|Human filtered()
  * @method static Builder|Human query()
- * @property float|null $latitude
- * @property float|null $longitude
+
  * @property-read Human|null $child
  * @property-read Human|null $father
- * @property-read int|null $galleries_count
- * @property-read Collection|\App\Models\Profile\Hobby[] $hobbies
- * @property-read int|null $hobbies_count
  * @property-read Human|null $mother
- * @property-read Collection|\App\Models\Profile\Religion[] $religions
- * @property-read int|null $religions_count
  * @property-read Human|null $spouse
  * @method static Builder|Human active()
  * @method static Builder|Human byUser(int $userId)
  * @method static Builder|Collection bySearch(string $searchText)
- * @method static Builder|Human withRelatives()
  * @method static Builder|Human pets()
- * @method static Builder|Human findSimilarSlugs(string $attribute, array $config, string $slug)
- * @method static Builder|Human newModelQuery()
- * @method static Builder|Human newQuery()
- * @mixin \Eloquent
+
+ * @mixin Eloquent
  */
 class Human extends Profile implements HasMedia
 {
@@ -84,6 +92,8 @@ class Human extends Profile implements HasMedia
         'user_id',
         'mother_id',
         'father_id',
+        'religion_id',
+        'family_burial_id',
         'first_name',
         'last_name',
         'description',
@@ -95,7 +105,6 @@ class Human extends Profile implements HasMedia
         'latitude',
         'longitude',
         'death_reason',
-        'religion_id',
         'status',
         'moderators_comment',
         'access',
@@ -108,7 +117,7 @@ class Human extends Profile implements HasMedia
     public static function updateChildForParent(int $parentId, int $childId): void
     {
         self::where('id', $parentId)
-            ->update(['child_id' => $childId]);
+            ->update(['children_id' => $childId]);
     }
 
     public static function updateSpouse(int $parentId, int $currentId): void
@@ -132,7 +141,7 @@ class Human extends Profile implements HasMedia
 
     public function scopeBySearch(Builder $query, string $searchText): Builder
     {
-        return $query->select(['id','first_name', 'last_name', 'slug', 'date_birth', 'date_death'])->where(
+        return $query->select(['id', 'first_name', 'last_name', 'slug', 'date_birth', 'date_death'])->where(
             \DB::raw('CONCAT_WS(" ", humans.first_name, " ", humans.last_name)'),
             'LIKE', "%$searchText%");
     }
@@ -150,14 +159,14 @@ class Human extends Profile implements HasMedia
 
     public function scopeByUser(Builder $query, int $userId): Builder
     {
-        return $query->select(['id', 'first_name', 'last_name', 'slug', 'avatar', 'date_birth', 'date_death'])
+        return $query->select(['id', 'first_name', 'last_name', 'slug', 'date_birth', 'date_death'])
             ->where('user_id', $userId);
     }
 
     public function scopeWithRelatives(Builder $query): Builder
     {
         return $query->has('father')->orHas('mother')
-            ->orHas('child')->orHas('spouse');
+            ->orHas('children')->orHas('spouse');
     }
 
     public function scopePets(Builder $query): Builder
@@ -182,6 +191,7 @@ class Human extends Profile implements HasMedia
             ->useFallbackPath(asset('assets/media/media/empty_profile_avatar.png'));
 
         $this->addMediaCollection('gallery');
+
         $this->addMediaCollection('attached_document')
             ->singleFile();
     }
@@ -241,7 +251,7 @@ class Human extends Profile implements HasMedia
         return self::belongsTo(static::class);
     }
 
-    public function child(): BelongsTo
+    public function children(): BelongsTo
     {
         return self::belongsTo(static::class);
     }
