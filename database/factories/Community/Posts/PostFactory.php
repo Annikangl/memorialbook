@@ -20,7 +20,7 @@ class PostFactory extends Factory
     {
         return [
             'author_id' => User::query()->inRandomOrder()->value('id'),
-            'title' => $this->faker->words(2, true),
+            'title' => $this->faker->words(10, true),
             'description' => $this->faker->realText(),
             'published_at' => now()
          ];

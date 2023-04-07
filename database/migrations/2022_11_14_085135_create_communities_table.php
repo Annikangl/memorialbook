@@ -48,52 +48,25 @@ return new class extends Migration {
         });
 
 
-
-        Schema::create('community_galleries', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Community::class)
-                ->constrained()
-                ->cascadeOnDelete();
-
-            $table->string('item');
-            $table->string('extension');
-        });
-
-        Schema::create('community_documents', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Community::class)
-                ->constrained()
-                ->cascadeOnDelete();
-
-            $table->string('item');
-        });
-
         Schema::create('community_posts', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('author_id')
                 ->references('id')->on('users')
                 ->cascadeOnDelete();
+
             $table->foreignIdFor(Community::class)
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->string('title')->nullable();
-            $table->text('description')->nullable();
+            $table->string('title');
+            $table->text('description');
             $table->boolean('pinned')->default(0);
             $table->integer('reposts')->default(0);
 
-            $table->timestamps();
             $table->timestamp('published_at')->nullable();
-        });
+            $table->timestamps();
 
-        Schema::create('community_post_galleries', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('post_id')
-                ->references('id')->on('community_posts')
-                ->cascadeOnDelete();
-
-            $table->string('item');
-            $table->string('extension');
         });
 
 
@@ -119,13 +92,9 @@ return new class extends Migration {
         if (app()->isLocal()) {
 
 
-            Schema::dropIfExists('community_galleries');
-            Schema::dropIfExists('community_post_galleries');
-
             Schema::dropIfExists('community_post_tags');
             Schema::dropIfExists('community_tags');
             Schema::dropIfExists('community_posts');
-            Schema::dropIfExists('community_documents');
 //            Schema::table('communities', function (Blueprint $table) {
 //                $table->dropForeign('communities_owner_id_foreign');
 //            });

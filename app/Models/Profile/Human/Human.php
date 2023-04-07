@@ -71,17 +71,21 @@ class Human extends Profile implements HasMedia
     public const MALE = 'male';
     public const FEMALE = 'female';
 
-    public const AVATAR_PATH = 'uploads/profiles/avatar';
-    public const DOCUMENTS_PATH = 'uploads/profiles/document';
-    public const GALLERY_PATH = 'uploads/profiles/gallery';
+    public const ACCESS_PUBLIC = 'public';
+    public const ACCESS_PRIVATE = 'private';
+    public const ACCESS_AVAILABLE = 'available';
+
 
     protected $fillable = [
         'cemetery_id',
         'user_id',
+        'spouse_id',
+        'child_id',
+        'user_id',
+        'mother_id',
+        'father_id',
         'first_name',
         'last_name',
-        'patronymic',
-        'avatar',
         'description',
         'gender',
         'date_birth',
@@ -91,20 +95,11 @@ class Human extends Profile implements HasMedia
         'latitude',
         'longitude',
         'death_reason',
-        'death_certificate',
-        'religious_view_id',
-        'hobby_id',
+        'religion_id',
         'status',
         'moderators_comment',
         'access',
-        'spouse_id',
-        'child_id',
-        'user_id',
-        'mother_id',
-        'father_id',
         'published_at',
-        'religious_id',
-        'profile_images'
     ];
 
     protected $appends = ['fullName', 'yearBirth', 'yearDeath'];

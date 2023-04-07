@@ -72,13 +72,13 @@ class Cemetery extends Model implements HasMedia
 {
     use HasFactory, Sluggable, InteractsWithMedia;
 
-    public const STATUS_DRAFT = 'Черновик';
-    public const STATUS_MODERATION = 'На модерации';
-    public const STATUS_ACTIVE = 'Опубликован';
+    public const STATUS_DRAFT = 'draft';
+    public const STATUS_MODERATION = 'moderation';
+    public const STATUS_ACTIVE = 'active';
     public const STATUS_CLOSED = 'Закрыт';
 
-    public const ACCESS_OPEN = 'Открытый';
-    public const ACCESS_DENIED = 'Закрытый';
+    public const ACCESS_PUBLIC = 'public';
+    public const ACCESS_PRIVATE = 'private';
 
     protected $fillable = [
         'user_id',
@@ -91,19 +91,18 @@ class Cemetery extends Model implements HasMedia
         'address',
         'latitude',
         'longitude',
-        'avatar',
-        'banner',
         'description',
         'status',
         'moderators_comment',
-        'access'
+        'access',
+        'published_at'
     ];
 
     public static function getAccessList(): array
     {
         return [
-            self::ACCESS_OPEN,
-            self::ACCESS_DENIED
+            self::ACCESS_PUBLIC,
+            self::ACCESS_PRIVATE
         ];
     }
 
@@ -126,7 +125,7 @@ class Cemetery extends Model implements HasMedia
             'longitude' => (double) $coords['lng'],
             'address' => $address,
             'status' => self::STATUS_DRAFT,
-            'access' => self::ACCESS_DENIED,
+            'access' => self::ACCESS_PRIVATE,
         ]);
     }
 

@@ -12,11 +12,14 @@ return new class extends Migration
     {
         Schema::create('cemeteries', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->string('slug')->nullable()->index();
 
             $table->string('title');
             $table->string('title_en')->nullable();
-            $table->string('slug')->nullable()->index();
             $table->string('subtitle')->nullable();
             $table->string('email')->nullable();
             $table->string('phone',20)->nullable();
@@ -29,8 +32,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('status', 15);
             $table->string('moderators_comment')->nullable();
-            $table->string('access');
+            $table->string('access', 50);
 
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }

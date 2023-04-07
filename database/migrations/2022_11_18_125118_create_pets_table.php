@@ -14,13 +14,14 @@ return new class extends Migration
     {
         Schema::create('pets', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)
+                ->constrained()
+                ->cascadeOnDelete();
+
+            $table->string('slug')->nullable()->index();
 
             $table->string('name');
-            $table->string('slug')->nullable()->index();
             $table->string('breed');
-            $table->string('avatar')->nullable();
-            $table->string('banner')->nullable();
             $table->text('description')->nullable();
             $table->date('date_birth')->nullable();
             $table->date('date_death')->nullable();
@@ -28,23 +29,15 @@ return new class extends Migration
             $table->string('burial_place')->nullable();
             $table->string('death_reason')->nullable();
 
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
 
-//        Schema::create('pet_galleries', function(Blueprint $table) {
-//           $table->id();
-//           $table->foreignIdFor(Pet::class)->constrained()->cascadeOnDelete();
-//
-//           $table->string('item');
-//           $table->string('item_sm')->nullable();
-//           $table->string('extension', 4);
-//        });
     }
 
     public function down(): void
     {
         if (app()->isLocal()) {
-            Schema::dropIfExists('pet_galleries');
             Schema::dropIfExists('pets');
         }
     }

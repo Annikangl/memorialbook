@@ -29,15 +29,10 @@ class DatabaseSeeder extends Seeder
         Religion::factory(10)->create();
         Hobby::factory(10)->create();
 
-        $this->call(DeathReasonSeeder::class);
-
         Cemetery::factory(30)
             ->create();
 
         $humans = Human::factory(30)
-            ->has(Cemetery::factory()->count(3))
-            ->has(Hobby::factory()->count(3))
-            ->has(Religion::factory()->count(3))
             ->create();
 
         foreach ($humans as $human) {
@@ -92,14 +87,12 @@ class DatabaseSeeder extends Seeder
             'username' => 'Ivanov Ivan',
             'email' => 'test@gmail.com',
             'password' => \Hash::make('test1234'),
-            'avatar' => User::AVATAR_PATH . '/empty_user_avatar.webp',
         ]);
 
         User::create([
             'username' => 'Petrov Petr',
             'email' => 'test2@gmail.com',
             'password' => \Hash::make('test1234'),
-            'avatar' => User::AVATAR_PATH . '/empty_user_avatar.webp',
         ]);
     }
 }

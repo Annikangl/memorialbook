@@ -25,7 +25,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        if (!app()->isProduction()) {
+        if (app()->isLocal()) {
             Schema::dropIfExists('available_human_user');
         }
     }

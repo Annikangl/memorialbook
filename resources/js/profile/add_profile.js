@@ -40,26 +40,26 @@ if (document.querySelector('#cemetery_address')) {
 
 }
 
-let burialLocationModal = function () {
-    const searchInput = document.querySelector('#burial_place_search');
-    const coordsInput = document.querySelector('#burial_place_coords');
-
-    const modal = new HystModal({
-        linkAttributeName: "data-hystmodal",
-        beforeOpen: function (modal) {
-            searchLocation(searchInput, coordsInput).then(r => console.log('Init map'));
-        },
-        afterClose: function (modal) {
-            document.querySelector('#burial_place').value = searchInput.value;
-        },
-    });
-}
-
-if (document.querySelector('#burial_place')) {
-    document.querySelector('.burialPlaceModal').addEventListener('click', burialLocationModal)
-    const loader = new Loader(app.globalConfig.gmapsApikey);
-    const google =  loader.load();
-}
+// let burialLocationModal = function () {
+//     const searchInput = document.querySelector('#burial_place_search');
+//     const coordsInput = document.querySelector('#burial_place_coords');
+//
+//     const modal = new HystModal({
+//         linkAttributeName: "data-hystmodal",
+//         beforeOpen: function (modal) {
+//             searchLocation(searchInput, coordsInput).then(r => console.log('Init map'));
+//         },
+//         afterClose: function (modal) {
+//             document.querySelector('#burial_place').value = searchInput.value;
+//         },
+//     });
+// }
+//
+// if (document.querySelector('#burial_place')) {
+//     document.querySelector('.burialPlaceModal').addEventListener('click', burialLocationModal)
+//     const loader = new Loader(app.globalConfig.gmapsApikey);
+//     const google =  loader.load();
+// }
 
 
 //CHANGE USER AVATAR

@@ -35,10 +35,10 @@ class Profile extends Model implements HasMedia
 {
     use InteractsWithMedia;
 
-    public const STATUS_DRAFT = 'Черновик';
-    public const STATUS_MODERATION = 'На модерации';
-    public const STATUS_ACTIVE = 'Опубликован';
-    public const STATUS_CLOSED = 'Отклонен';
+    public const STATUS_DRAFT = 'draft';
+    public const STATUS_MODERATION = 'moderation';
+    public const STATUS_ACTIVE = 'active';
+    public const STATUS_CLOSED = 'closed';
 
     public const EMPTY_AVATAR_PATH = 'uploads/profiles/avatar/empty_profile_avatar.png';
     public const AVATAR_PATH = 'uploads/profiles/avatar';

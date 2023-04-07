@@ -27,11 +27,12 @@ class Hobby extends Model
 {
     use HasFactory, Sluggable;
 
-    protected $table = 'hobbies';
-
     public $timestamps = false;
 
-    protected $fillable = ['title','slug',];
+    protected $fillable = [
+        'title',
+        'slug'
+    ];
 
     public function sluggable(): array
     {
