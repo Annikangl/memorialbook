@@ -34,16 +34,14 @@ class PetController extends Controller
 
     public function create(): Factory|View|Application
     {
-        $deathReasons = DeathReason::all();
-
-        return view('pet.create.create', compact('deathReasons'));
+        return view('pet.create.create');
     }
 
     public function store(CreateRequest $request): RedirectResponse
     {
         try {
             $pet = $this->service->createPet(\Auth::id(),$request->validated());
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             return redirect()->back()->with('message', $exception->getMessage());
         }
 

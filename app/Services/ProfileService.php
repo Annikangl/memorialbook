@@ -10,6 +10,8 @@ use App\Models\Profile\Pet\Pet;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class ProfileService
 {
@@ -26,9 +28,9 @@ class ProfileService
                     'date_birth' => $data['date_birth'],
                     'date_death' => $data['date_death'],
                     'birth_place' => $data['birth_place'],
-                    'burial_place' => $data['profile_burial_place'],
-                    'latitude' => $data['profile_burial_coords']['lat'] ?? null,
-                    'longitude' => $data['profile_burial_coords']['lng'] ?? null,
+                    'burial_place' => $data['burial_place'],
+                    'latitude' => $data['burial_coords']['lat'] ?? null,
+                    'longitude' => $data['burial_coords']['lng'] ?? null,
                     'death_reason' => $data['death_reason'],
                     'status' => Profile::STATUS_ACTIVE,
                     'access' => $data['access']
@@ -77,6 +79,10 @@ class ProfileService
         }
     }
 
+    /**
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
     public function createPet(int $ownerId, array $data): Pet|Builder
     {
         $pet = Pet::query()->make([

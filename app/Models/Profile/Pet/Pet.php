@@ -24,7 +24,11 @@ class Pet extends Profile
 {
     use HasFactory, Sluggable;
 
-    protected $fillable = ['name', 'breed', 'avatar', 'banner', 'description', 'date_birth',
+    protected $fillable = [
+        'name',
+        'breed',
+        'description',
+        'date_birth',
         'date_death',
         'birth_place',
         'burial_place',
@@ -33,13 +37,13 @@ class Pet extends Profile
 
     public function scopeByUser(Builder $query, int $userId): Builder
     {
-        return $query->select(['id', 'name', 'slug', 'avatar', 'date_birth', 'date_death'])
+        return $query->select(['id', 'name', 'slug', 'date_birth', 'date_death'])
             ->where('user_id', $userId);
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     public function sluggable(): array

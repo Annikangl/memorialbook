@@ -18,6 +18,7 @@ return [
     'Select gender' => 'Select gender',
     'John' => 'John',
     'Doe' => 'Doe',
+    'sheepdog' => 'Sheepdog',
     'Location' => 'Location',
     'Select burial place' => 'Select burial place',
     'input_deathDate' => 'Death date',

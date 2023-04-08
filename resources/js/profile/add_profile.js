@@ -4,10 +4,10 @@ import {loadPhoto, searchLocation} from "../functions";
 
 
 
-if (document.querySelector('#profile_burial_place')) {
+if (document.querySelector('#burial_place')) {
     let autocomplete;
 
-    autocomplete = new google.maps.places.Autocomplete(document.querySelector('#profile_burial_place'), {
+    autocomplete = new google.maps.places.Autocomplete(document.querySelector('#burial_place'), {
         fields: ["address_components", "geometry", "icon", "name"],
         strictBounds: false,
         types: ["establishment"],
@@ -21,7 +21,7 @@ if (document.querySelector('#profile_burial_place')) {
             lng: place.geometry.location.lng()
         };
 
-        document.getElementById('profile_burial_coords').value = JSON.stringify(latLang);
+        document.getElementById('burial_coords').value = JSON.stringify(latLang);
     })
 
 }

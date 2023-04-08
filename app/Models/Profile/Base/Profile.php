@@ -7,6 +7,7 @@ namespace App\Models\Profile\Base;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -39,11 +40,6 @@ class Profile extends Model implements HasMedia
     public const STATUS_MODERATION = 'moderation';
     public const STATUS_ACTIVE = 'active';
     public const STATUS_CLOSED = 'closed';
-
-    public const EMPTY_AVATAR_PATH = 'uploads/profiles/avatar/empty_profile_avatar.png';
-    public const AVATAR_PATH = 'uploads/profiles/avatar';
-    public const DOCUMENTS_PATH = 'uploads/profiles/document';
-    public const GALLERY_PATH = 'uploads/profiles/gallery';
 
 
     public static function statusList(): array
@@ -127,7 +123,7 @@ class Profile extends Model implements HasMedia
     }
 
     /**
-     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     * @throws InvalidManipulation
      */
     public function registerMediaConversions(Media $media = null): void
     {

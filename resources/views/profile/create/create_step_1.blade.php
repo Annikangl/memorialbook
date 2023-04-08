@@ -114,12 +114,12 @@
             <div class="input-form">
                 <input type="text" class="input-text"
                        placeholder="{{ __('create_profile.Select burial place') }}"
-                       id="profile_burial_place"
+                       id="burial_place"
                        name="profile_burial_place"
                        title="{{ __('create_profile.Location') }}">
             </div>
-            <input type="hidden" id="profile_burial_coords" name="profile_burial_coords"
-                   value="{{ old('profile_burial_coords') }}">
+            <input type="hidden" id="burial_coords" name="burial_coords"
+                   value="{{ old('burial_coords') }}">
         </div>
 
         <div class="input-wrap">

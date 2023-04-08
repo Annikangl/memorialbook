@@ -86,19 +86,6 @@ class Cemetery extends Model implements HasMedia
         return $this->status === self::STATUS_CLOSED;
     }
 
-//    public static function createFromProfile(int $userId, string $title, array $coords, string $address): self
-//    {
-//        return self::create([
-//            'user_id' => $userId,
-//            'title' => $title,
-//            'latitude' => (double) $coords['lat'],
-//            'longitude' => (double) $coords['lng'],
-//            'address' => $address,
-//            'status' => self::STATUS_DRAFT,
-//            'access' => self::ACCESS_PRIVATE,
-//        ]);
-//    }
-
     public function scopeFiltered(Builder $query): Builder
     {
         return $query->when($name = request('place_name'), function (Builder $q) use ($name) {

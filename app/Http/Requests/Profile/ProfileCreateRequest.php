@@ -18,7 +18,7 @@ use Illuminate\Validation\Rules\File;
  * @property string $gender
  * @property string $date_birth
  * @property string $date_death
- * @property string $profile_burial_coords
+ * @property string $burial_coords
  * @property string $father_id
  * @property string $spouse_id
  * @property string $mother_id
@@ -43,13 +43,7 @@ class ProfileCreateRequest extends FormRequest
     {
         $this->merge([
             'gender' => json_decode($this->gender, true)['value'] ?? '',
-            'date_birth' => $this->date_birth ?
-                Carbon::parse($this?->date_birth)->format('Y-m-d')
-                : $this?->date_birth,
-            'date_death' => $this->date_death ?
-                Carbon::parse($this->date_death)->format('Y-m-d')
-                : $this->date_death,
-            'profile_burial_coords' => json_decode($this->profile_burial_coords, true),
+            'burial_coords' => json_decode($this->burial_coords, true),
             'father_id' => json_decode($this->father_id, true),
             'spouse_id' => json_decode($this->spouse_id, true),
             'mother_id' => json_decode($this->mother_id, true),
@@ -65,7 +59,7 @@ class ProfileCreateRequest extends FormRequest
             'gender' => ['required', 'string', Rule::in(array_values(Human::genderList()))],
             'date_birth' => ['required', 'date', 'min:3'],
             'birth_place' => ['nullable', 'string', 'min:3'],
-            'profile_burial_place' => ['nullable', 'string', 'min:3'],
+            'burial_place' => ['nullable', 'string', 'min:3'],
             'death_reason' => ['nullable', 'string'],
             'date_death' => ['required', 'date'],
             'father_id' => ['sometimes', 'nullable', 'array'],
@@ -76,7 +70,7 @@ class ProfileCreateRequest extends FormRequest
             'religious_id' => ['sometimes', 'nullable'],
             'access' => ['required'],
 
-            'profile_burial_coords' => [
+            'burial_coords' => [
                 Rule::requiredIf(fn() => (bool)$this->get('profile_burial_place')),
                 'nullable',
                 'array'

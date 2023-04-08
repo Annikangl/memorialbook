@@ -8,6 +8,9 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
+/**
+ * @property string $burial_coords
+ */
 class CreateRequest extends FormRequest
 {
     public function authorize(): bool
@@ -23,6 +26,7 @@ class CreateRequest extends FormRequest
         ]);
     }
 
+
     public function rules(): array
     {
         return [
@@ -30,10 +34,10 @@ class CreateRequest extends FormRequest
             'breed' => ['required', 'string'],
             'date_birth' => ['required', 'date'],
             'date_death' => ['required', 'date'],
-            'birth_place' => ['sometimes', 'nullable', 'string', 'min:3'],
-            'burial_place' => ['sometimes', 'nullable', 'string', 'min:3'],
-            'death_reason' => ['required', 'exists:death_reasons,title'],
-            'description' => ['sometimes', 'nullable', 'string', 'min:20'],
+            'birth_place' => [ 'nullable', 'string'],
+            'burial_place' => ['nullable', 'string'],
+            'death_reason' => ['required', 'string'],
+            'description' => ['nullable', 'string'],
 
             'avatar' => [
                 'sometimes',
