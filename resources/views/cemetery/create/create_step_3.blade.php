@@ -18,14 +18,14 @@
         <ul class="settings-public grid-col-2">
             <li class="settings-public__item">
                 <label class="settings-wrap">
-                    <input type="radio" class="settings-wrap__radio"  name="settings-public" value="Открытый" checked/>
+                    <input type="radio" class="settings-wrap__radio"  name="settings-public" value="public" checked/>
                     <span class="settings-wrap__title">{{ __('create_cemetery.input_public') }}</span>
                     <span class="settings-wrap__desc">{{ __('create_cemetery.input_public_subtitle') }}</span>
                 </label>
             </li>
             <li class="settings-public__item">
                 <label class="settings-wrap">
-                    <input type="radio" class="settings-wrap__radio" name="settings-public" value="Закрытый"/>
+                    <input type="radio" class="settings-wrap__radio" name="settings-public" value="private"/>
                     <span class="settings-wrap__title">{{ __('create_cemetery.input_private') }}</span>
                     <span class="settings-wrap__desc">{{ __('create_cemetery.input_private_subtitle') }}</span>
                 </label>

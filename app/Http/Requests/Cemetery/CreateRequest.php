@@ -55,7 +55,7 @@ class CreateRequest extends FormRequest
                 'sometimes',
                 File::image()->min(5),
             ],
-            'input-banner' => [
+            'cemetery_banner' => [
                 'sometimes',
                 File::image()->max(10 * 1024),
             ],

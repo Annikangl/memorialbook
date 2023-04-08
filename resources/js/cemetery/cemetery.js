@@ -165,6 +165,8 @@ const cemeteryPageMap = async function initMap() {
         center: cemeteryCoords,
     });
 
+    console.log(contactMap)
+
     const contactMarker = new google.maps.Marker({
         position: cemeteryCoords,
         map: contactMap,

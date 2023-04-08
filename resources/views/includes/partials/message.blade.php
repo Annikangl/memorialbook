@@ -1,9 +1,5 @@
-
-{{--    {{ dump(Session::get('message')) }}--}}
-    @if(Session::has('message'))
-        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">
-            {{ Session::get('message') }}
-        </p>
-    @endif
-
-
+@if(session()->has('message'))
+    <div class="alert alert-danger" role="alert">
+        {{ session()->get('message') }}
+    </div>
+@endif

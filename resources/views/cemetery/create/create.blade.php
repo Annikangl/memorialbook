@@ -50,7 +50,9 @@
                   action="{{ route('cemetery.store') }}"
                   enctype="multipart/form-data">
                 @csrf
-{{--                {{ dump(session()->get('message')) }}--}}
+
+                @include('includes.partials.message')
+
                 @include('cemetery.create.create_step_1')
                 @include('cemetery.create.create_step_2')
                 @include('cemetery.create.create_step_3')

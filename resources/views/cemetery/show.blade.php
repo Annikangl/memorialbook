@@ -103,7 +103,10 @@
                             @endforelse
                         </ul>
 
-                        <div class="famous-persons__map"></div>
+                        @if($famous->isNotEmpty())
+                            <div class="famous-persons__map"></div>
+                        @endif
+
                     </div>
                 </div>
             </div>

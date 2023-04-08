@@ -14,11 +14,9 @@ use Illuminate\View\View;
 
 class CemeteryController extends Controller
 {
-    private CemeteryService $service;
 
-    public function __construct(CemeteryService $service)
+    public function __construct(private CemeteryService $service)
     {
-        $this->service = $service;
     }
 
     public function map(SearchRequest $request): Factory|View|Application
@@ -40,8 +38,9 @@ class CemeteryController extends Controller
     public function show(string $slug): Factory|\Illuminate\Contracts\View\View|Application
     {
         $cemetery = Cemetery::query()->where('slug', $slug)
-            ->with(['humans','media','socials'])
+            ->with(['humans','media'])
             ->firstOrFail();
+
 
         $memorials = $cemetery->humans()->paginate(3);
         $famous = $cemetery->humans()->limit(4)->get();
@@ -66,7 +65,7 @@ class CemeteryController extends Controller
         try {
             $cemetery = $this->service->create($request->validated(), auth()->user()->id);
         } catch (\DomainException $exception) {
-            return back()->with('message', $exception->getMessage());
+            return back()->with('message', $exception->getMessage())->withInput();
         }
 
         return redirect()->route('cemetery.show', $cemetery->slug);

@@ -40,6 +40,8 @@
 
                 @csrf
 
+                @include('includes.partials.message')
+
                 @include('pet.create.create_step_1')
                 @include('pet.create.create_step_2')
                 @include('pet.create.create_step_3')

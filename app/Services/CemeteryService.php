@@ -35,8 +35,8 @@ class CemeteryService
                     $cemetery->addMedia($data['avatar'])->toMediaCollection('avatars');
                 }
 
-                if (isset($data['input-banner'])) {
-                    $cemetery->addMedia($data['input-banner'])->toMediaCollection('banners');
+                if (isset($data['cemetery_banner'])) {
+                    $cemetery->addMedia($data['cemetery_banner'])->toMediaCollection('banners');
                 }
 
                if (isset($data['cemetery_files'])) {
