@@ -64,9 +64,7 @@ class HumanController extends Controller
 
     public function show(string $slug): Factory|View|Application
     {
-        $profile = Human::query()->with(['religions', 'media' => function ($query) {
-                $query->whereIn('collection_name', ['avatars', 'gallery']);
-            }])
+        $profile = Human::query()->with(['religion'])
             ->where('slug', $slug)
             ->firstOrFail();
 
@@ -105,13 +103,16 @@ class HumanController extends Controller
     public function store(ProfileCreateRequest $request): RedirectResponse
     {
         try {
-            $profile = $this->service->create(\Auth::id(), $request->validated());
+            $isDraft = (bool) $request->input('draft');
+            $profile = $this->service->create(\Auth::id(), $request->validated(), $isDraft);
+
 //        TODO    event(new CreateNews($profile, CreateNews::USER_ADDED_PROFILE));
+
         } catch (\DomainException $exception) {
             return back()->with([
                 'message' => $exception->getMessage(),
                 'alert-class' => 'alert-danger'
-            ]);
+            ])->withInput();
         }
 
         return redirect()->route('profile.show', $profile->slug);

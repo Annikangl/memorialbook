@@ -115,7 +115,7 @@
                 <input type="text" class="input-text"
                        placeholder="{{ __('create_profile.Select burial place') }}"
                        id="burial_place"
-                       name="profile_burial_place"
+                       name="burial_place"
                        title="{{ __('create_profile.Location') }}">
             </div>
             <input type="hidden" id="burial_coords" name="burial_coords"

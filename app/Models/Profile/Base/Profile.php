@@ -40,16 +40,23 @@ class Profile extends Model implements HasMedia
     public const STATUS_MODERATION = 'moderation';
     public const STATUS_ACTIVE = 'active';
     public const STATUS_CLOSED = 'closed';
+    public const STATUS_REJECTED = 'rejected';
 
 
     public static function statusList(): array
     {
         return [
-            'Опубликован' => self::STATUS_ACTIVE,
-            'Черновик' => self::STATUS_DRAFT,
-            'Отклонен' => self::STATUS_CLOSED,
-            'На модерации' => self::STATUS_MODERATION
+            'active' => self::STATUS_ACTIVE,
+            'draft' => self::STATUS_DRAFT,
+            'rejected' => self::STATUS_REJECTED,
+            'moderation' => self::STATUS_MODERATION,
+            'closed' => self::STATUS_CLOSED
         ];
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === self::STATUS_ACTIVE;
     }
 
     public function isDraft(): bool
@@ -62,9 +69,15 @@ class Profile extends Model implements HasMedia
         return $this->status === self::STATUS_CLOSED;
     }
 
+    public function isRejected(): bool
+    {
+        return $this->status === self::STATUS_REJECTED;
+    }
+
+
     public function getFullNameAttribute(): string
     {
-        return  "{$this->first_name} {$this->last_name}";
+        return "{$this->first_name} {$this->last_name}";
     }
 
     public function getYearBirthAttribute(): int
@@ -109,16 +122,16 @@ class Profile extends Model implements HasMedia
     protected function dateBirth(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('d.m.Y'),
-            set: fn ($value) => Carbon::parse($value)->format('Y-m-d'),
+            get: fn($value) => Carbon::parse($value)->format('d.m.Y'),
+            set: fn($value) => Carbon::parse($value)->format('Y-m-d'),
         );
     }
 
     protected function dateDeath(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('d.m.Y'),
-            set: fn ($value) => Carbon::parse($value)->format('Y-m-d'),
+            get: fn($value) => Carbon::parse($value)->format('d.m.Y'),
+            set: fn($value) => Carbon::parse($value)->format('Y-m-d'),
         );
     }
 

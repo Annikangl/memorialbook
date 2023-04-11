@@ -68,7 +68,7 @@ class ProfileCreateRequest extends FormRequest
             'profile_images.*' => ['required', 'mimes:jpg,jpeg,png,webp,mp4', 'max:20000'],
             'description' => ['sometimes', 'nullable', 'string'],
             'religious_id' => ['sometimes', 'nullable'],
-            'access' => ['required'],
+            'access' => ['required', Rule::in(Human::getAccessList())],
 
             'burial_coords' => [
                 Rule::requiredIf(fn() => (bool)$this->get('profile_burial_place')),

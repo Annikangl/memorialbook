@@ -15,10 +15,10 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class ProfileService
 {
-    public function create(int $userId, array $data): Human
+    public function create(int $userId, array $data, bool $draft = false): Human
     {
         try {
-            return DB::transaction(function () use ($data, $userId) {
+            return DB::transaction(function () use ($data, $userId, $draft) {
 
                 $human = Human::make([
                     'first_name' => $data['first_name'],
@@ -32,33 +32,43 @@ class ProfileService
                     'latitude' => $data['burial_coords']['lat'] ?? null,
                     'longitude' => $data['burial_coords']['lng'] ?? null,
                     'death_reason' => $data['death_reason'],
-                    'status' => Profile::STATUS_ACTIVE,
+                    'status' => $draft ? Profile::STATUS_DRAFT : Profile::STATUS_ACTIVE,
                     'access' => $data['access']
                 ]);
 
                 $human->users()->associate($userId);
+                $human->save();
 
-                $human->father()->associate($data['father_id']['id'] ?? null);
-                $human->father()->associate($data['mother_id']['id'] ?? null);
-                $human->father()->associate($data['spouse_id']['id'] ?? null);
-                $human->father()->associate($data['religious_id']['id'] ?? null);
+                if ($data['father_id']['id']) {
+                    $father = Human::findOrFail($data['father_id']['id']);
+                    $human->father()->associate($father);
+                    $father->children_id = $human->id;
+                    $father->save();
+                }
+
+                if ($data['mother_id']['id']) {
+                    $mother = Human::findOrFail($data['mother_id']['id']);
+                    $human->mother()->associate($mother);
+                    $mother->children()->associate($human);
+                    $mother->save();
+                }
+
+                if ($data['spouse_id']['id']) {
+                    $spouse = Human::findOrFail($data['spouse_id']['id']);
+                    $human->spouse()->associate($spouse);
+                    $spouse->spouse_id = $human->id;
+                    $spouse->save();
+                }
+
+                if ($religionId = $data['religious_id']['id']) {
+                    $human->religion()->associate($religionId);
+                }
 
                 $human->save();
 
                 if (isset($data['avatar'])) {
                     $human->addMedia($data['avatar'])
                         ->toMediaCollection('avatars');
-                }
-
-                if ($data['father_id'] || $data['mother_id']) {
-                    Human::updateChildForParent($data['father_id']['id']
-                        ?? $data['mother_id']['id'],
-                        $human->id
-                    );
-                }
-
-                if ($spouse = $data['spouse_id']) {
-                    Human::updateSpouse($spouse['id'], $human->id);
                 }
 
                 if (isset($data['profiles_files'])) {

@@ -113,18 +113,15 @@ class Human extends Profile implements HasMedia
 
     protected $appends = ['fullName', 'yearBirth', 'yearDeath'];
 
-
-    public static function updateChildForParent(int $parentId, int $childId): void
+    public static function getAccessList(): array
     {
-        self::where('id', $parentId)
-            ->update(['children_id' => $childId]);
+        return [
+            'public' => self::ACCESS_PUBLIC,
+            'available' => self::ACCESS_AVAILABLE,
+            'private' => self::ACCESS_PRIVATE
+        ];
     }
 
-    public static function updateSpouse(int $parentId, int $currentId): void
-    {
-        self::where('id', $parentId)
-            ->update(['spouse_id' => $currentId]);
-    }
 
     public static function genderList(): array
     {
@@ -221,14 +218,9 @@ class Human extends Profile implements HasMedia
             ->withPivot('status');
     }
 
-    public function hobbies(): BelongsToMany
+    public function religion(): BelongsTo
     {
-        return $this->belongsToMany(Hobby::class);
-    }
-
-    public function religions(): BelongsTo
-    {
-        return $this->belongsTo(Religion::class, 'religious_id');
+        return $this->belongsTo(Religion::class);
     }
 
     public function cemeteries(): BelongsTo
