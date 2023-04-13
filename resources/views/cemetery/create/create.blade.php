@@ -58,10 +58,20 @@
                 @include('cemetery.create.create_step_3')
 
                 <div class="buttons-save">
-                    <button type="button" class="save-draft hide btn white-btn">{{ __('create_cemetery.btn_saveAsDraft') }}</button>
-                    <button type="button" class="save-and-next btn blue-btn">{{ __('create_cemetery.btn_saveAndContinue') }}</button>
+                    <input type="submit"
+                           class="save-draft hide btn white-btn"
+                           name="draft"
+                           value="{{ __('create_cemetery.btn_saveAsDraft') }}">
 
-                    <button type="submit" class="save-end hide btn blue-btn">{{ __('create_cemetery.posting') }}</button>
+                    <button type="button"
+                            class="save-and-next btn blue-btn">
+                        {{ __('create_cemetery.btn_saveAndContinue') }}
+                    </button>
+
+                    <input type="submit"
+                           class="save-end hide btn blue-btn"
+                           name="posting"
+                           value="{{ __('create_cemetery.posting') }}">
                 </div>
 
             </form>

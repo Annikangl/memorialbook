@@ -9,10 +9,10 @@ use App\Models\Cemetery\Cemetery;
 
 class CemeteryService
 {
-    public function create(array $data, int $userId): Cemetery
+    public function create(array $data, int $userId, bool $isDraft = false): Cemetery
     {
         try {
-            return \DB::transaction(function () use ($data, $userId) {
+            return \DB::transaction(function () use ($data, $userId, $isDraft) {
                $cemetery = Cemetery::query()->make([
                    'title' => $data['title'],
                    'title_en' => $data['title_en'],
@@ -24,7 +24,7 @@ class CemeteryService
                    'latitude' => $data['cemetery_address_coords']['lat'] ?? null,
                    'longitude' => $data['cemetery_address_coords']['lng'] ?? null,
                    'description' => $data['description'],
-                   'status' => Cemetery::STATUS_ACTIVE,
+                   'status' => $isDraft ? Cemetery::STATUS_DRAFT : Cemetery::STATUS_ACTIVE,
                    'access' => $data['settings-public']
                ]);
 

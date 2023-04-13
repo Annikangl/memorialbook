@@ -1,7 +1,4 @@
 import '../libs/mask'
-// import {Loader} from "google-maps";
-import {loadPhoto, searchLocation} from "../functions";
-
 
 
 if (document.querySelector('#burial_place')) {
@@ -26,27 +23,7 @@ if (document.querySelector('#burial_place')) {
 
 }
 
-if (document.querySelector('#cemetery_address')) {
-    let autocomplete;
 
-    autocomplete = new google.maps.places.Autocomplete(document.querySelector('#cemetery_address'), {
-        fields: ["address_components", "geometry", "icon", "name"],
-        strictBounds: false,
-        types: ["establishment"],
-    });
-
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-        let place = autocomplete.getPlace();
-
-        const latLang = {
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng()
-        };
-
-        document.getElementById('cemetery_address_coords').value = JSON.stringify(latLang);
-    })
-
-}
 
 
 //CHANGE USER AVATAR

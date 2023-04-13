@@ -63,7 +63,8 @@ class CemeteryController extends Controller
     public function store(CreateRequest $request): RedirectResponse
     {
         try {
-            $cemetery = $this->service->create($request->validated(), auth()->user()->id);
+            $isDraft = (bool) $request->input('draft');
+            $cemetery = $this->service->create($request->validated(), auth()->id(), $isDraft);
         } catch (\DomainException $exception) {
             return back()->with('message', $exception->getMessage())->withInput();
         }
