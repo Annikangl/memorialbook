@@ -30,7 +30,7 @@ class CreateRequest extends FormRequest
         ]);
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $this->merge([
             'cemetery_address_coords' => json_decode($this->cemetery_address_coords, true)
@@ -44,9 +44,9 @@ class CreateRequest extends FormRequest
             'title_en' => ['nullable', 'string', 'min:3'],
             'subtitle' => ['nullable', 'string', 'min:3'],
             'cemetery_address' => ['required', 'nullable', 'string', 'min:5'],
-            'cemetery_address_coords' => ['sometimes', 'nullable', 'array:lat,lng'],
-            'email' => ['sometimes', 'email'],
-            'phone' => ['sometimes', 'string', 'min:8', 'max:15'],
+            'cemetery_address_coords' => ['nullable', 'array:lat,lng'],
+            'email' => ['nullable', 'email'],
+            'phone' => ['nullable', 'string', 'min:8', 'max:15'],
             'schedule' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
             'settings-public' => ['required', Rule::in(Cemetery::getAccessList())],

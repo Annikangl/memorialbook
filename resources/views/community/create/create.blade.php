@@ -55,19 +55,5 @@
         </div>
     </section>
 
-    <x-modal id="community_address_location" class="inner_map" long="hystmodal__window--long">
-        <div class="input-wrap" style="margin: 0 0 10px 0;">
-            <div class="input-form" >
-                <input type="text" class="input-text" id="community_address-search"
-                       name="community_address"
-                       placeholder="{{ __('create_community.choose_from_map') }}"
-                       title="{{ __('create_community.choose_from_map') }}">
-            </div>
-
-        </div>
-        <div class="map" style="min-height: 550px" >
-
-        </div>
-    </x-modal>
 @endsection
 
