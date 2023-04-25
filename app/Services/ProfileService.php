@@ -7,6 +7,7 @@ use App\Models\Cemetery\Cemetery;
 use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
+use App\Models\Profile\Religion;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -39,29 +40,30 @@ class ProfileService
                 $human->users()->associate($userId);
                 $human->save();
 
-                if ($data['father_id']['id']) {
+                if (isset($data['father_id']['id'])) {
                     $father = Human::findOrFail($data['father_id']['id']);
                     $human->father()->associate($father);
                     $father->children_id = $human->id;
                     $father->save();
                 }
 
-                if ($data['mother_id']['id']) {
+                if (isset($data['mother_id']['id'])) {
                     $mother = Human::findOrFail($data['mother_id']['id']);
                     $human->mother()->associate($mother);
                     $mother->children()->associate($human);
                     $mother->save();
                 }
 
-                if ($data['spouse_id']['id']) {
+                if (isset($data['spouse_id']['id'])) {
                     $spouse = Human::findOrFail($data['spouse_id']['id']);
                     $human->spouse()->associate($spouse);
                     $spouse->spouse_id = $human->id;
                     $spouse->save();
                 }
 
-                if ($religionId = $data['religious_id']['id']) {
-                    $human->religion()->associate($religionId);
+                if (isset($data['religious_id']['id'])) {
+                    $religion = Religion::findOrFail($data['religious_id']['id']);
+                    $human->religion()->associate($religion);
                 }
 
                 $human->save();

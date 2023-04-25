@@ -62,12 +62,12 @@ class ProfileCreateRequest extends FormRequest
             'burial_place' => ['nullable', 'string', 'min:3'],
             'death_reason' => ['nullable', 'string'],
             'date_death' => ['required', 'date'],
-            'father_id' => ['sometimes', 'nullable', 'array'],
-            'spouse_id' => ['sometimes', 'nullable', 'array'],
-            'mother_id' => ['sometimes', 'nullable', 'array'],
+            'father_id' => [ 'nullable', 'array'],
+            'spouse_id' => ['nullable', 'array'],
+            'mother_id' => ['nullable', 'array'],
             'profile_images.*' => ['required', 'mimes:jpg,jpeg,png,webp,mp4', 'max:20000'],
-            'description' => ['sometimes', 'nullable', 'string'],
-            'religious_id' => ['sometimes', 'nullable'],
+            'description' => ['nullable', 'string'],
+            'religious_id' => ['nullable', 'array'],
             'access' => ['required', Rule::in(Human::getAccessList())],
 
             'burial_coords' => [
