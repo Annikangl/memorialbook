@@ -158,16 +158,6 @@ if (document.querySelector('.load_files_profile')) {
         });
     });
 
-    // let inputsFile = document.querySelectorAll('.load-files-profile');
-    // console.log(inputsFile)
-    //
-    // for (let input of inputsFile) {
-    //     input.addEventListener('change', function () {
-    //         let files = input.files;
-    //
-    //         loadPhoto(input, files);
-    //     });
-    // }
 }
 
 //CUSTOM SELECT

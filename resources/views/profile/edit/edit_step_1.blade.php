@@ -4,7 +4,7 @@
         <div class="user-avatar">
             <div class="preview-avatar">
                 <label class="preview-avatar-wrap">
-                    <img src="{{ asset('storage/' . $profile->avatar )  }}" alt="" class="bg-img">
+                    <img src="{{ $human->getFirstMediaUrl('avatars', 'thumb') }}" alt="" class="bg-img">
                     <input type="file" accept=".jpg,.jpeg,.png" class="input-avatar"
                            id="change-avatar" name="avatar"/>
                     <span class="preview-avatar-wrap__text">Выберите фото</span>
@@ -26,8 +26,8 @@
             <div class="input-form">
                 <input type="text" class="input-text input-required" placeholder="Иван"
                        id="first_name" name="first_name"
-                       value="{{ $profile->first_name }}"
-                       title="{{ $profile->first_name }}">
+                       value="{{ $human->first_name }}"
+                       title="{{ $human->first_name }}">
             </div>
         </div>
 
@@ -36,7 +36,7 @@
             <div class="input-form">
                 <input type="text" class="input-text input-required" placeholder="Иванов"
                        id="last_name" name="last_name"
-                       value="{{ $profile->last_name }}"
+                       value="{{ $human->last_name }}"
                        title="">
             </div>
         </div>
@@ -48,7 +48,7 @@
                         data-select="">
                     <option value="">Выберите из списка</option>
                     @foreach($genders as $key => $gender)
-                        <option value="{{ $key }}" name="gender" @if ($gender === $profile->gender) selected @endif>{{ __($gender) }}</option>
+                        <option value="{{ $key }}" name="gender" @if ($gender === $human->gender) selected @endif>{{ __($gender) }}</option>
                     @endforeach
                 </select>
 
@@ -62,16 +62,16 @@
             <div class="input-form">
                 <input type="text" class="input-text input-required mask-data"
                        placeholder="дд.мм.гггг" id="date_birth" name="date_birth"
-                       value="{{ $profile->date_birth }}"
-                       title="{{ $profile->date_birth }}">
+                       value="{{ $human->date_birth }}"
+                       title="{{ $human->date_birth }}">
             </div>
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">Место рождения:</span>
             <div class="input-form">
                 <input type="text" class="input-text" name="birth_place"
-                       value="{{ $profile->birth_place }}"
-                       title="{{ $profile->birth_place }}">
+                       value="{{ $human->birth_place }}"
+                       title="{{ $human->birth_place }}">
             </div>
         </div>
         <div class="input-wrap">
@@ -79,8 +79,8 @@
             <div class="input-form">
                 <input type="text" class="input-text mask-data" placeholder="дд.мм.гггг"
                        id="date_death" name="date_death"
-                       value="{{ $profile->date_death }}"
-                       title="{{ $profile->date_death }}">
+                       value="{{ $human->date_death }}"
+                       title="{{ $human->date_death }}">
             </div>
         </div>
         <div class="input-wrap">
@@ -88,9 +88,9 @@
             <div class="input-form" style="position:relative;">
                 <input type="text" class="input-text"
                        id="burial_place" name="burial_place"
-                       title="{{ $profile->burial_place }}"
+                       title="{{ $human->burial_place }}"
                        readonly
-                       value="{{ $profile->burial_place }}">
+                       value="{{ $human->burial_place }}">
                 <a class="burialPlaceModal" data-hystmodal="#burial_place_location" href="#" style="position:absolute;" title="Указать на карте">
                     <img src="{{ asset('assets/media/media/icons/location.svg') }}" alt="Указать на карте" width="20" >
                 </a>
@@ -103,7 +103,7 @@
             <span class="input-wrap__title">Причина смерти:</span>
             <div class="input-form">
                 <input type="text" class="input-text" id="death_reason" name="death_reason"
-                       value="{{ $profile->death_reason }}"
+                       value="{{ $human->death_reason }}"
                        title="">
             </div>
         </div>
@@ -123,16 +123,16 @@
 
                     <input type="hidden" class="select__output" id="father_id_hidden" name="father_id" readonly>
                     <input type="text" class="select__output" placeholder="Выберите из списка"
-                           value="{{ $profile->father->full_name ?? '' }}" readonly>
+                           value="{{ $human->father->full_name ?? '' }}" readonly>
 
                     <ul class="select-list">
 
-                        @foreach($fathers as $father)
-                        <li class="select-list__item" data-name="father_id" data-id="{{ $father->id }}" id="father_id">
-                            {{ $father->full_name }}
-                        </li>
+{{--                        @foreach($fathers as $father)--}}
+{{--                        <li class="select-list__item" data-name="father_id" data-id="{{ $father->id }}" id="father_id">--}}
+{{--                            {{ $father->full_name }}--}}
+{{--                        </li>--}}
 
-                        @endforeach
+{{--                        @endforeach--}}
                     </ul>
                 </div>
 
@@ -151,14 +151,14 @@
 
                     <input type="hidden" class="select__output" id="mother_id_hidden" name="mother_id" readonly>
                     <input type="text" class="select__output" placeholder="Выберите из списка"
-                           value="{{ $profile->mother->full_name ?? ''  }}"
+                           value="{{ $human->mother->full_name ?? ''}}"
                            readonly>
                     <ul class="select-list">
-                        @foreach($mothers as $mother)
-                            <li class="select-list__item" data-name="mother_id" data-id="{{ $mother->id }}">
-                                {{ $mother->full_name }}
-                            </li>
-                        @endforeach
+{{--                        @foreach($mothers as $mother)--}}
+{{--                            <li class="select-list__item" data-name="mother_id" data-id="{{ $mother->id }}">--}}
+{{--                                {{ $mother->full_name }}--}}
+{{--                            </li>--}}
+{{--                        @endforeach--}}
                     </ul>
                 </div>
 
@@ -175,14 +175,14 @@
                 <div class="select">
                     <input type="hidden" class="select__output" id="spouse_id_hidden" name="spouse_id" readonly>
                     <input type="text" class="select__output" placeholder="Выберите из списка"
-                           value="{{ $profile->spouse->full_name ?? ''  }}"
+                           value="{{ $human->spouse->full_name ?? ''  }}"
                            readonly>
                     <ul class="select-list">
-                        @foreach($profiles as $profile)
-                            <li class="select-list__item" data-name="spouse_id" data-id="{{ $profile->id }}">
+{{--                        @foreach($humans as $human)--}}
+{{--                            <li class="select-list__item" data-name="spouse_id" data-id="{{ $human->id }}">--}}
 
-                                {{ $profile->full_name }}</li>
-                        @endforeach
+{{--                                {{ $human->full_name }}</li>--}}
+{{--                        @endforeach--}}
                     </ul>
                 </div>
                 <svg aria-hidden="true" class="select-arrow">

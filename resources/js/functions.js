@@ -1,5 +1,6 @@
 import axios from "axios";
-import {auto} from "@popperjs/core";
+import Swiper, {Lazy, Navigation, Pagination} from "swiper";
+import {Fancybox} from "@fancyapps/ui/src/Fancybox/Fancybox";
 
 export let loadPhoto = function (input, files) {
     console.log(files);
@@ -218,4 +219,55 @@ export function showErrors(errors) {
                 `<span class="is-invalid">${errors[err]}</span>`);
         }
     }
+}
+
+export function initSwiper(sliders) {
+    for (let slider of sliders) {
+
+        const swiper = new Swiper(slider, {
+            modules: [Navigation, Pagination, Lazy],
+            preloadImages: false,
+            lazy: true,
+            slidesPerView: 5,
+            spaceBetween: 25,
+            freeMode: true,
+            navigation: {
+                nextEl: slider.parentElement.querySelector('.arrows-right'),
+                prevEl: slider.parentElement.querySelector('.arrows-left'),
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                650: {
+                    slidesPerView: 3,
+                },
+                1050: {
+                    slidesPerView: 4,
+
+                },
+                1200: {
+                    slidesPerView: 5,
+                },
+            },
+        });
+    }
+}
+
+export function initFancybox(selector) {
+    Fancybox.bind(selector, {
+        groupAll: true, // Group all items
+        Toolbar: {
+            display: [
+                {id: "prev", position: "center"},
+                {id: "counter", position: "center"},
+                {id: "next", position: "center"},
+                "zoom",
+                "slideshow",
+                "fullscreen",
+                "close",
+            ],
+        },
+    });
 }

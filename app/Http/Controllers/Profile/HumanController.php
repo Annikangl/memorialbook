@@ -118,22 +118,14 @@ class HumanController extends Controller
         return redirect()->route('profile.show', $profile->slug);
     }
 
-    public function edit(Human $profile): Factory|View|Application
+    public function edit(Human $human): Factory|View|Application
     {
         $religions = Religion::query()->orderBy('id')->get();
-
-        $fathers = $profile->filter(function ($item) {
-            return $item->gender == Human::MALE;
-        });
-
-        $mothers = $profile->filter(function ($item) {
-            return $item->gender == Human::FEMALE;
-        });
 
         $genders = Human::genderList();
 
         return view('profile.edit.edit',
-            compact('profile', 'genders', 'mothers', 'fathers', 'religions'));
+            compact('human', 'genders', 'religions'));
     }
 
     public function map(SearchRequest $request): Factory|View|Application

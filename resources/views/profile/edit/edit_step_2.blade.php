@@ -21,7 +21,7 @@
         <div class="input-wrap">
             <span class="input-wrap__title">Описание:</span>
             <textarea class="textarea-form" placeholder="Текст описания..." id="description" name="description"
-                       title="{{ $profile->description }}">{{ $profile->description }}</textarea>
+                       title="{{ $human->description }}">{{ $human->description }}</textarea>
         </div>
 
         <div class="input-wrap">
@@ -32,7 +32,7 @@
 
                     <input type="hidden" class="select__output" id="religious_id_hidden" name="religious_id" readonly>
                     <input type="text" class="select__output" placeholder="Выберите из списка"
-                           value="{{ $profile->religions->title ?? '' }}"
+                           value="{{ $human->religions->title ?? '' }}"
                            readonly>
 
                     <ul class="select-list">

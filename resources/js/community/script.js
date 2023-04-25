@@ -1,7 +1,7 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
 import axios from "axios";
-import './create-community';
+import './create';
 
 let communityPhotoLength = function () {
     let photos = document.querySelectorAll('.community-photo__item');
@@ -47,6 +47,7 @@ let communityPhotoLength = function () {
 
 //slider img article
 let sliders = document.querySelectorAll('.article-slider');
+
 if (sliders) {
 
     for (let slider of sliders) {

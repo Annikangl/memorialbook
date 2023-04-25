@@ -1,16 +1,13 @@
-import './add_profile'
-import './search_profile'
-import './family_card'
 import Swiper from "swiper";
-
+import './card'
+import './create'
 
 window.addEventListener('load', function () {
     //слайдеры карточек
-    let qrCodeSlider = document.querySelector('.qr-code-slider');
 
-    if (qrCodeSlider) {
+    if (document.querySelector('.qr-code-slider')) {
 
-        let swiper = new Swiper(qrCodeSlider, {
+        let swiper = new Swiper(document.querySelector('.qr-code-slider'), {
             slidesPerView: 2,
             spaceBetween: 30,
             navigation: {
@@ -25,12 +22,10 @@ window.addEventListener('load', function () {
         let gallery = document.querySelector('.member-images');
 
         btnGrid.addEventListener('click', function () {
-            console.log(gallery)
             gallery.classList.remove('no-grid');
         })
 
         btnInline.addEventListener('click', function () {
-            console.log(gallery)
             gallery.classList.add('no-grid');
         })
 

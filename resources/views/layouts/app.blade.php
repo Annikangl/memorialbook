@@ -208,6 +208,7 @@
 <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtiW5uhL3BgojiJgqKk1eJuOKs4jAVFfU&libraries=places&callback=initMap">
 </script>
+
 @yield('scripts')
 
 </body>

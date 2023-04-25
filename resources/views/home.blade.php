@@ -56,7 +56,7 @@
                                             title="{{ $human->full_name }}"/>
                                         <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                                     </div>
-                                    <a href="#" class="list-profiles-mark" title="Редактировать профиль">
+                                    <a href="{{ route('profile.edit', $human) }}" class="list-profiles-mark" title="Редактировать профиль">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path

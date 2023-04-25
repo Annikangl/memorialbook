@@ -64,21 +64,6 @@
             <p class="add-profile__text">{{ __('create_profile.subtitle') }}</p>
         </div>
 
-        <x-modal id="burial_place_location" class="inner_map" long="hystmodal__window--long">
-            <div class="input-wrap" style="margin: 0 0 10px 0;">
-                <div class="input-form">
-                    <input type="text" class="input-text" id="burial_place_search"
-                           name="burial_place_search"
-                           placeholder="{{ __('create_profile.choose_from_map') }}"
-                           title="{{ __('create_profile.choose_from_map') }}">
-                </div>
-
-            </div>
-            <div class="map" style="min-height: 550px">
-
-            </div>
-        </x-modal>
-
     </section>
 
 @endsection

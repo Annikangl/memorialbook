@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <section class="add-profile">
     <div id="page">
 
         <section class="add-profile">
@@ -79,5 +79,6 @@
 
         </section>
     </div>
+    </section>
 @endsection
 

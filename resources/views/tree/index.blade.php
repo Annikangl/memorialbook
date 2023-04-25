@@ -1,12 +1,14 @@
 @extends('layouts.app')
 
 <script src="{{asset('js/familytree.js')}}"></script>
+
 <div class="container">
     <div class="tree__inner" style="margin-top: 100px !important;">
         <div class="tree__nav">
             <div class="tree-nav__items">
                 <div class="tree-nav__item">
-                    <a class="tree-nav__link active" href="{{ route('tree') }}">{{__('family_tree.link_family_tree')}}</a>
+                    <a class="tree-nav__link active"
+                       href="{{ route('tree') }}">{{__('family_tree.link_family_tree')}}</a>
                 </div>
                 <div class="tree-nav__item">
                     <a class="tree-nav__link" href="#">{{__('family_tree.link_profile_list')}}</a>

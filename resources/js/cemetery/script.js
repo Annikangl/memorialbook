@@ -1,23 +1,11 @@
+import axios from "axios";
 import {Loader} from 'google-maps';
 import {MarkerClusterer} from "@googlemaps/markerclusterer";
-import {Fancybox} from "@fancyapps/ui/src/Fancybox/Fancybox.js";
-import axios from "axios";
 import './create';
+import {initFancybox} from "@/functions";
 
-Fancybox.bind(".gallery", {
-    groupAll: true, // Group all items
-    Toolbar: {
-        display: [
-            {id: "prev", position: "center"},
-            {id: "counter", position: "center"},
-            {id: "next", position: "center"},
-            "zoom",
-            "slideshow",
-            "fullscreen",
-            "close",
-        ],
-    },
-});
+initFancybox(".gallery");
+
 
 // TODO pagination more btn none
 
@@ -122,7 +110,7 @@ let cemeteryPhotoLength = function () {
     }
 
 
-    let changeNamber = function () {
+    let changeNumber = function () {
         if (innerWidth >= 980) {
             viewPhotosLength = 5;
         } else {
@@ -136,8 +124,8 @@ let cemeteryPhotoLength = function () {
         hidePhoto();
     }
 
-    window.addEventListener('resize', changeNamber);
-    window.addEventListener('load', changeNamber);
+    window.addEventListener('resize', changeNumber);
+    window.addEventListener('load', changeNumber);
 }
 
 
@@ -164,8 +152,6 @@ const cemeteryPageMap = async function initMap() {
         zoom: 4,
         center: cemeteryCoords,
     });
-
-    console.log(contactMap)
 
     const contactMarker = new google.maps.Marker({
         position: cemeteryCoords,

@@ -1,6 +1,9 @@
 import _ from 'lodash';
 window._ = _;
 
+import $ from 'jquery';
+window.$ = $;
+
 import 'bootstrap';
 
 /**
@@ -12,8 +15,7 @@ import 'bootstrap';
 import axios from 'axios';
 window.axios = axios;
 
-import jQuery from 'jquery'
-window.$ = jQuery;
+
 
 import 'slideout/dist/slideout.min'
 
