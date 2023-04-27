@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.0",
         "socialiteproviders/facebook": "^4.1",
-        "spatie/laravel-medialibrary": "^10.0.0"
+        "spatie/laravel-medialibrary": "^10.0.0",
+        "wendelladriel/laravel-validated-dto": "^2.6"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

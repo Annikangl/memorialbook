@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\DTOs\Profile\HumanDTO;
 use App\Events\CreateNews;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\ProfileCreateRequest;
@@ -102,9 +103,11 @@ class HumanController extends Controller
 
     public function store(ProfileCreateRequest $request): RedirectResponse
     {
+        $humanDto = HumanDTO::fromRequest($request);
+
         try {
             $isDraft = (bool) $request->input('draft');
-            $profile = $this->service->create(\Auth::id(), $request->validated(), $isDraft);
+            $profile = $this->service->create(\Auth::id(), $humanDto, $isDraft);
 
 //        TODO    event(new CreateNews($profile, CreateNews::USER_ADDED_PROFILE));
 

@@ -185,6 +185,16 @@ section {
     align-items: flex-start;
 }
 
+select {
+    width: 100%;
+    border: 1px solid #007aff;
+    padding: 13px 15px 13px 15px;
+    height: 44px;
+    background-color: var(--gray);
+    border: 1px solid #cdd1d6;
+    border-radius: 7px;
+}
+
 .input-wrap__title {
     color: var(--dark-gray);
     font-size: 14px;

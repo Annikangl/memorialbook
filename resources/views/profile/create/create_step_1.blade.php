@@ -47,25 +47,14 @@
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">{{ __('create_profile.input_gender') }}</span>
+            <span class="input-wrap__title">{{ __('create_profile.Gender') }}</span>
 
-            <div class="select-form @error('gender') no-valid @enderror">
-                <div class="select">
-                    <input type="hidden" class="select__output" id="gender_hidden" name="gender" readonly>
-                    <input type="text" class="select__output" placeholder="{{ __('create_profile.Select gender') }}" readonly>
-                    <ul class="select-list">
-                        @foreach($genders as $gender)
-                            <li class="select-list__item" data-name="gender" data-id="{{ $gender}}">
-                                {{ $gender }}
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <svg aria-hidden="true" class="select-arrow">
-                    <path
-                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                </svg>
-            </div>
+            <select name="gender" id="select-gender" class="@error('gender') no-valid @enderror">
+                <option disabled selected value>{{ __('create_profile.Select gender') }}</option>
+                @foreach($genders as $gender)
+                    <option value="{{ $gender }}" @selected(old('gender') == $gender)>{{ $gender }}</option>
+                @endforeach
+            </select>
             @error('gender')
             <span class="is-invalid">{{ $message }}</span>
             @enderror
@@ -77,12 +66,12 @@
             <span class="input-wrap__title">{{ __('create_profile.input_birthDate') }}:</span>
             <div class="input-form @error('date_birth')  no-valid @enderror">
                 <input type="text" class="input-text input-required mask-data"
-                       placeholder="{{ __('create_profile.ymd') }}" id="date_birth" name="date_birth"
+                       placeholder="{{ __('create_profile.dmy') }}" id="date_birth" name="date_birth"
                        value="{{ old('date_birth') }}"
                        title="{{ __('create_profile.input_birthDate') }}">
             </div>
             @error('date_birth')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
@@ -101,12 +90,12 @@
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create_profile.input_deathDate') }}:</span>
             <div class="input-form @error('date_death')  no-valid @enderror">
-                <input type="text" class="input-text mask-data" placeholder="{{ __('create_profile.ymd') }}"
+                <input type="text" class="input-text mask-data" placeholder="{{ __('create_profile.dmy') }}"
                        id="date_death" name="date_death" value="{{ old('date_death') }}"
                        title="{{ __('create_profile.input_deathDate') }}">
             </div>
             @error('date_death')
-                <span class="is-invalid">{{ $message }}</span>
+            <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
@@ -116,6 +105,7 @@
                        placeholder="{{ __('create_profile.Select burial place') }}"
                        id="burial_place"
                        name="burial_place"
+                       value="{{ old('burial_place') }}"
                        title="{{ __('create_profile.Location') }}">
             </div>
             <input type="hidden" id="burial_coords" name="burial_coords"
@@ -149,26 +139,14 @@
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create_profile.input_father') }}</span>
-            <div class="select-form @error('father_id') no-valid @enderror">
-                <div class="select">
-                    <input type="hidden" class="select__output" id="father_id_hidden" name="father_id" readonly>
-                    <input type="text" class="select__output" placeholder="{{ __('create_profile.choose_from_list') }}"
-                           readonly>
 
-                    <ul class="select-list">
-                        @foreach($fathers as $father)
-                            <li class="select-list__item" data-name="father_id" data-id="{{ $father->id }}"
-                                id="father_id">
-                                {{$father->first_name.' '.$father->last_name}}
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <svg aria-hidden="true" class="select-arrow">
-                    <path
-                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                </svg>
-            </div>
+            <select name="father_id" id="select-father" class="@error('father_id') no-valid @enderror">
+                <option disabled selected value>{{ __('create_profile.Select father') }}</option>
+                @foreach($fathers as $father)
+                    <option
+                        value="{{ $father->id }}" @selected(old('father_id') == $father->id)>{{ $father->full_name }}</option>
+                @endforeach
+            </select>
             @error('father_id')
             <span class="is-invalid">{{ $message }}</span>
             @enderror
@@ -176,26 +154,16 @@
 
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create_profile.input_mother') }}</span>
-            <div class="select-form @error('mother_id') no-valid @enderror">
-                <div class="select">
-                    <input type="hidden" class="select__output" id="mother_id_hidden" name="mother_id" readonly>
-                    <input type="text" class="select__output" placeholder="{{ __('create_profile.choose_from_list') }}"
-                           readonly>
 
-                    <ul class="select-list">
-                        @foreach($mothers as $mother)
-                            <li class="select-list__item" data-name="mother_id" data-id="{{ $mother->id }}">
-                                {{$mother->first_name.' '.$mother->last_name}}
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+            <select name="mother_id" id="select-mother" class="@error('mother_id') no-valid @enderror">
+                <option disabled selected value>{{ __('create_profile.Select mother') }}</option>
+                @foreach($mothers as $mother)
+                    <option value="{{ $mother->id }}" @selected(old('mother_id') == $mother->id)>
+                        {{ $mother->full_name }}
+                    </option>
+                @endforeach
+            </select>
 
-                <svg aria-hidden="true" class="select-arrow">
-                    <path
-                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                </svg>
-            </div>
             @error('mother_id')
             <span class="is-invalid">{{ $message }}</span>
             @enderror
@@ -203,29 +171,20 @@
 
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create_profile.input_spouse') }}</span>
-            <div class="select-form @error('spouse_id') no-valid @enderror">
-                <div class="select">
-                    <input type="hidden" class="select__output" id="spouse_id_hidden" name="spouse_id" readonly>
-                    <input type="text" class="select__output" placeholder="{{ __('create_profile.choose_from_list') }}"
-                           readonly>
-                    <ul class="select-list">
-                        @foreach($profiles as $profile)
-                            <li class="select-list__item" data-name="spouse_id" data-id="{{ $profile->id }}">
-                                {{$profile->first_name.' '.$profile->last_name}}
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <svg aria-hidden="true" class="select-arrow">
-                    <path
-                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                </svg>
-            </div>
+            <select name="spouse_id" id="select-spouse" class="@error('spouse_id') no-valid @enderror">
+                <option disabled selected value>{{ __('create_profile.Select husband or wife') }}</option>
+                @foreach($profiles as $profile)
+                    <option value="{{ $profile->id }}" @selected(old('spouse_id') == $profile->id)>
+                        {{ $profile->full_name }}
+                    </option>
+                @endforeach
+            </select>
             @error('spouse_id')
             <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
     </div>
 </div>
+
 
 

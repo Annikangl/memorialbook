@@ -35,19 +35,14 @@ class ProfileCreateRequest extends FormRequest
     {
         return redirect()->back()->with([
             'message' => $validator->errors()->first(),
-            'alert-class' => 'alert-danger'
+            'alert-class' => 'alert-danger',
         ]);
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $this->merge([
-            'gender' => json_decode($this->gender, true)['value'] ?? '',
             'burial_coords' => json_decode($this->burial_coords, true),
-            'father_id' => json_decode($this->father_id, true),
-            'spouse_id' => json_decode($this->spouse_id, true),
-            'mother_id' => json_decode($this->mother_id, true),
-            'religious_id' => json_decode($this->religious_id, true),
         ]);
     }
 
@@ -62,23 +57,22 @@ class ProfileCreateRequest extends FormRequest
             'burial_place' => ['nullable', 'string', 'min:3'],
             'death_reason' => ['nullable', 'string'],
             'date_death' => ['required', 'date'],
-            'father_id' => [ 'nullable', 'array'],
-            'spouse_id' => ['nullable', 'array'],
-            'mother_id' => ['nullable', 'array'],
-            'profile_images.*' => ['required', 'mimes:jpg,jpeg,png,webp,mp4', 'max:20000'],
+            'father_id' => ['sometimes', 'integer'],
+            'mother_id' => ['sometimes', 'integer'],
+            'spouse_id' => ['sometimes', 'integer'],
+            'gallery.*' => ['required', 'mimes:jpg,jpeg,png,webp,mp4', 'max:20000'],
             'description' => ['nullable', 'string'],
-            'religious_id' => ['nullable', 'array'],
+            'religion_id' => ['nullable', 'integer'],
             'access' => ['required', Rule::in(Human::getAccessList())],
 
             'burial_coords' => [
                 Rule::requiredIf(fn() => (bool)$this->get('profile_burial_place')),
                 'nullable',
                 'array'
-            ] ,
+            ],
 
             'avatar' => [
                 'nullable',
-                Rule::requiredIf(fn () => $this->hasFile('avatar')),
                 File::image()
                     ->min(1)
                     ->max(5 * 1024)
@@ -88,11 +82,6 @@ class ProfileCreateRequest extends FormRequest
                 'sometimes',
                 File::types(['pdf'])
                     ->max(10 * 1024)
-            ],
-
-            'profiles_files.*' => [
-                'sometimes',
-                File::types(['video/mp4', 'image/jpeg', 'image/png'])->max(30 * 1024)
             ],
         ];
     }

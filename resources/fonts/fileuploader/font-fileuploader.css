@@ -7,9 +7,9 @@
  */
 @font-face {
 	font-family: 'font-fileuploader';
-	src: url('./font-fileuploader.ttf?yhe2ig') format('truetype'),
-		 url('./font-fileuploader.woff?yhe2ig') format('woff'),
-		 url('./font-fileuploader.svg?yhe2ig#font-fileuploader') format('svg');
+	src: url('./font-fileuploader.ttf') format('truetype'),
+		 url('./font-fileuploader.woff') format('woff'),
+		 url('./font-fileuploader.svg') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
