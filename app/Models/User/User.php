@@ -6,6 +6,7 @@ use App\Models\Community\Community;
 use App\Models\News\News;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -32,40 +33,15 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $phone
- * @property string|null $avatar
  * @property string $password
- * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User\Network[] $networks
- * @property-read int|null $networks_count
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
- * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
- * @property-read int|null $tokens_count
- * @method static Builder|User byNetwork(string $network, string $identity)
- * @method static Builder|User newModelQuery()
- * @method static Builder|User newQuery()
- * @method static Builder|User query()
- * @method static Builder|User whereAvatar($value)
- * @method static Builder|User whereCreatedAt($value)
- * @method static Builder|User whereEmail($value)
- * @method static Builder|User whereEmailVerifiedAt($value)
- * @method static Builder|User whereId($value)
- * @method static Builder|User whereName($value)
- * @method static Builder|User wherePassword($value)
- * @method static Builder|User wherePhone($value)
- * @method static Builder|User whereRememberToken($value)
- * @method static Builder|User whereUpdatedAt($value)
- * @mixin \Eloquent
- * @method static Builder|User whereUsername($value)
- * @method static \Database\Factories\User\UserFactory factory(...$parameters)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+
  */
 class User extends Authenticatable implements HasMedia
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes, Sluggable, InteractsWithMedia;
-
-    public const AVATAR_PATH = 'uploads/users/avatar';
 
     protected $fillable = [
         'username',
@@ -73,7 +49,6 @@ class User extends Authenticatable implements HasMedia
         'phone',
         'password',
     ];
-
 
     protected $hidden = [
         'password',
@@ -90,7 +65,6 @@ class User extends Authenticatable implements HasMedia
             'username' => $name,
             'email' => $email,
             'phone' => $phone,
-            'avatar' => self::AVATAR_PATH . '/empty_user_avatar.webp',
             'password' => Hash::make($password),
         ]);
     }
