@@ -4,19 +4,28 @@
 
     <section class="preview">
         <div class="preview-img">
-            <img src="{{ asset('assets/uploads/index-page/image_small.webp') }}"
-                 data-src="{{ asset('assets/uploads/index-page/image_en.png') }}"
-                 alt="Memorialbook preview image"
-                 title="Memorialbook"/>
-            <img src="{{ asset('assets/uploads/index-page/image-mobile_small.webp') }}"
-                 data-src="{{ asset('assets/uploads/index-page/image_en.png') }}"
-                 alt="Memorialbook preview image for mobile"
-                 title="Memorialbook"/>
+            @if(app()->getLocale() === 'en')
+                <img src="{{ asset('assets/img/image_en.png') }}"
+                     alt="Memorialbook preview image"
+                     title="Memorialbook"/>
+                <img src="{{ asset('assets/img/image-mobile.png') }}"
+                     alt="Memorialbook preview image for mobile"
+                     title="Memorialbook"/>
+            @else
+                <img src="{{ asset('assets/img/image.png') }}"
+                     alt="Memorialbook preview image"
+                     title="Memorialbook"/>
+                <img src="{{ asset('assets/img/image-mobile.png') }}"
+                     alt="Memorialbook preview image for mobile"
+                     title="Memorialbook"/>
+            @endif
+
         </div>
 
         <div class="preview-form">
             <form class="login-form" id="login-form" action="{{ route('login') }}" method="post" data-base-form="">
                 @csrf
+
                 <h3 class="login-form__title">{{ __('auth.sign_in') }}</h3>
 
                 <div class="input-wrap">
@@ -38,7 +47,9 @@
 
                 <a href="#" class="login-form__registration-link open-registration">{{ __('auth.link_register') }}</a>
             </form>
-            @include('auth.partials.socials')
+
+            @include('auth.socials.login-socials')
+
         </div>
     </section>
 

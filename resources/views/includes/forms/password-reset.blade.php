@@ -8,6 +8,6 @@
                 <input type="email" class="input-text" name="form-recover__email" title=""/>
             </div>
         </div>
-        <input type="submit" class="form__submit blue-btn btn" value="{{ __('auth.submit_btn') }}" title="Зарегистрироваться"/>
+        <input type="submit" class="form__submit blue-btn btn" value="{{ __('auth.submit_btn') }}" title="submit"/>
     </div>
 </form>

@@ -18,7 +18,6 @@ class HomeController extends Controller
 
     public function index(): Factory|View|Application
     {
-//        $humans = Human::byUser(auth()->id())->addSelect('status')->with('media')->latest()->get();
         $humans = Human::query()->where('user_id', auth()->id())->latest()->get();
         $pets = Pet::query()->where('user_id', auth()->id())->latest()->get();
 
