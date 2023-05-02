@@ -47,10 +47,9 @@
                 @include('pet.create.create_step_3')
 
                 <div class="buttons-save">
-                    <button type="button" class="save-draft hide btn white-btn">{{ __('create-pet.btn_saveAsDraft') }}</button>
+                    <input type="submit" class="save-draft hide btn white-btn" name="draft"
+                           value="{{ __('create_profile.btn_saveAsDraft') }}">
                     <button type="button" class="save-and-next btn blue-btn">{{ __('create-pet.btn_saveAndContinue') }}</button>
-
-                    <button type="submit" class="save-end hide btn blue-btn">{{ __('create-pet.btn_saveAndPost') }}</button>
                 </div>
 
             </form>
@@ -60,6 +59,9 @@
 @endsection
 
 @section('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtiW5uhL3BgojiJgqKk1eJuOKs4jAVFfU&libraries=places&callback=initMap">
+    </script>
     <script src="{{ asset('js/jquery.fileuploader.min.js') }}"></script>
 @endsection
 

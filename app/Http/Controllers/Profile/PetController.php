@@ -39,10 +39,12 @@ class PetController extends Controller
 
     public function store(CreateRequest $request): RedirectResponse
     {
+        $data = $request->validated();
+
         try {
-            $pet = $this->service->createPet(\Auth::id(),$request->validated());
+            $pet = $this->service->createPet(\Auth::id(), $data);
         } catch (\Throwable $exception) {
-            return redirect()->back()->with('message', $exception->getMessage());
+            return redirect()->back()->with('message', $exception->getMessage())->withInput();
         }
 
         return redirect()->route('profile.pet.show', $pet->slug);

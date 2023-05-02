@@ -23,7 +23,7 @@
 
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create-pet.input_petName') }}:</span>
-            <div class="input-form @error('name')  no-valid @enderror">
+            <div class="input-form @error('name') no-valid @enderror">
                 <input type="text" class="input-text input-required"
                        id="first_name"
                        name="name"
@@ -41,6 +41,7 @@
             <div class="input-form @error('breed')  no-valid @enderror">
                 <input type="text" class="input-text input-required"
                        name="breed"
+                       id="last_name"
                        placeholder="{{ __('create_profile.sheepdog') }}"
                        value="{{ old('breed') }}"
                        title="{{ __('create-pet.input_breed') }}">
@@ -56,7 +57,7 @@
             <div class="input-form @error('date_birth')  no-valid @enderror">
                 <input type="text" class="input-text input-required mask-data"
                        name="date_birth"
-                       placeholder="{{ __('create_profile.ymd') }}"
+                       placeholder="{{ __('create_profile.dmy') }}"
                        value="{{ old('date_birth') }}"
                        title={{ __('create-pet.input_birthDate') }}>
             </div>
@@ -81,7 +82,7 @@
             <div class="input-form @error('date_death')  no-valid @enderror">
                 <input type="text" class="input-text input-required mask-data"
                        name="date_death"
-                       placeholder="{{ __('create_profile.ymd') }}"
+                       placeholder="{{ __('create_profile.dmy') }}"
                        value="{{ old('date_death') }}"
                        title={{ __('create-pet.input_deathDate') }}>
             </div>

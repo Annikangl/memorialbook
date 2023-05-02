@@ -257,7 +257,7 @@ if (document.querySelector(".add-profile")) {
 
             if (currentSteep + 1 === steeps.length) {
                 btnSaveDraft.classList.remove("hide");
-                btnSave.innerHTML = "Save and posting 1";
+                btnSave.innerHTML = "Save and posting";
                 btnSave.type = 'submit';
             } else {
                 btnSaveDraft.classList.add("hide");
@@ -285,7 +285,7 @@ if (document.querySelector(".add-profile")) {
             if (currentSteep === steeps.length - 1) {
 
                 btnSaveDraft.classList.remove("hide");
-                btnSave.innerHTML = "Save and posting 2";
+                btnSave.innerHTML = "Save and posting";
                 btnSave.type = 'submit';
                 btnSave.disabled  = true;
 
