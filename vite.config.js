@@ -1,5 +1,8 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import fs from 'fs';
+
+const host = 'memorialbook.loc';
 
 export default defineConfig({
 
@@ -12,6 +15,16 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+
+    server: {
+        host,
+        hmr: { host },
+        https: {
+            key: fs.readFileSync(`./docker/nginx/ssl/default.key`),
+            cert: fs.readFileSync(`./docker/nginx/ssl/default.crt`),
+        },
+    },
+
     alias: {
         '$': 'jQuery'
     },
