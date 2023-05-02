@@ -26,10 +26,10 @@
                     <a href="#" class="menu-list__link">{{ __('layout.link_shop') }}</a>
                 </li>
                 <li class="menu-list__item">
-                    <a href="#" class="menu-list__link">{{ __('layout.link_search_people') }}</a>
+                    <a href="#" class="menu-list__link search-people">{{ __('layout.link_search_people') }}</a>
                 </li>
                 <li class="menu-list__item">
-                    <a href="#" class="menu-list__link">{{ __('layout.link_search_place') }}</a>
+                    <a href="#" class="menu-list__link search-places">{{ __('layout.link_search_place') }}</a>
                 </li>
                 <li class="menu-list__item">
                     <a href="#" class="menu-list__link">{{ __('layout.contacts') }}</a>

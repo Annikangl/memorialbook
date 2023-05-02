@@ -39,11 +39,13 @@
                     <span class="input-wrap__title">{{ __('auth.input_password') }}:</span>
                     <div class="input-form">
                         <a class="input-link" id="input-link">{{ __('auth.link_forgotPassword') }}</a>
-                        <input type="password" class="input-text" name="login_password" title="{{ __('auth.link_forgotPassword') }}"/>
+                        <input type="password" class="input-text" name="login_password"
+                               title="{{ __('auth.link_forgotPassword') }}"/>
                     </div>
                 </div>
 
-                <input type="submit" class="form__submit btn blue-btn" value="{{ __('auth.btn_signIn') }}" title="Войти"/>
+                <input type="submit" class="form__submit btn blue-btn" value="{{ __('auth.btn_signIn') }}"
+                       title="Войти"/>
 
                 <a href="#" class="login-form__registration-link open-registration">{{ __('auth.link_register') }}</a>
             </form>
@@ -53,6 +55,11 @@
         </div>
     </section>
 
+@endsection
+
+@section('preview-modals')
+    @include('auth.register')
+    @include('auth.passwords.reset')
 @endsection
 
 

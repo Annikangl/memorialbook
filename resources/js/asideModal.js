@@ -4,8 +4,8 @@ let buttonOpenMenu = document.querySelector('#mobile-menu');
 let modal = document.querySelector('#modal-from');
 let aside = document.querySelector('#form-aside');
 
-let buttonOpenSearchPeople = document.querySelector('.search-people');
-let buttonOpenSearchPlaces = document.querySelector('.search-places');
+let buttonOpenSearchPeople = document.querySelectorAll('.search-people');
+let buttonOpenSearchPlaces = document.querySelectorAll('.search-places');
 let buttonOpenSearchFilters = document.querySelector('.search-filter');
 
 let openModal = function () {
@@ -78,34 +78,44 @@ let openFormInvite = function () {
 }
 
 if (buttonOpenSearchPeople) {
-    buttonOpenSearchPeople.addEventListener('click', function () {
-        openModal();
-        modal.classList.add('aside-top');
-        aside.classList.remove('hide');
-        aside.classList.add('search-people');
-    });
-
-    buttonOpenSearchPlaces.addEventListener('click', function () {
-        openModal();
-        modal.classList.add('aside-top');
-        aside.classList.remove('hide');
-        aside.classList.add('search-places');
+    buttonOpenSearchPeople.forEach(function (item) {
+        item.addEventListener('click', function () {
+            openModal();
+            modal.classList.add('aside-top');
+            aside.classList.remove('hide');
+            aside.classList.add('search-people');
+        });
     })
 }
 
+if (buttonOpenSearchPlaces) {
+    buttonOpenSearchPlaces.forEach(function (item) {
+        item.addEventListener('click', function () {
+            openModal();
+            modal.classList.add('aside-top');
+            aside.classList.remove('hide');
+            aside.classList.add('search-places');
+        })
+    })
+}
+
+
+
+
+
 if (buttonOpenSearchFilters) {
     buttonOpenSearchFilters.addEventListener('click', function () {
-       let attributes = JSON.parse(this.getAttribute('data-slideout-options'));
+        let attributes = JSON.parse(this.getAttribute('data-slideout-options'));
 
         openModal();
         modal.classList.add('aside-top');
         aside.classList.remove('hide');
 
-       if (attributes.type === 'places') {
-           aside.classList.add('search-places');
-       } else if (attributes.type === 'people') {
-           aside.classList.add('search-people');
-       }
+        if (attributes.type === 'places') {
+            aside.classList.add('search-places');
+        } else if (attributes.type === 'people') {
+            aside.classList.add('search-people');
+        }
     });
 }
 

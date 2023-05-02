@@ -1,9 +1,11 @@
 <?php
 
 return [
+    'People' => 'People',
+    'Places' => 'Places',
     'communities' => 'communities',
     'pets' => 'pets',
-    'family' => 'family',
+    'Family tree' => 'Family tree',
     'shop' => 'shop',
     'news' => 'news',
     'create_community' => 'Create community',

@@ -228,88 +228,92 @@ if (document.querySelector('.mask-data')) {
     }
 }
 
-
-if (document.querySelector('.add-profile')) {
-    let itemsNav = document.querySelectorAll('.steeps-nav__item');
-    let steeps = document.querySelectorAll('.steep');
-    let btnSave = document.querySelector('.save-and-next');
-    let btnSaveDraft = document.querySelector('.save-draft');
-    let btnSaveEnd = document.querySelector('.save-end');
+//step transition
+if (document.querySelector(".add-profile")) {
+    let itemsNav = document.querySelectorAll(".steeps-nav__item");
+    let steeps = document.querySelectorAll(".steep");
+    let btnSave = document.querySelector(".save-and-next");
+    let btnSaveDraft = document.querySelector(".save-draft");
+    let totalInfo = document.querySelector('.user-total-info');
 
     let currentSteep = 0;
 
-
     for (let i = 0; i < itemsNav.length; i++) {
-        itemsNav[i].addEventListener('click', function () {
+        itemsNav[i].addEventListener("click", function () {
             for (let x = 0; x < itemsNav.length; x++) {
-                itemsNav[x].classList.remove('active', 'current');
-                steeps[x].classList.add('hide');
+                itemsNav[x].classList.remove("active", "current");
+                steeps[x].classList.add("hide");
             }
 
             if (i > 0) {
                 for (let x = i; x >= 0; x--) {
-                    itemsNav[x].classList.add('active');
+                    itemsNav[x].classList.add("active");
                 }
             }
 
-            steeps[i].classList.remove('hide');
-            itemsNav[i].classList.add('active', 'current');
+            steeps[i].classList.remove("hide");
+            itemsNav[i].classList.add("active", "current");
             currentSteep = i;
 
-
-
             if (currentSteep + 1 === steeps.length) {
-
-                btnSaveDraft.classList.remove('hide');
-                btnSaveEnd.classList.remove('hide');
-                btnSave.innerHTML = 'Сохранить и опубликовать';
-                btnSave.classList.add('hide');
-
+                btnSaveDraft.classList.remove("hide");
+                btnSave.innerHTML = "Save and posting 1";
+                btnSave.type = 'submit';
             } else {
-                btnSaveDraft.classList.add('hide');
-                btnSave.innerHTML = 'Сохранить и продолжить';
+                btnSaveDraft.classList.add("hide");
+                btnSave.innerHTML = "Save and continue";
+                btnSave.type = 'button';
+                btnSave.disabled  = false;
             }
-        })
+        });
     }
 
-    btnSave.addEventListener('click', function (e) {
-        let totalInf = document.querySelector('.user-total-info__name');
-
-
+    btnSave.addEventListener("click", function () {
         if (currentSteep < steeps.length - 1) {
             ++currentSteep;
 
             for (let x = 0; x < itemsNav.length; x++) {
-
                 if (x !== currentSteep) {
-                    steeps[x].classList.add('hide');
+                    steeps[x].classList.add("hide");
                 } else {
-                    steeps[x].classList.remove('hide');
+                    steeps[x].classList.remove("hide");
                 }
             }
 
-
-            itemsNav[currentSteep].classList.add('active', 'current');
+            itemsNav[currentSteep].classList.add("active", "current");
 
             if (currentSteep === steeps.length - 1) {
 
-                btnSaveDraft.classList.remove('hide');
-                btnSaveEnd.classList.remove('hide');
-                btnSave.classList.add('hide')
-                btnSave.innerHTML = 'Сохранить и опубликовать';
-                btnSave.classList.add('hide');
-                totalInf.innerHTML = document.querySelector("#first_name").value;
+                btnSaveDraft.classList.remove("hide");
+                btnSave.innerHTML = "Save and posting 2";
+                btnSave.type = 'submit';
+                btnSave.disabled  = true;
 
-                // btnSave.type = 'submit';
+                setTimeout(function () {
+                    btnSave.disabled = false;
+                }, 1000);
 
-                if (document.querySelector('.preview-avatar-wrap .bg-img')) {
-                    let wrap = document.querySelector('.user-current-avatar');
-                    let el = document.querySelector('.preview-avatar-wrap .bg-img');
+                if (document.querySelector('#first_name').value) {
+                    let fName = document.querySelector('#first_name').value;
+                    let lName = document.querySelector('#last_name').value;
+
+                    totalInfo.querySelector('.user-total-info__name').innerHTML = fName + ' ' + lName;
+                }
+
+                if (document.querySelector(".preview-avatar-wrap .bg-img")) {
+                    let wrap = document.querySelector(".user-current-avatar");
+                    let el = document.querySelector(".preview-avatar-wrap .bg-img");
                     let clone = el.cloneNode(true);
                     wrap.append(clone);
+                } else {
+                    let wrap = document.querySelector(".user-current-avatar");
+                    let defaultImg = document.createElement('img');
+                    defaultImg.classList.add('bg-img');
+                    defaultImg.setAttribute('src', window.app.globalConfig.assetsPath + '/img/empty_profile_avatar.png');
+                    wrap.append(defaultImg)
                 }
             }
         }
-    })
+    });
 }
 

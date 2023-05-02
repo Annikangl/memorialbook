@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Cabinet')
+
 @section('content')
 
     <section class="edit">
@@ -55,9 +57,10 @@
                             data-slideout-options="{&quot;type&quot;:&quot;restorepass&quot;,&quot;position&quot;:&quot;top&quot;}">
                         {{ __('cabinet.btn_changePassword') }}
                     </button>
-                    <button type="button" id="delete-account" class="delete-profile" title="Удалить аккаунт">
+                    <button type="button" id="delete-account" class="delete-profile" title="{{ __('cabinet.btn_deleteAccount') }}">
                         {{ __('cabinet.btn_deleteAccount') }}
                     </button>
+
                 </div>
 
 
@@ -114,7 +117,7 @@
                 <li class="access-profiles__item">
                     <div class="access-profiles__wrap">
                         <div class="access-profiles__img">
-                            <img src="{{ asset('storage/' . $owner->avatar) }}" class="bg-img" alt="Avatar"
+                            <img src="{{ $owner->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt="Avatar"
                                  title="user avatar"/>
                         </div>
                         <span class="access-profiles__name">{{ $owner->username }}</span>
@@ -126,6 +129,13 @@
         </ul>
 
         <button type="button" class="button-share">{{ __('cabinet.btn_shareAccess') }}</button>
+
+        <form action="{{ route('logout') }}" method="post">
+            @csrf
+            <button type="submit"  class="logout" title="{{ __('auth.sign_out') }}">
+                {{ __('auth.sign_out') }}
+            </button>
+        </form>
 
     </section>
 @endsection

@@ -42,16 +42,13 @@
     <div class="aside-form" id="form-aside">
         <button type="button" class="close-registration" id="close-aside"></button>
 
-        @if(Route::is('login'))
-            @include('includes.forms.register')
-            @include('includes.forms.password-reset')
-        @endif
+        @yield('preview-modals')
 
         @include('includes.forms.filter_people')
         @include('includes.forms.filter_places')
 
     </div>
-    @include('includes.forms.form_invite')
+    @include('includes.forms.invite')
 </div>
 
 <script data-skip-moving="true">
@@ -65,10 +62,6 @@
 </script>
 
 <script src="{{ asset('js/jquery-3.6.4.min.js') }}"></script>
-
-{{--<script--}}
-{{--    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtiW5uhL3BgojiJgqKk1eJuOKs4jAVFfU&libraries=places&callback=initMap">--}}
-{{--</script>--}}
 
 @yield('scripts')
 

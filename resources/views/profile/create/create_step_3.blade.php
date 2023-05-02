@@ -3,7 +3,7 @@
     <div class="steep-wrap grid-col-2_3">
         <div class="user-current-avatar"></div>
         <div class="user-total-info">
-            <h3 class="user-total-info__name"></h3>
+                <h3 class="user-total-info__name"></h3>
         </div>
     </div>
     <div class="steep-wrap">

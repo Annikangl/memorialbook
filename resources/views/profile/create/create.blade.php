@@ -2,27 +2,27 @@
 
 @section('content')
 
-{{--    <style>--}}
-{{--        .fileuploader-popup {--}}
-{{--            position: fixed;--}}
-{{--            top: 0;--}}
-{{--            left: 0;--}}
-{{--            width: 100%;--}}
-{{--            height: 100%;--}}
-{{--            overflow: hidden;--}}
-{{--            background: #191d1e;--}}
-{{--            z-index: 1090;--}}
-{{--            animation-duration: .4s;--}}
-{{--        }--}}
+    {{--    <style>--}}
+    {{--        .fileuploader-popup {--}}
+    {{--            position: fixed;--}}
+    {{--            top: 0;--}}
+    {{--            left: 0;--}}
+    {{--            width: 100%;--}}
+    {{--            height: 100%;--}}
+    {{--            overflow: hidden;--}}
+    {{--            background: #191d1e;--}}
+    {{--            z-index: 1090;--}}
+    {{--            animation-duration: .4s;--}}
+    {{--        }--}}
 
-{{--        .fileuploader, .fileuploader-popup {--}}
-{{--            font-family: Roboto,"Segoe UI","Helvetica Neue",Arial,sans-serif;--}}
-{{--            font-weight: 400;--}}
-{{--            font-size: 14px;--}}
-{{--            line-height: normal;--}}
-{{--            text-align: left;--}}
-{{--        }--}}
-{{--    </style>--}}
+    {{--        .fileuploader, .fileuploader-popup {--}}
+    {{--            font-family: Roboto,"Segoe UI","Helvetica Neue",Arial,sans-serif;--}}
+    {{--            font-weight: 400;--}}
+    {{--            font-size: 14px;--}}
+    {{--            line-height: normal;--}}
+    {{--            text-align: left;--}}
+    {{--        }--}}
+    {{--    </style>--}}
 
     <section class="add-profile">
 
@@ -61,31 +61,27 @@
 
             <form action="{{ route('profile.store') }}" class="add-profile-wrap" id="add-profile"
                   method="POST" enctype="multipart/form-data">
-            @csrf
+                @csrf
 
-            @include('includes.partials.message')
+                @include('includes.partials.message')
 
-            @include('profile.create.create_step_1')
+                @include('profile.create.create_step_1')
 
-            @include('profile.create.create_step_2')
+                @include('profile.create.create_step_2')
 
-            @include('profile.create.create_step_3')
+                @include('profile.create.create_step_3')
 
-            <div class="buttons-save">
-                <input type="submit"
-                       class="save-draft hide btn white-btn" name="draft"
-                       value="{{ __('create_profile.btn_saveAsDraft') }}">
-                <button type="button"
-                        class="save-and-next btn blue-btn">{{ __('create_profile.btn_saveAndContinue') }}</button>
-
-                <input type="submit"
-                       class="save-end hide btn blue-btn"
-                       name="posting"
-                       value="{{ __('create_profile.btn_saveAndPost') }}">
-            </div>
-
+                <div class="buttons-save">
+                    <input type="submit" class="save-draft hide btn white-btn" name="draft"
+                           value="{{ __('create_profile.btn_saveAsDraft') }}">
+                    <button type="button" class="save-and-next btn blue-btn">
+                        {{ __('create_profile.btn_saveAndContinue') }}
+                    </button>
+                </div>
             </form>
+
             <p class="add-profile__text">{{ __('create_profile.subtitle') }}</p>
+
         </div>
 
     </section>
@@ -93,6 +89,9 @@
 @endsection
 
 @section('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtiW5uhL3BgojiJgqKk1eJuOKs4jAVFfU&libraries=places&callback=initMap">
+    </script>
     <script src="{{ asset('js/jquery.fileuploader.min.js') }}"></script>
 @endsection
 
