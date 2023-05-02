@@ -8,7 +8,7 @@
                 <img src="{{ asset('assets/img/image_en.png') }}"
                      alt="Memorialbook preview image"
                      title="Memorialbook"/>
-                <img src="{{ asset('assets/img/image-mobile.png') }}"
+                <img src="{{ asset('assets/img/image_mobile_en.png') }}"
                      alt="Memorialbook preview image for mobile"
                      title="Memorialbook"/>
             @else
