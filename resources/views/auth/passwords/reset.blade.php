@@ -1,13 +1,26 @@
-<form class="form-recover">
-    <h3 class="form-recover__title">{{ __('auth.forgot_title') }}</h3>
-    <div class="form-recover-wrap">
-        <p>{{ __('auth.forgot_modal_text') }}</p>
-        <div class="input-wrap">
-            <span class="input-wrap__title">{{ __('auth.input_email') }}:</span>
-            <div class="input-form">
-                <input type="email" class="input-text" name="form-recover__email" title=""/>
+@extends('layouts.app')
+
+@section('content')
+    <section class="new-password">
+        <h2 class="new-password__title">{{ __('auth.reset_password_title') }}</h2>
+        <form class="form-new-password" action="{{ route('password.confirm') }}">
+            @csrf
+            <div class="form-new-password__wrap">
+                <div class="input-wrap">
+                    <span class="input-wrap__title">{{ __('auth.input_password') }}:</span>
+                    <div class="input-form">
+                        <input type="password" class="input-text" name="login-form__mail" title=""/>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <span class="input-wrap__title">{{ __('auth.input_confirmPassword') }}:</span>
+                    <div class="input-form">
+                        <input type="password" class="input-text" name="login-form__mail" title=""/>
+                    </div>
+                </div>
+                <input type="submit" class="form__submit btn blue-btn" value="{{ __('auth.btn_savePassword') }}" title="Войти"/>
             </div>
-        </div>
-        <input type="submit" class="form__submit blue-btn btn" value="{{ __('auth.submit_btn') }}" title="submit"/>
-    </div>
-</form>
+            <p class="form-new-password__text">{{ __('auth.reset_password_text') }}</p>
+        </form>
+    </section>
+@endsection

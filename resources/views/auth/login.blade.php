@@ -59,7 +59,7 @@
 
 @section('preview-modals')
     @include('auth.register')
-    @include('auth.passwords.reset')
+    @include('auth.passwords.email')
 @endsection
 
 
