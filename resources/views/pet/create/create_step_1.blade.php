@@ -40,8 +40,8 @@
             <span class="input-wrap__title">{{ __('create-pet.input_breed') }}:</span>
             <div class="input-form @error('breed')  no-valid @enderror">
                 <input type="text" class="input-text input-required"
-                       name="breed"
                        id="last_name"
+                       name="breed"
                        placeholder="{{ __('create_profile.sheepdog') }}"
                        value="{{ old('breed') }}"
                        title="{{ __('create-pet.input_breed') }}">
@@ -54,67 +54,68 @@
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create-pet.input_birthDate') }}:</span>
-            <div class="input-form @error('date_birth')  no-valid @enderror">
+            <div class="input-form @error('dateBirth')  no-valid @enderror">
                 <input type="text" class="input-text input-required mask-data"
-                       name="date_birth"
+                       name="dateBirth"
                        placeholder="{{ __('create_profile.dmy') }}"
-                       value="{{ old('date_birth') }}"
+                       value="{{ old('dateBirth') }}"
                        title={{ __('create-pet.input_birthDate') }}>
             </div>
-            @error('date_birth')
+            @error('dateBirth')
                 <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create-pet.input_birthPlace') }}:</span>
-            <div class="input-form @error('birth_place')  no-valid @enderror">
+            <div class="input-form @error('birthPlace') no-valid @enderror">
                 <input type="text" class="input-text"
-                       name="birth_place"
-                       value="{{ old('birth_place') }}"
+                       name="birthPlace"
+                       value="{{ old('birthPlace') }}"
                        title={{ __('create-pet.input_birthPlace') }}>
             </div>
-            @error('birth_place')
+            @error('birthPlace')
                 <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create-pet.input_deathDate') }}:</span>
-            <div class="input-form @error('date_death')  no-valid @enderror">
+            <div class="input-form @error('dateBirth') no-valid @enderror">
                 <input type="text" class="input-text input-required mask-data"
-                       name="date_death"
+                       name="dateDeath"
                        placeholder="{{ __('create_profile.dmy') }}"
-                       value="{{ old('date_death') }}"
+                       value="{{ old('dateBirth') }}"
                        title={{ __('create-pet.input_deathDate') }}>
             </div>
-            @error('date_death')
+            @error('dateBirth')
                 <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create-pet.input_burialPlace') }}:</span>
-            <div class="input-form @error('burial_place')  no-valid @enderror">
+            <div class="input-form @error('burialPlace') no-valid @enderror">
                 <input type="text" class="input-text"
                        id="burial_place"
-                       name="burial_place"
+                       name="burialPlace"
                        placeholder="{{ __('create_cemetery.Select burial place') }}"
-                       value="{{ old('burial_place') }}"
+                       value="{{ old('burialPlace') }}"
                        title={{ __('create-pet.input_burialPlace') }}>
             </div>
-            @error('burial_place')
+            @error('burialPlace')
                 <span class="is-invalid">{{ $message }}</span>
             @enderror
-            <input type="hidden" id="burial_coords" name="burial_coords"
-                   value="{{ old('burial_coords') }}">
+            <input type="hidden" id="burial_coords" name="burialCoords"
+                   value="{{ old('burialCoords') }}">
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create_profile.input_deathCause') }}:</span>
-            <div class="input-form @error('death_reason')  no-valid @enderror">
-                <input type="text" class="input-text" id="death_reason" name="death_reason"
+            <div class="input-form @error('deathReason')  no-valid @enderror">
+                <input type="text" class="input-text" id="death_reason"
+                       name="deathReason"
                        placeholder="{{ __('create_profile.input_deathCause') }}"
-                       value="{{ old('death_reason') }}"
+                       value="{{ old('deathReason') }}"
                        title="{{ __('create_profile.input_deathCause') }}">
             </div>
-            @error('death_reason')
+            @error('deathReason')
             <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>

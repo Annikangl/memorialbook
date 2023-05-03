@@ -94,40 +94,40 @@ class ProfileService
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function createPet(int $ownerId, array $data): Pet|Builder
-    {
-        $pet = Pet::query()->make([
-            'name' => $data['name'],
-            'breed' => $data['breed'],
-            'date_birth' => $data['date_birth'],
-            'date_death' => $data['date_death'],
-            'birth_place' => $data['birth_place'],
-            'burial_place' => $data['burial_place'],
-            'death_reason' => $data['death_reason'],
-            'description' => $data['description'],
-        ]);
-
-        $pet->user()->associate($ownerId);
-
-        $pet->save();
-
-
-        if (isset($data['avatar'])) {
-            $pet->addMedia($data['avatar'])->toMediaCollection('avatars');
-        }
-
-        if (isset($data['pet_banner'])) {
-            $pet->addMedia($data['pet_banner'])->toMediaCollection('banner');
-        }
-
-        if (isset($data['pets_files'])) {
-            foreach ($data['pets_files'] as $image) {
-                $pet->addMedia($image)->toMediaCollection('gallery');
-            }
-        }
-
-        return $pet;
-    }
+//    public function createPet(int $ownerId, array $data): Pet|Builder
+//    {
+//        $pet = Pet::query()->make([
+//            'name' => $data['name'],
+//            'breed' => $data['breed'],
+//            'date_birth' => $data['date_birth'],
+//            'date_death' => $data['date_death'],
+//            'birth_place' => $data['birth_place'],
+//            'burial_place' => $data['burial_place'],
+//            'death_reason' => $data['death_reason'],
+//            'description' => $data['description'],
+//        ]);
+//
+//        $pet->user()->associate($ownerId);
+//
+//        $pet->save();
+//
+//
+//        if (isset($data['avatar'])) {
+//            $pet->addMedia($data['avatar'])->toMediaCollection('avatars');
+//        }
+//
+//        if (isset($data['pet_banner'])) {
+//            $pet->addMedia($data['pet_banner'])->toMediaCollection('banner');
+//        }
+//
+//        if (isset($data['pets_files'])) {
+//            foreach ($data['pets_files'] as $image) {
+//                $pet->addMedia($image)->toMediaCollection('gallery');
+//            }
+//        }
+//
+//        return $pet;
+//    }
 
     public function search(string $searchText): LengthAwarePaginator
     {

@@ -206,10 +206,6 @@ let select = function () {
     }
 }
 
-// if (document.querySelector('.select-form')) {
-//     select();
-// }
-
 //MASK TADE FORM
 if (document.querySelector('.mask-data')) {
     let inputsMask = document.querySelectorAll('.mask-data');

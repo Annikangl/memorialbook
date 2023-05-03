@@ -18,6 +18,15 @@ class CreateRequest extends FormRequest
         return \Auth::check();
     }
 
+    protected function prepareForValidation()
+    {
+        if ($this->get('burialCoords')) {
+            $this->merge([
+                'burialCoords' => json_decode($this->get('burialCoords'), true)
+            ]);
+        }
+    }
+
     protected function failedValidation(Validator $validator)
     {
         return redirect()->back()->with([
@@ -32,11 +41,14 @@ class CreateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:100'],
             'breed' => ['required', 'string'],
-            'date_birth' => ['required', 'date'],
-            'date_death' => ['required', 'date'],
-            'birth_place' => [ 'nullable', 'string'],
-            'burial_place' => ['nullable', 'string'],
-            'death_reason' => ['required', 'string'],
+            'dateBirth' => ['required', 'date'],
+            'dateDeath' => ['required', 'date'],
+            'birthPlace' => [ 'nullable', 'string'],
+            'burialPlace' => ['nullable', 'string'],
+            'burialCoords' => ['nullable', 'array'],
+            'burialCoords.lat' => ['nullable', 'numeric'],
+            'burialCoords.lng' => ['nullable', 'numeric'],
+            'deathReason' => ['required', 'string'],
             'description' => ['nullable', 'string'],
 
             'avatar' => [
@@ -45,12 +57,14 @@ class CreateRequest extends FormRequest
                     ->max(10 * 1024)
             ],
 
-            'pet_banner' => [
+            'banner' => [
                 'sometimes',
-                File::image()->max(10 * 1024),
+                File::image()
+                    ->max(10 * 1024),
             ],
 
-            'pets_files.*' => ['sometimes',
+            'gallery.*' => [
+                'sometimes',
                 File::types(['video/mp4', 'image/jpeg', 'image/png'])->max(30 * 1024),
             ],
         ];

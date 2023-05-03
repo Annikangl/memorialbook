@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\DTOs\Profile\PetDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\Pet\CreateRequest;
-use App\Models\Profile\DeathReason;
 use App\Models\Profile\Pet\Pet;
-use App\Services\ProfileService;
+use App\Services\PetService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
+use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class PetController extends Controller
 {
-    private ProfileService $service;
-
-    public function __construct(ProfileService $service)
+    public function __construct(private PetService $service)
     {
-        $this->service = $service;
     }
 
     public function show(string $slug): Factory|View|Application
@@ -37,14 +35,20 @@ class PetController extends Controller
         return view('pet.create.create');
     }
 
+    /**
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     */
     public function store(CreateRequest $request): RedirectResponse
     {
-        $data = $request->validated();
+        $petDto = PetDTO::fromArray($request->validated());
 
         try {
-            $pet = $this->service->createPet(\Auth::id(), $data);
+            $pet = $this->service->create($petDto, \Auth::id());
         } catch (\Throwable $exception) {
-            return redirect()->back()->with('message', $exception->getMessage())->withInput();
+            return redirect()->back()
+                ->with('message', 'Failed to create pet profile')
+                ->withInput();
         }
 
         return redirect()->route('profile.pet.show', $pet->slug);
