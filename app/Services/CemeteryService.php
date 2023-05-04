@@ -4,7 +4,6 @@
 namespace App\Services;
 
 
-use App\Classes\Files\FileUploader;
 use App\DTOs\Cemetery\CemeteryDTO;
 use App\Models\Cemetery\Cemetery;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;

@@ -248,7 +248,7 @@ class Human extends Profile implements HasMedia
         return self::belongsTo(static::class);
     }
 
-    public function familyBurial(): BelongsTo
+    public function burial(): BelongsTo
     {
         return $this->belongsTo(Burial::class);
     }

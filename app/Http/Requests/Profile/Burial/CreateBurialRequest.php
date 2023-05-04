@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\FamilyBurial;
+namespace App\Http\Requests\Profile\Burial;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRequest extends FormRequest
+class CreateBurialRequest extends FormRequest
 {
 
     public function authorize(): bool

@@ -59,17 +59,17 @@
                     <ul class="social">
                         <li class="social__item">
                             <a href="#" class="social__link">
-                                <img src="img/social/facebook.svg" alt="" title="facebook"/>
+                                <img src="{{ asset('assets/img/social/facebook.svg') }}" alt="" title="facebook"/>
                             </a>
                         </li>
                         <li class="social__item">
                             <a href="#" class="social__link">
-                                <img src="img/social/instagram.svg" alt="" title=""/>
+                                <img src="{{ asset('assets/img/social/instagram.svg') }}" alt="" title="instagram"/>
                             </a>
                         </li>
                         <li class="social__item">
                             <a href="#" class="social__link">
-                                <img src="img/social/twitter.svg" alt="" title=""/>
+                                <img src="{{ asset('assets/img/social/twitter.svg') }}" alt="" title="twitter"/>
                             </a>
                         </li>
                     </ul>

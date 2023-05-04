@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\FamilyBurial\CreateRequest;
+use App\Http\Requests\Profile\Burial\CreateBurialRequest;
 use App\Models\Profile\Burial;
 use App\Models\Profile\Human\Human;
 use App\Services\BurialService;
-use App\Services\HumanService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -60,7 +59,7 @@ class BurialController extends Controller
         return response()->json(['status' => true, 'profiles' => $profiles]);
     }
 
-    public function store(CreateRequest $request): RedirectResponse
+    public function store(CreateBurialRequest $request): RedirectResponse
     {
         $humans = Human::whereIn('slug', $request->validated('profile_ids'))->get();
 

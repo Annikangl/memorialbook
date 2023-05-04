@@ -12,11 +12,11 @@ class BurialService
 {
     public function create(Collection $humans): Burial
     {
-        $burial = Burial::create(['banner' => Burial::DEFAULT_BANNER]);
+        $burial = Burial::query()->create();
 
         $humans->each(function ($human) use ($burial) {
             /** @var Human $human */
-            $human->familyBurial()->associate($burial);
+            $human->burial()->associate($burial);
             $human->save();
         });
 
