@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Profile;
 
 use App\DTOs\Profile\PetDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\Pet\CreateRequest;
+use App\Http\Requests\Profile\Pet\CreatePetRequest;
 use App\Models\Profile\Pet\Pet;
 use App\Services\PetService;
 use Illuminate\Contracts\Foundation\Application;
@@ -39,7 +39,7 @@ class PetController extends Controller
      * @throws CastTargetException
      * @throws MissingCastTypeException
      */
-    public function store(CreateRequest $request): RedirectResponse
+    public function store(CreatePetRequest $request): RedirectResponse
     {
         $petDto = PetDTO::fromArray($request->validated());
 

@@ -9,7 +9,7 @@
                  alt="Баннер семейного захоронения" title="Биннер"/>
         </div>
         <ul class="family-card-nav">
-            @foreach($familyBurial->humans as $human)
+            @foreach($burial->humans as $human)
                 <li class="family-card-nav__item" data-src="{{ route('profile.show', $human->slug) }}">
                     <div class="family-card-img">
                         <img src="{{ $human->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt="Аватар профиля"

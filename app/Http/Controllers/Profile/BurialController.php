@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FamilyBurial\CreateRequest;
-use App\Models\Profile\FamilyBurial;
+use App\Models\Profile\Burial;
 use App\Models\Profile\Human\Human;
-use App\Services\FamilyBurialService;
-use App\Services\ProfileService;
+use App\Services\BurialService;
+use App\Services\HumanService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -15,35 +15,31 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class FamilyBurialController extends Controller
+class BurialController extends Controller
 {
-    private ProfileService $service;
-    private FamilyBurialService $burialService;
 
-    public function __construct(ProfileService $service, FamilyBurialService $burialService)
+    public function __construct(private BurialService $burialService)
     {
-        $this->service = $service;
-        $this->burialService = $burialService;
     }
 
-    public function show(FamilyBurial $familyBurial)
+    public function show(Burial $burial)
     {
-        $firstHuman = $familyBurial->humans()->with(['hobbies'])->first();
+        $firstHuman = $burial->humans()->first();
         $relatives = $firstHuman->WithRelatives()->get();
 
-        return view('family_burial.show', compact('familyBurial', 'firstHuman', 'relatives'));
+        return view('burial.show', compact('burial', 'firstHuman', 'relatives'));
     }
 
-    public function showShortPage(FamilyBurial $familyBurial): Factory|View|Application
+    public function showShortPage(Burial $burial): Factory|View|Application
     {
-        $human = $familyBurial->humans()->firstOrFail();
+        $human = $burial->humans()->firstOrFail();
 
-        return view('family_burial.short_page', compact('familyBurial', 'human'));
+        return view('burial.short_page', compact('burial', 'human'));
     }
 
     public function create(): Factory|View|Application
     {
-        return view('family_burial.create');
+        return view('burial.create');
     }
 
     public function searchProfile(Request $request): JsonResponse
@@ -51,7 +47,7 @@ class FamilyBurialController extends Controller
         $searchText = $request->get('searchText');
 
         try {
-            $profiles = $this->service->search($searchText);
+            $profiles = Human::bySearch($searchText)->paginate(5);
 
             foreach ($profiles as $profile) {
                 $profile->avatar = $profile->getFirstMediaUrl('avatars', 'thumb');
@@ -69,11 +65,11 @@ class FamilyBurialController extends Controller
         $humans = Human::whereIn('slug', $request->validated('profile_ids'))->get();
 
         try {
-            $familyBurial = $this->burialService->create($humans);
+            $burial = $this->burialService->create($humans);
         } catch (\DomainException $exception) {
             return redirect()->back()->with('message', $exception->getMessage());
         }
 
-        return redirect()->route('profile.family.show', $familyBurial);
+        return redirect()->route('profile.family.show', $burial);
     }
 }

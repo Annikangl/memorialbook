@@ -11,14 +11,14 @@ use Illuminate\Validation\Rules\File;
 /**
  * @property string $burial_coords
  */
-class CreateRequest extends FormRequest
+class CreatePetRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return \Auth::check();
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         if ($this->get('burialCoords')) {
             $this->merge([

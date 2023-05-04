@@ -3,7 +3,7 @@
     <div class="steep-wrap grid-col-2_3">
         <div class="user-current-avatar"></div>
         <div class="user-total-info">
-            <h3 class="user-total-info__name">Ваше кладбище</h3>
+            <h3 class="user-total-info__name"></h3>
 
 {{--            <div class="status-moderation">--}}
 {{--                <span class="status-moderation__title">Статус модерации:</span>--}}
@@ -18,14 +18,14 @@
         <ul class="settings-public grid-col-2">
             <li class="settings-public__item">
                 <label class="settings-wrap">
-                    <input type="radio" class="settings-wrap__radio"  name="settings-public" value="public" checked/>
+                    <input type="radio" class="settings-wrap__radio"  name="access" value="public" checked/>
                     <span class="settings-wrap__title">{{ __('create_cemetery.input_public') }}</span>
                     <span class="settings-wrap__desc">{{ __('create_cemetery.input_public_subtitle') }}</span>
                 </label>
             </li>
             <li class="settings-public__item">
                 <label class="settings-wrap">
-                    <input type="radio" class="settings-wrap__radio" name="settings-public" value="private"/>
+                    <input type="radio" class="settings-wrap__radio" name=access value="private"/>
                     <span class="settings-wrap__title">{{ __('create_cemetery.input_private') }}</span>
                     <span class="settings-wrap__desc">{{ __('create_cemetery.input_private_subtitle') }}</span>
                 </label>

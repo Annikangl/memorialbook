@@ -19,12 +19,4 @@ class CreateRequest extends FormRequest
             'profile_ids.*' => ['required', 'string', 'exists:humans,slug']
         ];
     }
-
-    public function messages(): array
-    {
-        return [
-            'profile_ids.*.exists' => 'Выбранного профиля не существует',
-            'profile_ids.required' => 'Выберите хотя бы один профиль',
-        ];
-    }
 }

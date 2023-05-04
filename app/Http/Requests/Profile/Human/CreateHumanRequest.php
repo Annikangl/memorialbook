@@ -1,18 +1,17 @@
 <?php
 
 
-namespace App\Http\Requests\Profile;
+namespace App\Http\Requests\Profile\Human;
 
 
 use App\Models\Profile\Human\Human;
-use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
 /**
- * Class ProfileCreateRequest
+ * Class CreateHumanRequest
  * @package App\Http\Requests\Human
  *
  * @property string $gender
@@ -24,7 +23,7 @@ use Illuminate\Validation\Rules\File;
  * @property string $mother_id
  * @property string $religious_id
  */
-class ProfileCreateRequest extends FormRequest
+class CreateHumanRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -66,9 +65,9 @@ class ProfileCreateRequest extends FormRequest
             'access' => ['required', Rule::in(Human::getAccessList())],
 
             'burial_coords' => [
-                Rule::requiredIf(fn() => (bool)$this->get('profile_burial_place')),
+                'required_with:burial_place',
                 'nullable',
-                'array'
+                'array:lat,lng'
             ],
 
             'avatar' => [
@@ -79,30 +78,11 @@ class ProfileCreateRequest extends FormRequest
             ],
 
             'death_certificate' => [
-                'sometimes',
+                'nullable',
                 File::types(['pdf'])
                     ->max(10 * 1024)
             ],
         ];
     }
-
-//    public function messages(): array
-//    {
-//        return [
-//            'avatar' => 'Изображение аватара должно быть более 5 мб',
-//            'first_name.required' => 'Укажите Имя',
-//            'last_name.required' => 'Укажите Фамилию',
-//            'gender' => 'Выберите пол',
-//            'date_birth.required' => 'Укажите дату рождения',
-//            'birth_place.required' => 'Укажите место рождения',
-//            'burial_place.required' => 'Укажите место захоронения',
-//            'date_death.required' => 'Укажите дату смерти',
-//            'death_certificate.file' => 'Документ "Свидетельство о смерти" должен быть в одном из форматов: pdf, jpg, png',
-//            'death_certificate.max' => 'Документ "Свидетельство о смерти" слишком большой',
-//            'profile_images.*.required' => 'Пожалуйста, загрузите фотографии или видео',
-//            'profile_images.*.mimes' => 'Только jpeg,png,bmp,mp4 файлы доступны',
-//            'profile_images.*.max' => 'Извините! Максимально доступный размер файла 20MB',
-//        ];
-//    }
 
 }

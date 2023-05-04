@@ -8,14 +8,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('family_burials', function (Blueprint $table) {
+        Schema::create('burials', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
 
         Schema::table('humans', function (Blueprint $table) {
-           $table->foreignId('family_burial_id')->after('cemetery_id')->nullable()
-               ->references('id')->on('family_burials')->cascadeOnDelete();
+           $table->foreignId('burial_id')->after('cemetery_id')->nullable()
+               ->references('id')->on('burials')->cascadeOnDelete();
         });
     }
 

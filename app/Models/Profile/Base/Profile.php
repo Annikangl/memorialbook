@@ -17,17 +17,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * Class Profile
  * @package App\Models\Profile\Base
  *
- * @property int $id
- * @property string $first_name
- * @property string|null $last_name
- * @property string|null $patronymic
- * @property string $slug
- * @property string|null $avatar
- * @property string $date_birth
- * @property string $date_death
- * @property-read string $full_name
- * @property string|null $description
- * @property string|null $death_reason
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at

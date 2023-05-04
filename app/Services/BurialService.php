@@ -4,15 +4,15 @@
 namespace App\Services;
 
 
-use App\Models\Profile\FamilyBurial;
+use App\Models\Profile\Burial;
 use App\Models\Profile\Human\Human;
 use Illuminate\Support\Collection;
 
-class FamilyBurialService
+class BurialService
 {
-    public function create(Collection $humans): FamilyBurial
+    public function create(Collection $humans): Burial
     {
-        $burial = FamilyBurial::create(['banner' => FamilyBurial::DEFAULT_BANNER]);
+        $burial = Burial::create(['banner' => Burial::DEFAULT_BANNER]);
 
         $humans->each(function ($human) use ($burial) {
             /** @var Human $human */

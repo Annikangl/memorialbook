@@ -5,50 +5,51 @@ namespace App\Services;
 
 
 use App\Classes\Files\FileUploader;
+use App\DTOs\Cemetery\CemeteryDTO;
 use App\Models\Cemetery\Cemetery;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class CemeteryService
 {
-    public function create(array $data, int $userId, bool $isDraft = false): Cemetery
+    /**
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function create(CemeteryDTO $cemeteryDTO, int $userId, bool $isDraft = false): Cemetery
     {
-        try {
-            return \DB::transaction(function () use ($data, $userId, $isDraft) {
-               $cemetery = Cemetery::query()->make([
-                   'title' => $data['title'],
-                   'title_en' => $data['title_en'],
-                   'subtitle' => $data['subtitle'],
-                   'email' => $data['email'],
-                   'phone' => $data['phone'],
-                   'schedule' => $data['schedule'],
-                   'address' => $data['cemetery_address'],
-                   'latitude' => $data['cemetery_address_coords']['lat'] ?? null,
-                   'longitude' => $data['cemetery_address_coords']['lng'] ?? null,
-                   'description' => $data['description'],
-                   'status' => $isDraft ? Cemetery::STATUS_DRAFT : Cemetery::STATUS_ACTIVE,
-                   'access' => $data['settings-public']
-               ]);
+        $cemetery = Cemetery::query()->make([
+            'title' => $cemeteryDTO->title,
+            'title_en' => $cemeteryDTO->titleEn,
+            'subtitle' => $cemeteryDTO->subtitle,
+            'email' => $cemeteryDTO->email,
+            'phone' => $cemeteryDTO->phone,
+            'schedule' => $cemeteryDTO->schedule,
+            'address' => $cemeteryDTO->address,
+            'latitude' => $cemeteryDTO->addressCoords['lat'] ?? null,
+            'longitude' => $cemeteryDTO->addressCoords['lng'] ?? null,
+            'description' => $cemeteryDTO->description,
+            'status' => $isDraft ? Cemetery::STATUS_DRAFT : Cemetery::STATUS_ACTIVE,
+            'access' => $cemeteryDTO->access
+        ]);
 
-               $cemetery->user()->associate($userId);
-               $cemetery->save();
+        $cemetery->user()->associate($userId);
+        $cemetery->save();
 
-                if (isset($data['avatar'])) {
-                    $cemetery->addMedia($data['avatar'])->toMediaCollection('avatars');
-                }
-
-                if (isset($data['cemetery_banner'])) {
-                    $cemetery->addMedia($data['cemetery_banner'])->toMediaCollection('banners');
-                }
-
-               if (isset($data['cemetery_files'])) {
-                   foreach ($data['cemetery_files'] as $item) {
-                       $cemetery->addMedia($item)->toMediaCollection('gallery');
-                   }
-               }
-
-               return $cemetery;
-            });
-        } catch (\Throwable $exception) {
-            throw new \DomainException($exception->getMessage());
+        if ($avatar = $cemeteryDTO->avatar) {
+            $cemetery->addMedia($avatar)->toMediaCollection('avatars');
         }
+
+        if ($banner = $cemeteryDTO->banner) {
+            $cemetery->addMedia($banner)->toMediaCollection('banners');
+        }
+
+        if ($gallery = $cemeteryDTO->gallery) {
+            foreach ($gallery as $image) {
+                $cemetery->addMedia($image)->toMediaCollection('gallery');
+            }
+        }
+
+        return $cemetery;
     }
 }

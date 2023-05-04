@@ -1,13 +1,12 @@
 @extends('layouts.app')
 
 @section('title')
-    Новое кладбище
+    New cemetery
 @endsection
 
 @section('content')
 
     <style>
-
         .fileuploader {
             max-width: 560px;
         }
@@ -58,20 +57,11 @@
                 @include('cemetery.create.create_step_3')
 
                 <div class="buttons-save">
-                    <input type="submit"
-                           class="save-draft hide btn white-btn"
-                           name="draft"
-                           value="{{ __('create_cemetery.btn_saveAsDraft') }}">
-
-                    <button type="button"
-                            class="save-and-next btn blue-btn">
-                        {{ __('create_cemetery.btn_saveAndContinue') }}
+                    <input type="submit" class="save-draft hide btn white-btn" name="draft"
+                           value="{{ __('create_profile.btn_saveAsDraft') }}">
+                    <button type="button" class="save-and-next btn blue-btn">
+                        {{ __('create_profile.btn_saveAndContinue') }}
                     </button>
-
-                    <input type="submit"
-                           class="save-end hide btn blue-btn"
-                           name="posting"
-                           value="{{ __('create_cemetery.posting') }}">
                 </div>
 
             </form>
@@ -82,6 +72,9 @@
 @endsection
 
 @section('scripts')
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtiW5uhL3BgojiJgqKk1eJuOKs4jAVFfU&libraries=places&callback=initMap"></script>
+
     <script src="{{ asset('js/jquery.fileuploader.min.js') }}"></script>
 
 @endsection

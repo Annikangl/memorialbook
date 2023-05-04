@@ -6,7 +6,7 @@ use App\Http\Controllers\Cemetery\CemeteryController;
 use App\Http\Controllers\Community\CommunityController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\Profile\FamilyBurialController;
+use App\Http\Controllers\Profile\BurialController;
 use App\Http\Controllers\Profile\HumanController;
 use App\Http\Controllers\Profile\PetController;
 use App\Http\Controllers\User\UserController;
@@ -82,11 +82,11 @@ Route::middleware('auth')->group(function () {
         });
 
         Route::group(['prefix' => 'family', 'as' => 'family.'], function () {
-            Route::get('/create', [FamilyBurialController::class, 'create'])->name('create');
-            Route::post('/store', [FamilyBurialController::class, 'store'])->name('store');
-            Route::get('/search/', [FamilyBurialController::class, 'searchProfile'])->name('search.profile');
-            Route::get('/{familyBurial}/show', [FamilyBurialController::class, 'show'])->name('show');
-            Route::get('/{familyBurial}/short/show', [FamilyBurialController::class, 'showShortPage'])
+            Route::get('/create', [BurialController::class, 'create'])->name('create');
+            Route::post('/store', [BurialController::class, 'store'])->name('store');
+            Route::get('/search/', [BurialController::class, 'searchProfile'])->name('search.profile');
+            Route::get('/{familyBurial}/show', [BurialController::class, 'show'])->name('show');
+            Route::get('/{familyBurial}/short/show', [BurialController::class, 'showShortPage'])
                 ->middleware('agent')
                 ->name('short.page');
         });

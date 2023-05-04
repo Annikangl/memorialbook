@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Cemetery;
 
+use App\DTOs\Cemetery\CemeteryDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Cemetery\CreateRequest;
+use App\Http\Requests\Cemetery\CreateCemeteryRequest;
 use App\Http\Requests\Cemetery\SearchRequest;
 use App\Models\Cemetery\Cemetery;
 use App\Services\CemeteryService;
@@ -11,6 +12,8 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
+use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class CemeteryController extends Controller
 {
@@ -60,12 +63,18 @@ class CemeteryController extends Controller
         return view('cemetery.create.create');
     }
 
-    public function store(CreateRequest $request): RedirectResponse
+    /**
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     */
+    public function store(CreateCemeteryRequest $request): RedirectResponse
     {
+        $cemeteryDto = CemeteryDTO::fromArray($request->validated());
+
         try {
-            $isDraft = (bool) $request->input('draft');
-            $cemetery = $this->service->create($request->validated(), auth()->id(), $isDraft);
-        } catch (\DomainException $exception) {
+            $isDraft = (bool) $request->validated('draft');
+            $cemetery = $this->service->create($cemeteryDto, \Auth::id(), $isDraft);
+        } catch (\Throwable $exception) {
             return back()->with('message', $exception->getMessage())->withInput();
         }
 

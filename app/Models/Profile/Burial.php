@@ -7,13 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class FamilyBurial extends Model
+class Burial extends Model
 {
     use HasFactory;
 
     protected $fillable = ['banner'];
-
-    public const DEFAULT_BANNER = '/family/banner.webp';
 
     public function humans(): HasMany
     {

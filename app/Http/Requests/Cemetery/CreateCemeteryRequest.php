@@ -9,18 +9,19 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
 /**
- * Class CreateRequest
+ * Class CreateCemeteryRequest
  * @package App\Http\Requests\Cemetery
  *
  * @property string $cemetery_address_coords
  * @property string $cemetery_address
  */
-class CreateRequest extends FormRequest
+class CreateCemeteryRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return \Auth::check();
     }
+
 
     protected function failedValidation(Validator $validator)
     {
@@ -32,36 +33,43 @@ class CreateRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $this->merge([
-            'cemetery_address_coords' => json_decode($this->cemetery_address_coords, true)
-        ]);
+        if ($this->get('address')) {
+            $this->merge([
+                'addressCoords' => json_decode($this->get('addressCoords'), true)
+            ]);
+        }
     }
 
     public function rules(): array
     {
         return [
             'title' => ['required', 'string', 'min:3'],
-            'title_en' => ['nullable', 'string', 'min:3'],
+            'titleEn' => ['nullable', 'string', ''],
             'subtitle' => ['nullable', 'string', 'min:3'],
-            'cemetery_address' => ['required', 'nullable', 'string', 'min:5'],
-            'cemetery_address_coords' => ['nullable', 'array:lat,lng'],
+            'address' => ['required', 'string', 'min:5'],
+            'addressCoords' => ['nullable', 'required_with:address', 'array:lat,lng'],
             'email' => ['nullable', 'email'],
             'phone' => ['nullable', 'string', 'min:8', 'max:15'],
             'schedule' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
-            'settings-public' => ['required', Rule::in(Cemetery::getAccessList())],
+            'access' => ['required', Rule::in(Cemetery::getAccessList())],
+
+            'draft' => ['sometimes', 'string'],
 
             'avatar' => [
-                'sometimes',
+                'nullable',
                 File::image()->min(5),
             ],
-            'cemetery_banner' => [
-                'sometimes',
+
+            'banner' => [
+                'nullable',
                 File::image()->max(10 * 1024),
             ],
-            'cemetery_files.*' => [
+
+            'gallery.*' => [
                 'sometimes',
-                File::types(['video/mp4', 'image/jpeg', 'image/png'])->max(30 * 1024),
+                File::types(['video/mp4', 'image/jpeg', 'image/png'])
+                    ->max(30 * 1024),
             ],
         ];
     }

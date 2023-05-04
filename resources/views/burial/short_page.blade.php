@@ -32,7 +32,7 @@
             </button>
 
             <ul class="qr-code-slider__list swiper-wrapper">
-                @foreach($familyBurial->humans as $human)
+                @foreach($burial->humans as $human)
                 <li class="qr-code-slider__item swiper-slide">
                     <div class="qr-code-slider__avatar">
                         <img src="{{ $human->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt="Аватар профиля"
@@ -67,7 +67,7 @@
             <span class="qr-profile__info-item">Причина смерти: {{ $human->death_reason }}</span>
         </div>
 
-        <a href="{{ route('profile.family.show', $familyBurial) }}" class="full-profile-link blue-btn">View full profile</a>
+        <a href="{{ route('profile.family.show', $burial) }}" class="full-profile-link blue-btn">View full profile</a>
 
         <div class="member-images-wrap">
             <div class="member-images__style">

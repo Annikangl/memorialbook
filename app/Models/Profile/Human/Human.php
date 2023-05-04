@@ -4,7 +4,7 @@ namespace App\Models\Profile\Human;
 
 use App\Models\Cemetery\Cemetery;
 use App\Models\Profile\Base\Profile;
-use App\Models\Profile\FamilyBurial;
+use App\Models\Profile\Burial;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Religion;
 use App\Models\User\User;
@@ -250,6 +250,6 @@ class Human extends Profile implements HasMedia
 
     public function familyBurial(): BelongsTo
     {
-        return $this->belongsTo(FamilyBurial::class);
+        return $this->belongsTo(Burial::class);
     }
 }

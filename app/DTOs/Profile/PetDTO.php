@@ -19,6 +19,8 @@ class PetDTO extends ValidatedDTO
 
     public string|null $burialPlace;
 
+    public array|null $burialCoords;
+
     public string|null $deathReason;
 
     public string|null $description;

@@ -24,9 +24,7 @@ class HomeController extends Controller
         $relatives = Human::where('user_id', auth()->id())
             ->withRelatives()->get();
 
-        $news = News::with(['author','galleries','human'])
-            ->latest()
-            ->get();
+        $news = collect();
 
         return view('home',
             compact('humans','relatives', 'pets', 'news'));

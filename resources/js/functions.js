@@ -189,7 +189,7 @@ export function validation(items) {
             if (!items[i].parentElement.classList.contains('no-valid')) {
                 items[i].parentElement.classList.add('no-valid');
                 items[i].parentElement.insertAdjacentHTML('afterend',
-                    '<span class="is-invalid">Это обязательное поле</span>');
+                    '<span class="is-invalid">The field is required</span>');
             }
 
             inputStatusValidate.push(false);

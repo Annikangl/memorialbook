@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\DB;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
-class ProfileService
+class HumanService
 {
     public function create(int $userId, HumanDTO $humanDTO, bool $draft = false): Human
     {
         try {
-            return DB::transaction(function () use ($humanDTO, $userId, $draft) {
+            $human = DB::transaction(function () use ($humanDTO, $userId, $draft) {
 
                 $human = Human::make([
                     'first_name' => $humanDTO->first_name,
@@ -66,32 +66,29 @@ class ProfileService
 
                 $human->save();
 
-                if ($humanDTO->avatar) {
-                    $human->addMedia($humanDTO->avatar)
-                        ->toMediaCollection('avatars');
-                }
-
-                if ($humanDTO->gallery) {
-                    foreach ($humanDTO->gallery as $image) {
-                        $human->addMedia($image)->toMediaCollection('gallery');
-                    }
-                }
-
-                if ($humanDTO->death_certificate) {
-                    $human->addMedia($humanDTO->death_certificate)
-                        ->toMediaCollection('attached_document');
-                }
-
                 return $human;
             });
+
+            if ($humanDTO->avatar) {
+                $human->addMedia($humanDTO->avatar)
+                    ->toMediaCollection('avatars');
+            }
+
+            if ($humanDTO->gallery) {
+                foreach ($humanDTO->gallery as $image) {
+                    $human->addMedia($image)->toMediaCollection('gallery');
+                }
+            }
+
+            if ($humanDTO->death_certificate) {
+                $human->addMedia($humanDTO->death_certificate)
+                    ->toMediaCollection('attached_document');
+            }
 
         } catch (\Throwable $exception) {
             throw new \DomainException($exception->getMessage());
         }
-    }
 
-    public function search(string $searchText): LengthAwarePaginator
-    {
-        return Human::bySearch($searchText)->paginate(5);
+        return $human;
     }
 }

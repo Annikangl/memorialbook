@@ -1,28 +1,8 @@
 @extends('layouts.app')
 
+@section('title') New profile @endsection
+
 @section('content')
-
-    {{--    <style>--}}
-    {{--        .fileuploader-popup {--}}
-    {{--            position: fixed;--}}
-    {{--            top: 0;--}}
-    {{--            left: 0;--}}
-    {{--            width: 100%;--}}
-    {{--            height: 100%;--}}
-    {{--            overflow: hidden;--}}
-    {{--            background: #191d1e;--}}
-    {{--            z-index: 1090;--}}
-    {{--            animation-duration: .4s;--}}
-    {{--        }--}}
-
-    {{--        .fileuploader, .fileuploader-popup {--}}
-    {{--            font-family: Roboto,"Segoe UI","Helvetica Neue",Arial,sans-serif;--}}
-    {{--            font-weight: 400;--}}
-    {{--            font-size: 14px;--}}
-    {{--            line-height: normal;--}}
-    {{--            text-align: left;--}}
-    {{--        }--}}
-    {{--    </style>--}}
 
     <section class="add-profile">
 

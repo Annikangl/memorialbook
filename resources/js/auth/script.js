@@ -1,5 +1,5 @@
 import axios from "axios";
-import { validation, showErrors } from "../functions";
+import { validation, showErrors } from "@/functions";
 
 
 if (document.querySelector('#login-form')) {

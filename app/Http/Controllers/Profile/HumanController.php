@@ -3,36 +3,24 @@
 namespace App\Http\Controllers\Profile;
 
 use App\DTOs\Profile\HumanDTO;
-use App\Events\CreateNews;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\ProfileCreateRequest;
+use App\Http\Requests\Profile\Human\CreateHumanRequest;
 use App\Http\Requests\Profile\ProfileCreateStep2Request;
 use App\Http\Requests\Profile\SearchRequest;
-use App\Models\Cemetery\Cemetery;
-use App\Models\Profile\Hobby;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Religion;
-use App\Services\ProfileService;
-use Carbon\Carbon;
+use App\Services\HumanService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
-use Nette\Schema\ValidationException;
-use PhpParser\Node\Stmt\Return_;
 
 
 class HumanController extends Controller
 {
-    private ProfileService $service;
-
-    public function __construct(ProfileService $personservice)
+    public function __construct(private HumanService $humanService)
     {
-        $this->service = $personservice;
     }
 
     public function index(): Factory|View|Application
@@ -45,6 +33,7 @@ class HumanController extends Controller
         if ($profiles->isEmpty()) {
             return view('tree.error');
         }
+
         return view('tree.index', compact('profiles'));
     }
 
@@ -101,13 +90,13 @@ class HumanController extends Controller
             compact('profiles', 'fathers', 'mothers', 'religions', 'genders'));
     }
 
-    public function store(ProfileCreateRequest $request): RedirectResponse
+    public function store(CreateHumanRequest $request): RedirectResponse
     {
         $humanDto = HumanDTO::fromRequest($request);
 
         try {
             $isDraft = (bool) $request->input('draft');
-            $profile = $this->service->create(\Auth::id(), $humanDto, $isDraft);
+            $profile = $this->humanService->create(\Auth::id(), $humanDto, $isDraft);
 
 //        TODO    event(new CreateNews($profile, CreateNews::USER_ADDED_PROFILE));
 
