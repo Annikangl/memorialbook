@@ -53,7 +53,7 @@ if (document.querySelector('#form-registration')) {
                 registration_email: inputs[1].value,
                 registration_phone: inputs[2].value,
                 registration_password: inputs[3].value,
-                registration_password_confirm: inputs[4].value,
+                registration_password_confirmation: inputs[4].value,
             }
         ).then(function (response) {
             if (response.status === 201) {
