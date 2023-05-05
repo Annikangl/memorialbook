@@ -3,15 +3,11 @@
 namespace App\Http\Controllers\Api\v1\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\SearchRequest;
 use App\Http\Resources\Profile\HumanCollection;
 use App\Http\Resources\Profile\HumanResource;
 use App\Http\Resources\Profile\HumanResourceCollection;
-use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
-use App\Models\User\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class HumanController extends Controller
 {

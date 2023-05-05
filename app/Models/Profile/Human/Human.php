@@ -10,6 +10,7 @@ use App\Models\Profile\Religion;
 use App\Models\User\User;
 use Carbon\Carbon;
 use Eloquent;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
@@ -74,7 +75,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Human extends Profile implements HasMedia
 {
-    use HasFactory, Sluggable, InteractsWithMedia;
+    use HasFactory, Sluggable, InteractsWithMedia, Filterable;
 
     public const MALE = 'male';
     public const FEMALE = 'female';
@@ -141,17 +142,6 @@ class Human extends Profile implements HasMedia
         return $query->select(['id', 'first_name', 'last_name', 'slug', 'date_birth', 'date_death'])->where(
             \DB::raw('CONCAT_WS(" ", humans.first_name, " ", humans.last_name)'),
             'LIKE', "%$searchText%");
-    }
-
-    public function scopeFiltered(Builder $query): Builder
-    {
-        return $query->when($value = request('full_name'), function (Builder $q) use ($value) {
-            $q->where(\DB::raw('CONCAT_WS(" ",humans.first_name, " ", humans.last_name, " ", humans.patronymic)'), 'LIKE', "%$value%");
-        })->when($value = request('birth_date'), function (Builder $q) use ($value) {
-            $q->whereBetween(\DB::raw('YEAR(date_birth)'), explode('-', $value));
-        })->when($value = request('death_date'), function (Builder $query) use ($value) {
-            $query->whereBetween(\DB::raw('YEAR(date_death)'), explode('-', $value));
-        });
     }
 
     public function scopeByUser(Builder $query, int $userId): Builder

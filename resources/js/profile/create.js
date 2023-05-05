@@ -23,9 +23,6 @@ if (document.querySelector('#burial_place')) {
 
 }
 
-
-
-
 //CHANGE USER AVATAR
 let showFile = function () {
     let inputImage = document.querySelector('.input-avatar');
@@ -158,52 +155,6 @@ if (document.querySelector('.load_files_profile')) {
         });
     });
 
-}
-
-//CUSTOM SELECT
-
-let select = function () {
-
-    let selects = document.querySelectorAll('.select-form');
-    let items = document.querySelectorAll('.select-list__item');
-
-    let namesFather = document.querySelector('.select__output_father');
-    let namesMother = document.querySelector('.select__output_mother');
-    let namesSpouse = document.querySelector('.select__output_spouse');
-    let namesReligious= document.querySelector('.select__output_religious');
-
-
-
-    for (let select of selects) {
-        select.addEventListener('click', function () {
-            select.classList.toggle('focus-select');
-        })
-    }
-
-    window.addEventListener('click', function (event) {
-        if (!event.target.closest('.select-form')) {
-            let focusSelects = document.querySelectorAll('.focus-select');
-
-            for (let select of focusSelects) {
-                select.classList.remove('focus-select');
-            }
-
-        }
-    })
-
-    for (let item of items) {
-        item.addEventListener('click', function () {
-
-            let itemData = {
-                id: item.getAttribute('data-id'),
-                value: item.textContent.trim()
-            };
-            item.parentElement.previousElementSibling.value = itemData.value
-            let hiddenInputId = '#' + item.getAttribute('data-name') + '_hidden';
-            document.querySelector(hiddenInputId).value = JSON.stringify(itemData)
-
-        })
-    }
 }
 
 //MASK TADE FORM

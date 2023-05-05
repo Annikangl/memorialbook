@@ -39,17 +39,17 @@
                 </div>
             </div>
 
-            <form action="{{ route('profile.store') }}" class="add-profile-wrap" id="add-profile"
+            <form action="{{ route('profile.human.store') }}" class="add-profile-wrap" id="add-profile"
                   method="POST" enctype="multipart/form-data">
                 @csrf
 
                 @include('includes.partials.message')
 
-                @include('profile.create.create_step_1')
+                @include('humans.create.create_step_1')
 
-                @include('profile.create.create_step_2')
+                @include('humans.create.create_step_2')
 
-                @include('profile.create.create_step_3')
+                @include('humans.create.create_step_3')
 
                 <div class="buttons-save">
                     <input type="submit" class="save-draft hide btn white-btn" name="draft"

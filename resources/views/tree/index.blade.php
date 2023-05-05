@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="tree__controls">
-            <a class="tree-controls__button btn blue-btn" href="{{ route('profile.create') }}">+
+            <a class="tree-controls__button btn blue-btn" href="{{ route('profile.human.create') }}">+
                 {{ __('family_tree.btn_create_profile') }}
             </a>
         </div>
@@ -85,7 +85,7 @@
             window.location.href = 'profile/card/' + link
         });
 
-        let profiles = @json($profiles);
+        let profiles = @json($humans);
 
         profiles.forEach(function (profile) {
             family.addNode({

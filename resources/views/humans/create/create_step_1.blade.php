@@ -173,9 +173,9 @@
             <span class="input-wrap__title">{{ __('create_profile.input_spouse') }}</span>
             <select name="spouse_id" id="select-spouse" class="@error('spouse_id') no-valid @enderror">
                 <option disabled selected value>{{ __('create_profile.Select husband or wife') }}</option>
-                @foreach($profiles as $profile)
-                    <option value="{{ $profile->id }}" @selected(old('spouse_id') == $profile->id)>
-                        {{ $profile->full_name }}
+                @foreach($humans as $human)
+                    <option value="{{ $human->id }}" @selected(old('spouse_id') == $human->id)>
+                        {{ $human->full_name }}
                     </option>
                 @endforeach
             </select>

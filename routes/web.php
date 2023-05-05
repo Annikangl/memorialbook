@@ -39,7 +39,7 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
 });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-    Route::get('/map', [HumanController::class, 'map'])->name('search.map');
+    Route::get('/humans/search/map', [HumanController::class, 'map'])->name('humans.search.map');
 });
 
 Route::group(['prefix' => 'cemetery', 'as' => 'cemetery.'], function () {
@@ -68,12 +68,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/tree-list', [HumanController::class, 'list'])->name('tree.list');
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-        Route::get('/create', [HumanController::class, 'create'])->name('create');
-        Route::post('/store', [HumanController::class, 'store'])->name('store');
 
-        Route::get('/{profile}/edit', [HumanController::class, 'edit'])->name('edit');
-
-        Route::get('/card/{slug}', [HumanController::class, 'show'])->name('show');
+        Route::group(['prefix' => 'human', 'as' => 'human.'], function () {
+            Route::get('/create', [HumanController::class, 'create'])->name('create');
+            Route::post('/store', [HumanController::class, 'store'])->name('store');
+            Route::get('/{human}/edit', [HumanController::class, 'edit'])->name('edit');
+            Route::get('/card/{slug}', [HumanController::class, 'show'])->name('show');
+        });
 
         Route::group(['prefix' => 'pet', 'as' => 'pet.'], function () {
             Route::get('/create', [PetController::class, 'create'])->name('create');
@@ -85,8 +86,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', [BurialController::class, 'create'])->name('create');
             Route::post('/store', [BurialController::class, 'store'])->name('store');
             Route::get('/search/', [BurialController::class, 'searchProfile'])->name('search.profile');
-            Route::get('/{familyBurial}/show', [BurialController::class, 'show'])->name('show');
-            Route::get('/{familyBurial}/short/show', [BurialController::class, 'showShortPage'])
+            Route::get('/{burial}/show', [BurialController::class, 'show'])->name('show');
+            Route::get('/{burial}/short/show', [BurialController::class, 'showShortPage'])
                 ->middleware('agent')
                 ->name('short.page');
         });
@@ -99,13 +100,6 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/create', [CemeteryController::class, 'create'])->name('create');
         Route::post('/store', [CemeteryController::class, 'store'])->name('store');
-    });
-
-
-
-
-    Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-        Route::get('/create', [HumanController::class, 'create'])->name('create');
     });
 
     Route::group(['prefix' => 'community', 'as' => 'community.'], function () {

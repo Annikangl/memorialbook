@@ -14,7 +14,7 @@
             <div class="map-results__title-wrap">
                 <span
                     class="map-results__title">
-                    {{ __('map.founded', ['count' => $profiles->total(), 'entity' => 'people']) }}
+                    {{ __('map.founded', ['count' => $humans->total(), 'entity' => 'people']) }}
                 </span>
                 <button type="button" class="map-results__unwrap">
                     {{ __('map.unwrap') }}
@@ -25,18 +25,18 @@
             </div>
 
             <ul class="map-results__list">
-                @foreach($profiles as $profile)
-                    <li class="map-results__item" data-lat="{{ $profile->latitude }}"
-                        data-lng="{{ $profile->longitude }}">
-                        <a href="{{ route('profile.show', ['slug' => $profile->slug]) }}" class="map-results__link">
+                @foreach($humans as $human)
+                    <li class="map-results__item" data-lat="{{ $human->latitude }}"
+                        data-lng="{{ $human->longitude }}">
+                        <a href="{{ route('profile.human.show', ['slug' => $human->slug]) }}" class="map-results__link">
                             <div class="map-results__img">
-                                <img src="{{ $profile->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img"
-                                     alt="{{ $profile->full_name }}"
-                                     title="{{ $profile->full_name }}"/>
+                                <img src="{{ $human->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img"
+                                     alt="{{ $human->full_name }}"
+                                     title="{{ $human->full_name }}"/>
                             </div>
                             <div class="map-results__info">
-                                <span class="map-results__name">{{ $profile->full_name }}</span>
-                                <span class="map-results__years">{{ $profile->yearBirth }} - {{ $profile->yearDeath }} г.</span>
+                                <span class="map-results__name">{{ $human->full_name }}</span>
+                                <span class="map-results__years">{{ $human->yearBirth }} - {{ $human->yearDeath }} г.</span>
                             </div>
                         </a>
                     </li>

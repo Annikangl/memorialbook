@@ -22,7 +22,7 @@
                     </li>
                     <li class="steeps-nav__item">
                         <i class="steeps-nav__icon"></i>
-                        <span class="steeps-nav__title">{{ __('create-pet.step_3') }}</span>
+                        <span class="steeps-nav__title">{{ __('create-pet.step_2') }}</span>
                         <p class="steeps-nav__desc">{{ __('create-pet.description') }}</p>
                     </li>
                     <li class="steeps-nav__item">

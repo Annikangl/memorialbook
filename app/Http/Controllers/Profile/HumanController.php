@@ -5,15 +5,15 @@ namespace App\Http\Controllers\Profile;
 use App\DTOs\Profile\HumanDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\Human\CreateHumanRequest;
+use App\Http\Requests\Profile\Human\SearchHumanRequest;
 use App\Http\Requests\Profile\ProfileCreateStep2Request;
-use App\Http\Requests\Profile\SearchRequest;
+use App\ModelFilters\ProfileFilters\HumanFilter;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Religion;
 use App\Services\HumanService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 
 
@@ -25,69 +25,67 @@ class HumanController extends Controller
 
     public function index(): Factory|View|Application
     {
-        $profiles = Human::query()->orderBy('id')
+        $humans = Human::query()->orderBy('id')
             ->with('users')
             ->where('user_id', \Auth::id())
             ->get();
 
-        if ($profiles->isEmpty()) {
+        if ($humans->isEmpty()) {
             return view('tree.error');
         }
 
-        return view('tree.index', compact('profiles'));
+        return view('tree.index', compact('humans'));
     }
 
     public function list(): Factory|View|Application
     {
-        $profiles = Human::query()
+        $humans = Human::query()
             ->orderBy('date_birth')
             ->with('users')
             ->where('user_id', \Auth::id())
             ->paginate(8);
 
-        if ($profiles->isEmpty()) {
+        if ($humans->isEmpty()) {
             return view('tree.error');
         }
 
-        return view('tree.list', compact('profiles'));
+        return view('tree.list', compact('humans'));
     }
 
     public function show(string $slug): Factory|View|Application
     {
-        $profile = Human::query()->with(['religion'])
+        $human = Human::query()->with(['religion'])
             ->where('slug', $slug)
             ->firstOrFail();
 
-//        $relatives = Human::withRelatives()->get();
-
         $relatives = Human::query()
-            ->where('father_id', $profile->id)
-            ->orWhere('mother_id', $profile->id)
-            ->orWhere('spouse_id', $profile->id)
-            ->orWhere('children_id', $profile->id)
+            ->where('father_id', $human->id)
+            ->orWhere('mother_id', $human->id)
+            ->orWhere('spouse_id', $human->id)
+            ->orWhere('children_id', $human->id)
             ->get();
 
-        return view('profile.show', compact('profile', 'relatives'));
+        return view('humans.show', compact('human', 'relatives'));
     }
 
     public function create(): Factory|View|Application
     {
-        $profiles = Human::query()->where('user_id', auth()->id())->latest()->get();
+        $humans = Human::query()->where('user_id', auth()->id())->latest()->get();
 
         $religions = Religion::query()->orderBy('id')->get();
 
-        $fathers = $profiles->filter(function ($item) {
+        $fathers = $humans->filter(function ($item) {
             return $item->gender == Human::MALE;
         });
 
-        $mothers = $profiles->filter(function ($item) {
+        $mothers = $humans->filter(function ($item) {
             return $item->gender == Human::FEMALE;
         });
 
         $genders = Human::genderList();
 
-        return view('profile.create.create',
-            compact('profiles', 'fathers', 'mothers', 'religions', 'genders'));
+        return view('humans.create.create',
+            compact('humans', 'fathers', 'mothers', 'religions', 'genders'));
     }
 
     public function store(CreateHumanRequest $request): RedirectResponse
@@ -107,7 +105,7 @@ class HumanController extends Controller
             ])->withInput();
         }
 
-        return redirect()->route('profile.show', $profile->slug);
+        return redirect()->route('profile.human.show', $profile->slug);
     }
 
     public function edit(Human $human): Factory|View|Application
@@ -116,27 +114,19 @@ class HumanController extends Controller
 
         $genders = Human::genderList();
 
-        return view('profile.edit.edit',
+        return view('humans.edit.edit',
             compact('human', 'genders', 'religions'));
     }
 
-    public function map(SearchRequest $request): Factory|View|Application
+    public function map(SearchHumanRequest $request): Factory|View|Application
     {
-        $profiles = Human::active()->filtered()->paginate(30);
+        $humans = Human::filter($request->validated(), HumanFilter::class)->active()->paginate(15);
 
         $count_filters = collect($request->input())->filter(function ($value) {
             return !is_null($value);
         })->count();
 
-
-        return view('profile.map', compact('profiles', 'count_filters'));
-    }
-
-    private function getProfiles(): array|Collection|\Illuminate\Support\Collection
-    {
-        return Human::byUser(auth()->id())
-            ->addSelect('gender')
-            ->get();
+        return view('humans.map', compact('humans', 'count_filters'));
     }
 
 }

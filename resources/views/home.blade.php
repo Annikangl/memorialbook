@@ -33,7 +33,8 @@
                 <div class="swiper swiper-profiles">
                     <ul class="list-profiles swiper-wrapper">
                         <li class="list-profiles__item swiper-slide">
-                            <a href="{{ route('profile.create') }}" class="list-profiles__link" title="Создать профиль">
+                            <a href="{{ route('profile.human.create') }}" class="list-profiles__link"
+                               title="Create profile">
                                 <div class="list-profiles__img">
                                     <svg width="19" height="20" viewBox="0 0 19 20" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +56,8 @@
                                             title="{{ $human->full_name }}"/>
                                         <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
                                     </div>
-                                    <a href="{{ route('profile.edit', $human) }}" class="list-profiles-mark" title="Редактировать профиль">
+                                    <a href="{{ route('profile.human.edit', $human) }}" class="list-profiles-mark"
+                                       title="Edit profile">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -65,7 +67,7 @@
                                     </a>
                                 </div>
                                 <span class="profile-time">{{ $human->yearBirth}} {{ $human->yearDeath }} г.</span>
-                                <a href="{{ route('profile.show', ['slug' => $human->slug]) }}"
+                                <a href="{{ route('profile.human.show', ['slug' => $human->slug]) }}"
                                    class="profile-text">{{ $human->full_name }}</a>
                             </li>
                         @empty
@@ -117,7 +119,7 @@
                                     </a>
                                 </div>
                                 <span class="profile-time">{{ $relative->yearBirth}} {{ $relative->yearDeath }}г.</span>
-                                <a href="{{ route('profile.show', ['slug' => $relative->slug ]) }}"
+                                <a href="{{ route('profile.human.show', ['slug' => $relative->slug ]) }}"
                                    class="profile-text">
                                     {{ $relative->full_name }}
                                 </a>
