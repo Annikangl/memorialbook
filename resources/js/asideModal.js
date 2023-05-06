@@ -99,10 +99,6 @@ if (buttonOpenSearchPlaces) {
     })
 }
 
-
-
-
-
 if (buttonOpenSearchFilters) {
     buttonOpenSearchFilters.addEventListener('click', function () {
         let attributes = JSON.parse(this.getAttribute('data-slideout-options'));

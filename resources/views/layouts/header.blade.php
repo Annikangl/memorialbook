@@ -29,20 +29,6 @@
                 <li class="menu__item">
                     <a href="#" class="menu__link">{{ __('layout.link_shop') }}</a>
                 </li>
-                @if ($agent->isMobile())
-                    <li class="menu__item">
-                        <a href="{{ route('community.create') }}"
-                           class="menu__link">{{__('left_menu.create_community')}}</a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="{{ route('cemetery.create') }}"
-                           class="menu__link">{{__('left_menu.create_cemetery')}}</a>
-                    </li>
-                    <li class="menu__item">
-                        <a href="{{ route('profile.family.create') }}"
-                           class="menu__link">{{__('left_menu.create_burial')}}</a>
-                    </li>
-                @endif
             @endif
         </ul>
     </nav>

@@ -139,3 +139,7 @@
 
     </section>
 @endsection
+
+@section('preview-modals')
+    @include('auth.passwords.email')
+@endsection

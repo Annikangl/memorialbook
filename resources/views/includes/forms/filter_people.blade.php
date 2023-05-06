@@ -8,6 +8,7 @@
                    name="name"
                    placeholder="John Doe"
                    value="{{ request('name') }}"
+                   required
                    title="Full Name"/>
         </div>
     </div>
@@ -15,20 +16,24 @@
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('modals.input_birthYear') }}</span>
             <div class="input-form">
-                <input type="text" class="input-text"
+                <input type="text" class="input-text mask-year"
+                       id="birth-year-search"
                        name="birthYear"
-                       placeholder="1972"
+                       placeholder="1900-2023 y."
                        value="{{ request('birthYear') }}"
+                       required
                        title="Date birth"/>
             </div>
         </div>
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('modals.input_deathYear') }}</span>
             <div class="input-form">
-                <input type="text" class="input-text"
+                <input type="text" class="input-text mask-year"
                        name="deathYear"
-                       placeholder="1999"
-                       value="{{ request('deathYear') }}" title="Date death"/>
+                       placeholder="1900-2023 y."
+                       value="{{ request('deathYear') }}"
+                       required
+                       title="Date death"/>
             </div>
         </div>
         <input type="submit" value="{{ __('modals.btn_show') }}" class="btn blue-btn"/>

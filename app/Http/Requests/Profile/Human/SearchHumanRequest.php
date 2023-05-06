@@ -15,8 +15,8 @@ class SearchHumanRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3'],
-            'birthYear' => ['nullable', 'date_format:Y'],
-            'deathYear' => ['nullable', 'date_format:Y'],
+            'birthYear' => ['nullable', 'string', 'regex:(\d{4}-\d{4})'],
+            'deathYear' => ['nullable', 'string', 'regex:(\d{4}-\d{4})'],
         ];
     }
 }

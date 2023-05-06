@@ -4,6 +4,7 @@ namespace App\ModelFilters\ProfileFilters;
 
 use EloquentFilter\ModelFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 
 class HumanFilter extends ModelFilter
 {
@@ -25,11 +26,15 @@ class HumanFilter extends ModelFilter
 
     public function birthYear($birthYear): HumanFilter
     {
-        return $this->whereYear('date_birth', $birthYear);
+        [$from, $to] = Str::of($birthYear)->explode('-');
+
+        return $this->whereBetween(\DB::raw('YEAR(date_birth)'), [$from, $to]);
     }
 
     public function deathYear($deathYear): HumanFilter
     {
-        return $this->whereYear('date_death', $deathYear);
+        [$from, $to] = Str::of($deathYear)->explode('-');
+
+        return $this->whereBetween(\DB::raw('YEAR(date_death)'), [$from, $to]);
     }
 }
