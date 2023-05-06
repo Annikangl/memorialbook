@@ -16,7 +16,6 @@ use Illuminate\Http\Request;
 
 class BurialController extends Controller
 {
-
     public function __construct(private BurialService $burialService)
     {
     }
@@ -69,6 +68,6 @@ class BurialController extends Controller
             return redirect()->back()->with('message', $exception->getMessage());
         }
 
-        return redirect()->route('profile.family.show', $burial);
+        return redirect()->route('profile.burial.show', $burial);
     }
 }

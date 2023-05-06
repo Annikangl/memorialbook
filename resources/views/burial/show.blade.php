@@ -10,7 +10,7 @@
         </div>
         <ul class="family-card-nav">
             @foreach($burial->humans as $human)
-                <li class="family-card-nav__item" data-src="{{ route('profile.show', $human->slug) }}">
+                <li class="family-card-nav__item" data-src="{{ route('profile.human.show', $human->slug) }}">
                     <div class="family-card-img">
                         <img src="{{ $human->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt="Аватар профиля"
                              title="Аватар"/>
@@ -22,7 +22,7 @@
 
 
                 <li class="family-card-nav__item" title="Добавить">
-                    <a href="{{ route('profile.family.create') }}">
+                    <a href="{{ route('profile.burial.create') }}">
                         <svg viewBox="0 0 41 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M40.9167 23.9115H23.4167V41.4115H17.5833V23.9115H0.0833435V18.0781H17.5833V0.578125H23.4167V18.0781H40.9167V23.9115Z"
@@ -38,7 +38,7 @@
                 <div class="member-info-wrap">
                     <div class="member-avatar">
                         <div class="member-avatar__wrap">
-                            <img src="{{ asset('storage/' . $firstHuman->avatar ) }}"
+                            <img src="{{ $firstHuman->getFirstMediaUrl('avatars', 'thumb') }}"
                                  class="bg-img" alt="Аватар профиля" title="Аватар профиля"/>
                         </div>
                     </div>
@@ -50,12 +50,6 @@
                 <div class="member-info-biography">
                     <p class="member-info__death">Причина смерти: <span class="reason">{{ $firstHuman->death_reason }}</span></p>
 
-                    <ul class="interests">
-
-                        @foreach($firstHuman->hobbies as $hobby)
-                            <li class="interests__item">{{ $hobby->title }}</li>
-                        @endforeach
-                    </ul>
                     <ul class="social">
                         <li class="social__item">
                             <a href="#" class="social__link">
@@ -80,7 +74,7 @@
                         @if (!empty($relatives))
                             @foreach ($relatives as $relative)
                                 <li class="relatives-list__item">
-                                    <a href="{{ route('profile.show', $relative->slug ) }}" class="relatives__link">
+                                    <a href="{{ route('profile.human.show', $relative->slug ) }}" class="relatives__link">
                                         <div class="relatives__avatar">
                                             <img src="{{ asset('storage/'. $relative->avatar ) }}"
                                                  class="bg-img" alt="avatar" title="avatar"/>

@@ -1,5 +1,5 @@
 import Swiper, {Navigation, Pagination, Lazy} from 'swiper';
-import {filteredProfile} from "../functions";
+import {filteredProfile} from "@/functions";
 
 const hideResult = function () {
     document.querySelector('.profiles-search-result').classList.add('hide');
@@ -13,7 +13,7 @@ if (document.querySelector('.profiles-search__input')) {
 
     btnReset.addEventListener('click', hideResult);
 
-    let url = app.globalConfig.baseUrl + '/profile/family/search/';
+    let url = searchInput.getAttribute('data-url');
 
     searchInput.addEventListener('input', function () {
         let searchText = this.value.trim().toLowerCase();

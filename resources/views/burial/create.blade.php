@@ -24,7 +24,7 @@
                 </ul>
             </div>
 
-            <form class="add-cemetery-wrap" id="add-cemetery" action="{{ route('profile.family.store') }}"
+            <form class="add-cemetery-wrap" id="add-cemetery" action="{{ route('profile.burial.store') }}"
                   method="post">
                 @csrf
                 <div class="steep">
@@ -60,7 +60,7 @@
                             </svg>
 
                             <input type="text" class="profiles-search__input" name="profiles-search"
-                                   placeholder="{{ __('create_burial.input_enterName') }}"/>
+                                   data-url="{{ route('profile.burial.search') }}" placeholder="{{ __('create_burial.input_enterName') }}"/>
 
                             <button type="reset" class="profiles-search__reset " title="Очистить">
                                 <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +93,7 @@
 
                             <p class="search-result-text">{{ __('create_burial.empty_search') }}<br/>{{ __('create_burial.or') }}
                                 <br/>
-                                <a href="{{ route('profile.create') }}">{{ __('create_burial.create_profile') }}</a></p>
+                                <a href="{{ route('profile.human.create') }}">{{ __('create_burial.create_profile') }}</a></p>
                         </div>
 
                     </div>

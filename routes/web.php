@@ -82,10 +82,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/{slug}/show', [PetController::class, 'show'])->name('show');
         });
 
-        Route::group(['prefix' => 'family', 'as' => 'family.'], function () {
+        Route::group(['prefix' => 'burial', 'as' => 'burial.'], function () {
             Route::get('/create', [BurialController::class, 'create'])->name('create');
             Route::post('/store', [BurialController::class, 'store'])->name('store');
-            Route::get('/search/', [BurialController::class, 'searchProfile'])->name('search.profile');
+            Route::get('/search/', [BurialController::class, 'searchProfile'])->name('search');
             Route::get('/{burial}/show', [BurialController::class, 'show'])->name('show');
             Route::get('/{burial}/short/show', [BurialController::class, 'showShortPage'])
                 ->middleware('agent')
@@ -94,8 +94,6 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::group(['prefix' => 'cemetery', 'as' => 'cemetery.'], function () {
-//        Route::get('map', [CemeteryController::class, 'map'])->name('search.map');
-//        Route::get('list', [CemeteryController::class, 'list'])->name('search.list');
         Route::get('show/{slug}', [CemeteryController::class, 'show'])->name('show');
 
         Route::get('/create', [CemeteryController::class, 'create'])->name('create');

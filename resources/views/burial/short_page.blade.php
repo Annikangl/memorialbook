@@ -64,10 +64,10 @@
                 Head of the State Museum contemporary art.
             </p>
             <span class="qr-profile__info-item">{{ $human->lifeExpectancy }}</span>
-            <span class="qr-profile__info-item">Причина смерти: {{ $human->death_reason }}</span>
+            <span class="qr-profile__info-item"> {{ __('create-pet.input_deathCause') }}: {{ $human->death_reason }}</span>
         </div>
 
-        <a href="{{ route('profile.family.show', $burial) }}" class="full-profile-link blue-btn">View full profile</a>
+        <a href="{{ route('profile.burial.show', $burial) }}" class="full-profile-link blue-btn">View full profile</a>
 
         <div class="member-images-wrap">
             <div class="member-images__style">
