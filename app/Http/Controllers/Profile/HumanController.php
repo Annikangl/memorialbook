@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\Human\CreateHumanRequest;
 use App\Http\Requests\Profile\Human\SearchHumanRequest;
 use App\Http\Requests\Profile\Human\UpdateHumanRequest;
-use App\Http\Requests\Profile\ProfileCreateStep2Request;
 use App\ModelFilters\ProfileFilters\HumanFilter;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Religion;
