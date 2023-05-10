@@ -2,20 +2,42 @@
     <div class="steep-wrap">
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Фотографии и видео:</span>
+            <span class="input-wrap__title">{{ __('edit-profile.Downloaded pictures and movies') }}:</span>
             <div class="input-photo">
+                @foreach($human->getMedia('gallery') as $item)
+                    <div class="input-photo-preview">
+                        <button type="button" class="delete-resource">
+                            <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M3.41421 0.585779C2.63316 -0.19527 1.36684 -0.19527 0.585786 0.585779C-0.195262 1.36683 -0.195262 2.63316 0.585786 3.41421L7.17157 9.99999L0.585787 16.5858C-0.195262 17.3668 -0.195262 18.6332 0.585787 19.4142C1.36684 20.1953 2.63316 20.1953 3.41421 19.4142L10 12.8284L16.5858 19.4142C17.3668 20.1953 18.6332 20.1953 19.4142 19.4142C20.1953 18.6332 20.1953 17.3668 19.4142 16.5858L12.8284 9.99999L19.4142 3.41421C20.1953 2.63316 20.1953 1.36683 19.4142 0.585779C18.6332 -0.19527 17.3668 -0.19527 16.5858 0.585779L10 7.17157L3.41421 0.585779Z"
+                                    fill="white"
+                                />
+                            </svg>
+                        </button>
+                        <input type="file" hidden="hidden" name="load-resource"/>
+                        <img class="bg-img" src="{{ $item->getUrl('thumb_500') }}" alt="{{ $item->name }}"/>
+                    </div>
+                @endforeach
 
-                <label class="input-photo-load">
-                    <svg style="width: 20px; height: 20px;" aria-hidden="true">
-                        <path
-                            d="M10.5 21c-.6 0-1-.4-1-1v-8.5H1c-.6 0-1-.4-1-1s.4-1 1-1h8.5V1c0-.6.4-1 1-1s1 .4 1 1v8.5H20c.6 0 1 .4 1 1s-.4 1-1 1h-8.5V20c0 .6-.4 1-1 1z"/>
-                    </svg>
-                    <span class="input-photo-load__text">Добавить фото/видео</span>
-
-                    <input type="file" class="load-files" name="profile_images[]" id="profile_images"
-                           accept=".jpg,.jpeg,.png,.mp4" multiple/>
-                </label>
             </div>
+        </div>
+
+        <div class="input-wrap">
+            <span class="input-wrap__title">{{ __('edit-profile.Pictures and movies') }}:</span>
+            <div class="input-photo  @error('gallery.*') no-valid @enderror">
+                <input type="file" name="gallery[]" class="load_files_profile" accept=".jpg,.jpeg,.png,.mp4">
+            </div>
+            @error('gallery.*')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="input-wrap">
@@ -25,33 +47,21 @@
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Религиозные взгляды:</span>
+            <span class="input-wrap__title">{{ __('edit-profile.Select religion view') }}:</span>
 
-            <div class="select-form">
-                <div class="select">
+            <label for="select-religion"></label>
+            <select name="religion_id" id="select-religion" class="@error('religion_id') no-valid @enderror">
+                <option disabled selected value>{{ __('create_profile.Select religion view') }}</option>
+                @foreach($religions as $religion)
+                    <option value="{{ $religion->id }}" @selected($religion->id == $human->religion_id)>
+                        {{ $religion->title }}
+                    </option>
+                @endforeach
+            </select>
 
-                    <input type="hidden" class="select__output" id="religious_id_hidden" name="religious_id" readonly>
-                    <input type="text" class="select__output" placeholder="Выберите из списка"
-                           value="{{ $human->religions->title ?? '' }}"
-                           readonly>
-
-                    <ul class="select-list">
-                        @foreach($religions as $religion)
-                            <li class="select-list__item"
-                                id="religious_id"
-                                data-name="religious_id"
-                                data-id="{{$religion->id }}">
-                                {{ $religion->title }}
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-
-                <svg aria-hidden="true" class="select-arrow">
-                    <path d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                </svg>
-            </div>
-
+            @error('religion_id')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
     </div>
 </div>

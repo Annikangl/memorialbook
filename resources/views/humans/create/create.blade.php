@@ -11,14 +11,14 @@
                 <a href="{{ route('home') }}" class="breadcrumbs__link">Home</a>
             </li>
             <li class="breadcrumbs__item">
-                <a href="#" class="breadcrumbs__link">Create profile</a>
+                <a href="" class="breadcrumbs__link">{{ __('create_profile.New profile') }}</a>
             </li>
         </ul>
 
         <div class="add-profile-content">
             <div>
                 <div>
-                    <h3 class="add-profile-content__title">{{ __('create_profile.new_profile') }}</h3>
+                    <h3 class="add-profile-content__title">{{ __('create_profile.New profile') }}</h3>
                     <ul class="steeps-nav">
                         <li class="steeps-nav__item active current">
                             <i class="steeps-nav__icon"></i>

@@ -242,4 +242,9 @@ class Human extends Profile implements HasMedia
     {
         return $this->belongsTo(Burial::class);
     }
+
+    public function getBurialJson(): string
+    {
+        return json_encode(['lat' => $this->latitude, 'lng' => $this->longitude]);
+    }
 }

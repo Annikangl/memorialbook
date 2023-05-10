@@ -6,6 +6,7 @@ use App\DTOs\Profile\HumanDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\Human\CreateHumanRequest;
 use App\Http\Requests\Profile\Human\SearchHumanRequest;
+use App\Http\Requests\Profile\Human\UpdateHumanRequest;
 use App\Http\Requests\Profile\ProfileCreateStep2Request;
 use App\ModelFilters\ProfileFilters\HumanFilter;
 use App\Models\Profile\Human\Human;
@@ -110,12 +111,29 @@ class HumanController extends Controller
 
     public function edit(Human $human): Factory|View|Application
     {
+        $humans = Human::query()->where('user_id', auth()->id())->latest()->get();
+
+        $religions = Religion::query()->orderBy('id')->get();
+
+        $fathers = $humans->filter(function ($item) {
+            return $item->gender == Human::MALE;
+        });
+
+        $mothers = $humans->filter(function ($item) {
+            return $item->gender == Human::FEMALE;
+        });
+
         $religions = Religion::query()->orderBy('id')->get();
 
         $genders = Human::genderList();
 
         return view('humans.edit.edit',
-            compact('human', 'genders', 'religions'));
+            compact('human', 'genders', 'fathers', 'mothers', 'humans', 'religions'));
+    }
+
+    public function update(Human $human, UpdateHumanRequest $request)
+    {
+        dd($request->all());
     }
 
     public function map(SearchHumanRequest $request): Factory|View|Application

@@ -3,10 +3,10 @@
 
         <div class="input-wrap">
             <span class="input-wrap__title">{{ __('create_profile.input_pictureAndMovies') }}:</span>
-            <div class="input-photo  @error('profiles_files.*') no-valid @enderror">
+            <div class="input-photo  @error('gallery.*') no-valid @enderror">
                 <input type="file" name="gallery[]" class="load_files_profile" accept=".jpg,.jpeg,.png,.mp4">
             </div>
-            @error('profile_images.*')
+            @error('gallery.*')
                 <span class="is-invalid">{{ $message }}</span>
             @enderror
         </div>

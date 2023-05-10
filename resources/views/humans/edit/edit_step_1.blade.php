@@ -1,13 +1,18 @@
 <div class="steep">
     <div class="steep-wrap grid-col-2">
 
+        <style>
+            {{--.preview-avatar-wrap {--}}
+            {{--    background-image: url({{ $human->getFirstMediaUrl('avatars', 'thumb') }});--}}
+            {{--}--}}
+        </style>
         <div class="user-avatar">
             <div class="preview-avatar">
                 <label class="preview-avatar-wrap">
-                    <img src="{{ $human->getFirstMediaUrl('avatars', 'thumb') }}" alt="" class="bg-img">
                     <input type="file" accept=".jpg,.jpeg,.png" class="input-avatar"
                            id="change-avatar" name="avatar"/>
-                    <span class="preview-avatar-wrap__text">Выберите фото</span>
+                    <span class="preview-avatar-wrap__text">{{ __('edit-profile.Select photo') }}</span>
+                    <img src="{{ $human->getFirstMediaUrl('avatars', 'thumb') }}" class="bg-img" alt="">
                 </label>
                 <label class="preview-avatar__icon" for="change-avatar">
                     <svg>
@@ -18,179 +23,172 @@
                     </svg>
                 </label>
             </div>
-            <button type="button" class="delete-avatar hide">Удалить фото</button>
+            <button type="button" class="delete-avatar hide">{{ __('edit-profile.Remove photo') }}</button>
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Имя:</span>
+            <span class="input-wrap__title">{{ __('edit-profile.First name') }}:</span>
             <div class="input-form">
-                <input type="text" class="input-text input-required" placeholder="Иван"
-                       id="first_name" name="first_name"
+                <input type="text" class="input-text input-required" id="first_name"
+                       name="first_name"
                        value="{{ $human->first_name }}"
-                       title="{{ $human->first_name }}">
+                       placeholder="{{ __('edit-profile.John') }}"
+                       title="{{ __('edit-profile.First name') }}">
             </div>
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Фамилия:</span>
+            <span class="input-wrap__title">{{ __('edit-profile.Last name') }}:</span>
             <div class="input-form">
-                <input type="text" class="input-text input-required" placeholder="Иванов"
-                       id="last_name" name="last_name"
+                <input type="text" class="input-text input-required" id="last_name"
+                       name="last_name"
                        value="{{ $human->last_name }}"
-                       title="">
+                       placeholder="{{ __('edit-profile.Doe') }}"
+                       title="{{ __('edit-profile.Last name') }}">
             </div>
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Пол</span>
-            <div class="select-forms" style="width: 100%">
-                <select class="profile-section__select select"  id="gender" name="gender"
-                        data-select="">
-                    <option value="">Выберите из списка</option>
-                    @foreach($genders as $key => $gender)
-                        <option value="{{ $key }}" name="gender" @if ($gender === $human->gender) selected @endif>{{ __($gender) }}</option>
-                    @endforeach
-                </select>
+            <span class="input-wrap__title">{{ __('edit-profile.Gender') }}</span>
 
-            </div>
+            <label for="select-gender"></label>
+            <select name="gender" id="select-gender" class="@error('gender') no-valid @enderror">
+                <option disabled selected value>{{ __('edit-profile.Select gender') }}</option>
+                @foreach($genders as $gender)
+                    <option value="{{ $gender }}" @selected($gender == $human->gender)>{{ $gender }}</option>
+                @endforeach
+            </select>
+            @error('gender')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
     </div>
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
-            <span class="input-wrap__title">Дата рождения:</span>
-            <div class="input-form">
-                <input type="text" class="input-text input-required mask-data"
-                       placeholder="дд.мм.гггг" id="date_birth" name="date_birth"
+            <span class="input-wrap__title">{{ __('edit-profile.Birth date') }}:</span>
+            <div class="input-form @error('date_birth') no-valid @enderror">
+                <input type="text" class="input-text input-required mask-data" id="date_birth"
+                       name="date_birth"
                        value="{{ $human->date_birth }}"
-                       title="{{ $human->date_birth }}">
+                       placeholder="{{ __('edit-profile.d-m-Y') }}"
+                       title="{{ __('edit-profile.Birth date') }}">
             </div>
+            @error('date_birth')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">Место рождения:</span>
-            <div class="input-form">
-                <input type="text" class="input-text" name="birth_place"
+            <span class="input-wrap__title">{{ __('edit-profile.Birth place') }}:</span>
+            <div class="input-form @error('birth_place') no-valid @enderror">
+                <input type="text" class="input-text"
+                       name="birth_place"
                        value="{{ $human->birth_place }}"
-                       title="{{ $human->birth_place }}">
+                       title="{{ __('edit-profile.Birth place') }}">
             </div>
+            @error('birth_place')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">Дата смерти:</span>
-            <div class="input-form">
-                <input type="text" class="input-text mask-data" placeholder="дд.мм.гггг"
-                       id="date_death" name="date_death"
+            <span class="input-wrap__title">{{ __('edit-profile.Death date') }}:</span>
+            <div class="input-form @error('date_death') no-valid @enderror">
+                <input type="text" class="input-text mask-data" id="date_death"
+                       name="date_death"
                        value="{{ $human->date_death }}"
+                       placeholder="{{ __('edit-profile.d-m-Y') }}"
                        title="{{ $human->date_death }}">
             </div>
+            @error('date_death')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">Место захоронения:</span>
-            <div class="input-form" style="position:relative;">
+            <span class="input-wrap__title">{{ __('edit-profile.Location') }}:</span>
+            <div class="input-form">
                 <input type="text" class="input-text"
-                       id="burial_place" name="burial_place"
-                       title="{{ $human->burial_place }}"
-                       readonly
-                       value="{{ $human->burial_place }}">
-                <a class="burialPlaceModal" data-hystmodal="#burial_place_location" href="#" style="position:absolute;" title="Указать на карте">
-                    <img src="{{ asset('assets/media/media/icons/location.svg') }}" alt="Указать на карте" width="20" >
-                </a>
-                <input type="hidden" name="burial_place_coords" id="burial_place_coords" value="{{ old('burial_place_coords') }}">
+                       placeholder="{{ __('edit-profile.Select burial place') }}"
+                       id="burial_place"
+                       name="burial_place"
+                       value="{{ $human->burial_place }}"
+                       title="{{ __('create_profile.Location') }}">
             </div>
-
+            <input type="hidden" id="burial_coords"
+                   name="burial_coords"
+                   value="{{ $human->getBurialJson() }}">
         </div>
 
         <div class="input-wrap">
-            <span class="input-wrap__title">Причина смерти:</span>
-            <div class="input-form">
-                <input type="text" class="input-text" id="death_reason" name="death_reason"
+            <span class="input-wrap__title">{{ __('edit-profile.Death cause') }}:</span>
+            <div class="input-form @error('death_reason') no-valid @enderror">
+                <input type="text" class="input-text" id="death_reason"
+                       name="death_reason"
                        value="{{ $human->death_reason }}"
-                       title="">
+                       placeholder="{{ __('edit-profile.Death cause') }}"
+                       title="{{ __('edit-profile.Death cause') }}">
             </div>
+            @error('death_reason')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
         <div class="input-wrap">
-            <span class="input-wrap__title">Свидетельство о смерти:</span>
-            <div class="input-form">
-                <input type="file" class="profileDocument" id="death_certificate" name="death_certificate">
+            <span class="input-wrap__title">{{ __('edit-profile.Death certificate') }}:</span>
+            <div class="input-form @error('death_certificate') no-valid @enderror">
+                <input type="file" class="profileDocument" id="death_certificate"
+                       name="death_certificate">
             </div>
+            @error('death_certificate')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
     </div>
 
     <div class="steep-wrap grid-col-2">
         <div class="input-wrap">
             <span class="input-wrap__title">Отец</span>
-            <div class="select-form">
-                <div class="select">
 
-                    <input type="hidden" class="select__output" id="father_id_hidden" name="father_id" readonly>
-                    <input type="text" class="select__output" placeholder="Выберите из списка"
-                           value="{{ $human->father->full_name ?? '' }}" readonly>
-
-                    <ul class="select-list">
-
-{{--                        @foreach($fathers as $father)--}}
-{{--                        <li class="select-list__item" data-name="father_id" data-id="{{ $father->id }}" id="father_id">--}}
-{{--                            {{ $father->full_name }}--}}
-{{--                        </li>--}}
-
-{{--                        @endforeach--}}
-                    </ul>
-                </div>
-
-                <svg aria-hidden="true" class="select-arrow">
-                    <path
-                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                </svg>
-            </div>
-
+            <select name="father_id" id="select-father" class="@error('father_id') no-valid @enderror">
+                <option disabled selected value>{{ __('edit-profile.Select father') }}</option>
+                @foreach($fathers as $father)
+                    <option
+                        value="{{ $father->id }}" @selected($father->id == $human->father_id)>{{ $father->full_name }}</option>
+                @endforeach
+            </select>
+            @error('father_id')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="input-wrap">
             <span class="input-wrap__title">Мать</span>
-            <div class="select-form">
-                <div class="select">
+            <select name="mother_id" id="select-mother" class="@error('mother_id') no-valid @enderror">
+                <option disabled selected value>{{ __('edit-profile.Select mother') }}</option>
+                @foreach($mothers as $mother)
+                    <option value="{{ $mother->id }}" @selected($mother->id == $human->mother_id)>
+                        {{ $mother->full_name }}
+                    </option>
+                @endforeach
+            </select>
 
-                    <input type="hidden" class="select__output" id="mother_id_hidden" name="mother_id" readonly>
-                    <input type="text" class="select__output" placeholder="Выберите из списка"
-                           value="{{ $human->mother->full_name ?? ''}}"
-                           readonly>
-                    <ul class="select-list">
-{{--                        @foreach($mothers as $mother)--}}
-{{--                            <li class="select-list__item" data-name="mother_id" data-id="{{ $mother->id }}">--}}
-{{--                                {{ $mother->full_name }}--}}
-{{--                            </li>--}}
-{{--                        @endforeach--}}
-                    </ul>
-                </div>
-
-                <svg aria-hidden="true" class="select-arrow">
-                    <path
-                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                </svg>
-            </div>
+            @error('mother_id')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
 
         <div class="input-wrap">
             <span class="input-wrap__title">Супруг / Супруга</span>
-            <div class="select-form">
-                <div class="select">
-                    <input type="hidden" class="select__output" id="spouse_id_hidden" name="spouse_id" readonly>
-                    <input type="text" class="select__output" placeholder="Выберите из списка"
-                           value="{{ $human->spouse->full_name ?? ''  }}"
-                           readonly>
-                    <ul class="select-list">
-{{--                        @foreach($humans as $human)--}}
-{{--                            <li class="select-list__item" data-name="spouse_id" data-id="{{ $human->id }}">--}}
+            <select name="spouse_id" id="select-spouse" class="@error('spouse_id') no-valid @enderror">
+                <option disabled selected value>{{ __('create_profile.Select husband or wife') }}</option>
+                @foreach($humans as $profile)
+                    <option value="{{ $profile->id }}" @selected($profile->id == $human->id)>
+                        {{ $profile->full_name }}
+                    </option>
+                @endforeach
+            </select>
 
-{{--                                {{ $human->full_name }}</li>--}}
-{{--                        @endforeach--}}
-                    </ul>
-                </div>
-                <svg aria-hidden="true" class="select-arrow">
-                    <path
-                        d="M7 7.8c-.2 0-.4-.1-.6-.2L.8 2 2 .8l5 5 5-5L13.2 2 7.6 7.6c-.2.2-.4.2-.6.2z"/>
-                </svg>
-            </div>
-
+            @error('spouse_id')
+            <span class="is-invalid">{{ $message }}</span>
+            @enderror
         </div>
     </div>
 </div>

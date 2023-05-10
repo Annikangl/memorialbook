@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', [HumanController::class, 'create'])->name('create');
             Route::post('/store', [HumanController::class, 'store'])->name('store');
             Route::get('/{human}/edit', [HumanController::class, 'edit'])->name('edit');
+            Route::put('/{human}/update', [HumanController::class, 'update'])->name('update');
             Route::get('/card/{slug}', [HumanController::class, 'show'])->name('show');
         });
 

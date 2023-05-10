@@ -1,0 +1,31 @@
+.delete-resource {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 6px;
+    right: 6px;
+    border-radius: 50%;
+    transition: var(--normal);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fe7676;
+    border-radius: 50%;
+    box-shadow: -1px 1px 6px #fe7676cc;
+}
+
+.delete-resource:hover {
+    background-color: #fe8a8a;
+}
+
+.delete-resource svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    fill: #fff;
+}

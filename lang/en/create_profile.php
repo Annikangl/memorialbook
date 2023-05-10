@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'new_profile' => 'New profile',
+    'New profile' => 'New profile',
     'subtitle' => 'Let us create and store history together! At first, you need to fill in the primary profile information.',
     'step_1' => 'Step 1',
     'step_2' => 'Step 2',
