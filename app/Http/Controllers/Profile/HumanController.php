@@ -15,6 +15,9 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\MediaCannotBeDeleted;
+use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
+use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 
 class HumanController extends Controller
@@ -74,13 +77,8 @@ class HumanController extends Controller
 
         $religions = Religion::query()->orderBy('id')->get();
 
-        $fathers = $humans->filter(function ($item) {
-            return $item->gender == Human::MALE;
-        });
-
-        $mothers = $humans->filter(function ($item) {
-            return $item->gender == Human::FEMALE;
-        });
+        $fathers = $humans->where('gender', Human::MALE);
+        $mothers = $humans->where('gender', Human::FEMALE);
 
         $genders = Human::genderList();
 
@@ -88,6 +86,10 @@ class HumanController extends Controller
             compact('humans', 'fathers', 'mothers', 'religions', 'genders'));
     }
 
+    /**
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     */
     public function store(CreateHumanRequest $request): RedirectResponse
     {
         $humanDto = HumanDTO::fromRequest($request);
@@ -112,15 +114,8 @@ class HumanController extends Controller
     {
         $humans = Human::query()->where('user_id', auth()->id())->latest()->get();
 
-        $religions = Religion::query()->orderBy('id')->get();
-
-        $fathers = $humans->filter(function ($item) {
-            return $item->gender == Human::MALE;
-        });
-
-        $mothers = $humans->filter(function ($item) {
-            return $item->gender == Human::FEMALE;
-        });
+        $fathers = $humans->where('gender', Human::MALE);
+        $mothers = $humans->where('gender', Human::FEMALE);
 
         $religions = Religion::query()->orderBy('id')->get();
 
@@ -130,9 +125,23 @@ class HumanController extends Controller
             compact('human', 'genders', 'fathers', 'mothers', 'humans', 'religions'));
     }
 
+    /**
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     */
     public function update(Human $human, UpdateHumanRequest $request)
     {
-        dd($request->all());
+        $humanDto = HumanDTO::fromArray($request->validated());
+
+        $isDraft = (bool) $request->input('draft');
+
+        try {
+            $human = $this->humanService->update($human->id, $humanDto, $request->user(), $isDraft);
+        } catch (\Throwable $e) {
+            return back()->with(['message' => $e->getMessage()]);
+        }
+
+        return redirect()->route('profile.human.show', $human->slug);
     }
 
     public function map(SearchHumanRequest $request): Factory|View|Application

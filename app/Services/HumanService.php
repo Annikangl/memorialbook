@@ -7,11 +7,16 @@ use App\DTOs\Profile\HumanDTO;
 use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
+use App\Models\User\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\MediaCannotBeDeleted;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class HumanService
 {
@@ -70,19 +75,17 @@ class HumanService
             });
 
             if ($humanDTO->avatar) {
-                $human->addMedia($humanDTO->avatar)
-                    ->toMediaCollection('avatars');
+                $this->uploadMedia($human, 'avatars', $humanDTO->avatar);
             }
 
             if ($humanDTO->gallery) {
                 foreach ($humanDTO->gallery as $image) {
-                    $human->addMedia($image)->toMediaCollection('gallery');
+                    $this->uploadMedia($human, 'gallery', $image);
                 }
             }
 
             if ($humanDTO->death_certificate) {
-                $human->addMedia($humanDTO->death_certificate)
-                    ->toMediaCollection('attached_document');
+                $this->uploadMedia($human, 'attached_document', $humanDTO->death_certificate);
             }
 
         } catch (\Throwable $exception) {
@@ -90,5 +93,72 @@ class HumanService
         }
 
         return $human;
+    }
+
+    /**
+     * @throws MediaCannotBeDeleted
+     * @throws \Throwable
+     */
+    public function update(int $id, HumanDTO $humanDTO, User $user, bool $isDraft): Human
+    {
+        $human = Human::query()->find($id);
+
+        $human->fill([
+            'first_name' => $humanDTO->first_name,
+            'last_name' => $humanDTO->last_name,
+            'description' => $humanDTO->description,
+            'gender' => $humanDTO->gender,
+            'date_birth' => $humanDTO->date_birth,
+            'date_death' => $humanDTO->date_death,
+            'birth_place' => $humanDTO->birth_place,
+            'burial_place' => $humanDTO->burial_place,
+            'latitude' => $humanDTO->burial_coords['lat'],
+            'longitude' => $humanDTO->burial_coords['lng'],
+            'death_reason' => $humanDTO->death_reason,
+            'status' => $isDraft ? Profile::STATUS_DRAFT : Profile::STATUS_ACTIVE,
+            'access' => $humanDTO->access,
+            'father_id' => $humanDTO->father_id,
+            'mother_id' => $humanDTO->mother_id,
+            'spouse_id' => $humanDTO->spouse_id,
+            'religion_id' => $humanDTO->religion_id,
+        ]);
+
+        $human->save();
+
+
+        if ($humanDTO->removedImageIds) {
+            foreach ($humanDTO->removedImageIds as $mediaId) {
+                $this->deleteMedia($human, $mediaId);
+            }
+        }
+
+        if ($humanDTO->avatar) {
+            $this->uploadMedia($human, 'avatars', $humanDTO->avatar);
+        }
+
+        if ($humanDTO->gallery) {
+            foreach ($humanDTO->gallery as $image) {
+                $this->uploadMedia($human, 'gallery', $image);
+            }
+        }
+
+        return $human;
+    }
+
+    /**
+     * @throws FileIsTooBig
+     * @throws FileDoesNotExist
+     */
+    private function uploadMedia(Human $human, string $collectionName, UploadedFile $file): void
+    {
+        $human->addMedia($file)->toMediaCollection($collectionName);
+    }
+
+    /**
+     * @throws MediaCannotBeDeleted
+     */
+    private function deleteMedia(Human $user, int $mediaId): void
+    {
+        $user->deleteMedia($mediaId);
     }
 }

@@ -13,7 +13,7 @@ class PetService
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
-    public function create(PetDTO $petDTO, int $userId)
+    public function create(PetDTO $petDTO, int $userId): Pet
     {
         $pet = Pet::query()->make([
             'name' => $petDTO->name,

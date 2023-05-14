@@ -247,4 +247,5 @@ class Human extends Profile implements HasMedia
     {
         return json_encode(['lat' => $this->latitude, 'lng' => $this->longitude]);
     }
+
 }

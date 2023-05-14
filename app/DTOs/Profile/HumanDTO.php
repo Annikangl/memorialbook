@@ -3,6 +3,8 @@
 namespace App\DTOs\Profile;
 
 use Illuminate\Http\UploadedFile;
+use WendellAdriel\ValidatedDTO\Casting\CarbonCast;
+use WendellAdriel\ValidatedDTO\Casting\CarbonImmutableCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 class HumanDTO extends ValidatedDTO
@@ -24,6 +26,7 @@ class HumanDTO extends ValidatedDTO
     public array|null $gallery;
     public string|null $description;
     public string $access;
+    public array|null $removedImageIds;
 
 
     public int|null $religion_id;
@@ -54,6 +57,7 @@ class HumanDTO extends ValidatedDTO
             'avatar' => ['nullable', 'file'],
             'death_certificate' => ['nullable', 'file'],
             'gallery' => ['nullable', 'array'],
+            'removedImageIds' => ['nullable', 'array'],
         ];
     }
 

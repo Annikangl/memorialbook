@@ -46,6 +46,8 @@
                         @csrf
                         @method('PUT')
 
+                        @include('includes.partials.message')
+
                         @include('humans.edit.edit_step_1')
 
                         @include('humans.edit.edit_step_2')

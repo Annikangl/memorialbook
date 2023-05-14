@@ -6,7 +6,7 @@
             <div class="input-photo">
                 @foreach($human->getMedia('gallery') as $item)
                     <div class="input-photo-preview">
-                        <button type="button" class="delete-resource">
+                        <button type="button" class="delete-resource" data-image-id="{{ $item->id }}">
                             <svg
                                 width="20"
                                 height="20"
@@ -26,7 +26,7 @@
                         <img class="bg-img" src="{{ $item->getUrl('thumb_500') }}" alt="{{ $item->name }}"/>
                     </div>
                 @endforeach
-
+                    <input type="hidden" class="deleted-images" name="removedImageIds[]">
             </div>
         </div>
 
