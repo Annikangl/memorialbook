@@ -13,7 +13,22 @@ if (document.querySelector('#birth-year-search')) {
             autofix: true,
             lazy: true,
         })
-
     }
+}
+
+if (document.querySelector('.delete-resource')) {
+    const deleteButtons = document.querySelectorAll('.delete-resource');
+    const removedImagesInput = document.querySelector('.deleted-images');
+
+    deleteButtons.forEach((item) => {
+        item.addEventListener('click', function () {
+            item.closest('.input-photo-preview').style.display = 'none';
+            const elInput = removedImagesInput.cloneNode(false);
+            elInput.value = item.getAttribute('data-image-id');
+            removedImagesInput.appendChild(elInput);
+        });
+    })
+
+
 }
 

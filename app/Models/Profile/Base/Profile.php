@@ -111,16 +111,16 @@ class Profile extends Model implements HasMedia
     protected function dateBirth(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Carbon::parse($value)->format('d.m.Y'),
-            set: fn($value) => Carbon::parse($value)->format('Y-m-d'),
+            get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y'),
+            set: fn($value) => Carbon::createFromFormat('d.m.Y', $value)->format('Y-m-d'),
         );
     }
 
     protected function dateDeath(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Carbon::parse($value)->format('d.m.Y'),
-            set: fn($value) => Carbon::parse($value)->format('Y-m-d'),
+            get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y'),
+            set: fn($value) => Carbon::createFromFormat('d.m.Y', $value)->format('Y-m-d'),
         );
     }
 

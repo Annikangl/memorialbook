@@ -1,7 +1,15 @@
 {
+  "resources/fonts/fileuploader/font-fileuploader.ttf": {
+    "file": "assets/font-fileuploader.75e69c9b.ttf",
+    "src": "resources/fonts/fileuploader/font-fileuploader.ttf"
+  },
   "resources/fonts/lato-black.woff2": {
     "file": "assets/lato-black.1933944b.woff2",
     "src": "resources/fonts/lato-black.woff2"
+  },
+  "resources/fonts/lato-bold.woff2": {
+    "file": "assets/lato-bold.0cc3d792.woff2",
+    "src": "resources/fonts/lato-bold.woff2"
   },
   "resources/fonts/lato-regular.woff2": {
     "file": "assets/lato-regular.de81d909.woff2",
@@ -10,14 +18,6 @@
   "resources/fonts/lato-semibold.woff2": {
     "file": "assets/lato-semibold.e42a071f.woff2",
     "src": "resources/fonts/lato-semibold.woff2"
-  },
-  "resources/fonts/fileuploader/font-fileuploader.ttf": {
-    "file": "assets/font-fileuploader.75e69c9b.ttf",
-    "src": "resources/fonts/fileuploader/font-fileuploader.ttf"
-  },
-  "resources/fonts/lato-bold.woff2": {
-    "file": "assets/lato-bold.0cc3d792.woff2",
-    "src": "resources/fonts/lato-bold.woff2"
   },
   "resources/fonts/fileuploader/font-fileuploader.woff": {
     "file": "assets/font-fileuploader.236c8a03.woff",
@@ -28,19 +28,19 @@
     "src": "resources/fonts/fileuploader/font-fileuploader.svg"
   },
   "resources/js/app.js": {
-    "file": "assets/app.38525e82.js",
+    "file": "assets/app.9270f95e.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app.028243bf.css"
+      "assets/app.7cc3451f.css"
     ]
   },
   "resources/js/app.css": {
-    "file": "assets/app.028243bf.css",
+    "file": "assets/app.7cc3451f.css",
     "src": "resources/js/app.css"
   },
   "resources/css/app.css": {
-    "file": "assets/app.3cf4a2f6.css",
+    "file": "assets/app.5b8c7b7d.css",
     "src": "resources/css/app.css",
     "isEntry": true
   }
