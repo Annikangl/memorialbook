@@ -14,7 +14,7 @@ class CemeteryDTO extends ValidatedDTO
 
     public string $titleEn;
 
-    public string $subtitle;
+    public string|null $subtitle;
 
     public string $address;
 

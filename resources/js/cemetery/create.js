@@ -17,7 +17,7 @@ if (document.querySelector('#cemetery_address')) {
     autocomplete = new google.maps.places.Autocomplete(document.querySelector('#cemetery_address'), {
         fields: ["address_components", "geometry", "icon", "name"],
         strictBounds: false,
-        types: ["establishment"],
+        types: [],
     });
 
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
