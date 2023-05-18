@@ -31,10 +31,9 @@
 @section('scripts')
     <script src="{{ asset('js/familytree.js') }}"></script>
 
-
     <script>
 
-        var family = new FamilyTree(document.getElementById("tree"), {
+        const family = new FamilyTree(document.getElementById("tree"), {
             template: 'john',
 
             nodeMouseClick: FamilyTree.action.none,
@@ -93,7 +92,7 @@
         profiles.forEach(function (human) {
             family.addNode({
                 id: human.id,
-                slug:human.slug,
+                slug: human.slug,
                 pids: [human.spouse_id],
                 mid: human.mother_id,
                 fid: human.father_id,
@@ -111,8 +110,3 @@
     </script>
 
 @endsection
-
-
-
-
-
