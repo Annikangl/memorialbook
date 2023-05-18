@@ -28,10 +28,16 @@ class HumanController extends Controller
 
     public function index(): Factory|View|Application
     {
-        $humans = Human::query()->orderBy('id')
+        $humans = Human::query()
+            ->select(['id','slug', 'first_name', 'last_name', 'gender','date_birth', 'date_death', 'mother_id', 'father_id', 'spouse_id', 'children_id'])
+            ->orderBy('id')
             ->with('users')
             ->where('user_id', \Auth::id())
             ->get();
+
+        $humans->each(function (Human $human) {
+            $human->avatar = $human->getFirstMediaUrl('avatars', 'thumb');
+        });
 
         if ($humans->isEmpty()) {
             return view('tree.error');

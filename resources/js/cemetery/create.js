@@ -11,6 +11,9 @@ if (document.querySelector('.load-files-cemetery')) {
     }
 }
 
+
+
+
 if (document.querySelector('#cemetery_address')) {
     let autocomplete;
 

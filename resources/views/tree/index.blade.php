@@ -1,35 +1,38 @@
 @extends('layouts.app')
 
-<script src="{{asset('js/familytree.js')}}"></script>
-
-<div class="container">
-    <div class="tree__inner" style="margin-top: 100px !important;">
-        <div class="tree__nav">
-            <div class="tree-nav__items">
-                <div class="tree-nav__item">
-                    <a class="tree-nav__link active"
-                       href="{{ route('tree') }}">{{__('family_tree.link_family_tree')}}</a>
-                </div>
-                <div class="tree-nav__item">
-                    <a class="tree-nav__link" href="#">{{__('family_tree.link_profile_list')}}</a>
+@section('content')
+<section class="family-tree">
+        <div class="tree__inner">
+            <div class="tree__nav">
+                <div class="tree-nav__items">
+                    <div class="tree-nav__item">
+                        <a class="tree-nav__link active"
+                           href="{{ route('tree') }}">{{__('family_tree.link_family_tree')}}</a>
+                    </div>
+                    <div class="tree-nav__item">
+                        <a class="tree-nav__link" href="#">{{__('family_tree.link_profile_list')}}</a>
+                    </div>
                 </div>
             </div>
+            <div class="tree__controls">
+                <a class="tree-controls__button btn blue-btn" href="{{ route('profile.human.create') }}">+
+                    {{ __('family_tree.btn_create_profile') }}
+                </a>
+            </div>
         </div>
-        <div class="tree__controls">
-            <a class="tree-controls__button btn blue-btn" href="{{ route('profile.human.create') }}">+
-                {{ __('family_tree.btn_create_profile') }}
-            </a>
+        <div class="container-tree">
+            <div id="tree">
+            </div>
         </div>
-    </div>
-    <div class="container-tree">
-        <div id="tree"></div>
-    </div>
+</section>
 
-</div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/familytree.js') }}"></script>
 
 
-<script>
-    window.onload = function () {
+    <script>
 
         var family = new FamilyTree(document.getElementById("tree"), {
             template: 'john',
@@ -80,33 +83,36 @@
         });
 
         family.on('click', function (sender, args,) {
-            var link = args.node.gender;
-            console.log(args)
-            window.location.href = 'profile/card/' + link
+            const link = args.node.gender;
+            console.log(sender)
+            // window.location.href = 'profile/card/' + link
         });
 
         let profiles = @json($humans);
 
-        profiles.forEach(function (profile) {
+        profiles.forEach(function (human) {
             family.addNode({
-                id: profile.id,
-                // slug:profile.slug,
-                pids: [profile.spouse_id],
-                mid: profile.mother_id,
-                fid: profile.father_id,
-                name: [profile.first_name + ' ' + profile.last_name],
-                fullname: [profile.first_name + ' ' + profile.patronymic + ' ' + profile.last_name],
-                img: 'storage/' + profile.avatar,
-                gender: profile.slug,
-                birthDate: new Date(profile.date_birth).toLocaleDateString(),
-                deathDate: new Date(profile.date_death).toLocaleDateString(),
-                placebirth: profile.birth_place,
-                burialplace: profile.burial_place,
-                reasondeath: profile.reason_death,
-                date: new Date(profile.date_birth).getFullYear() + ' - ' + new Date(profile.date_death).getFullYear() + ' ' + 'г.',
-                link: 'profile/update/' + profile.id,
+                id: human.id,
+                slug:human.slug,
+                pids: [human.spouse_id],
+                mid: human.mother_id,
+                fid: human.father_id,
+                name: human.fullName,
+                img: human.avatar,
+                gender: human.gender,
+                birthDate: new Date(human.date_birth).toLocaleDateString(),
+                deathDate: new Date(human.date_death).toLocaleDateString(),
+                date: new Date(human.date_birth).getFullYear() + ' - ' + new Date(human.date_death).getFullYear() + ' ' + 'г.',
+                link: 'profile/update/' + human.id,
             },)
         });
-    }
 
-</script>
+
+    </script>
+
+@endsection
+
+
+
+
+
