@@ -83,8 +83,8 @@
         });
 
         family.on('click', function (sender, args,) {
-            const link = args.node.gender;
-            console.log(sender)
+            // const link = args.node.slug;
+            // console.log(this)
             // window.location.href = 'profile/card/' + link
         });
 
