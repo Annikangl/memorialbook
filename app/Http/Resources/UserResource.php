@@ -8,21 +8,14 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|Arrayable|\JsonSerializable
-     */
-    public function toArray($request): array|\JsonSerializable|Arrayable
+    public function toArray($request): array
     {
         /** @var User $this */
+
         return [
             'id' => $this->id,
-            'slug' => $this->slug,
-            'email' => $this->email,
-            'phone' => $this->phone,
             'username' => $this->username,
+            'email' => $this->email,
             'avatar' => $this->getFirstMediaUrl('avatar'),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

@@ -2,39 +2,41 @@
 
 namespace App\Http\Controllers\Api\v1\Auth;
 
+use App\DTOs\User\UserDTO;
+use App\Exceptions\Api\Auth\RegisterException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\LoginRequest;
-use App\Http\Requests\User\RegisterRequest;
+use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User\User;
+use App\Services\Auth\RegisterService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Auth;
+use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
+use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class RegisterController extends Controller
 {
+    public function __construct(private RegisterService $registerService)
+    {
+    }
+
+    /**
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     * @throws RegisterException
+     */
     public function register(RegisterRequest $request): JsonResponse
     {
-        $request_data = $request->validated();
+        $userDto = UserDTO::fromArray($request->validated());
 
-        $user = User::register(
-            $request_data['full_name'],
-            $request_data['email'],
-            $request_data['phone'],
-            $request_data['password']
-        );
-
-        if (!$user) {
-            return response()->json(['status' => false, 'message' => 'User not created']);
-        }
+        $user = $this->registerService->register($userDto);
 
         event(new Registered($user));
 
-        $token = $user->createToken($request_data['device'])->plainTextToken;
-
-        return response()->json(['status' => true, 'token' => $token, 'user' => new UserResource($user)])
-            ->setStatusCode(201);
+        return response()->json([
+            'status' => true,
+            'token' => $user->createAuthToken(),
+            'user' => new UserResource($user)
+        ])->setStatusCode(201);
     }
 }

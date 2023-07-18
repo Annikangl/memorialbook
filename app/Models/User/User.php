@@ -34,10 +34,12 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $phone
  * @property string $password
+ * @property string $fcm_token
+ * @property string $device_name
+ * @property string $location
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
-
  */
 class User extends Authenticatable implements HasMedia
 {
@@ -48,6 +50,9 @@ class User extends Authenticatable implements HasMedia
         'email',
         'phone',
         'password',
+        'fcm_token',
+        'device_name',
+        'location',
     ];
 
     protected $hidden = [
@@ -84,6 +89,27 @@ class User extends Authenticatable implements HasMedia
         ]);
 
         return $user;
+    }
+
+    public function createAuthToken(): string
+    {
+        return $this->createToken($this->device_name)->plainTextToken;
+    }
+
+    public function updateFcmToken(string $token): void
+    {
+        if ($this->fcm_token !== $token) {
+            $this->fcm_token = $token;
+            $this->save();
+        }
+    }
+
+    public function updateDeviceName(string $deviceName): void
+    {
+        if ($this->device_name !== $deviceName) {
+            $this->device_name = $deviceName;
+            $this->save();
+        }
     }
 
     public function scopeByNetwork(Builder $query, string $network, string $identity): Builder
@@ -148,7 +174,7 @@ class User extends Authenticatable implements HasMedia
 
     public function news(): HasMany
     {
-        return $this->hasMany(News::class,'author_id');
+        return $this->hasMany(News::class, 'author_id');
     }
 
     public function communities(): BelongsToMany

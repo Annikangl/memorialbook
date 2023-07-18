@@ -2,42 +2,53 @@
 
 namespace App\Http\Controllers\Api\v1\Auth;
 
-use App\Exceptions\Api\TokenException;
+use App\Exceptions\Api\Auth\LoginException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\LoginRequest;
+use App\Http\Requests\Api\Auth\LoginRequest;
 use App\Http\Resources\UserResource;
+use App\Services\Auth\LoginService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    public function __construct(private LoginService $loginService)
+    {
+    }
+
+    /**
+     * @throws LoginException
+     */
     public function login(LoginRequest $request): JsonResponse
     {
-        $credentials = $this->credentials($request);
+        $credentials = $this->getCredentials($request);
 
-        if (!Auth::attempt($credentials)) {
-            return response()->json(['status' => false, 'message' => 'Invalid login or password'])->setStatusCode(401);
-        }
+        $user = $this->loginService->login(
+            $credentials,
+            $request->validated('device_name'),
+            $request->validated('fcm_token')
+        );
 
-        $token = Auth::user()->createToken($request->get('device'))->plainTextToken;
-
-
-        return response()->json(['status' => true, 'token' => $token, 'user' => new UserResource(Auth::user())], 200);
+        return response()->json([
+            'status' => true,
+            'token' => $user->createAuthToken(),
+            'user' => new UserResource($user)
+        ])->setStatusCode(200);
     }
 
     public function logout(Request $request): JsonResponse
     {
         $request->user()->tokens()->delete();
 
-        return response()->json(['status' => true, 'message' => 'User logged out'], 200);
+        return response()->json(['status' => true, 'message' => 'User logged out'])
+            ->setStatusCode(200);
     }
 
-    protected function credentials(Request $request): array
+    protected function getCredentials(LoginRequest $request): array
     {
         return [
-            'email' => $request->get('login_email'),
-            'password' => $request->get('login_password'),
+            'email' => $request->validated('email'),
+            'password' => $request->validated('password')
         ];
     }
 }
