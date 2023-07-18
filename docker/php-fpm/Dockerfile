@@ -103,13 +103,6 @@ RUN curl -s http://getcomposer.org/installer | php && \
 # Source the bash
 RUN . ~/.bashrc
 
-#####################################
-# Laravel Schedule Cron Job:
-#####################################
-
-RUN echo "* * * * * www-data /usr/local/bin/php /var/www/artisan schedule:run >> /dev/null 2>&1"  >> /etc/cron.d/laravel-scheduler
-RUN chmod 0644 /etc/cron.d/laravel-scheduler
-
 #
 #--------------------------------------------------------------------------
 # Final Touch
@@ -146,10 +139,10 @@ RUN usermod -u 1000 www-data
 
 WORKDIR /var/www/memorialbook
 
-COPY ./docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-RUN ln -s /usr/local/bin/docker-entrypoint.sh /
-ENTRYPOINT ["docker-entrypoint.sh"]
+#COPY ./docker-entrypoint.sh /usr/local/bin/
+#RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+#RUN ln -s /usr/local/bin/docker-entrypoint.sh /
+#ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 9000
 CMD ["php-fpm"]
