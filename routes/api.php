@@ -19,30 +19,12 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         Route::post('/register', [RegisterController::class, 'register']);
         Route::post('/login', [LoginController::class, 'login']);
         Route::post('/login/network/{network}', [NetworkController::class, 'redirect']);
+        Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
     });
 
-
-//    Route::post('/register', [RegisterController::class, 'register']);
-//    Route::post('/login', [LoginController::class, 'login']);
 //    Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 
     Route::middleware('auth:sanctum')->group(function () {
-//        Route::get('/logout', [LoginController::class, 'logout']);
-//
-//        Route::prefix('cabinet')->group(function () {
-//            Route::get('/users/{id}', [CabinetController::class, 'show']);
-//            Route::put('/users/{id}', [CabinetController::class, 'update']);
-//            Route::delete('/users/{id}', [CabinetController::class, 'delete']);
-//        });
-//
-//        Route::prefix('profiles')->group(function () {
-//            Route::get('/{id}', [HumanController::class, 'show']);
-//        });
-//
-//        Route::prefix('search')->group(function () {
-//            Route::get('/profile', [HumanController::class, 'search']);
-//        });
-
 
     });
 });

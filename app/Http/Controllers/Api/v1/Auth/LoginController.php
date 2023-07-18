@@ -38,7 +38,7 @@ class LoginController extends Controller
 
     public function logout(Request $request): JsonResponse
     {
-        $request->user()->tokens()->delete();
+        $this->loginService->logout($request->user());
 
         return response()->json(['status' => true, 'message' => 'User logged out'])
             ->setStatusCode(200);

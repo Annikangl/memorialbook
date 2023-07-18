@@ -17,7 +17,6 @@ class NetworkController extends Controller
 
     public function redirect(string $network)
     {
-        dd($network);
         return Socialite::driver($network)->redirect();
     }
 

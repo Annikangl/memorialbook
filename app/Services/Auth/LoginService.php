@@ -24,4 +24,12 @@ class LoginService
 
         return $user;
     }
+
+    public function logout(User $user): void
+    {
+        $user->tokens()->delete();
+        $user->fcm_token = null;
+
+        $user->save();
+    }
 }
