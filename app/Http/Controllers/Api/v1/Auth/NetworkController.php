@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api\v1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Services\Auth\NetworkService;
@@ -8,16 +8,12 @@ use Laravel\Socialite\Facades\Socialite;
 
 class NetworkController extends Controller
 {
-    private NetworkService $service;
-
-    public function __construct(NetworkService $service)
+    public function __construct(private NetworkService $service)
     {
-        $this->service = $service;
     }
 
     public function redirect(string $network)
     {
-        dd($network);
         return Socialite::driver($network)->redirect();
     }
 

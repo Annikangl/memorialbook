@@ -2,9 +2,8 @@
 
 use App\Http\Controllers\Api\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\v1\Auth\LoginController;
+use App\Http\Controllers\Api\v1\Auth\NetworkController;
 use App\Http\Controllers\Api\v1\Auth\RegisterController;
-use App\Http\Controllers\Api\v1\Cabinet\CabinetController;
-use App\Http\Controllers\Api\v1\Profile\HumanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +18,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::prefix('auth')->group(function () {
         Route::post('/register', [RegisterController::class, 'register']);
         Route::post('/login', [LoginController::class, 'login']);
+        Route::post('/login/network/{network}', [NetworkController::class, 'redirect']);
     });
 
 
