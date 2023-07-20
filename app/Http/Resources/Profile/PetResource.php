@@ -2,19 +2,19 @@
 
 namespace App\Http\Resources\Profile;
 
-use App\Models\Profile\Human\Human;
+use App\Models\Profile\Pet\Pet;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class HumanResource extends JsonResource
+class PetResource extends JsonResource
 {
     public function toArray($request): array
     {
-        /** @var Human $this */
+        /** @var Pet $this */
         return [
             'id' => $this->id,
-            'full_name' => $this->full_name,
-            'date_birth' => $this->year_birth,
-            'date_death' => $this->year_death,
+            'name' => $this->name,
+            'year_birth' => $this->year_birth,
+            'year_death' => $this->year_death,
             'avatar' => $this->getFirstMediaUrl('avatars', 'thumb')
         ];
     }

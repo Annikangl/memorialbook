@@ -27,6 +27,7 @@ class PetFactory extends Factory
             'birth_place' => $this->faker->address,
             'burial_place' => $this->faker->address,
             'death_reason' => $this->faker->words(2, true),
+            'is_celebrity' => $this->faker->boolean,
         ];
     }
 }

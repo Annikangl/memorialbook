@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\Auth\NetworkController;
 use App\Http\Controllers\Api\v1\Auth\RegisterController;
+use App\Http\Controllers\Api\v1\Feed\FeedController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,9 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
 //    Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 
     Route::middleware('auth:sanctum')->group(function () {
-
+        Route::prefix('/feed')->group(function () {
+            Route::get('/', [FeedController::class, 'index']);
+        });
     });
 });
 

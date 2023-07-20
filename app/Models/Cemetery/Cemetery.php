@@ -123,7 +123,6 @@ class Cemetery extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('avatars')
-            ->singleFile()
             ->useFallbackUrl(asset('assets/media/media/empty_profile_avatar.png'))
             ->useFallbackPath(asset('assets/media/media/empty_profile_avatar.png'));
 

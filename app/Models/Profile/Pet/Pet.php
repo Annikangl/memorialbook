@@ -32,7 +32,12 @@ class Pet extends Profile
         'date_death',
         'birth_place',
         'burial_place',
-        'death_reason'
+        'death_reason',
+        'is_celebrity'
+    ];
+
+    protected $casts = [
+        'is_celebrity' => 'boolean'
     ];
 
     public function scopeByUser(Builder $query, int $userId): Builder

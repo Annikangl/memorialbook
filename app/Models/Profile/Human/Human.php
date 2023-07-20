@@ -52,6 +52,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property float|null $latitude
  * @property float|null $longitude
  * @property string $status
+ * @property boolean $is_celebrity
  * @property string|null $moderators_comment
  * @property string|null $access
  * @property Carbon|null $published_at
@@ -107,12 +108,17 @@ class Human extends Profile implements HasMedia
         'longitude',
         'death_reason',
         'status',
+        'is_celebrity',
         'moderators_comment',
         'access',
         'published_at',
     ];
 
     protected $appends = ['fullName', 'yearBirth', 'yearDeath'];
+
+    protected $casts = [
+        'is_celebrity' => 'boolean'
+    ];
 
     public static function getAccessList(): array
     {

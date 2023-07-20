@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Cemetery\Cemetery;
-use App\Models\Cemetery\Gallery;
 use App\Models\Community\Community;
 use App\Models\Community\Posts\Post;
 use App\Models\Profile\Hobby;
@@ -12,13 +11,18 @@ use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
 use App\Models\Profile\Religion;
 use App\Models\User\User;
-use Database\Seeders\Profile\DeathReasonSeeder;
-use Faker\Provider\Image;
+use Faker\Provider\UserAgent;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
     public function run(): void
     {
         $faker = \Faker\Factory::create();
@@ -87,12 +91,18 @@ class DatabaseSeeder extends Seeder
             'username' => 'Ivanov Ivan',
             'email' => 'test@gmail.com',
             'password' => \Hash::make('test1234'),
+            'fcm_token' => Str::random(50),
+            'device_name' => UserAgent::userAgent(),
+            'location' => 'RU',
         ]);
 
         User::create([
             'username' => 'Petrov Petr',
             'email' => 'test2@gmail.com',
             'password' => \Hash::make('test1234'),
+            'fcm_token' => Str::random(50),
+            'device_name' => UserAgent::userAgent(),
+            'location' => 'DE',
         ]);
     }
 }
