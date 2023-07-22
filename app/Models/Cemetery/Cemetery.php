@@ -3,7 +3,6 @@
 namespace App\Models\Cemetery;
 
 use App\Models\Profile\Human\Human;
-use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
