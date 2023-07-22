@@ -112,7 +112,7 @@ class Profile extends Model implements HasMedia
     {
         return Attribute::make(
             get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y'),
-            set: fn($value) => Carbon::createFromFormat('d.m.Y', $value)->format('Y-m-d'),
+//            set: fn($value) => Carbon::createFromFormat('d.m.Y', $value)->format('Y-m-d'),
         );
     }
 
@@ -120,7 +120,7 @@ class Profile extends Model implements HasMedia
     {
         return Attribute::make(
             get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y'),
-            set: fn($value) => Carbon::createFromFormat('d.m.Y', $value)->format('Y-m-d'),
+//            set: fn($value) => Carbon::createFromFormat('d.m.Y', $value)->format('Y-m-d'),
         );
     }
 
