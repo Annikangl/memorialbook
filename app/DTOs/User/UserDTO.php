@@ -2,6 +2,7 @@
 
 namespace App\DTOs\User;
 
+use Illuminate\Http\UploadedFile;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 class UserDTO extends ValidatedDTO
@@ -9,10 +10,11 @@ class UserDTO extends ValidatedDTO
     public string $username;
     public string $email;
     public ?string $phone;
-    public string $password;
-    public string $device_name;
-    public string $fcm_token;
-    public string $location;
+    public ?string $password;
+    public ?string $device_name;
+    public ?string $fcm_token;
+    public ?string $location;
+    public ?UploadedFile $avatar;
 
     /**
      * Defines the validation rules for the DTO.
@@ -25,10 +27,11 @@ class UserDTO extends ValidatedDTO
             'username' => ['required', 'string'],
             'email' => ['required', 'email'],
             'phone' => ['nullable', 'string'],
-            'password' => ['required', 'string'],
-            'device_name' => ['required', 'string'],
-            'fcm_token' => ['required', 'string'],
-            'location' => ['required', 'string', 'max:15']
+            'password' => ['nullable', 'string'],
+            'device_name' => ['nullable', 'string'],
+            'fcm_token' => ['nullable', 'string'],
+            'location' => ['nullable', 'string', 'max:15'],
+            'avatar' => ['nullable']
         ];
     }
 

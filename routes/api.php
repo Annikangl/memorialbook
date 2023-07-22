@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\Auth\NetworkController;
 use App\Http\Controllers\Api\v1\Auth\RegisterController;
+use App\Http\Controllers\Api\v1\Cabinet\CabinetController;
 use App\Http\Controllers\Api\v1\Feed\FeedController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,11 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('/feed')->group(function () {
             Route::get('/', [FeedController::class, 'index']);
+        });
+
+        Route::prefix('/cabinet')->group(function () {
+            Route::get('/user', [CabinetController::class, 'show']);
+            Route::put('/user', [CabinetController::class, 'update']);
         });
     });
 });
