@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Profile\Pet;
 
+use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Pet;
 use App\Models\User\User;
 use Carbon\Carbon;
@@ -27,7 +28,9 @@ class PetFactory extends Factory
             'birth_place' => $this->faker->address,
             'burial_place' => $this->faker->address,
             'death_reason' => $this->faker->words(2, true),
-            'is_celebrity' => $this->faker->boolean,
+            'is_celebrity' => $this->faker->boolean(),
+            'status' => $this->faker->randomElement(Profile::statusList()),
+            'access' => $this->faker->randomElement(Profile::getAccessList()),
         ];
     }
 }

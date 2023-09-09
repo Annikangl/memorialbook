@@ -45,7 +45,7 @@ return new class extends Migration {
 
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('patronymic')->nullable();
+            $table->string('middle_name')->nullable();
             $table->string('slug')->nullable()->index();
             $table->text('description')->nullable();
             $table->string('gender', 10);
@@ -57,6 +57,8 @@ return new class extends Migration {
             $table->string('death_reason')->nullable();
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
+            $table->json('hobbies')->nullable();
+            $table->boolean('is_celebrity')->default(false);
 
             $table->string('status', 16);
             $table->string('moderators_comment')->nullable();

@@ -18,6 +18,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @package App\Models\Profile\Base
  *
  * @property string $status
+ * @property bool $is_celebrity
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  */
@@ -31,6 +32,10 @@ class Profile extends Model implements HasMedia
     public const STATUS_CLOSED = 'closed';
     public const STATUS_REJECTED = 'rejected';
 
+    public const ACCESS_PUBLIC = 'public';
+    public const ACCESS_PRIVATE = 'private';
+    public const ACCESS_AVAILABLE = 'available';
+
 
     public static function statusList(): array
     {
@@ -40,6 +45,15 @@ class Profile extends Model implements HasMedia
             'rejected' => self::STATUS_REJECTED,
             'moderation' => self::STATUS_MODERATION,
             'closed' => self::STATUS_CLOSED
+        ];
+    }
+
+    public static function getAccessList(): array
+    {
+        return [
+            'public' => self::ACCESS_PUBLIC,
+            'available' => self::ACCESS_AVAILABLE,
+            'private' => self::ACCESS_PRIVATE
         ];
     }
 
@@ -132,5 +146,16 @@ class Profile extends Model implements HasMedia
         $this->addMediaConversion('thumb')
             ->fit(Manipulations::FIT_CROP, 150, 150)
             ->nonQueued();
+    }
+
+    public function getGallery(): array
+    {
+        $gallery = [];
+
+        $this->getMedia('gallery')->each(function (Media $item) use (&$gallery) {
+            $gallery[] = $item->getUrl('thumb_500');
+        });
+
+        return $gallery;
     }
 }

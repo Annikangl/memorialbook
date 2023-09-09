@@ -24,7 +24,14 @@ class HumanFactory extends Factory
             'religion_id' => Religion::query()->inRandomOrder()->value('id'),
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
+            'middle_name' => $this->faker->userName(),
             'description' => $this->faker->text(),
+            'hobbies' => $this->faker->randomElement([
+                json_encode(['sport', 'games', 'cars', 'travel']),
+                json_encode(['sport', 'games', 'cars']),
+                json_encode(['sport', 'games']),
+                json_encode(['sport']),
+            ]),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'date_birth' => $birth = $this->faker->date('Y-m-d', '2000'),
             'date_death' => Carbon::parse($birth)->addYears(40),
@@ -33,10 +40,10 @@ class HumanFactory extends Factory
             'latitude' => $this->faker->latitude(),
             'longitude' => $this->faker->longitude(),
             'death_reason' => $this->faker->words(2, true),
-            'status' => Profile::STATUS_ACTIVE,
+            'status' => $this->faker->randomElement(Profile::statusList()),
             'is_celebrity' => $this->faker->boolean,
             'moderators_comment' => null,
-            'access' => Human::ACCESS_PUBLIC,
+            'access' => $this->faker->randomElement(Profile::getAccessList()),
             'published_at' => Carbon::now()
         ];
     }

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -34,9 +35,10 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $status
  * @property string|null $moderators_comment
  * @property string $access
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $published_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $published_at
+ * @property boolean $is_celebrity
  */
 class Cemetery extends Model implements HasMedia
 {
@@ -65,7 +67,12 @@ class Cemetery extends Model implements HasMedia
         'status',
         'moderators_comment',
         'access',
-        'published_at'
+        'published_at',
+        'is_celebrity'
+    ];
+
+    protected $casts = [
+        'is_celebrity' => 'boolean'
     ];
 
     public static function getAccessList(): array

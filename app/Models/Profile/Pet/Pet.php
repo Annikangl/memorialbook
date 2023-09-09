@@ -33,6 +33,7 @@ class Pet extends Profile
         'birth_place',
         'burial_place',
         'death_reason',
+        'status',
         'is_celebrity'
     ];
 

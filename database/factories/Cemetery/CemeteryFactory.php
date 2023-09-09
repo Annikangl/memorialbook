@@ -15,6 +15,7 @@ class CemeteryFactory extends Factory
     {
         return [
             'user_id' => User::query()->inRandomOrder()->value('id'),
+            'is_celebrity' => $this->faker->boolean(),
             'title' => $title = $this->faker->text(30),
             'title_en' => str($title)->slug(),
             'subtitle' => $this->faker->words(10, true),

@@ -28,6 +28,9 @@ return new class extends Migration
             $table->string('birth_place')->nullable();
             $table->string('burial_place')->nullable();
             $table->string('death_reason')->nullable();
+            $table->boolean('is_celebrity')->default(false);
+            $table->string('access')->nullable();
+            $table->string('status', 16);
 
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

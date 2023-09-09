@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('status', 15);
             $table->string('moderators_comment')->nullable();
             $table->string('access', 50);
+            $table->boolean('is_celebrity')->default(false);
 
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
