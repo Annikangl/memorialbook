@@ -28,8 +28,10 @@ class HumanService
                 $human = Human::make([
                     'first_name' => $humanDTO->first_name,
                     'last_name' => $humanDTO->last_name,
+                    'middle_name' => $humanDTO->middle_name,
                     'description' => $humanDTO->description,
                     'gender' => $humanDTO->gender,
+                    'hobbies' => $humanDTO->hobbies,
                     'date_birth' => $humanDTO->date_birth,
                     'date_death' => $humanDTO->date_death,
                     'birth_place' => $humanDTO->birth_place,
@@ -78,6 +80,10 @@ class HumanService
                 $this->uploadMedia($human, 'avatars', $humanDTO->avatar);
             }
 
+            if ($humanDTO->banner) {
+                $this->uploadMedia($human, 'banners', $humanDTO->banner);
+            }
+
             if ($humanDTO->gallery) {
                 foreach ($humanDTO->gallery as $image) {
                     $this->uploadMedia($human, 'gallery', $image);
@@ -124,7 +130,6 @@ class HumanService
         ]);
 
         $human->save();
-
 
         if ($humanDTO->removedImageIds) {
             foreach ($humanDTO->removedImageIds as $mediaId) {

@@ -35,6 +35,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $subtitle
  * @property string $description
  * @property string $banner
+ * @property bool $is_celebrity
  *
  * @method static Builder|Community byUser(int $userId)
  * @method static Builder|Community query()
@@ -57,6 +58,7 @@ class Community extends Model implements HasMedia
         'subtitle',
         'description',
         'banner',
+        'is_celebrity',
     ];
 
     public function scopeByUser(Builder $query, int $userId): Builder

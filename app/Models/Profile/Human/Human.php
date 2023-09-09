@@ -41,8 +41,10 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int|null $family_burial_id
  * @property string $first_name
  * @property string $last_name
+ * @property string $middle_name
  * @property string $slug
  * @property string $description
+ * @property string $hobbies
  * @property string|null $gender
  * @property string|null $date_birth
  * @property string|null $date_death
@@ -81,11 +83,6 @@ class Human extends Profile implements HasMedia
     public const MALE = 'male';
     public const FEMALE = 'female';
 
-    public const ACCESS_PUBLIC = 'public';
-    public const ACCESS_PRIVATE = 'private';
-    public const ACCESS_AVAILABLE = 'available';
-
-
     protected $fillable = [
         'cemetery_id',
         'user_id',
@@ -95,11 +92,14 @@ class Human extends Profile implements HasMedia
         'mother_id',
         'father_id',
         'religion_id',
-        'family_burial_id',
+        'burial_id',
+        'is_celebrity',
         'first_name',
         'last_name',
+        'middle_name',
         'description',
         'gender',
+        'hobbies',
         'date_birth',
         'date_death',
         'birth_place',
@@ -117,18 +117,9 @@ class Human extends Profile implements HasMedia
     protected $appends = ['fullName', 'yearBirth', 'yearDeath'];
 
     protected $casts = [
-        'is_celebrity' => 'boolean'
+        'is_celebrity' => 'boolean',
+        'hobbies' => 'array'
     ];
-
-    public static function getAccessList(): array
-    {
-        return [
-            'public' => self::ACCESS_PUBLIC,
-            'available' => self::ACCESS_AVAILABLE,
-            'private' => self::ACCESS_PRIVATE
-        ];
-    }
-
 
     public static function genderList(): array
     {
@@ -183,6 +174,10 @@ class Human extends Profile implements HasMedia
             ->useFallbackUrl(asset('assets/media/media/empty_profile_avatar.png'))
             ->useFallbackPath(asset('assets/media/media/empty_profile_avatar.png'));
 
+
+        $this->addMediaCollection('banners')
+            ->singleFile();
+
         $this->addMediaCollection('gallery');
 
         $this->addMediaCollection('attached_document')
@@ -197,7 +192,7 @@ class Human extends Profile implements HasMedia
             ->nonQueued();
 
         $this->addMediaConversion('thumb_500')
-            ->performOnCollections('gallery')
+            ->performOnCollections('gallery', 'banners')
             ->width(500)
             ->height(550)
             ->nonQueued();

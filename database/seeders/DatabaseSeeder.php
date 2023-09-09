@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         Cemetery::factory(30)
             ->create();
 
-        $humans = Human::factory(30)
+        $humans = Human::factory(50)
             ->create();
 
         foreach ($humans as $human) {
@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        $pets = Pet::factory(15)
+        $pets = Pet::factory(50)
             ->create();
 
         foreach ($pets as $pet) {
@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        $communities = Community::factory(5)
+        $communities = Community::factory(50)
             ->has(Post::factory(5))
             ->has(User::factory()->count(30))
             ->has(Human::factory(5))
