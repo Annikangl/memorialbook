@@ -41,7 +41,6 @@ class FeedController extends Controller
             ->get();
 
         $communities = Community::query()
-            ->where('is_celebrity', true)
             ->latest()
             ->limit(10)
             ->get();
@@ -51,10 +50,11 @@ class FeedController extends Controller
         return response()->json([
             'status' => true,
             'data' => [
-                'humans' => HumanResource::collection($celebrityHumans),
-                'cemeteries' => CemeteryResource::collection($celebrityCemeteries),
+                'celebrity_humans' => HumanResource::collection($celebrityHumans),
                 'celebrity_pets' => PetResource::collection($celebrityPets),
+                'cemeteries' => CemeteryResource::collection($celebrityCemeteries),
                 'communities' => CommunityResource::collection($communities),
+                'news' => $news
             ]]
         )->setStatusCode(Response::HTTP_OK);
     }
