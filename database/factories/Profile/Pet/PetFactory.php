@@ -3,6 +3,7 @@
 namespace Database\Factories\Profile\Pet;
 
 use App\Models\Profile\Base\Profile;
+use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet;
 use App\Models\User\User;
 use Carbon\Carbon;
@@ -20,6 +21,7 @@ class PetFactory extends Factory
     {
         return [
             'user_id' => User::query()->inRandomOrder()->value('id'),
+            'owner_id' => Human::query()->inRandomOrder()->value('id'),
             'name' => $this->faker->firstName(),
             'description' => $this->faker->realText(),
             'breed' => $this->faker->words(2, true),

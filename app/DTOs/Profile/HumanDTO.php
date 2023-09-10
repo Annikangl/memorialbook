@@ -30,6 +30,7 @@ class HumanDTO extends ValidatedDTO
     public array|null $hobbies;
     public string $access;
     public array|null $removedImageIds;
+    public bool $as_draft;
 
 
     public int|null $religion_id;
@@ -68,6 +69,7 @@ class HumanDTO extends ValidatedDTO
             'death_certificate' => ['nullable', 'file'],
             'gallery' => ['nullable', 'array'],
             'removedImageIds' => ['nullable', 'array'],
+            'as_draft' => ['required', 'bool'],
         ];
     }
 

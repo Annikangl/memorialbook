@@ -15,6 +15,11 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
+            $table->unsignedBigInteger('owner_id');
+
+            $table->foreign('owner_id')->references('id')->on('humans')
+                ->cascadeOnDelete();
+
             $table->string('slug')->nullable()->index();
 
             $table->string('name');

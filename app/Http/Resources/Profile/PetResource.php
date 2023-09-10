@@ -15,7 +15,7 @@ class PetResource extends JsonResource
             'name' => $this->name,
             'year_birth' => $this->year_birth,
             'year_death' => $this->year_death,
-            'avatar' => $this->getFirstMediaUrl('avatars', 'thumb')
+            'avatar' => $this->getFirstMediaUrl('avatars', 'thumb'),
         ];
     }
 }

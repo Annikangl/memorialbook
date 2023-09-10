@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Profile\Pet;
 
-use App\Models\Profile\DeathReason;
+use App\Models\Profile\Base\Profile;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
@@ -20,19 +21,25 @@ class CreatePetRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        if ($this->get('burialCoords')) {
+        if ($this->get('burial_coords')) {
             $this->merge([
-                'burialCoords' => json_decode($this->get('burialCoords'), true)
+                'burial_coords' => json_decode($this->burial_coords, true),
             ]);
         }
     }
 
     protected function failedValidation(Validator $validator)
     {
-        return redirect()->back()->with([
-            'message' => $validator->errors()->first(),
-            'alert-class' => 'alert-danger'
-        ]);
+        if ($this->expectsJson()) {
+            throw new HttpResponseException(
+                response()->json(["status" => false, "message" => $this->validator->errors()->first()],
+                    422));
+        } else {
+            return redirect()->back()->with([
+                'message' => $validator->errors()->first(),
+                'alert-class' => 'alert-danger',
+            ]);
+        }
     }
 
 
@@ -41,15 +48,22 @@ class CreatePetRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:100'],
             'breed' => ['required', 'string'],
-            'dateBirth' => ['required', 'date'],
-            'dateDeath' => ['required', 'date'],
-            'birthPlace' => [ 'nullable', 'string'],
-            'burialPlace' => ['nullable', 'string'],
-            'burialCoords' => ['nullable', 'array'],
-            'burialCoords.lat' => ['nullable', 'numeric'],
-            'burialCoords.lng' => ['nullable', 'numeric'],
-            'deathReason' => ['required', 'string'],
+            'date_birth' => ['required', 'date'],
+            'date_death' => ['required', 'date'],
+            'birth_place' => [ 'nullable', 'string'],
+            'burial_place' => ['nullable', 'string'],
+            'death_reason' => ['required', 'string'],
+            'burial_coords' => [
+                'required_with:burial_place',
+                'nullable',
+                'array:lat,lng'
+            ],
+            'burial_coords.lat' => ['nullable', 'numeric'],
+            'burial_coords.lng' => ['nullable', 'numeric'],
             'description' => ['nullable', 'string'],
+            'owner_id' => ['required', 'integer', 'exists:humans,id'],
+            'as_draft' => ['required', 'boolean'],
+            'access' => ['required', Rule::in(Profile::getAccessList())],
 
             'avatar' => [
                 'sometimes',

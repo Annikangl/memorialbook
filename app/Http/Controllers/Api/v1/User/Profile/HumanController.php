@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\Profile;
+namespace App\Http\Controllers\Api\v1\User\Profile;
 
 use App\DTOs\Profile\HumanDTO;
 use App\Http\Controllers\Controller;
@@ -48,7 +48,7 @@ class HumanController extends Controller
         $human = $this->humanService->create(
             userId: auth()->id(),
             humanDTO: $humanDto,
-            draft: (bool)$request->input('as_draft')
+            draft: $humanDto->as_draft
         );
 
         return response()->json(['status' => true, 'human' => new CreatedHumanResource($human)])

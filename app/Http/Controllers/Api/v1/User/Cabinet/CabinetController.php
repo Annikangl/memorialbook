@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\Cabinet;
+namespace App\Http\Controllers\Api\v1\User\Cabinet;
 
 use App\DTOs\User\UserDTO;
 use App\Http\Controllers\Controller;
@@ -8,7 +8,6 @@ use App\Http\Requests\Api\User\UpdateUserRequest;
 use App\Http\Resources\Cabinet\UserResource;
 use App\Models\User\User;
 use App\Services\UserService;
-use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;

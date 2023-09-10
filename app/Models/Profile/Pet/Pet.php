@@ -4,6 +4,7 @@ namespace App\Models\Profile\Pet;
 
 use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Hobby;
+use App\Models\Profile\Human\Human;
 use App\Models\User\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
@@ -34,12 +35,18 @@ class Pet extends Profile
         'burial_place',
         'death_reason',
         'status',
-        'is_celebrity'
+        'is_celebrity',
+        'owner_id'
     ];
 
     protected $casts = [
         'is_celebrity' => 'boolean'
     ];
+
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(Human::class, 'owner_id', 'id');
+    }
 
     public function scopeByUser(Builder $query, int $userId): Builder
     {

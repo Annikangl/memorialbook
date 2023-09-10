@@ -4,8 +4,8 @@
 namespace App\Http\Requests\Profile\Human;
 
 
+use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
-use App\Traits\JsonFailedResponse;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -66,39 +66,32 @@ class CreateHumanRequest extends FormRequest
             'birth_place' => ['required', 'string', 'min:3'],
             'burial_place' => ['nullable', 'string', 'min:3'],
 
-            'father_id' => ['sometimes', 'integer'],
-            'mother_id' => ['sometimes', 'integer'],
-            'spouse_id' => ['sometimes', 'integer'],
-            'description' => ['nullable', 'string'],
+            'father_id' => ['nullable', 'integer'],
+            'mother_id' => ['nullable', 'integer'],
+            'spouse_id' => ['nullable', 'integer'],
+            'description' => ['required', 'string'],
             'hobbies' => ['nullable', 'array'],
             'religion_id' => ['required', 'integer', 'exists:religions,id'],
             'as_draft' => ['required', 'boolean'],
-
-            'access' => ['required', Rule::in(Human::getAccessList())],
-
+            'access' => ['required', Rule::in(Profile::getAccessList())],
             'burial_coords' => [
                 'required_with:burial_place',
                 'nullable',
                 'array:lat,lng'
             ],
-
             'avatar' => [
                 'nullable',
                 File::image()
-                    ->min(1)
+                    ->min(10)
                     ->max(5 * 1024)
             ],
-
             'banner' => [
                 'sometimes',
                 File::image()
                     ->max(5 * 1024)
-                    ->dimensions(Rule::dimensions()->minWidth(1920)->minHeight(728))
             ],
-
             'gallery' => ['required', 'array'],
             'gallery.*' => ['required', 'mimes:jpg,jpeg,png,webp,mp4', 'max:20000'],
-
             'death_certificate' => [
                 'nullable',
                 File::types(['pdf'])

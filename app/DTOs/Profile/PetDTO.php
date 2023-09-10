@@ -7,29 +7,21 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 class PetDTO extends ValidatedDTO
 {
+    public int $owner_id;
     public string $name;
-
     public string $breed;
-
-    public string $dateBirth;
-
-    public string $dateDeath;
-
-    public string|null $birthPlace;
-
-    public string|null $burialPlace;
-
-    public array|null $burialCoords;
-
-    public string|null $deathReason;
-
+    public string $date_birth;
+    public string $date_death;
+    public string|null $birth_place;
+    public string|null $burial_place;
+    public array|null $burial_coords;
+    public string|null $death_reason;
     public string|null $description;
-
     public UploadedFile|null $avatar;
-
     public UploadedFile|null $banner;
-
     public array|null $gallery;
+    public bool $as_draft;
+
     /**
      * Defines the validation rules for the DTO.
      *
@@ -40,16 +32,18 @@ class PetDTO extends ValidatedDTO
         return [
             'name' => ['required', 'string'],
             'breed' => ['required', 'string'],
-            'dateBirth' => ['required', 'date'],
-            'dateDeath' => ['required', 'date'],
-            'birthPlace' => [ 'nullable', 'string'],
-            'burialPlace' => ['nullable', 'string'],
-            'burialCoords' => ['nullable', 'array'],
-            'deathReason' => ['required', 'string'],
+            'date_birth' => ['required', 'date'],
+            'date_death' => ['required', 'date'],
+            'birth_place' => [ 'nullable', 'string'],
+            'burial_place' => ['nullable', 'string'],
+            'burial_coords' => ['nullable', 'array'],
+            'owner_id' => ['required', 'integer'],
+            'death_reason' => ['required', 'string'],
             'description' => ['nullable', 'string'],
             'avatar' => ['nullable', 'image'],
             'banner' => ['nullable', 'image'],
             'gallery' => ['nullable', 'array'],
+            'as_draft' => ['required', 'bool']
         ];
     }
 

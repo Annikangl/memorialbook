@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\Api\v1\Attributes\ReligionController;
-use App\Http\Controllers\Api\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\Auth\NetworkController;
 use App\Http\Controllers\Api\v1\Auth\RegisterController;
-use App\Http\Controllers\Api\v1\Cabinet\CabinetController;
-use App\Http\Controllers\Api\v1\Feed\FeedController;
-use App\Http\Controllers\Api\v1\Profile\HumanController;
+use App\Http\Controllers\Api\v1\User\Cabinet\CabinetController;
+use App\Http\Controllers\Api\v1\User\Feed\FeedController;
+use App\Http\Controllers\Api\v1\User\Profile\HumanController;
+use App\Http\Controllers\Api\v1\User\Profile\PetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,7 +57,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             });
 
             Route::prefix('pet')->group(function () {
-
+                Route::post('/', [PetController::class, 'store']);
             });
         });
     });

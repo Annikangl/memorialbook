@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\Feed;
+namespace App\Http\Controllers\Api\v1\User\Feed;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Cemetery\CemeteryResource;
@@ -11,7 +11,6 @@ use App\Models\Cemetery\Cemetery;
 use App\Models\Community\Community;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
-use Illuminate\Http\Request;
 
 class FeedController extends Controller
 {
