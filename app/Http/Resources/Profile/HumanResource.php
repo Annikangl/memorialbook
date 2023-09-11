@@ -7,9 +7,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class HumanResource extends JsonResource
 {
+
     public function toArray($request): array
     {
         /** @var Human $this */
+
         return [
             'id' => $this->id,
             'full_name' => $this->full_name,

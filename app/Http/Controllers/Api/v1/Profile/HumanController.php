@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\User\Profile;
+namespace App\Http\Controllers\Api\v1\Profile;
 
 use App\DTOs\Profile\HumanDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\Human\CreateHumanRequest;
 use App\Http\Resources\Profile\CreatedHumanResource;
 use App\Http\Resources\Profile\HumanResource;
+use App\Http\Resources\Profile\PetResource;
+use App\Http\Resources\Profile\ShowHumanResource;
 use App\Models\Profile\Human\Human;
 use App\Services\HumanService;
 use Illuminate\Http\JsonResponse;
@@ -34,6 +36,21 @@ class HumanController extends Controller
         return response()->json([
             'status' => true,
             'humans' => HumanResource::collection(auth()->user()->humans()->get()),
+        ])->setStatusCode(Response::HTTP_OK);
+    }
+
+    public function show(Human $human)
+    {
+        $kinsfolk = collect($human->father()->get())
+            ->merge($human->mother()->get())
+            ->merge($human->children()->get());
+
+        $pets = $human->pets()->get();
+
+        return response()->json(['status' => true,
+            'human' => new ShowHumanResource($human),
+            'kinsfolk' => HumanResource::collection($kinsfolk),
+            'pets' =>  PetResource::collection($pets)
         ])->setStatusCode(Response::HTTP_OK);
     }
 

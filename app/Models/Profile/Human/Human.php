@@ -6,6 +6,7 @@ use App\Models\Cemetery\Cemetery;
 use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Burial;
 use App\Models\Profile\Hobby;
+use App\Models\Profile\Pet\Pet;
 use App\Models\Profile\Religion;
 use App\Models\User\User;
 use Carbon\Carbon;
@@ -226,17 +227,22 @@ class Human extends Profile implements HasMedia
 
     public function father(): BelongsTo
     {
-        return self::belongsTo(static::class);
+        return self::belongsTo(Human::class, 'father_id', 'id');
     }
 
     public function mother(): BelongsTo
     {
-        return self::belongsTo(static::class);
+        return self::belongsTo(self::class, 'mother_id', 'id');
     }
 
     public function children(): BelongsTo
     {
-        return self::belongsTo(static::class);
+        return self::belongsTo(self::class, 'children_id', 'id');
+    }
+
+    public function pets(): HasMany
+    {
+        return $this->hasMany(Pet::class,'owner_id');
     }
 
     public function burial(): BelongsTo

@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\User\Profile;
+namespace App\Http\Controllers\Api\v1\Profile;
 
 use App\DTOs\Profile\PetDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\Pet\CreatePetRequest;
 use App\Http\Resources\Profile\PetResource;
+use App\Http\Resources\Profile\ShowPetResource;
+use App\Models\Profile\Pet\Pet;
 use App\Services\PetService;
 use Illuminate\Http\Response;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
@@ -17,6 +19,12 @@ class PetController extends Controller
 {
     public function __construct(private PetService $petService)
     {
+    }
+
+    public function show(Pet $pet)
+    {
+        return response()->json(['status' => true, 'pet' => new ShowPetResource($pet)])
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**
