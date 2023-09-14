@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ModelFilters\ProfileFilters;
+namespace App\ModelFilters;
 
 use EloquentFilter\ModelFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -16,11 +16,12 @@ class HumanFilter extends ModelFilter
      */
     public $relations = [];
 
-    public function name($name): HumanFilter
+    public function fullName($fullName): HumanFilter
     {
-        return $this->where(function (Builder $query) use ($name) {
-            return $query->where('first_name', 'LIKE', "%$name%")
-                ->orWhere('last_name', 'LIKE', "%$name%");
+        return $this->where(function (Builder $query) use ($fullName) {
+            return $query->where('first_name', 'LIKE', "%$fullName%")
+                ->orWhere('last_name', 'LIKE', "%$fullName%")
+                ->orWhere('middle_name', 'like', "%$fullName%");
         });
     }
 
@@ -37,4 +38,10 @@ class HumanFilter extends ModelFilter
 
         return $this->whereBetween(\DB::raw('YEAR(date_death)'), [$from, $to]);
     }
+
+    public function country(string $country): HumanFilter
+    {
+        return $this->where('birth_place', 'like', "%$country%");
+    }
+
 }

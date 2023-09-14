@@ -34,6 +34,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
 
     Route::prefix('profile')->group(function () {
         Route::prefix('human')->group(function () {
+            Route::get('/search', [HumanController::class, 'search']);
             Route::get('/{human}', [HumanController::class, 'show']);
         });
 

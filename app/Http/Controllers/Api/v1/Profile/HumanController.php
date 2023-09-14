@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1\Profile;
 
 use App\DTOs\Profile\HumanDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Profile\SearchHumanRequest;
 use App\Http\Requests\Profile\Human\CreateHumanRequest;
 use App\Http\Resources\Profile\CreatedHumanResource;
 use App\Http\Resources\Profile\HumanResource;
@@ -70,6 +71,17 @@ class HumanController extends Controller
 
         return response()->json(['status' => true, 'human' => new CreatedHumanResource($human)])
             ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    public function search(SearchHumanRequest $request)
+    {
+        $humans = Human::query()
+            ->filter($request->validated())
+            ->latest()
+            ->paginate(20);
+
+        return response()->json(['status' => true, 'humans' => HumanResource::collection($humans)])
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     private function getFathers(): JsonResponse

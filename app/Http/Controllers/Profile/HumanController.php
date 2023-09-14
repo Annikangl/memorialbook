@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\Human\CreateHumanRequest;
 use App\Http\Requests\Profile\Human\SearchHumanRequest;
 use App\Http\Requests\Profile\Human\UpdateHumanRequest;
-use App\ModelFilters\ProfileFilters\HumanFilter;
+use App\ModelFilters\HumanFilter;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Religion;
 use App\Services\HumanService;
@@ -15,7 +15,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\MediaCannotBeDeleted;
 use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
 use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
