@@ -58,7 +58,7 @@ class HumanDTO extends ValidatedDTO
 
             'description' => ['nullable', 'string'],
             'hobbies' => ['nullable', 'array'],
-            'religions' => ['required', 'array'],
+            'religions' => ['nullable', 'array'],
             'access' => ['required', 'string'],
 
             'burial_coords' => ['nullable', 'array'],
