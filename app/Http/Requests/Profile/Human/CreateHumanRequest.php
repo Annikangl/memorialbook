@@ -71,8 +71,8 @@ class CreateHumanRequest extends FormRequest
             'spouse_id' => ['nullable', 'integer'],
             'description' => ['required', 'string'],
             'hobbies' => ['nullable', 'array'],
-            'religion_id' => ['required', 'integer', 'exists:religions,id'],
-            'as_draft' => ['required', 'boolean'],
+            'religions' => ['nullable', 'array'],
+            'as_draft' => ['required', 'bool'],
             'access' => ['required', Rule::in(Profile::getAccessList())],
             'burial_coords' => [
                 'required_with:burial_place',
@@ -90,8 +90,8 @@ class CreateHumanRequest extends FormRequest
                 File::image()
                     ->max(5 * 1024)
             ],
-            'gallery' => ['required', 'array'],
-            'gallery.*' => ['required', 'mimes:jpg,jpeg,png,webp,mp4', 'max:20000'],
+            'gallery' => ['nullable', 'array'],
+            'gallery.*' => ['nullable', 'mimes:jpg,jpeg,png,webp,mp4', 'max:20000'],
             'death_certificate' => [
                 'nullable',
                 File::types(['pdf'])

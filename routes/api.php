@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\v1\Attributes\ReligionController;
 use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\Auth\NetworkController;
 use App\Http\Controllers\Api\v1\Auth\RegisterController;
+use App\Http\Controllers\Api\v1\Community\CommunityController;
 use App\Http\Controllers\Api\v1\Profile\HumanController;
 use App\Http\Controllers\Api\v1\Profile\PetController;
 use App\Http\Controllers\Api\v1\User\Cabinet\CabinetController;
@@ -43,6 +44,10 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         });
     });
 
+    Route::prefix('community')->group(function () {
+        Route::get('/', [CommunityController::class, 'index']);
+        Route::get('/{community}', [CommunityController::class, 'show']);
+    });
 
 
 //    Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
@@ -54,7 +59,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
 
         Route::prefix('cabinet')->group(function () {
             Route::get('/user', [CabinetController::class, 'show']);
-            Route::put('/user', [CabinetController::class, 'update']);
+            Route::post('/user/update', [CabinetController::class, 'update']);
         });
 
         Route::prefix('attributes')->group(function () {

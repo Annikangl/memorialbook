@@ -2,6 +2,7 @@
 
 namespace App\Models\Profile\Pet;
 
+use App\Models\Community\Community;
 use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Human\Human;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
@@ -52,6 +54,11 @@ class Pet extends Profile
     {
         return $query->select(['id', 'name', 'slug', 'date_birth', 'date_death'])
             ->where('user_id', $userId);
+    }
+
+    public function communities(): MorphMany
+    {
+        return $this->morphMany(Community::class,'profilable');
     }
 
     public function user(): BelongsTo

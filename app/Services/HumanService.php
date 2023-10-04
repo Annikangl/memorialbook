@@ -6,17 +6,12 @@ namespace App\Services;
 use App\DTOs\Profile\HumanDTO;
 use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
-use App\Models\Profile\Pet\Pet;
 use App\Models\User\User;
-use Carbon\Carbon;
-use Illuminate\Contracts\Database\Query\Builder;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\MediaCannotBeDeleted;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class HumanService
 {
@@ -32,6 +27,7 @@ class HumanService
                     'description' => $humanDTO->description,
                     'gender' => $humanDTO->gender,
                     'hobbies' => $humanDTO->hobbies,
+                    'religions' => $humanDTO->religions,
                     'date_birth' => $humanDTO->date_birth,
                     'date_death' => $humanDTO->date_death,
                     'birth_place' => $humanDTO->birth_place,
@@ -65,10 +61,6 @@ class HumanService
                     $human->spouse()->associate($spouse);
                     $spouse->spouse_id = $human->id;
                     $spouse->save();
-                }
-
-                if ($religionId = $humanDTO->religion_id) {
-                    $human->religion()->associate($religionId);
                 }
 
                 $human->save();

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Cemetery\Cemetery;
 use App\Models\Community\Community;
+use App\Models\Community\CommunityProfile;
 use App\Models\Community\Posts\Post;
 use App\Models\Profile\Hobby;
 use App\Models\Profile\Human\Human;
@@ -14,6 +15,7 @@ use App\Models\User\User;
 use Faker\Provider\UserAgent;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use Smknstd\FakerPicsumImages\FakerPicsumImagesProvider;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
@@ -26,17 +28,19 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create();
-        $faker->addProvider(new \Smknstd\FakerPicsumImages\FakerPicsumImagesProvider($faker));
+        $faker->addProvider(new FakerPicsumImagesProvider($faker));
 
         $this->createUsers();
 
-        Religion::factory(10)->create();
-        Hobby::factory(10)->create();
-
-        Cemetery::factory(30)
+        $cemeteries = Cemetery::factory(10)
             ->create();
 
-        $humans = Human::factory(50)
+        foreach ($cemeteries as $cemetery) {
+            $cemetery->addMedia($faker->image(storage_path('app/images'),1280,720))
+                ->toMediaCollection('banners');
+        }
+
+        $humans = Human::factory(15)
             ->create();
 
         foreach ($humans as $human) {
@@ -49,7 +53,7 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        $pets = Pet::factory(50)
+        $pets = Pet::factory(10)
             ->create();
 
         foreach ($pets as $pet) {
@@ -64,12 +68,14 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        $communities = Community::factory(50)
-            ->has(Post::factory(5))
-            ->has(User::factory()->count(30))
-            ->has(Human::factory(5))
-            ->has(Pet::factory(5))
+        $communities = Community::factory(10)
+            ->hasPosts(5)
+            ->hasUsers(30)
             ->create();
+
+        CommunityProfile::factory(15)->create();
+
+        /** @var Community $community */
 
         foreach ($communities as $community) {
             $community->addMedia($faker->image(storage_path('app/images'), 1280, 720))
@@ -77,11 +83,18 @@ class DatabaseSeeder extends Seeder
 
             $community->addMedia($faker->image(storage_path('app/images'), 1280, 720))
                 ->toMediaCollection('banners');
-        }
 
-        foreach (User::all() as $user) {
-            $user->addMedia($faker->image(storage_path('app/images'), 1280, 720))
-                ->toMediaCollection('avatars');
+            for ($i = 0; $i < 5; $i++) {
+                $community->addMedia($faker->image(storage_path('app/images'), 1280, 720))
+                    ->toMediaCollection('gallery');
+            }
+
+            $community->posts()->each(function (Post $post) use ($faker) {
+                for ($i = 0; $i < 5; $i++) {
+                    $post->addMedia($faker->image(storage_path('app/images'), 1280, 720))
+                        ->toMediaCollection('gallery');
+                }
+            });
         }
     }
 

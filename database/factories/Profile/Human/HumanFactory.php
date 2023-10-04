@@ -21,17 +21,16 @@ class HumanFactory extends Factory
         return [
             'user_id' => User::query()->inRandomOrder()->value('id'),
             'cemetery_id' => Cemetery::query()->inRandomOrder()->value('id'),
-            'religion_id' => Religion::query()->inRandomOrder()->value('id'),
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'middle_name' => $this->faker->userName(),
             'description' => $this->faker->text(),
-            'hobbies' => $this->faker->randomElement([
-                json_encode(['sport', 'games', 'cars', 'travel']),
-                json_encode(['sport', 'games', 'cars']),
-                json_encode(['sport', 'games']),
-                json_encode(['sport']),
-            ]),
+            'religions' => $this->faker->randomElements(
+                ['Reading', 'Traveling', 'Photography', 'Gardening'], 2
+            ),
+            'hobbies' => $this->faker->randomElements(
+                ['Reading', 'Traveling', 'Photography', 'Gardening'], 2
+            ),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'date_birth' => $birth = $this->faker->date('Y-m-d', '2000'),
             'date_death' => Carbon::parse($birth)->addYears(40),

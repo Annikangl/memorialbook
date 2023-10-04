@@ -10,7 +10,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('humans', function (Blueprint $table) {
-            $table->foreignIdFor(Cemetery::class)->after('religion_id')->nullable()
+            $table->foreignIdFor(Cemetery::class)->after('children_id')->nullable()
                 ->constrained();
         });
     }

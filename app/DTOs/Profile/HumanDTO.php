@@ -3,6 +3,7 @@
 namespace App\DTOs\Profile;
 
 use Illuminate\Http\UploadedFile;
+use WendellAdriel\ValidatedDTO\Casting\BooleanCast;
 use WendellAdriel\ValidatedDTO\Casting\CarbonCast;
 use WendellAdriel\ValidatedDTO\Casting\CarbonImmutableCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
@@ -28,12 +29,11 @@ class HumanDTO extends ValidatedDTO
     public array|null $gallery;
     public string|null $description;
     public array|null $hobbies;
+    public array|null $religions;
     public string $access;
     public array|null $removedImageIds;
     public bool $as_draft;
 
-
-    public int|null $religion_id;
     /**
      * Defines the validation rules for the DTO.
      *
@@ -58,7 +58,7 @@ class HumanDTO extends ValidatedDTO
 
             'description' => ['nullable', 'string'],
             'hobbies' => ['nullable', 'array'],
-            'religion_id' => ['required', 'integer'],
+            'religions' => ['required', 'array'],
             'access' => ['required', 'string'],
 
             'burial_coords' => ['nullable', 'array'],
@@ -93,7 +93,7 @@ class HumanDTO extends ValidatedDTO
     protected function casts(): array
     {
         return [
-
+            'as_draft' => new BooleanCast()
         ];
     }
 

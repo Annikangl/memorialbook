@@ -3,8 +3,6 @@
 namespace App\Models\Community;
 
 use App\Models\Community\Posts\Post;
-use App\Models\Profile\Human\Human;
-use App\Models\Profile\Pet\Pet;
 use App\Models\User\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
@@ -34,7 +32,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $avatar
  * @property string $subtitle
  * @property string $description
- * @property string $banner
  * @property bool $is_celebrity
  *
  * @method static Builder|Community byUser(int $userId)
@@ -57,7 +54,6 @@ class Community extends Model implements HasMedia
         'avatar',
         'subtitle',
         'description',
-        'banner',
         'is_celebrity',
     ];
 
@@ -84,14 +80,10 @@ class Community extends Model implements HasMedia
             ->as('subscribers');
     }
 
-    public function humans(): BelongsToMany
-    {
-        return $this->belongsToMany(Human::class);
-    }
 
-    public function pets(): BelongsToMany
+    public function communityProfiles(): HasMany
     {
-        return $this->belongsToMany(Pet::class);
+        return $this->hasMany(CommunityProfile::class);
     }
 
     public function isSubscribe(int $userId): bool
@@ -136,10 +128,32 @@ class Community extends Model implements HasMedia
             ->height(550)
             ->nonQueued();
 
+        $this->addMediaConversion('thumb_500')
+            ->performOnCollections('gallery')
+            ->width(500)
+            ->height(550)
+            ->nonQueued();
+
         $this->addMediaConversion('thumb_900')
             ->performOnCollections('banners')
             ->width(1000)
             ->height(600)
             ->nonQueued();
+    }
+
+    public function getPictures(): array
+    {
+        $pictures = [];
+
+        $this->getMedia('gallery')->filter(function (Media $media) use (&$pictures) {
+            $pictures[] = $media->getUrl('thumb_500');
+        });
+
+        return $pictures;
+    }
+
+    public function getMovies(): array
+    {
+        return [];
     }
 }

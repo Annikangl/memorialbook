@@ -5,23 +5,21 @@ namespace App\Models\Community;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class Document extends Model
+class CommunityProfile extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
 
-    protected $table = 'community_documents';
-
-    protected $fillable = [
-        'community_id',
-        'item',
-    ];
-
-
     public function community(): BelongsTo
     {
         return $this->belongsTo(Community::class);
+    }
+
+    public function profileable(): MorphTo
+    {
+        return $this->morphTo();
     }
 }

@@ -5,11 +5,15 @@ namespace App\Models\Community\Posts;
 use App\Models\Community\Community;
 use App\Models\User\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  *@property int $id
@@ -17,13 +21,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *@property int $community_id
  *@property string $title
  *@property string $description
- *@property boolean $pinned
+ *@property boolean $is_pinned
  *@property Carbon $published_at
  *
  */
-class Post extends Model
+class Post extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $table = 'community_posts';
 
@@ -32,17 +36,17 @@ class Post extends Model
         'community_id',
         'title',
         'description',
-        'pinned',
+        'is_pinned',
         'published_at',
     ];
 
     protected $casts = [
-        'pinned' => 'boolean'
+        'is_pinned' => 'boolean'
     ];
 
     public function isPinned(): bool
     {
-        return $this->pinned;
+        return $this->is_pinned;
     }
 
     public function community(): BelongsTo
@@ -55,13 +59,40 @@ class Post extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    public function galleries(): HasMany
-    {
-        return $this->hasMany(Gallery::class, 'post_id');
-    }
-
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class,'community_post_tags');
+    }
+
+    protected function publishedAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::parse($value)->format('M d, Y')
+        );
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('gallery');
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb_900')
+            ->performOnCollections('gallery')
+            ->width(1000)
+            ->height(600)
+            ->nonQueued();
+    }
+
+    public function getGallery(): array
+    {
+        $gallery = [];
+
+        $this->getMedia('gallery')->each(function (Media $item) use (&$gallery) {
+            $gallery[] = $item->getUrl('thumb_900');
+        });
+
+        return $gallery;
     }
 }

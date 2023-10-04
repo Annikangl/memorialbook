@@ -2,10 +2,11 @@
 
 namespace Database\Factories\Community;
 
+use App\Models\Community\Community;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Community\Community>
+ * @extends Factory<Community>
  */
 class CommunityFactory extends Factory
 {
@@ -13,17 +14,15 @@ class CommunityFactory extends Factory
     {
         return [
             'owner_id' => 1,
-            'email' => $this->faker->email,
+            'email' => $this->faker->unique()->email,
             'website' => $this->faker->url,
-            'phone' => $this->faker->phoneNumber,
+            'phone' => $this->faker->unique()->phoneNumber,
             'address' => $this->faker->address,
             'latitude' => $this->faker->latitude,
             'longitude' => $this->faker->longitude,
             'title' => $this->faker->words(3,true),
             'subtitle' => $this->faker->text(),
             'description' => $this->faker->realText(400),
-            'avatar' => 'uploads/community/logo.png',
-            'banner' => 'uploads/community/community-banner.png',
         ];
     }
 }

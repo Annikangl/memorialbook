@@ -146,8 +146,7 @@ class User extends Authenticatable implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-            ->width(368)
-            ->height(232)
+            ->width(300)
             ->nonQueued();
     }
 

@@ -3,25 +3,22 @@
 namespace App\Models\Profile\Human;
 
 use App\Models\Cemetery\Cemetery;
+use App\Models\Community\Community;
 use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Burial;
-use App\Models\Profile\Hobby;
 use App\Models\Profile\Pet\Pet;
-use App\Models\Profile\Religion;
 use App\Models\User\User;
 use Carbon\Carbon;
 use Eloquent;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\Image\Manipulations;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -37,7 +34,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int|null $mother_id
  * @property int|null $children_id
  * @property int|null $spouse_id
- * @property int|null $religion_id
+ * @property int|null $religions
  * @property int|null $cemetery_id
  * @property int|null $family_burial_id
  * @property string $first_name
@@ -92,7 +89,7 @@ class Human extends Profile implements HasMedia
         'user_id',
         'mother_id',
         'father_id',
-        'religion_id',
+        'religions',
         'burial_id',
         'is_celebrity',
         'first_name',
@@ -119,7 +116,8 @@ class Human extends Profile implements HasMedia
 
     protected $casts = [
         'is_celebrity' => 'boolean',
-        'hobbies' => 'array'
+        'hobbies' => 'array',
+        'religions' => 'array'
     ];
 
     public static function genderList(): array
@@ -135,24 +133,7 @@ class Human extends Profile implements HasMedia
         return $query->where('status', self::STATUS_ACTIVE);
     }
 
-    public function scopeBySearch(Builder $query, string $searchText): Builder
-    {
-        return $query->select(['id', 'first_name', 'last_name', 'slug', 'date_birth', 'date_death'])->where(
-            \DB::raw('CONCAT_WS(" ", humans.first_name, " ", humans.last_name)'),
-            'LIKE', "%$searchText%");
-    }
 
-    public function scopeByUser(Builder $query, int $userId): Builder
-    {
-        return $query->select(['id', 'first_name', 'last_name', 'slug', 'date_birth', 'date_death'])
-            ->where('user_id', $userId);
-    }
-
-    public function scopeWithRelatives(Builder $query): Builder
-    {
-        return $query->has('father')->orHas('mother')
-            ->orHas('children')->orHas('spouse');
-    }
 
     public function scopePets(Builder $query): Builder
     {
@@ -210,11 +191,6 @@ class Human extends Profile implements HasMedia
             ->withPivot('status');
     }
 
-    public function religion(): BelongsTo
-    {
-        return $this->belongsTo(Religion::class);
-    }
-
     public function cemeteries(): BelongsTo
     {
         return $this->belongsTo(Cemetery::class, 'cemetery_id');
@@ -245,6 +221,11 @@ class Human extends Profile implements HasMedia
         return $this->hasMany(Pet::class,'owner_id');
     }
 
+    public function communities(): MorphMany
+    {
+        return $this->morphMany(Community::class,'profileable');
+    }
+
     public function burial(): BelongsTo
     {
         return $this->belongsTo(Burial::class);
@@ -253,6 +234,25 @@ class Human extends Profile implements HasMedia
     public function getBurialJson(): string
     {
         return json_encode(['lat' => $this->latitude, 'lng' => $this->longitude]);
+    }
+
+    public function scopeBySearch(Builder $query, string $searchText): Builder
+    {
+        return $query->select(['id', 'first_name', 'last_name', 'slug', 'date_birth', 'date_death'])->where(
+            \DB::raw('CONCAT_WS(" ", humans.first_name, " ", humans.last_name)'),
+            'LIKE', "%$searchText%");
+    }
+
+    public function scopeByUser(Builder $query, int $userId): Builder
+    {
+        return $query->select(['id', 'first_name', 'last_name', 'slug', 'date_birth', 'date_death'])
+            ->where('user_id', $userId);
+    }
+
+    public function scopeWithRelatives(Builder $query): Builder
+    {
+        return $query->has('father')->orHas('mother')
+            ->orHas('children')->orHas('spouse');
     }
 
 }

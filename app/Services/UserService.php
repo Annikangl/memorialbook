@@ -4,18 +4,18 @@
 namespace App\Services;
 
 
-use App\Classes\Files\FileUploader;
 use App\Models\Community\Community;
-use App\Models\Profile\Human\Human;
 use App\Models\User\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\UploadedFile;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class UserService
 {
     /**
-     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig
-     * @throws \Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist
+     * @throws FileIsTooBig
+     * @throws FileDoesNotExist
      */
     public function update(User $user, string $username, ?string $email, ?string $phone, ?UploadedFile $avatar): User
     {
