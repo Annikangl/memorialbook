@@ -34,7 +34,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int|null $mother_id
  * @property int|null $children_id
  * @property int|null $spouse_id
- * @property int|null $religions
+ * @property string|null $religion
  * @property int|null $cemetery_id
  * @property int|null $family_burial_id
  * @property string $first_name
@@ -89,7 +89,7 @@ class Human extends Profile implements HasMedia
         'user_id',
         'mother_id',
         'father_id',
-        'religions',
+        'religion',
         'burial_id',
         'is_celebrity',
         'first_name',
@@ -117,7 +117,6 @@ class Human extends Profile implements HasMedia
     protected $casts = [
         'is_celebrity' => 'boolean',
         'hobbies' => 'array',
-        'religions' => 'array'
     ];
 
     public static function genderList(): array
@@ -132,8 +131,6 @@ class Human extends Profile implements HasMedia
     {
         return $query->where('status', self::STATUS_ACTIVE);
     }
-
-
 
     public function scopePets(Builder $query): Builder
     {

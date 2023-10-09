@@ -29,7 +29,7 @@ class HumanDTO extends ValidatedDTO
     public array|null $gallery;
     public string|null $description;
     public array|null $hobbies;
-    public array|null $religions;
+    public string|null $religion;
     public string $access;
     public array|null $removedImageIds;
     public bool $as_draft;
@@ -58,7 +58,7 @@ class HumanDTO extends ValidatedDTO
 
             'description' => ['nullable', 'string'],
             'hobbies' => ['nullable', 'array'],
-            'religions' => ['nullable', 'array'],
+            'religion' => ['nullable', 'string'],
             'access' => ['required', 'string'],
 
             'burial_coords' => ['nullable', 'array'],

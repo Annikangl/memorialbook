@@ -55,7 +55,7 @@ return new class extends Migration {
             $table->string('death_reason')->nullable();
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
-            $table->json('religions')->nullable();
+            $table->string('religion')->nullable();
             $table->json('hobbies')->nullable();
             $table->boolean('is_celebrity')->default(false);
 

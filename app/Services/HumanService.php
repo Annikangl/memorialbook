@@ -27,7 +27,7 @@ class HumanService
                     'description' => $humanDTO->description,
                     'gender' => $humanDTO->gender,
                     'hobbies' => $humanDTO->hobbies,
-                    'religions' => $humanDTO->religions,
+                    'religion' => $humanDTO->religion,
                     'date_birth' => $humanDTO->date_birth,
                     'date_death' => $humanDTO->date_death,
                     'birth_place' => $humanDTO->birth_place,
