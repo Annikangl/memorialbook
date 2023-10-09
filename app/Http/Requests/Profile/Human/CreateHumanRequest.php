@@ -71,7 +71,7 @@ class CreateHumanRequest extends FormRequest
             'spouse_id' => ['nullable', 'integer'],
             'description' => ['required', 'string'],
             'hobbies' => ['nullable', 'array'],
-            'religions' => ['nullable', 'array'],
+            'religion' => ['nullable', 'string'],
             'as_draft' => ['required', 'bool'],
             'access' => ['required', Rule::in(Profile::getAccessList())],
             'burial_coords' => [
