@@ -28,8 +28,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $phone
  * @property string $schedule
  * @property string $address
- * @property float|null $latitude
- * @property float|null $longitude
+ * @property array $address_coords
  * @property string|null $description
  * @property string $status
  * @property string|null $moderators_comment
@@ -60,8 +59,7 @@ class Cemetery extends Model implements HasMedia
         'phone',
         'schedule',
         'address',
-        'latitude',
-        'longitude',
+        'address_coords',
         'description',
         'status',
         'moderators_comment',
@@ -71,7 +69,8 @@ class Cemetery extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'is_celebrity' => 'boolean'
+        'is_celebrity' => 'boolean',
+        'address_coords' => 'array'
     ];
 
     public static function getAccessList(): array
@@ -136,6 +135,8 @@ class Cemetery extends Model implements HasMedia
 
         $this->addMediaCollection('banners')
             ->singleFile();
+
+        $this->addMediaCollection('confirming_documents');
     }
 
     public function registerMediaConversions(Media $media = null): void

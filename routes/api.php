@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\v1\Attributes\ReligionController;
 use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\Auth\NetworkController;
 use App\Http\Controllers\Api\v1\Auth\RegisterController;
 use App\Http\Controllers\Api\v1\Community\CommunityController;
+use App\Http\Controllers\Api\v1\Profile\CemeteryController;
 use App\Http\Controllers\Api\v1\Profile\HumanController;
 use App\Http\Controllers\Api\v1\Profile\PetController;
 use App\Http\Controllers\Api\v1\User\Cabinet\CabinetController;
@@ -62,18 +62,18 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::post('/user/update', [CabinetController::class, 'update']);
         });
 
-        Route::prefix('attributes')->group(function () {
-            Route::get('religion', [ReligionController::class, 'index']);
-        });
-
         Route::group(['prefix' => 'profile'], function () {
-            Route::prefix('human')->group(function () {
+            Route::prefix('humans')->group(function () {
                 Route::get('/', [HumanController::class, 'index']);
                 Route::post('/', [HumanController::class, 'store']);
             });
 
-            Route::prefix('pet')->group(function () {
+            Route::prefix('pets')->group(function () {
                 Route::post('/', [PetController::class, 'store']);
+            });
+
+            Route::prefix('cemeteries')->group(function () {
+                Route::post('/', [CemeteryController::class, 'store']);
             });
         });
     });

@@ -9,11 +9,13 @@ class CemeteryResource extends JsonResource
 {
     public function toArray($request): array
     {
-        /** @var Cemetery $this */
+        /** @var Cemetery|JsonResource $this */
+
         return [
             'id' => $this->id,
             'title' => $this->title,
             'subtitle' => $this->subtitle,
+            'address_coords' => $this->address_coords,
             'avatar' => $this->getFirstMediaUrl('avatars', 'thumb'),
             'banner' => $this->getFirstMediaUrl('banners', 'thumb_500')
         ];

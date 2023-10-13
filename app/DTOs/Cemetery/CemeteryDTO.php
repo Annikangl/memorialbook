@@ -12,31 +12,33 @@ class CemeteryDTO extends ValidatedDTO
 {
     public string $title;
 
-    public string $titleEn;
+    public ?string $titleEn;
 
-    public string|null $subtitle;
+    public ?string $subtitle;
 
     public string $address;
 
-    public array|null $addressCoords;
+    public ?array $address_coords;
 
-    public string|null $email;
+    public ?string $email;
 
-    public string|null $phone;
+    public ?string $phone;
 
-    public string|null $schedule;
+    public ?string $schedule;
 
-    public string|null $description;
+    public ?string $description;
 
     public string $access;
 
-    public UploadedFile|null $avatar;
+    public ?UploadedFile $avatar;
 
-    public UploadedFile|null $banner;
+    public ?UploadedFile $banner;
 
-    public array|null $gallery;
+    public ?array $confirming_documents;
 
-    public string|null $draft;
+    public ?array $gallery;
+
+    public ?string $as_draft;
 
     protected function rules(): array
     {
@@ -45,15 +47,16 @@ class CemeteryDTO extends ValidatedDTO
             'titleEn' => ['nullable', 'string', 'min:3'],
             'subtitle' => ['nullable', 'string', 'min:3'],
             'address' => ['required', 'string'],
-            'addressCoords' => ['nullable', 'array:lat,lng'],
+            'address_coords' => ['nullable', 'array:lat,lng'],
             'email' => ['nullable', 'email'],
             'phone' => ['nullable', 'string'],
             'schedule' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
             'access' => ['required', 'string'],
-            'draft' => ['nullable', 'string'],
+            'as_draft' => ['nullable', 'string'],
             'avatar' => ['nullable', 'file'],
             'banner' => ['nullable', 'file'],
+            'confirming_documents' => ['nullable', 'array'],
             'gallery' => ['nullable', 'array'],
         ];
     }
@@ -76,7 +79,7 @@ class CemeteryDTO extends ValidatedDTO
     protected function casts(): array
     {
         return [
-            'draft' => new BooleanCast()
+            'as_draft' => new BooleanCast()
         ];
     }
 

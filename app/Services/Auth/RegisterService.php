@@ -14,6 +14,7 @@ class RegisterService
     public function register(UserDTO $userDTO): User
     {
         /** @var User $user */
+
         $user = User::query()->create([
             'username' => $userDTO->username,
             'email' => $userDTO->email,

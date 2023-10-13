@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Api\v1\Profile;
 
 use App\DTOs\Profile\PetDTO;
+use App\Exceptions\Api\Profile\PetException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\Pet\CreatePetRequest;
+use App\Http\Requests\Api\Profile\Pet\CreatePetRequest;
 use App\Http\Resources\Profile\PetResource;
 use App\Http\Resources\Profile\ShowPetResource;
 use App\Models\Profile\Pet\Pet;
 use App\Services\PetService;
 use Illuminate\Http\Response;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
 use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
@@ -28,10 +27,7 @@ class PetController extends Controller
     }
 
     /**
-     * @throws MissingCastTypeException
-     * @throws FileIsTooBig
-     * @throws FileDoesNotExist
-     * @throws CastTargetException
+     * @throws MissingCastTypeException|PetException|CastTargetException
      */
     public function store(CreatePetRequest $request)
     {

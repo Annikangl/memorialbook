@@ -32,8 +32,7 @@ class HumanService
                     'date_death' => $humanDTO->date_death,
                     'birth_place' => $humanDTO->birth_place,
                     'burial_place' => $humanDTO->burial_place,
-                    'latitude' => $humanDTO->burial_coords['lat'],
-                    'longitude' => $humanDTO->burial_coords['lng'],
+                    'burial_coords' => $humanDTO->burial_coords,
                     'death_reason' => $humanDTO->death_reason,
                     'status' => $draft ? Profile::STATUS_DRAFT : Profile::STATUS_ACTIVE,
                     'access' => $humanDTO->access

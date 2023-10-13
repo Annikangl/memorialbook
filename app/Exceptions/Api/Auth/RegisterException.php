@@ -2,10 +2,10 @@
 
 namespace App\Exceptions\Api\Auth;
 
-use App\Exceptions\Api\JsonException;
+use App\Traits\ApiException;
 use Exception;
 
-class RegisterException extends JsonException
+class RegisterException extends Exception
 {
-    //
+    use ApiException;
 }

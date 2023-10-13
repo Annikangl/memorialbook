@@ -3,6 +3,7 @@
 namespace App\DTOs\Profile;
 
 use Illuminate\Http\UploadedFile;
+use WendellAdriel\ValidatedDTO\Casting\BooleanCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 class PetDTO extends ValidatedDTO
@@ -12,14 +13,13 @@ class PetDTO extends ValidatedDTO
     public string $breed;
     public string $date_birth;
     public string $date_death;
-    public string|null $birth_place;
-    public string|null $burial_place;
-    public array|null $burial_coords;
-    public string|null $death_reason;
-    public string|null $description;
-    public UploadedFile|null $avatar;
-    public UploadedFile|null $banner;
-    public array|null $gallery;
+    public ?string $birth_place;
+    public ?string $burial_place;
+    public ?string $death_reason;
+    public ?string $description;
+    public ?UploadedFile $avatar;
+    public ?UploadedFile $banner;
+    public ?array $gallery;
     public bool $as_draft;
 
     /**
@@ -36,7 +36,6 @@ class PetDTO extends ValidatedDTO
             'date_death' => ['required', 'date'],
             'birth_place' => [ 'nullable', 'string'],
             'burial_place' => ['nullable', 'string'],
-            'burial_coords' => ['nullable', 'array'],
             'owner_id' => ['required', 'integer'],
             'death_reason' => ['required', 'string'],
             'description' => ['nullable', 'string'],
@@ -64,7 +63,9 @@ class PetDTO extends ValidatedDTO
      */
     protected function casts(): array
     {
-        return [];
+        return [
+            'as_draft' => new BooleanCast()
+        ];
     }
 
     /**

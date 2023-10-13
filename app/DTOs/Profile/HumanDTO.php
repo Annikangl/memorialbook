@@ -81,7 +81,7 @@ class HumanDTO extends ValidatedDTO
     protected function defaults(): array
     {
         return [
-            'burial_coords' => ['lat' => null, 'lng' => null]
+            'burial_coords' => ['lat' => null, 'lng' => null],
         ];
     }
 

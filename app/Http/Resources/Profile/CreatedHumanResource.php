@@ -21,6 +21,7 @@ class CreatedHumanResource extends JsonResource
             'date_death' => $this->year_death,
             'death_reason' => $this->death_reason,
             'burial_place' => $this->burial_place,
+            'burial_coords' => $this->burial_coords,
             'father_id' => $this->father_id,
             'mother_id' => $this->mother_id,
             'spouse_id' => $this->spouse_id,

@@ -2,12 +2,7 @@
 
 namespace App\Exceptions\Api\Auth;
 
-use App\Exceptions\Api\JsonException;
 
-class LoginException extends JsonException
+class LoginException extends \Exception
 {
-    protected function statusCode(): int
-    {
-        return 401;
-    }
 }

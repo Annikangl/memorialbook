@@ -28,6 +28,8 @@ class Pet extends Profile
     use HasFactory, Sluggable;
 
     protected $fillable = [
+        'user_id',
+        'owner_id',
         'name',
         'breed',
         'description',
@@ -38,7 +40,6 @@ class Pet extends Profile
         'death_reason',
         'status',
         'is_celebrity',
-        'owner_id'
     ];
 
     protected $casts = [

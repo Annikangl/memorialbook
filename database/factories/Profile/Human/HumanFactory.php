@@ -25,8 +25,8 @@ class HumanFactory extends Factory
             'last_name' => $this->faker->lastName(),
             'middle_name' => $this->faker->userName(),
             'description' => $this->faker->text(),
-            'religions' => $this->faker->randomElements(
-                ['Reading', 'Traveling', 'Photography', 'Gardening'], 2
+            'religion' => $this->faker->randomElements(
+                ['Reading', 'Traveling', 'Photography', 'Gardening']
             ),
             'hobbies' => $this->faker->randomElements(
                 ['Reading', 'Traveling', 'Photography', 'Gardening'], 2
@@ -36,8 +36,12 @@ class HumanFactory extends Factory
             'date_death' => Carbon::parse($birth)->addYears(40),
             'birth_place' => $this->faker->address(),
             'burial_place' => $this->faker->address(),
-            'latitude' => $this->faker->latitude(),
-            'longitude' => $this->faker->longitude(),
+            'burial_coords' => $this->faker->randomElements([
+                [
+                    $this->faker->latitude(),
+                    $this->faker->longitude()
+                ], 2
+            ]),
             'death_reason' => $this->faker->words(2, true),
             'status' => $this->faker->randomElement(Profile::statusList()),
             'is_celebrity' => $this->faker->boolean,

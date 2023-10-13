@@ -26,8 +26,6 @@ return new class extends Migration
             $table->string('schedule')->nullable();
 
             $table->string('address');
-            $table->double('latitude')->nullable();
-            $table->double('longitude')->nullable();
 
             $table->text('description')->nullable();
             $table->string('status', 15);

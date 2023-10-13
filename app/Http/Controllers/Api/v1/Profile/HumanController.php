@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\v1\Profile;
 
 use App\DTOs\Profile\HumanDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Profile\Human\CreateHumanRequest;
 use App\Http\Requests\Api\Profile\SearchHumanRequest;
-use App\Http\Requests\Profile\Human\CreateHumanRequest;
 use App\Http\Resources\Profile\CreatedHumanResource;
 use App\Http\Resources\Profile\HumanResource;
 use App\Http\Resources\Profile\PetResource;
