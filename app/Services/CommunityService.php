@@ -3,48 +3,74 @@
 
 namespace App\Services;
 
-
-use App\Classes\Files\FileUploader;
+use App\DTOs\Community\CommunityDTO;
+use App\Exceptions\Api\Community\CommunityException;
 use App\Models\Community\Community;
 
 class CommunityService
 {
-
-    public function create(int $userId, array $data): Community
+    /**
+     * @throws CommunityException
+     */
+    public function create(int $userId, CommunityDTO $communityDTO): Community
     {
-        $community = Community::query()->make([
-            'title' => $data['title'],
-            'address' => $data['community_address'],
-            'latitude' => $data['community_address_coords']['lat'],
-            'longitude' => $data['community_address_coords']['lng'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-            'website' => $data['website'],
-            'description' => $data['description'],
-        ]);
+        try {
+            $community = Community::query()->create([
+                'owner_id' => $userId,
+                'title' => $communityDTO->title,
+                'subtitle' => $communityDTO->subtitle,
+                'description' => $communityDTO->description,
+                'email' => $communityDTO->email,
+                'phone' => $communityDTO->phone,
+                'website' => $communityDTO->website,
+            ]);
 
-        $community->owner()->associate($userId);
-
-        $community->save();
-
-        if (isset($data['avatar'])) {
-            $community->addMedia($data['avatar'])->toMediaCollection('avatars');
-        }
-
-        if (isset($data['community_banner'])) {
-            $community->addMedia('community_banner')->toMediaCollection('banners');
-        }
-
-        if (isset($data['community_documents'])) {
-            $community->addMedia('community_documents')->toMediaCollection('documents');
-        }
-
-        if (isset($data['community_gallery'])) {
-            foreach ($data['community_gallery'] as $item) {
-                $community->addMedia($item)->toMediaCollection('gallery');
+            if ($avatar = $communityDTO->avatar) {
+                $community->addMedia($avatar)->toMediaCollection('avatars');
             }
+
+            if ($banner = $communityDTO->banner) {
+                $community->addMedia($banner)->toMediaCollection('banners');
+            }
+
+            if ($gallery = $communityDTO->gallery) {
+                foreach ($gallery as $image) {
+                    $community->addMedia($image)->toMediaCollection('gallery');
+                }
+            }
+
+        } catch (\Throwable $exception) {
+            throw new CommunityException($exception->getMessage(), 500);
         }
 
         return $community;
+    }
+
+    /**
+     * @throws CommunityException
+     */
+    public function subscribe(int $userId, int $communityId): void
+    {
+        $community = Community::findOrFail($communityId);
+
+        if ($community->users()->where('id', $userId)->exists()) {
+            throw new CommunityException('You already subscribe on the community', 409);
+        }
+
+        $community->users()->attach($userId);
+    }
+
+    /**
+     * @throws CommunityException
+     */
+    public function unsubscribe(int $userId, int $communityId): void
+    {
+        $community = Community::findOrFail($communityId);
+
+        if (!$community->users()->where('id', $userId)->exists()) {
+            throw new CommunityException('You already unsubscribe on the community', 409);
+        }
+
+        $community->users()->detach($userId);
     }
 }

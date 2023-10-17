@@ -76,6 +76,12 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
                 Route::post('/', [CemeteryController::class, 'store']);
             });
         });
+
+        Route::prefix('communities')->group(function () {
+            Route::post('/', [CommunityController::class, 'store']);
+            Route::post('/{community}/subscribe', [CommunityController::class, 'subscribe']);
+            Route::post('/{community}/unsubscribe', [CommunityController::class, 'unsubscribe']);
+        });
     });
 
 });

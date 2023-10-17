@@ -4,12 +4,15 @@ namespace App\Http\Requests\Api\Profile\Human;
 
 use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
+use App\Traits\JsonFailedResponse;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
 class CreateHumanRequest extends FormRequest
 {
+    use JsonFailedResponse;
+
     public function authorize(): bool
     {
         return auth()->check();

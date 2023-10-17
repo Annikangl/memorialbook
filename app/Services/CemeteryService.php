@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Services;
 
 use App\DTOs\Cemetery\CemeteryDTO;
