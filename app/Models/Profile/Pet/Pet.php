@@ -80,13 +80,15 @@ class Pet extends Profile
     {
         $this->addMediaCollection('avatars')
             ->singleFile()
-            ->useFallbackUrl(asset('assets/media/media/empty_profile_avatar.png'))
-            ->useFallbackPath(asset('assets/media/media/empty_profile_avatar.png'));
-
-        $this->addMediaCollection('gallery');
+            ->useFallbackUrl(asset('assets/media/media/empty_avatar.png'))
+            ->useFallbackPath(asset('assets/media/media/empty_avatar.png'));
 
         $this->addMediaCollection('banners')
+            ->useFallbackUrl(asset('assets/media/media/empty_banner.png'))
+            ->useFallbackPath(asset('assets/media/media/empty_banner.png'))
             ->singleFile();
+
+        $this->addMediaCollection('gallery');
     }
 
     public function registerMediaConversions(Media $media = null): void

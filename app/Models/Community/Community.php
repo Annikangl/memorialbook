@@ -104,13 +104,16 @@ class Community extends Model implements HasMedia
     {
         $this->addMediaCollection('avatars')
             ->singleFile()
-            ->useFallbackUrl(asset('assets/media/media/empty_profile_avatar.png'))
-            ->useFallbackPath(asset('assets/media/media/empty_profile_avatar.png'));
+            ->useFallbackUrl(asset('assets/media/media/empty_avatar.png'))
+            ->useFallbackPath(asset('assets/media/media/empty_avatar.png'));
 
-        $this->addMediaCollection('gallery');
 
         $this->addMediaCollection('banners')
+            ->useFallbackUrl(asset('assets/media/media/empty_banner.png'))
+            ->useFallbackPath(asset('assets/media/media/empty_banner.png'))
             ->singleFile();
+
+        $this->addMediaCollection('gallery');
 
         $this->addMediaCollection('documents');
     }
