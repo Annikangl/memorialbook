@@ -1,8 +1,6 @@
 <?php
 
-
-namespace App\Models\Profile\Base;
-
+namespace App\Models\Profile;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;

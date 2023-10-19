@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Profile\Pet;
 
-use App\Models\Profile\Base\Profile;
+use App\Models\Profile\Profile;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;

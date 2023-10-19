@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\DTOs\Cemetery\CemeteryDTO;
 use App\Exceptions\Api\Profile\CemeteryException;
-use App\Models\Cemetery\Cemetery;
+use App\Models\Profile\Cemetery\Cemetery;
 
 class CemeteryService
 {

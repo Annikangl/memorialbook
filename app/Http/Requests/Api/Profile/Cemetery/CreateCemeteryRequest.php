@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api\Profile\Cemetery;
 
-use App\Models\Cemetery\Cemetery;
+use App\Models\Profile\Cemetery\Cemetery;
 use App\Traits\JsonFailedResponse;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

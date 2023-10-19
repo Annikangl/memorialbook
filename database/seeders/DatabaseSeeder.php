@@ -3,14 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Cemetery\Cemetery;
-use App\Models\Community\Community;
-use App\Models\Community\CommunityProfile;
-use App\Models\Community\Posts\Post;
-use App\Models\Profile\Hobby;
-use App\Models\Profile\Human\Human;
-use App\Models\Profile\Pet\Pet;
-use App\Models\Profile\Religion;
+use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\User\User;
 use Faker\Provider\UserAgent;
 use Illuminate\Database\Seeder;

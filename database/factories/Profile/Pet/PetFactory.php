@@ -2,9 +2,9 @@
 
 namespace Database\Factories\Profile\Pet;
 
-use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet;
+use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;

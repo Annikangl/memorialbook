@@ -4,10 +4,8 @@ namespace App\Services;
 
 use App\DTOs\Profile\PetDTO;
 use App\Exceptions\Api\Profile\PetException;
-use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Pet\Pet;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use App\Models\Profile\Profile;
 
 class PetService
 {

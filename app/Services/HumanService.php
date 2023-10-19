@@ -4,8 +4,8 @@
 namespace App\Services;
 
 use App\DTOs\Profile\HumanDTO;
-use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
+use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;

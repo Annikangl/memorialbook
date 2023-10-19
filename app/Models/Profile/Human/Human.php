@@ -2,19 +2,19 @@
 
 namespace App\Models\Profile\Human;
 
-use App\Models\Cemetery\Cemetery;
 use App\Models\Community\Community;
-use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Burial;
+use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\Profile\Pet\Pet;
+use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Eloquent;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;

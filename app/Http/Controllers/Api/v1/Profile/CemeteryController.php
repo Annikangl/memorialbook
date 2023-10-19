@@ -9,7 +9,7 @@ use App\Http\Requests\Api\Profile\Cemetery\CreateCemeteryRequest;
 use App\Http\Requests\Api\Profile\Cemetery\SearchCemeteryRequest;
 use App\Http\Resources\Cemetery\CemeteryResource;
 use App\Http\Resources\Cemetery\ShowCemeteryResource;
-use App\Models\Cemetery\Cemetery;
+use App\Models\Profile\Cemetery\Cemetery;
 use App\Services\CemeteryService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;

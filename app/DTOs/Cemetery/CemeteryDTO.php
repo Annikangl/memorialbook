@@ -2,9 +2,7 @@
 
 namespace App\DTOs\Cemetery;
 
-use App\Models\Cemetery\Cemetery;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Validation\Rule;
 use WendellAdriel\ValidatedDTO\Casting\BooleanCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 

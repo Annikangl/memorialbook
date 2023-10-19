@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Cemetery;
 
-use App\Models\Cemetery\Cemetery;
+use App\Models\Profile\Cemetery\Cemetery;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CemeteryResource extends JsonResource
