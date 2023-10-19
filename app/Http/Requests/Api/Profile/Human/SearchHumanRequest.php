@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Profile;
+namespace App\Http\Requests\Api\Profile\Human;
 
 use App\Traits\JsonFailedResponse;
 use Illuminate\Foundation\Http\FormRequest;

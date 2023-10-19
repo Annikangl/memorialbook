@@ -5,6 +5,7 @@ namespace App\Models\Cemetery;
 use App\Models\Profile\Human\Human;
 use App\Models\User\User;
 use Cviebrock\EloquentSluggable\Sluggable;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -40,7 +41,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Cemetery extends Model implements HasMedia
 {
-    use HasFactory, Sluggable, InteractsWithMedia;
+    use HasFactory, Sluggable, InteractsWithMedia, Filterable;
 
     public const STATUS_DRAFT = 'draft';
     public const STATUS_MODERATION = 'moderation';
@@ -160,5 +161,16 @@ class Cemetery extends Model implements HasMedia
             ->width(1000)
             ->height(600)
             ->nonQueued();
+    }
+
+    public function getGallery(): array
+    {
+        $gallery = [];
+
+        $this->getMedia('gallery')->each(function (Media $item) use (&$gallery) {
+            $gallery[] = $item->getUrl('thumb_500');
+        });
+
+        return $gallery;
     }
 }

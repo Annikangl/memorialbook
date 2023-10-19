@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\v1\Profile;
 use App\DTOs\Profile\HumanDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Profile\Human\CreateHumanRequest;
-use App\Http\Requests\Api\Profile\SearchHumanRequest;
+use App\Http\Requests\Api\Profile\Human\SearchHumanRequest;
 use App\Http\Resources\Profile\CreatedHumanResource;
 use App\Http\Resources\Profile\HumanResource;
 use App\Http\Resources\Profile\PetResource;
@@ -78,7 +78,7 @@ class HumanController extends Controller
         $humans = Human::query()
             ->filter($request->validated())
             ->latest()
-            ->paginate(20);
+            ->paginate(10);
 
         return response()->json(['status' => true, 'humans' => HumanResource::collection($humans)])
             ->setStatusCode(Response::HTTP_OK);

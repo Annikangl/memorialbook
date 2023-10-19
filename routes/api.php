@@ -42,6 +42,11 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         Route::prefix('pet')->group(function () {
             Route::get('/{pet}', [PetController::class, 'show']);
         });
+
+        Route::prefix('cemeteries')->group(function () {
+            Route::get('/search', [CemeteryController::class, 'search']);
+            Route::get('/{cemetery}', [CemeteryController::class, 'show']);
+        });
     });
 
     Route::prefix('community')->group(function () {
