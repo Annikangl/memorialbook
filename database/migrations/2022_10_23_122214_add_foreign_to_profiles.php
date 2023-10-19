@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Cemetery\Cemetery;
+use App\Models\Profile\Cemetery\Cemetery;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,7 +19,7 @@ return new class extends Migration
     {
         if (app()->isLocal()) {
             Schema::table('humans', function (Blueprint $table) {
-                $table->dropForeignIdFor(App\Models\Cemetery\Cemetery::class);
+                $table->dropForeignIdFor(\App\Models\Profile\Cemetery\Cemetery::class);
             });
         }
     }

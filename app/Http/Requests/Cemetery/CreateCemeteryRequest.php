@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Cemetery;
 
-use App\Models\Cemetery\Cemetery;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -52,7 +51,7 @@ class CreateCemeteryRequest extends FormRequest
             'phone' => ['nullable', 'string', 'min:8', 'max:15'],
             'schedule' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
-            'access' => ['required', Rule::in(Cemetery::getAccessList())],
+            'access' => ['required', Rule::in(\App\Models\Profile\Cemetery\Cemetery::getAccessList())],
 
             'draft' => ['sometimes', 'string'],
 

@@ -6,7 +6,6 @@ use App\DTOs\Cemetery\CemeteryDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Cemetery\CreateCemeteryRequest;
 use App\Http\Requests\Cemetery\SearchRequest;
-use App\Models\Cemetery\Cemetery;
 use App\Services\CemeteryService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -24,7 +23,7 @@ class CemeteryController extends Controller
 
     public function map(SearchRequest $request): Factory|View|Application
     {
-        $cemeteries = Cemetery::active()->filtered()->paginate(30);
+        $cemeteries = \App\Models\Profile\Cemetery\Cemetery::active()->filtered()->paginate(30);
         $count_filters = $this->countApplyFilters($request->input());
 
         return view('cemetery.map', compact('cemeteries', 'count_filters'));
@@ -32,7 +31,7 @@ class CemeteryController extends Controller
 
     public function list(SearchRequest $request): Factory|View|Application
     {
-        $cemeteries = Cemetery::active()->filtered()->paginate(5);
+        $cemeteries = \App\Models\Profile\Cemetery\Cemetery::active()->filtered()->paginate(5);
         $count_filters = $this->countApplyFilters($request->input());
 
         return view('cemetery.list', compact('cemeteries', 'count_filters'));
@@ -40,7 +39,7 @@ class CemeteryController extends Controller
 
     public function show(string $slug): Factory|\Illuminate\Contracts\View\View|Application
     {
-        $cemetery = Cemetery::query()->where('slug', $slug)
+        $cemetery = \App\Models\Profile\Cemetery\Cemetery::query()->where('slug', $slug)
             ->with(['humans','media'])
             ->firstOrFail();
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Api\Profile\Human;
 
-use App\Models\Profile\Base\Profile;
 use App\Models\Profile\Human\Human;
+use App\Models\Profile\Profile;
 use App\Traits\JsonFailedResponse;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;

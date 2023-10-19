@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Cemetery\Cemetery;
 use App\Models\User\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

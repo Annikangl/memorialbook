@@ -2,13 +2,11 @@
 
 namespace Database\Factories\Profile\Human;
 
-use App\Models\Cemetery\Cemetery;
-use App\Models\Profile\Base\Profile;
+use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\Profile\Human\Human;
-use App\Models\Profile\Religion;
+use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Carbon\Carbon;
-use Closure;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

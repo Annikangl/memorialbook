@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Cemetery;
+namespace App\Models\Profile\Cemetery;
 
 use App\Models\Profile\Human\Human;
 use App\Models\User\User;
@@ -17,7 +17,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
- * App\Models\Cemetery\Cemetery
+ * App\Models\Profile\Cemetery\Cemetery
  *
  * @property int $id
  * @property int $user_id

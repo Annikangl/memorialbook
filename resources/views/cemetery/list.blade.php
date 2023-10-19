@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@php /** @var \App\Models\Cemetery\Cemetery $cemetery */ @endphp
+@php /** @var \App\Models\Profile\Cemetery\Cemetery $cemetery */ @endphp
 
 @section('content')
     <section class="list">
 
         <!--button filter start-->
         <x-search-filter
-            :count_filters="$count_filters"
-            list="true"
-            modalHref="#slideout-places"
-            slideoutOptions="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}"
-            hrefMap="{{ route('cemetery.search.map') . '?NAME=' . request('NAME') . '&ADDRESS=' . request('ADDRESS') }}"
+                :count_filters="$count_filters"
+                list="true"
+                modalHref="#slideout-places"
+                slideoutOptions="{&quot;type&quot;:&quot;places&quot;,&quot;position&quot;:&quot;top&quot;}"
+                hrefMap="{{ route('cemetery.search.map') . '?NAME=' . request('NAME') . '&ADDRESS=' . request('ADDRESS') }}"
         >
         </x-search-filter>
         <!--button filter end-->

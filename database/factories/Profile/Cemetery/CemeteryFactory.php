@@ -1,13 +1,13 @@
 <?php
 
-namespace Database\Factories\Cemetery;
+namespace Database\Factories\Profile\Cemetery;
 
-use App\Models\Cemetery\Cemetery;
+use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Cemetery>
+ * @extends Factory<\App\Models\Profile\Cemetery\Cemetery>
  */
 class CemeteryFactory extends Factory
 {
@@ -30,7 +30,7 @@ class CemeteryFactory extends Factory
                 ], 2
             ]),
             'description' => $this->faker->realText(1000),
-            'status' => Cemetery::STATUS_ACTIVE,
+            'status' => \App\Models\Profile\Cemetery\Cemetery::STATUS_ACTIVE,
             'access' => Cemetery::ACCESS_PUBLIC,
             'moderators_comment' => null,
         ];

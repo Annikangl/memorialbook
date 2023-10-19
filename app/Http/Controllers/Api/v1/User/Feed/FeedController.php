@@ -7,8 +7,8 @@ use App\Http\Resources\Cemetery\CemeteryResource;
 use App\Http\Resources\Community\CommunityResource;
 use App\Http\Resources\Profile\HumanResource;
 use App\Http\Resources\Profile\PetResource;
-use App\Models\Cemetery\Cemetery;
 use App\Models\Community\Community;
+use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
 

@@ -3,16 +3,13 @@
 namespace App\Models\Profile\Pet;
 
 use App\Models\Community\Community;
-use App\Models\Profile\Base\Profile;
-use App\Models\Profile\Hobby;
 use App\Models\Profile\Human\Human;
+use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
