@@ -23,7 +23,9 @@ class FeedController extends Controller
             ->where('user_id', auth()->id())
             ->get();
 
-        $cemeteries = Cemetery::query()->latest()
+        $cemeteries = Cemetery::query()
+            ->where('user_id', auth()->id())
+            ->latest()
             ->limit(10)
             ->get();
 
@@ -36,6 +38,7 @@ class FeedController extends Controller
             ->get();
 
         $communities = Community::query()
+            ->where('owner_id', auth()->id())
             ->latest()
             ->limit(10)
             ->get();

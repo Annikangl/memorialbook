@@ -9,22 +9,13 @@ use Illuminate\Validation\Rules\Password;
 class RegisterRequest extends FormRequest
 {
     use JsonFailedResponse;
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
+
+    public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
             'username' => ['required', 'string', 'min:3', 'max:50'],
@@ -32,8 +23,8 @@ class RegisterRequest extends FormRequest
             'password' => ['required', 'string', Password::default(), 'confirmed'],
             'password_confirmation' => ['required', 'string'],
             'device_name' => ['required', 'string'],
-            'fcm_token' => ['required', 'string'],
-            'location' => ['required', 'string', 'max:15']
+            'fcm_token' => ['nullable', 'string'],
+            'location' => ['nullable', 'string', 'max:15']
         ];
     }
 }
