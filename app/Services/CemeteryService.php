@@ -5,6 +5,7 @@ namespace App\Services;
 use App\DTOs\Cemetery\CemeteryDTO;
 use App\Exceptions\Api\Profile\CemeteryException;
 use App\Models\Profile\Cemetery\Cemetery;
+use App\Models\User\User;
 
 class CemeteryService
 {
@@ -54,5 +55,29 @@ class CemeteryService
         }
 
         return $cemetery;
+    }
+
+    /**
+     * @throws CemeteryException
+     */
+    public function subscribe(User $user, Cemetery $cemetery): void
+    {
+        if ($user->subscribedCemeteries()->exists()) {
+            throw new CemeteryException('You already subscribed!', 422);
+        }
+
+        $user->subscribedCemeteries()->attach($cemetery->id);
+    }
+
+    /**
+     * @throws CemeteryException
+     */
+    public function unsubscribe(User $user, Cemetery $cemetery): void
+    {
+        if (!$user->subscribedCemeteries()->exists()) {
+            throw new CemeteryException('You already unsubscribed!', 422);
+        }
+
+        $user->subscribedCemeteries()->detach($cemetery->id);
     }
 }

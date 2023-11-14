@@ -6,6 +6,8 @@ use App\DTOs\Community\CommunityDTO;
 use App\Exceptions\Api\Community\CommunityException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Community\CreateCommunityRequest;
+use App\Http\Requests\Community\SearchCommunityRequest;
+use App\Http\Resources\Community\CommunityCollection;
 use App\Http\Resources\Community\CommunityResource;
 use App\Http\Resources\Profile\ShowCommunityResource;
 use App\Models\Community\Community;
@@ -14,6 +16,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
 use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
@@ -25,18 +28,24 @@ class CommunityController extends Controller
 
     public function index(): JsonResponse
     {
+        $user = Auth::guard('sanctum')->user();
+
         $featuredCommunities = Community::query()
             ->where('is_celebrity', true)
             ->limit(6)
             ->get();
 
-        $communities = Community::query()->limit(10)->get();
+        if ($user) {
+            $communities = $user->subscribedCommunities->merge($user->communities);
+        } else {
+            $communities = Community::query()->limit(10)->get();
+        }
 
         return response()->json([
-                'status' => true,
-                'featured_communities' => CommunityResource::collection($featuredCommunities),
-                'communities' => CommunityResource::collection($communities)]
-        )->setStatusCode(Response::HTTP_OK);
+            'status' => true,
+            'featured_communities' => CommunityResource::collection($featuredCommunities),
+            'communities' => CommunityResource::collection($communities)
+        ])->setStatusCode(Response::HTTP_OK);
     }
 
     public function show(Community $community): JsonResponse
@@ -69,6 +78,14 @@ class CommunityController extends Controller
 
         return response()->json(['status' => true, 'community' => new CommunityResource($community)])
             ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    public function search(SearchCommunityRequest $request): JsonResponse
+    {
+        $communities = $this->communityService->search($request->validated());
+
+        return response()->json(['status' => true, 'communities' => new CommunityCollection($communities)])
+            ->setStatusCode(Response::HTTP_OK);
     }
 
     /**

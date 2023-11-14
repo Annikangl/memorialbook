@@ -6,6 +6,7 @@ namespace App\Services;
 use App\DTOs\Community\CommunityDTO;
 use App\Exceptions\Api\Community\CommunityException;
 use App\Models\Community\Community;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CommunityService
 {
@@ -22,6 +23,7 @@ class CommunityService
                 'description' => $communityDTO->description,
                 'email' => $communityDTO->email,
                 'phone' => $communityDTO->phone,
+                'address' => $communityDTO->address,
                 'website' => $communityDTO->website,
             ]);
 
@@ -46,6 +48,13 @@ class CommunityService
         return $community;
     }
 
+    public function search(array $searchData): LengthAwarePaginator
+    {
+        return Community::query()
+            ->filter($searchData)
+            ->paginate(10);
+    }
+
     /**
      * @throws CommunityException
      */
@@ -54,7 +63,7 @@ class CommunityService
         $community = Community::findOrFail($communityId);
 
         if ($community->users()->where('id', $userId)->exists()) {
-            throw new CommunityException('You already subscribe on the community', 409);
+            throw new CommunityException('You already subscribe!', 422);
         }
 
         $community->users()->attach($userId);
@@ -68,7 +77,7 @@ class CommunityService
         $community = Community::findOrFail($communityId);
 
         if (!$community->users()->where('id', $userId)->exists()) {
-            throw new CommunityException('You already unsubscribe on the community', 409);
+            throw new CommunityException('You already unsubscribe!', 422);
         }
 
         $community->users()->detach($userId);

@@ -5,6 +5,7 @@ namespace App\Models\Community;
 use App\Models\Community\Posts\Post;
 use App\Models\User\User;
 use Cviebrock\EloquentSluggable\Sluggable;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -39,7 +40,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Community extends Model implements HasMedia
 {
-    use HasFactory, Sluggable, InteractsWithMedia;
+    use HasFactory, Sluggable, InteractsWithMedia, Filterable;
 
     protected $fillable = [
         'owner_id',
@@ -48,8 +49,6 @@ class Community extends Model implements HasMedia
         'website',
         'phone',
         'address',
-        'latitude',
-        'longitude',
         'title',
         'avatar',
         'subtitle',
@@ -76,10 +75,9 @@ class Community extends Model implements HasMedia
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)
+        return $this->belongsToMany(User::class, 'community_users')
             ->as('subscribers');
     }
-
 
     public function communityProfiles(): HasMany
     {

@@ -7,8 +7,8 @@ use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 class UserDTO extends ValidatedDTO
 {
-    public string $username;
-    public string $email;
+    public ?string $username;
+    public ?string $email;
     public ?string $phone;
     public ?string $password;
     public ?string $device_name;
@@ -24,8 +24,8 @@ class UserDTO extends ValidatedDTO
     protected function rules(): array
     {
         return [
-            'username' => ['required', 'string'],
-            'email' => ['required', 'email'],
+            'username' => ['nullable', 'string'],
+            'email' => ['nullable', 'email'],
             'phone' => ['nullable', 'string'],
             'password' => ['nullable', 'string'],
             'device_name' => ['nullable', 'string'],

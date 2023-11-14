@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\DTOs\User\UserDTO;
 use App\Models\Community\Community;
 use App\Models\User\User;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -17,17 +18,17 @@ class UserService
      * @throws FileIsTooBig
      * @throws FileDoesNotExist
      */
-    public function update(User $user, string $username, ?string $email, ?string $phone, ?UploadedFile $avatar): User
+    public function update(User $user, UserDTO $userDTO): User
     {
-        if ($avatar) {
-            $user->addMedia($avatar)->toMediaCollection('avatar');
+        $validatedData = collect($userDTO->toArray())->filter()->except(['avatar'])->toArray();
+
+        $user->update($validatedData);
+
+        if ($avatar = $userDTO->avatar) {
+            $user->addMedia($avatar)->toMediaCollection('avatars');
         }
 
-        return tap($user)->update([
-            'username' => $username,
-            'email' => $email,
-            'phone' => $phone,
-        ]);
+        return $user;
     }
 
     public function delete(User|Authenticatable $user): void

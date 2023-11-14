@@ -11,6 +11,7 @@ use App\Models\Community\Community;
 use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
+use Illuminate\Support\Facades\Auth;
 
 class FeedController extends Controller
 {
@@ -23,16 +24,10 @@ class FeedController extends Controller
             ->where('user_id', auth()->id())
             ->get();
 
-        $cemeteries = Cemetery::query()
-            ->where('user_id', auth()->id())
-            ->latest()
-            ->limit(10)
-            ->get();
+        $cemeteries = Auth::user()->subscribedCemeteries()->latest()->get();
 
-        $celebrityPets = Pet::query()
+        $pets = Pet::query()
             ->where('is_celebrity', true)
-            ->where('status', Cemetery::STATUS_ACTIVE)
-            ->where('access', Cemetery::ACCESS_PUBLIC)
             ->latest()
             ->limit(10)
             ->get();
@@ -48,7 +43,7 @@ class FeedController extends Controller
             'data' => [
                 'related_humans' => HumanResource::collection($relatedHumans),
                 'cemeteries' => CemeteryResource::collection($cemeteries),
-                'celebrity_pets' => PetResource::collection($celebrityPets),
+                'pets' => PetResource::collection($pets),
                 'communities' => CommunityResource::collection($communities),
                 'news' => []
             ]

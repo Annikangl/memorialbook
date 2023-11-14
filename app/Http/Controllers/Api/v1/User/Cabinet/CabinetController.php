@@ -41,10 +41,7 @@ class CabinetController extends Controller
 
         $user = $this->userService->update(
             auth()->user(),
-            $userDTO->username,
-            $userDTO->email,
-            $userDTO->phone,
-            $userDTO->avatar
+            $userDTO
         );
 
         return response()->json(['status' => true, 'user' => new UserResource($user)])

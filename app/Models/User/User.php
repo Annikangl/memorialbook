@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Models\Community\Community;
 use App\Models\News\News;
+use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
 use Carbon\Carbon;
@@ -40,6 +41,10 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
+ *
+ * @property int $createdProfilesCount
+ *
+ * @method static BelongsToMany subscribedCommunities()
  */
 class User extends Authenticatable implements HasMedia
 {
@@ -126,6 +131,11 @@ class User extends Authenticatable implements HasMedia
         );
     }
 
+    public function getCreatedProfilesCountAttribute(): int
+    {
+        return $this->humans->count() + $this->pets->count();
+    }
+
     public function sluggable(): array
     {
         return [
@@ -137,7 +147,7 @@ class User extends Authenticatable implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('avatar')
+        $this->addMediaCollection('avatars')
             ->singleFile()
             ->useFallbackUrl(asset('assets/media/media/empty_user_avatar.webp'))
             ->useFallbackPath(asset('assets/media/media/empty_user_avatar.webp'));
@@ -176,8 +186,18 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(News::class, 'author_id');
     }
 
-    public function communities(): BelongsToMany
+    public function communities(): HasMany
     {
-        return $this->belongsToMany(Community::class);
+        return $this->hasMany(Community::class, 'owner_id');
+    }
+
+    public function subscribedCommunities(): BelongsToMany
+    {
+        return $this->belongsToMany(Community::class, 'community_users');
+    }
+
+    public function subscribedCemeteries(): BelongsToMany
+    {
+        return $this->belongsToMany(Cemetery::class,'cemetery_subscribers')->withTimestamps();
     }
 }

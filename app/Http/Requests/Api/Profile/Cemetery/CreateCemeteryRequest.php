@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\Profile\Cemetery;
 
 use App\Models\Profile\Cemetery\Cemetery;
+use App\Rules\PhoneNumber;
 use App\Traits\JsonFailedResponse;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -20,7 +21,7 @@ class CreateCemeteryRequest extends FormRequest
             'address' => ['required', 'string', 'min:5'],
             'address_coords' => ['required', 'array:lat,lng'],
             'email' => ['required', 'email', 'unique:cemeteries'],
-            'phone' => ['required', 'string', 'min:8', 'max:15', 'unique:cemeteries'],
+            'phone' => ['required', 'string', new PhoneNumber(), 'unique:cemeteries'],
             'schedule' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
             'access' => ['required', Rule::in(Cemetery::getAccessList())],

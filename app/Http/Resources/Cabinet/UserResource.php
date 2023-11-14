@@ -11,15 +11,13 @@ class UserResource extends JsonResource
     {
         /** @var User $this */
 
-        $this->loadCount(['pets', 'humans', 'availableProfiles']);
-
         return [
             'id' => $this->id,
             'username' => $this->username,
             'email' => $this->email,
             'avatar' => $this->getFirstMediaUrl('avatar', 'thumb'),
-            'profiles_count' => $this->pets_count + $this->humans_count,
-            'accesses_count' => $this->available_profiles_count
+            'profiles_count' => $this->createdProfilesCount,
+            'accesses_count' => 0
         ];
     }
 }

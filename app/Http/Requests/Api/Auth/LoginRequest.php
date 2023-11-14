@@ -30,7 +30,7 @@ class LoginRequest extends FormRequest
             'email' => ['required', 'email'],
             'password' => ['required', 'string', Password::default()],
             'device_name' => ['required', 'string'],
-            'fcm_token' => ['required', 'string'],
+            'fcm_token' => ['nullable', 'string'],
         ];
     }
 }

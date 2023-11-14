@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api\Community;
 
+use App\Rules\PhoneNumber;
 use App\Traits\JsonFailedResponse;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\File;
@@ -21,9 +22,10 @@ class CreateCommunityRequest extends FormRequest
             'title' => ['required', 'string', 'max:150'],
             'subtitle' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:1000'],
+            'address' => ['required', 'string', 'max:150'],
             'email' => ['required', 'email', 'unique:cemeteries'],
-            'phone' => ['required', 'string', 'min:8', 'max:15', 'unique:communities'],
-            'website' => ['sometimes', 'nullable', 'url'],
+            'phone' => ['required', 'string', new PhoneNumber(),'unique:communities'],
+            'website' => ['nullable', 'nullable', 'url'],
             'avatar' => [
                 'nullable',
                 File::image()->max(10 * 1024),
@@ -35,7 +37,7 @@ class CreateCommunityRequest extends FormRequest
             ],
 
             'gallery.*' => [
-                'sometimes',
+                'nullable',
                 File::types(['video/mp4', 'image/jpeg', 'image/png'])
                     ->max(30 * 1024),
             ],

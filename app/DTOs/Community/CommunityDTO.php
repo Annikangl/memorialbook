@@ -13,6 +13,7 @@ class CommunityDTO extends ValidatedDTO
     public string $email;
     public string $phone;
     public ?string $website;
+    public string $address;
     public ?UploadedFile $avatar;
     public ?UploadedFile $banner;
     public ?array $gallery;
@@ -28,12 +29,14 @@ class CommunityDTO extends ValidatedDTO
             'title' => ['required', 'string', 'max:150'],
             'subtitle' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:1000'],
-            'email' => ['required', 'email', 'unique:cemeteries'],
-            'phone' => ['required', 'string', 'min:8', 'max:15'],
-            'website' => ['sometimes', 'nullable', 'url'],
+            'email' => ['required', 'email'],
+            'phone' => ['required', 'string'],
+            'address' => ['required', 'string', 'max:150'],
+            'website' => ['nullable', 'nullable', 'url'],
             'avatar' => ['nullable', 'file'],
             'banner' => ['nullable', 'file'],
-            'gallery.*' => ['sometimes', 'file'],
+            'gallery' => ['nullable', 'array'],
+            'gallery.*' => ['nullable', 'file'],
         ];
     }
 

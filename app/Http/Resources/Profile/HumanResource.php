@@ -18,6 +18,7 @@ class HumanResource extends JsonResource
             'date_birth' => $this->year_birth,
             'date_death' => $this->year_death,
             'burial_cord' => $this->burial_coords,
+            'is_celebrity' => $this->is_celebrity,
             'avatar' => $this->getFirstMediaUrl('avatars', 'thumb')
         ];
     }

@@ -17,10 +17,10 @@ class SearchHumanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'full_name' => ['required', 'string', 'min:1', 'max:255'],
+            'full_name' => ['required', 'string', 'min:3', 'max:255'],
             'birth_year' => ['nullable', 'string', 'regex:(\d{4}-\d{4})'],
             'death_year' => ['nullable', 'string', 'regex:(\d{4}-\d{4})'],
-            'country' => ['nullable', 'string']
+            'country' => ['nullable', 'string'],
         ];
     }
 }

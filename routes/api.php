@@ -46,11 +46,14 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         Route::prefix('cemeteries')->group(function () {
             Route::get('/search', [CemeteryController::class, 'search']);
             Route::get('/{cemetery}', [CemeteryController::class, 'show']);
+            Route::post('/{cemetery}/subscribe', [CemeteryController::class, 'subscribe']);
+            Route::post('/{cemetery}/unsubscribe', [CemeteryController::class, 'unsubscribe']);
         });
     });
 
-    Route::prefix('community')->group(function () {
+    Route::prefix('communities')->group(function () {
         Route::get('/', [CommunityController::class, 'index']);
+        Route::get('/search', [CommunityController::class, 'search']);
         Route::get('/{community}', [CommunityController::class, 'show']);
     });
 
@@ -64,7 +67,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
 
         Route::prefix('cabinet')->group(function () {
             Route::get('/user', [CabinetController::class, 'show']);
-            Route::post('/user/update', [CabinetController::class, 'update']);
+            Route::put('/user', [CabinetController::class, 'update']);
         });
 
         Route::group(['prefix' => 'profile'], function () {

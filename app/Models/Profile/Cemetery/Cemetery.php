@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Spatie\MediaLibrary\HasMedia;
@@ -92,16 +93,6 @@ class Cemetery extends Model implements HasMedia
         return $this->status === self::STATUS_CLOSED;
     }
 
-    public function scopeFiltered(Builder $query): Builder
-    {
-        return $query->when($name = request('place_name'), function (Builder $q) use ($name) {
-            $q->where('title', 'LIKE', "%$name%")
-                ->orWhere('title_en', 'LIKE', "%$name%");
-        })->when($address = request('place'), function (Builder $query) use ($address) {
-            $query->where('address', 'LIKE', "%$address%");
-        });
-    }
-
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('status', self::STATUS_ACTIVE);
@@ -112,9 +103,14 @@ class Cemetery extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
-    public function humans(): HasMany
+    public function memorials(): HasMany
     {
-        return $this->hasMany(Human::class);
+        return $this->hasMany(Human::class, 'cemetery_id');
+    }
+
+    public function subscribers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'cemetery_subscribers');
     }
 
     public function sluggable(): array

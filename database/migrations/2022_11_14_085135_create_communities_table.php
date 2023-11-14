@@ -26,15 +26,14 @@ return new class extends Migration {
             $table->string('website')->nullable();
             $table->string('phone')->nullable();
             $table->string('address');
-            $table->double('latitude');
-            $table->double('longitude');
             $table->boolean('is_celebrity')->default(false);
             $table->timestamps();
         });
 
-        Schema::create('community_user', function (Blueprint $table) {
+        Schema::create('community_users', function (Blueprint $table) {
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(Community::class)->constrained();
+            $table->timestamps();
             $table->primary(['user_id', 'community_id']);
         });
 

@@ -13,6 +13,7 @@ use App\Models\Profile\Cemetery\Cemetery;
 use App\Services\CemeteryService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
 use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
@@ -53,6 +54,28 @@ class CemeteryController extends Controller
         );
 
         return response()->json(['status' => true, 'cemetery' => new CemeteryResource($cemetery)])
+            ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    /**
+     * @throws CemeteryException
+     */
+    public function subscribe(Cemetery $cemetery)
+    {
+        $this->cemeteryService->subscribe(Auth::guard('sanctum')->user(), $cemetery);
+
+        return response()->json(['status' => true, 'message' => 'You are subscribed successful'])
+            ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    /**
+     * @throws CemeteryException
+     */
+    public function unsubscribe(Cemetery $cemetery)
+    {
+        $this->cemeteryService->unsubscribe(Auth::guard('sanctum')->user(), $cemetery);
+
+        return response()->json(['status' => true, 'message' => 'You are unsubscribed'])
             ->setStatusCode(Response::HTTP_CREATED);
     }
 }
