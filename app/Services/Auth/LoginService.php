@@ -11,7 +11,7 @@ class LoginService
     /**
      * @throws LoginException
      */
-    public function login(array $credentials, string $fcmToken, string $deviceName): User
+    public function login(array $credentials, ?string $fcmToken, ?string $deviceName): User
     {
         if (!Auth::attempt($credentials)) {
             throw new LoginException('Invalid login or password', 401);
@@ -19,8 +19,13 @@ class LoginService
 
         $user = Auth::user();
 
-        $user->updateFcmToken($fcmToken);
-        $user->updateDeviceName($deviceName);
+        if ($deviceName) {
+            $user->updateDeviceName($deviceName);
+        }
+
+        if ($fcmToken) {
+            $user->updateFcmToken($fcmToken);
+        }
 
         return $user;
     }
