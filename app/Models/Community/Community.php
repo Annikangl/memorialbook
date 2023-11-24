@@ -73,6 +73,15 @@ class Community extends Model implements HasMedia
         return $this->belongsTo(User::class ,'owner_id');
     }
 
+    public function isUserSubscribed(?User $user): bool
+    {
+        if (!$user) {
+            return false;
+        }
+
+        return $this->users->contains($user);
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'community_users')

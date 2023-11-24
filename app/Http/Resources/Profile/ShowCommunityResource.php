@@ -15,6 +15,7 @@ class ShowCommunityResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'is_subscribe' =>  $this->isUserSubscribed(auth('sanctum')->user()),
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'description' => $this->description,
