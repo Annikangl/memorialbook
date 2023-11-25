@@ -93,11 +93,6 @@ class Community extends Model implements HasMedia
         return $this->hasMany(CommunityProfile::class);
     }
 
-    public function isSubscribe(int $userId): bool
-    {
-        return $this->users()->where('id', $userId)->exists();
-    }
-
     public function sluggable(): array
     {
         return [
