@@ -79,7 +79,7 @@ class Community extends Model implements HasMedia
             return false;
         }
 
-        return $this->users->contains($user);
+        return $this->users()->wherePivot('user_id', $user->id)->exists();
     }
 
     public function users(): BelongsToMany
