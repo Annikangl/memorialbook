@@ -27,10 +27,18 @@ class CemeteryController extends Controller
     {
         $user = Auth::guard('sanctum')->user();
 
+        $featuredCemeteries = Cemetery::query()
+            ->where('is_celebrity', true)
+            ->limit(6)
+            ->get();
+
         $cemeteries = $user->subscribedCemeteries->merge($user->cemeteries);
 
-        return response()->json(['status' => true, 'cemeteries' => CemeteryResource::collection($cemeteries)])
-            ->setStatusCode(Response::HTTP_OK);
+        return response()->json([
+            'status' => true,
+            'featured_cemeteries' => CemeteryResource::collection($featuredCemeteries),
+            'cemeteries' => CemeteryResource::collection($cemeteries)
+        ])->setStatusCode(Response::HTTP_OK);
     }
 
     public function search(SearchCemeteryRequest $request): JsonResponse
