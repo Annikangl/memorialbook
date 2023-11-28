@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\Auth\NetworkController;
 use App\Http\Controllers\Api\v1\Auth\RegisterController;
 use App\Http\Controllers\Api\v1\Community\CommunityController;
+use App\Http\Controllers\Api\v1\Community\Post\PostController;
 use App\Http\Controllers\Api\v1\Profile\CemeteryController;
 use App\Http\Controllers\Api\v1\Profile\HumanController;
 use App\Http\Controllers\Api\v1\Profile\PetController;
@@ -90,6 +91,10 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::post('/', [CommunityController::class, 'store']);
             Route::post('/{community}/subscribe', [CommunityController::class, 'subscribe']);
             Route::post('/{community}/unsubscribe', [CommunityController::class, 'unsubscribe']);
+
+            Route::prefix('posts')->group(function () {
+                Route::post('/', [PostController::class, 'store']);
+            });
         });
     });
 

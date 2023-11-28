@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -29,6 +28,9 @@ class Post extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
+    const TYPE_TEXT = 'text';
+    const TYPE_MEDIA = 'media';
+
     protected $table = 'community_posts';
 
     protected $fillable = [
@@ -36,6 +38,7 @@ class Post extends Model implements HasMedia
         'community_id',
         'title',
         'description',
+        'content_type',
         'is_pinned',
         'published_at',
     ];
@@ -54,14 +57,14 @@ class Post extends Model implements HasMedia
         return $this->belongsTo(Community::class);
     }
 
+    public function content(): MorphTo
+    {
+        return $this->morphTo();
+    }
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
-    }
-
-    public function tags(): BelongsToMany
-    {
-        return $this->belongsToMany(Tag::class,'community_post_tags');
     }
 
     protected function publishedAt(): Attribute
