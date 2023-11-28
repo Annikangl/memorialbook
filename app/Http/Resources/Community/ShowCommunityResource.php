@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Profile;
+namespace App\Http\Resources\Community;
 
 use App\Http\Resources\Community\Posts\PostResource;
 use App\Http\Resources\UserResource;

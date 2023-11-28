@@ -23,7 +23,17 @@ class CemeteryController extends Controller
     {
     }
 
-    public function search(SearchCemeteryRequest $request)
+    public function index(): JsonResponse
+    {
+        $user = Auth::guard('sanctum')->user();
+
+        $cemeteries = $user->subscribedCemeteries->merge($user->cemeteries);
+
+        return response()->json(['status' => true, 'cemeteries' => CemeteryResource::collection($cemeteries)])
+            ->setStatusCode(Response::HTTP_OK);
+    }
+
+    public function search(SearchCemeteryRequest $request): JsonResponse
     {
         $cemeteries = Cemetery::query()
             ->filter($request->validated())
@@ -43,7 +53,7 @@ class CemeteryController extends Controller
     /**
      * @throws MissingCastTypeException|CemeteryException|CastTargetException
      */
-    public function store(CreateCemeteryRequest $request)
+    public function store(CreateCemeteryRequest $request): JsonResponse
     {
         $cemeteryDto = CemeteryDTO::fromArray($request->validated());
 
@@ -60,7 +70,7 @@ class CemeteryController extends Controller
     /**
      * @throws CemeteryException
      */
-    public function subscribe(Cemetery $cemetery)
+    public function subscribe(Cemetery $cemetery): JsonResponse
     {
         $this->cemeteryService->subscribe(Auth::guard('sanctum')->user(), $cemetery);
 
@@ -71,7 +81,7 @@ class CemeteryController extends Controller
     /**
      * @throws CemeteryException
      */
-    public function unsubscribe(Cemetery $cemetery)
+    public function unsubscribe(Cemetery $cemetery): JsonResponse
     {
         $this->cemeteryService->unsubscribe(Auth::guard('sanctum')->user(), $cemetery);
 

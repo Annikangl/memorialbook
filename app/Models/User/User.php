@@ -191,6 +191,11 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Community::class, 'owner_id');
     }
 
+    public function cemeteries(): HasMany
+    {
+        return $this->hasMany(Cemetery::class, 'user_id');
+    }
+
     public function subscribedCommunities(): BelongsToMany
     {
         return $this->belongsToMany(Community::class, 'community_users');

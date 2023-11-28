@@ -9,7 +9,7 @@ use App\Http\Requests\Api\Community\CreateCommunityRequest;
 use App\Http\Requests\Community\SearchCommunityRequest;
 use App\Http\Resources\Community\CommunityCollection;
 use App\Http\Resources\Community\CommunityResource;
-use App\Http\Resources\Profile\ShowCommunityResource;
+use App\Http\Resources\Community\ShowCommunityResource;
 use App\Models\Community\Community;
 use App\Services\CommunityService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

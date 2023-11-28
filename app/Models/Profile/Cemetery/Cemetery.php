@@ -113,6 +113,15 @@ class Cemetery extends Model implements HasMedia
         return $this->belongsToMany(User::class, 'cemetery_subscribers');
     }
 
+    public function isUserSubscribed(?User $user): bool
+    {
+        if (!$user) {
+            return false;
+        }
+
+        return $this->subscribers()->wherePivot('user_id', $user->id)->exists();
+    }
+
     public function sluggable(): array
     {
         return [

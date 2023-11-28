@@ -46,8 +46,6 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         Route::prefix('cemeteries')->group(function () {
             Route::get('/search', [CemeteryController::class, 'search']);
             Route::get('/{cemetery}', [CemeteryController::class, 'show']);
-            Route::post('/{cemetery}/subscribe', [CemeteryController::class, 'subscribe']);
-            Route::post('/{cemetery}/unsubscribe', [CemeteryController::class, 'unsubscribe']);
         });
     });
 
@@ -81,7 +79,10 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             });
 
             Route::prefix('cemeteries')->group(function () {
-                Route::post('/', [CemeteryController::class, 'store']);
+                Route::get('/', [CemeteryController::class, 'index']);
+                Route::post('/{cemetery}/subscribe', [CemeteryController::class, 'subscribe']);
+                Route::post('/{cemetery}/unsubscribe', [CemeteryController::class, 'unsubscribe']);
+//                Route::post('/', [CemeteryController::class, 'store']);
             });
         });
 
