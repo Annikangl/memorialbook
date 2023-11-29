@@ -18,16 +18,18 @@ class FeedController extends Controller
     public function index()
     {
         $relatedHumans = Human::query()
-            ->has('father')
-            ->orHas('mother')
-            ->orHas('children')
-            ->where('user_id', auth()->id())
+            ->where('user_id', auth('sanctum')->id())
+            ->where(function ($query) {
+                $query->has('father')
+                    ->orHas('mother')
+                    ->orHas('children');
+            })
             ->get();
 
         $cemeteries = Auth::user()->subscribedCemeteries()->latest()->get();
 
         $pets = Pet::query()
-            ->where('is_celebrity', true)
+            ->where('user_id', auth()->id())
             ->latest()
             ->limit(10)
             ->get();
