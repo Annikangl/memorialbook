@@ -24,7 +24,7 @@ class HumanController extends Controller
     {
     }
 
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         if ($request->get('gender') === Human::MALE) {
             return $this->getFathers();
@@ -40,7 +40,7 @@ class HumanController extends Controller
         ])->setStatusCode(Response::HTTP_OK);
     }
 
-    public function show(Human $human)
+    public function show(Human $human): JsonResponse
     {
         $kinsfolk = collect($human->father()->get())
             ->merge($human->mother()->get())
@@ -73,7 +73,7 @@ class HumanController extends Controller
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function search(SearchHumanRequest $request)
+    public function search(SearchHumanRequest $request): JsonResponse
     {
         $humans = Human::query()
             ->filter($request->validated())
@@ -81,6 +81,14 @@ class HumanController extends Controller
             ->paginate(10);
 
         return response()->json(['status' => true, 'humans' => HumanResource::collection($humans)])
+            ->setStatusCode(Response::HTTP_OK);
+    }
+
+    public function searchCount(SearchHumanRequest $request): JsonResponse
+    {
+        $humansFilteredCount = Human::getFilteredCount($request->validated());
+
+        return response()->json(['status' => true, 'profiles_count' => $humansFilteredCount])
             ->setStatusCode(Response::HTTP_OK);
     }
 

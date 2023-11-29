@@ -17,7 +17,7 @@ class SearchCemeteryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'min:1', 'max:255'],
+            'title' => ['required', 'string', 'min:3', 'max:255'],
         ];
     }
 }

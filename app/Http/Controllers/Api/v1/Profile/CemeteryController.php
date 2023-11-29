@@ -48,7 +48,16 @@ class CemeteryController extends Controller
             ->latest()
             ->paginate(10);
 
+
         return response()->json(['status' => true, 'cemeteries' => CemeteryResource::collection($cemeteries)])
+            ->setStatusCode(Response::HTTP_OK);
+    }
+
+    public function searchCount(SearchCemeteryRequest $request): JsonResponse
+    {
+        $cemeteriesFilteredCount = Cemetery::getFilteredCount($request->validated());
+
+        return response()->json(['status' => true, 'profiles_count' => $cemeteriesFilteredCount])
             ->setStatusCode(Response::HTTP_OK);
     }
 

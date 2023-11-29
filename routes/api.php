@@ -36,6 +36,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::prefix('profile')->group(function () {
         Route::prefix('human')->group(function () {
             Route::get('/search', [HumanController::class, 'search']);
+            Route::get('/search/count', [HumanController::class, 'searchCount']);
             Route::get('/{human}', [HumanController::class, 'show']);
         });
 
@@ -45,6 +46,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
 
         Route::prefix('cemeteries')->group(function () {
             Route::get('/search', [CemeteryController::class, 'search']);
+            Route::get('/search/count', [CemeteryController::class, 'searchCount']);
             Route::get('/{cemetery}', [CemeteryController::class, 'show']);
         });
     });

@@ -136,6 +136,16 @@ class Human extends Profile implements HasMedia
         return $query->where('gender', 'pet');
     }
 
+    /**
+     * Get count filtered items
+     * @param array $filters
+     * @return int
+     */
+    public static function getFilteredCount(array $filters): int
+    {
+        return self::query()->filter($filters)->count();
+    }
+
     public function sluggable(): array
     {
         return [

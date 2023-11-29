@@ -98,6 +98,16 @@ class Cemetery extends Model implements HasMedia
         return $query->where('status', self::STATUS_ACTIVE);
     }
 
+    /**
+     * Get count filtered items
+     * @param array $filters
+     * @return int
+     */
+    public static function getFilteredCount(array $filters): int
+    {
+        return self::query()->filter($filters)->count();
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
