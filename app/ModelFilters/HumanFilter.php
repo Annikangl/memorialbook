@@ -27,9 +27,7 @@ class HumanFilter extends ModelFilter
 
     public function birthYear($birthYear): HumanFilter
     {
-        [$from, $to] = Str::of($birthYear)->explode('-');
-
-        return $this->whereBetween(\DB::raw('YEAR(date_birth)'), [$from, $to]);
+        return $this->whereYear('date_birth', $birthYear);
     }
 
     public function deathYear($deathYear): HumanFilter

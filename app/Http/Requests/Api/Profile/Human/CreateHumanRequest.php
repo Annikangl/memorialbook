@@ -23,7 +23,7 @@ class CreateHumanRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:50'],
             'last_name' => ['required', 'string', 'max:50'],
-            'middle_name' => ['required', 'string', 'max:50'],
+            'middle_name' => ['nullable', 'string', 'max:50'],
             'gender' => ['required', 'string', Rule::in(Human::genderList())],
             'date_birth' => ['required', 'date', 'date_format:d.m.Y'],
             'date_death' => ['required', 'date', 'date_format:d.m.Y'],
