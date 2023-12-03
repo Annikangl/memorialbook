@@ -31,29 +31,29 @@
                 <p>{{ $human->description }}</p>
 
 
-                <ul class="social">
-                    <li class="social__item">
-                        <a href="#" class="social__link">
-                            <img src="{{ asset('assets/img/social/facebook.svg') }}"
-                                 alt="facebook"
-                                 title="facebook"/>
-                        </a>
-                    </li>
-                    <li class="social__item">
-                        <a href="#" class="social__link">
-                            <img src="{{ asset('assets/img/social/instagram.svg') }}"
-                                 alt="instagram"
-                                 title="instagram"/>
-                        </a>
-                    </li>
-                    <li class="social__item">
-                        <a href="#" class="social__link">
-                            <img src="{{ asset('assets/img/social/twitter.svg') }}"
-                                 alt="twitter"
-                                 title="twitter"/>
-                        </a>
-                    </li>
-                </ul>
+{{--                <ul class="social">--}}
+{{--                    <li class="social__item">--}}
+{{--                        <a href="#" class="social__link">--}}
+{{--                            <img src="{{ asset('assets/img/social/facebook.svg') }}"--}}
+{{--                                 alt="facebook"--}}
+{{--                                 title="facebook"/>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="social__item">--}}
+{{--                        <a href="#" class="social__link">--}}
+{{--                            <img src="{{ asset('assets/img/social/instagram.svg') }}"--}}
+{{--                                 alt="instagram"--}}
+{{--                                 title="instagram"/>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                    <li class="social__item">--}}
+{{--                        <a href="#" class="social__link">--}}
+{{--                            <img src="{{ asset('assets/img/social/twitter.svg') }}"--}}
+{{--                                 alt="twitter"--}}
+{{--                                 title="twitter"/>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
             </div>
             <div class="relatives">
                 <h3 class="relatives__title">{{ __('show_profile.Kinsfolk') }}</h3>

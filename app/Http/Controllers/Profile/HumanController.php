@@ -28,7 +28,7 @@ class HumanController extends Controller
     public function index(): Factory|View|Application
     {
         $humans = Human::query()
-            ->select(['id','slug', 'first_name', 'last_name', 'gender','date_birth', 'date_death', 'mother_id', 'father_id', 'spouse_id', 'children_id'])
+            ->select(['id', 'slug', 'first_name', 'last_name', 'gender', 'date_birth', 'date_death', 'mother_id', 'father_id', 'spouse_id', 'children_id'])
             ->orderBy('id')
             ->with('users')
             ->where('user_id', \Auth::id())
@@ -62,16 +62,13 @@ class HumanController extends Controller
 
     public function show(string $slug): Factory|View|Application
     {
-        $human = Human::query()->with(['religion'])
+        $human = Human::query()
             ->where('slug', $slug)
             ->firstOrFail();
 
-        $relatives = Human::query()
-            ->where('father_id', $human->id)
-            ->orWhere('mother_id', $human->id)
-            ->orWhere('spouse_id', $human->id)
-            ->orWhere('children_id', $human->id)
-            ->get();
+        $relatives = collect($human->father()->get())
+            ->merge($human->mother()->get())
+            ->merge($human->children()->get());
 
         return view('humans.show', compact('human', 'relatives'));
     }
@@ -100,7 +97,7 @@ class HumanController extends Controller
         $humanDto = HumanDTO::fromRequest($request);
 
         try {
-            $isDraft = (bool) $request->input('draft');
+            $isDraft = (bool)$request->input('draft');
             $profile = $this->humanService->create(\Auth::id(), $humanDto, $isDraft);
 
 //        TODO    event(new CreateNews($profile, CreateNews::USER_ADDED_PROFILE));
@@ -138,7 +135,7 @@ class HumanController extends Controller
     {
         $humanDto = HumanDTO::fromArray($request->validated());
 
-        $isDraft = (bool) $request->input('draft');
+        $isDraft = (bool)$request->input('draft');
 
         try {
             $human = $this->humanService->update($human->id, $humanDto, $request->user(), $isDraft);
