@@ -48,6 +48,9 @@ Route::group(['prefix' => 'cemetery', 'as' => 'cemetery.'], function () {
 });
 
 
+Route::get('profile/human/card/{slug}', [HumanController::class, 'show'])->name('profile.human.show');
+
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -63,7 +66,6 @@ Route::middleware('auth')->group(function () {
             ->name('community.subscribe');
     });
 
-
     Route::get('/tree', [HumanController::class, 'index'])->name('tree');
     Route::get('/tree-list', [HumanController::class, 'list'])->name('tree.list');
 
@@ -74,7 +76,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', [HumanController::class, 'store'])->name('store');
             Route::get('/{human}/edit', [HumanController::class, 'edit'])->name('edit');
             Route::put('/{human}/update', [HumanController::class, 'update'])->name('update');
-            Route::get('/card/{slug}', [HumanController::class, 'show'])->name('show');
+//            Route::get('/card/{slug}', [HumanController::class, 'show'])->name('show');
         });
 
         Route::group(['prefix' => 'pet', 'as' => 'pet.'], function () {
