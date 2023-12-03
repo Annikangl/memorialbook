@@ -16,14 +16,14 @@ export default defineConfig({
         }),
     ],
 
-    server: {
-        host,
-        hmr: { host },
-        https: {
-            key: fs.readFileSync(`./docker/nginx/ssl/default.key`),
-            cert: fs.readFileSync(`./docker/nginx/ssl/default.crt`),
-        },
-    },
+    // server: {
+    //     host,
+    //     hmr: { host },
+    //     https: {
+    //         key: fs.readFileSync(`./docker/nginx/ssl/default.key`),
+    //         cert: fs.readFileSync(`./docker/nginx/ssl/default.crt`),
+    //     },
+    // },
 
     alias: {
         '$': 'jQuery'
