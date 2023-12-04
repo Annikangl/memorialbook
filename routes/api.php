@@ -55,6 +55,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         Route::get('/', [CommunityController::class, 'index']);
         Route::get('/search', [CommunityController::class, 'search']);
         Route::get('/{community}', [CommunityController::class, 'show']);
+        Route::get('/{community}/memorials/search', [CommunityController::class, 'searchMemorials']);
     });
 
 

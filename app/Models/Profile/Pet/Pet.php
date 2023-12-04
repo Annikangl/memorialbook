@@ -56,7 +56,7 @@ class Pet extends Profile
 
     public function communities(): MorphMany
     {
-        return $this->morphMany(Community::class,'profilable');
+        return $this->morphMany(Community::class, 'profilable');
     }
 
     public function user(): BelongsTo
@@ -71,6 +71,11 @@ class Pet extends Profile
                 'source' => ['name']
             ]
         ];
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        return $this->name;
     }
 
     public function registerMediaCollections(): void

@@ -7,16 +7,21 @@ use App\Exceptions\Api\Community\CommunityException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Community\CreateCommunityRequest;
 use App\Http\Requests\Community\SearchCommunityRequest;
+use App\Http\Requests\Profile\Human\SearchHumanRequest;
 use App\Http\Resources\Community\CommunityCollection;
+use App\Http\Resources\Community\CommunityMemorialResource;
 use App\Http\Resources\Community\CommunityResource;
 use App\Http\Resources\Community\ShowCommunityResource;
+use App\Http\Resources\Profile\HumanResource;
 use App\Models\Community\Community;
+use App\Models\Profile\Pet\Pet;
 use App\Services\CommunityService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
 use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
@@ -26,6 +31,9 @@ class CommunityController extends Controller
     {
     }
 
+    /**
+     * @return JsonResponse
+     */
     public function index(): JsonResponse
     {
         $user = Auth::guard('sanctum')->user();
@@ -48,6 +56,10 @@ class CommunityController extends Controller
         ])->setStatusCode(Response::HTTP_OK);
     }
 
+    /**
+     * @param Community $community
+     * @return JsonResponse
+     */
     public function show(Community $community): JsonResponse
     {
         $community->load([
@@ -80,6 +92,11 @@ class CommunityController extends Controller
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
+    /**
+     * Search community by global search
+     * @param SearchCommunityRequest $request
+     * @return JsonResponse
+     */
     public function search(SearchCommunityRequest $request): JsonResponse
     {
         $communities = $this->communityService->search($request->validated());
@@ -89,6 +106,9 @@ class CommunityController extends Controller
     }
 
     /**
+     * Subscribe user to community
+     * @param Community $community
+     * @return JsonResponse
      * @throws CommunityException
      */
     public function subscribe(Community $community): JsonResponse
@@ -104,6 +124,9 @@ class CommunityController extends Controller
     }
 
     /**
+     * Unsubscribe user to community
+     * @param Community $community
+     * @return JsonResponse
      * @throws CommunityException
      */
     public function unsubscribe(Community $community): JsonResponse
@@ -115,6 +138,29 @@ class CommunityController extends Controller
         }
 
         return \response()->json(['status' => true, 'message' => 'Unsubscribe successful'])
+            ->setStatusCode(Response::HTTP_OK);
+    }
+
+    /**
+     * Search community memorials
+     * @param Community $community
+     * @param SearchHumanRequest $request
+     * @return JsonResponse
+     */
+    public function searchMemorials(Community $community, SearchHumanRequest $request): JsonResponse
+    {
+        $community = $community->load(['communityProfiles', 'communityProfiles.profileable']);
+
+        $memorials = $community->communityProfiles->pluck('profileable');
+
+        $filteredMemorials = $memorials->filter(function ($memorial) use ($request) {
+            if ($memorial instanceof Pet) {
+                return Str::contains($memorial->name, $request->validated('name'));
+            }
+            return Str::contains($memorial->fullName, $request->validated('name'));
+        });
+
+        return response()->json(['status' => true, 'community_memorials' => CommunityMemorialResource::collection($filteredMemorials)])
             ->setStatusCode(Response::HTTP_OK);
     }
 }

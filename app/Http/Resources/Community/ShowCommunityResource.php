@@ -26,7 +26,11 @@ class ShowCommunityResource extends JsonResource
             'subscribers_count' => $this->users_count,
             'posts' => PostResource::collection($this->posts),
             'subscribers' => UserResource::collection($this->users),
-            'memorials' => []
+            'memorials' => CommunityMemorialResource::collection(
+                $this->communityProfiles->map(function ($communityProfile) {
+                    return $communityProfile->profileable;
+                })
+            )
         ];
     }
 }
