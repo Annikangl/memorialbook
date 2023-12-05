@@ -67,7 +67,8 @@
                 {{--                    </li>--}}
                 {{--                </ul>--}}
             </div>
-            <div class="relatives">
+            @if (!$relatives->isEmpty())
+                <div class="relatives">
                 <h3 class="relatives__title">{{ __('show_profile.Kinsfolk') }}</h3>
                 <ul class="relatives-list">
                     @if (!empty($relatives))
@@ -96,6 +97,7 @@
                     <span class="view-relatives__text">View family tree</span>
                 </a>
             </div>
+            @endif
         </div>
         <div class="member-images-wrap">
             <ul class="member-images">
