@@ -917,6 +917,10 @@
     .community-photos-list__link svg {
         width: 30px;
     }
+
+    .interests, .relatives-list {
+        margin-bottom: 10px;
+    }
 }
 
 @media screen and (max-width: 480px) {
