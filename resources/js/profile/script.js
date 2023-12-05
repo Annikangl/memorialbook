@@ -28,7 +28,26 @@ if (document.querySelector('.delete-resource')) {
             removedImagesInput.appendChild(elInput);
         });
     })
-
-
 }
+
+if (document.querySelector('#toggleButton')) {
+    document.querySelector(".member-info__more").addEventListener("click", toggleText);
+}
+
+function toggleText() {
+    const fullText = document.getElementById("member-info__desc");
+    const buttonText = document.getElementById("toggleButton");
+
+    if (fullText.classList.contains("member-info__desc--hide")) {
+        fullText.classList.remove("member-info__desc--hide");
+        buttonText.textContent = "Скрыть";
+        buttonText.classList.add("on");
+    } else {
+        fullText.classList.add("member-info__desc--hide");
+        buttonText.textContent = "Показать";
+        buttonText.classList.remove("on");
+    }
+}
+
+
 

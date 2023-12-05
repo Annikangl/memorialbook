@@ -953,6 +953,60 @@
         margin-top: 20px;
     }
 
+    .member-info__desc {
+        position: relative;
+        height: auto;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    .member-info__desc.member-info__desc--hide {
+        height: 100px;
+        overflow: hidden;
+    }
+    .member-info__desc.member-info__desc--hide::after {
+        position: absolute;
+        content: "";
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        opacity: 1;
+        height: 40px;
+        flex-shrink: 0;
+        background: linear-gradient(
+            180deg,
+            rgba(245, 247, 249, 0.2) 0%,
+            #f5f7f9 100%
+        );
+    }
+
+    .member-info__more {
+        position: relative;
+        font-size: 12px;
+        padding: 3px 24px 3px 10px;
+        border-radius: 25px;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    .member-info__more.on {
+        margin-top: 10px;
+    }
+
+    .member-info__more::after {
+        position: absolute;
+        content: "";
+        top: 50%;
+        z-index: 10;
+        right: 10px;
+        transform: translateY(-50%);
+        width: 10px;
+        height: 10px;
+        background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuNjM2MDUgNS4yOTI3OUMxLjgyMzU4IDUuMTA1MzIgMi4wNzc4OCA1IDIuMzQzMDUgNUMyLjYwODIxIDUgMi44NjI1MiA1LjEwNTMyIDMuMDUwMDUgNS4yOTI3OUw4LjAwMDA1IDEwLjI0MjhMMTIuOTUgNS4yOTI3OUMxMy4xMzg3IDUuMTEwNjMgMTMuMzkxMyA1LjAwOTgzIDEzLjY1MzUgNS4wMTIxMUMxMy45MTU2IDUuMDE0MzkgMTQuMTY2NSA1LjExOTU2IDE0LjM1MTkgNS4zMDQ5N0MxNC41MzczIDUuNDkwMzggMTQuNjQyNCA1Ljc0MTE5IDE0LjY0NDcgNi4wMDMzOUMxNC42NDcgNi4yNjU1OCAxNC41NDYyIDYuNTE4MTggMTQuMzY0IDYuNzA2NzlMOC43MDcwNSAxMi4zNjM4QzguNTE5NTIgMTIuNTUxMyA4LjI2NTIxIDEyLjY1NjYgOC4wMDAwNSAxMi42NTY2QzcuNzM0ODggMTIuNjU2NiA3LjQ4MDU4IDEyLjU1MTMgNy4yOTMwNSAxMi4zNjM4TDEuNjM2MDUgNi43MDY3OUMxLjQ0ODU4IDYuNTE5MjYgMS4zNDMyNiA2LjI2NDk1IDEuMzQzMjYgNS45OTk3OUMxLjM0MzI2IDUuNzM0NjIgMS40NDg1OCA1LjQ4MDMxIDEuNjM2MDUgNS4yOTI3OVoiIGZpbGw9ImJsYWNrIi8+Cjwvc3ZnPgo=") center;
+        background-size: 10px 10px;
+    }
+
     .member-name {
         text-align: center;
     }
