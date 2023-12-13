@@ -3,7 +3,6 @@
 namespace App\Models\Profile;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Image\Exceptions\InvalidManipulation;
@@ -76,7 +75,6 @@ class Profile extends Model implements HasMedia
         return $this->status === self::STATUS_REJECTED;
     }
 
-
     public function getYearBirthAttribute(): int
     {
         return Carbon::parse($this->date_birth)->year;
@@ -92,13 +90,6 @@ class Profile extends Model implements HasMedia
         return new Attribute(
             get: fn() => Carbon::make($this->date_birth)?->format('d.m.Y') . ' - ' .
                 Carbon::make($this->date_death)?->format('d.m.Y')
-        );
-    }
-
-    protected function fullName(): Attribute
-    {
-        return new Attribute(
-            get: fn() => "{$this->first_name} {$this->last_name}"
         );
     }
 

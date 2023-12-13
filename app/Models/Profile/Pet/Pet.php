@@ -8,6 +8,7 @@ use App\Models\Profile\Profile;
 use App\Models\User\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -111,5 +112,12 @@ class Pet extends Profile
             ->width(1000)
             ->height(600)
             ->nonQueued();
+    }
+
+    protected function fullName(): Attribute
+    {
+        return new Attribute(
+            get: fn() => "{$this->name} {$this->breed}"
+        );
     }
 }

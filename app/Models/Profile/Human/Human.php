@@ -13,6 +13,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Eloquent;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -155,9 +156,11 @@ class Human extends Profile implements HasMedia
         ];
     }
 
-    public function getFullNameAttribute(): string
+    protected function fullName(): Attribute
     {
-        return "{$this->first_name} {$this->last_name} {$this->middle_name}";
+        return new Attribute(
+            get: fn() => "{$this->first_name} {$this->last_name}"
+        );
     }
 
     public function registerMediaCollections(): void

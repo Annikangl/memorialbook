@@ -7,21 +7,17 @@ use App\Exceptions\Api\Community\CommunityException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Community\CreateCommunityRequest;
 use App\Http\Requests\Community\SearchCommunityRequest;
-use App\Http\Requests\Profile\Human\SearchHumanRequest;
 use App\Http\Resources\Community\CommunityCollection;
-use App\Http\Resources\Community\CommunityMemorialResource;
 use App\Http\Resources\Community\CommunityResource;
 use App\Http\Resources\Community\ShowCommunityResource;
-use App\Http\Resources\Profile\HumanResource;
 use App\Models\Community\Community;
-use App\Models\Profile\Pet\Pet;
 use App\Services\CommunityService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
 use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
@@ -66,8 +62,9 @@ class CommunityController extends Controller
             'users' => function (BelongsToMany $query) {
                 return $query->limit(7)->get();
             },
-            'posts',
-            'media',
+            'posts' => fn(HasMany $query) => $query->latest(),
+            'posts.author',
+            'posts.postable',
             'communityProfiles',
             'communityProfiles.profileable'
         ])->loadCount('users')->has('media');
@@ -93,7 +90,6 @@ class CommunityController extends Controller
     }
 
     /**
-     * Search community by global search
      * @param SearchCommunityRequest $request
      * @return JsonResponse
      */
@@ -106,7 +102,6 @@ class CommunityController extends Controller
     }
 
     /**
-     * Subscribe user to community
      * @param Community $community
      * @return JsonResponse
      * @throws CommunityException
@@ -124,7 +119,6 @@ class CommunityController extends Controller
     }
 
     /**
-     * Unsubscribe user to community
      * @param Community $community
      * @return JsonResponse
      * @throws CommunityException
@@ -138,29 +132,6 @@ class CommunityController extends Controller
         }
 
         return \response()->json(['status' => true, 'message' => 'Unsubscribe successful'])
-            ->setStatusCode(Response::HTTP_OK);
-    }
-
-    /**
-     * Search community memorials
-     * @param Community $community
-     * @param SearchHumanRequest $request
-     * @return JsonResponse
-     */
-    public function searchMemorials(Community $community, SearchHumanRequest $request): JsonResponse
-    {
-        $community = $community->load(['communityProfiles', 'communityProfiles.profileable']);
-
-        $memorials = $community->communityProfiles->pluck('profileable');
-
-        $filteredMemorials = $memorials->filter(function ($memorial) use ($request) {
-            if ($memorial instanceof Pet) {
-                return Str::contains($memorial->name, $request->validated('name'));
-            }
-            return Str::contains($memorial->fullName, $request->validated('name'));
-        });
-
-        return response()->json(['status' => true, 'community_memorials' => CommunityMemorialResource::collection($filteredMemorials)])
             ->setStatusCode(Response::HTTP_OK);
     }
 }

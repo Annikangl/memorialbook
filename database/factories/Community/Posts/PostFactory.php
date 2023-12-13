@@ -6,22 +6,14 @@ use App\Models\Community\Community;
 use App\Models\User\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
- */
 class PostFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition()
+
+    public function definition(): array
     {
         return [
             'author_id' => User::query()->inRandomOrder()->value('id'),
-            'title' => $this->faker->words(10, true),
-            'description' => $this->faker->realText(),
+            'community_id' => Community::query()->inRandomOrder()->value('id'),
             'published_at' => now()
          ];
     }
