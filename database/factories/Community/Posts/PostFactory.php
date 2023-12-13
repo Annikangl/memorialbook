@@ -13,10 +13,7 @@ class PostFactory extends Factory
     {
         return [
             'author_id' => User::query()->inRandomOrder()->value('id'),
-            'title' => $this->faker->words(10, true),
-            'description' => $this->faker->realText(),
             'community_id' => Community::query()->inRandomOrder()->value('id'),
-            'content_type' => 'text',
             'published_at' => now()
          ];
     }

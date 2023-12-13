@@ -54,10 +54,9 @@ return new class extends Migration {
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->string('title');
-            $table->text('description');
+//            $table->string('title');
+//            $table->text('description');
             $table->boolean('is_pinned')->default(0);
-            $table->integer('reposts')->default(0);
 
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

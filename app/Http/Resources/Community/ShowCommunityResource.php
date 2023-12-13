@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Community;
 
 use App\Http\Resources\Community\Posts\PostResource;
+use App\Http\Resources\Profile\ProfileResource;
 use App\Http\Resources\UserResource;
 use App\Models\Community\Community;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -15,7 +16,7 @@ class ShowCommunityResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'is_subscribe' =>  $this->isUserSubscribed(auth('sanctum')->user()),
+            'is_subscribe' => $this->isUserSubscribed(auth('sanctum')->user()),
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'description' => $this->description,
@@ -24,9 +25,9 @@ class ShowCommunityResource extends JsonResource
             'pictures' => $this->getPictures(),
             'movies' => $this->getMovies(),
             'subscribers_count' => $this->users_count,
-            'posts' => PostResource::collection($this->posts),
+            'posts' => $this->whenLoaded('posts', PostResource::collection($this->posts)),
             'subscribers' => UserResource::collection($this->users),
-            'memorials' => []
+            'memorials' => $this->whenLoaded('communityProfiles', ProfileResource::collection($this->communityProfiles)),
         ];
     }
 }

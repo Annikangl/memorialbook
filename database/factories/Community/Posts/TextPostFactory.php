@@ -14,10 +14,8 @@ class TextPostFactory extends Factory
     public function definition(): array
     {
         return [
-            'text' => $this->faker->text(),
-            'post_id' => Post::query()->inRandomOrder()->value('id'),
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
+            'title' => $this->faker->words(),
+            'description' => $this->faker->text(),
         ];
     }
 }

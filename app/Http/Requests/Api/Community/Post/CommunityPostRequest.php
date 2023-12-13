@@ -4,6 +4,7 @@ namespace App\Http\Requests\Api\Community\Post;
 
 use App\Traits\JsonFailedResponse;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class CommunityPostRequest extends FormRequest
 {
@@ -19,10 +20,15 @@ class CommunityPostRequest extends FormRequest
         return [
             'community_id' => ['required', 'exists:communities,id'],
             'content_type' => ['required', 'string'],
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string', 'max:1000'],
             'is_pinned' => ['required', 'bool'],
-
+            'title' => ['nullable', 'string', 'max:255'],
+            'description' => ['nullable', 'string', 'max:1000'],
+            'post_media' => ['nullable', 'array'],
+            'post_media.*' => [
+                'nullable',
+                File::types(['image/jpeg', 'image/png', 'image/webp', 'image/gif','video/mp4', 'video/avi', 'video/mpeg'])
+                    ->max(15 * 1024)
+            ],
         ];
     }
 }

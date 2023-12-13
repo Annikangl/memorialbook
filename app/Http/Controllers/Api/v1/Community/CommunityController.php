@@ -14,6 +14,7 @@ use App\Models\Community\Community;
 use App\Services\CommunityService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,9 @@ class CommunityController extends Controller
     {
     }
 
+    /**
+     * @return JsonResponse
+     */
     public function index(): JsonResponse
     {
         $user = Auth::guard('sanctum')->user();
@@ -48,14 +52,19 @@ class CommunityController extends Controller
         ])->setStatusCode(Response::HTTP_OK);
     }
 
+    /**
+     * @param Community $community
+     * @return JsonResponse
+     */
     public function show(Community $community): JsonResponse
     {
         $community->load([
             'users' => function (BelongsToMany $query) {
                 return $query->limit(7)->get();
             },
-            'posts',
-            'media',
+            'posts' => fn(HasMany $query) => $query->latest(),
+            'posts.author',
+            'posts.postable',
             'communityProfiles',
             'communityProfiles.profileable'
         ])->loadCount('users')->has('media');
@@ -80,6 +89,10 @@ class CommunityController extends Controller
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
+    /**
+     * @param SearchCommunityRequest $request
+     * @return JsonResponse
+     */
     public function search(SearchCommunityRequest $request): JsonResponse
     {
         $communities = $this->communityService->search($request->validated());
@@ -89,6 +102,8 @@ class CommunityController extends Controller
     }
 
     /**
+     * @param Community $community
+     * @return JsonResponse
      * @throws CommunityException
      */
     public function subscribe(Community $community): JsonResponse
@@ -104,6 +119,8 @@ class CommunityController extends Controller
     }
 
     /**
+     * @param Community $community
+     * @return JsonResponse
      * @throws CommunityException
      */
     public function unsubscribe(Community $community): JsonResponse

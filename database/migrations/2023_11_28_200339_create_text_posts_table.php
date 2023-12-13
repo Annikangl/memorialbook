@@ -9,17 +9,14 @@ return new class extends Migration {
     {
         Schema::create('community_text_posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('post_id')
-                ->references('id')
-                ->on('community_posts')
-                ->cascadeOnDelete();
-            $table->string('text');
-            $table->timestamps();
+
+            $table->string('title');
+            $table->string('description');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('text_posts');
+        Schema::dropIfExists('community_text_posts');
     }
 };

@@ -855,10 +855,6 @@ a.cemetery-contacts-list__text:hover {
     grid-template-columns: repeat(2, 1fr);
 }
 
-.member-info {
-    width: 100%;
-}
-
 .member-images-wrap {
     height: 100%;
     background-color: var(--light-gray);
@@ -902,7 +898,8 @@ a.cemetery-contacts-list__text:hover {
 
 .member-info {
     width: 100%;
-    padding-top: 27px;
+    padding-top: 20px;
+    padding-right: 20px;
 }
 
 .member-avatar, .member-avatar__wrap {

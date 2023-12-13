@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Api\v1\Community\Post;
 use App\DTOs\Community\CommunityPostDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Community\Post\CommunityPostRequest;
+use App\Http\Resources\Community\Posts\PostResource;
 use App\Services\Community\PostService;
+use Illuminate\Http\Response;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
 use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
@@ -15,14 +19,12 @@ class PostController extends Controller
     {
     }
 
-    public function index()
-    {
-
-    }
-
     /**
-     * @throws CastTargetException
+     * @throws \Throwable
      * @throws MissingCastTypeException
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     * @throws CastTargetException
      */
     public function store(CommunityPostRequest $request)
     {
@@ -30,5 +32,7 @@ class PostController extends Controller
 
         $post = $this->postService->create($postDto, auth('sanctum')->user());
 
+        return response()->json(['status' => true, 'post' => new PostResource($post)])
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 }

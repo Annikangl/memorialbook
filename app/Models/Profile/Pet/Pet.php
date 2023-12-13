@@ -107,4 +107,9 @@ class Pet extends Profile
             ->height(600)
             ->nonQueued();
     }
+
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->name} {$this->breed}";
+    }
 }
