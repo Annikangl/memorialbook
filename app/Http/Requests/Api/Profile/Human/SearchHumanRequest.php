@@ -18,8 +18,8 @@ class SearchHumanRequest extends FormRequest
     {
         return [
             'full_name' => ['required', 'string', 'min:3', 'max:255'],
-            'birth_year' => ['required', 'string', 'date_format:Y'],
-            'death_year' => ['required', 'string', 'date_format:Y'],
+            'birth_year' => ['nullable', 'string', 'date_format:Y'],
+            'death_year' => ['nullable', 'string', 'date_format:Y'],
             'country' => ['nullable', 'string'],
         ];
     }
