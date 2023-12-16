@@ -47,7 +47,7 @@ class PostController extends Controller
      */
     public function delete(Post $post): JsonResponse
     {
-        $this->authorize('delete', $post);
+        $this->authorize('delete', [Post::class, $post->community->getModel()]);
 
         $this->postService->delete($post);
 
