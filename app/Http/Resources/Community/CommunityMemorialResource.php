@@ -13,7 +13,7 @@ class CommunityMemorialResource extends JsonResource
         /** @var Human|Pet|JsonResource $this */
 
         return [
-            'full_name' =>  $this->getFullNameAttribute(),
+            'full_name' =>  $this->full_name,
             'year_birth' => $this->date_birth,
             'year_death' => $this->date_death,
             'avatar' => $this->getFirstMediaUrl('avatars', 'thumb'),

@@ -74,9 +74,11 @@ class Pet extends Profile
         ];
     }
 
-    public function getFullNameAttribute(): string
+    protected function fullName(): Attribute
     {
-        return $this->name;
+        return new Attribute(
+            get: fn() => $this->name
+        );
     }
 
     public function registerMediaCollections(): void
@@ -112,12 +114,5 @@ class Pet extends Profile
             ->width(1000)
             ->height(600)
             ->nonQueued();
-    }
-
-    protected function fullName(): Attribute
-    {
-        return new Attribute(
-            get: fn() => "{$this->name} {$this->breed}"
-        );
     }
 }
