@@ -26,6 +26,7 @@ class UpdateCommunityRequest extends FormRequest
             'email' => ['required', 'email'],
             'phone' => ['required', 'string', new PhoneNumber()],
             'website' => ['nullable', 'nullable', 'url'],
+            '_method' => ['required', 'string'],
             'avatar' => [
                 'nullable',
                 File::image()->max(10 * 1024),
