@@ -145,20 +145,11 @@ class User extends Authenticatable implements HasMedia
         ];
     }
 
-    public function registerMediaCollections(): void
+    public function isCommunityOwner(Community $community): bool
     {
-        $this->addMediaCollection('avatars')
-            ->singleFile()
-            ->useFallbackUrl(asset('assets/media/media/empty_user_avatar.webp'))
-            ->useFallbackPath(asset('assets/media/media/empty_user_avatar.webp'));
+        return $this->communities->contains($community);
     }
 
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-            ->width(300)
-            ->nonQueued();
-    }
 
     public function networks(): HasMany
     {
@@ -204,5 +195,20 @@ class User extends Authenticatable implements HasMedia
     public function subscribedCemeteries(): BelongsToMany
     {
         return $this->belongsToMany(Cemetery::class,'cemetery_subscribers')->withTimestamps();
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('avatars')
+            ->singleFile()
+            ->useFallbackUrl(asset('assets/media/media/empty_user_avatar.webp'))
+            ->useFallbackPath(asset('assets/media/media/empty_user_avatar.webp'));
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(300)
+            ->nonQueued();
     }
 }

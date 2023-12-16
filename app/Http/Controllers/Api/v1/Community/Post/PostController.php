@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Api\v1\Community\Post;
 
 use App\DTOs\Community\CommunityPostDTO;
+use App\Exceptions\Api\Community\Post\CommunityPostException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Community\Post\CommunityPostRequest;
 use App\Http\Resources\Community\Posts\PostResource;
+use App\Models\Community\Community;
+use App\Models\Community\Posts\Post;
 use App\Services\Community\PostService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use Throwable;
 use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
 use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
@@ -20,19 +23,40 @@ class PostController extends Controller
     }
 
     /**
-     * @throws \Throwable
-     * @throws MissingCastTypeException
-     * @throws FileDoesNotExist
-     * @throws FileIsTooBig
-     * @throws CastTargetException
+     * @param CommunityPostRequest $request
+     * @return JsonResponse
+     * @throws Throwable|CastTargetException|MissingCastTypeException
      */
-    public function store(CommunityPostRequest $request)
+    public function store(CommunityPostRequest $request): JsonResponse
     {
+        $community = $this->getCommunity($request->validated('community_id'));
+
+        $this->authorize('create', [Post::class, $community]);
+
         $postDto = CommunityPostDTO::fromArray($request->validated());
 
         $post = $this->postService->create($postDto, auth('sanctum')->user());
 
         return response()->json(['status' => true, 'post' => new PostResource($post)])
             ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    /**
+     * Delete post
+     * @throws CommunityPostException
+     */
+    public function delete(Post $post): JsonResponse
+    {
+        $this->authorize('delete', $post);
+
+        $this->postService->delete($post);
+
+        return response()->json(['status' => true, 'message' => "Post $post->id deleted"])
+            ->setStatusCode(Response::HTTP_OK);
+    }
+
+    private function getCommunity(int $communityId): Community
+    {
+        return Community::find($communityId);
     }
 }

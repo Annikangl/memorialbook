@@ -86,17 +86,18 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
                 Route::get('/', [CemeteryController::class, 'index']);
                 Route::post('/{cemetery}/subscribe', [CemeteryController::class, 'subscribe']);
                 Route::post('/{cemetery}/unsubscribe', [CemeteryController::class, 'unsubscribe']);
-//                Route::post('/', [CemeteryController::class, 'store']);
             });
         });
 
         Route::prefix('communities')->group(function () {
             Route::post('/', [CommunityController::class, 'store']);
+            Route::put('/{community}', [CommunityController::class, 'update']);
             Route::post('/{community}/subscribe', [CommunityController::class, 'subscribe']);
             Route::post('/{community}/unsubscribe', [CommunityController::class, 'unsubscribe']);
 
             Route::prefix('posts')->group(function () {
                 Route::post('/', [PostController::class, 'store']);
+                Route::delete('/{post}', [PostController::class, 'delete']);
             });
         });
     });

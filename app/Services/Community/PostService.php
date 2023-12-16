@@ -82,6 +82,18 @@ class PostService
         return $postWithMedia;
     }
 
+    /**
+     * @throws CommunityPostException
+     */
+    public function delete(Post $post): void
+    {
+        try {
+            $post->delete();
+        } catch (Throwable $exception) {
+            throw new CommunityPostException($exception->getMessage());
+        }
+    }
+
     protected function getFilenames($mediaArray): array
     {
         return collect($mediaArray)->map(function (UploadedFile $media) {

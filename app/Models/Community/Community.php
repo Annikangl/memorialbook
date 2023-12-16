@@ -70,7 +70,7 @@ class Community extends Model implements HasMedia
 
     public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class ,'owner_id');
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
     public function isUserSubscribed(?User $user): bool
@@ -105,10 +105,9 @@ class Community extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('avatars')
-            ->singleFile()
             ->useFallbackUrl(asset('assets/media/media/empty_avatar.png'))
-            ->useFallbackPath(asset('assets/media/media/empty_avatar.png'));
-
+            ->useFallbackPath(asset('assets/media/media/empty_avatar.png'))
+            ->singleFile();
 
         $this->addMediaCollection('banners')
             ->useFallbackUrl(asset('assets/media/media/empty_banner.png'))

@@ -7,10 +7,16 @@ use App\DTOs\Community\CommunityDTO;
 use App\Exceptions\Api\Community\CommunityException;
 use App\Models\Community\Community;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class CommunityService
 {
     /**
+     * Create a new community
+     * @param int $userId
+     * @param CommunityDTO $communityDTO
+     * @return Community
      * @throws CommunityException
      */
     public function create(int $userId, CommunityDTO $communityDTO): Community
@@ -48,6 +54,50 @@ class CommunityService
         return $community;
     }
 
+    /**
+     * @param int $userId
+     * @param Community $community
+     * @param CommunityDTO $communityDTO
+     * @return Community
+     * @throws CommunityException
+     */
+    public function update(int $userId, Community $community, CommunityDTO $communityDTO): Community
+    {
+        try {
+            $community->update([
+                'owner_id' => $userId,
+                'title' => $communityDTO->title,
+                'subtitle' => $communityDTO->subtitle,
+                'description' => $communityDTO->description,
+                'email' => $communityDTO->email,
+                'phone' => $communityDTO->phone,
+                'address' => $communityDTO->address,
+                'website' => $communityDTO->website,
+            ]);
+
+            if ($avatar = $communityDTO->avatar) {
+                $community->clearMediaCollection('avatars');
+                $community->addMedia($avatar)->toMediaCollection('avatars');
+            }
+
+            if ($banner = $communityDTO->banner) {
+                $community->clearMediaCollection('banners');
+                $community->addMedia($banner)->toMediaCollection('banners');
+            }
+
+            if ($gallery = $communityDTO->gallery) {
+                foreach ($gallery as $image) {
+                    $community->clearMediaCollection('gallery');
+                    $community->addMedia($image)->toMediaCollection('gallery');
+                }
+            }
+        } catch (\Throwable $exception) {
+            throw new CommunityException($exception->getMessage());
+        }
+
+        return $community;
+    }
+
     public function search(array $searchData): LengthAwarePaginator
     {
         return Community::query()
@@ -56,6 +106,9 @@ class CommunityService
     }
 
     /**
+     * Subscribe user to community
+     * @param int $userId
+     * @param int $communityId
      * @throws CommunityException
      */
     public function subscribe(int $userId, int $communityId): void
@@ -70,6 +123,8 @@ class CommunityService
     }
 
     /**
+     * @param int $userId
+     * @param int $communityId
      * @throws CommunityException
      */
     public function unsubscribe(int $userId, int $communityId): void

@@ -7,7 +7,7 @@ use App\Traits\JsonFailedResponse;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\File;
 
-class CreateCommunityRequest extends FormRequest
+class UpdateCommunityRequest extends FormRequest
 {
     use JsonFailedResponse;
 
@@ -23,19 +23,17 @@ class CreateCommunityRequest extends FormRequest
             'subtitle' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:1000'],
             'address' => ['required', 'string', 'max:150'],
-            'email' => ['required', 'email', 'unique:communities'],
-            'phone' => ['required', 'string', new PhoneNumber(), 'unique:communities'],
+            'email' => ['required', 'email'],
+            'phone' => ['required', 'string', new PhoneNumber()],
             'website' => ['nullable', 'nullable', 'url'],
             'avatar' => [
                 'nullable',
                 File::image()->max(10 * 1024),
             ],
-
             'banner' => [
                 'nullable',
                 File::image()->max(10 * 1024),
             ],
-
             'gallery.*' => [
                 'nullable',
                 File::types(['video/mp4', 'image/jpeg', 'image/png'])

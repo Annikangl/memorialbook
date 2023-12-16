@@ -6,6 +6,7 @@ use App\DTOs\Community\CommunityDTO;
 use App\Exceptions\Api\Community\CommunityException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Community\CreateCommunityRequest;
+use App\Http\Requests\Api\Community\UpdateCommunityRequest;
 use App\Http\Requests\Community\SearchCommunityRequest;
 use App\Http\Requests\Profile\Human\SearchHumanRequest;
 use App\Http\Resources\Community\CommunityCollection;
@@ -90,6 +91,29 @@ class CommunityController extends Controller
 
         $community = $this->communityService->create(
             userId: auth()->id(),
+            communityDTO: $communityDto
+        );
+
+        return response()->json(['status' => true, 'community' => new CommunityResource($community)])
+            ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    /**
+     * Update community info and media
+     * @param Community $community
+     * @param UpdateCommunityRequest $request
+     * @return JsonResponse
+     * @throws CastTargetException
+     * @throws CommunityException
+     * @throws MissingCastTypeException
+     */
+    public function update(Community $community, UpdateCommunityRequest $request)
+    {
+        $communityDto = CommunityDTO::fromArray($request->validated());
+
+        $community = $this->communityService->update(
+            userId: auth()->id(),
+            community: $community,
             communityDTO: $communityDto
         );
 
