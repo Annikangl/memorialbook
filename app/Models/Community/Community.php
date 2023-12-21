@@ -63,6 +63,15 @@ class Community extends Model implements HasMedia
         });
     }
 
+    public function isUserSubscribed(?User $user): bool
+    {
+        if (!$user) {
+            return false;
+        }
+
+        return $this->users()->wherePivot('user_id', $user->id)->exists();
+    }
+
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
@@ -71,15 +80,6 @@ class Community extends Model implements HasMedia
     public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class, 'owner_id');
-    }
-
-    public function isUserSubscribed(?User $user): bool
-    {
-        if (!$user) {
-            return false;
-        }
-
-        return $this->users()->wherePivot('user_id', $user->id)->exists();
     }
 
     public function users(): BelongsToMany

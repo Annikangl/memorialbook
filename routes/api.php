@@ -95,6 +95,9 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
             Route::post('/{community}/subscribe', [CommunityController::class, 'subscribe']);
             Route::post('/{community}/unsubscribe', [CommunityController::class, 'unsubscribe']);
 
+            Route::post('/{community}/memorials/add', [CommunityController::class, 'addMemorial']);
+            Route::delete('/{community}/memorials/remove', [CommunityController::class, 'removeMemorial']);
+
             Route::prefix('posts')->group(function () {
                 Route::post('/', [PostController::class, 'store']);
                 Route::delete('/{post}', [PostController::class, 'delete']);

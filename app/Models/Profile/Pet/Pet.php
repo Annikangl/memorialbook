@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -55,9 +56,9 @@ class Pet extends Profile
             ->where('user_id', $userId);
     }
 
-    public function communities(): MorphMany
+    public function communities(): BelongsToMany
     {
-        return $this->morphMany(Community::class, 'profilable');
+        return $this->belongsToMany(Community::class, 'community_profiles', 'profileable_id');
     }
 
     public function user(): BelongsTo

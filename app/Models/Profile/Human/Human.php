@@ -163,39 +163,6 @@ class Human extends Profile implements HasMedia
         );
     }
 
-    public function registerMediaCollections(): void
-    {
-        $this->addMediaCollection('avatars')
-            ->singleFile()
-            ->useFallbackUrl(asset('assets/media/media/empty_avatar.png'))
-            ->useFallbackPath(asset('assets/media/media/empty_avatar.png'));
-
-
-        $this->addMediaCollection('banners')
-            ->useFallbackUrl(asset('assets/media/media/empty_banner.png'))
-            ->useFallbackPath(asset('assets/media/media/empty_banner.png'))
-            ->singleFile();
-
-        $this->addMediaCollection('gallery');
-
-        $this->addMediaCollection('attached_document')
-            ->singleFile();
-    }
-
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-            ->width(150)
-            ->height(150)
-            ->nonQueued();
-
-        $this->addMediaConversion('thumb_500')
-            ->performOnCollections('gallery', 'banners')
-            ->width(500)
-            ->height(550)
-            ->nonQueued();
-    }
-
     public function users(): BelongsTo
     {
         return $this->BelongsTo(User::class, 'user_id');
@@ -237,9 +204,9 @@ class Human extends Profile implements HasMedia
         return $this->hasMany(Pet::class,'owner_id');
     }
 
-    public function communities(): MorphMany
+    public function communities(): BelongsToMany
     {
-        return $this->morphMany(Community::class,'profileable');
+        return $this->belongsToMany(Community::class, 'community_profiles', 'profileable_id');
     }
 
     public function burial(): BelongsTo
@@ -269,6 +236,39 @@ class Human extends Profile implements HasMedia
     {
         return $query->has('father')->orHas('mother')
             ->orHas('children')->orHas('spouse');
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('avatars')
+            ->singleFile()
+            ->useFallbackUrl(asset('assets/media/media/empty_avatar.png'))
+            ->useFallbackPath(asset('assets/media/media/empty_avatar.png'));
+
+
+        $this->addMediaCollection('banners')
+            ->useFallbackUrl(asset('assets/media/media/empty_banner.png'))
+            ->useFallbackPath(asset('assets/media/media/empty_banner.png'))
+            ->singleFile();
+
+        $this->addMediaCollection('gallery');
+
+        $this->addMediaCollection('attached_document')
+            ->singleFile();
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(150)
+            ->height(150)
+            ->nonQueued();
+
+        $this->addMediaConversion('thumb_500')
+            ->performOnCollections('gallery', 'banners')
+            ->width(500)
+            ->height(550)
+            ->nonQueued();
     }
 
 }

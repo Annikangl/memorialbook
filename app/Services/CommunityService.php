@@ -6,6 +6,9 @@ namespace App\Services;
 use App\DTOs\Community\CommunityDTO;
 use App\Exceptions\Api\Community\CommunityException;
 use App\Models\Community\Community;
+use App\Models\Profile\Human\Human;
+use App\Models\Profile\Pet\Pet;
+use App\Models\Profile\Profile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -136,5 +139,44 @@ class CommunityService
         }
 
         $community->users()->detach($userId);
+    }
+
+    /**
+     * Add memorial to community
+     * @param Community $community
+     * @param Human|Pet $profile
+     * @throws CommunityException
+     */
+    public function addMemorial(Community $community, Human|Pet $profile): void
+    {
+        $profileClass = get_class($profile);
+
+        if ($community->communityProfiles()
+            ->where('profileable_id', $profile->id)
+            ->where('profileable_type', $profileClass)
+            ->exists())
+        {
+            throw new CommunityException('This profile already exists in community', 422);
+        }
+
+        $community->communityProfiles()->create([
+            'profileable_id' => $profile->id,
+            'profileable_type' => $profileClass
+        ]);
+    }
+
+    /**
+     * Remove memorial from community
+     * @param Community $community
+     * @param Human|Pet $profile
+     */
+    public function deleteMemorial(Community $community, Human|Pet $profile): void
+    {
+        $profileClass = get_class($profile);
+
+        $community->communityProfiles()
+            ->where('profileable_id', $profile->id)
+            ->where('profileable_type', $profileClass)
+            ->delete();
     }
 }

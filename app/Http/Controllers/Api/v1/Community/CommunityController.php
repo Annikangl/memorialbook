@@ -6,6 +6,7 @@ use App\DTOs\Community\CommunityDTO;
 use App\Exceptions\Api\Community\CommunityException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Community\CreateCommunityRequest;
+use App\Http\Requests\Api\Community\Memorials\AddCommunityMemorialRequest;
 use App\Http\Requests\Api\Community\UpdateCommunityRequest;
 use App\Http\Requests\Community\SearchCommunityRequest;
 use App\Http\Requests\Profile\Human\SearchHumanRequest;
@@ -14,6 +15,7 @@ use App\Http\Resources\Community\CommunityMemorialResource;
 use App\Http\Resources\Community\CommunityResource;
 use App\Http\Resources\Community\ShowCommunityResource;
 use App\Models\Community\Community;
+use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
 use App\Services\CommunityService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -146,7 +148,7 @@ class CommunityController extends Controller
             throw new CommunityException($exception->getMessage(), $exception->getCode());
         }
 
-        return \response()->json(['status' => true, 'message' => 'Subscribe successful'])
+        return response()->json(['status' => true, 'message' => 'Subscribe successful'])
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
@@ -163,7 +165,7 @@ class CommunityController extends Controller
             throw new CommunityException($exception->getMessage(), $exception->getCode());
         }
 
-        return \response()->json(['status' => true, 'message' => 'Unsubscribe successful'])
+        return response()->json(['status' => true, 'message' => 'Unsubscribe successful'])
             ->setStatusCode(Response::HTTP_OK);
     }
 
@@ -179,15 +181,63 @@ class CommunityController extends Controller
         $memorials = $community->communityProfiles->pluck('profileable');
 
         $filteredMemorials = $memorials->filter(function ($memorial) use ($request) {
-            if ($memorial instanceof Pet) {
-                return Str::contains($memorial->name, $request->validated('name'));
-            }
-            return Str::contains($memorial->fullName, $request->validated('name'));
+            return Str::contains($memorial->full_name, $request->validated('name'));
         });
 
         return response()->json([
-                'status' => true,
-                'community_memorials' => CommunityMemorialResource::collection($filteredMemorials)]
-        )->setStatusCode(Response::HTTP_OK);
+            'status' => true,
+            'community_memorials' => CommunityMemorialResource::collection($filteredMemorials)
+        ])->setStatusCode(Response::HTTP_OK);
     }
+
+    /**
+     * @param Community $community
+     * @param AddCommunityMemorialRequest $request
+     * @return JsonResponse
+     * @throws CommunityException
+     */
+    public function addMemorial(Community $community, AddCommunityMemorialRequest $request)
+    {
+        $this->authorize('create', [$community]);
+
+        $profile = $this->getProfile(
+            $request->validated('memorial_id'),
+            $request->validated('memorial_type')
+        );
+
+        $this->communityService->addMemorial($community, $profile);
+
+        return response()->json(['status' => true, 'message' => 'Profile added successful'])
+            ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    /**
+     * @param Community $community
+     * @param AddCommunityMemorialRequest $request
+     * @return JsonResponse
+     */
+    public function removeMemorial(Community $community, AddCommunityMemorialRequest $request)
+    {
+        $this->authorize('delete', [$community]);
+
+        $profile = $this->getProfile(
+            $request->validated('memorial_id'),
+            $request->validated('memorial_type')
+        );
+
+        $this->communityService->deleteMemorial($community, $profile);
+
+        return response()->json(['status' => true, 'message' => 'Profile deleted successful'])
+            ->setStatusCode(Response::HTTP_OK);
+    }
+
+    private function getProfile(int $id, string $type): Pet|Human
+    {
+        if ($type === 'human') {
+            return Human::find($id);
+        }
+
+        return Pet::find($id);
+    }
+
 }

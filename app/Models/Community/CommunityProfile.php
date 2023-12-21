@@ -13,6 +13,11 @@ class CommunityProfile extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'profileable_id',
+        'profileable_type'
+    ];
+
     public function community(): BelongsTo
     {
         return $this->belongsTo(Community::class);

@@ -7,6 +7,7 @@ use App\Http\Resources\Profile\ProfileResource;
 use App\Http\Resources\UserResource;
 use App\Models\Community\Community;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class ShowCommunityResource extends JsonResource
 {
@@ -14,9 +15,12 @@ class ShowCommunityResource extends JsonResource
     {
         /** @var Community|JsonResource $this */
 
+        $user = auth('sanctum')->user();
+
         return [
             'id' => $this->id,
-            'is_subscribe' => $this->isUserSubscribed(auth('sanctum')->user()),
+            'is_subscribe' => $this->isUserSubscribed($user),
+            'is_admin' => $user ? $user->isCommunityOwner($this->getModel()) : false,
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'description' => $this->description,
