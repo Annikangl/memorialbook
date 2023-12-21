@@ -13,6 +13,7 @@ class CommunityPostDTO extends ValidatedDTO
     public ?string $title;
     public ?string $description;
     public ?array $post_media;
+    public ?string $published_at;
 
     protected function rules(): array
     {
@@ -21,6 +22,7 @@ class CommunityPostDTO extends ValidatedDTO
             'is_pinned' => ['required', 'bool'],
             'content_type' => ['required', 'string'],
             'title' => ['nullable', 'string', 'max:255'],
+            'published_at' => ['nullable', 'date', 'date_format:Y-m-d H:i:s'],
             'description' => ['nullable', 'string'],
             'post_media' => ['nullable', 'array'],
             'post_media.*' => [

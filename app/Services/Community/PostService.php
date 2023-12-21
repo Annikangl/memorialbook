@@ -10,7 +10,6 @@ use App\Models\Community\Posts\TextPost;
 use App\Models\User\User;
 use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
@@ -19,7 +18,10 @@ use Throwable;
 class PostService
 {
     /**
-     * @throws Throwable
+     * @param CommunityPostDTO $communityPostDTO
+     * @param User $user
+     * @return Post
+     * @throws CommunityPostException
      */
     public function create(CommunityPostDTO $communityPostDTO, User $user): Post
     {
@@ -32,7 +34,7 @@ class PostService
                     'community_id' => $communityPostDTO->community_id,
                     'content_type' => $communityPostDTO->content_type,
                     'is_pinned' => $communityPostDTO->is_pinned,
-                    'published_at' => Carbon::now()
+                    'published_at' => $communityPostDTO->published_at,
                 ]);
             });
         } catch (Throwable $exception) {

@@ -21,6 +21,7 @@ class CommunityPostRequest extends FormRequest
             'community_id' => ['required', 'exists:communities,id'],
             'content_type' => ['required', 'string'],
             'is_pinned' => ['required', 'bool'],
+            'published_at' => ['nullable', 'date', 'date_format:Y-m-d H:i:s'],
             'title' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:1000'],
             'post_media' => ['nullable', 'array'],

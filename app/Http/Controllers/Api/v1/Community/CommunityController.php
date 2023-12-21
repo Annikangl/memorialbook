@@ -18,6 +18,7 @@ use App\Models\Community\Community;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
 use App\Services\CommunityService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -69,7 +70,10 @@ class CommunityController extends Controller
             'users' => function (BelongsToMany $query) {
                 return $query->limit(7)->get();
             },
-            'posts' => fn(HasMany $query) => $query->latest(),
+            'posts' => fn(HasMany $query) => $query
+                ->where('published_at', '<', Carbon::now())
+                ->orWhereNull('published_at')
+                ->latest(),
             'posts.author',
             'posts.postable',
             'communityProfiles',
