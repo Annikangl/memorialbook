@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Models\Community\Community;
+use App\Models\Event\Event;
 use App\Models\News\News;
 use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\Profile\Human\Human;
@@ -12,7 +13,6 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -170,6 +170,11 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsToMany(Human::class, 'available_human_user')
             ->withPivot('status', 'created_at');
+    }
+
+    public function events(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class);
     }
 
     public function news(): HasMany

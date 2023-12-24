@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\v1\Profile\CemeteryController;
 use App\Http\Controllers\Api\v1\Profile\HumanController;
 use App\Http\Controllers\Api\v1\Profile\PetController;
 use App\Http\Controllers\Api\v1\User\Cabinet\CabinetController;
+use App\Http\Controllers\Api\v1\User\Event\EventController;
 use App\Http\Controllers\Api\v1\User\Feed\FeedController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,10 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('/feed')->group(function () {
             Route::get('/', [FeedController::class, 'index']);
+        });
+
+        Route::prefix('user')->group(function () {
+            Route::get('/events', [EventController::class, 'byUser']);
         });
 
         Route::prefix('cabinet')->group(function () {
