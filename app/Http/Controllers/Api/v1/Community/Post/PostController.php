@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Community\Post;
 
 use App\DTOs\Community\CommunityPostDTO;
+use App\Events\CommunityPostCreated;
 use App\Exceptions\Api\Community\Post\CommunityPostException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Community\Post\CommunityPostRequest;
@@ -35,7 +36,11 @@ class PostController extends Controller
 
         $postDto = CommunityPostDTO::fromArray($request->validated());
 
-        $post = $this->postService->create($postDto, auth('sanctum')->user());
+        $post = $this->postService->create(
+            $postDto,
+            auth('sanctum')->user(),
+            $community
+        );
 
         return response()->json(['status' => true, 'post' => new PostResource($post)])
             ->setStatusCode(Response::HTTP_CREATED);

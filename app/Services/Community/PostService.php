@@ -3,10 +3,13 @@
 namespace App\Services\Community;
 
 use App\DTOs\Community\CommunityPostDTO;
+use App\Events\CommunityPostCreated;
 use App\Exceptions\Api\Community\Post\CommunityPostException;
+use App\Models\Community\Community;
 use App\Models\Community\Posts\MediaPost;
 use App\Models\Community\Posts\Post;
 use App\Models\Community\Posts\TextPost;
+use App\Models\Event\Event;
 use App\Models\User\User;
 use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
@@ -18,24 +21,37 @@ use Throwable;
 class PostService
 {
     /**
-     * @param CommunityPostDTO $communityPostDTO
-     * @param User $user
-     * @return Post
-     * @throws CommunityPostException
-     */
-    public function create(CommunityPostDTO $communityPostDTO, User $user): Post
+ * @param CommunityPostDTO $communityPostDTO
+ * @param User $user
+ * @return Post
+ * @throws CommunityPostException
+ */
+    public function create(CommunityPostDTO $communityPostDTO, User $user, Community $community): Post
     {
         try {
-            return DB::transaction(function () use ($communityPostDTO, $user) {
+            return DB::transaction(function () use ($communityPostDTO, $user, $community) {
                 $contentPost = $this->createPostContent($communityPostDTO);
 
-                return $contentPost->post()->create([
+                $post =  $contentPost->post()->create([
                     'author_id' => $user->id,
                     'community_id' => $communityPostDTO->community_id,
                     'content_type' => $communityPostDTO->content_type,
                     'is_pinned' => $communityPostDTO->is_pinned,
                     'published_at' => $communityPostDTO->published_at,
                 ]);
+
+                $event = Event::query()->create([
+                    'event_type' => 'community_post',
+                    'title' => "{$post->community->title}",
+                    'description' => 'Published a new post',
+                    'author_avatar_url' => $post->community->getFirstMediaUrl('avatars', 'thumb'),
+                ]);
+
+                $event->users()->attach($community->users);
+
+                event(new CommunityPostCreated($post, $event, $community->users));
+
+                return $post;
             });
         } catch (Throwable $exception) {
             throw new CommunityPostException($exception->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);

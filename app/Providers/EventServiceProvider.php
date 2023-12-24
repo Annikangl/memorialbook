@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\CreateNews;
+use App\Events\CommunityPostCreated;
 use App\Listeners\PublishCreatedNews;
+use App\Listeners\SendPushNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -26,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             // ... other providers
             \SocialiteProviders\Facebook\FacebookExtendSocialite::class.'@handle',
+        ],
+        CommunityPostCreated::class => [
+            SendPushNotification::class,
         ],
     ];
 

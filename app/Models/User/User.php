@@ -3,6 +3,8 @@
 namespace App\Models\User;
 
 use App\Models\Community\Community;
+use App\Models\Event\Event;
+use App\Models\Event\EventUser;
 use App\Models\News\News;
 use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\Profile\Human\Human;
@@ -170,6 +172,11 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsToMany(Human::class, 'available_human_user')
             ->withPivot('status', 'created_at');
+    }
+
+    public function events(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class);
     }
 
     public function news(): HasMany
