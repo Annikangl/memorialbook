@@ -18,9 +18,9 @@ class CommunityPostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'community_id' => ['required', 'exists:communities,id'],
+            'community_id' => ['required', 'integer', 'exists:communities,id'],
             'content_type' => ['required', 'string'],
-            'is_pinned' => ['required', 'bool'],
+            'is_pinned' => ['required', 'int'],
             'published_at' => ['nullable', 'date', 'date_format:Y-m-d H:i:s'],
             'title' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:1000'],

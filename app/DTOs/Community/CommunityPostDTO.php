@@ -3,6 +3,8 @@
 namespace App\DTOs\Community;
 
 use Illuminate\Validation\Rules\File;
+use WendellAdriel\ValidatedDTO\Casting\BooleanCast;
+use WendellAdriel\ValidatedDTO\Casting\IntegerCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 class CommunityPostDTO extends ValidatedDTO
@@ -50,7 +52,10 @@ class CommunityPostDTO extends ValidatedDTO
      */
     protected function casts(): array
     {
-        return [];
+        return [
+            'community_id' => new IntegerCast(),
+            'is_pinned' => new BooleanCast(),
+        ];
     }
 
     /**
