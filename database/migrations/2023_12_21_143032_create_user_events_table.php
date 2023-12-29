@@ -6,14 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
-        Schema::create('event_users', function (Blueprint $table) {
+        Schema::create('event_user', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\User\User::class)->constrained();
             $table->foreignIdFor(\App\Models\Event\Event::class)->constrained();
@@ -22,13 +17,8 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('event_users');
+        Schema::dropIfExists('event_user');
     }
 };

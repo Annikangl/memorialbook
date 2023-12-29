@@ -4,7 +4,6 @@ namespace App\Models\User;
 
 use App\Models\Community\Community;
 use App\Models\Event\Event;
-use App\Models\Event\EventUser;
 use App\Models\News\News;
 use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\Profile\Human\Human;
@@ -14,7 +13,6 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;

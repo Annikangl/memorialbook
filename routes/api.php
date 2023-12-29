@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\v1\Auth\ForgotPasswordController;
 use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\Auth\NetworkController;
 use App\Http\Controllers\Api\v1\Auth\RegisterController;
@@ -27,6 +28,8 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         Route::post('/login', [LoginController::class, 'login']);
         Route::post('/login/network/{network}', [NetworkController::class, 'redirect']);
         Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
+        Route::post('/password/email', [ForgotPasswordController::class, 'sendResetEmail']);
+        Route::post('/password/recover', [ForgotPasswordController::class, 'recoverPassword']);
     });
 
     Route::prefix('guest')->group(function () {
@@ -59,9 +62,6 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
         Route::get('/{community}', [CommunityController::class, 'show']);
         Route::get('/{community}/memorials/search', [CommunityController::class, 'searchMemorials']);
     });
-
-
-//    Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::prefix('/feed')->group(function () {
