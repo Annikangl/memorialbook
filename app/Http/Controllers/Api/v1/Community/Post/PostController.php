@@ -47,6 +47,34 @@ class PostController extends Controller
     }
 
     /**
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     */
+    public function update(Post $post, CommunityPostRequest $request)
+    {
+        $community = $this->getCommunity($request->validated('community_id'));
+
+        $this->authorize('create', [Post::class, $community]);
+
+        $postDto = CommunityPostDTO::fromArray(
+            collect($request->validated())->except(['published_at', 'is_pinned'])->toArray()
+        );
+
+        $updatedPost = $this->postService->update($post, $postDto);
+
+        return response()->json(['status' => true, 'post' => new PostResource($updatedPost)])
+            ->setStatusCode(Response::HTTP_OK);
+    }
+
+    public function pin(Post $post)
+    {
+        $this->postService->pin($post);
+
+        return response()->json(['status' => true, 'message' => 'Post pinned'])
+            ->setStatusCode(Response::HTTP_OK);
+    }
+
+    /**
      * Delete post
      * @throws CommunityPostException
      */

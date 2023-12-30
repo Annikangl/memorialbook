@@ -20,16 +20,17 @@ class CommunityPostRequest extends FormRequest
         return [
             'community_id' => ['required', 'integer', 'exists:communities,id'],
             'content_type' => ['required', 'string'],
-            'is_pinned' => ['required', 'int'],
+            'is_pinned' => ['nullable', 'int'],
             'published_at' => ['nullable', 'date', 'date_format:Y-m-d H:i:s'],
             'title' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string', 'max:1000'],
-            'post_media' => ['nullable', 'array'],
+            'post_media' => ['nullable', 'array', 'required_if:content_type,MEDIA_POST'],
             'post_media.*' => [
                 'nullable',
-                File::types(['image/jpeg', 'image/png', 'image/webp', 'image/gif','video/mp4', 'video/avi', 'video/mpeg'])
+                File::types(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'video/mp4', 'video/avi', 'video/mpeg'])
                     ->max(15 * 1024)
             ],
+            'post_media_removed_ids' => ['nullable', 'array', 'required_with::post_media'],
         ];
     }
 }

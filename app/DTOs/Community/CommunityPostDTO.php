@@ -11,22 +11,24 @@ class CommunityPostDTO extends ValidatedDTO
 {
     public int $community_id;
     public string $content_type;
-    public bool $is_pinned;
+    public ?bool $is_pinned;
     public ?string $title;
     public ?string $description;
     public ?array $post_media;
+    public ?array $post_media_removed_ids;
     public ?string $published_at;
 
     protected function rules(): array
     {
         return [
             'community_id' => ['required', 'integer'],
-            'is_pinned' => ['required', 'bool'],
+            'is_pinned' => ['nullable', 'bool'],
             'content_type' => ['required', 'string'],
             'title' => ['nullable', 'string', 'max:255'],
             'published_at' => ['nullable', 'date', 'date_format:Y-m-d H:i:s'],
             'description' => ['nullable', 'string'],
             'post_media' => ['nullable', 'array'],
+            'post_media_removed_ids' => ['nullable', 'array'],
             'post_media.*' => [
                 'nullable',
                 File::types(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'video/mp4', 'video/avi', 'video/mpeg'])

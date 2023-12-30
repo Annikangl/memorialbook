@@ -117,9 +117,15 @@ class Post extends Model implements HasMedia
 
         $this->getMedia('gallery')->each(function (Media $item) use (&$gallery) {
             if (str_contains($item->mime_type, 'image')) {
-                $gallery['images'][] = $item->getUrl('thumb_900');
+                $gallery['images'][] = [
+                    'id' => $item->id,
+                    'url' => $item->getUrl('thumb_900'),
+                ];
             } elseif (str_contains($item->mime_type, 'video')) {
-                $gallery['videos'][] = $item->getUrl();
+                $gallery['videos'][] = [
+                    'id' => $item->id,
+                    'url' => $item->getUrl(),
+                ];
             }
         });
 

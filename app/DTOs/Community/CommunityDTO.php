@@ -17,6 +17,7 @@ class CommunityDTO extends ValidatedDTO
     public ?UploadedFile $avatar;
     public ?UploadedFile $banner;
     public ?array $gallery;
+    public ?array $media_removed_ids;
 
     /**
      * Defines the validation rules for the DTO.
@@ -36,6 +37,7 @@ class CommunityDTO extends ValidatedDTO
             'avatar' => ['nullable', 'file'],
             'banner' => ['nullable', 'file'],
             'gallery' => ['nullable', 'array'],
+            'media_removed_ids' => ['nullable', 'array'],
             'gallery.*' => ['nullable', 'file'],
         ];
     }
