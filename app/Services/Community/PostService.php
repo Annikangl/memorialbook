@@ -106,7 +106,6 @@ class PostService
         return $post->postable;
     }
 
-
     /**
      * @param Post $post
      * @param CommunityPostDTO $postDTO
@@ -146,16 +145,33 @@ class PostService
     }
 
     /**
+     * Pin post in feed
+     * @param Post $post
+     * @return void
+     */
+    public function pin(Post $post): void
+    {
+        $community = $post->community;
+
+        $community->posts()->where('id', '<>', $post->id)->update(['is_pinned' => false]);
+
+        $post->is_pinned = true;
+        $post->save();
+    }
+
+    /**
      * @throws FileIsTooBig
      * @throws FileDoesNotExist
      */
-    protected function createPostContent(CommunityPostDTO $communityPostDTO): Post|TextPost|MediaPost
+    protected function createPostContent(CommunityPostDTO $communityPostDTO): Post|TextPost|MediaPost|null
     {
         switch ($communityPostDTO->content_type) {
             case Post::TYPE_TEXT:
                 return $this->createTextPost($communityPostDTO);
             case Post::TYPE_MEDIA:
                 return $this->createMediaPost($communityPostDTO);
+            default:
+                return null;
         }
     }
 
@@ -166,6 +182,8 @@ class PostService
                 return $this->updateTextPost($post, $communityPostDTO);
             case Post::TYPE_MEDIA:
                 return $this->updateMediaPost($post, $communityPostDTO);
+            default:
+                return null;
         }
     }
 

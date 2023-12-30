@@ -65,6 +65,14 @@ class PostController extends Controller
             ->setStatusCode(Response::HTTP_OK);
     }
 
+    public function pin(Post $post)
+    {
+        $this->postService->pin($post);
+
+        return response()->json(['status' => true, 'message' => 'Post pinned'])
+            ->setStatusCode(Response::HTTP_OK);
+    }
+
     /**
      * Delete post
      * @throws CommunityPostException
