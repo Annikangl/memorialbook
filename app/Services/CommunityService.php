@@ -94,6 +94,13 @@ class CommunityService
                     $community->addMedia($image)->toMediaCollection('gallery');
                 }
             }
+
+            if ($mediaIds = $communityDTO->media_removed_ids) {
+                foreach ($mediaIds as $mediaId) {
+                    $community->deleteMedia($mediaId);
+                }
+            }
+
         } catch (\Throwable $exception) {
             throw new CommunityException($exception->getMessage());
         }

@@ -105,6 +105,7 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
 
             Route::prefix('posts')->group(function () {
                 Route::post('/', [PostController::class, 'store']);
+                Route::put('/{post}', [PostController::class, 'update']);
                 Route::delete('/{post}', [PostController::class, 'delete']);
             });
         });

@@ -150,7 +150,10 @@ class Community extends Model implements HasMedia
         $pictures = [];
 
         $this->getMedia('gallery')->filter(function (Media $media) use (&$pictures) {
-            $pictures[] = $media->getUrl('thumb_500');
+            $pictures[] = [
+                'id' => $media->id,
+                'url' => $media->getUrl('thumb_500')
+            ];
         });
 
         return $pictures;

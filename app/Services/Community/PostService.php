@@ -16,23 +16,24 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
+use Spatie\MediaLibrary\MediaCollections\Exceptions\MediaCannotBeDeleted;
 use Throwable;
 
 class PostService
 {
     /**
- * @param CommunityPostDTO $communityPostDTO
- * @param User $user
- * @return Post
- * @throws CommunityPostException
- */
+     * @param CommunityPostDTO $communityPostDTO
+     * @param User $user
+     * @return Post
+     * @throws CommunityPostException
+     */
     public function create(CommunityPostDTO $communityPostDTO, User $user, Community $community): Post
     {
         try {
             return DB::transaction(function () use ($communityPostDTO, $user, $community) {
                 $contentPost = $this->createPostContent($communityPostDTO);
 
-                $post =  $contentPost->post()->create([
+                $post = $contentPost->post()->create([
                     'author_id' => $user->id,
                     'community_id' => $communityPostDTO->community_id,
                     'content_type' => $communityPostDTO->content_type,
@@ -58,18 +59,11 @@ class PostService
         }
     }
 
-    /**
-     * @throws FileIsTooBig
-     * @throws FileDoesNotExist
-     */
-    protected function createPostContent(CommunityPostDTO $communityPostDTO): Post|TextPost|MediaPost
+    public function update(Post $post, CommunityPostDTO $communityPostDTO): Post
     {
-        switch ($communityPostDTO->content_type) {
-            case Post::TYPE_TEXT:
-                return $this->createTextPost($communityPostDTO);
-            case Post::TYPE_MEDIA:
-                return $this->createMediaPost($communityPostDTO);
-        }
+        $contentPost = $this->updatePostContent($post, $communityPostDTO);
+
+        return $contentPost->post;
     }
 
     public function createTextPost(CommunityPostDTO $communityPostDTO): TextPost
@@ -100,7 +94,46 @@ class PostService
         return $postWithMedia;
     }
 
+    public function updateTextPost(Post $post, CommunityPostDTO $postDTO): TextPost
+    {
+        $updatedData = collect($postDTO->validatedData)
+            ->except(['community_id', 'content_type'])
+            ->filter()
+            ->toArray();
+
+        $post->postable->update($updatedData);
+
+        return $post->postable;
+    }
+
+
     /**
+     * @param Post $post
+     * @param CommunityPostDTO $postDTO
+     * @return MediaPost
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     * @throws MediaCannotBeDeleted
+     */
+    public function updateMediaPost(Post $post, CommunityPostDTO $postDTO): MediaPost
+    {
+        foreach ($postDTO->post_media as $media) {
+            /** @var UploadedFile $media */
+            $post->postable->addMedia($media)->toMediaCollection('gallery');
+        }
+
+        if ($mediaIds = $postDTO->post_media_removed_ids) {
+            foreach ($mediaIds as $mediaId) {
+                $post->postable->deleteMedia($mediaId);
+            }
+        }
+
+        return $post->postable;
+    }
+
+    /**
+     * @param Post $post
+     * @return void
      * @throws CommunityPostException
      */
     public function delete(Post $post): void
@@ -109,6 +142,30 @@ class PostService
             $post->delete();
         } catch (Throwable $exception) {
             throw new CommunityPostException($exception->getMessage());
+        }
+    }
+
+    /**
+     * @throws FileIsTooBig
+     * @throws FileDoesNotExist
+     */
+    protected function createPostContent(CommunityPostDTO $communityPostDTO): Post|TextPost|MediaPost
+    {
+        switch ($communityPostDTO->content_type) {
+            case Post::TYPE_TEXT:
+                return $this->createTextPost($communityPostDTO);
+            case Post::TYPE_MEDIA:
+                return $this->createMediaPost($communityPostDTO);
+        }
+    }
+
+    protected function updatePostContent(Post $post, CommunityPostDTO $communityPostDTO)
+    {
+        switch ($communityPostDTO->content_type) {
+            case Post::TYPE_TEXT:
+                return $this->updateTextPost($post, $communityPostDTO);
+            case Post::TYPE_MEDIA:
+                return $this->updateMediaPost($post, $communityPostDTO);
         }
     }
 

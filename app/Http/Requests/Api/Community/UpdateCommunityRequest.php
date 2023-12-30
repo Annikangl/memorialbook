@@ -40,6 +40,7 @@ class UpdateCommunityRequest extends FormRequest
                 File::types(['video/mp4', 'image/jpeg', 'image/png'])
                     ->max(30 * 1024),
             ],
+            'media_removed_ids' => ['nullable', 'array']
         ];
     }
 }
