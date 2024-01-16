@@ -242,9 +242,8 @@ class Human extends Profile implements HasMedia
     {
         $this->addMediaCollection('avatars')
             ->singleFile()
-            ->useFallbackUrl(asset('assets/media/media/empty_avatar.png'))
-            ->useFallbackPath(asset('assets/media/media/empty_avatar.png'));
-
+            ->useFallbackUrl(asset('assets/media/media/empty_avatar.jpg'))
+            ->useFallbackPath(asset('assets/media/media/empty_avatar.jpg'));
 
         $this->addMediaCollection('banners')
             ->useFallbackUrl(asset('assets/media/media/empty_banner.png'))
