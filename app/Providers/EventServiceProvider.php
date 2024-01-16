@@ -10,6 +10,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use SocialiteProviders\Facebook\FacebookExtendSocialite;
+use SocialiteProviders\Manager\SocialiteWasCalled;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -22,12 +24,8 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        CreateNews::class => [
-          PublishCreatedNews::class
-        ],
-        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            // ... other providers
-            \SocialiteProviders\Facebook\FacebookExtendSocialite::class.'@handle',
+        SocialiteWasCalled::class => [
+            FacebookExtendSocialite::class.'@handle',
         ],
         CommunityPostCreated::class => [
             SendPushNotification::class,
