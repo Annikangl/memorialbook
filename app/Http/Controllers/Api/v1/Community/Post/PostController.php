@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1\Community\Post;
 
 use App\DTOs\Community\CommunityPostDTO;
+use App\Events\CommunityPostCreated;
 use App\Exceptions\Api\Community\Post\CommunityPostException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Community\Post\CommunityPostRequest;
