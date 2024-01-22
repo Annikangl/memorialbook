@@ -49,7 +49,7 @@ class HumanController extends Controller
         $pets = $human->pets()->get();
 
         return response()->json(['status' => true,
-            'human' => new ShowHumanResource($human),
+            'human' => new ShowHumanResource($human->load('religion')),
             'kinsfolk' => HumanResource::collection($kinsfolk),
             'pets' =>  PetResource::collection($pets)
         ])->setStatusCode(Response::HTTP_OK);

@@ -3,9 +3,14 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Community\Community;
+use App\Models\Community\CommunityProfile;
 use App\Models\Community\Posts\Post;
 use App\Models\Community\Posts\TextPost;
 use App\Models\Profile\Cemetery\Cemetery;
+use App\Models\Profile\Human\Human;
+use App\Models\Profile\Human\Religion;
+use App\Models\Profile\Pet\Pet;
 use App\Models\User\User;
 use Faker\Provider\UserAgent;
 use Illuminate\Database\Seeder;
@@ -25,14 +30,15 @@ class DatabaseSeeder extends Seeder
         $faker = \Faker\Factory::create();
         $faker->addProvider(new FakerPicsumImagesProvider($faker));
 
-//        TextPost::factory()->count(5)->for(Post::factory())->create();
+        Religion::factory(10)->create();
+
 //        $this->createUsers();
 
 //        $cemeteries = Cemetery::factory(10)
 //            ->create();
-
+//
 //        foreach ($cemeteries as $cemetery) {
-//            $cemetery->addMedia($faker->image(storage_path('app/images'),1280,720))
+//            $cemetery->addMedia($faker->image(storage_path('app/images')))
 //                ->toMediaCollection('banners');
 //        }
 //
@@ -65,7 +71,7 @@ class DatabaseSeeder extends Seeder
 //        }
 //
 //        $communities = Community::factory(10)
-//            ->hasPosts(5)
+////            ->hasPosts(5)
 //            ->hasUsers(30)
 //            ->create();
 //
@@ -96,7 +102,7 @@ class DatabaseSeeder extends Seeder
 
     private function createUsers(): void
     {
-        User::create([
+        User::query()->create([
             'username' => 'Ivanov Ivan',
             'email' => 'test@gmail.com',
             'password' => \Hash::make('test1234'),
@@ -105,7 +111,7 @@ class DatabaseSeeder extends Seeder
             'location' => 'RU',
         ]);
 
-        User::create([
+        User::query()->create([
             'username' => 'Petrov Petr',
             'email' => 'test2@gmail.com',
             'password' => \Hash::make('test1234'),

@@ -9,7 +9,7 @@ use App\Http\Requests\Profile\Human\SearchHumanRequest;
 use App\Http\Requests\Profile\Human\UpdateHumanRequest;
 use App\ModelFilters\HumanFilter;
 use App\Models\Profile\Human\Human;
-use App\Models\Profile\Religion;
+use App\Models\Profile\Human\Religion;
 use App\Services\HumanService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

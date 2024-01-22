@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Profile\Hobby;
-use App\Models\Profile\Human\Human;
-use App\Models\Profile\Religion;
 use App\Models\User\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -53,9 +50,6 @@ return new class extends Migration {
             $table->string('birth_place')->nullable();
             $table->string('burial_place')->nullable();
             $table->string('death_reason')->nullable();
-            $table->double('latitude')->nullable();
-            $table->double('longitude')->nullable();
-            $table->string('religion')->nullable();
             $table->json('hobbies')->nullable();
             $table->boolean('is_celebrity')->default(false);
 

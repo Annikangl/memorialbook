@@ -1,6 +1,6 @@
-FROM php:8.1-fpm
+FROM php:8.2-fpm
 
-MAINTAINER support@cyber-duck.co.uk
+MAINTAINER svinpauk78@gmail.com
 
 ENV COMPOSER_MEMORY_LIMIT='-1'
 
@@ -13,6 +13,7 @@ RUN apt-get update && \
         libpq-dev \
         libjpeg-dev \
         libpng-dev \
+        libwebp-dev \
         libfreetype6-dev \
         libssl-dev \
         openssh-server \
@@ -30,31 +31,22 @@ RUN apt-get update && \
         pngquant \
         gifsicle
 
-# Install soap extention
 RUN docker-php-ext-install soap
 
-# Install for image manipulation
 RUN docker-php-ext-install exif
 
-# Install the PHP pcntl extention
 RUN docker-php-ext-install pcntl
 
-# Install the PHP zip extention
 RUN docker-php-ext-install zip
 
-# Install the PHP pdo_mysql extention
 RUN docker-php-ext-install pdo_mysql
 
-# Install the PHP pdo_pgsql extention
 RUN docker-php-ext-install pdo_pgsql
 
-# Install the PHP bcmath extension
 RUN docker-php-ext-install bcmath
 
-# Install the PHP intl extention
 RUN docker-php-ext-install intl
 
-# Install the PHP gmp extention
 RUN docker-php-ext-install gmp
 
 #####################################
@@ -75,7 +67,7 @@ RUN pecl install imagick && \
 
 # Install the PHP gd library
 RUN docker-php-ext-install gd && \
-    docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp && \
     docker-php-ext-install gd
 
 #####################################

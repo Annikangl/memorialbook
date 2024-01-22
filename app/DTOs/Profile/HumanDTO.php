@@ -17,21 +17,21 @@ class HumanDTO extends ValidatedDTO
     public string $date_birth;
     public string $date_death;
     public string $death_reason;
-    public string|null $birth_place;
-    public string|null $burial_place;
-    public array|null $burial_coords;
-    public UploadedFile|null $death_certificate;
-    public UploadedFile|null $avatar;
-    public UploadedFile|null $banner;
-    public int|null $father_id;
-    public int|null $mother_id;
-    public int|null $spouse_id;
-    public array|null $gallery;
-    public string|null $description;
-    public array|null $hobbies;
-    public string|null $religion;
+    public ?string $birth_place;
+    public ?string $burial_place;
+    public ?array $burial_coords;
+    public ?UploadedFile $death_certificate;
+    public ?UploadedFile $avatar;
+    public ?UploadedFile $banner;
+    public ?string $father_id;
+    public ?string $mother_id;
+    public ?string $spouse_id;
+    public ?string $religion_id;
+    public ?array $gallery;
+    public ?string $description;
+    public ?array $hobbies;
     public string $access;
-    public array|null $removedImageIds;
+    public ?array $removedImageIds;
     public bool $as_draft;
 
     /**
@@ -52,13 +52,13 @@ class HumanDTO extends ValidatedDTO
             'death_reason' => ['required', 'string'],
             'date_death' => ['nullable', 'date'],
 
+            'religion_id' => ['nullable', 'integer'],
             'father_id' => ['nullable', 'integer'],
             'mother_id' => ['nullable', 'integer'],
             'spouse_id' => ['nullable', 'integer'],
 
             'description' => ['nullable', 'string'],
             'hobbies' => ['nullable', 'array'],
-            'religion' => ['nullable', 'string'],
             'access' => ['required', 'string'],
 
             'burial_coords' => ['nullable', 'array'],

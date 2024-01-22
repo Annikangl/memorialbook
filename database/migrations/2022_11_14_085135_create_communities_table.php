@@ -31,8 +31,8 @@ return new class extends Migration {
         });
 
         Schema::create('community_users', function (Blueprint $table) {
-            $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Community::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Community::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
             $table->primary(['user_id', 'community_id']);
         });
@@ -41,7 +41,6 @@ return new class extends Migration {
             $table->foreignIdFor(Community::class)->constrained()->cascadeOnDelete();
             $table->morphs('profileable');
         });
-
 
         Schema::create('community_posts', function (Blueprint $table) {
             $table->id();
@@ -54,26 +53,22 @@ return new class extends Migration {
                 ->constrained()
                 ->cascadeOnDelete();
 
-//            $table->string('title');
-//            $table->text('description');
             $table->boolean('is_pinned')->default(0);
 
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
-
         });
     }
 
     public function down(): void
     {
         if (app()->isLocal()) {
+            Schema::disableForeignKeyConstraints();
             Schema::dropIfExists('community_post_tags');
             Schema::dropIfExists('community_posts');
-            Schema::dropIfExists('community_user');
-            Schema::dropIfExists('community_human');
             Schema::dropIfExists('community_profiles');
+            Schema::dropIfExists('community_users');
             Schema::dropIfExists('communities');
         }
-
     }
 };

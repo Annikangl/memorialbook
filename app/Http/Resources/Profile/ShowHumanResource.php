@@ -23,6 +23,7 @@ class ShowHumanResource extends JsonResource
             'date_death' => $this->date_death,
             'death_reason' => $this->death_reason,
             'hobbies' => $this->hobbies,
+            'religion' => $this->whenLoaded('religion',$this->religion->title),
             'description' => $this->description,
             'gallery' => $this->getGallery(),
         ];

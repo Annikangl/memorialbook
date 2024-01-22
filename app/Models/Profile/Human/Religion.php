@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Profile;
+namespace App\Models\Profile\Human;
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,15 +20,16 @@ class Religion extends Model
 {
     use HasFactory;
 
-    protected $table = 'religions';
-
     public $timestamps = false;
 
-    protected $fillable = ['title','slug'];
+    protected $fillable = [
+        'title',
+        'slug'
+    ];
 
-    public function profiles(): HasMany
+    public function humans(): HasMany
     {
-        return $this->hasMany(Profile::class);
+        return $this->hasMany(Human::class);
     }
 
     public function sluggable(): array

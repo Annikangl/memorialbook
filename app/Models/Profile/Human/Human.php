@@ -35,7 +35,6 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property int|null $mother_id
  * @property int|null $children_id
  * @property int|null $spouse_id
- * @property string|null $religion
  * @property int|null $cemetery_id
  * @property int|null $family_burial_id
  * @property string $first_name
@@ -89,7 +88,7 @@ class Human extends Profile implements HasMedia
         'user_id',
         'mother_id',
         'father_id',
-        'religion',
+        'religion_id',
         'burial_id',
         'is_celebrity',
         'first_name',
@@ -212,6 +211,11 @@ class Human extends Profile implements HasMedia
     public function burial(): BelongsTo
     {
         return $this->belongsTo(Burial::class);
+    }
+
+    public function religion(): BelongsTo
+    {
+        return $this->belongsTo(Religion::class, 'religion_id', 'id');
     }
 
     public function getBurialJson(): string

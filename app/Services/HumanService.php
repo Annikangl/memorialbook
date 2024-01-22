@@ -39,6 +39,7 @@ class HumanService
                 ]);
 
                 $human->users()->associate($userId);
+                $human->religion()->associate($humanDTO->religion_id);
                 $human->save();
 
                 if ($fatherId = $humanDTO->father_id) {

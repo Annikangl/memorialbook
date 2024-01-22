@@ -18,8 +18,6 @@ class CommunityFactory extends Factory
             'website' => $this->faker->url,
             'phone' => $this->faker->unique()->phoneNumber,
             'address' => $this->faker->address,
-            'latitude' => $this->faker->latitude,
-            'longitude' => $this->faker->longitude,
             'title' => $this->faker->words(3,true),
             'subtitle' => $this->faker->text(),
             'description' => $this->faker->realText(400),
