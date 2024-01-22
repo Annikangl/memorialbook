@@ -51,7 +51,7 @@ class CommunityService
             }
 
         } catch (\Throwable $exception) {
-            throw new CommunityException($exception->getMessage(), 500);
+            throw new CommunityException($exception->getMessage() . ' empty body', $exception->getCode());
         }
 
         return $community;

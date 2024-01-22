@@ -101,6 +101,24 @@ class Community extends Model implements HasMedia
             ]
         ];
     }
+    public function getPictures(): array
+    {
+        $pictures = [];
+
+        $this->getMedia('gallery')->filter(function (Media $media) use (&$pictures) {
+            $pictures[] = [
+                'id' => $media->id,
+                'url' => $media->getUrl('thumb_500')
+            ];
+        });
+
+        return $pictures;
+    }
+
+    public function getMovies(): array
+    {
+        return [];
+    }
 
     public function registerMediaCollections(): void
     {
@@ -143,24 +161,5 @@ class Community extends Model implements HasMedia
             ->width(1000)
             ->height(600)
             ->nonQueued();
-    }
-
-    public function getPictures(): array
-    {
-        $pictures = [];
-
-        $this->getMedia('gallery')->filter(function (Media $media) use (&$pictures) {
-            $pictures[] = [
-                'id' => $media->id,
-                'url' => $media->getUrl('thumb_500')
-            ];
-        });
-
-        return $pictures;
-    }
-
-    public function getMovies(): array
-    {
-        return [];
     }
 }
