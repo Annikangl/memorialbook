@@ -20,7 +20,7 @@ use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class HumanController extends Controller
 {
-    public function __construct(private HumanService $humanService)
+    public function __construct(private readonly HumanService $humanService)
     {
     }
 
