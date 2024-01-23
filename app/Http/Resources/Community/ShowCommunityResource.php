@@ -35,7 +35,10 @@ class ShowCommunityResource extends JsonResource
             'subscribers_count' => $this->users_count,
             'posts' => $this->whenLoaded('posts', PostResource::collection($this->posts)),
             'subscribers' => UserResource::collection($this->users),
-            'memorials' => $this->whenLoaded('communityProfiles', ProfileResource::collection($this->communityProfiles)),
+            'memorials' => $this->whenLoaded(
+                'communityProfiles',
+                ProfileResource::collection($this->communityProfiles)
+            ),
         ];
     }
 }

@@ -16,8 +16,8 @@ class ProfileResource extends JsonResource
         return [
             'id' => $this->profileable->id,
             'full_name' => $this->profileable->fullName,
-            'year_birth' => $this->profileable->year_birth,
-            'year_death' => $this->profileable->year_death,
+            'year_birth' => $this->profileable->date_birth,
+            'year_death' => $this->profileable->date_death,
             'type' => $this->profileable->gender ? 'human' : 'pet',
             'avatar' => $this->profileable->getFirstMediaUrl('avatars', 'thumb')
         ];
