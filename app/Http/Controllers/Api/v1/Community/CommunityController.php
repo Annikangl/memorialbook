@@ -185,7 +185,7 @@ class CommunityController extends Controller
         $memorials = $community->communityProfiles->pluck('profileable');
 
         $filteredMemorials = $memorials->filter(function ($memorial) use ($request) {
-            return Str::contains($memorial->full_name, $request->validated('name'));
+            return Str::contains($memorial->full_name, $request->validated('name'), true);
         });
 
         return response()->json([
@@ -238,10 +238,10 @@ class CommunityController extends Controller
     private function getProfile(int $id, string $type): Pet|Human
     {
         if ($type === 'human') {
-            return Human::find($id);
+            return Human::findOrFail($id);
         }
 
-        return Pet::find($id);
+        return Pet::findOrFail($id);
     }
 
 }
