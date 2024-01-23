@@ -72,6 +72,15 @@ class Community extends Model implements HasMedia
         return $this->users()->wherePivot('user_id', $user->id)->exists();
     }
 
+    public function isOwner(?int $userId): bool
+    {
+        if (!$userId) {
+            return false;
+        }
+
+        return $this->owner_id === $userId;
+    }
+
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
@@ -101,6 +110,7 @@ class Community extends Model implements HasMedia
             ]
         ];
     }
+
     public function getPictures(): array
     {
         $pictures = [];

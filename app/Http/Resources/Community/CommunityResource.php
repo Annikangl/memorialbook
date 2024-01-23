@@ -13,6 +13,7 @@ class CommunityResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'is_owner' => $this->isOwner(auth('sanctum')->id()),
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'banner' => $this->getFirstMediaUrl('banners', 'thumb_500'),
