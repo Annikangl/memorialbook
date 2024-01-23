@@ -10,14 +10,23 @@ use App\Http\Resources\Profile\PetResource;
 use App\Http\Resources\Profile\ShowPetResource;
 use App\Models\Profile\Pet\Pet;
 use App\Services\PetService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
 use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class PetController extends Controller
 {
-    public function __construct(private PetService $petService)
+    public function __construct(private readonly PetService $petService)
     {
+    }
+
+    public function byUser(): JsonResponse
+    {
+        return response()->json([
+            'status' => true,
+            'pets' => PetResource::collection(auth('sanctum')->user()->pets)
+        ])->setStatusCode(Response::HTTP_OK);
     }
 
     public function show(Pet $pet)
@@ -34,7 +43,7 @@ class PetController extends Controller
         $petDto = PetDTO::fromArray($request->validated());
 
         $pet = $this->petService->create(
-            petDTO:  $petDto,
+            petDTO: $petDto,
             userId: auth()->id(),
             as_draft: $petDto->as_draft
         );

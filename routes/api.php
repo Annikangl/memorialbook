@@ -82,11 +82,12 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
 
         Route::group(['prefix' => 'profile'], function () {
             Route::prefix('humans')->group(function () {
-                Route::get('/', [HumanController::class, 'index']);
+                Route::get('/', [HumanController::class, 'byUser']);
                 Route::post('/', [HumanController::class, 'store']);
             });
 
             Route::prefix('pets')->group(function () {
+                Route::get('/', [PetController::class, 'byUser']);
                 Route::post('/', [PetController::class, 'store']);
             });
 

@@ -13,8 +13,8 @@ class PetResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'year_birth' => $this->year_birth,
-            'year_death' => $this->year_death,
+            'year_birth' => $this->date_birth,
+            'year_death' => $this->date_death,
             'avatar' => $this->getFirstMediaUrl('avatars', 'thumb'),
         ];
     }

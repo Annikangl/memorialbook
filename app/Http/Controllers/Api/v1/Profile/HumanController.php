@@ -24,7 +24,7 @@ class HumanController extends Controller
     {
     }
 
-    public function index(Request $request): JsonResponse
+    public function byUser(Request $request): JsonResponse
     {
         if ($request->get('gender') === Human::MALE) {
             return $this->getFathers();
