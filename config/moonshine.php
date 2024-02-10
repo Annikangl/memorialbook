@@ -1,11 +1,11 @@
 <?php
 
+use App\MoonShine\Layout\NewMoonshineLayout;
 use MoonShine\Exceptions\MoonShineNotFoundException;
 use MoonShine\Forms\LoginForm;
 use MoonShine\Http\Middleware\Authenticate;
 use MoonShine\Http\Middleware\SecurityHeadersMiddleware;
 use MoonShine\Models\MoonshineUser;
-use MoonShine\MoonShineLayout;
 use MoonShine\Pages\ProfilePage;
 
 return [
@@ -31,7 +31,7 @@ return [
     'use_notifications' => true,
     'use_theme_switcher' => true,
 
-    'layout' => MoonShineLayout::class,
+    'layout' => NewMoonshineLayout::class,
 
     'disk' => 'public',
 
@@ -49,8 +49,8 @@ return [
     ],
 
     'model_resources' => [
-        'default_with_import' => true,
-        'default_with_export' => true,
+        'default_with_import' => false,
+        'default_with_export' => false,
     ],
 
     'auth' => [

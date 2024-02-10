@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Resources\HobbyResource;
+use App\MoonShine\Resources\PetResource;
+use App\MoonShine\Resources\ReligionsResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
@@ -26,6 +29,15 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
     protected function menu(): array
     {
         return [
+            MenuGroup::make('Профили', [
+                    MenuItem::make('Животные', new PetResource()),
+                ]
+            ),
+            MenuGroup::make('Атрибуты', [
+                    MenuItem::make('Религиозные взгляды', new ReligionsResource()),
+                    MenuItem::make('Хобби', new HobbyResource())
+                ]
+            ),
             MenuGroup::make(static fn() => __('moonshine::ui.resource.system'), [
                MenuItem::make(
                    static fn() => __('moonshine::ui.resource.admins_title'),
@@ -37,8 +49,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                ),
             ]),
 
-            MenuItem::make('Documentation', 'https://moonshine-laravel.com')
-               ->badge(fn() => 'Check'),
+//            MenuItem::make('Documentation', 'https://moonshine-laravel.com')
+//               ->badge(fn() => 'Check'),
         ];
     }
 
