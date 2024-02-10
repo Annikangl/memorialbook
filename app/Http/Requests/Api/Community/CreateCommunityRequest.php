@@ -25,7 +25,9 @@ class CreateCommunityRequest extends FormRequest
             'address' => ['required', 'string', 'max:150'],
             'email' => ['required', 'email', 'unique:communities'],
             'phone' => ['required', 'string', new PhoneNumber(), 'unique:communities'],
-            'website' => ['nullable', 'nullable', 'url'],
+            'website' => ['nullable', 'string', 'url'],
+            'social_links' => ['nullable', 'array'],
+            'social_links.*' => ['nullable', 'url'],
             'avatar' => [
                 'nullable',
                 File::image()->max(10 * 1024),

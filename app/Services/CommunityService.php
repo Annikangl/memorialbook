@@ -8,10 +8,7 @@ use App\Exceptions\Api\Community\CommunityException;
 use App\Models\Community\Community;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
-use App\Models\Profile\Profile;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
-use Spatie\MediaLibrary\MediaCollections\Exceptions\FileIsTooBig;
 
 class CommunityService
 {
@@ -34,6 +31,7 @@ class CommunityService
                 'phone' => $communityDTO->phone,
                 'address' => $communityDTO->address,
                 'website' => $communityDTO->website,
+                'social_links' => $communityDTO->social_links,
             ]);
 
             if ($avatar = $communityDTO->avatar) {
@@ -76,6 +74,7 @@ class CommunityService
                 'phone' => $communityDTO->phone,
                 'address' => $communityDTO->address,
                 'website' => $communityDTO->website,
+                'social_Links' => $communityDTO->social_links,
             ]);
 
             if ($avatar = $communityDTO->avatar) {

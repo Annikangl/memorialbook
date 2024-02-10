@@ -9,6 +9,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('humans', function (Blueprint $table) {
+            $table->dropColumn('religion');
             $table->foreignIdFor(Religion::class)
                 ->nullable()
                 ->after('cemetery_id')
@@ -22,6 +23,7 @@ return new class extends Migration {
         Schema::table('humans', function (Blueprint $table) {
             $table->dropForeignIdFor(Religion::class);
             $table->dropColumn('religion_id');
+            $table->string('religion')->nullable();
         });
     }
 };

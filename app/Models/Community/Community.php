@@ -33,6 +33,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $avatar
  * @property string $subtitle
  * @property string $description
+ * @property array $social_links
  * @property bool $is_celebrity
  *
  * @method static Builder|Community byUser(int $userId)
@@ -46,14 +47,20 @@ class Community extends Model implements HasMedia
         'owner_id',
         'slug',
         'email',
-        'website',
         'phone',
         'address',
+        'website',
         'title',
         'avatar',
         'subtitle',
         'description',
         'is_celebrity',
+        'social_links',
+    ];
+
+    protected $casts = [
+        'social_links' => 'array',
+        'is_celebrity' => 'boolean'
     ];
 
     public function scopeByUser(Builder $query, int $userId): Builder
