@@ -4,6 +4,7 @@ namespace App\DTOs\Profile;
 
 use Illuminate\Http\UploadedFile;
 use WendellAdriel\ValidatedDTO\Casting\BooleanCast;
+use WendellAdriel\ValidatedDTO\Casting\IntegerCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 class PetDTO extends ValidatedDTO
@@ -64,7 +65,8 @@ class PetDTO extends ValidatedDTO
     protected function casts(): array
     {
         return [
-            'as_draft' => new BooleanCast()
+            'owner_id' => new IntegerCast(),
+            'as_draft' => new BooleanCast(),
         ];
     }
 

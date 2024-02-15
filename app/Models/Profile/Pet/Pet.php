@@ -12,15 +12,11 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
- * Class Pet
- * @package App\Models\Profile\Pet
- *
- *  * @method static Builder|Pet byUser(int $userId)
- *  * @method static Builder|Pet query()
+ * @method static Builder|Pet byUser(int $userId)
+ * @method static Builder|Pet query()
  */
 class Pet extends Profile
 {
@@ -42,7 +38,9 @@ class Pet extends Profile
     ];
 
     protected $casts = [
-        'is_celebrity' => 'boolean'
+        'date_birth' => 'datetime',
+        'date_death' => 'datetime',
+        'is_celebrity' => 'boolean',
     ];
 
     public function owner(): BelongsTo

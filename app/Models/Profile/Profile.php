@@ -77,12 +77,12 @@ class Profile extends Model implements HasMedia
 
     public function getYearBirthAttribute(): string
     {
-        return Carbon::parse($this->date_birth)->year;
+        return $this->date_birth->year;
     }
 
     public function getYearDeathAttribute(): string
     {
-        return Carbon::parse($this->date_death)->year;
+        return $this->date_death->year;
     }
 
     protected function lifeExpectancy(): ?Attribute
@@ -110,7 +110,6 @@ class Profile extends Model implements HasMedia
     protected function dateBirth(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y'),
             set: fn($value) => Carbon::parse($value)->format('Y-m-d'),
         );
     }
@@ -118,7 +117,6 @@ class Profile extends Model implements HasMedia
     protected function dateDeath(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y'),
             set: fn($value) => Carbon::parse($value)->format('Y-m-d'),
         );
     }

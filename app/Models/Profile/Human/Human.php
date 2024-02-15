@@ -44,8 +44,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string $description
  * @property string $hobbies
  * @property string|null $gender
- * @property string|null $date_birth
- * @property string|null $date_death
+ * @property Carbon|null $date_birth
+ * @property Carbon|null $date_death
  * @property string|null $birth_place
  * @property string|null $burial_place
  * @property string|null $death_reason
@@ -115,7 +115,9 @@ class Human extends Profile implements HasMedia
     protected $casts = [
         'is_celebrity' => 'boolean',
         'hobbies' => 'array',
-        'burial_coords' => 'array'
+        'burial_coords' => 'array',
+        'date_birth' => 'datetime',
+        'date_death' => 'datetime',
     ];
 
     public static function genderList(): array
