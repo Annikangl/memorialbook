@@ -26,6 +26,8 @@ class UpdateCommunityRequest extends FormRequest
             'email' => ['required', 'email'],
             'phone' => ['required', 'string', new PhoneNumber()],
             'website' => ['nullable', 'nullable', 'url'],
+            'social_Links' => ['nullable', 'array'],
+            'social_Links.*' => ['nullable', 'url'],
             '_method' => ['required', 'string'],
             'avatar' => [
                 'nullable',

@@ -28,6 +28,7 @@ class ShowCommunityResource extends JsonResource
             'email' => $this->email,
             'phone' => $this->phone,
             'website' => $this->website,
+            'social_links' => $this->social_links,
             'banner' => $this->getFirstMediaUrl('banners', 'thumb_900'),
             'avatar' => $this->getFirstMediaUrl('avatars', 'thumb'),
             'pictures' => $this->getPictures(),

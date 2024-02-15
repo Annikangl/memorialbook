@@ -14,6 +14,7 @@ class CommunityDTO extends ValidatedDTO
     public string $phone;
     public ?string $website;
     public string $address;
+    public ?array $social_links;
     public ?UploadedFile $avatar;
     public ?UploadedFile $banner;
     public ?array $gallery;
@@ -34,6 +35,7 @@ class CommunityDTO extends ValidatedDTO
             'phone' => ['required', 'string'],
             'address' => ['required', 'string', 'max:150'],
             'website' => ['nullable', 'nullable', 'url'],
+            'social_links' => ['nullable', 'array'],
             'avatar' => ['nullable', 'file'],
             'banner' => ['nullable', 'file'],
             'gallery' => ['nullable', 'array'],

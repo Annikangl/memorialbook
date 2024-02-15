@@ -45,6 +45,9 @@ class Pet extends Profile
         'is_celebrity' => 'boolean'
     ];
 
+
+    protected $with = ['owner','user'];
+
     public function owner(): BelongsTo
     {
         return $this->belongsTo(Human::class, 'owner_id', 'id');

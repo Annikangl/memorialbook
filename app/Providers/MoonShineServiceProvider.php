@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\MoonShine\Resources\HobbyResource;
+use App\MoonShine\Resources\HumanResource;
 use App\MoonShine\Resources\PetResource;
 use App\MoonShine\Resources\ReligionsResource;
+use App\MoonShine\Resources\UserResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
@@ -31,6 +33,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
         return [
             MenuGroup::make('Профили', [
                     MenuItem::make('Животные', new PetResource()),
+                    MenuItem::make('Люди', new HumanResource()),
+                    MenuItem::make('Пользователи', new UserResource()),
                 ]
             ),
             MenuGroup::make('Атрибуты', [

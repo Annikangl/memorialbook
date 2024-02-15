@@ -161,6 +161,12 @@ class Human extends Profile implements HasMedia
             get: fn() => "{$this->first_name} {$this->last_name}"
         );
     }
+    protected function getFullNameAttribute(): Attribute
+    {
+        return new Attribute(
+            get: fn() => "{$this->first_name} {$this->last_name}"
+        );
+    }
 
     public function users(): BelongsTo
     {

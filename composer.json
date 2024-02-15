@@ -21,6 +21,7 @@
         "symfony/http-client": "^6.4",
         "symfony/mailgun-mailer": "^6.4",
         "tucker-eric/eloquentfilter": "^3.2",
+        "visual-ideas/moonshine-spatie-medialibrary": "^2.1",
         "wendelladriel/laravel-validated-dto": "^2.6"
     },
     "require-dev": {

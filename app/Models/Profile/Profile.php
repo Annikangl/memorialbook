@@ -107,21 +107,21 @@ class Profile extends Model implements HasMedia
         );
     }
 
-    protected function dateBirth(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y'),
-            set: fn($value) => Carbon::parse($value)->format('Y-m-d'),
-        );
-    }
-
-    protected function dateDeath(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y'),
-            set: fn($value) => Carbon::parse($value)->format('Y-m-d'),
-        );
-    }
+//    protected function dateBirth(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y'),
+//            set: fn($value) => Carbon::parse($value)->format('Y-m-d'),
+//        );
+//    }
+//
+//    protected function dateDeath(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn($value) => Carbon::createFromFormat('Y-m-d', $value)->format('d.m.Y'),
+//            set: fn($value) => Carbon::parse($value)->format('Y-m-d'),
+//        );
+//    }
 
     /**
      * @throws InvalidManipulation
@@ -139,6 +139,17 @@ class Profile extends Model implements HasMedia
 
         $this->getMedia('gallery')->each(function (Media $item) use (&$gallery) {
             $gallery[] = $item->getUrl('thumb_500');
+        });
+
+        return $gallery;
+    }
+    public function getCustomGallery(): array
+    {
+        $gallery = [];
+
+        $this->getMedia('gallery')->each(function (Media $item) use (&$gallery) {
+            $path = $item->getOriginal('id');
+            $gallery[] = '/'.$path.'/'.$item->getAttribute('file_name');
         });
 
         return $gallery;

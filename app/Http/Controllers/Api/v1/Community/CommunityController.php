@@ -31,7 +31,7 @@ use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class CommunityController extends Controller
 {
-    public function __construct(private CommunityService $communityService)
+    public function __construct(private readonly CommunityService $communityService)
     {
     }
 

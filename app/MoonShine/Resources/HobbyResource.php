@@ -19,6 +19,18 @@ class HobbyResource extends ModelResource
 
     protected string $title = 'Хобби';
 
+    protected bool $createInModal = true;
+
+    public function getActiveActions(): array
+    {
+        return ['create','view', 'delete',];
+
+    }
+    public function redirectAfterSave(): string
+    {
+        return '/admin/resource/hobby-resource/index-page';
+    }
+
     public function fields(): array
     {
         return [

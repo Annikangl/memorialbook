@@ -23,20 +23,12 @@ class ReligionsResource extends ModelResource
     protected bool $createInModal = true;
     public function getActiveActions(): array
     {
-        return ['view', 'delete',];
+        return ['create','view', 'delete',];
+
     }
-    public function actions(): array
+    public function redirectAfterSave(): string
     {
-        return [
-            ActionButton::make('Cоздать', '/')
-                ->inModal(
-                    'Modal',
-                    fn() => FormBuilder::make()
-                        ->fields([
-                            Text::make('Название','title'),
-                        ])
-                )
-        ];
+        return '/admin/resource/religions-resource/index-page';
     }
 
     public function fields(): array
