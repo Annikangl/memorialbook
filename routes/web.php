@@ -10,6 +10,7 @@ use App\Http\Controllers\Profile\BurialController;
 use App\Http\Controllers\Profile\HumanController;
 use App\Http\Controllers\Profile\PetController;
 use App\Http\Controllers\User\UserController;
+use App\Services\Attributes\ReligionService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
