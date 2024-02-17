@@ -148,22 +148,7 @@ class Human extends Profile implements HasMedia
         return self::query()->filter($filters)->count();
     }
 
-    public function sluggable(): array
-    {
-        return [
-            'slug' => [
-                'source' => ['first_name', 'last_name'],
-            ]
-        ];
-    }
-
     protected function fullName(): Attribute
-    {
-        return new Attribute(
-            get: fn() => "{$this->first_name} {$this->last_name}"
-        );
-    }
-    protected function getFullNameAttribute(): Attribute
     {
         return new Attribute(
             get: fn() => "{$this->first_name} {$this->last_name}"
@@ -281,5 +266,15 @@ class Human extends Profile implements HasMedia
             ->height(550)
             ->nonQueued();
     }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => ['first_name', 'last_name'],
+            ]
+        ];
+    }
+
 
 }
