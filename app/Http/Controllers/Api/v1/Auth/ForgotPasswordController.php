@@ -34,8 +34,11 @@ class ForgotPasswordController extends Controller
         Mail::to($request->validated('email'))
             ->send(new VerificationCodeMail($verifications->code));
 
-        return response()->json(['status' => true, 'message' => 'Verification code send to your email'])
-            ->setStatusCode(Response::HTTP_CREATED);
+        return response()->json([
+            'status' => true,
+            'verification_code' => $verifications->code,
+            'message' => 'Verification code send to your email'
+        ])->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**

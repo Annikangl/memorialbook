@@ -24,6 +24,11 @@ class HumanController extends Controller
     {
     }
 
+    /**
+     * Get humans list by user
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function byUser(Request $request): JsonResponse
     {
         if ($request->get('gender') === Human::MALE) {
@@ -40,6 +45,11 @@ class HumanController extends Controller
         ])->setStatusCode(Response::HTTP_OK);
     }
 
+    /**
+     * Show human by id
+     * @param Human $human
+     * @return JsonResponse
+     */
     public function show(Human $human): JsonResponse
     {
         $kinsfolk = collect($human->father()->get())
@@ -56,6 +66,7 @@ class HumanController extends Controller
     }
 
     /**
+     * Create a human profile
      * @throws CastTargetException
      * @throws MissingCastTypeException
      */
@@ -92,6 +103,10 @@ class HumanController extends Controller
             ->setStatusCode(Response::HTTP_OK);
     }
 
+    /**
+     * Return profiles with gender = MALE
+     * @return JsonResponse
+     */
     private function getFathers(): JsonResponse
     {
         $fathers = auth()->user()->humans()->where('gender', Human::MALE)->get();
@@ -100,6 +115,10 @@ class HumanController extends Controller
             ->setStatusCode(Response::HTTP_OK);
     }
 
+    /**
+     * Return profiles with gender = FEMALE
+     * @return JsonResponse
+     */
     private function getMothers(): JsonResponse
     {
         $mothers = auth()->user()->humans()->where('gender', Human::FEMALE)->get();

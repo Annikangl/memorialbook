@@ -15,8 +15,8 @@ class HumanResource extends JsonResource
         return [
             'id' => $this->id,
             'full_name' => $this->full_name,
-            'date_birth' => $this->date_birth,
-            'date_death' => $this->date_death,
+            'date_birth' => $this->date_birth->format('d.m.Y'),
+            'date_death' => $this->date_death->format('d.m.Y'),
             'year_birth' => $this->year_birth,
             'year_death' => $this->year_death,
             'burial_coords' => $this->burial_coords,

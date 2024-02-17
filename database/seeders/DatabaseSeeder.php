@@ -27,8 +27,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = \Faker\Factory::create();
-        $faker->addProvider(new FakerPicsumImagesProvider($faker));
+//        $faker = \Faker\Factory::create();
+//        $faker->addProvider(new FakerPicsumImagesProvider($faker));
 
         Religion::factory(10)->create();
 

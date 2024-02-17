@@ -6,6 +6,7 @@ use Illuminate\Http\UploadedFile;
 use WendellAdriel\ValidatedDTO\Casting\BooleanCast;
 use WendellAdriel\ValidatedDTO\Casting\CarbonCast;
 use WendellAdriel\ValidatedDTO\Casting\CarbonImmutableCast;
+use WendellAdriel\ValidatedDTO\Casting\IntegerCast;
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 class HumanDTO extends ValidatedDTO
@@ -26,7 +27,7 @@ class HumanDTO extends ValidatedDTO
     public ?string $father_id;
     public ?string $mother_id;
     public ?string $spouse_id;
-    public ?string $religion_id;
+    public ?int $religion_id;
     public ?array $gallery;
     public ?string $description;
     public ?array $hobbies;
@@ -93,7 +94,8 @@ class HumanDTO extends ValidatedDTO
     protected function casts(): array
     {
         return [
-            'as_draft' => new BooleanCast()
+            'religion_id' => new IntegerCast(),
+            'as_draft' => new BooleanCast(),
         ];
     }
 
