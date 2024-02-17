@@ -24,7 +24,6 @@ class UserService
 
         if (isset($validatedData['password'])) {
             $validatedData['password'] = bcrypt($validatedData['password']);
-
         }
 
         $user->update($validatedData);
