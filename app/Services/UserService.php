@@ -20,6 +20,10 @@ class UserService
      */
     public function update(User $user, UserDTO $userDTO): User
     {
+        if ($userDTO->password) {
+            $userDTO->password = bcrypt($userDTO->password);
+        }
+
         $validatedData = collect($userDTO->toArray())->filter()->except(['avatar'])->toArray();
 
         $user->update($validatedData);
