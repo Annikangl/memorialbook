@@ -109,8 +109,7 @@ class HumanService
             'date_death' => $humanDTO->date_death,
             'birth_place' => $humanDTO->birth_place,
             'burial_place' => $humanDTO->burial_place,
-            'latitude' => $humanDTO->burial_coords['lat'],
-            'longitude' => $humanDTO->burial_coords['lng'],
+            'burial_coords' => $humanDTO->burial_coords,
             'death_reason' => $humanDTO->death_reason,
             'status' => $isDraft ? Profile::STATUS_DRAFT : Profile::STATUS_ACTIVE,
             'access' => $humanDTO->access,
@@ -128,8 +127,14 @@ class HumanService
             }
         }
 
+        // TODO remove old images
+
         if ($humanDTO->avatar) {
             $this->uploadMedia($human, 'avatars', $humanDTO->avatar);
+        }
+
+        if ($humanDTO->banner) {
+            $this->uploadMedia($human, 'banners', $humanDTO->banner);
         }
 
         if ($humanDTO->gallery) {
