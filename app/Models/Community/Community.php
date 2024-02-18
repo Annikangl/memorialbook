@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Image\Exceptions\InvalidManipulation;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -154,29 +156,24 @@ class Community extends Model implements HasMedia
         $this->addMediaCollection('documents');
     }
 
+    /**
+     * @throws InvalidManipulation
+     */
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
             ->performOnCollections('avatars')
-            ->width(150)
-            ->height(150)
-            ->nonQueued();
-
-        $this->addMediaConversion('thumb_500')
-            ->width(500)
-            ->height(550)
-            ->nonQueued();
+            ->fit(Manipulations::FIT_CROP, 150, 150)
+            ->queued();
 
         $this->addMediaConversion('thumb_500')
             ->performOnCollections('gallery')
-            ->width(500)
-            ->height(550)
-            ->nonQueued();
+            ->fit(Manipulations::FIT_CROP, 640)
+            ->queued();
 
         $this->addMediaConversion('thumb_900')
             ->performOnCollections('banners')
-            ->width(1000)
-            ->height(600)
-            ->nonQueued();
+            ->fit(Manipulations::FIT_CROP, 1000)
+            ->queued();
     }
 }

@@ -29,7 +29,8 @@ RUN apt-get update && \
         jpegoptim \
         optipng \
         pngquant \
-        gifsicle
+        gifsicle \
+        supervisor
 
 RUN docker-php-ext-install exif
 
@@ -71,7 +72,7 @@ RUN docker-php-ext-install gd && \
 #####################################
 
 # Install the xdebug extension
-RUN pecl install xdebug
+#RUN pecl install xdebug
 
 #####################################
 # PHP Memcached:
@@ -91,6 +92,12 @@ RUN curl -s http://getcomposer.org/installer | php && \
 # Source the bash
 RUN . ~/.bashrc
 
+
+#####################################
+# Supervisor :
+#####################################
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 #
 #--------------------------------------------------------------------------
 # Final Touch
@@ -103,22 +110,22 @@ ADD ./laravel.ini /usr/local/etc/php/conf.d
 # Aliases:
 #####################################
 # docker-compose exec php-fpm dep --> locally installed Deployer binaries
-RUN echo '#!/bin/bash\n/usr/local/bin/php /var/www/vendor/bin/dep "$@"' > /usr/bin/dep
+RUN echo '#!/bin/bash\n/usr/local/bin/php /var/www/memorialbook/vendor/bin/dep "$@"' > /usr/bin/dep
 RUN chmod +x /usr/bin/dep
-# docker-compose exec php-fpm art --> php artisan
-RUN echo '#!/bin/bash\n/usr/local/bin/php /var/www/artisan "$@"' > /usr/bin/art
+# docker compose exec php-fpm art --> php artisan
+RUN echo '#!/bin/bash\n/usr/local/bin/php /var/www/memorialbook/artisan "$@"' > /usr/bin/art
 RUN chmod +x /usr/bin/art
-# docker-compose exec php-fpm migrate --> php artisan migrate
-RUN echo '#!/bin/bash\n/usr/local/bin/php /var/www/artisan migrate "$@"' > /usr/bin/migrate
+# docker compose exec php-fpm migrate --> php artisan migrate
+RUN echo '#!/bin/bash\n/usr/local/bin/php /var/www/memorialbook/artisan migrate "$@"' > /usr/bin/migrate
 RUN chmod +x /usr/bin/migrate
 # docker-compose exec php-fpm fresh --> php artisan migrate:fresh --seed
-RUN echo '#!/bin/bash\n/usr/local/bin/php /var/www/artisan migrate:fresh --seed' > /usr/bin/fresh
+RUN echo '#!/bin/bash\n/usr/local/bin/php /var/www/memorialbook/artisan migrate:fresh --seed' > /usr/bin/fresh
 RUN chmod +x /usr/bin/fresh
 # docker-compose exec php-fpm t --> run the tests for the project and generate testdox
-RUN echo '#!/bin/bash\n/usr/local/bin/php /var/www/artisan config:clear\n/var/www/vendor/bin/phpunit -d memory_limit=2G --stop-on-error --stop-on-failure --testdox-text=tests/report.txt "$@"' > /usr/bin/t
+RUN echo '#!/bin/bash\n/usr/local/bin/php /var/www/memorialbook/artisan config:clear\n/var/www/vendor/bin/phpunit -d memory_limit=2G --stop-on-error --stop-on-failure --testdox-text=tests/report.txt "$@"' > /usr/bin/t
 RUN chmod +x /usr/bin/t
 # docker-compose exec php-fpm d --> run the Laravel Dusk browser tests for the project
-RUN echo '#!/bin/bash\n/usr/local/bin/php /var/www/artisan config:clear\n/bin/bash\n/usr/local/bin/php /var/www/artisan dusk -d memory_limit=2G --stop-on-error --stop-on-failure --testdox-text=tests/report-dusk.txt "$@"' > /usr/bin/d
+RUN echo '#!/bin/bash\n/usr/local/bin/php /var/www/memorialbook/artisan config:clear\n/bin/bash\n/usr/local/bin/php /var/www/artisan dusk -d memory_limit=2G --stop-on-error --stop-on-failure --testdox-text=tests/report-dusk.txt "$@"' > /usr/bin/d
 RUN chmod +x /usr/bin/d
 
 RUN rm -r /var/lib/apt/lists/*
@@ -127,10 +134,7 @@ RUN usermod -u 1000 www-data
 
 WORKDIR /var/www/memorialbook
 
-#COPY ./docker-entrypoint.sh /usr/local/bin/
-#RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-#RUN ln -s /usr/local/bin/docker-entrypoint.sh /
-#ENTRYPOINT ["docker-entrypoint.sh"]
-
 EXPOSE 9000
-CMD ["php-fpm"]
+#CMD ["php-fpm"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+

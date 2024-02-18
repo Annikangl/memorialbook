@@ -20,12 +20,15 @@ use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class HumanController extends Controller
 {
+    /**
+     * @param HumanService $humanService
+     */
     public function __construct(private readonly HumanService $humanService)
     {
     }
 
     /**
-     * Get humans list by user
+     * Get humans list by auth user
      * @param Request $request
      * @return JsonResponse
      */
@@ -67,6 +70,8 @@ class HumanController extends Controller
 
     /**
      * Create a human profile
+     * @param CreateHumanRequest $request
+     * @return JsonResponse
      * @throws CastTargetException
      * @throws MissingCastTypeException
      */
@@ -84,6 +89,11 @@ class HumanController extends Controller
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
+    /**
+     * Search and filters humans
+     * @param SearchHumanRequest $request
+     * @return JsonResponse
+     */
     public function search(SearchHumanRequest $request): JsonResponse
     {
         $humans = Human::query()
@@ -95,6 +105,11 @@ class HumanController extends Controller
             ->setStatusCode(Response::HTTP_OK);
     }
 
+    /**
+     * Get counts humans by search filters
+     * @param SearchHumanRequest $request
+     * @return JsonResponse
+     */
     public function searchCount(SearchHumanRequest $request): JsonResponse
     {
         $humansFilteredCount = Human::getFilteredCount($request->validated());

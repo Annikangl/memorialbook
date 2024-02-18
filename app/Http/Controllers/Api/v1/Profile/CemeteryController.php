@@ -23,6 +23,9 @@ class CemeteryController extends Controller
     {
     }
 
+    /**
+     * @return JsonResponse
+     */
     public function index(): JsonResponse
     {
         $user = Auth::guard('sanctum')->user();
@@ -41,6 +44,10 @@ class CemeteryController extends Controller
         ])->setStatusCode(Response::HTTP_OK);
     }
 
+    /**
+     * @param SearchCemeteryRequest $request
+     * @return JsonResponse
+     */
     public function search(SearchCemeteryRequest $request): JsonResponse
     {
         $cemeteries = Cemetery::query()
@@ -53,6 +60,10 @@ class CemeteryController extends Controller
             ->setStatusCode(Response::HTTP_OK);
     }
 
+    /**
+     * @param SearchCemeteryRequest $request
+     * @return JsonResponse
+     */
     public function searchCount(SearchCemeteryRequest $request): JsonResponse
     {
         $cemeteriesFilteredCount = Cemetery::getFilteredCount($request->validated());
@@ -61,6 +72,10 @@ class CemeteryController extends Controller
             ->setStatusCode(Response::HTTP_OK);
     }
 
+    /**
+     * @param Cemetery $cemetery
+     * @return JsonResponse
+     */
     public function show(Cemetery $cemetery): JsonResponse
     {
         return response()->json(['status' => true, 'cemetery' => new ShowCemeteryResource($cemetery)])
@@ -68,7 +83,11 @@ class CemeteryController extends Controller
     }
 
     /**
-     * @throws MissingCastTypeException|CemeteryException|CastTargetException
+     * @param CreateCemeteryRequest $request
+     * @return JsonResponse
+     * @throws CastTargetException
+     * @throws CemeteryException
+     * @throws MissingCastTypeException
      */
     public function store(CreateCemeteryRequest $request): JsonResponse
     {
@@ -85,6 +104,8 @@ class CemeteryController extends Controller
     }
 
     /**
+     * @param Cemetery $cemetery
+     * @return JsonResponse
      * @throws CemeteryException
      */
     public function subscribe(Cemetery $cemetery): JsonResponse
@@ -96,6 +117,8 @@ class CemeteryController extends Controller
     }
 
     /**
+     * @param Cemetery $cemetery
+     * @return JsonResponse
      * @throws CemeteryException
      */
     public function unsubscribe(Cemetery $cemetery): JsonResponse

@@ -21,6 +21,10 @@ class PetController extends Controller
     {
     }
 
+    /**
+     * Get created pets by auth user
+     * @return JsonResponse
+     */
     public function byUser(): JsonResponse
     {
         return response()->json([
@@ -29,6 +33,11 @@ class PetController extends Controller
         ])->setStatusCode(Response::HTTP_OK);
     }
 
+    /**
+     * Show pet by id
+     * @param Pet $pet
+     * @return JsonResponse
+     */
     public function show(Pet $pet)
     {
         return response()->json(['status' => true, 'pet' => new ShowPetResource($pet)])
@@ -36,7 +45,12 @@ class PetController extends Controller
     }
 
     /**
-     * @throws MissingCastTypeException|PetException|CastTargetException
+     * Create a new pet
+     * @param CreatePetRequest $request
+     * @return JsonResponse
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     * @throws PetException
      */
     public function store(CreatePetRequest $request)
     {

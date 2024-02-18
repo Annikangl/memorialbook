@@ -10,6 +10,11 @@ use App\Models\Profile\Profile;
 class PetService
 {
     /**
+     * Create a new pet
+     * @param PetDTO $petDTO
+     * @param int $userId
+     * @param bool $as_draft
+     * @return Pet
      * @throws PetException
      */
     public function create(PetDTO $petDTO, int $userId, bool $as_draft): Pet
@@ -26,7 +31,8 @@ class PetService
                 'burial_place' => $petDTO->burial_place,
                 'death_reason' => $petDTO->death_reason,
                 'description' => $petDTO->description,
-                'status' => $as_draft ? Profile::STATUS_DRAFT : Profile::STATUS_ACTIVE
+                'status' => $as_draft ? Profile::STATUS_DRAFT : Profile::STATUS_ACTIVE,
+                'is_celebrity' => $petDTO->is_celebrity,
             ]);
 
             if ($avatar = $petDTO->avatar) {
@@ -34,7 +40,7 @@ class PetService
             }
 
             if ($banner = $petDTO->banner) {
-                $pet->addMedia($banner)->toMediaCollection('banner');
+                $pet->addMedia($banner)->toMediaCollection('banners');
             }
 
             if ($gallery = $petDTO->gallery) {

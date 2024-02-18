@@ -15,7 +15,7 @@ class ShowPetResource extends JsonResource
             'id' => $this->id,
             'owner' => HumanResource::make($this->owner),
             'avatar' => $this->getFirstMediaUrl('avatars', 'thumb'),
-            'banner' => $this->getFirstMediaUrl('banners', 'thumb_500'),
+            'banner' => $this->getFirstMediaUrl('banners', 'thumb_900'),
             'name' => $this->name,
             'date_birth' => $this->date_birth->format('d.m.Y'),
             'date_death' => $this->date_death->format('d.m.Y'),

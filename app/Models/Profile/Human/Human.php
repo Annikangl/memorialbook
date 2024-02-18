@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Spatie\Image\Exceptions\InvalidManipulation;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -253,18 +255,27 @@ class Human extends Profile implements HasMedia
             ->singleFile();
     }
 
+    /**
+     * @throws InvalidManipulation
+     */
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-            ->width(150)
-            ->height(150)
-            ->nonQueued();
+            ->performOnCollections('avatars')
+            ->fit(Manipulations::FIT_CROP, 150, 150)
+            ->sharpen(10)
+            ->queued();
 
         $this->addMediaConversion('thumb_500')
-            ->performOnCollections('gallery', 'banners')
-            ->width(500)
-            ->height(550)
-            ->nonQueued();
+            ->performOnCollections('gallery')
+            ->fit(Manipulations::FIT_CROP, 640)
+            ->sharpen(10)
+            ->queued();
+
+        $this->addMediaConversion('thumb_900')
+            ->performOnCollections('banners')
+            ->fit(Manipulations::FIT_CROP, 1000)
+            ->queued();
     }
 
     public function sluggable(): array

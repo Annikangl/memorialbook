@@ -16,7 +16,7 @@ class CommunityResource extends JsonResource
             'is_owner' => $this->isOwner(auth('sanctum')->id()),
             'title' => $this->title,
             'subtitle' => $this->subtitle,
-            'banner' => $this->getFirstMediaUrl('banners', 'thumb_500'),
+            'banner' => $this->getFirstMediaUrl('banners', 'thumb_900'),
             'avatar' => $this->getFirstMediaUrl('avatars', 'thumb'),
             'created_at' => $this->created_at
         ];

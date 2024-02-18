@@ -121,16 +121,6 @@ class Profile extends Model implements HasMedia
         );
     }
 
-    /**
-     * @throws InvalidManipulation
-     */
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-            ->fit(Manipulations::FIT_CROP, 150, 150)
-            ->nonQueued();
-    }
-
     public function getGallery(): array
     {
         $gallery = [];

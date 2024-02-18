@@ -30,6 +30,7 @@ class CreatePetRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'owner_id' => ['required', 'integer', 'exists:humans,id'],
             'as_draft' => ['required', 'bool'],
+            'is_celebrity' => ['nullable', 'bool'],
             'access' => ['required', Rule::in(Profile::getAccessList())],
 
             'avatar' => [

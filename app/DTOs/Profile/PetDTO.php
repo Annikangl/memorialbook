@@ -22,6 +22,7 @@ class PetDTO extends ValidatedDTO
     public ?UploadedFile $banner;
     public ?array $gallery;
     public bool $as_draft;
+    public ?bool $is_celebrity;
 
     /**
      * Defines the validation rules for the DTO.
@@ -43,7 +44,8 @@ class PetDTO extends ValidatedDTO
             'avatar' => ['nullable', 'image'],
             'banner' => ['nullable', 'image'],
             'gallery' => ['nullable', 'array'],
-            'as_draft' => ['required', 'bool']
+            'as_draft' => ['required', 'bool'],
+            'is_celebrity' => ['nullable', 'bool'],
         ];
     }
 
@@ -54,7 +56,9 @@ class PetDTO extends ValidatedDTO
      */
     protected function defaults(): array
     {
-        return [];
+        return [
+            'is_celebrity' => false,
+        ];
     }
 
     /**
@@ -67,6 +71,7 @@ class PetDTO extends ValidatedDTO
         return [
             'owner_id' => new IntegerCast(),
             'as_draft' => new BooleanCast(),
+            'is_celebrity' => new BooleanCast(),
         ];
     }
 

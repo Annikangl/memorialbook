@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\Image\Exceptions\InvalidManipulation;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
@@ -43,13 +45,7 @@ class Pet extends Profile
         'is_celebrity' => 'boolean',
     ];
 
-
     protected $with = ['owner','user'];
-
-    public function owner(): BelongsTo
-    {
-        return $this->belongsTo(Human::class, 'owner_id', 'id');
-    }
 
     public function scopeByUser(Builder $query, int $userId): Builder
     {
@@ -67,13 +63,9 @@ class Pet extends Profile
         return $this->belongsTo(User::class);
     }
 
-    public function sluggable(): array
+    public function owner(): BelongsTo
     {
-        return [
-            'slug' => [
-                'source' => ['name']
-            ]
-        ];
+        return $this->belongsTo(Human::class, 'owner_id', 'id');
     }
 
     protected function fullName(): Attribute
@@ -98,23 +90,36 @@ class Pet extends Profile
         $this->addMediaCollection('gallery');
     }
 
+    /**
+     * Convert images
+     * @throws InvalidManipulation
+     */
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
             ->performOnCollections('avatars')
-            ->width(150)
-            ->height(150)
-            ->nonQueued();
+            ->fit(Manipulations::FIT_CROP, 150, 150)
+            ->sharpen(10)
+            ->queued();
 
         $this->addMediaConversion('thumb_500')
-            ->width(500)
-            ->height(550)
-            ->nonQueued();
+            ->performOnCollections('gallery')
+            ->fit(Manipulations::FIT_CROP, 640)
+            ->sharpen(10)
+            ->queued();
 
         $this->addMediaConversion('thumb_900')
             ->performOnCollections('banners')
-            ->width(1000)
-            ->height(600)
-            ->nonQueued();
+            ->fit(Manipulations::FIT_CROP, 1000)
+            ->queued();
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => ['name']
+            ]
+        ];
     }
 }

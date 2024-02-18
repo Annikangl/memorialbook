@@ -15,7 +15,7 @@ class ShowHumanResource extends JsonResource
         return [
             'id' => $this->id,
             'avatar' => $this->getFirstMediaUrl('avatars', 'thumb'),
-            'banner' => $this->getFirstMediaUrl('banners', 'thumb_500'),
+            'banner' => $this->getFirstMediaUrl('banners', 'thumb_900'),
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'middle_name' => $this->middle_name,
