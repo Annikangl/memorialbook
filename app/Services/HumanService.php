@@ -15,6 +15,13 @@ use Spatie\MediaLibrary\MediaCollections\Exceptions\MediaCannotBeDeleted;
 
 class HumanService
 {
+    /**
+     * Create a human profile
+     * @param int $userId
+     * @param HumanDTO $humanDTO
+     * @param bool $draft
+     * @return Human
+     */
     public function create(int $userId, HumanDTO $humanDTO, bool $draft = false): Human
     {
         try {
