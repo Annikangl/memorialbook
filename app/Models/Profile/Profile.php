@@ -75,14 +75,14 @@ class Profile extends Model implements HasMedia
         return $this->status === self::STATUS_REJECTED;
     }
 
-    public function getYearBirthAttribute(): string
+    public function getYearBirthAttribute(): ?string
     {
-        return $this->date_birth->year;
+        return $this->date_birth?->year;
     }
 
-    public function getYearDeathAttribute(): string
+    public function getYearDeathAttribute(): ?string
     {
-        return $this->date_death->year;
+        return $this->date_death?->year;
     }
 
     protected function lifeExpectancy(): ?Attribute
@@ -107,6 +107,20 @@ class Profile extends Model implements HasMedia
         );
     }
 
+    protected function dateBirth(): Attribute
+    {
+        return Attribute::make(
+            set: fn($value) => Carbon::parse($value)->format('Y-m-d'),
+        );
+    }
+
+    protected function dateDeath(): Attribute
+    {
+        return Attribute::make(
+            set: fn($value) => Carbon::parse($value)->format('Y-m-d'),
+        );
+    }
+
     /**
      * @throws InvalidManipulation
      */
@@ -127,6 +141,7 @@ class Profile extends Model implements HasMedia
 
         return $gallery;
     }
+
     public function getCustomGallery(): array
     {
         $gallery = [];

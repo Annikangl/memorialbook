@@ -13,7 +13,7 @@ class ReligionService
      */
     public function create(string $title): Religion
     {
-        return Religion::query()->create(['title' => $title]);
+        return Religion::query()->create(['title' => $title,'slug'=>\Str::slug($title)]);
     }
 
     /**

@@ -127,7 +127,8 @@ class Human extends Profile implements HasMedia
             'female' => self::FEMALE
         ];
     }
-    protected $with = ['spouse','father','mother','children'];
+
+    protected $with = ['user'];
 
     public function scopeActive(Builder $query): Builder
     {
@@ -164,6 +165,7 @@ class Human extends Profile implements HasMedia
             get: fn() => "{$this->first_name} {$this->last_name}"
         );
     }
+
     protected function getFullNameAttribute(): Attribute
     {
         return new Attribute(
@@ -171,6 +173,15 @@ class Human extends Profile implements HasMedia
         );
     }
 
+    public function getNameFullAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->BelongsTo(User::class, 'user_id');
+    }
     public function users(): BelongsTo
     {
         return $this->BelongsTo(User::class, 'user_id');
