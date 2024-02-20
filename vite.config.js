@@ -20,8 +20,8 @@ export default defineConfig({
     //     host,
     //     hmr: { host },
     //     https: {
-    //         key: fs.readFileSync(`./docker/nginx/ssl/default.key`),
-    //         cert: fs.readFileSync(`./docker/nginx/ssl/default.crt`),
+    //         key: fs.readFileSync(`./docker/nginx/ssl/memorialbook.site.key`),
+    //         cert: fs.readFileSync(`./docker/nginx/ssl/memorialbook.site.crt`),
     //     },
     // },
 

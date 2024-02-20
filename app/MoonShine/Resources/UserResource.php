@@ -8,6 +8,7 @@ use App\Models\User\User;
 use Illuminate\Database\Eloquent\Model;
 
 
+use MoonShine\Fields\Text;
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
 use MoonShine\Fields\ID;
@@ -23,6 +24,7 @@ class UserResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
+                Text::make('Имя','username')->sortable(),
             ]),
         ];
     }

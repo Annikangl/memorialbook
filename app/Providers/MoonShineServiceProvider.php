@@ -34,9 +34,10 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             MenuGroup::make('Профили', [
                     MenuItem::make('Животные', new PetResource()),
                     MenuItem::make('Люди', new HumanResource()),
-                    MenuItem::make('Пользователи', new UserResource()),
+
                 ]
             ),
+            MenuItem::make('Пользователи', new UserResource()),
             MenuGroup::make('Атрибуты', [
                     MenuItem::make('Религиозные взгляды', new ReligionsResource()),
                     MenuItem::make('Хобби', new HobbyResource())

@@ -130,6 +130,8 @@ class Human extends Profile implements HasMedia
         ];
     }
 
+    protected $with = ['user'];
+
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('status', self::STATUS_ACTIVE);
