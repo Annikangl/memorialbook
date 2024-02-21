@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\User\User;
+use App\MoonShine\Pages\Dashboard;
 use App\MoonShine\Resources\HobbyResource;
 use App\MoonShine\Resources\HumanResource;
 use App\MoonShine\Resources\PetResource;
@@ -31,18 +33,29 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
     protected function menu(): array
     {
         return [
-            MenuGroup::make('Профили', [
-                    MenuItem::make('Животные', new PetResource()),
-                    MenuItem::make('Люди', new HumanResource()),
+            MenuItem::make('Главная страница', new Dashboard())
+                ->icon('heroicons.home'),
 
+            MenuGroup::make('Профили', [
+                    MenuItem::make('Животные', new PetResource())
+                        ->icon('heroicons.document-text'),
+
+                    MenuItem::make('Люди', new HumanResource())
+                        ->icon('heroicons.user'),
                 ]
-            ),
-            MenuItem::make('Пользователи', new UserResource()),
+            )->icon('heroicons.identification'),
+
+            MenuItem::make('Пользователи', new UserResource())
+                ->badge(fn()=>User::query()->count())
+                ->icon('heroicons.users'),
+
             MenuGroup::make('Атрибуты', [
-                    MenuItem::make('Религиозные взгляды', new ReligionsResource()),
+                    MenuItem::make('Религиозные взгляды', new ReligionsResource())
+                        ->icon('heroicons.globe-europe-africa'),
                     MenuItem::make('Хобби', new HobbyResource())
+                        ->icon('heroicons.puzzle-piece')
                 ]
-            ),
+            )->icon('heroicons.document-plus'),
             MenuGroup::make(static fn() => __('moonshine::ui.resource.system'), [
                MenuItem::make(
                    static fn() => __('moonshine::ui.resource.admins_title'),
@@ -52,7 +65,7 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                    static fn() => __('moonshine::ui.resource.role_title'),
                    new MoonShineUserRoleResource()
                ),
-            ]),
+            ])->icon('heroicons.wrench-screwdriver'),
 
 //            MenuItem::make('Documentation', 'https://moonshine-laravel.com')
 //               ->badge(fn() => 'Check'),

@@ -20,8 +20,15 @@ class Dashboard extends Page
         return $this->title ?: 'Главная';
     }
 
+    public function subtitle(): string
+    {
+        return $this->subtitle ?: 'Добро пожаловать! Панель администрирования приложения MemorialBook!';
+    }
+
     public function components(): array
 	{
-		return [];
+		return [
+
+        ];
 	}
 }
