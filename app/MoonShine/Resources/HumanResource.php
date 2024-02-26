@@ -171,7 +171,7 @@ class HumanResource extends ModelResource
                                     ->hideOnIndex(),
                             ])->columnSpan(3),
                         ]),
-                        BelongsTo::make('Cоздатель','user',
+                        BelongsTo::make('Cоздатель записи','user',
                             fn($user)=> $user->id.' | '.$user->username, resource: new UserResource())
                             ->hideOnIndex()
                             ->required(),
@@ -198,8 +198,8 @@ class HumanResource extends ModelResource
                     Tab::make('Завершение',[
                         Select::make('Настройка публикации', 'as_draft')
                             ->options([
-                                '0'=>'Черновик',
-                                '1'=>'Активный',
+                                '1'=>'Черновик',
+                                '0'=>'Активный',
                             ])
                             ->hideOnIndex()
                             ->required(),

@@ -54,8 +54,14 @@ class PetResource extends ModelResource
                 ID::make()->sortable(),
                 Tabs::make([
                     Tab::make('Основная информация',[
-                        Text::make('Имя питомца','name')->required(),
-                        Text::make('Порода','breed')->required(),
+                        Grid::make([
+                            Column::make([
+                                Text::make('Имя питомца','name')->required(),
+                            ])->columnSpan(6),
+                            Column::make([
+                                Text::make('Порода','breed')->required(),
+                            ])->columnSpan(6),
+                        ]),
                         Grid::make([
                             Column::make([
                                 Date::make('Дата рождения','date_birth')
@@ -74,22 +80,29 @@ class PetResource extends ModelResource
                         Text::make('Причина смерти','death_reason')
                             ->hideOnIndex()
                             ->required(),
-                        Text::make('Место рождения','birth_place')
-                            ->required()
-                            ->hideOnIndex(),
-                        Text::make('Место захоронения','burial_place')
-                            ->required()
-                            ->hideOnIndex(),
                         Grid::make([
                             Column::make([
-                                BelongsTo::make('Владелец','owner',
+                                Text::make('Место рождения','birth_place')
+                                    ->required()
+                                    ->hideOnIndex(),
+                            ])->columnSpan(6),
+                            Column::make([
+                                Text::make('Место захоронения','burial_place')
+                                    ->required()
+                                    ->hideOnIndex(),
+                            ])->columnSpan(6),
+                        ]),
+                        Grid::make([
+                            Column::make([
+                                BelongsTo::make('Владелец питомца','owner',
                                     fn($owner)=> $owner->id.' | '.$owner->first_name.' '.$owner->last_name,
                                     resource: new HumanResource())
                                     ->required(),
                             ])->columnSpan(6),
                             Column::make([
-                                BelongsTo::make('Cоздатель','user',
+                                BelongsTo::make('Cоздатель записи','user',
                                     fn($user)=> $user->id.' | '.$user->username, resource: new UserResource())
+                                    ->hideOnIndex()
                                     ->required(),
                             ])->columnSpan(6),
                         ]),
@@ -118,6 +131,7 @@ class PetResource extends ModelResource
                             ->required(),
                         Date::make('Дата создания','created_at')
                             ->hideOnCreate()
+                            ->hideOnIndex()
                             ->format('Y-m-d'),
                     ]),
                 ]),

@@ -1,6 +1,5 @@
 <?php
 
-use App\MoonShine\Layout\NewMoonshineLayout;
 use MoonShine\Exceptions\MoonShineNotFoundException;
 use MoonShine\Forms\LoginForm;
 use MoonShine\Http\Middleware\Authenticate;
@@ -31,7 +30,7 @@ return [
     'use_notifications' => true,
     'use_theme_switcher' => true,
 
-    'layout' => NewMoonshineLayout::class,
+    'layout' => \App\MoonShine\Layout\MoonShineLayout::class,
 
     'disk' => 'public',
 

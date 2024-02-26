@@ -79,6 +79,28 @@ return [
             'imported' => 'Imported',
             'file_required' => 'File is required',
             'extension_not_supported' => 'File extension not supported'
-        ]
-    ]
+        ],
+    ],
+
+    'menu_items' => [
+        'dashboard' => 'Dashboard',
+        'profiles' => [
+            'profiles' => 'Profiles',
+            'pets' => 'Pets',
+            'humans' => 'Humans',
+        ],
+        'attributes' => [
+            'attributes' => 'Attributes',
+            'religion views' => 'Religion views',
+            'hobbies' => 'Hobbies',
+        ],
+        'users' => 'Users',
+        'application' => 'Application manage',
+        'main' => 'Main',
+    ],
+
+    'metrics' => [
+        'Total users' => 'Total users',
+        'Profile creation statistics' => 'Profile creation statistics',
+    ],
 ];
