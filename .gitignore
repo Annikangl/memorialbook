@@ -21,3 +21,5 @@ public/media
 config/filesystems.php
 
 /storage/media-library/temp/*
+/supervisord.log
+/supervisord.pid

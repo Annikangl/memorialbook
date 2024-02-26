@@ -80,5 +80,27 @@ return [
             'file_required' => 'Файл обязателен',
             'extension_not_supported' => 'Расширение файла не поддерживается'
         ]
-    ]
+    ],
+
+    'menu_items' => [
+        'dashboard' => 'Главная',
+        'profiles' => [
+            'profiles' => 'Профили',
+            'pets' => 'Животные',
+            'humans' => 'Люди',
+        ],
+        'attributes' => [
+            'attributes' => 'Атрибуты',
+            'religion views' => 'Религии',
+            'hobbies' => 'Хобби',
+        ],
+        'users' => 'Пользователи',
+        'application' => 'Управление приложением',
+        'main' => 'Основное',
+    ],
+
+    'metrics' => [
+        'Total users' => 'Всего пользователей',
+        'Profile creation statistics' => 'Статистика создания профилей',
+    ],
 ];

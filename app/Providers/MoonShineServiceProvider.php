@@ -11,6 +11,7 @@ use App\MoonShine\Resources\HumanResource;
 use App\MoonShine\Resources\PetResource;
 use App\MoonShine\Resources\ReligionsResource;
 use App\MoonShine\Resources\UserResource;
+use MoonShine\Menu\MenuDivider;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
@@ -33,42 +34,51 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
     protected function menu(): array
     {
         return [
-            MenuItem::make('Главная страница', new Dashboard())
+            MenuDivider::make('moonshine::ui.menu_items.main')->translatable(),
+            MenuItem::make('moonshine::ui.menu_items.dashboard', new Dashboard())
+                ->translatable()
                 ->icon('heroicons.home'),
 
-            MenuGroup::make('Профили', [
-                    MenuItem::make('Животные', new PetResource())
-                        ->icon('heroicons.document-text'),
-
-                    MenuItem::make('Люди', new HumanResource())
-                        ->icon('heroicons.user'),
-                ]
-            )->icon('heroicons.identification'),
-
-            MenuItem::make('Пользователи', new UserResource())
-                ->badge(fn()=>User::query()->count())
+            MenuItem::make('moonshine::ui.menu_items.users', new UserResource())
+                ->translatable()
+                ->badge(fn() => User::query()->count())
                 ->icon('heroicons.users'),
 
-            MenuGroup::make('Атрибуты', [
-                    MenuItem::make('Религиозные взгляды', new ReligionsResource())
+            MenuDivider::make('moonshine::ui.menu_items.application')->translatable(),
+
+            MenuGroup::make('moonshine::ui.menu_items.profiles.profiles', [
+                    MenuItem::make('moonshine::ui.menu_items.profiles.pets', new PetResource())
+                        ->translatable()
+                        ->icon('heroicons.document-text'),
+
+                    MenuItem::make('moonshine::ui.menu_items.profiles.humans', new HumanResource())
+                        ->translatable()
+                        ->icon('heroicons.user'),
+                ]
+            )->translatable()->icon('heroicons.identification'),
+
+            MenuGroup::make('moonshine::ui.menu_items.attributes.attributes', [
+                    MenuItem::make('moonshine::ui.menu_items.attributes.religion views', new ReligionsResource())
+                        ->translatable()
                         ->icon('heroicons.globe-europe-africa'),
-                    MenuItem::make('Хобби', new HobbyResource())
+                    MenuItem::make('moonshine::ui.menu_items.attributes.hobbies', new HobbyResource())
+                        ->translatable()
                         ->icon('heroicons.puzzle-piece')
                 ]
-            )->icon('heroicons.document-plus'),
-            MenuGroup::make(static fn() => __('moonshine::ui.resource.system'), [
-               MenuItem::make(
-                   static fn() => __('moonshine::ui.resource.admins_title'),
-                   new MoonShineUserResource()
-               ),
-               MenuItem::make(
-                   static fn() => __('moonshine::ui.resource.role_title'),
-                   new MoonShineUserRoleResource()
-               ),
-            ])->icon('heroicons.wrench-screwdriver'),
+            )->translatable()->icon('heroicons.document-plus'),
 
-//            MenuItem::make('Documentation', 'https://moonshine-laravel.com')
-//               ->badge(fn() => 'Check'),
+            MenuDivider::make('moonshine::ui.resource.system')->translatable(),
+
+            MenuGroup::make(static fn() => __('moonshine::ui.resource.system'), [
+                MenuItem::make(
+                    static fn() => __('moonshine::ui.resource.admins_title'),
+                    new MoonShineUserResource()
+                ),
+                MenuItem::make(
+                    static fn() => __('moonshine::ui.resource.role_title'),
+                    new MoonShineUserRoleResource()
+                ),
+            ])->icon('heroicons.wrench-screwdriver'),
         ];
     }
 
