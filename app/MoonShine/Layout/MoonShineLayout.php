@@ -31,12 +31,9 @@ final class MoonShineLayout implements MoonShineLayoutContract
                 Header::make(),
                 Content::make(),
                 Footer::make()->copyright(fn (): string => <<<'HTML'
-                        &copy; 2024 Made with ❤️ by
-                        <a href="https://t.me/kek_ivanovich"
-                            class="font-semibold text-primary hover:text-secondary"
-                            target="_blank"
+                        &copy; 2024
+                        <a
                         >
-                            Ivan
                         </a>
                     HTML),
             ])->customAttributes(['class' => 'layout-page']),

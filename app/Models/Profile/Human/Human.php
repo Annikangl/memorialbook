@@ -130,7 +130,7 @@ class Human extends Profile implements HasMedia
         ];
     }
 
-    protected $with = ['user'];
+    protected $with = ['users'];
 
     public function scopeActive(Builder $query): Builder
     {
@@ -157,6 +157,11 @@ class Human extends Profile implements HasMedia
         return new Attribute(
             get: fn() => "{$this->first_name} {$this->last_name}"
         );
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     public function users(): BelongsTo

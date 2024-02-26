@@ -135,7 +135,7 @@ class HumanResource extends ModelResource
                                     ->options(Human::query()
                                         ->select(['id','first_name','last_name'])
                                         ->get()
-                                        ->pluck('name_full', 'id')
+                                        ->pluck('full_name', 'id')
                                         ->toArray())
                                     ->nullable()
                                     ->hideOnIndex(),
@@ -145,7 +145,7 @@ class HumanResource extends ModelResource
                                     ->options(Human::query()
                                         ->select(['id','first_name','last_name'])
                                         ->get()
-                                        ->pluck('name_full', 'id')
+                                        ->pluck('full_name', 'id')
                                         ->toArray())
                                     ->nullable()
                                     ->hideOnIndex(),
@@ -155,7 +155,7 @@ class HumanResource extends ModelResource
                                     ->options(Human::query()
                                         ->select(['id','first_name','last_name'])
                                         ->get()
-                                        ->pluck('name_full', 'id')
+                                        ->pluck('full_name', 'id')
                                         ->toArray())
                                     ->nullable()
                                     ->hideOnIndex(),
@@ -165,13 +165,13 @@ class HumanResource extends ModelResource
                                     ->options(Human::query()
                                         ->select(['id','first_name','last_name'])
                                         ->get()
-                                        ->pluck('name_full', 'id')
+                                        ->pluck('full_name', 'id')
                                         ->toArray())
                                     ->nullable()
                                     ->hideOnIndex(),
                             ])->columnSpan(3),
                         ]),
-                        BelongsTo::make('Cоздатель записи','user',
+                        BelongsTo::make('Cоздатель записи','users',
                             fn($user)=> $user->id.' | '.$user->username, resource: new UserResource())
                             ->hideOnIndex()
                             ->required(),
