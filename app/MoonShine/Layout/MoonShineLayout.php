@@ -17,29 +17,28 @@ use MoonShine\Components\Layout\{Content,
 use MoonShine\Components\When;
 use MoonShine\Contracts\MoonShineLayoutContract;
 
-final class NewMoonshineLayout implements MoonShineLayoutContract
+final class MoonShineLayout implements MoonShineLayoutContract
 {
     public static function build(): LayoutBuilder
     {
         return LayoutBuilder::make([
             Sidebar::make([
                 Menu::make()->customAttributes(['class' => 'mt-2']),
-                When::make(
-                    static fn () => config('moonshine.auth.enable', true),
-                    static fn (): array => [Profile::make(withBorder: true)]
-                ),
+                Profile::make(withBorder: true),
             ]),
             LayoutBlock::make([
                 Flash::make(),
-                Header::make([
-                    Search::make(),
-                ]),
+                Header::make(),
                 Content::make(),
                 Footer::make()->copyright(fn (): string => <<<'HTML'
-                        &copy; 2024
-
-                    HTML)->menu([
-                ]),
+                        &copy; 2024 Made with ❤️ by
+                        <a href="https://t.me/kek_ivanovich"
+                            class="font-semibold text-primary hover:text-secondary"
+                            target="_blank"
+                        >
+                            Ivan
+                        </a>
+                    HTML),
             ])->customAttributes(['class' => 'layout-page']),
         ]);
     }

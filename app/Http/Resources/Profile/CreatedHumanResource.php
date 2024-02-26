@@ -27,7 +27,7 @@ class CreatedHumanResource extends JsonResource
             'spouse_id' => $this->spouse_id,
             'description' => $this->description,
             'hobbies' => $this->hobbies,
-            'religion' => $this->whenLoaded('religion', $this->religion->title),
+            'religion' => $this->whenLoaded('religion',$this->religion->title),
             'access' => $this->access,
             'avatar' => $this->getFirstMediaUrl('avatars', 'thumb'),
             'banner' => $this->getFirstMediaUrl('banners', 'thumb_500'),

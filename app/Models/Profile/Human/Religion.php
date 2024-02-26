@@ -32,6 +32,11 @@ class Religion extends Model
         return $this->hasMany(Human::class);
     }
 
+    public static function getNoneReligion(): Religion
+    {
+        return Religion::where('title', 'None')->first();
+    }
+
     public function sluggable(): array
     {
         return [

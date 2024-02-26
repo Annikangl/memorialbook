@@ -2,6 +2,7 @@
 
 namespace App\DTOs\Profile;
 
+use App\Models\Profile\Human\Religion;
 use Illuminate\Http\UploadedFile;
 use WendellAdriel\ValidatedDTO\Casting\BooleanCast;
 use WendellAdriel\ValidatedDTO\Casting\CarbonCast;
@@ -83,6 +84,7 @@ class HumanDTO extends ValidatedDTO
     {
         return [
             'burial_coords' => ['lat' => null, 'lng' => null],
+            'religion_id' => Religion::getNoneReligion()->id,
         ];
     }
 

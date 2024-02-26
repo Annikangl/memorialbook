@@ -75,14 +75,14 @@ class Profile extends Model implements HasMedia
         return $this->status === self::STATUS_REJECTED;
     }
 
-    public function getYearBirthAttribute(): string
+    public function getYearBirthAttribute(): ?string
     {
-        return $this->date_birth->year;
+        return $this->date_birth?->year;
     }
 
-    public function getYearDeathAttribute(): string
+    public function getYearDeathAttribute(): ?string
     {
-        return $this->date_death->year;
+        return $this->date_death?->year;
     }
 
     protected function lifeExpectancy(): ?Attribute
