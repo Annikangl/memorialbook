@@ -18,6 +18,7 @@ class FeedController extends Controller
     public function index()
     {
         $relatedHumans = Human::query()
+            ->with('user')
             ->where('user_id', auth('sanctum')->id())
             ->where(function ($query) {
                 $query->has('father')
@@ -29,12 +30,14 @@ class FeedController extends Controller
         $cemeteries = Auth::user()->subscribedCemeteries()->latest()->get();
 
         $pets = Pet::query()
+            ->with('user')
             ->where('user_id', auth()->id())
             ->latest()
             ->limit(10)
             ->get();
 
         $communities = Community::query()
+            ->with('owner')
             ->where('owner_id', auth()->id())
             ->latest()
             ->limit(10)

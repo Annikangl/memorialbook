@@ -159,7 +159,7 @@ class Human extends Profile implements HasMedia
         );
     }
 
-    public function users(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->BelongsTo(User::class, 'user_id');
     }
