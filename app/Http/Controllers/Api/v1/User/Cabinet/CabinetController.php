@@ -15,7 +15,7 @@ use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class CabinetController extends Controller
 {
-    public function __construct(private UserService $userService)
+    public function __construct(private readonly UserService $userService)
     {
     }
 

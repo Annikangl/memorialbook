@@ -11,34 +11,19 @@ use App\Models\Community\Community;
 use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class FeedController extends Controller
 {
     public function index()
     {
-        $relatedHumans = Human::query()
-            ->where('user_id', auth('sanctum')->id())
-            ->where(function ($query) {
-                $query->has('father')
-                    ->orHas('mother')
-                    ->orHas('children');
-            })
-            ->get();
+        $user = Auth::user();
 
-        $cemeteries = Auth::user()->subscribedCemeteries()->latest()->get();
-
-        $pets = Pet::query()
-            ->where('user_id', auth()->id())
-            ->latest()
-            ->limit(10)
-            ->get();
-
-        $communities = Community::query()
-            ->where('owner_id', auth()->id())
-            ->latest()
-            ->limit(10)
-            ->get();
+        $relatedHumans = $user->humans()->latest()->get();
+        $cemeteries = $user->subscribedCemeteries()->latest()->get();
+        $pets = $user->pets()->latest()->take(15)->get();
+        $communities = $user->communities()->latest()->take(10)->get();
 
         return response()->json([
             'status' => true,
@@ -49,6 +34,6 @@ class FeedController extends Controller
                 'communities' => CommunityResource::collection($communities),
                 'news' => []
             ]
-        ])->setStatusCode(200);
+        ])->setStatusCode(Response::HTTP_OK);
     }
 }

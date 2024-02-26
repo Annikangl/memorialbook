@@ -27,7 +27,7 @@ class CreateHumanRequest extends FormRequest
             'gender' => ['required', 'string', Rule::in(Human::genderList())],
             'date_birth' => ['required', 'date', 'date_format:d.m.Y'],
             'date_death' => ['required', 'date', 'date_format:d.m.Y'],
-            'death_reason' => ['required', 'string'],
+            'death_reason' => ['nullable', 'string', 'max:150'],
             'birth_place' => ['required', 'string', 'min:3'],
             'burial_place' => ['nullable', 'string', 'min:3'],
 
@@ -35,7 +35,7 @@ class CreateHumanRequest extends FormRequest
             'mother_id' => ['nullable', 'exists:humans,id'],
             'spouse_id' => ['nullable', 'exists:humans,id'],
             'religion_id' => ['nullable', 'exists:religions,id'],
-            'description' => ['required', 'string'],
+            'description' => ['required', 'string','max:5000'],
             'hobbies' => ['nullable', 'array'],
 
             'as_draft' => ['required', 'bool'],

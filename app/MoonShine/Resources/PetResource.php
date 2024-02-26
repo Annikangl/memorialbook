@@ -100,7 +100,7 @@ class PetResource extends ModelResource
                                     ->required(),
                             ])->columnSpan(6),
                             Column::make([
-                                BelongsTo::make('Cоздатель записи','user',
+                                BelongsTo::make('Cоздатель записи','users',
                                     fn($user)=> $user->id.' | '.$user->username, resource: new UserResource())
                                     ->hideOnIndex()
                                     ->required(),

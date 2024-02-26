@@ -44,7 +44,7 @@ class HumanController extends Controller
 
         return response()->json([
             'status' => true,
-            'humans' => HumanResource::collection(auth()->user()->humans()->get()),
+            'humans' => HumanResource::collection(auth()->user()->humans()->latest()->get()),
         ])->setStatusCode(Response::HTTP_OK);
     }
 

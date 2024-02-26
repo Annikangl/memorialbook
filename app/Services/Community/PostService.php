@@ -9,6 +9,7 @@ use App\Models\Community\Community;
 use App\Models\Community\Posts\MediaPost;
 use App\Models\Community\Posts\Post;
 use App\Models\Community\Posts\TextPost;
+use App\Models\Community\Posts\TextWithMediaPost;
 use App\Models\Event\Event;
 use App\Models\User\User;
 use Illuminate\Http\Response;
@@ -24,6 +25,7 @@ class PostService
     /**
      * @param CommunityPostDTO $communityPostDTO
      * @param User $user
+     * @param Community $community
      * @return Post
      * @throws CommunityPostException
      */
@@ -59,13 +61,11 @@ class PostService
         }
     }
 
-    public function update(Post $post, CommunityPostDTO $communityPostDTO): Post
-    {
-        $contentPost = $this->updatePostContent($post, $communityPostDTO);
-
-        return $contentPost->post;
-    }
-
+    /**
+     * Create only text content post
+     * @param CommunityPostDTO $communityPostDTO
+     * @return TextPost
+     */
     public function createTextPost(CommunityPostDTO $communityPostDTO): TextPost
     {
         return TextPost::query()->create([
@@ -75,6 +75,9 @@ class PostService
     }
 
     /**
+     * Create only media content post
+     * @param CommunityPostDTO $communityPostDTO
+     * @return MediaPost
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
@@ -82,18 +85,61 @@ class PostService
     {
         $filenames = $this->getFilenames($communityPostDTO->post_media);
 
-        $postWithMedia = MediaPost::query()->create([
+        $postContent = MediaPost::query()->create([
             'filename' => implode(',', $filenames)
         ]);
 
         foreach ($communityPostDTO->post_media as $media) {
             /** @var UploadedFile $media */
-            $postWithMedia->addMedia($media)->toMediaCollection('gallery');
+            $postContent->addMedia($media)->toMediaCollection('gallery');
         }
 
-        return $postWithMedia;
+        return $postContent;
     }
 
+    /**
+     * Create text with media post
+     * @param CommunityPostDTO $postDTO
+     * @return TextWithMediaPost
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    public function createTextWithMediaPost(CommunityPostDTO $postDTO): TextWithMediaPost
+    {
+        $postContent = TextWithMediaPost::query()->create([
+            'title' => $postDTO->title,
+            'description' => $postDTO->description
+        ]);
+
+        foreach ($postDTO->post_media as $media) {
+            /** @var UploadedFile $media */
+            $postContent->addMedia($media)->toMediaCollection('gallery');
+        }
+
+        return $postContent;
+    }
+
+    /**
+     * @param Post $post
+     * @param CommunityPostDTO $communityPostDTO
+     * @return Post
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     * @throws MediaCannotBeDeleted
+     */
+    public function update(Post $post, CommunityPostDTO $communityPostDTO): Post
+    {
+        $contentPost = $this->updatePostContent($post, $communityPostDTO);
+
+        return $contentPost->post;
+    }
+
+    /**
+     * Update text post
+     * @param Post $post
+     * @param CommunityPostDTO $postDTO
+     * @return TextPost
+     */
     public function updateTextPost(Post $post, CommunityPostDTO $postDTO): TextPost
     {
         $updatedData = collect($postDTO->validatedData)
@@ -107,6 +153,7 @@ class PostService
     }
 
     /**
+     * Update media post
      * @param Post $post
      * @param CommunityPostDTO $postDTO
      * @return MediaPost
@@ -131,20 +178,6 @@ class PostService
     }
 
     /**
-     * @param Post $post
-     * @return void
-     * @throws CommunityPostException
-     */
-    public function delete(Post $post): void
-    {
-        try {
-            $post->delete();
-        } catch (Throwable $exception) {
-            throw new CommunityPostException($exception->getMessage());
-        }
-    }
-
-    /**
      * Pin post in feed
      * @param Post $post
      * @return void
@@ -160,31 +193,50 @@ class PostService
     }
 
     /**
-     * @throws FileIsTooBig
-     * @throws FileDoesNotExist
+     * @param Post $post
+     * @return void
+     * @throws CommunityPostException
      */
-    protected function createPostContent(CommunityPostDTO $communityPostDTO): Post|TextPost|MediaPost|null
+    public function delete(Post $post): void
     {
-        switch ($communityPostDTO->content_type) {
-            case Post::TYPE_TEXT:
-                return $this->createTextPost($communityPostDTO);
-            case Post::TYPE_MEDIA:
-                return $this->createMediaPost($communityPostDTO);
-            default:
-                return null;
+        try {
+            $post->delete();
+        } catch (Throwable $exception) {
+            throw new CommunityPostException($exception->getMessage());
         }
     }
 
-    protected function updatePostContent(Post $post, CommunityPostDTO $communityPostDTO)
+    /**
+     * @param CommunityPostDTO $communityPostDTO
+     * @return Post|TextPost|MediaPost|TextWithMediaPost|null
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     */
+    protected function createPostContent(CommunityPostDTO $communityPostDTO): Post|TextPost|MediaPost|TextWithMediaPost|null
     {
-        switch ($communityPostDTO->content_type) {
-            case Post::TYPE_TEXT:
-                return $this->updateTextPost($post, $communityPostDTO);
-            case Post::TYPE_MEDIA:
-                return $this->updateMediaPost($post, $communityPostDTO);
-            default:
-                return null;
-        }
+        return match ($communityPostDTO->content_type) {
+            Post::TYPE_TEXT => $this->createTextPost($communityPostDTO),
+            Post::TYPE_MEDIA => $this->createMediaPost($communityPostDTO),
+            Post::TYPE_TEXT_WITH_MEDIA => $this->createTextWithMediaPost($communityPostDTO),
+            default => null,
+        };
+    }
+
+    /**
+     * @param Post $post
+     * @param CommunityPostDTO $communityPostDTO
+     * @return TextPost|MediaPost|null
+     * @throws FileDoesNotExist
+     * @throws FileIsTooBig
+     * @throws MediaCannotBeDeleted
+     */
+    protected function updatePostContent(Post $post, CommunityPostDTO $communityPostDTO): TextPost|MediaPost|null
+    {
+        return match ($communityPostDTO->content_type) {
+            Post::TYPE_TEXT => $this->updateTextPost($post, $communityPostDTO),
+            Post::TYPE_MEDIA => $this->updateMediaPost($post, $communityPostDTO),
+            default => null,
+        };
     }
 
     protected function getFilenames($mediaArray): array

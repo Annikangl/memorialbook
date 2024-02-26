@@ -33,6 +33,8 @@ class Post extends Model implements HasMedia
     const TYPE_TEXT = 'TEXT_POST';
     const TYPE_MEDIA = 'MEDIA_POST';
 
+    const TYPE_TEXT_WITH_MEDIA = 'TEXT_WITH_MEDIA_POST';
+
     protected $table = 'community_posts';
 
     protected $fillable = [
@@ -46,19 +48,29 @@ class Post extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'is_pinned' => 'boolean'
+        'is_pinned' => 'boolean',
+        'published_at' => 'datetime'
     ];
 
+    /**
+     * Chech if post is pinned
+     * @return bool
+     */
     public function isPinned(): bool
     {
         return $this->is_pinned;
     }
 
+    /**
+     * Get allowed post content types
+     * @return string[]
+     */
     public static function getContentTypes(): array
     {
         return [
             'TEXT_POST' => self::TYPE_TEXT,
             'MEDIA_POST' => self::TYPE_MEDIA,
+            'TEXT_WITH_MEDIA_POST' => self::TYPE_TEXT_WITH_MEDIA,
         ];
     }
 
@@ -87,26 +99,19 @@ class Post extends Model implements HasMedia
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    protected function publishedAt(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => Carbon::parse($value)->format('M d, Y')
-        );
-    }
-
-    public function registerMediaCollections(): void
-    {
-        $this->addMediaCollection('gallery');
-    }
-
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb_900')
-            ->performOnCollections('gallery')
-            ->width(1000)
-            ->height(600)
-            ->nonQueued();
-    }
+//    public function registerMediaCollections(): void
+//    {
+//        $this->addMediaCollection('gallery');
+//    }
+//
+//    public function registerMediaConversions(Media $media = null): void
+//    {
+//        $this->addMediaConversion('thumb_900')
+//            ->performOnCollections('gallery')
+//            ->width(1000)
+//            ->height(600)
+//            ->queued();
+//    }
 
     public function getPostMedia(): array
     {
@@ -115,11 +120,11 @@ class Post extends Model implements HasMedia
             'videos' => [],
         ];
 
-        $this->getMedia('gallery')->each(function (Media $item) use (&$gallery) {
+        $this->postable->getMedia('gallery')->each(function (Media $item) use (&$gallery) {
             if (str_contains($item->mime_type, 'image')) {
                 $gallery['images'][] = [
                     'id' => $item->id,
-                    'url' => $item->getUrl('thumb_900'),
+                    'url' => $item->getUrl('thumb_1024'),
                 ];
             } elseif (str_contains($item->mime_type, 'video')) {
                 $gallery['videos'][] = [
