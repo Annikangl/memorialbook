@@ -48,7 +48,7 @@ class HumanResource extends ModelResource
 
     public function getActiveActions(): array
     {
-        return ['create','view', 'delete'];
+        return ['create', 'view', 'delete'];
     }
 
     public function fields(): array
@@ -57,52 +57,52 @@ class HumanResource extends ModelResource
             Block::make([
                 ID::make()->sortable(),
                 Tabs::make([
-                    Tab::make('Основная информация',[
+                    Tab::make('Основная информация', [
                         Grid::make([
                             Column::make([
-                                Text::make('Имя','first_name')->required(),
+                                Text::make('Имя', 'first_name')->required(),
                             ])->columnSpan(4),
                             Column::make([
-                                Text::make('Фамилия','last_name')->required(),
+                                Text::make('Фамилия', 'last_name')->required(),
                             ])->columnSpan(4),
                             Column::make([
-                                Text::make('Отчество','middle_name')->required(),
+                                Text::make('Отчество', 'middle_name')->required(),
                             ])->columnSpan(4),
                         ]),
                         Grid::make([
                             Column::make([
-                                Select::make('Пол','gender')
+                                Select::make('Пол', 'gender')
                                     ->hideOnIndex()
                                     ->options([
-                                        Human::MALE=>'Мужчина',
-                                        Human::FEMALE=>'Женщина',
+                                        Human::MALE => 'Мужчина',
+                                        Human::FEMALE => 'Женщина',
                                     ])->required(),
                             ])->columnSpan(4),
                             Column::make([
-                                Date::make('Дата рождения','date_birth')
+                                Date::make('Дата рождения', 'date_birth')
                                     ->changeFill(fn($data) => $data->getOriginal('date_birth'))
                                     ->required()
                                     ->format('Y'),
                             ])->columnSpan(4),
                             Column::make([
-                                Date::make('Дата смерти','date_death')
+                                Date::make('Дата смерти', 'date_death')
                                     ->changeFill(fn($data) => $data->getOriginal('date_death'))
                                     ->required()
                                     ->format('Y'),
 
                             ])->columnSpan(4),
                         ]),
-                        Text::make('Причина смерти','death_reason')
+                        Text::make('Причина смерти', 'death_reason')
                             ->hideOnIndex()
                             ->required(),
                         Grid::make([
                             Column::make([
-                                Text::make('Место рождения','birth_place')
+                                Text::make('Место рождения', 'birth_place')
                                     ->hideOnIndex()
                                     ->required(),
                             ])->columnSpan(6),
                             Column::make([
-                                Text::make('Место захоронения','burial_place')
+                                Text::make('Место захоронения', 'burial_place')
                                     ->hideOnIndex(),
                             ])->columnSpan(6),
                         ]),
@@ -117,7 +117,7 @@ class HumanResource extends ModelResource
                                     ->required()
                             ])->columnSpan(6),
                             Column::make([
-                                Number::make('Координата, д.','lng')
+                                Number::make('Координата, д.', 'lng')
                                     ->hideOnIndex()
                                     ->changeFill(
                                         fn(Human $data, Field $field) => isset($data['burial_coords']['lng'])
@@ -131,9 +131,9 @@ class HumanResource extends ModelResource
 //                            ->hideOnIndex(),
                         Grid::make([
                             Column::make([
-                                Select::make('Мать','mother_id')
+                                Select::make('Мать', 'mother_id')
                                     ->options(Human::query()
-                                        ->select(['id','first_name','last_name'])
+                                        ->select(['id', 'first_name', 'last_name'])
                                         ->get()
                                         ->pluck('full_name', 'id')
                                         ->toArray())
@@ -141,9 +141,9 @@ class HumanResource extends ModelResource
                                     ->hideOnIndex(),
                             ])->columnSpan(3),
                             Column::make([
-                                Select::make('Отец','father_id')
+                                Select::make('Отец', 'father_id')
                                     ->options(Human::query()
-                                        ->select(['id','first_name','last_name'])
+                                        ->select(['id', 'first_name', 'last_name'])
                                         ->get()
                                         ->pluck('full_name', 'id')
                                         ->toArray())
@@ -151,9 +151,9 @@ class HumanResource extends ModelResource
                                     ->hideOnIndex(),
                             ])->columnSpan(3),
                             Column::make([
-                                Select::make('Супруг','spouse_id')
+                                Select::make('Супруг', 'spouse_id')
                                     ->options(Human::query()
-                                        ->select(['id','first_name','last_name'])
+                                        ->select(['id', 'first_name', 'last_name'])
                                         ->get()
                                         ->pluck('full_name', 'id')
                                         ->toArray())
@@ -161,9 +161,9 @@ class HumanResource extends ModelResource
                                     ->hideOnIndex(),
                             ])->columnSpan(3),
                             Column::make([
-                                Select::make('Ребенок','children_id')
+                                Select::make('Ребенок', 'children_id')
                                     ->options(Human::query()
-                                        ->select(['id','first_name','last_name'])
+                                        ->select(['id', 'first_name', 'last_name'])
                                         ->get()
                                         ->pluck('full_name', 'id')
                                         ->toArray())
@@ -171,13 +171,13 @@ class HumanResource extends ModelResource
                                     ->hideOnIndex(),
                             ])->columnSpan(3),
                         ]),
-                        BelongsTo::make('Cоздатель записи','users',
-                            fn($user)=> $user->id.' | '.$user->username, resource: new UserResource())
+                        BelongsTo::make('Cоздатель записи', 'users',
+                            fn($user) => $user->id . ' | ' . $user->username, resource: new UserResource())
                             ->hideOnIndex()
                             ->required(),
                     ]),
-                    Tab::make('Описание',[
-                        Image::make('Изображения и видео','gallery')
+                    Tab::make('Описание', [
+                        Image::make('Изображения и видео', 'gallery')
                             ->removable()
                             ->multiple()
                             ->nullable()
@@ -186,28 +186,28 @@ class HumanResource extends ModelResource
                             ->changeFill(
                                 fn(Human $data, Field $field) => $data->getCustomGallery()
                             )
-                            ->allowedExtensions(['jpg', 'png', 'jpeg','webp', 'mp4']),
-                        Textarea::make('Описание','description')
+                            ->allowedExtensions(['jpg', 'png', 'jpeg', 'webp', 'mp4']),
+                        Textarea::make('Описание', 'description')
                             ->hideOnIndex(),
 
-                        Select::make('Хобби','hobbies')
+                        Select::make('Хобби', 'hobbies')
                             ->options(Hobby::query()->pluck('title', 'id')->toArray())
                             ->hideOnIndex()
                             ->multiple()
                     ]),
-                    Tab::make('Завершение',[
+                    Tab::make('Завершение', [
                         Select::make('Настройка публикации', 'as_draft')
                             ->options([
-                                '1'=>'Черновик',
-                                '0'=>'Активный',
+                                '1' => 'Черновик',
+                                '0' => 'Активный',
                             ])
                             ->hideOnIndex()
                             ->required(),
                         Select::make('Доступ публикации', 'access')
                             ->options([
-                                Profile::ACCESS_PUBLIC=>'Публичный',
-                                Profile::ACCESS_AVAILABLE=>'Доступный',
-                                Profile::ACCESS_PRIVATE=>'Приватный',
+                                Profile::ACCESS_PUBLIC => 'Публичный',
+                                Profile::ACCESS_AVAILABLE => 'Доступный',
+                                Profile::ACCESS_PRIVATE => 'Приватный',
                             ])
                             ->hideOnIndex()
                             ->required(),
@@ -239,19 +239,19 @@ class HumanResource extends ModelResource
 
         $fields->fill($item->toArray(), $item);
 
-        $fields->each(fn (Field $field): mixed => $field->beforeApply($item));
-        if (! $item->exists) {
+        $fields->each(fn(Field $field): mixed => $field->beforeApply($item));
+        if (!$item->exists) {
             $item = $this->beforeCreating($item);
         }
         if ($item->exists) {
             $item = $this->beforeUpdating($item);
         }
         $fields->withoutOutside()
-            ->each(fn (Field $field): mixed => $field->apply($this->onSave($field), $item));
+            ->each(fn(Field $field): mixed => $field->apply($this->onSave($field), $item));
 
-        $item['burial_coords']=['lat'=>$item['lat'],'lng'=>$item['lng']];
+        $item['burial_coords'] = ['lat' => $item['lat'], 'lng' => $item['lng']];
 
-        $updatedData = collect($item['gallery'])->map(function($image) {
+        $updatedData = collect($item['gallery'])->map(function ($image) {
 
             $filePath = Storage::path($image);
             $image = new UploadedFile($filePath, $image, 'image/jpg/png/jpeg,mp4', 1024);
