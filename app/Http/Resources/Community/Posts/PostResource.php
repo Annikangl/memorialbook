@@ -12,13 +12,15 @@ class PostResource extends JsonResource
     {
         /** @var Post|JsonResource $this */
 
+        $this->load('postable');
+
         return [
             'id' => $this->id,
             'is_pinned' => $this->is_pinned,
             'content_type' => $this->content_type,
             'published_at' => $this->published_at?->format('M d, Y'),
             'author' => new UserResource($this->author),
-            'content' => new PostContentResource($this->postable)
+            'content' => $this->whenLoaded('postable', new PostContentResource($this->postable))
         ];
     }
 }
