@@ -17,7 +17,7 @@ use App\Http\Resources\Community\ShowCommunityResource;
 use App\Models\Community\Community;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
-use App\Services\CommunityService;
+use App\Services\Community\CommunityService;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;

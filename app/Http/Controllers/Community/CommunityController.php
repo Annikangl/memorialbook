@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Community;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Community\CreateCommunityRequest;
 use App\Models\Community\Community;
-use App\Services\CommunityService;
+use App\Services\Community\CommunityService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;

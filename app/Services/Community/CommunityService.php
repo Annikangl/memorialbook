@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Services\Community;
 
 use App\DTOs\Community\CommunityDTO;
 use App\Exceptions\Api\Community\CommunityException;
@@ -74,7 +74,7 @@ class CommunityService
                 'phone' => $communityDTO->phone,
                 'address' => $communityDTO->address,
                 'website' => $communityDTO->website,
-                'social_Links' => $communityDTO->social_links,
+                'social_links' => $communityDTO->social_links,
             ]);
 
             if ($avatar = $communityDTO->avatar) {
