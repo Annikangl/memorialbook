@@ -219,22 +219,6 @@ class HumanResource extends ModelResource
 
     public function save(Model $item, ?Fields $fields = null): Model
     {
-
-// TODO: на Update
-
-//        if ($item['id'] !== null) {
-//            $item['as_draft']=true;
-//            $humanDto = HumanDTO::fromArray($item->toArray());
-//            dd($humanDto);
-//            $human = $this->humanService->update(
-//                id:$item['id'],
-//                humanDTO: $humanDto,
-//                user: $item['user'],
-//                isDraft: $item['as_draft'],
-//            );
-//            return $human;
-//        }
-
         $fields ??= $this->getFormFields()->onlyFields();
 
         $fields->fill($item->toArray(), $item);
@@ -252,13 +236,10 @@ class HumanResource extends ModelResource
         $item['burial_coords']=['lat'=>$item['lat'],'lng'=>$item['lng']];
 
         $updatedData = collect($item['gallery'])->map(function($image) {
-
             $filePath = Storage::path($image);
-            $image = new UploadedFile($filePath, $image, 'image/jpg/png/jpeg,mp4', 1024);
-
+            $image = new UploadedFile($filePath, $image, 'image/jpg/png/jpeg/mp4', 1024);
             return $image;
         })->all();
-
         $item['gallery'] = $updatedData;
 
 // TODO:  Проверить тип загрузки файла Сертификата смерти
@@ -266,12 +247,11 @@ class HumanResource extends ModelResource
 //        $filePath = Storage::path($item['death_certificate']);
 //        $file = new UploadedFile($filePath, $item['death_certificate'], 'application/pdf', 0,false);
 //        $item['death_certificate'] = $file;
-//        dd($item->toArray());
-
+        $item['user_id']=(int)$item['user_id'];
         $humanDto = HumanDTO::fromArray($item->toArray());
         $human = $this->humanService->create(
             humanDTO: $humanDto,
-            userId: $item['user']['id'],
+            userId: $item['user_id'],
         );
         return $human;
     }

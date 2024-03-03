@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Pages;
 
 use App\Models\Community\Community;
+use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Pet\Pet;
 use App\Models\User\User;
@@ -37,6 +38,7 @@ class Dashboard extends Page
         $petsCount = Pet::query()->count();
         $humansCount = Human::query()->count();
         $communityCount = Community::query()->count();
+        $cemeteryCount = Cemetery::query()->count();
 
         return [
             Heading::make('Статистика по пользователям'),
@@ -51,8 +53,9 @@ class Dashboard extends Page
             Heading::make(__('moonshine::ui.metrics.Profile creation statistics')),
 
             Grid::make([
-                ValueMetric::make('Всего создано профилей')->value(function () use ($humansCount, $petsCount) {
-                    return $humansCount + $petsCount;
+                ValueMetric::make('Всего создано профилей')->value(function ()
+                use ($humansCount, $petsCount,$communityCount,$cemeteryCount) {
+                    return $humansCount + $petsCount + $communityCount + $cemeteryCount;
                 })
                     ->icon('heroicons.user-circle')
                     ->columnSpan(3, 6),
@@ -65,6 +68,16 @@ class Dashboard extends Page
                 ValueMetric::make('Профилей животных')
                     ->value(function () use ($petsCount) {
                         return $petsCount;
+                    })
+                    ->columnSpan(3, 6)->icon('heroicons.outline.arrow-trending-up'),
+                ValueMetric::make('Профилей сообществ')
+                    ->value(function () use ($communityCount) {
+                        return $communityCount;
+                    })
+                    ->columnSpan(3, 6)->icon('heroicons.outline.arrow-trending-up'),
+                ValueMetric::make('Профилей кладбищ')
+                    ->value(function () use ($cemeteryCount) {
+                        return $cemeteryCount;
                     })
                     ->columnSpan(3, 6)->icon('heroicons.outline.arrow-trending-up'),
             ]),

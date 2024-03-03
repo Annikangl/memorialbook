@@ -12,7 +12,7 @@ return [
     'namespace' => 'App\MoonShine',
 
     'title' => env('MOONSHINE_TITLE', 'MoonShine'),
-    'logo' => env('MOONSHINE_LOGO'),
+    'logo' => '/image/MemorialLogo.svg',
     'logo_small' => env('MOONSHINE_LOGO_SMALL'),
 
     'route' => [

@@ -65,6 +65,8 @@ class Community extends Model implements HasMedia
         'is_celebrity' => 'boolean'
     ];
 
+    protected $with = ['owner'];
+
     public function scopeByUser(Builder $query, int $userId): Builder
     {
         return $query->whereHas('users', function (Builder $query) use ($userId) {
@@ -132,6 +134,18 @@ class Community extends Model implements HasMedia
         });
 
         return $pictures;
+    }
+
+    public function getCustomPictures(): array
+    {
+        $gallery = [];
+
+        $this->getMedia('gallery')->each(function (Media $item) use (&$gallery) {
+            $path = $item->getOriginal('id');
+            $gallery[] = '/'.$path.'/'.$item->getAttribute('file_name');
+        });
+
+        return $gallery;
     }
 
     public function getMovies(): array

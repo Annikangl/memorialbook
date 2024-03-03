@@ -49,7 +49,7 @@ class CommunityService
             }
 
         } catch (\Throwable $exception) {
-            throw new CommunityException($exception->getMessage() . ' empty body', $exception->getCode());
+            throw new CommunityException($exception->getMessage());
         }
 
         return $community;
@@ -74,7 +74,7 @@ class CommunityService
                 'phone' => $communityDTO->phone,
                 'address' => $communityDTO->address,
                 'website' => $communityDTO->website,
-                'social_Links' => $communityDTO->social_links,
+                'social_links' => $communityDTO->social_links,
             ]);
 
             if ($avatar = $communityDTO->avatar) {
