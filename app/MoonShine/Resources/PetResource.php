@@ -156,13 +156,10 @@ class PetResource extends ModelResource
                 ->each(fn (Field $field): mixed => $field->apply($this->onSave($field), $item));
 
         $updatedData = collect($item['gallery'])->map(function($image) {
-
             $fileUrl = Storage::path($image);
             $image = new UploadedFile($fileUrl, $image, 'image/jpg/png/jpeg,mp4', 1024);
-
             return $image;
         })->all();
-
         $item['gallery'] = $updatedData;
         $item['owner_id']=(int)$item['owner_id'];
 

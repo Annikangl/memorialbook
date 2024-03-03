@@ -53,7 +53,6 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     MenuItem::make('moonshine::ui.menu_items.profiles.pets', new PetResource())
                         ->translatable()
                         ->icon('heroicons.document-text'),
-
                     MenuItem::make('moonshine::ui.menu_items.profiles.humans', new HumanResource())
                         ->translatable()
                         ->icon('heroicons.user'),
@@ -75,7 +74,6 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     MenuItem::make('moonshine::ui.menu_items.community.community', new CommunityResource())
                         ->translatable()
                         ->icon('heroicons.user-group'),
-
                     MenuItem::make('moonshine::ui.menu_items.community.community_post', new CommunityPostResource())
                         ->translatable()
                         ->icon('heroicons.document-plus'),

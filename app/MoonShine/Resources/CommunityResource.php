@@ -166,8 +166,6 @@ class CommunityResource extends ModelResource
             );
             return $communityUpdate;
         }
-//        $avatarPath = Storage::path($item['avatar']);
-//        $item['avatar'] = new UploadedFile($avatarPath, $item['avatar'], 'image/jpg/png/jpeg', 1024,true);
         $updatedData = collect($item['gallery'])->map(function($image) {
             $fileUrl = Storage::path($image);
             $image = new UploadedFile($fileUrl, $image, 'image/jpg/png/jpeg,mp4', 1024);

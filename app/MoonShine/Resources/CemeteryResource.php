@@ -132,14 +132,6 @@ class CemeteryResource extends ModelResource
                     ]),
 
                     Tab::make('Доступ',[
-//                        Select::make('Настройка публикации', 'as_draft')
-//                            ->options([
-//                                Cemetery::STATUS_DRAFT=>'Черновик',
-//                                Cemetery::STATUS_ACTIVE=>'Активный',
-//                                Cemetery::STATUS_MODERATION=>'Модерация',
-//                                Cemetery::STATUS_CLOSED=>'Закрыт',
-//                            ])
-//                            ->hideOnIndex(),
                         Select::make('Доступ публикации', 'access')
                             ->options([
                                 Cemetery::ACCESS_PUBLIC=>'Публичный',
