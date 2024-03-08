@@ -6,6 +6,9 @@ namespace App\Providers;
 
 use App\Models\User\User;
 use App\MoonShine\Pages\Dashboard;
+use App\MoonShine\Resources\CemeteryResource;
+use App\MoonShine\Resources\CommunityPostResource;
+use App\MoonShine\Resources\CommunityResource;
 use App\MoonShine\Resources\HobbyResource;
 use App\MoonShine\Resources\HumanResource;
 use App\MoonShine\Resources\PetResource;
@@ -50,7 +53,6 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     MenuItem::make('moonshine::ui.menu_items.profiles.pets', new PetResource())
                         ->translatable()
                         ->icon('heroicons.document-text'),
-
                     MenuItem::make('moonshine::ui.menu_items.profiles.humans', new HumanResource())
                         ->translatable()
                         ->icon('heroicons.user'),
@@ -66,6 +68,21 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                         ->icon('heroicons.puzzle-piece')
                 ]
             )->translatable()->icon('heroicons.document-plus'),
+
+            MenuGroup::make('moonshine::ui.menu_items.community.community', [
+
+                    MenuItem::make('moonshine::ui.menu_items.community.community', new CommunityResource())
+                        ->translatable()
+                        ->icon('heroicons.user-group'),
+                    MenuItem::make('moonshine::ui.menu_items.community.community_post', new CommunityPostResource())
+                        ->translatable()
+                        ->icon('heroicons.document-plus'),
+                ]
+            )->translatable()->icon('heroicons.user-plus'),
+
+            MenuItem::make('moonshine::ui.menu_items.profiles.cemeteries', new CemeteryResource())
+                ->translatable()
+                ->icon('heroicons.building-library'),
 
             MenuDivider::make('moonshine::ui.resource.system')->translatable(),
 

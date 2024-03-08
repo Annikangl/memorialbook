@@ -188,4 +188,27 @@ class Cemetery extends Model implements HasMedia
 
         return $gallery;
     }
+
+    public function getCustomGallery(): array
+    {
+        $gallery = [];
+
+        $this->getMedia('gallery')->each(function (Media $item) use (&$gallery) {
+            $path = $item->getOriginal('id');
+            $gallery[] = '/'.$path.'/'.$item->getAttribute('file_name');
+        });
+
+        return $gallery;
+    }
+    public function getCustomDocuments(): array
+    {
+        $documents= [];
+
+        $this->getMedia('confirming_documents')->each(function (Media $item) use (&$documents) {
+            $path = $item->getOriginal('id');
+            $documents[] = '/'.$path.'/'.$item->getAttribute('file_name');
+        });
+
+        return $documents;
+    }
 }
