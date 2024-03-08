@@ -28,79 +28,79 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//        $faker = \Faker\Factory::create();
-//        $faker->addProvider(new FakerPicsumImagesProvider($faker));
+        $faker = \Faker\Factory::create();
+        $faker->addProvider(new FakerPicsumImagesProvider($faker));
 
         $categories = ProductCategory::factory(10)->create();
 
 //        Religion::factory(10)->create();
 
-//        $this->createUsers();
+        $this->createUsers();
 
-//        $cemeteries = Cemetery::factory(10)
-//            ->create();
-//
-//        foreach ($cemeteries as $cemetery) {
-//            $cemetery->addMedia($faker->image(storage_path('app/images')))
-//                ->toMediaCollection('banners');
-//        }
-//
-//        $humans = Human::factory(15)
-//            ->create();
-//
-//        foreach ($humans as $human) {
-//            $human->addMedia($faker->image(storage_path('app/images'),350,300))
-//                ->toMediaCollection('avatars');
-//
-//            for ($i = 0; $i < 5; $i++) {
-//                $human->addMedia($faker->image(storage_path('app/images'),1280,720))
-//                    ->toMediaCollection('gallery');
-//            }
-//        }
-//
-//        $pets = Pet::factory(10)
-//            ->create();
-//
-//        foreach ($pets as $pet) {
-//            $pet->addMedia($faker->image(storage_path('app/images'),350,300))
-//                ->toMediaCollection('avatars');
-//            $pet->addMedia($faker->image(storage_path('app/images'),1280,720))
-//                ->toMediaCollection('banners');
-//
-//            for ($i = 0; $i < 5; $i++) {
-//                $pet->addMedia($faker->image(storage_path('app/images'), 1280, 720))
-//                    ->toMediaCollection('gallery');
-//            }
-//        }
-//
-//        $communities = Community::factory(10)
-////            ->hasPosts(5)
-//            ->hasUsers(30)
-//            ->create();
-//
-//        CommunityProfile::factory(15)->create();
-//
-//        /** @var Community $community */
-//
-//        foreach ($communities as $community) {
-//            $community->addMedia($faker->image(storage_path('app/images'), 1280, 720))
-//                ->toMediaCollection('avatars');
-//
-//            $community->addMedia($faker->image(storage_path('app/images'), 1280, 720))
-//                ->toMediaCollection('banners');
-//
-//            for ($i = 0; $i < 5; $i++) {
-//                $community->addMedia($faker->image(storage_path('app/images'), 1280, 720))
-//                    ->toMediaCollection('gallery');
-//            }
-//
-//            $community->posts()->each(function (Post $post) use ($faker) {
-//                for ($i = 0; $i < 5; $i++) {
-//                    $post->addMedia($faker->image(storage_path('app/images'), 1280, 720))
-//                        ->toMediaCollection('gallery');
-//                }
-//            });
-//        }
+        $cemeteries = Cemetery::factory(10)
+            ->create();
+
+        foreach ($cemeteries as $cemetery) {
+            $cemetery->addMedia($faker->image(storage_path('app/images')))
+                ->toMediaCollection('banners');
+        }
+
+        $humans = Human::factory(15)
+            ->create();
+
+        foreach ($humans as $human) {
+            $human->addMedia($faker->image(storage_path('app/images'),350,300))
+                ->toMediaCollection('avatars');
+
+            for ($i = 0; $i < 5; $i++) {
+                $human->addMedia($faker->image(storage_path('app/images'),1280,720))
+                    ->toMediaCollection('gallery');
+            }
+        }
+
+        $pets = Pet::factory(10)
+            ->create();
+
+        foreach ($pets as $pet) {
+            $pet->addMedia($faker->image(storage_path('app/images'),350,300))
+                ->toMediaCollection('avatars');
+            $pet->addMedia($faker->image(storage_path('app/images'),1280,720))
+                ->toMediaCollection('banners');
+
+            for ($i = 0; $i < 5; $i++) {
+                $pet->addMedia($faker->image(storage_path('app/images'), 1280, 720))
+                    ->toMediaCollection('gallery');
+            }
+        }
+
+        $communities = Community::factory(10)
+//            ->hasPosts(5)
+            ->hasUsers(30)
+            ->create();
+
+        CommunityProfile::factory(15)->create();
+
+        /** @var Community $community */
+
+        foreach ($communities as $community) {
+            $community->addMedia($faker->image(storage_path('app/images'), 1280, 720))
+                ->toMediaCollection('avatars');
+
+            $community->addMedia($faker->image(storage_path('app/images'), 1280, 720))
+                ->toMediaCollection('banners');
+
+            for ($i = 0; $i < 5; $i++) {
+                $community->addMedia($faker->image(storage_path('app/images'), 1280, 720))
+                    ->toMediaCollection('gallery');
+            }
+
+            $community->posts()->each(function (Post $post) use ($faker) {
+                for ($i = 0; $i < 5; $i++) {
+                    $post->addMedia($faker->image(storage_path('app/images'), 1280, 720))
+                        ->toMediaCollection('gallery');
+                }
+            });
+        }
     }
 
     private function createUsers(): void

@@ -88,11 +88,16 @@ return [
             'profiles' => 'Profiles',
             'pets' => 'Pets',
             'humans' => 'Humans',
+            'cemeteries' => 'Cemeteries',
         ],
         'attributes' => [
             'attributes' => 'Attributes',
             'religion views' => 'Religion views',
             'hobbies' => 'Hobbies',
+        ],
+        'community' => [
+            'community' => 'Community',
+            'community_post' => 'Community post',
         ],
         'users' => 'Users',
         'application' => 'Application manage',

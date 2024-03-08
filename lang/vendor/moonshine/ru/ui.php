@@ -88,11 +88,16 @@ return [
             'profiles' => 'Профили',
             'pets' => 'Животные',
             'humans' => 'Люди',
+            'cemeteries' => 'Кладбища',
         ],
         'attributes' => [
             'attributes' => 'Атрибуты',
             'religion views' => 'Религии',
             'hobbies' => 'Хобби',
+        ],
+        'community' => [
+            'community' => 'Сообщества',
+            'community_post' => 'Посты сообщества',
         ],
         'users' => 'Пользователи',
         'application' => 'Управление приложением',

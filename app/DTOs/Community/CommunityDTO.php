@@ -40,7 +40,7 @@ class CommunityDTO extends ValidatedDTO
             'banner' => ['nullable', 'file'],
             'gallery' => ['nullable', 'array'],
             'media_removed_ids' => ['nullable', 'array'],
-            'gallery.*' => ['nullable', 'file'],
+//            'gallery.*' => ['nullable', 'file'],
         ];
     }
 
