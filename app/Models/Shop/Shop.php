@@ -19,7 +19,18 @@ class Shop extends Model
         'cemetery_id',
         'name',
         'address',
+        'shop_address_coords',
+        'cemetery_address',
+        'cemetery_address_coords',
         'description',
+        'status',
+        'has_pickup',
+    ];
+
+    protected $casts = [
+        'has_pickup' => 'boolean',
+        'cemetery_address_coords' => 'array',
+        'shop_address_coords' => 'array',
     ];
 
     public function user(): BelongsTo

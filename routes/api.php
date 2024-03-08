@@ -114,6 +114,8 @@ Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
                 Route::delete('/{post}', [PostController::class, 'delete']);
             });
         });
+
+        Route::name('shop')->group(base_path('./routes/shop/shop.php'));
     });
 
 });

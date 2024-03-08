@@ -11,6 +11,7 @@ use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\Profile\Human\Human;
 use App\Models\Profile\Human\Religion;
 use App\Models\Profile\Pet\Pet;
+use App\Models\Shop\ProductCategory;
 use App\Models\User\User;
 use Faker\Provider\UserAgent;
 use Illuminate\Database\Seeder;
@@ -30,7 +31,9 @@ class DatabaseSeeder extends Seeder
 //        $faker = \Faker\Factory::create();
 //        $faker->addProvider(new FakerPicsumImagesProvider($faker));
 
-        Religion::factory(10)->create();
+        $categories = ProductCategory::factory(10)->create();
+
+//        Religion::factory(10)->create();
 
 //        $this->createUsers();
 

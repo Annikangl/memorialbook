@@ -89,7 +89,6 @@ class CommunityService
 
             if ($gallery = $communityDTO->gallery) {
                 foreach ($gallery as $image) {
-                    $community->clearMediaCollection('gallery');
                     $community->addMedia($image)->toMediaCollection('gallery');
                 }
             }
@@ -107,6 +106,11 @@ class CommunityService
         return $community;
     }
 
+    /**
+     * Search community by filters
+     * @param array $searchData
+     * @return LengthAwarePaginator
+     */
     public function search(array $searchData): LengthAwarePaginator
     {
         return Community::query()

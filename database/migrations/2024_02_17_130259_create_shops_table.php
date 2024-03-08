@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ShopStatus;
 use App\Models\Profile\Cemetery\Cemetery;
 use App\Models\User\User;
 use Illuminate\Database\Migrations\Migration;
@@ -15,11 +16,24 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Cemetery::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)
+                ->constrained()
+                ->cascadeOnDelete();
+            $table->foreignIdFor(Cemetery::class)
+                ->nullable()
+                ->constrained()
+                ->cascadeOnDelete();
+
             $table->string('name');
+            $table->string('email');
+            $table->string('phone',25);
             $table->string('address');
+            $table->json('shop_address_coords');
+            $table->string('cemetery_address');
+            $table->json('cemetery_address_coords');
             $table->text('description')->nullable();
+            $table->string('status',16)->default(ShopStatus::ON_MODERATION);
+            $table->boolean('has_pickup')->default(false);
             $table->timestamps();
         });
     }
