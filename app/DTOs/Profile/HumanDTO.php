@@ -18,7 +18,7 @@ class HumanDTO extends ValidatedDTO
     public string $gender;
     public string $date_birth;
     public string $date_death;
-    public string $death_reason;
+    public ?string $death_reason;
     public ?string $birth_place;
     public ?string $burial_place;
     public ?array $burial_coords;
@@ -51,21 +51,17 @@ class HumanDTO extends ValidatedDTO
             'date_birth' => ['required', 'date', 'min:3'],
             'birth_place' => ['required', 'string', 'min:3'],
             'burial_place' => ['nullable', 'string'],
-            'death_reason' => ['required', 'string'],
+            'death_reason' => ['nullable', 'string'],
             'date_death' => ['nullable', 'date'],
-
             'religion_id' => ['nullable', 'integer'],
             'father_id' => ['nullable', 'integer'],
             'mother_id' => ['nullable', 'integer'],
             'spouse_id' => ['nullable', 'integer'],
-
             'description' => ['nullable', 'string'],
             'hobbies' => ['nullable', 'array'],
             'access' => ['required', 'string'],
-
             'burial_coords' => ['nullable', 'array'],
             'burial_coords.*' => ['nullable', 'numeric'],
-
             'avatar' => ['nullable', 'file'],
             'banner' => ['nullable', 'file'],
             'death_certificate' => ['nullable', 'file'],

@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'v1', 'as' => 'v1.'], function () {
 
     Route::prefix('auth')->group(function () {
-        Route::post('/register', [RegisterController::class, 'register']);
+        Route::post('/register', [RegisterController::class, 'registerUser']);
         Route::post('/login', [LoginController::class, 'login']);
         Route::post('/login/network/{network}', [NetworkController::class, 'redirect']);
         Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');

@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function __construct(private LoginService $loginService)
+    public function __construct(private readonly LoginService $loginService)
     {
     }
 

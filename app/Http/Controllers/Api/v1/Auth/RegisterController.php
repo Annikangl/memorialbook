@@ -11,12 +11,13 @@ use App\Models\User\User;
 use App\Services\Auth\RegisterService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use WendellAdriel\ValidatedDTO\Exceptions\CastTargetException;
 use WendellAdriel\ValidatedDTO\Exceptions\MissingCastTypeException;
 
 class RegisterController extends Controller
 {
-    public function __construct(private RegisterService $registerService)
+    public function __construct(private readonly RegisterService $registerService)
     {
     }
 
@@ -25,7 +26,7 @@ class RegisterController extends Controller
      * @throws MissingCastTypeException
      * @throws RegisterException
      */
-    public function register(RegisterRequest $request): JsonResponse
+    public function registerUser(RegisterRequest $request): JsonResponse
     {
         $userDto = UserDTO::fromArray($request->validated());
 
@@ -37,6 +38,26 @@ class RegisterController extends Controller
             'status' => true,
             'token' => $user->createAuthToken(),
             'user' => new UserResource($user)
-        ])->setStatusCode(201);
+        ])->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    /**
+     * @throws CastTargetException
+     * @throws MissingCastTypeException
+     * @throws RegisterException
+     */
+    public function registerSeller(RegisterRequest $request): JsonResponse
+    {
+        $user = $this->registerService->registerSeller(
+            UserDTO::fromArray($request->validated())
+        );
+
+        event(new Registered($user));
+
+        return response()->json([
+            'status' => true,
+            'token' => $user->createAuthToken(),
+            'user' => new UserResource($user)
+        ])->setStatusCode(Response::HTTP_CREATED);
     }
 }

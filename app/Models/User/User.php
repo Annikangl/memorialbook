@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Enums\UserRole;
 use App\Models\Community\Community;
 use App\Models\Event\Event;
 use App\Models\News\News;
@@ -53,6 +54,7 @@ class User extends Authenticatable implements HasMedia
     protected $fillable = [
         'username',
         'email',
+        'role',
         'phone',
         'password',
         'fcm_token',
@@ -67,41 +69,15 @@ class User extends Authenticatable implements HasMedia
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'role' => UserRole::class
     ];
-
-    public static function register(string $name, string $email, string $phone, string $password): self
-    {
-        return static::create([
-            'username' => $name,
-            'email' => $email,
-            'phone' => $phone,
-            'password' => Hash::make($password),
-        ]);
-    }
-
-    public static function registerByNetwork(string $name, string $email, string $network, string $identity): self
-    {
-        $user = static::create([
-            'username' => $name,
-            'email' => $email,
-            'password' => null
-        ]);
-
-
-        $user->networks()->create([
-            'network' => $network,
-            'identity' => $identity
-        ]);
-
-        return $user;
-    }
 
     public function createAuthToken(): string
     {
         return $this->createToken($this->device_name)->plainTextToken;
     }
 
-    public function updateFcmToken(string $token): void
+    public function updateFcmToken(?string $token): void
     {
         if ($this->fcm_token !== $token) {
             $this->fcm_token = $token;
