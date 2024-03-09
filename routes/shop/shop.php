@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'shop', 'as' => 'shop.'], function () {
 
+    Route::get('/{shop}', [ShopController::class, 'show']);
     Route::post('/', [ShopController::class, 'store']);
 
     Route::prefix('category')->group(function () {

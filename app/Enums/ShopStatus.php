@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum ShopStatus: string
 {
-    const ON_MODERATION = 'on_moderation';
-    const ACTIVE = 'active';
-    const CANCELED = 'canceled';
+    case ON_MODERATION = 'on_moderation';
+    case ACTIVE = 'active';
+    case CANCELED = 'canceled';
 }
