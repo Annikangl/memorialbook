@@ -36,7 +36,7 @@ class CommunityDTO extends ValidatedDTO
             'address' => ['required', 'string', 'max:150'],
             'website' => ['nullable', 'nullable', 'url'],
             'social_links' => ['nullable', 'array'],
-            'avatar' => ['nullable', 'file'],
+            'avatar' => ['nullable'],
             'banner' => ['nullable', 'file'],
             'gallery' => ['nullable', 'array'],
             'media_removed_ids' => ['nullable', 'array'],

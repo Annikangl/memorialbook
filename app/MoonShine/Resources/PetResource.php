@@ -95,14 +95,16 @@ class PetResource extends ModelResource
                         Grid::make([
                             Column::make([
                                 BelongsTo::make('Владелец питомца','owner',
-                                    fn($owner)=> $owner->id.' | '.$owner->first_name.' '.$owner->last_name,
+                                    fn($owner)=> $owner->first_name.' '.$owner->last_name,
                                     resource: new HumanResource())
+                                    ->searchable()
                                     ->required(),
                             ])->columnSpan(6),
                             Column::make([
                                 BelongsTo::make('Cоздатель записи','user',
-                                    fn($user)=> $user->id.' | '.$user->username, resource: new UserResource())
+                                    fn($user)=> $user->username, resource: new UserResource())
                                     ->hideOnIndex()
+                                    ->searchable()
                                     ->required(),
                             ])->columnSpan(6),
                         ]),

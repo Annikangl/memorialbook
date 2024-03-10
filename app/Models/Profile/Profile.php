@@ -143,4 +143,20 @@ class Profile extends Model implements HasMedia
 
         return $gallery;
     }
+    public function getCustomDocument()
+    {
+        $this->getMedia('attached_document')->each(function (Media $item) use (&$document) {
+            $path = $item->getOriginal('id');
+            $document= '/'.$path.'/'.$item->getAttribute('file_name');
+        });
+        return $document;
+    }
+    public function getCustomAvatar()
+    {
+        $this->getMedia('avatars')->each(function (Media $item) use (&$document) {
+            $path = $item->getOriginal('id');
+            $document= '/'.$path.'/'.$item->getAttribute('file_name');
+        });
+        return $document;
+    }
 }

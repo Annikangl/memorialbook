@@ -66,9 +66,9 @@ class HumanDTO extends ValidatedDTO
             'burial_coords' => ['nullable', 'array'],
             'burial_coords.*' => ['nullable', 'numeric'],
 
-            'avatar' => ['nullable', 'file'],
+            'avatar' => ['nullable'],
             'banner' => ['nullable', 'file'],
-            'death_certificate' => ['nullable', 'file'],
+            'death_certificate' => ['nullable'],
             'gallery' => ['nullable', 'array'],
             'removedImageIds' => ['nullable', 'array'],
             'as_draft' => ['required', 'bool'],

@@ -52,7 +52,7 @@ class CemeteryDTO extends ValidatedDTO
             'description' => ['nullable', 'string'],
             'access' => ['required', 'string'],
             'as_draft' => ['nullable', 'string'],
-            'avatar' => ['nullable', 'file'],
+            'avatar' => ['nullable'],
             'banner' => ['nullable', 'file'],
             'confirming_documents' => ['nullable', 'array'],
             'gallery' => ['nullable', 'array'],

@@ -125,14 +125,12 @@ class Community extends Model implements HasMedia
     public function getPictures(): array
     {
         $pictures = [];
-
         $this->getMedia('gallery')->filter(function (Media $media) use (&$pictures) {
             $pictures[] = [
                 'id' => $media->id,
                 'url' => $media->getUrl('thumb_500')
             ];
         });
-
         return $pictures;
     }
 
@@ -146,6 +144,15 @@ class Community extends Model implements HasMedia
         });
 
         return $gallery;
+    }
+    public function getCustomAvatar()
+    {
+        $this->getMedia('avatars')->each(function (Media $item) use (&$avatar) {
+            $path = $item->getOriginal('id');
+            $avatar = '/'.$path.'/'.$item->getAttribute('file_name');
+        });
+
+        return $avatar;
     }
 
     public function getMovies(): array
