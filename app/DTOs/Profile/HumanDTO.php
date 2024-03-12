@@ -60,11 +60,13 @@ class HumanDTO extends ValidatedDTO
             'description' => ['nullable', 'string'],
             'hobbies' => ['nullable', 'array'],
             'access' => ['required', 'string'],
+
             'burial_coords' => ['nullable', 'array'],
             'burial_coords.*' => ['nullable', 'numeric'],
-            'avatar' => ['nullable', 'file'],
+
+            'avatar' => ['nullable'],
             'banner' => ['nullable', 'file'],
-            'death_certificate' => ['nullable', 'file'],
+            'death_certificate' => ['nullable'],
             'gallery' => ['nullable', 'array'],
             'removedImageIds' => ['nullable', 'array'],
             'as_draft' => ['required', 'bool'],

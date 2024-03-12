@@ -99,12 +99,13 @@ class CommunityResource extends ModelResource
                                 ->required(),
                     ]),
                     Tab::make('Дополнительная информация',[
-                        Preview::make(
-                            label: 'Аватар',
-                            formatted: fn(Community $community) =>
-                            $community->getFirstMediaUrl('avatars', 'thumb'))
-                            ->image()
-                            ->hideOnForm(),
+                        Image::make('Аватар', 'avatar')
+                            ->allowedExtensions(['jpg', 'png', 'jpeg','webp'])
+                            ->hideOnUpdate()
+                            ->changeFill(
+                                fn(Community $data, Field $field) => $data->getCustomAvatar()
+                            ),
+
                         Image::make('Изображения и видео','gallery')
                             ->removable()
                             ->multiple()
@@ -117,7 +118,7 @@ class CommunityResource extends ModelResource
                                 ['jpg', 'png', 'jpeg','mp4']
                             ),
                         BelongsTo::make('Автор сообщества','owner',
-                            fn($user)=> $user->id.' | '.$user->username, resource: new UserResource())
+                            fn($user)=> $user->username, resource: new UserResource())
                             ->hideOnIndex()
                             ->required(),
                         Text::make(trans('Кол-во подписчиков'))
@@ -154,6 +155,7 @@ class CommunityResource extends ModelResource
         $fields->withoutOutside()
             ->each(fn (Field $field): mixed => $field->apply($this->onSave($field), $item));
         $item['social_links'] = ($item['social_links'] !== null) ? explode(" ", $item['social_links']) : null;
+
         if ($item['id']!== null){
             $communityDTO = CommunityDTO::fromArray($item->toArray());
             $communityUpdate = $this->communityService->update(
@@ -162,6 +164,12 @@ class CommunityResource extends ModelResource
                 communityDTO: $communityDTO,
             );
             return $communityUpdate;
+        }
+
+        if ($item['avatar']!==null){
+            $filePath = Storage::path($item['avatar']);
+            $avatar = new UploadedFile($filePath, $item['avatar'], 'image/jpg/png/jpeg', 0,false);
+            $item['avatar'] = $avatar;
         }
         $updatedData = collect($item['gallery'])->map(function($image) {
             $fileUrl = Storage::path($image);

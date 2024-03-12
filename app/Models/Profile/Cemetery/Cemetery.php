@@ -211,4 +211,14 @@ class Cemetery extends Model implements HasMedia
 
         return $documents;
     }
+
+    public function getCustomAvatar()
+    {
+        $this->getMedia('avatars')->each(function (Media $item) use (&$avatar) {
+            $path = $item->getOriginal('id');
+            $avatar = '/'.$path.'/'.$item->getAttribute('file_name');
+        });
+
+        return $avatar;
+    }
 }

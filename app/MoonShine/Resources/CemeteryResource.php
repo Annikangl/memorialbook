@@ -67,11 +67,11 @@ class CemeteryResource extends ModelResource
                                   ->hideOnIndex(),
                           ])->columnSpan(6)
                       ]),
-                      Text::make('Адрес калдбища','address')
+                      Text::make('Адрес','address')
                           ->required(),
                       Grid::make([
                           Column::make([
-                              Number::make('Координата, ш.', 'lat')
+                              Text::make('Координата, ш.', 'lat')
                                   ->hideOnIndex()
                                   ->changeFill(
                                       fn(Cemetery $data, Field $field) => isset($data['address_coords']['lat'])
@@ -79,7 +79,7 @@ class CemeteryResource extends ModelResource
                                   )
                           ])->columnSpan(6),
                           Column::make([
-                              Number::make('Координата, д.','lng')
+                              Text::make('Координата, д.','lng')
                                   ->hideOnIndex()
                                   ->changeFill(
                                       fn(Cemetery $data, Field $field) => isset($data['address_coords']['lng'])
@@ -102,11 +102,16 @@ class CemeteryResource extends ModelResource
                           ])->columnSpan(4)
                       ]),
                       BelongsTo::make('Cоздатель записи','user',
-                          fn($user)=> $user->id.' | '.$user->username, resource: new UserResource())
+                          fn($user)=> $user->username, resource: new UserResource())
                           ->hideOnIndex()
                           ->required(),
                   ]),
                     Tab::make('Дополнительная информация',[
+                        Image::make('Аватар', 'avatar')
+                            ->allowedExtensions(['jpg', 'png', 'jpeg','webp'])
+                            ->changeFill(
+                                fn(Cemetery $data, Field $field) => $data->getCustomAvatar()
+                            ),
                         Grid::make([
                             Column::make([
                                 File::make('Подтверждающие документы','confirming_documents')
@@ -137,6 +142,7 @@ class CemeteryResource extends ModelResource
                                 Cemetery::ACCESS_PUBLIC=>'Публичный',
                                 Cemetery::ACCESS_PRIVATE=>'Приватный',
                             ])
+                            ->badge(fn($status, Field $field) => $status === Cemetery::ACCESS_PUBLIC ? 'blue' : 'red')
                             ->required()
                             ->hideOnIndex(),
                     ])
@@ -177,6 +183,11 @@ class CemeteryResource extends ModelResource
             $document = new UploadedFile($filePath, $document, 'doc/docs/pdf', 1024);
             return $document;
         })->all();
+        if ($item['avatar']!==null){
+            $filePath = Storage::path($item['avatar']);
+            $avatar = new UploadedFile($filePath, $item['avatar'], 'image/jpg/png/jpeg', 0,false);
+            $item['avatar'] = $avatar;
+        }
         $item['gallery'] = $updatedData;
         $item['confirming_documents'] = $updatedDocument;
 

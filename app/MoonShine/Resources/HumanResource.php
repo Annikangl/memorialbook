@@ -12,6 +12,7 @@ use App\Services\HumanService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use MoonShine\Components\Badge;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
 use MoonShine\Decorations\Tab;
@@ -66,7 +67,7 @@ class HumanResource extends ModelResource
                                 Text::make('Фамилия','last_name')->required(),
                             ])->columnSpan(4),
                             Column::make([
-                                Text::make('Отчество','middle_name')->required(),
+                                Text::make('Отчество','middle_name')->hideOnIndex(),
                             ])->columnSpan(4),
                         ]),
                         Grid::make([
@@ -108,7 +109,7 @@ class HumanResource extends ModelResource
                         ]),
                         Grid::make([
                             Column::make([
-                                Number::make('Координата, ш.', 'lat')
+                                Text::make('Координата, ш.', 'lat')
                                     ->hideOnIndex()
                                     ->changeFill(
                                         fn(Human $data, Field $field) => isset($data['burial_coords']['lat'])
@@ -117,7 +118,7 @@ class HumanResource extends ModelResource
                                     ->required()
                             ])->columnSpan(6),
                             Column::make([
-                                Number::make('Координата, д.','lng')
+                                Text::make('Координата, д.','lng')
                                     ->hideOnIndex()
                                     ->changeFill(
                                         fn(Human $data, Field $field) => isset($data['burial_coords']['lng'])
@@ -126,9 +127,6 @@ class HumanResource extends ModelResource
                                     ->required(),
                             ])->columnSpan(6),
                         ]),
-//                        File::make('Сертификат о смерти', 'death_certificate')
-//                            ->allowedExtensions(['doc', 'docs', 'pdf'])
-//                            ->hideOnIndex(),
                         Grid::make([
                             Column::make([
                                 Select::make('Мать','mother_id')
@@ -138,8 +136,9 @@ class HumanResource extends ModelResource
                                         ->pluck('full_name', 'id')
                                         ->toArray())
                                     ->nullable()
+                                    ->searchable()
                                     ->hideOnIndex(),
-                            ])->columnSpan(3),
+                            ])->columnSpan(4),
                             Column::make([
                                 Select::make('Отец','father_id')
                                     ->options(Human::query()
@@ -148,8 +147,9 @@ class HumanResource extends ModelResource
                                         ->pluck('full_name', 'id')
                                         ->toArray())
                                     ->nullable()
+                                    ->searchable()
                                     ->hideOnIndex(),
-                            ])->columnSpan(3),
+                            ])->columnSpan(4),
                             Column::make([
                                 Select::make('Супруг','spouse_id')
                                     ->options(Human::query()
@@ -158,35 +158,35 @@ class HumanResource extends ModelResource
                                         ->pluck('full_name', 'id')
                                         ->toArray())
                                     ->nullable()
+                                    ->searchable()
                                     ->hideOnIndex(),
-                            ])->columnSpan(3),
-                            Column::make([
-                                Select::make('Ребенок','children_id')
-                                    ->options(Human::query()
-                                        ->select(['id','first_name','last_name'])
-                                        ->get()
-                                        ->pluck('full_name', 'id')
-                                        ->toArray())
-                                    ->nullable()
-                                    ->hideOnIndex(),
-                            ])->columnSpan(3),
+                            ])->columnSpan(4),
                         ]),
-                        BelongsTo::make('Cоздатель записи','users',
-                            fn($user)=> $user->id.' | '.$user->username, resource: new UserResource())
-                            ->hideOnIndex()
-                            ->required(),
                     ]),
                     Tab::make('Описание',[
                         Image::make('Изображения и видео','gallery')
                             ->removable()
                             ->multiple()
-                            ->nullable()
                             ->required()
                             ->hideOnIndex()
                             ->changeFill(
                                 fn(Human $data, Field $field) => $data->getCustomGallery()
                             )
                             ->allowedExtensions(['jpg', 'png', 'jpeg','webp', 'mp4']),
+
+                        Image::make('Аватар', 'avatar')
+                            ->allowedExtensions(['jpg', 'png', 'jpeg','webp'])
+                            ->changeFill(
+                                fn(Human $data, Field $field) => $data->getCustomAvatar()
+                            ),
+
+                        File::make('Сертификат о смерти', 'death_certificate')
+                            ->allowedExtensions(['doc', 'docs', 'pdf'])
+                            ->changeFill(
+                                fn(Human $data, Field $field) => $data->getCustomDocument()
+                            )
+                            ->hideOnIndex(),
+
                         Textarea::make('Описание','description')
                             ->hideOnIndex(),
 
@@ -201,7 +201,16 @@ class HumanResource extends ModelResource
                                 '1'=>'Черновик',
                                 '0'=>'Активный',
                             ])
+                            ->optionProperties(fn() => [
+                                1 => ['image' => '/image/DocumentMinus.svg'],
+                                0 => ['image' => '/image/DocumentCheck.svg'],
+                            ])
                             ->hideOnIndex()
+                            ->required(),
+                        BelongsTo::make('Cоздатель записи','users',
+                            fn($user)=> $user->username, resource: new UserResource())
+                            ->hideOnIndex()
+                            ->searchable()
                             ->required(),
                         Select::make('Доступ публикации', 'access')
                             ->options([
@@ -210,6 +219,7 @@ class HumanResource extends ModelResource
                                 Profile::ACCESS_PRIVATE=>'Приватный',
                             ])
                             ->hideOnIndex()
+                            ->badge(fn($status, Field $field) => $status === Profile::ACCESS_PUBLIC ? 'blue' : 'red')
                             ->required(),
                     ]),
                 ]),
@@ -242,11 +252,17 @@ class HumanResource extends ModelResource
         })->all();
         $item['gallery'] = $updatedData;
 
-// TODO:  Проверить тип загрузки файла Сертификата смерти
+        if ($item['death_certificate']!==null){
+            $filePath = Storage::path($item['death_certificate']);
+            $file = new UploadedFile($filePath, $item['death_certificate'], 'application/pdf', 0,false);
+            $item['death_certificate'] = $file;
+        }
+        if ($item['avatar']!==null){
+            $filePath = Storage::path($item['avatar']);
+            $avatar = new UploadedFile($filePath, $item['avatar'], 'image/jpg/png/jpeg', 0,false);
+            $item['avatar'] = $avatar;
+        }
 
-//        $filePath = Storage::path($item['death_certificate']);
-//        $file = new UploadedFile($filePath, $item['death_certificate'], 'application/pdf', 0,false);
-//        $item['death_certificate'] = $file;
         $item['user_id']=(int)$item['user_id'];
         $humanDto = HumanDTO::fromArray($item->toArray());
         $human = $this->humanService->create(
