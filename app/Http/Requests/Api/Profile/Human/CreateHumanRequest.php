@@ -30,14 +30,12 @@ class CreateHumanRequest extends FormRequest
             'death_reason' => ['nullable', 'string', 'max:150'],
             'birth_place' => ['required', 'string', 'min:3'],
             'burial_place' => ['nullable', 'string', 'min:3'],
-
             'father_id' => ['nullable', 'exists:humans,id'],
             'mother_id' => ['nullable', 'exists:humans,id'],
             'spouse_id' => ['nullable', 'exists:humans,id'],
             'religion_id' => ['nullable', 'exists:religions,id'],
             'description' => ['required', 'string','max:5000'],
             'hobbies' => ['nullable', 'array'],
-
             'as_draft' => ['required', 'bool'],
             'access' => ['required', Rule::in(Profile::getAccessList())],
             'burial_coords' => [

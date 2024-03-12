@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enums\UserRole;
 use App\Models\Community\Community;
 use App\Models\Community\CommunityProfile;
 use App\Models\Community\Posts\Post;
@@ -31,9 +32,7 @@ class DatabaseSeeder extends Seeder
         $faker = \Faker\Factory::create();
         $faker->addProvider(new FakerPicsumImagesProvider($faker));
 
-        $categories = ProductCategory::factory(10)->create();
-
-//        Religion::factory(10)->create();
+//        $categories = ProductCategory::factory(10)->create();
 
         $this->createUsers();
 
@@ -109,18 +108,10 @@ class DatabaseSeeder extends Seeder
             'username' => 'Ivanov Ivan',
             'email' => 'test@gmail.com',
             'password' => \Hash::make('test1234'),
+            'role' => UserRole::ROLE_USER,
             'fcm_token' => Str::random(50),
             'device_name' => UserAgent::userAgent(),
             'location' => 'RU',
-        ]);
-
-        User::query()->create([
-            'username' => 'Petrov Petr',
-            'email' => 'test2@gmail.com',
-            'password' => \Hash::make('test1234'),
-            'fcm_token' => Str::random(50),
-            'device_name' => UserAgent::userAgent(),
-            'location' => 'DE',
         ]);
     }
 }
