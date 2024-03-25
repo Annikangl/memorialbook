@@ -45,6 +45,6 @@ class UserResource extends ModelResource
 
     public function getActiveActions(): array
     {
-        return ['view', 'delete', 'update'];
+        return ['view', 'delete', 'update','massDelete'];
     }
 }

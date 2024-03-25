@@ -44,7 +44,7 @@ class PetResource extends ModelResource
 
     public function getActiveActions(): array
     {
-        return ['create','view', 'delete'];
+        return ['create','view', 'delete', 'massDelete'];
     }
 
     public function fields(): array
