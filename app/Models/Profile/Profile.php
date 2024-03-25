@@ -159,4 +159,12 @@ class Profile extends Model implements HasMedia
         });
         return $document;
     }
+    public function getCustomBanner()
+    {
+        $this->getMedia('banners')->each(function (Media $item) use (&$banner) {
+            $path = $item->getOriginal('id');
+            $banner= '/'.$path.'/'.$item->getAttribute('file_name');
+        });
+        return $banner;
+    }
 }

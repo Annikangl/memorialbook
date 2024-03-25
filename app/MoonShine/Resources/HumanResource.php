@@ -12,6 +12,7 @@ use App\Services\HumanService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use MoonShine\ActionButtons\ActionButton;
 use MoonShine\Components\Badge;
 use MoonShine\Decorations\Column;
 use MoonShine\Decorations\Grid;
@@ -22,6 +23,7 @@ use MoonShine\Fields\Date;
 use MoonShine\Fields\Field;
 use MoonShine\Fields\Fields;
 use MoonShine\Fields\File;
+use MoonShine\Fields\Hidden;
 use MoonShine\Fields\Image;
 use MoonShine\Fields\Number;
 use MoonShine\Fields\Relationships\BelongsTo;
@@ -105,11 +107,112 @@ class HumanResource extends ModelResource
                             Column::make([
                                 Text::make('Место захоронения','burial_place')
                                     ->hideOnIndex(),
+                                ActionButton::make('Найти на карте',route('profile.humans.search.map'))
+                                    ->inModal(
+                                        title:'Поиск по карте',
+                                        content:'
+                                             <style>
+                                            .pac-container {
+                                                z-index: 2000;
+                                            }</style>
+                                         <input class="form-input" id="pac-input" type="text" style=" margin-bottom: 10px" placeholder="Введите место">
+                                          <div id="map" style="height: 450px; width: 640px;"></div>
+                                          <div id="output"></div>
+                                          <button class="btn form_submit_button btn-primary btn-lg" @click.stop="open=false" id="apply-btn">Применить</button>
+                                          <script>
+                                            let map;
+                                            async function initMap() {
+                                              const outputElement = document.getElementById("output");
+                                              const position = { lat: -25.344, lng: 131.031 };
+                                              const { Map } = await google.maps.importLibrary("maps");
+                                              const { Marker } = await google.maps.importLibrary("marker");
+
+                                              map = new Map(document.getElementById("map"), {
+                                                zoom: 4,
+                                                center: position,
+                                                mapId: "DEMO_MAP_ID",
+                                              });
+
+                                              const marker = new Marker({
+                                                map: map,
+                                                position: position,
+                                                title: "Uluru",
+                                              });
+
+                                              const input = document.getElementById("pac-input");
+                                              const searchBox = new google.maps.places.SearchBox(input);
+
+                                              map.addListener("bounds_changed", function() {
+                                                searchBox.setBounds(map.getBounds());
+                                              });
+
+                                              let markers = [];
+                                              searchBox.addListener("places_changed", function() {
+                                                const places = searchBox.getPlaces();
+
+                                                if (places.length == 0) {
+                                                  return;
+                                                }
+                                                markers.forEach(function(marker) {
+                                                  marker.setMap(null);
+                                                });
+                                                markers = [];
+
+                                                const bounds = new google.maps.LatLngBounds();
+                                                places.forEach(function(place) {
+                                                    if (!place.geometry) {
+                                                        console.log("Returned place contains no geometry");
+                                                        return;
+                                                    }
+                                                    const icon = {
+                                                        url: place.icon,
+                                                        size: new google.maps.Size(71, 71),
+                                                        origin: new google.maps.Point(0, 0),
+                                                        anchor: new google.maps.Point(17, 34),
+                                                        scaledSize: new google.maps.Size(25, 25),
+                                                    };
+                                                    markers.push(
+                                                        new google.maps.Marker({
+                                                            map,
+                                                            icon,
+                                                            title: place.name,
+                                                            position: place.geometry.location,
+                                                        })
+                                                    );
+                                                    outputElement.innerText = `Координаты места: Широта ${place.geometry.location.lat()}, Долгота ${place.geometry.location.lng()}`;
+                                                    document.getElementById("lat").value = place.geometry.location.lat();
+                                                    document.getElementById("lng").value = place.geometry.location.lng();
+                                                    document.getElementById("burial_place").value = place.formatted_address;
+
+                                                    if (place.geometry.viewport) {
+                                                        bounds.union(place.geometry.viewport);
+                                                    } else {
+                                                        bounds.extend(place.geometry.location);
+                                                    }
+                                                });
+                                                map.fitBounds(bounds);
+                                              });
+                                            }
+
+                                            initMap();
+
+                                            document.getElementById("apply-btn").addEventListener("click", function() {
+                                              const lat = parseFloat(document.getElementById("lat").value);
+                                              const lng = parseFloat(document.getElementById("lng").value);
+                                              map.setCenter({ lat, lng });
+                                            });
+                                          </script>
+                                          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtiW5uhL3BgojiJgqKk1eJuOKs4jAVFfU&libraries=places&callback=initMap" async defer></script>
+                                         ',
+                                        closeOutside: true,
+                                    )
+                                    ->icon('heroicons.eye'),
                             ])->columnSpan(6),
+
                         ]),
                         Grid::make([
                             Column::make([
-                                Text::make('Координата, ш.', 'lat')
+                                Hidden::make('Координата, ш.', 'lat')
                                     ->hideOnIndex()
                                     ->changeFill(
                                         fn(Human $data, Field $field) => isset($data['burial_coords']['lat'])
@@ -118,7 +221,7 @@ class HumanResource extends ModelResource
                                     ->required()
                             ])->columnSpan(6),
                             Column::make([
-                                Text::make('Координата, д.','lng')
+                                Hidden::make('Координата, д.','lng')
                                     ->hideOnIndex()
                                     ->changeFill(
                                         fn(Human $data, Field $field) => isset($data['burial_coords']['lng'])
@@ -127,6 +230,8 @@ class HumanResource extends ModelResource
                                     ->required(),
                             ])->columnSpan(6),
                         ]),
+
+
                         Grid::make([
                             Column::make([
                                 Select::make('Мать','mother_id')
@@ -164,32 +269,46 @@ class HumanResource extends ModelResource
                         ]),
                     ]),
                     Tab::make('Описание',[
-                        Image::make('Изображения и видео','gallery')
-                            ->removable()
-                            ->multiple()
-                            ->required()
-                            ->hideOnIndex()
-                            ->changeFill(
-                                fn(Human $data, Field $field) => $data->getCustomGallery()
-                            )
-                            ->allowedExtensions(['jpg', 'png', 'jpeg','webp', 'mp4']),
-
-                        Image::make('Аватар', 'avatar')
-                            ->allowedExtensions(['jpg', 'png', 'jpeg','webp'])
-                            ->changeFill(
-                                fn(Human $data, Field $field) => $data->getCustomAvatar()
-                            ),
-
-                        File::make('Сертификат о смерти', 'death_certificate')
-                            ->allowedExtensions(['doc', 'docs', 'pdf'])
-                            ->changeFill(
-                                fn(Human $data, Field $field) => $data->getCustomDocument()
-                            )
-                            ->hideOnIndex(),
-
+                        Grid::make([
+                            Column::make([
+                                Image::make('Изображения и видео','gallery')
+                                    ->removable()
+                                    ->multiple()
+                                    ->required()
+                                    ->hideOnIndex()
+                                    ->changeFill(
+                                        fn(Human $data, Field $field) => $data->getCustomGallery()
+                                    )
+                                    ->allowedExtensions(['jpg', 'png', 'jpeg','webp', 'mp4']),
+                            ])->columnSpan(6),
+                            Column::make([
+                                Image::make('Аватар', 'avatar')
+                                    ->allowedExtensions(['jpg', 'png', 'jpeg','webp'])
+                                    ->changeFill(
+                                        fn(Human $data, Field $field) => $data->getCustomAvatar()
+                                    ),
+                            ])->columnSpan(6),
+                        ]),
+                        Grid::make([
+                            Column::make([
+                                Image::make('Банер', 'banner')
+                                    ->allowedExtensions(['jpg', 'png', 'jpeg','webp'])
+                                    ->hideOnIndex()
+                                    ->changeFill(
+                                        fn(Human $data, Field $field) => $data->getCustomBanner()
+                                    ),
+                            ])->columnSpan(6),
+                            Column::make([
+                                File::make('Сертификат о смерти', 'death_certificate')
+                                    ->allowedExtensions(['doc', 'docs', 'pdf'])
+                                    ->changeFill(
+                                        fn(Human $data, Field $field) => $data->getCustomDocument()
+                                    )
+                                    ->hideOnIndex(),
+                            ])->columnSpan(6),
+                        ]),
                         Textarea::make('Описание','description')
                             ->hideOnIndex(),
-
                         Select::make('Хобби','hobbies')
                             ->options(Hobby::query()->pluck('title', 'id')->toArray())
                             ->hideOnIndex()
@@ -261,6 +380,11 @@ class HumanResource extends ModelResource
             $filePath = Storage::path($item['avatar']);
             $avatar = new UploadedFile($filePath, $item['avatar'], 'image/jpg/png/jpeg', 0,false);
             $item['avatar'] = $avatar;
+        }
+        if ($item['banner']!==null){
+            $filePath = Storage::path($item['banner']);
+            $banner = new UploadedFile($filePath, $item['banner'], 'image/jpg/png/jpeg', 0,false);
+            $item['banner'] = $banner;
         }
 
         $item['user_id']=(int)$item['user_id'];
